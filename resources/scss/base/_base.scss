@@ -1,0 +1,119 @@
+@use '../abstracts/all' as *;
+
+// Global Base Styles
+
+// Container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  @include responsive(mobile) {
+    padding: 0 $spacing-sm;
+  }
+}
+
+// Section Spacing
+.section {
+  padding: $spacing-xl 0;
+
+  &--sm {
+    padding: $spacing-lg 0;
+  }
+}
+
+// Button Base Styles
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  text-align: center;
+  cursor: pointer;
+  transition: all $transition-medium;
+
+  &--primary {
+    background-color: $color-accent-purple;
+    color: $color-text-light;
+
+    &:hover {
+      background-color: darken($color-accent-purple, 10%);
+    }
+  }
+
+  &--secondary {
+    background-color: $color-bg-dark-secondary;
+    color: $color-text-light;
+    border: 1px solid $color-bg-dark-tertiary;
+
+    &:hover {
+      background-color: $color-bg-dark-tertiary;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Form Base Styles
+.form {
+  &__group {
+    margin-bottom: $spacing-md;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    color: $color-text-muted;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $spacing-sm;
+    background-color: $color-bg-dark-secondary;
+    border: 1px solid $color-bg-dark-tertiary;
+    border-radius: $border-radius-sm;
+    color: $color-text-light;
+    transition: border-color $transition-fast;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-purple;
+    }
+  }
+
+  &__error {
+    color: $color-danger;
+    font-size: 0.875rem;
+    margin-top: $spacing-xs;
+  }
+}
+
+// Utility Classes
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: $color-text-muted;
+}
+
+.bg-dark {
+  background-color: $color-bg-dark-secondary;
+}
+
+// Margin and Padding Utilities
+@for $i from 1 through 5 {
+  .m-#{$i} {
+    margin: #{$i * 0.5}rem;
+  }
+  .p-#{$i} {
+    padding: #{$i * 0.5}rem;
+  }
+}

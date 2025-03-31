@@ -1,0 +1,39 @@
+// Global Variables
+
+// Spacing
+$spacing-xs:  0.25rem;
+$spacing-sm:  0.5rem;
+$spacing-md:  1rem;
+$spacing-lg:  1.5rem;
+$spacing-xl:  2rem;
+
+// Typography
+$base-font-size:   16px;
+$base-line-height: 1.5;
+
+// Border Radius
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 1rem;
+
+// Breakpoints
+$breakpoint-mobile:   576px;
+$breakpoint-tablet:   768px;
+$breakpoint-desktop:  992px;
+$breakpoint-wide:     1200px;
+
+// Transitions
+$transition-fast:   0.2s;
+$transition-medium: 0.3s;
+$transition-slow:   0.5s;
+
+// Z-Index
+$z-index-base:      1;
+$z-index-dropdown:  10;
+$z-index-overlay:   100;
+$z-index-modal:     1000;
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+$shadow-md: 0 3px 6px rgba(0, 0, 0, 0.16);
+$shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19);
