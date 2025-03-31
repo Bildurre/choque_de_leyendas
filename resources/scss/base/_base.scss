@@ -1,3 +1,4 @@
+@use "sass:color";
 @use '../abstracts/all' as *;
 
 // Global Base Styles
@@ -37,7 +38,7 @@
     color: $color-text-light;
 
     &:hover {
-      background-color: darken($color-accent-purple, 10%);
+      background-color: color.scale($color-accent-orange, $lightness: -20%);
     }
   }
 
@@ -115,5 +116,36 @@
   }
   .p-#{$i} {
     padding: #{$i * 0.5}rem;
+  }
+}
+
+// Heading Styles
+h1, h2, h3 {
+  @include font-secondary;
+  @include font-bold;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+// Responsive Typography
+body {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  body {
+    font-size: 14px;
   }
 }

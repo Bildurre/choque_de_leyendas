@@ -13,16 +13,11 @@
     <body>
         <div>
             <div>
-                <a href="/">
-                    <x-application-logo gradient="true" 
-                    gradient-start="#3d3df5" 
-                    gradient-end="#f53d3d"
-                    stroke="#000000" 
-                    stroke-width="2" />
-                </a>
-            </div>
-
-            <div>
+              @if (session('error'))
+                <div class="auth-error">
+                  {{ session('error') }}
+                </div>
+              @endif
                 {{ $slot }}
             </div>
         </div>
