@@ -119,3 +119,63 @@
   font-weight: 100;
   font-style: italic;
 }
+
+
+// Font Mixins
+@mixin font-primary {
+  font-family: 'roboto', sans-serif;
+  font-weight: 400;
+}
+
+@mixin font-secondary {
+  font-family: 'almendra', serif;
+  font-weight: 400;
+}
+
+@mixin font-bold {
+  font-weight: 700;
+}
+
+// Heading Styles
+h1, h2, h3 {
+  @include font-secondary;
+  @include font-bold;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+// Typography Classes
+.text-primary {
+  @include font-primary;
+}
+
+.text-secondary {
+  @include font-secondary;
+}
+
+.text-bold {
+  @include font-bold;
+}
+
+// Responsive Typography
+body {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  body {
+    font-size: 14px;
+  }
+}
