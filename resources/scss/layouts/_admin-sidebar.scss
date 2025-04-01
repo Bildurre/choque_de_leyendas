@@ -1,3 +1,4 @@
+@use "sass:color";
 @use '../abstracts/all' as *;
 
 .admin-sidebar {
@@ -122,7 +123,7 @@
       }
 
       &.active {
-        background-color: $color-accent-orange;
+        // background-color: color.scale($color-accent-orange, $lightness: +40%);
         color: $color-text-light;
         position: relative;
 
