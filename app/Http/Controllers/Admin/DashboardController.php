@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-  public function index(): View
+  public function view(): View
   {
     return view('dashboard');
   }

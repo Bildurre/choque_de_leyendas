@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FactionController;
 
 Route::get('/', function () {
