@@ -1,15 +1,16 @@
 import Alpine from 'alpinejs'
 
-// Global Store (optional but recommended)
+// Configuración inicial de Alpine
 document.addEventListener('alpine:init', () => {
-  Alpine.store('app', {
-    darkMode: false,
-    toggleDarkMode() {
-      this.darkMode = !this.darkMode
-      document.documentElement.classList.toggle('dark-mode', this.darkMode)
-    }
-  })
-})
+  // Detectar cambios de tamaño de ventana para sidebar
+  // window.addEventListener('resize', () => {
+  //   if (window.innerWidth > 768) {
+  //     document.body.classList.add('sidebar-open');
+  //   } else {
+  //     document.body.classList.remove('sidebar-open');
+  //   }
+  // });
+});
 
-window.Alpine = Alpine
-Alpine.start()
+window.Alpine = Alpine;
+Alpine.start();

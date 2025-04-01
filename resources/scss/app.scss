@@ -8,11 +8,13 @@
 //VENDOR
 
 //LAYOUT
+@use 'layouts/admin-layout';
+@use 'layouts/admin-header';
+@use 'layouts/admin-sidebar';
 
 //VIEWS
 
 //PAGES
-
 
 @use 'pages/wellcome';
 @use 'pages/login';

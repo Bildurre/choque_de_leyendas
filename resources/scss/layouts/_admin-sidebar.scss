@@ -1,0 +1,93 @@
+@use '../abstracts/all' as *;
+
+.admin-sidebar {
+  position: fixed;
+  top: 60px; // Comienza debajo del header
+  left: 0;
+  z-index: $z-index-dropdown;
+  width: 250px;
+  background-color: $color-bg-dark-secondary;
+  border-right: 1px solid $color-bg-dark-tertiary;
+  height: calc(100vh - 60px); // Altura total menos el header
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition-medium ease;
+  
+  @media (max-width: $breakpoint-tablet) {
+    transform: translateX(-100%);
+    
+    .sidebar-open & {
+      transform: translateX(0);
+    }
+  }
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-md $spacing-lg; // Asegurarnos de que usa $spacing-lg en los laterales
+  
+  // Placeholder style for now
+  .sidebar-nav-placeholder {
+    height: 300px;
+    background: linear-gradient(
+      180deg,
+      rgba($color-bg-dark-tertiary, 0.3) 0%,
+      rgba($color-bg-dark-tertiary, 0.1) 100%
+    );
+    margin-bottom: $spacing-md;
+    border-radius: $border-radius-md;
+  }
+}
+
+.sidebar-footer {
+  padding: $spacing-md $spacing-lg; // Mantener consistencia con el padding lateral
+  border-top: 1px solid $color-bg-dark-tertiary;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-md;
+  
+  .user-avatar-dice {
+    margin-right: $spacing-sm;
+    
+    .user-dice {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  .user-info {
+    .user-name {
+      display: block;
+      font-size: 0.9rem;
+      color: $color-text-light;
+    }
+    
+    .user-role {
+      display: block;
+      font-size: 0.75rem;
+      color: $color-text-muted;
+    }
+  }
+}
+
+.logout-section {
+  .logout-button {
+    width: 100%;
+    padding: $spacing-xs $spacing-sm;
+    background-color: transparent;
+    border: 1px solid $color-bg-dark-tertiary;
+    border-radius: $border-radius-sm;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: $transition-fast;
+    
+    &:hover {
+      background-color: $color-bg-dark-tertiary;
+      color: $color-text-light;
+    }
+  }
+}

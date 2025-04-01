@@ -1,96 +1,106 @@
 @use '../abstracts/all' as *;
 
-.admin-layout {
+.dashboard-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  gap: $spacing-lg;
 }
 
-.admin-header {
-  background-color: $color-bg-dark-secondary;
-  border-bottom: 1px solid $color-bg-dark-tertiary;
-  padding: $spacing-md;
+.dashboard-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
   
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .header-logo {
-    display: flex;
-    align-items: center;
-    
-    .logo-small {
-      width: 40px;
-      height: 40px;
-      margin-right: $spacing-sm;
-    }
-    
-    .header-title {
-      font-family: 'almendra', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: $color-text-light;
-    }
+  @include responsive(mobile) {
+    grid-template-columns: 1fr;
   }
-  
-  .header-actions {
-    .welcome-text {
-      color: $color-text-muted;
-    }
-  }
-}
-
-.admin-main {
-  flex: 1;
-  padding: $spacing-lg;
-  background-color: $color-bg-dark-primary;
-}
-
-.dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: $spacing-lg;
 }
 
 .dashboard-card {
   background-color: $color-bg-dark-secondary;
+  border: 1px solid $color-bg-dark-tertiary;
   border-radius: $border-radius-md;
   padding: $spacing-lg;
-  box-shadow: $shadow-md;
   
-  h3 {
-    margin-top: 0;
+  &.dashboard-card-lg {
+    grid-column: span 3;
+    
+    @include responsive(tablet) {
+      grid-column: span 2;
+    }
+    
+    @include responsive(mobile) {
+      grid-column: span 1;
+    }
+  }
+  
+  .card-icon {
     margin-bottom: $spacing-md;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: 50px;
+      height: 50px;
+      background-color: rgba($color-accent-orange, 0.1);
+      z-index: 1;
+      border-radius: $border-radius-sm;
+    }
+    
+    .card-dice {
+      position: relative;
+      z-index: 2;
+    }
+  }
+  
+  .card-title {
+    @include font-primary;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: $spacing-sm;
     color: $color-text-light;
   }
   
-  p {
-    color: $color-text-muted;
-    margin-bottom: $spacing-lg;
+  .card-value {
+    font-size: 2rem;
+    @include font-bold;
+    margin: 0 0 $spacing-md;
+    color: $color-text-light;
   }
-}
-
-.dashboard-actions {
-  padding-top: $spacing-md;
-  border-top: 1px solid $color-bg-dark-tertiary;
-  text-align: right;
   
-  .logout-button {
-    padding: $spacing-sm $spacing-md;
-    background-color: transparent;
-    color: $color-danger;
-    border: 1px solid $color-danger;
-    border-radius: $border-radius-sm;
-    cursor: pointer;
-    transition: all $transition-medium;
+  .card-action {
+    color: $color-accent-orange;
+    text-decoration: none;
+    font-size: 0.9rem;
     
     &:hover {
-      background-color: rgba($color-danger, 0.1);
+      text-decoration: underline;
+    }
+  }
+  
+  .card-text {
+    color: $color-text-muted;
+    margin-bottom: $spacing-md;
+    line-height: 1.5;
+  }
+  
+  .card-list {
+    padding-left: $spacing-lg;
+    
+    li {
+      color: $color-text-muted;
+      margin-bottom: $spacing-xs;
+      
+      &::marker {
+        color: $color-accent-purple;
+      }
     }
   }
 }

@@ -1,0 +1,107 @@
+@use '../abstracts/all' as *;
+
+.admin-header {
+  background-color: $color-bg-dark-secondary;
+  border-bottom: 1px solid $color-bg-dark-tertiary;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $spacing-lg;
+  width: 100%;
+  position: relative;
+  z-index: $z-index-dropdown + 1;
+  
+  @include responsive(mobile) {
+    padding: 0 $spacing-md;
+  }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  
+  // Ajustar el margen para compensar la nueva posición de la hamburguesa
+  @include responsive(tablet) {
+    margin-left: 32px; // Ajustado para dar espacio suficiente
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: $spacing-sm;
+    
+    .logo-dice {
+      width: 30px;
+      height: 30px;
+      margin-right: $spacing-xs;
+    }
+    
+    .logo-text {
+      @include font-secondary;
+      @include font-bold;
+      font-size: 1.1rem;
+      color: $color-text-light;
+    }
+  }
+  
+  .logo-subtitle {
+    @include font-primary;
+    font-size: 0.65rem;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: none;
+    
+    @media (min-width: $breakpoint-tablet + 1px) {
+      display: inline;
+      margin-left: $spacing-sm;
+    }
+  }
+}
+
+.header-title {
+  h1 {
+    margin: 0;
+    @include font-primary;
+    font-size: 1.2rem;
+    margin-left: $spacing-lg;
+    
+    @include responsive(tablet) {
+      margin-left: $spacing-md;
+    }
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+// Eliminamos el bloque del buscador
+
+.header-icons {
+  display: flex;
+  
+  .header-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: $spacing-md;
+    cursor: pointer;
+    
+    path {
+      stroke: $color-text-muted;
+      transition: $transition-fast;
+    }
+    
+    &:hover path {
+      stroke: $color-text-light;
+    }
+  }
+}
