@@ -1,0 +1,189 @@
+@use '../abstracts/all' as *;
+
+.dice-sm {
+  width: .75rem;
+  height: .75rem;
+}
+.dice-md {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.dice-lg {
+  width: 3rem;
+  height: 3rem;
+}
+.dice-xl {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+
+.dice-pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.dice-bounce {
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.dice-shake {
+  animation: shake 0.8s infinite;
+}
+
+.dice-spin-to-stop {
+  animation: spinToStop 3s infinite ease-out;
+}
+
+.dice-fade-in-out {
+  animation: fadeInOut 3s infinite ease-in-out;
+}
+
+.dice-vibrate {
+  animation: vibrate 0.3s infinite linear;
+}
+
+.dice-infinite-spin {
+  animation: infiniteSpin 2s infinite linear;
+}
+
+.dice-swing {
+  animation: swing 3s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+.dice-float {
+  animation: float 5s infinite ease-in-out;
+}
+
+.dice-wobble {
+  animation: wobble 3s infinite ease-in-out;
+}
+
+.dice-heartbeat {
+  animation: heartbeat 1.5s infinite ease-in-out;
+}
+
+.dice-tilt {
+  animation: tilt 5s infinite ease-in-out;
+}
+
+.dice-color-pulse {
+  animation: colorPulse 4s infinite linear;
+}
+
+.dice-jello {
+  animation: jello 2.5s infinite;
+}
+
+.dice-shadow-pulse {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  animation: shadowPulse 2s infinite ease-in-out;
+}
+
+.dice-roll {
+  animation: roll 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes spinToStop {
+  0% { transform: rotate(0deg); }
+  80% { transform: rotate(720deg); }
+  100% { transform: rotate(720deg); }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes vibrate {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+}
+
+@keyframes infiniteSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(3deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(10px) rotate(-3deg); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  15% { transform: translateX(-10px) rotate(-5deg); }
+  30% { transform: translateX(8px) rotate(4deg); }
+  45% { transform: translateX(-6px) rotate(-2deg); }
+  60% { transform: translateX(4px) rotate(1deg); }
+  75% { transform: translateX(-2px) rotate(-1deg); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10%, 30% { transform: scale(1.1); }
+  20% { transform: scale(1.15); }
+  40%, 60% { transform: scale(1); }
+  70%, 90% { transform: scale(1.05); }
+  80% { transform: scale(1.1); }
+}
+
+@keyframes tilt {
+  0%, 100% { transform: perspective(500px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: perspective(500px) rotateX(15deg) rotateY(5deg); }
+  50% { transform: perspective(500px) rotateX(0deg) rotateY(10deg); }
+  75% { transform: perspective(500px) rotateX(-15deg) rotateY(5deg); }
+}
+
+@keyframes colorPulse {
+  0%, 100% {}
+  33% { filter: hue-rotate(120deg); }
+  66% { filter: hue-rotate(240deg); }
+}
+
+@keyframes jello {
+  0%, 100% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+}
+
+@keyframes shadowPulse {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
+  50% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)); }
+}
+
+@keyframes roll {
+  0% { transform: translate(-25px, 0) rotate(-30deg); }
+  50% { transform: translate(25px, 0) rotate(210deg); }
+  50.1% { transform: translate(25px, 0) rotate(210deg); }
+  100% { transform: translate(-25px, 0) rotate(-30deg); }
+}

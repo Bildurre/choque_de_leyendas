@@ -8,7 +8,7 @@
     <title>{{ config('app.name', 'Alanda: Choque de Leyendas') }}</title>
 
     <!-- Scripts -->
-    @vite(['resources/scss/_app.scss', 'resources/js/app.js'])
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
   </head>
   <body class="font-sans antialiased">
     <div class="admin-layout">

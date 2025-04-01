@@ -8,13 +8,16 @@
   <title>{{ config('app.name', 'Alanda: Choque de Leyendas') }}</title>
 
   <!-- Scripts -->
-  @vite(['resources/css/_app.scss', 'resources/js/app.js'])
+  @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body>
   <div class="welcome-container">
     <div class="welcome-logo">
       <x-application-logo class="logo-large" />
-      <h1 class="welcome-title">ALANDA</h1>
+      <h1 class="welcome-title">
+        <x-game-dice size="xl" class="dice-infinite-spin" />
+        ALANDA
+      </h1>
       <p class="welcome-subtitle">CHOQUE DE LEYENDAS</p>
       
       <div class="welcome-actions">
