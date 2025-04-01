@@ -48,11 +48,6 @@
       </div>
       
       <div class="header-actions">
-        <!-- Eliminamos el buscador -->
-        <div class="header-icons">
-          @include('components.game-dice', ['variant' => 'outline', 'size' => 'sm', 'class' => 'header-icon'])
-          @include('components.game-dice', ['variant' => 'outline', 'size' => 'sm', 'class' => 'header-icon'])
-        </div>
       </div>
     </header>
 
@@ -61,8 +56,20 @@
       <aside class="admin-sidebar">
         <!-- Sidebar Navigation Placeholder -->
         <nav class="sidebar-nav">
-          <!-- Will be implemented later -->
-          <div class="sidebar-nav-placeholder"></div>
+          <div class="sidebar-section">
+            <span class="sidebar-section-title">Componentes</span>
+            <ul class="sidebar-section-list">
+              <li>
+                <a href="{{ route('admin.factions.index') }}"
+                   data-route="{{ route('admin.factions.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('admin.factions.*') ? 'active' : '' }}">
+                  <x-game-dice variant="mono-red" size="sm"/>
+                  Facciones
+                </a>
+              </li>
+              <!-- More game components will be added here in the future -->
+            </ul>
+          </div>
         </nav>
 
         <!-- User Profile Section -->
