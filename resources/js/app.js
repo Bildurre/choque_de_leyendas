@@ -1,39 +1,51 @@
 // resources/js/app.js
-
 import './bootstrap';
 import '../scss/app.scss';
 import './alpine-init';
 import './components/sidebar';
-import ImageUploader from './components/image-uploader';
+import { setupAlertDismissal } from './common/alerts';
+
+// Initialize common functionality
+setupAlertDismissal();
 
 // Función para inicializar páginas específicas
 function initPages() {
-  // Detectar la ruta actual para cargar solo los scripts necesarios
   const path = window.location.pathname;
   
-  // Alternativa: detectar un atributo data en el body
-  // const pageType = document.body.dataset.page;
-  
-  // Importar los scripts específicos de cada página según la ruta
-  if (path.includes('/admin/factions') && !path.includes('/create') && !path.includes('/edit')) {
-    import('./factions/index').then(module => {
-      // Opcional: se puede llamar a alguna función de inicialización específica
-      // module.default.init();
-    });
+  // Cargar scripts específicos basados en la ruta
+  if (path.includes('/admin/factions')) {
+    if (path.includes('/edit')) {
+      import('./pages/factions/edit');
+    } else if (!path.includes('/create')) {
+      import('./pages/factions/index');
+    }
   }
   
-  if (path.includes('/admin/factions/') && path.includes('/edit')) {
-    import('./factions/edit').then(module => {
-      // Módulo importado correctamente
-    });
+  if (path.includes('/admin/hero-classes')) {
+    if (path.includes('/create')) {
+      import('./pages/hero-classes/create').then(module => {
+        module.setupModifiersValidation();
+      });
+    } else if (path.includes('/edit')) {
+      import('./pages/hero-classes/edit').then(module => {
+        module.setupModifiersValidation();
+      });
+    } else if (!path.includes('/create')) {
+      import('./pages/hero-classes/index');
+    }
   }
-
+  
   if (path.includes('/admin/superclasses') && !path.includes('/create') && !path.includes('/edit')) {
-    import('./superclasses/index').then(module => {
-      // Módulo importado correctamente
+    import('./pages/superclasses/index');
+  }
+  
+  // Initialize image uploader where needed
+  if (document.querySelector('.image-uploader')) {
+    import('./components/image-uploader').then(module => {
+      module.default.init();
     });
   }
 }
 
-// Inicializar las páginas cuando el DOM esté listo
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', initPages);

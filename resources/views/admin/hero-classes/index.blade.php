@@ -87,37 +87,3 @@
   </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Manejo de la confirmación para eliminar clase
-  const deleteButtons = document.querySelectorAll('.delete-btn');
-  
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.preventDefault();
-      
-      const heroClassName = this.getAttribute('data-hero-class-name');
-      
-      if (confirm(`¿Estás seguro de querer eliminar la clase "${heroClassName}"?`)) {
-        // Si el usuario confirma, enviamos el formulario
-        this.closest('form').submit();
-      }
-    });
-  });
-  
-  // Ocultar alertas después de 5 segundos
-  const alerts = document.querySelectorAll('.alert');
-  
-  alerts.forEach(alert => {
-    setTimeout(() => {
-      alert.style.opacity = '0';
-      setTimeout(() => {
-        alert.style.display = 'none';
-      }, 300);
-    }, 5000);
-  });
-});
-</script>
-@endpush
