@@ -7,6 +7,7 @@ use App\Models\HeroAttributeConfiguration;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Admin\HeroAttributeConfiguration\UpdateHeroAttributeConfigurationRequest;
 
 class HeroAttributeConfigurationController extends Controller
 {
@@ -23,17 +24,10 @@ class HeroAttributeConfigurationController extends Controller
   /**
    * Update hero attributes configuration
    */
-  public function update(Request $request): RedirectResponse
+  public function update(UpdateHeroAttributeConfigurationRequest $request): RedirectResponse
   {
     // Validate the input
-    $validated = $request->validate([
-      'base_agility' => 'required|integer|min:0',
-      'base_mental' => 'required|integer|min:0',
-      'base_will' => 'required|integer|min:0',
-      'base_strength' => 'required|integer|min:0',
-      'base_armor' => 'required|integer|min:0',
-      'total_points' => 'required|integer|min:1'
-    ]);
+    $validated = $request->validated();
 
     // Get the first configuration
     $configuration = HeroAttributeConfiguration::firstOrFail();

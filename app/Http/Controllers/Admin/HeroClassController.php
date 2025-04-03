@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\HeroClass;
 use App\Models\Superclass;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\Admin\HeroClass\StoreHeroClassRequest;
+use App\Http\Requests\Admin\HeroClass\updateHeroClassRequest;
 
 class HeroClassController extends Controller
 {
@@ -38,18 +38,9 @@ class HeroClassController extends Controller
   /**
    * Store a newly created hero class in storage.
    */
-  public function store(Request $request)
+  public function store(StoreHeroClassRequest $request)
   {
-    $validated = $request->validate([
-      'name' => 'required|string|max:255|unique:hero_classes',
-      'passive' => 'nullable|string',
-      'superclass_id' => 'required|exists:superclasses,id',
-      'agility_modifier' => 'required|integer|between:-2,2',
-      'mental_modifier' => 'required|integer|between:-2,2',
-      'will_modifier' => 'required|integer|between:-2,2',
-      'strength_modifier' => 'required|integer|between:-2,2',
-      'armor_modifier' => 'required|integer|between:-2,2'
-    ]);
+    $validated = $request->validated();
 
     $heroClass = HeroClass::create($validated);
 
@@ -69,23 +60,9 @@ class HeroClassController extends Controller
   /**
    * Update the specified hero class in storage.
    */
-  public function update(Request $request, HeroClass $heroClass)
+  public function update(UpdateHeroClassRequest $request, HeroClass $heroClass)
   {
-    $validated = $request->validate([
-      'name' => [
-        'required',
-        'string',
-        'max:255',
-        Rule::unique('hero_classes')->ignore($heroClass->id)
-      ],
-      'passive' => 'nullable|string',
-      'superclass_id' => 'required|exists:superclasses,id',
-      'agility_modifier' => 'required|integer|between:-2,2',
-      'mental_modifier' => 'required|integer|between:-2,2',
-      'will_modifier' => 'required|integer|between:-2,2',
-      'strength_modifier' => 'required|integer|between:-2,2',
-      'armor_modifier' => 'required|integer|between:-2,2'
-    ]);
+    $validated = $request->validated();
 
     $heroClass->update($validated);
 

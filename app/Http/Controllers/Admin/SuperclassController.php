@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Superclass;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Superclass\StoreSuperclassRequest;
+use App\Http\Requests\Admin\Superclass\UpdateSuperclassRequest;
 
 class SuperclassController extends Controller
 {
@@ -29,12 +30,9 @@ class SuperclassController extends Controller
   /**
    * Store a newly created superclass in storage.
    */
-  public function store(Request $request)
+  public function store(StoreSuperclassRequest $request)
   {
-    $validated = $request->validate([
-      'name' => 'required|string|max:255|unique:superclasses',
-      'description' => 'nullable|string',
-    ]);
+    $validated = $request->validated();
 
     $superclass = Superclass::create($validated);
 
@@ -53,17 +51,9 @@ class SuperclassController extends Controller
   /**
    * Update the specified superclass in storage.
    */
-  public function update(Request $request, Superclass $superclass)
+  public function update(UpdateSuperclassRequest $request, Superclass $superclass)
   {
-    $validated = $request->validate([
-      'name' => [
-        'required',
-        'string',
-        'max:255',
-        Rule::unique('superclasses')->ignore($superclass->id)
-      ],
-      'description' => 'nullable|string',
-    ]);
+    $validated = $request->validated();
 
     $superclass->update($validated);
 

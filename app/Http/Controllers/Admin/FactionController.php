@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faction;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Faction\StoreFactionRequest;
+use App\Http\Requests\Admin\Faction\UpdateFactionRequest;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 class FactionController extends Controller
 {
@@ -30,14 +30,10 @@ class FactionController extends Controller
   /**
    * Store a newly created faction in storage.
    */
-  public function store(Request $request)
+  public function store(StoreFactionRequest $request)
   {
-    $validated = $request->validate([
-      'name' => 'required|string|max:255|unique:factions',
-      'lore_text' => 'nullable|string',
-      'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
-      'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    // La validación ya se ha realizado en el request
+    $validated = $request->validated();
 
     // Crear facción
     $faction = new Faction();
@@ -79,20 +75,10 @@ class FactionController extends Controller
   /**
    * Update the specified faction in storage.
    */
-  public function update(Request $request, Faction $faction)
+  public function update(UpdateFactionRequest $request, Faction $faction)
   {
-    $validated = $request->validate([
-      'name' => [
-        'required',
-        'string',
-        'max:255',
-        Rule::unique('factions')->ignore($faction->id),
-      ],
-      'lore_text' => 'nullable|string',
-      'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
-      'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-      'remove_icon' => 'nullable|boolean',
-    ]);
+    // La validación ya se ha realizado en el request
+    $validated = $request->validated();
 
     $faction->name = $validated['name'];
     $faction->lore_text = $validated['lore_text'];
