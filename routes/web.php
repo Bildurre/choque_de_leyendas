@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FactionController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\HeroAttributeConfigurationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,6 +18,10 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Facciones
   Route::resource('factions', FactionController::class);
+
+  // Hero Attributes Configuration
+  Route::get('/hero-attributes', [HeroAttributeConfigurationController::class, 'edit'])->name('hero-attributes.edit');
+  Route::put('/hero-attributes', [HeroAttributeConfigurationController::class, 'update'])->name('hero-attributes.update');
 });
 
 

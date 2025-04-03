@@ -7,12 +7,14 @@ choque_de_leyendas/
 │   ├── Models/
 │   │   ├── User.php (updated with is_admin field)
 │   │   ├── Faction.php (added for faction management)
-│   │   └── Deck.php (planned for deck management)
+│   │   ├── Deck.php (planned for deck management)
+│   │   └── HeroAttributeConfiguration.php (NEW: for managing hero base attributes)
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   │   ├── Admin/
 │   │   │   │   ├── DashboardController.php (handles admin dashboard)
 │   │   │   │   ├── FactionController.php (CRUD for factions)
+│   │   │   │   ├── HeroAttributeConfigurationController.php (NEW: manages hero attribute configuration)
 │   │   │   │   └── HeroController.php (placeholder for hero management)
 │   │   ├── Middleware/
 │   │   │   └── EnsureIsAdmin.php (restricts access to admin users)
@@ -21,13 +23,15 @@ choque_de_leyendas/
 ├── database/
 │   ├── migrations/
 │   │   ├── 0001_01_01_000000_create_users_table.php (modified with is_admin field)
-│   │   └── 2025_04_01_095111_create_factions_table.php (added)
+│   │   ├── 2025_04_01_095111_create_factions_table.php (added)
+│   │   └── migration_for_hero_attribute_configurations.php (NEW: for hero base attributes)
 │   ├── seeders/
-│   │   ├── DatabaseSeeder.php
+│   │   ├── DatabaseSeeder.php (updated)
 │   │   ├── AdminUserSeeder.php
-│   │   └── FactionSeeder.php (added to seed faction data)
+│   │   ├── FactionSeeder.php
+│   │   └── HeroAttributeConfigurationSeeder.php (NEW: seeds initial hero attribute config)
 │   └── data/
-│       └── factions.json (added for seeder data source)
+│       └── factions.json
 ├── resources/
 │   ├── scss/
 │   │   ├── abstracts/
@@ -41,10 +45,10 @@ choque_de_leyendas/
 │   │   │   └── _base.scss
 │   │   ├── components/
 │   │   │   ├── _game-dice.scss
-│   │   │   ├── _alerts.scss (added for system notifications)
-│   │   │   ├── _buttons.scss (added for consistent button styling)
-│   │   │   ├── _forms.scss (added for form styling)
-│   │   │   └── _image-uploader.scss (added for image upload functionality)
+│   │   │   ├── _alerts.scss
+│   │   │   ├── _buttons.scss
+│   │   │   ├── _forms.scss
+│   │   │   └── _image-uploader.scss
 │   │   ├── layout/
 │   │   │   ├── _admin-layout.scss                     
 │   │   │   ├── _admin-header.scss                     
@@ -53,36 +57,39 @@ choque_de_leyendas/
 │   │   │   ├── _login.scss
 │   │   │   ├── _dashboard.scss                        
 │   │   │   ├── _welcome.scss
-│   │   │   └── _factions.scss (added for faction management pages)
+│   │   │   ├── _factions.scss
+│   │   │   └── _hero-attributes.scss (NEW: styles for hero attribute configuration)
 │   │   ├── vendor/
 │   │   ├── views/
 │   │   └── _app.scss (updated to include new components)
 │   ├── js/
 │   │   ├── components/                                
 │   │   │   ├── sidebar.js                             
-│   │   │   └── image-uploader.js (added for dynamic image upload)
+│   │   │   └── image-uploader.js
 │   │   ├── factions/
-│   │   │   ├── index.js (added for faction listing functionality)
-│   │   │   └── edit.js (added for faction edit page interactions)
+│   │   │   ├── index.js
+│   │   │   └── edit.js
 │   │   ├── utilities/                                
 │   │   ├── pages/                                    
-│   │   ├── app.js (updated to dynamically load page scripts)                                   
+│   │   ├── app.js                                    
 │   │   ├── alpine-init.js                             
 │   │   └── bootstrap.js
 │   └── views/
 │       ├── admin/
 │       │   ├── factions/
-│       │   │   ├── index.blade.php (faction listing)
-│       │   │   ├── create.blade.php (create form)
-│       │   │   ├── edit.blade.php (edit form)
-│       │   │   └── show.blade.php (faction details)
+│       │   │   ├── index.blade.php
+│       │   │   ├── create.blade.php
+│       │   │   ├── edit.blade.php
+│       │   │   └── show.blade.php
+│       │   ├── hero-attributes/
+│       │   │   └── edit.blade.php (NEW: view for hero attribute configuration)
 │       │   └── heroes/ (planned for hero management)
 │       ├── auth/
 │       │   └── login.blade.php (customized)
 │       ├── components/
 │       │   ├── application-logo.blade.php
 │       │   ├── game-dice.blade.php
-│       │   ├── image-uploader.blade.php (new reusable image upload component)
+│       │   ├── image-uploader.blade.php
 │       │   └── input-label.blade.php
 │       ├── layouts/
 │       │   ├── admin.blade.php (updated with dashboard link)                        

@@ -36,7 +36,7 @@
         <!-- Logo en el header -->
         <div class="header-logo">
           <a href="{{ route('admin.dashboard') }}" class="logo-container">
-            @include('components.game-dice', ['class' => 'logo-dice'])
+            <x-game-dice variant="tricolor" size="bg"/>
             <span class="logo-text">ALANDA</span>
           </a>
           <span class="logo-subtitle">CHOQUE DE LEYENDAS</span>
@@ -85,6 +85,19 @@
                 </a>
               </li>
               <!-- Otros enlaces de componentes se añadirán aquí -->
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <span class="sidebar-section-title">Balance</span>
+            <ul class="sidebar-section-list">
+              <li>
+                <a href="{{ route('admin.hero-attributes.edit') }}" 
+                  class="sidebar-nav-link {{ request()->routeIs('admin.hero-attributes.*') ? 'active' : '' }}">
+                  <x-game-dice variant="red-green" size="sm"/>
+                  Configuración de Atributos
+                </a>
+              </li>              
             </ul>
           </div>
           

@@ -1,0 +1,66 @@
+@use '../abstracts/all' as *;
+
+.hero-attributes-container {
+  margin: 0 auto;
+
+  .configuration-info {
+    margin-bottom: $spacing-lg;
+    background-color: $color-bg-dark-secondary;
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: $spacing-md;
+      font-size: 1.2rem;
+      color: $color-text-light;
+    }
+
+    .config-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      tr {
+        border-bottom: 1px solid $color-bg-dark-tertiary;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      th, td {
+        padding: $spacing-sm;
+        text-align: left;
+      }
+
+      th {
+        color: $color-text-muted;
+        font-weight: 500;
+      }
+
+      td {
+        color: $color-text-light;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
+
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .total-points-group {
+    grid-column: 1 / -1;
+    margin-top: $spacing-lg;
+  }
+}
