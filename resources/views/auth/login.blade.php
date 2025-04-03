@@ -3,8 +3,8 @@
     <div class="login-page__container">
       <h1 class="login-page__title"> 
         <x-application-logo gradient="true" 
-        gradient-start="#3d3df5" 
-        gradient-end="#f53d3d"
+        gradient-start="#ff9800" 
+        gradient-end="#9575cd"
         stroke="#000000" 
         stroke-width="2" />
       </h1>

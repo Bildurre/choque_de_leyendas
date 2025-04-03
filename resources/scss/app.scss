@@ -4,6 +4,9 @@
 
 //COMPONENTS
 @use 'components/game-dice';
+@use 'components/alerts';
+@use 'components/buttons';
+
 
 //VENDOR
 
@@ -19,3 +22,4 @@
 @use 'pages/wellcome';
 @use 'pages/login';
 @use 'pages/dashboard';
+@use 'pages/factions';

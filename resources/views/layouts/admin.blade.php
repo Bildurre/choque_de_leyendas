@@ -35,10 +35,10 @@
         
         <!-- Logo en el header -->
         <div class="header-logo">
-          <div class="logo-container">
+          <a href="{{ route('admin.dashboard') }}" class="logo-container">
             @include('components.game-dice', ['class' => 'logo-dice'])
             <span class="logo-text">ALANDA</span>
-          </div>
+          </a>
           <span class="logo-subtitle">CHOQUE DE LEYENDAS</span>
         </div>
         
@@ -53,44 +53,77 @@
 
     <div class="admin-main-container">
       <!-- Sidebar -->
+      <!-- Sidebar Navigation -->
       <aside class="admin-sidebar">
-        <!-- Sidebar Navigation Placeholder -->
         <nav class="sidebar-nav">
+          <!-- Dashboard link (standalone, before any groups) -->
+          <div class="sidebar-dashboard-link">
+            <a href="{{ route('admin.dashboard') }}"
+              class="sidebar-nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+              <x-game-dice variant="mono-blue" size="sm"/>
+              Dashboard
+            </a>
+          </div>
+          
+          <!-- Componentes Group -->
           <div class="sidebar-section">
             <span class="sidebar-section-title">Componentes</span>
             <ul class="sidebar-section-list">
               <li>
                 <a href="{{ route('admin.factions.index') }}"
-                   data-route="{{ route('admin.factions.index') }}"
-                   class="sidebar-nav-link {{ request()->routeIs('admin.factions.*') ? 'active' : '' }}">
+                  data-route="{{ route('admin.factions.index') }}"
+                  class="sidebar-nav-link {{ request()->routeIs('admin.factions.*') ? 'active' : '' }}">
                   <x-game-dice variant="mono-red" size="sm"/>
                   Facciones
                 </a>
               </li>
-              <!-- More game components will be added here in the future -->
+              <li>
+                <a href="#"
+                  class="sidebar-nav-link {{ request()->routeIs('admin.heroes.*') ? 'active' : '' }}">
+                  <x-game-dice variant="mono-green" size="sm"/>
+                  Héroes
+                </a>
+              </li>
+              <!-- Otros enlaces de componentes se añadirán aquí -->
+            </ul>
+          </div>
+          
+          <!-- Placeholder para futuras secciones -->
+          <div class="sidebar-section">
+            <span class="sidebar-section-title">Reglas</span>
+            <ul class="sidebar-section-list">
+              <li><a href="#" class="sidebar-nav-link">Reglas básicas</a></li>
+              <li><a href="#" class="sidebar-nav-link">Componentes</a></li>
+              <li><a href="#" class="sidebar-nav-link">Anexos</a></li>
+            </ul>
+          </div>
+          
+          <div class="sidebar-section">
+            <span class="sidebar-section-title">Balance</span>
+            <ul class="sidebar-section-list">
+              <li><a href="#" class="sidebar-nav-link">Análisis de costes</a></li>
+              <li><a href="#" class="sidebar-nav-link">Probabilidades</a></li>
+            </ul>
+          </div>
+          
+          <div class="sidebar-section">
+            <span class="sidebar-section-title">Exportación</span>
+            <ul class="sidebar-section-list">
+              <li><a href="#" class="sidebar-nav-link">PDF</a></li>
+            </ul>
+          </div>
+          
+          <div class="sidebar-section">
+            <span class="sidebar-section-title">Sistema</span>
+            <ul class="sidebar-section-list">
+              <li><a href="#" class="sidebar-nav-link">Administradores</a></li>
             </ul>
           </div>
         </nav>
 
         <!-- User Profile Section -->
         <div class="sidebar-footer">
-          <div class="user-profile">
-            <div class="user-avatar-dice">
-              @include('components.game-dice', ['variant' => 'mono', 'color' => '#333333', 'class' => 'user-dice'])
-            </div>
-            <div class="user-info">
-              <span class="user-name">{{ Auth::user()->name }}</span>
-              <span class="user-role">Administrador</span>
-            </div>
-          </div>
-          <div class="logout-section">
-            <form method="POST" action="{{ route('logout') }}">
-              @csrf
-              <button type="submit" class="logout-button">
-                <span>Cerrar sesión</span>
-              </button>
-            </form>
-          </div>
+          <!-- ... resto del código ... -->
         </div>
       </aside>
 

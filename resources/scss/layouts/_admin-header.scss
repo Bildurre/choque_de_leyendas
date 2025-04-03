@@ -52,9 +52,9 @@
   }
   
   .logo-subtitle {
-    @include font-primary;
-    font-size: 0.65rem;
-    color: $color-text-muted;
+    @include font-secondary;
+    font-size: 0.75rem;
+    color: $color-text-light;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: none;

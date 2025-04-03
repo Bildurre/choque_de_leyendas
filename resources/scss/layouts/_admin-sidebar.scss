@@ -140,3 +140,39 @@
     }
   }
 }
+
+.sidebar-dashboard-link {
+  padding: $spacing-sm 0;
+  margin-bottom: $spacing-md;
+  border-bottom: 1px solid $color-bg-dark-tertiary;
+  
+  a {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    color: $color-text-light;
+    font-weight: 500;
+    transition: $transition-fast;
+    
+    &:hover {
+      background-color: $color-bg-dark-tertiary;
+    }
+    
+    &.active {
+      background-color: $color-accent-orange;
+      color: $color-text-light;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: $color-accent-orange;
+      }
+    }
+  }
+}
