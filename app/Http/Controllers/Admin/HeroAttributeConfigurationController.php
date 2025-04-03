@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\HeroAttributeConfiguration;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Models\HeroAttributeConfiguration;
+use App\Services\HeroAttributeConfigurationService;
 use App\Http\Requests\Admin\HeroAttributeConfiguration\UpdateHeroAttributeConfigurationRequest;
 
 class HeroAttributeConfigurationController extends Controller
 {
+  protected $configurationService;
+
+  /**
+   * Create a new controller instance.
+   *
+   * @param HeroAttributeConfigurationService $configurationService
+   */
+  public function __construct(HeroAttributeConfigurationService $configurationService)
+  {
+    $this->configurationService = $configurationService;
+  }
+
   /**
    * Show the form for editing hero attributes configuration
    */
   public function edit(): View
   {
     // Get the first (and only) configuration
-    $configuration = HeroAttributeConfiguration::firstOrFail();
+    $configuration = $this->configurationService->getConfiguration();
     return view('admin.hero-attributes.edit', compact('configuration'));
   }
 
@@ -29,32 +42,19 @@ class HeroAttributeConfigurationController extends Controller
     // Validate the input
     $validated = $request->validated();
 
-    // Get the first configuration
-    $configuration = HeroAttributeConfiguration::firstOrFail();
-
-    // Calculate total base points
-    $basePointsTotal = 
-      $validated['base_agility'] + 
-      $validated['base_mental'] + 
-      $validated['base_will'] + 
-      $validated['base_strength'] + 
-      $validated['base_armor'];
-
-    // Validate that base points don't exceed total points
-    if ($basePointsTotal > $validated['total_points']) {
+    try {
+      $this->configurationService->updateConfiguration($validated);
+      
+      // Redirect with success message
+      return redirect()
+        ->route('admin.hero-attributes.edit')
+        ->with('success', 'Hero attribute configuration updated successfully.');
+    } catch (\Exception $e) {
       return back()
         ->withInput()
         ->withErrors([
-          'base_points' => 'The sum of base attributes cannot exceed the total points.'
+          'base_points' => $e->getMessage()
         ]);
     }
-
-    // Update the configuration
-    $configuration->update($validated);
-
-    // Redirect with success message
-    return redirect()
-      ->route('admin.hero-attributes.edit')
-      ->with('success', 'Hero attribute configuration updated successfully.');
   }
 }

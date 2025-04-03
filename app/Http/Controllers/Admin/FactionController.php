@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Faction;
+use App\Services\FactionService;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\Faction\StoreFactionRequest;
 use App\Http\Requests\Admin\Faction\UpdateFactionRequest;
-use Illuminate\Support\Facades\Storage;
 
 class FactionController extends Controller
 {
+  protected $factionService;
+
+  /**
+   * Create a new controller instance.
+   *
+   * @param FactionService $factionService
+   */
+  public function __construct(FactionService $factionService)
+  {
+    $this->factionService = $factionService;
+  }
   /**
    * Display a listing of factions.
    */
   public function index()
   {
-    $factions = Faction::all();
+    $factions = $this->factionService->getAllFactions();
     return view('admin.factions.index', compact('factions'));
   }
 
@@ -35,25 +47,13 @@ class FactionController extends Controller
     // La validación ya se ha realizado en el request
     $validated = $request->validated();
 
-    // Crear facción
-    $faction = new Faction();
-    $faction->name = $validated['name'];
-    $faction->lore_text = $validated['lore_text'];
-    $faction->color = $validated['color'];
-    
-    // Determinar automáticamente el color del texto
-    $faction->setTextColorBasedOnBackground();
-    
-    // Guardar icono si existe
-    if ($request->hasFile('icon')) {
-      $iconPath = $request->file('icon')->store('faction-icons', 'public');
-      $faction->icon = $iconPath;
+    try {
+      $this->factionService->create($validated);
+      return redirect()->route('admin.factions.index')
+        ->with('success', 'Facción creada correctamente.');
+    } catch (\Exception $e) {
+      return back()->withInput()->with('error', $e->getMessage());
     }
-    
-    $faction->save();
-    
-    return redirect()->route('admin.factions.index')
-      ->with('success', 'Facción creada correctamente.');
   }
 
   /**
@@ -80,35 +80,13 @@ class FactionController extends Controller
     // La validación ya se ha realizado en el request
     $validated = $request->validated();
 
-    $faction->name = $validated['name'];
-    $faction->lore_text = $validated['lore_text'];
-    $faction->color = $validated['color'];
-    
-    // Determinar automáticamente el color del texto
-    $faction->setTextColorBasedOnBackground();
-    
-    // Manejar la eliminación del icono si se seleccionó la opción
-    if ($request->has('remove_icon') && $request->remove_icon == "1") {
-      if ($faction->icon) {
-        Storage::disk('public')->delete($faction->icon);
-        $faction->icon = null;
-      }
+    try {
+      $this->factionService->update($faction, $validated);
+      return redirect()->route('admin.factions.index')
+        ->with('success', 'Facción actualizada correctamente.');
+    } catch (\Exception $e) {
+      return back()->withInput()->with('error', $e->getMessage());
     }
-    // Actualizar icono si existe un nuevo archivo
-    elseif ($request->hasFile('icon')) {
-      // Eliminar el icono anterior si existe
-      if ($faction->icon) {
-        Storage::disk('public')->delete($faction->icon);
-      }
-      
-      $iconPath = $request->file('icon')->store('faction-icons', 'public');
-      $faction->icon = $iconPath;
-    }
-    
-    $faction->save();
-    
-    return redirect()->route('admin.factions.index')
-      ->with('success', 'Facción actualizada correctamente.');
   }
 
   /**
@@ -121,15 +99,17 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index')
         ->with('error', 'No se puede eliminar la facción porque tiene héroes o cartas asociadas.');
     }
-    
-    // Eliminar el icono si existe
-    if ($faction->icon) {
-      Storage::disk('public')->delete($faction->icon);
+        
+    try {
+      $this->factionService->delete($faction);
+      if ($faction->icon) {
+        Storage::disk('public')->delete($faction->icon);
+      }
+      return redirect()->route('admin.factions.index')
+        ->with('success', 'Facción eliminada correctamente.');
+    } catch (\Exception $e) {
+      return redirect()->route('admin.factions.index')
+        ->with('error', $e->getMessage());
     }
-    
-    $faction->delete();
-    
-    return redirect()->route('admin.factions.index')
-      ->with('success', 'Facción eliminada correctamente.');
   }
 }

@@ -2,21 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\HeroClass;
 use App\Models\Superclass;
+use App\Services\HeroClassService;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HeroClass\StoreHeroClassRequest;
 use App\Http\Requests\Admin\HeroClass\updateHeroClassRequest;
 
 class HeroClassController extends Controller
 {
+  protected $heroClassService;
+
+  /**
+   * Create a new controller instance.
+   *
+   * @param HeroClassService $heroClassService
+   */
+  public function __construct(HeroClassService $heroClassService)
+  {
+    $this->heroClassService = $heroClassService;
+  }
+
   /**
    * Display a listing of hero classes.
    */
   public function index()
   {
-     // Cargar las clases con sus superclases relacionadas
-    $heroClasses = HeroClass::with('superclass')->get();
+    $heroClasses = $this->heroClassService->getAllHeroClasses();
     
     // Modificar la colección para agregar el nombre de la superclase como propiedad
     $heroClasses->each(function($heroClass) {
@@ -42,10 +54,13 @@ class HeroClassController extends Controller
   {
     $validated = $request->validated();
 
-    $heroClass = HeroClass::create($validated);
-
-    return redirect()->route('admin.hero-classes.index')
-      ->with('success', "La clase {$heroClass->name} ha sido creada correctamente.");
+    try {
+      $heroClass = $this->heroClassService->create($validated);
+      return redirect()->route('admin.hero-classes.index')
+        ->with('success', "La clase {$heroClass->name} ha sido creada correctamente.");
+    } catch (\Exception $e) {
+      return back()->withInput()->with('error', $e->getMessage());
+    }
   }
 
   /**
@@ -64,10 +79,13 @@ class HeroClassController extends Controller
   {
     $validated = $request->validated();
 
-    $heroClass->update($validated);
-
-    return redirect()->route('admin.hero-classes.index')
-      ->with('success', "La clase {$heroClass->name} ha sido actualizada correctamente.");
+    try {
+      $this->heroClassService->update($heroClass, $validated);
+      return redirect()->route('admin.hero-classes.index')
+        ->with('success', "La clase {$heroClass->name} ha sido actualizada correctamente.");
+    } catch (\Exception $e) {
+      return back()->withInput()->with('error', $e->getMessage());
+    }
   }
 
     /**
@@ -75,10 +93,15 @@ class HeroClassController extends Controller
      */
     public function destroy(HeroClass $heroClass)
     {
+      try {
         $heroName = $heroClass->name;
-        $heroClass->delete();
-
+        $this->heroClassService->delete($heroClass);
+        
         return redirect()->route('admin.hero-classes.index')
-            ->with('success', "La clase {$heroName} ha sido eliminada correctamente.");
+          ->with('success', "La clase {$heroName} ha sido eliminada correctamente.");
+      } catch (\Exception $e) {
+        return redirect()->route('admin.hero-classes.index')
+          ->with('error', $e->getMessage());
+      }
     }
 }

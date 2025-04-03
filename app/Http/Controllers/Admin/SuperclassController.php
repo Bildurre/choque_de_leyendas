@@ -4,18 +4,31 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Superclass;
 use Illuminate\Http\Request;
+use App\Services\SuperclassService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Superclass\StoreSuperclassRequest;
 use App\Http\Requests\Admin\Superclass\UpdateSuperclassRequest;
 
 class SuperclassController extends Controller
 {
+  protected $superclassService;
+
+  /**
+   * Create a new controller instance.
+   *
+   * @param SuperclassService $superclassService
+   */
+  public function __construct(SuperclassService $superclassService)
+  {
+    $this->superclassService = $superclassService;
+  }
+
   /**
    * Display a listing of superclasses.
    */
   public function index()
   {
-    $superclasses = Superclass::withCount('heroClasses')->get();
+    $superclasses = $this->superclassService->getAllSuperclasses();
     return view('admin.superclasses.index', compact('superclasses'));
   }
 
@@ -34,10 +47,13 @@ class SuperclassController extends Controller
   {
     $validated = $request->validated();
 
-    $superclass = Superclass::create($validated);
-
-    return redirect()->route('admin.superclasses.index')
-      ->with('success', "La superclase {$superclass->name} ha sido creada correctamente.");
+    try {
+      $superclass = $this->superclassService->create($validated);
+      return redirect()->route('admin.superclasses.index')
+        ->with('success', "La superclase {$superclass->name} ha sido creada correctamente.");
+    } catch (\Exception $e) {
+      return back()->withInput()->with('error', $e->getMessage());
+    }
   }
 
   /**
@@ -55,10 +71,13 @@ class SuperclassController extends Controller
   {
     $validated = $request->validated();
 
-    $superclass->update($validated);
-
-    return redirect()->route('admin.superclasses.index')
-      ->with('success', "La superclase {$superclass->name} ha sido actualizada correctamente.");
+    try {
+      $this->superclassService->update($superclass, $validated);
+      return redirect()->route('admin.superclasses.index')
+        ->with('success', "La superclase {$superclass->name} ha sido actualizada correctamente.");
+    } catch (\Exception $e) {
+      return back()->withInput()->with('error', $e->getMessage());
+    }
   }
 
   /**
@@ -72,10 +91,15 @@ class SuperclassController extends Controller
         ->with('error', "No se puede eliminar la superclase {$superclass->name} porque está siendo utilizada por clases de héroe.");
     }
 
-    $superclassName = $superclass->name;
-    $superclass->delete();
+    try {
+      $superclassName = $superclass->name;
+      $this->superclassService->delete($superclass);
 
-    return redirect()->route('admin.superclasses.index')
-      ->with('success', "La superclase {$superclassName} ha sido eliminada correctamente.");
+      return redirect()->route('admin.superclasses.index')
+        ->with('success', "La superclase {$superclassName} ha sido eliminada correctamente.");
+    } catch (\Exception $e) {
+      return redirect()->route('admin.superclasses.index')
+        ->with('error', $e->getMessage());
+    }
   }
 }
