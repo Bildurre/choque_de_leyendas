@@ -1,139 +1,38 @@
 # Alanda: Choque de Leyendas - Web Project Documentation
 
-## Project File Structure
-```
-choque_de_leyendas/
-├── app/
-│   ├── Models/
-│   │   ├── User.php (updated with is_admin field)
-│   │   ├── Faction.php (added for faction management)
-│   │   ├── Deck.php (planned for deck management)
-│   │   ├── HeroAttributeConfiguration.php (for managing hero base attributes)
-│   │   ├── HeroClass.php (NEW: for managing hero classes)
-│   │   └── Superclass.php (NEW: for managing superclasses)
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── Admin/
-│   │   │   │   ├── DashboardController.php (handles admin dashboard)
-│   │   │   │   ├── FactionController.php (CRUD for factions)
-│   │   │   │   ├── HeroAttributeConfigurationController.php (manages hero attribute configuration)
-│   │   │   │   ├── HeroClassController.php (CRUD for hero classes)
-│   │   │   │   ├── SuperclassController.php (NEW: CRUD for superclasses)
-│   │   │   │   └── HeroController.php (placeholder for hero management)
-│   │   ├── Middleware/
-│   │   │   └── EnsureIsAdmin.php (restricts access to admin users)
-│   │   └── Requests/
-│   │       └── Auth/ (modified to use admin.dashboard routes)
-│   └── Services/ (potential future addition for complex logic)
-├── database/
-│   ├── migrations/
-│   │   ├── 0001_01_01_000000_create_users_table.php (modified with is_admin field)
-│   │   ├── 2025_04_01_095111_create_factions_table.php (added)
-│   │   ├── 2025_04_03_160404_create_hero_attribute_configuration.php (for hero base attributes)
-│   │   ├── 2025_04_03_160500_create_superclasses_table.php (NEW: for superclasses)
-│   │   └── 2025_04_03_164900_create_hero_classes.php (for hero classes)
-│   ├── seeders/
-│   │   ├── DatabaseSeeder.php (updated)
-│   │   ├── AdminUserSeeder.php
-│   │   ├── FactionSeeder.php
-│   │   ├── HeroAttributeConfigurationSeeder.php (seeds initial hero attribute config)
-│   │   └── SuperclassSeeder.php (NEW: seeds initial superclasses)
-│   └── data/
-│       └── factions.json
-├── resources/
-│   ├── scss/
-│   │   ├── abstracts/
-│   │   │   ├── _all.scss                              
-│   │   │   ├── _colors.scss
-│   │   │   ├── _fonts.scss
-│   │   │   ├── _mixins.scss
-│   │   │   └── _variables.scss
-│   │   ├── base/
-│   │   │   ├── _normalize.scss
-│   │   │   └── _base.scss
-│   │   ├── components/
-│   │   │   ├── _game-dice.scss
-│   │   │   ├── _alerts.scss
-│   │   │   ├── _buttons.scss
-│   │   │   ├── _forms.scss
-│   │   │   └── _image-uploader.scss
-│   │   ├── layout/
-│   │   │   ├── _admin-layout.scss                     
-│   │   │   ├── _admin-header.scss                     
-│   │   │   └── _admin-sidebar.scss                    
-│   │   ├── pages/
-│   │   │   ├── _login.scss
-│   │   │   ├── _dashboard.scss                        
-│   │   │   ├── _welcome.scss
-│   │   │   ├── _factions.scss
-│   │   │   ├── _hero-attributes.scss
-│   │   │   ├── _hero-classes.scss
-│   │   │   └── _superclasses.scss (NEW: styles for superclasses)
-│   │   ├── vendor/
-│   │   ├── views/
-│   │   └── _app.scss (updated to include new components)
-│   ├── js/
-│   │   ├── components/                                
-│   │   │   ├── sidebar.js                             
-│   │   │   └── image-uploader.js
-│   │   ├── factions/
-│   │   │   ├── index.js
-│   │   │   └── edit.js
-│   │   ├── superclasses/ (NEW: scripts for superclass pages)
-│   │   │   └── index.js
-│   │   ├── utilities/                                
-│   │   ├── pages/                                    
-│   │   ├── app.js (updated to include superclass scripts)                                   
-│   │   ├── alpine-init.js                             
-│   │   └── bootstrap.js
-│   └── views/
-│       ├── admin/
-│       │   ├── factions/
-│       │   │   ├── index.blade.php
-│       │   │   ├── create.blade.php
-│       │   │   ├── edit.blade.php
-│       │   │   └── show.blade.php
-│       │   ├── hero-attributes/
-│       │   │   └── edit.blade.php
-│       │   ├── hero-classes/
-│       │   │   ├── index.blade.php (updated to show superclass)
-│       │   │   ├── create.blade.php (updated to include superclass selector)
-│       │   │   └── edit.blade.php (updated to include superclass selector)
-│       │   ├── superclasses/ (NEW: views for superclass management)
-│       │   │   ├── index.blade.php
-│       │   │   ├── create.blade.php
-│       │   │   └── edit.blade.php
-│       │   └── heroes/ (planned for hero management)
-│       ├── auth/
-│       │   └── login.blade.php (customized)
-│       ├── components/
-│       │   ├── application-logo.blade.php
-│       │   ├── game-dice.blade.php
-│       │   ├── image-uploader.blade.php
-│       │   └── input-label.blade.php
-│       ├── layouts/
-│       │   ├── admin.blade.php (updated with superclasses menu link)                        
-│       │   ├── app.blade.php
-│       │   └── guest.blade.php
-│       ├── dashboard.blade.php                        
-│       └── welcome.blade.php
-├── routes/
-│   └── web.php (updated with superclass routes)
-└── README.md
-```
-
 ## Project Overview
 - **Framework**: Laravel 12.4
 - **Frontend**: Blade + Alpine.js
 - **Styling**: SCSS
 - **Authentication**: Laravel Breeze (customized)
 
-## Recent Implementation Updates
+## Implementation Roadmap
+
+### Form Requests
+- Added comprehensive form requests for validation:
+  - StoreFactionRequest and UpdateFactionRequest
+  - UpdateHeroAttributeConfigurationRequest
+  - StoreHeroClassRequest and UpdateHeroClassRequest
+  - StoreSuperclassRequest and UpdateSuperclassRequest
+
+### Services Implementation
+- Developed service classes to handle business logic:
+  - FactionService
+  - HeroAttributeConfigurationService
+  - HeroClassService
+  - ImageService
+  - SuperclassService
+
+### Traits Added
+- HasColorAttribute: Provides color-related functionality
+- HasGameStatistics: Adds statistical methods for game-related models
+- HasImageAttribute: Manages image-related operations
+- HasSlug: Generates slugs for models
 
 ### Superclass Management System
-- Created `Superclass` model to manage hero superclasses (Luchador/Conjurador)
+- Created Superclass model to manage hero superclasses (Luchador/Conjurador)
 - Implemented migration and database schema for superclasses
-- Modified `HeroClass` model to establish relationship with superclasses
+- Modified HeroClass model to establish relationship with superclasses
 - Added comprehensive CRUD operations for superclass management
 - Developed SuperclassController with all necessary methods
 - Created elegant user interface for superclass management:
@@ -148,7 +47,7 @@ choque_de_leyendas/
 - Added navigation link in admin sidebar for superclass management
 
 ### Hero Attribute Configuration System
-- Created `HeroAttributeConfiguration` model to manage base hero attributes
+- Created HeroAttributeConfiguration model to manage base hero attributes
 - Implemented migration for storing configuration
 - Added seeder to initialize default configuration
 - Created admin controller for managing hero attributes
@@ -162,7 +61,7 @@ choque_de_leyendas/
 - Implemented form validation and user-friendly interface
 
 ### Hero Classes Management System
-- Created `HeroClass` model to manage hero classes
+- Created HeroClass model to manage hero classes
 - Implemented migration for storing class information
 - Added comprehensive CRUD operations for hero classes
 - Developed admin controller for managing hero classes
