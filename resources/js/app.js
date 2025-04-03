@@ -4,6 +4,7 @@ import './bootstrap';
 import '../scss/app.scss';
 import './alpine-init';
 import './components/sidebar';
+import ImageUploader from './components/image-uploader';
 
 // Función para inicializar páginas específicas
 function initPages() {
@@ -21,10 +22,11 @@ function initPages() {
     });
   }
   
-  // Aquí puedes añadir más condiciones para otras páginas
-  // if (path.includes('/admin/heroes')) {
-  //   import('./pages/heroes/index');
-  // }
+  if (path.includes('/admin/factions/') && path.includes('/edit')) {
+    import('./factions/edit').then(module => {
+      // Módulo importado correctamente
+    });
+  }
 }
 
 // Inicializar las páginas cuando el DOM esté listo

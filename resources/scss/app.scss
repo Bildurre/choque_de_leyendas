@@ -6,6 +6,8 @@
 @use 'components/game-dice';
 @use 'components/alerts';
 @use 'components/buttons';
+@use 'components/forms';
+@use 'components/image-uploader';
 
 
 //VENDOR
@@ -18,7 +20,6 @@
 //VIEWS
 
 //PAGES
-
 @use 'pages/wellcome';
 @use 'pages/login';
 @use 'pages/dashboard';

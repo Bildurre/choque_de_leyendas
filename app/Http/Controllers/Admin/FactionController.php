@@ -91,6 +91,7 @@ class FactionController extends Controller
       'lore_text' => 'nullable|string',
       'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
       'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'remove_icon' => 'nullable|boolean',
     ]);
 
     $faction->name = $validated['name'];
@@ -100,8 +101,15 @@ class FactionController extends Controller
     // Determinar automáticamente el color del texto
     $faction->setTextColorBasedOnBackground();
     
-    // Actualizar icono si existe
-    if ($request->hasFile('icon')) {
+    // Manejar la eliminación del icono si se seleccionó la opción
+    if ($request->has('remove_icon') && $request->remove_icon == "1") {
+      if ($faction->icon) {
+        Storage::disk('public')->delete($faction->icon);
+        $faction->icon = null;
+      }
+    }
+    // Actualizar icono si existe un nuevo archivo
+    elseif ($request->hasFile('icon')) {
       // Eliminar el icono anterior si existe
       if ($faction->icon) {
         Storage::disk('public')->delete($faction->icon);
