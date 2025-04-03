@@ -8,28 +8,33 @@ choque_de_leyendas/
 │   │   ├── User.php (updated with is_admin field)
 │   │   ├── Faction.php (added for faction management)
 │   │   ├── Deck.php (planned for deck management)
-│   │   └── HeroAttributeConfiguration.php (NEW: for managing hero base attributes)
+│   │   ├── HeroAttributeConfiguration.php (for managing hero base attributes)
+│   │   └── HeroClass.php (NEW: for managing hero classes)
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   │   ├── Admin/
 │   │   │   │   ├── DashboardController.php (handles admin dashboard)
 │   │   │   │   ├── FactionController.php (CRUD for factions)
-│   │   │   │   ├── HeroAttributeConfigurationController.php (NEW: manages hero attribute configuration)
+│   │   │   │   ├── HeroAttributeConfigurationController.php (manages hero attribute configuration)
+│   │   │   │   ├── HeroClassController.php (NEW: manages hero classes)
 │   │   │   │   └── HeroController.php (placeholder for hero management)
 │   │   ├── Middleware/
 │   │   │   └── EnsureIsAdmin.php (restricts access to admin users)
 │   │   └── Requests/
 │   │       └── Auth/ (modified to use admin.dashboard routes)
+│   └── Services/ (potential future addition for complex logic)
 ├── database/
 │   ├── migrations/
 │   │   ├── 0001_01_01_000000_create_users_table.php (modified with is_admin field)
 │   │   ├── 2025_04_01_095111_create_factions_table.php (added)
-│   │   └── migration_for_hero_attribute_configurations.php (NEW: for hero base attributes)
+│   │   ├── migration_for_hero_attribute_configurations.php (for hero base attributes)
+│   │   └── migration_for_hero_classes.php (NEW: for hero classes)
 │   ├── seeders/
 │   │   ├── DatabaseSeeder.php (updated)
 │   │   ├── AdminUserSeeder.php
 │   │   ├── FactionSeeder.php
-│   │   └── HeroAttributeConfigurationSeeder.php (NEW: seeds initial hero attribute config)
+│   │   ├── HeroAttributeConfigurationSeeder.php (seeds initial hero attribute config)
+│   │   └── HeroClassSeeder.php (NEW: seeds initial hero classes)
 │   └── data/
 │       └── factions.json
 ├── resources/
@@ -58,7 +63,8 @@ choque_de_leyendas/
 │   │   │   ├── _dashboard.scss                        
 │   │   │   ├── _welcome.scss
 │   │   │   ├── _factions.scss
-│   │   │   └── _hero-attributes.scss (NEW: styles for hero attribute configuration)
+│   │   │   ├── _hero-attributes.scss
+│   │   │   └── _hero-classes.scss (NEW: styles for hero classes)
 │   │   ├── vendor/
 │   │   ├── views/
 │   │   └── _app.scss (updated to include new components)
@@ -82,7 +88,11 @@ choque_de_leyendas/
 │       │   │   ├── edit.blade.php
 │       │   │   └── show.blade.php
 │       │   ├── hero-attributes/
-│       │   │   └── edit.blade.php (NEW: view for hero attribute configuration)
+│       │   │   └── edit.blade.php
+│       │   ├── hero-classes/
+│       │   │   ├── index.blade.php
+│       │   │   ├── create.blade.php
+│       │   │   └── edit.blade.php
 │       │   └── heroes/ (planned for hero management)
 │       ├── auth/
 │       │   └── login.blade.php (customized)
@@ -109,6 +119,36 @@ choque_de_leyendas/
 - **Authentication**: Laravel Breeze (customized)
 
 ## Recent Implementation Updates
+
+### Hero Attribute Configuration System
+- Created `HeroAttributeConfiguration` model to manage base hero attributes
+- Implemented migration for storing configuration
+- Added seeder to initialize default configuration
+- Created admin controller for managing hero attributes
+- Developed a responsive configuration form with:
+  - 3-column layout for desktop
+  - Dynamic attribute distribution
+  - Total points management
+  - Validation of attribute point allocation
+- Added sidebar navigation link to attribute configuration
+- Created SCSS styles with responsive design considerations
+- Implemented form validation and user-friendly interface
+
+### Hero Classes Management System
+- Created `HeroClass` model to manage hero classes
+- Implemented migration for storing class information
+- Added comprehensive CRUD operations for hero classes
+- Developed admin controller for managing hero classes
+- Created views for:
+  - Listing hero classes
+  - Creating new hero classes
+  - Editing existing hero classes
+- Implemented attribute modifier validation
+- Added client-side JavaScript validation for modifier totals
+- Created responsive design for class management pages
+- Implemented superclass (fighter/caster) selection
+- Added support for class-specific passive abilities
+- Created detailed styling for class cards and forms
 
 ### Faction Management Form Implementation
 - Created comprehensive edit form for factions
@@ -145,7 +185,6 @@ choque_de_leyendas/
 - Complete faction management CRUD views (create, edit, show)
 - Hero management CRUD operations
 - Card management interface
-- Class and race management
 - Deck builder interface
 - Balance analysis tools
 - Rules and annexos content management

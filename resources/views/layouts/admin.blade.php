@@ -97,7 +97,15 @@
                   <x-game-dice variant="red-green" size="sm"/>
                   Configuración de Atributos
                 </a>
-              </li>              
+              </li>
+              <li>
+                <a href="{{ route('admin.hero-classes.index') }}"
+                  data-route="{{ route('admin.hero-classes.index') }}"
+                  class="sidebar-nav-link {{ request()->routeIs('admin.hero-classes.*') ? 'active' : '' }}">
+                  <x-game-dice variant="mono-green" size="sm"/>
+                  Clases
+                </a>
+              </li>            
             </ul>
           </div>
           
