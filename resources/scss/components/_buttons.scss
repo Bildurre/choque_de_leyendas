@@ -1,3 +1,4 @@
+@use "sass:color";
 @use '../abstracts/all' as *;
 
 .btn {
@@ -22,7 +23,7 @@
     color: #fff;
     
     &:hover {
-      background-color: darken($color-accent-orange, 10%);
+      background-color: color.scale($color-accent-orange, $lightness: -17.1140939597%);
     }
   }
   
@@ -31,7 +32,7 @@
     color: $color-text-light;
     
     &:hover {
-      background-color: lighten($color-bg-dark-tertiary, 5%);
+      background-color: color.scale($color-bg-dark-tertiary, $lightness: 6.25%)
     }
   }
   
@@ -40,7 +41,7 @@
     color: #fff;
     
     &:hover {
-      background-color: darken($color-info, 10%);
+      background-color: color.scale($color-accent-orange, $lightness: -17.1140939597%);
     }
   }
   
@@ -49,7 +50,7 @@
     color: $color-bg-dark-primary;
     
     &:hover {
-      background-color: darken($color-warning, 10%);
+      background-color: color.scale($color-warning, $lightness: -17.1140939597%);
     }
   }
   
@@ -58,7 +59,7 @@
     color: #fff;
     
     &:hover {
-      background-color: darken($color-danger, 10%);
+      background-color: color.scale($color-danger, $lightness: -17.1140939597%);
     }
   }
   

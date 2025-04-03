@@ -1,3 +1,4 @@
+@use "sass:color";
 @use '../abstracts/all' as *;
 
 .faction-form-container {
@@ -168,7 +169,7 @@
   font-weight: 500;
   
   &:hover {
-    background-color: darken($color-accent-orange, 10%);
+    background-color: color.scale($color-accent-orange, $lightness: -17.1140939597%);
   }
 }
 
