@@ -40,17 +40,21 @@
         </div>
 
         <div class="form-group">
-          <label for="superclass" class="form-label">Superclase <span class="required">*</span></label>
+          <label for="superclass_id" class="form-label">Superclase <span class="required">*</span></label>
           <select 
-            id="superclass" 
-            name="superclass" 
-            class="form-input @error('superclass') is-invalid @enderror" 
+            id="superclass_id" 
+            name="superclass_id" 
+            class="form-input @error('superclass_id') is-invalid @enderror" 
             required
           >
-            <option value="fighter" {{ old('superclass') == 'fighter' ? 'selected' : '' }}>Luchador</option>
-            <option value="caster" {{ old('superclass') == 'caster' ? 'selected' : '' }}>Conjurador</option>
+            <option value="">Selecciona una superclase</option>
+            @foreach($superclasses as $superclass)
+              <option value="{{ $superclass->id }}" {{ old('superclass_id') == $superclass->id ? 'selected' : '' }}>
+                {{ $superclass->name }}
+              </option>
+            @endforeach
           </select>
-          @error('superclass')
+          @error('superclass_id')
             <div class="invalid-feedback">{{ $message }}</div>
           @enderror
         </div>

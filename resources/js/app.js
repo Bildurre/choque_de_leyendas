@@ -27,6 +27,12 @@ function initPages() {
       // Módulo importado correctamente
     });
   }
+
+  if (path.includes('/admin/superclasses') && !path.includes('/create') && !path.includes('/edit')) {
+    import('./superclasses/index').then(module => {
+      // Módulo importado correctamente
+    });
+  }
 }
 
 // Inicializar las páginas cuando el DOM esté listo

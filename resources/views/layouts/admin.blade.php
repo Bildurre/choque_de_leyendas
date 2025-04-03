@@ -98,6 +98,16 @@
                   Configuración de Atributos
                 </a>
               </li>
+
+              <li>
+                <a href="{{ route('admin.superclasses.index') }}"
+                  data-route="{{ route('admin.superclasses.index') }}"
+                  class="sidebar-nav-link {{ request()->routeIs('admin.superclasses.*') ? 'active' : '' }}">
+                  <x-game-dice variant="green-blue" size="sm"/>
+                  Superclases
+                </a>
+              </li>
+
               <li>
                 <a href="{{ route('admin.hero-classes.index') }}"
                   data-route="{{ route('admin.hero-classes.index') }}"

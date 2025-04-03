@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\FactionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroClassController;
+use App\Http\Controllers\Admin\SuperclassController;
 use App\Http\Controllers\Admin\HeroAttributeConfigurationController;
 
 Route::get('/', function () {
@@ -26,6 +27,9 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Hero Classes
   Route::resource('hero-classes', HeroClassController::class);
+
+  // Superclasses
+  Route::resource('superclasses', SuperclassController::class);
 });
 
 

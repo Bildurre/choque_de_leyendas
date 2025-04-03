@@ -6,12 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+  /**
+   * Run the migrations.
+   */
     public function up(): void
     {
         Schema::create('hero_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->text('passive')->nullable();
+            $table->foreignId('superclass_id')->nullable()->constrained()->onDelete('set null');
             
             // Attribute modifiers
             $table->integer('agility_modifier')->default(0);
@@ -24,8 +28,17 @@ return new class extends Migration
         });
     }
 
-    public function down(): void
-    {
-        Schema::dropIfExists('hero_classes');
-    }
+    /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::table('hero_classes', function (Blueprint $table) {
+      $table->dropForeign(['superclass_id']);
+      $table->dropColumn('superclass_id');
+      
+      // Si queremos volver a la versión anterior
+      $table->string('superclass')->nullable();
+    });
+  }
 };

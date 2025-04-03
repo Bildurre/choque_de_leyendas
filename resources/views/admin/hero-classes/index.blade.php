@@ -30,7 +30,7 @@
         <div class="hero-class-header">
           <h3 class="hero-class-name">{{ $heroClass->name }}</h3>
           <span class="hero-class-superclass">
-            {{ $heroClass->superclass_label }}
+            {{ $heroClass->superclass ? $heroClass->superclass->name : 'Sin superclase' }}
           </span>
         </div>
         
