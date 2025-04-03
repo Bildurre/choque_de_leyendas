@@ -9,14 +9,16 @@ choque_de_leyendas/
 │   │   ├── Faction.php (added for faction management)
 │   │   ├── Deck.php (planned for deck management)
 │   │   ├── HeroAttributeConfiguration.php (for managing hero base attributes)
-│   │   └── HeroClass.php (NEW: for managing hero classes)
+│   │   ├── HeroClass.php (NEW: for managing hero classes)
+│   │   └── Superclass.php (NEW: for managing superclasses)
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   │   ├── Admin/
 │   │   │   │   ├── DashboardController.php (handles admin dashboard)
 │   │   │   │   ├── FactionController.php (CRUD for factions)
 │   │   │   │   ├── HeroAttributeConfigurationController.php (manages hero attribute configuration)
-│   │   │   │   ├── HeroClassController.php (NEW: manages hero classes)
+│   │   │   │   ├── HeroClassController.php (CRUD for hero classes)
+│   │   │   │   ├── SuperclassController.php (NEW: CRUD for superclasses)
 │   │   │   │   └── HeroController.php (placeholder for hero management)
 │   │   ├── Middleware/
 │   │   │   └── EnsureIsAdmin.php (restricts access to admin users)
@@ -27,14 +29,15 @@ choque_de_leyendas/
 │   ├── migrations/
 │   │   ├── 0001_01_01_000000_create_users_table.php (modified with is_admin field)
 │   │   ├── 2025_04_01_095111_create_factions_table.php (added)
-│   │   ├── migration_for_hero_attribute_configurations.php (for hero base attributes)
-│   │   └── migration_for_hero_classes.php (NEW: for hero classes)
+│   │   ├── 2025_04_03_160404_create_hero_attribute_configuration.php (for hero base attributes)
+│   │   ├── 2025_04_03_160500_create_superclasses_table.php (NEW: for superclasses)
+│   │   └── 2025_04_03_164900_create_hero_classes.php (for hero classes)
 │   ├── seeders/
 │   │   ├── DatabaseSeeder.php (updated)
 │   │   ├── AdminUserSeeder.php
 │   │   ├── FactionSeeder.php
 │   │   ├── HeroAttributeConfigurationSeeder.php (seeds initial hero attribute config)
-│   │   └── HeroClassSeeder.php (NEW: seeds initial hero classes)
+│   │   └── SuperclassSeeder.php (NEW: seeds initial superclasses)
 │   └── data/
 │       └── factions.json
 ├── resources/
@@ -64,7 +67,8 @@ choque_de_leyendas/
 │   │   │   ├── _welcome.scss
 │   │   │   ├── _factions.scss
 │   │   │   ├── _hero-attributes.scss
-│   │   │   └── _hero-classes.scss (NEW: styles for hero classes)
+│   │   │   ├── _hero-classes.scss
+│   │   │   └── _superclasses.scss (NEW: styles for superclasses)
 │   │   ├── vendor/
 │   │   ├── views/
 │   │   └── _app.scss (updated to include new components)
@@ -75,9 +79,11 @@ choque_de_leyendas/
 │   │   ├── factions/
 │   │   │   ├── index.js
 │   │   │   └── edit.js
+│   │   ├── superclasses/ (NEW: scripts for superclass pages)
+│   │   │   └── index.js
 │   │   ├── utilities/                                
 │   │   ├── pages/                                    
-│   │   ├── app.js                                    
+│   │   ├── app.js (updated to include superclass scripts)                                   
 │   │   ├── alpine-init.js                             
 │   │   └── bootstrap.js
 │   └── views/
@@ -90,6 +96,10 @@ choque_de_leyendas/
 │       │   ├── hero-attributes/
 │       │   │   └── edit.blade.php
 │       │   ├── hero-classes/
+│       │   │   ├── index.blade.php (updated to show superclass)
+│       │   │   ├── create.blade.php (updated to include superclass selector)
+│       │   │   └── edit.blade.php (updated to include superclass selector)
+│       │   ├── superclasses/ (NEW: views for superclass management)
 │       │   │   ├── index.blade.php
 │       │   │   ├── create.blade.php
 │       │   │   └── edit.blade.php
@@ -102,13 +112,13 @@ choque_de_leyendas/
 │       │   ├── image-uploader.blade.php
 │       │   └── input-label.blade.php
 │       ├── layouts/
-│       │   ├── admin.blade.php (updated with dashboard link)                        
+│       │   ├── admin.blade.php (updated with superclasses menu link)                        
 │       │   ├── app.blade.php
 │       │   └── guest.blade.php
 │       ├── dashboard.blade.php                        
 │       └── welcome.blade.php
 ├── routes/
-│   └── web.php (updated with admin prefix and resource routes)
+│   └── web.php (updated with superclass routes)
 └── README.md
 ```
 
@@ -119,6 +129,23 @@ choque_de_leyendas/
 - **Authentication**: Laravel Breeze (customized)
 
 ## Recent Implementation Updates
+
+### Superclass Management System
+- Created `Superclass` model to manage hero superclasses (Luchador/Conjurador)
+- Implemented migration and database schema for superclasses
+- Modified `HeroClass` model to establish relationship with superclasses
+- Added comprehensive CRUD operations for superclass management
+- Developed SuperclassController with all necessary methods
+- Created elegant user interface for superclass management:
+  - Listing page with superclass cards showing details and associated hero classes
+  - Create form with validation
+  - Edit form with validation
+  - Delete functionality with dependency checking
+- Implemented seeder for initial superclasses (Luchador/Conjurador)
+- Added JavaScript functionality for client-side validations and confirmations
+- Created SCSS styles for superclass pages with responsive design considerations
+- Updated existing hero class views to incorporate superclass relationship
+- Added navigation link in admin sidebar for superclass management
 
 ### Hero Attribute Configuration System
 - Created `HeroAttributeConfiguration` model to manage base hero attributes
@@ -146,7 +173,7 @@ choque_de_leyendas/
 - Implemented attribute modifier validation
 - Added client-side JavaScript validation for modifier totals
 - Created responsive design for class management pages
-- Implemented superclass (fighter/caster) selection
+- Implemented superclass selection
 - Added support for class-specific passive abilities
 - Created detailed styling for class cards and forms
 
@@ -179,7 +206,7 @@ choque_de_leyendas/
 - Enhanced `FactionController` with robust update method
 - Added server-side validation for faction updates
 - Implemented icon management (upload, remove, update)
-- Created route for faction management
+- Enhanced routes for superclass management
 
 ## Upcoming Implementation Tasks
 - Complete faction management CRUD views (create, edit, show)
@@ -195,5 +222,6 @@ choque_de_leyendas/
 - Faction → Heroes (one-to-many)
 - Faction → Cards (one-to-many)
 - Faction → Decks (one-to-many)
+- Superclass → HeroClasses (one-to-many)
 - Decks → Heroes (many-to-many with copies attribute)
 - Decks → Cards (many-to-many with copies attribute)
