@@ -1,0 +1,35 @@
+@use '../abstracts/all' as *;
+
+.form-group {
+  margin-bottom: $spacing-md;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    color: $color-text-light;
+    font-weight: 500;
+    
+    .required {
+      color: $color-red;
+      margin-left: $spacing-xs;
+    }
+  }
+
+  .invalid-feedback {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $color-red;
+    font-size: 0.875rem;
+  }
+
+  .form-text {
+    display: block;
+    margin-top: $spacing-xs;
+    font-size: 0.875rem;
+    color: $color-text-muted;
+  }
+}

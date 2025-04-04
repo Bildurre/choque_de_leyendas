@@ -1,0 +1,33 @@
+@use '../abstracts/all' as *;
+
+.form-card {
+  background-color: $color-bg-dark-secondary;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+  
+  @include responsive(mobile) {
+    padding: $spacing-md;
+  }
+  
+  .form-section {
+    margin-bottom: $spacing-lg;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+    
+    @include responsive(mobile) {
+      flex-direction: column;
+    }
+    
+    .btn {
+      min-width: 120px;
+      
+      @include responsive(mobile) {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -3,17 +3,21 @@
 @section('header-title', 'Hero Attribute Configuration')
 @section('content')
 <div class="hero-attributes-container">
-  <div class="header-actions-bar">
-    <div class="left-actions">
-      <h1>Hero Attribute Configuration</h1>
-      <p>Configure base attributes and total points for hero creation</p>
-    </div>
-  </div>
-@if(session('success'))
-<div class="alert alert-success">
-{{ session('success') }}
-</div>
-@endif
+  <x-header-actions-bar 
+    title="Hero Attribute Configuration"
+    subtitle="Configure base attributes and total points for hero creation"
+  />
+  @if(session('success'))
+    <x-alert type="success">
+      {{ session('success') }}
+    </x-alert>
+  @endif
+
+  @if(session('error'))
+    <x-alert type="danger">
+      {{ session('error') }}
+    </x-alert>
+  @endif
 
 <div class="configuration-info">
   <h2>Current Configuration Summary</h2>
@@ -52,9 +56,11 @@
   <form action="{{ route('admin.hero-attributes.update') }}" method="POST" class="hero-attributes-form">
     @csrf
     @method('PUT')
-<div class="form-card">
+  <x-form-card 
+  submit_label="Editar Atributos"
+  :cancel_route="route('admin.hero-attributes.index')">
   <div class="form-section">
-    <div class="attributes-grid">
+    <div class="entities-grid">
       @php
         $attributes = [
           'base_agility' => 'Agility',
@@ -66,23 +72,15 @@
       @endphp
 
       @foreach($attributes as $key => $label)
-        <div class="form-group">
-          <label for="{{ $key }}" class="form-label">
-            {{ $label }} Base <span class="required">*</span>
-          </label>
-          <input 
+        <x-form.group name="{{ $key }}" label="{{ $label }} Base" :required="true">
+          <x-form.input 
             type="number" 
-            id="{{ $key }}" 
             name="{{ $key }}" 
-            class="form-input @error($key) is-invalid @enderror" 
-            value="{{ old($key, $configuration->$key) }}" 
+            :value="$configuration->$key" 
+            :required="true" 
             min="0" 
-            required
-          >
-          @error($key)
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+          />
+        </x-form.group>
       @endforeach
     </div>
 
@@ -117,7 +115,7 @@
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save Configuration</button>
   </div>
-</div>
+</x-form-card>
   </form>
   
 </div>

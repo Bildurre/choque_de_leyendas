@@ -1,0 +1,22 @@
+@use '../abstracts/all' as *;
+
+.form-textarea {
+  width: 100%;
+  padding: $spacing-sm;
+  background-color: $color-bg-dark-tertiary;
+  border: 1px solid $color-bg-dark-tertiary;
+  border-radius: $border-radius-sm;
+  color: $color-text-light;
+  transition: border-color $transition-fast;
+  resize: vertical;
+  min-height: 100px;
+  
+  &:focus {
+    outline: none;
+    border-color: $color-accent-purple;
+  }
+  
+  &.is-invalid {
+    border-color: $color-red;
+  }
+}

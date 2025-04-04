@@ -1,0 +1,107 @@
+@use '../abstracts/all' as *;
+
+.faction-card {
+  background-color: $color-bg-dark-secondary;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  transition: transform $transition-medium, box-shadow $transition-medium;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+  
+  .faction-card-content {
+    padding: $spacing-md;
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .faction-icon {
+    margin-right: $spacing-md;
+    
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: $border-radius-sm;
+      object-fit: cover;
+    }
+    
+    .faction-icon-placeholder {
+      width: 40px;
+      height: 40px;
+      border-radius: $border-radius-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: $color-text-light;
+    }
+  }
+  
+  .faction-info {
+    flex: 1;
+    
+    .faction-name {
+      margin: 0 0 $spacing-xs;
+      font-size: 1.125rem;
+    }
+    
+    .faction-color {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      font-size: 0.875rem;
+      color: $color-text-muted;
+    }
+    
+    .color-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: $spacing-xs;
+    }
+  }
+  
+  .faction-actions {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-bg-dark-tertiary;
+    padding: $spacing-sm;
+    
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: $spacing-xs;
+      border-radius: $border-radius-sm;
+      color: $color-text-light;
+      transition: background-color $transition-fast;
+      cursor: pointer;
+      border: none;
+      background: none;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .view-btn:hover {
+      background-color: $color-blue;
+    }
+    
+    .edit-btn:hover {
+      background-color: $color-green;
+      color: $color-bg-dark-primary;
+    }
+    
+    .delete-btn:hover {
+      background-color: $color-red;
+    }
+  }
+}

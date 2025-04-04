@@ -5,6 +5,7 @@
   border-radius: $border-radius-sm;
   margin-bottom: $spacing-md;
   transition: opacity $transition-medium;
+  position: relative;
   
   &.alert-success {
     background-color: rgba($color-green, 0.1);
@@ -28,5 +29,32 @@
     background-color: rgba($color-blue, 0.1);
     color: $color-blue;
     border-left: 4px solid $color-blue;
+  }
+  
+  &.alert-dismissible {
+    padding-right: 2.5rem;
+  }
+  
+  .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.5;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    &::before {
+      content: "×";
+    }
   }
 }

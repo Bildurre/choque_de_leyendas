@@ -58,66 +58,67 @@
         <nav class="sidebar-nav">
           <!-- Dashboard link (standalone, before any groups) -->
           <div class="sidebar-dashboard-link">
-            <a href="{{ route('admin.dashboard') }}"
-              class="sidebar-nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-              <x-game-dice variant="mono-blue" size="sm"/>
+            <x-sidebar.nav-link 
+              :route="route('admin.dashboard')"
+              :active="request()->routeIs('admin.dashboard')" 
+              icon="mono-blue"
+            >
               Dashboard
-            </a>
+            </x-sidebar.nav-link>
           </div>
           
           <!-- Componentes Group -->
-          <div class="sidebar-section">
-            <span class="sidebar-section-title">Componentes</span>
-            <ul class="sidebar-section-list">
-              <li>
-                <a href="{{ route('admin.factions.index') }}"
-                  data-route="{{ route('admin.factions.index') }}"
-                  class="sidebar-nav-link {{ request()->routeIs('admin.factions.*') ? 'active' : '' }}">
-                  <x-game-dice variant="mono-red" size="sm"/>
-                  Facciones
-                </a>
-              </li>
-              <li>
-                <a href="#"
-                  class="sidebar-nav-link {{ request()->routeIs('admin.heroes.*') ? 'active' : '' }}">
-                  <x-game-dice variant="mono-green" size="sm"/>
-                  Héroes
-                </a>
-              </li>
-              <!-- Otros enlaces de componentes se añadirán aquí -->
-            </ul>
-          </div>
+          <x-sidebar.section title="Componentes">
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.factions.index')"
+                :active="request()->routeIs('admin.factions.*')" 
+                icon="mono-red"
+              >
+                Facciones
+              </x-sidebar.nav-link>
+            </li>
+            <li>
+              <x-sidebar.nav-link 
+                route="#"
+                :active="request()->routeIs('admin.heroes.*')" 
+                icon="mono-green"
+              >
+                Héroes
+              </x-sidebar.nav-link>
+            </li>
+            <!-- Otros enlaces de componentes se añadirán aquí -->
+          </x-sidebar.section>
 
-          <div class="sidebar-section">
-            <span class="sidebar-section-title">Balance</span>
-            <ul class="sidebar-section-list">
-              <li>
-                <a href="{{ route('admin.hero-attributes.edit') }}" 
-                  class="sidebar-nav-link {{ request()->routeIs('admin.hero-attributes.*') ? 'active' : '' }}">
-                  <x-game-dice variant="red-green" size="sm"/>
-                  Configuración de Atributos
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ route('admin.superclasses.index') }}"
-                  data-route="{{ route('admin.superclasses.index') }}"
-                  class="sidebar-nav-link {{ request()->routeIs('admin.superclasses.*') ? 'active' : '' }}">
-                  <x-game-dice variant="green-blue" size="sm"/>
-                  Superclases
-                </a>
-              </li>
-
-              <li>
-                <a href="{{ route('admin.hero-classes.index') }}"
-                  data-route="{{ route('admin.hero-classes.index') }}"
-                  class="sidebar-nav-link {{ request()->routeIs('admin.hero-classes.*') ? 'active' : '' }}">
-                  <x-game-dice variant="mono-green" size="sm"/>
-                  Clases
-                </a>
-              </li>            
-            </ul>
-          </div>
+          <x-sidebar.section title="Balance">
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.hero-attributes.edit')"
+                :active="request()->routeIs('admin.hero-attributes.*')" 
+                icon="red-green"
+              >
+                Configuración de Atributos
+              </x-sidebar.nav-link>
+            </li>
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.superclasses.index')"
+                :active="request()->routeIs('admin.superclasses.*')" 
+                icon="green-blue"
+              >
+                Superclases
+              </x-sidebar.nav-link>
+            </li>
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.hero-classes.index')"
+                :active="request()->routeIs('admin.hero-classes.*')" 
+                icon="mono-green"
+              >
+                Clases
+              </x-sidebar.nav-link>
+            </li>
+          </x-sidebar.section>
           
           <!-- Placeholder para futuras secciones -->
           <div class="sidebar-section">

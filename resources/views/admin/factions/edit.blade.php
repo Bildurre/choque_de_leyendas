@@ -6,88 +6,45 @@
 
 @section('content')
 <div class="faction-form-container">
-  <div class="header-actions-bar">
-    <div class="left-actions">
-      <h1>Editar Facción</h1>
-      <p>Modifica los detalles de la facción "{{ $faction->name }}"</p>
-    </div>
-    <div class="right-actions">
-      <a href="{{ route('admin.factions.index') }}" class="btn btn-secondary">
-        <span>Volver al listado</span>
-      </a>
-    </div>
-  </div>
+  <x-header-actions-bar 
+    title="Editar Facción"
+    subtitle="Modifica los detalles de la facción '{{ $faction->name }}'"
+    :back_route="route('admin.factions.index')"
+  />
 
   @if(session('success'))
-    <div class="alert alert-success">
+    <x-alert type="success">
       {{ session('success') }}
-    </div>
+    </x-alert>
   @endif
 
   @if(session('error'))
-    <div class="alert alert-danger">
+    <x-alert type="danger">
       {{ session('error') }}
-    </div>
+    </x-alert>
   @endif
 
   <form action="{{ route('admin.factions.update', $faction) }}" method="POST" enctype="multipart/form-data" class="faction-form">
     @csrf
     @method('PUT')
     
-    <div class="form-card">
+    <x-form-card 
+    submit_label="Editar Facción"
+    :cancel_route="route('admin.factions.index')"
+  >
       <div class="form-section">
-        <div class="form-group">
-          <label for="name" class="form-label">Nombre de la Facción <span class="required">*</span></label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            class="form-input @error('name') is-invalid @enderror" 
-            value="{{ old('name', $faction->name) }}" 
-            required
-          >
-          @error('name')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+        <x-form.group name="name" label="Nombre de la Facción" :required="true">
+          <x-form.input name="name" :value="$faction->name" :required="true" />
+        </x-form.group>
 
-        <div class="form-group">
-          <label for="lore_text" class="form-label">Descripción / Lore</label>
-          <textarea 
-            id="lore_text" 
-            name="lore_text" 
-            class="form-textarea @error('lore_text') is-invalid @enderror" 
-            rows="5"
-          >{{ old('lore_text', $faction->lore_text) }}</textarea>
-          @error('lore_text')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+        <x-form.group name="lore_text" label="Descripción / Lore">
+          <x-form.textarea name="lore_text" :value="$faction->lore_text" rows="5" />
+        </x-form.group>
 
-        <div class="form-group">
-          <label for="color" class="form-label">Color <span class="required">*</span></label>
-          <div class="color-input-group">
-            <input 
-              type="color" 
-              id="color" 
-              name="color" 
-              class="form-color-input @error('color') is-invalid @enderror" 
-              value="{{ old('color', $faction->color) }}" 
-              required
-            >
-            <input 
-              type="text" 
-              id="color_text" 
-              class="form-input color-text-input" 
-              value="{{ old('color', $faction->color) }}" 
-              readonly
-            >
-          </div>
+        <x-form.group name="color" label="Color" :required="true">
+          <x-form.color-input name="color" :value="$faction->color" :required="true" />
           <small class="form-text">Selecciona un color representativo para la facción</small>
-          @error('color')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+        </x-form.group>
 
         <x-image-uploader
           name="icon" 
@@ -101,7 +58,7 @@
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         <a href="{{ route('admin.factions.index') }}" class="btn btn-secondary">Cancelar</a>
       </div>
-    </div>
+    </x-form-card>
   </form>
 </div>
 @endsection

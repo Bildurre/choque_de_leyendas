@@ -1,0 +1,80 @@
+@use '../abstracts/all' as *;
+
+.form-input {
+  width: 100%;
+  padding: $spacing-sm;
+  background-color: $color-bg-dark-tertiary;
+  border: 1px solid $color-bg-dark-tertiary;
+  border-radius: $border-radius-sm;
+  color: $color-text-light;
+  transition: border-color $transition-fast;
+  
+  &:focus {
+    outline: none;
+    border-color: $color-accent-purple;
+  }
+  
+  &.is-invalid {
+    border-color: $color-red;
+  }
+}
+
+// Tipos específicos de inputs
+input[type="color"].form-input, .form-color-input {
+  width: 50px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: $border-radius-sm;
+  background-color: transparent;
+  cursor: pointer;
+  
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  
+  &::-webkit-color-swatch {
+    border: 1px solid $color-bg-dark-tertiary;
+    border-radius: $border-radius-sm;
+  }
+  
+  &::-moz-color-swatch {
+    border: 1px solid $color-bg-dark-tertiary;
+    border-radius: $border-radius-sm;
+  }
+}
+
+// Input groups
+.input-group {
+  display: flex;
+  align-items: center;
+  
+  .form-input {
+    flex: 1;
+  }
+  
+  .input-group-append, 
+  .input-group-prepend {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group-text {
+    padding: $spacing-sm;
+    background-color: $color-bg-dark-tertiary;
+    border: 1px solid $color-bg-dark-tertiary;
+    color: $color-text-muted;
+  }
+}
+
+// Color input group specific styles
+.color-input-group {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  
+  .color-text-input {
+    max-width: 120px;
+    text-transform: uppercase;
+  }
+}

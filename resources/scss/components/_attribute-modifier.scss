@@ -1,0 +1,46 @@
+@use '../abstracts/all' as *;
+
+.modifier-item {
+  display: flex;
+  justify-content: space-between;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-xs;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.positive {
+    background-color: rgba($color-green, 0.1);
+    color: $color-green;
+  }
+
+  &.negative {
+    background-color: rgba($color-red, 0.1);
+    color: $color-red;
+  }
+
+  &.neutral {
+    background-color: $color-bg-dark-tertiary;
+    color: $color-text-muted;
+  }
+
+  .modifier-label {
+    font-weight: 500;
+  }
+
+  .modifier-value {
+    font-weight: 600;
+  }
+}
+
+.modifiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-sm;
+
+  @include responsive(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

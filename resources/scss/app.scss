@@ -4,10 +4,27 @@
 
 //COMPONENTS
 @use 'components/game-dice';
-@use 'components/alerts';
+@use 'components/alert';
 @use 'components/buttons';
 @use 'components/forms';
 @use 'components/image-uploader';
+@use 'components/sidebar-nav-link';
+@use 'components/sidebar-section';
+@use 'components/header-actions-bar';
+@use 'components/form-card';
+@use 'components/form-group';
+@use 'components/form-input';
+@use 'components/form-textarea';
+@use 'components/form-select';
+@use 'components/form-color-input';
+@use 'components/entity-card';
+@use 'components/no-entities';
+@use 'components/attribute-modifier';
+@use 'components/attribute-modifiers-grid';
+@use 'components/hero-class-card';
+@use 'components/faction-card';
+@use 'components/superclass-card';
+
 
 
 //VENDOR

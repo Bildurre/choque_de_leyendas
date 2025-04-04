@@ -6,59 +6,36 @@
 
 @section('content')
 <div class="hero-class-form-container">
-  <div class="header-actions-bar">
-    <div class="left-actions">
-      <h1>Editar Clase</h1>
-      <p>Modifica los detalles de la clase "{{ $heroClass->name }}"</p>
-    </div>
-    <div class="right-actions">
-      <a href="{{ route('admin.hero-classes.index') }}" class="btn btn-secondary">
-        <span>Volver al listado</span>
-      </a>
-    </div>
-  </div>
+  <x-header-actions-bar 
+    title="Editar Clase"
+    subtitle="Modifica los detalles de la clase '{{ $heroClass->name }}'"
+    :back_route="route('admin.hero-classes.index')"
+  />
 
   <form action="{{ route('admin.hero-classes.update', $heroClass) }}" method="POST" class="hero-class-form">
     @csrf
     @method('PUT')
     
-    <div class="form-card">
+    <x-form-card submit_label="Editar Clase"
+    :cancel_route="route('admin.hero-classes.index')">
       <div class="form-section">
-        <div class="form-group">
-          <label for="name" class="form-label">Nombre de la Clase <span class="required">*</span></label>
-          <input 
-            type="text" 
-            id="name" 
+        <x-form.group name="name" label="Nombre de la Clase" :required="true">
+          <x-form.input 
             name="name" 
-            class="form-input @error('name') is-invalid @enderror" 
-            value="{{ old('name', $heroClass->name) }}" 
-            required
-            maxlength="255"
-          >
-          @error('name')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+            :value="$heroClass->name ?? ''" 
+            :required="true" 
+            maxlength="255" 
+          />
+        </x-form.group>
 
-        <div class="form-group">
-          <label for="superclass_id" class="form-label">Superclase <span class="required">*</span></label>
-          <select 
-            id="superclass_id" 
+        <x-form.group name="superclass_id" label="Superclase" :required="true">
+          <x-form.select 
             name="superclass_id" 
-            class="form-input @error('superclass_id') is-invalid @enderror" 
-            required
-          >
-            <option value="">Selecciona una superclase</option>
-            @foreach($superclasses as $superclass)
-              <option value="{{ $superclass->id }}" {{ old('superclass_id', $heroClass->superclass_id) == $superclass->id ? 'selected' : '' }}>
-                {{ $superclass->name }}
-              </option>
-            @endforeach
-          </select>
-          @error('superclass_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+            :value="$heroClass->superclass_id ?? ''" 
+            :required="true"
+            :options="$superclasses->pluck('name', 'id')->toArray()"
+          />
+        </x-form.group>
 
         <div class="form-group">
           <label for="passive" class="form-label">Habilidad Pasiva</label>
@@ -87,7 +64,7 @@
             ];
           @endphp
 
-          <div class="attribute-modifiers-grid">
+<div class="entities-grid">
             @foreach($attributes as $key => $label)
               <div class="form-group">
                 <label for="{{ $key }}_modifier" class="form-label">
@@ -116,7 +93,7 @@
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         <a href="{{ route('admin.hero-classes.index') }}" class="btn btn-secondary">Cancelar</a>
       </div>
-    </div>
+    </x-form-card>
   </form>
 </div>
 @endsection
