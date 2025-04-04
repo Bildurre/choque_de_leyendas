@@ -5,6 +5,7 @@
 - **Frontend**: Blade + Alpine.js
 - **Styling**: SCSS
 - **Authentication**: Laravel Breeze (customized)
+- **Philosophies and Principles**: SOLID, DRY, KISS, YAGNI, Composition Over Inheritance, Law of Demeter
 
 ## Implementation Roadmap
 
