@@ -1,16 +1,5 @@
 @use '../abstracts/all' as *;
 
 .hero-classes-container {
-  max-width: 1200px;
-  margin: 0 auto;
-
-  .hero-classes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: $spacing-md;
-
-    @include responsive(mobile) {
-      grid-template-columns: 1fr;
-    }
-  }
+  @include page-container;
 }

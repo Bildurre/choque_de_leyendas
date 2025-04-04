@@ -5,33 +5,20 @@
 @section('header-title', 'Editar Facción')
 
 @section('content')
-<div class="faction-form-container">
-  <x-header-actions-bar 
-    title="Editar Facción"
-    subtitle="Modifica los detalles de la facción '{{ $faction->name }}'"
-    :back_route="route('admin.factions.index')"
-  />
-
-  @if(session('success'))
-    <x-alert type="success">
-      {{ session('success') }}
-    </x-alert>
-  @endif
-
-  @if(session('error'))
-    <x-alert type="danger">
-      {{ session('error') }}
-    </x-alert>
-  @endif
-
+<x-admin-container
+  title="Editar Facción"
+  subtitle="Modifica los detalles de la facción '{{ $faction->name }}'"
+  :back_route="route('admin.factions.index')"
+  back_label="Volver al listado"
+>
   <form action="{{ route('admin.factions.update', $faction) }}" method="POST" enctype="multipart/form-data" class="faction-form">
     @csrf
     @method('PUT')
     
     <x-form-card 
-    submit_label="Editar Facción"
-    :cancel_route="route('admin.factions.index')"
-  >
+      submit_label="Editar Facción"
+      :cancel_route="route('admin.factions.index')"
+    >
       <div class="form-section">
         <x-form.group name="name" label="Nombre de la Facción" :required="true">
           <x-form.input name="name" :value="$faction->name" :required="true" />
@@ -53,12 +40,7 @@
           acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
         />
       </div>
-      
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        <a href="{{ route('admin.factions.index') }}" class="btn btn-secondary">Cancelar</a>
-      </div>
     </x-form-card>
   </form>
-</div>
+</x-admin-container>
 @endsection

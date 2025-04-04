@@ -65,3 +65,71 @@
   white-space: nowrap;
   border: 0;
 }
+
+// Action Component Mixins
+@mixin action-button-base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: $spacing-xs;
+  border-radius: $border-radius-sm;
+  color: $color-text-light;
+  transition: background-color $transition-fast;
+  cursor: pointer;
+  border: none;
+  background: none;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin action-button-hover-states {
+  &.view-btn:hover {
+    background-color: $color-blue;
+  }
+  
+  &.edit-btn:hover {
+    background-color: $color-green;
+    color: $color-bg-dark-primary;
+  }
+  
+  &.delete-btn:hover {
+    background-color: $color-red;
+  }
+}
+
+@mixin actions-container {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-bg-dark-tertiary;
+  padding: $spacing-sm;
+}
+
+// Form Mixins
+@mixin form-input-base {
+  width: 100%;
+  padding: $spacing-sm;
+  background-color: $color-bg-dark-tertiary;
+  border: 1px solid $color-bg-dark-tertiary;
+  border-radius: $border-radius-sm;
+  color: $color-text-light;
+  transition: border-color $transition-fast;
+  
+  &:focus {
+    outline: none;
+    border-color: $color-accent-purple;
+  }
+  
+  &.is-invalid {
+    border-color: $color-red;
+  }
+}
+
+// Layout Mixins
+@mixin page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

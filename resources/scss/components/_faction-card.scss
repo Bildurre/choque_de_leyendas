@@ -67,41 +67,11 @@
   }
   
   .faction-actions {
-    display: flex;
-    flex-direction: column;
-    background-color: $color-bg-dark-tertiary;
-    padding: $spacing-sm;
+    @include actions-container;
     
     .action-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      margin-bottom: $spacing-xs;
-      border-radius: $border-radius-sm;
-      color: $color-text-light;
-      transition: background-color $transition-fast;
-      cursor: pointer;
-      border: none;
-      background: none;
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-    
-    .view-btn:hover {
-      background-color: $color-blue;
-    }
-    
-    .edit-btn:hover {
-      background-color: $color-green;
-      color: $color-bg-dark-primary;
-    }
-    
-    .delete-btn:hover {
-      background-color: $color-red;
+      @include action-button-base;
+      @include action-button-hover-states;
     }
   }
 }

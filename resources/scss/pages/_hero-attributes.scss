@@ -1,7 +1,7 @@
 @use '../abstracts/all' as *;
 
 .hero-attributes-container {
-  margin: 0 auto;
+  @include page-container;
 
   .configuration-info {
     margin-bottom: $spacing-lg;

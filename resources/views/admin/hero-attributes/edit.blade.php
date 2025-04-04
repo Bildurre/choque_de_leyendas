@@ -7,17 +7,8 @@
     title="Hero Attribute Configuration"
     subtitle="Configure base attributes and total points for hero creation"
   />
-  @if(session('success'))
-    <x-alert type="success">
-      {{ session('success') }}
-    </x-alert>
-  @endif
-
-  @if(session('error'))
-    <x-alert type="danger">
-      {{ session('error') }}
-    </x-alert>
-  @endif
+  
+  <x-session-alerts />
 
 <div class="configuration-info">
   <h2>Current Configuration Summary</h2>

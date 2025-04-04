@@ -41,46 +41,6 @@
       color: $color-text-muted;
       font-size: 1rem;
     }
-
-    .modifiers-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: $spacing-sm;
-
-      @include responsive(mobile) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .modifier-item {
-      display: flex;
-      justify-content: space-between;
-      padding: $spacing-xs $spacing-sm;
-      border-radius: $border-radius-sm;
-
-      &.positive {
-        background-color: rgba($color-green, 0.1);
-        color: $color-green;
-      }
-
-      &.negative {
-        background-color: rgba($color-red, 0.1);
-        color: $color-red;
-      }
-
-      &.neutral {
-        background-color: $color-bg-dark-tertiary;
-        color: $color-text-muted;
-      }
-
-      .modifier-label {
-        font-weight: 500;
-      }
-
-      .modifier-value {
-        font-weight: 600;
-      }
-    }
   }
 
   .hero-class-passive {
@@ -108,13 +68,10 @@
     padding-top: $spacing-sm;
 
     .action-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include action-button-base;
       width: 40px;
       height: 40px;
-      border-radius: $border-radius-sm;
-      transition: background-color $transition-fast;
+      margin-bottom: 0;
 
       &.edit-btn {
         color: $color-accent-purple;

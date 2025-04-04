@@ -1,22 +1,7 @@
 @use '../abstracts/all' as *;
 
 .form-input {
-  width: 100%;
-  padding: $spacing-sm;
-  background-color: $color-bg-dark-tertiary;
-  border: 1px solid $color-bg-dark-tertiary;
-  border-radius: $border-radius-sm;
-  color: $color-text-light;
-  transition: border-color $transition-fast;
-  
-  &:focus {
-    outline: none;
-    border-color: $color-accent-purple;
-  }
-  
-  &.is-invalid {
-    border-color: $color-red;
-  }
+  @include form-input-base;
 }
 
 // Tipos específicos de inputs
@@ -64,17 +49,5 @@ input[type="color"].form-input, .form-color-input {
     background-color: $color-bg-dark-tertiary;
     border: 1px solid $color-bg-dark-tertiary;
     color: $color-text-muted;
-  }
-}
-
-// Color input group specific styles
-.color-input-group {
-  display: flex;
-  align-items: center;
-  gap: $spacing-sm;
-  
-  .color-text-input {
-    max-width: 120px;
-    text-transform: uppercase;
   }
 }

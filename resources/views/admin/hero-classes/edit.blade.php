@@ -37,18 +37,13 @@
           />
         </x-form.group>
 
-        <div class="form-group">
-          <label for="passive" class="form-label">Habilidad Pasiva</label>
-          <textarea 
-            id="passive" 
+        <x-form.group name="passive" label="Habilidad Pasiva">
+          <x-form.textarea 
             name="passive" 
-            class="form-textarea @error('passive') is-invalid @enderror" 
-            rows="4"
-          >{{ old('passive', $heroClass->passive) }}</textarea>
-          @error('passive')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-        </div>
+            :value="$heroClass->passive" 
+            rows="4" 
+          />
+        </x-form.group>
 
         <div class="attribute-modifiers-section">
           <h3>Modificadores de Atributos</h3>

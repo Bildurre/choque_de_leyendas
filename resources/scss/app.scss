@@ -24,8 +24,7 @@
 @use 'components/hero-class-card';
 @use 'components/faction-card';
 @use 'components/superclass-card';
-
-
+@use 'components/entities-grid';
 
 //VENDOR
 
@@ -33,6 +32,7 @@
 @use 'layouts/admin-layout';
 @use 'layouts/admin-header';
 @use 'layouts/admin-sidebar';
+@use 'layouts/admin-container';
 
 //VIEWS
 

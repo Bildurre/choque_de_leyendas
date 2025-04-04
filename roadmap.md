@@ -9,6 +9,25 @@
 
 ## Implementation Roadmap
 
+## Implemented Blade Components
+- resources/views/components/sidebar/nav-link.blade.php
+- resources/views/components/sidebar/section.blade.php
+- resources/views/components/header-actions-bar.blade.php
+- resources/views/components/form-card.blade.php
+- resources/views/components/form/group.blade.php
+- resources/views/components/form/input.blade.php
+- resources/views/components/form/textarea.blade.php
+- resources/views/components/form/select.blade.php
+- resources/views/components/form/color-input.blade.php
+- resources/views/components/entity-card.blade.php
+- resources/views/components/no-entities.blade.php
+- resources/views/components/alert.blade.php
+- resources/views/components/game/attribute-modifier.blade.php
+- resources/views/components/game/attribute-modifiers-grid.blade.php
+- resources/views/components/game/hero-class-card.blade.php
+- resources/views/components/game/faction-card.blade.php
+- resources/views/components/game/superclass-card.blade.php
+
 ### Form Requests
 - Added comprehensive form requests for validation:
   - StoreFactionRequest and UpdateFactionRequest

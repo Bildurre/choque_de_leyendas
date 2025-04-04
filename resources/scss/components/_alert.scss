@@ -4,8 +4,9 @@
   padding: $spacing-sm $spacing-md;
   border-radius: $border-radius-sm;
   margin-bottom: $spacing-md;
-  transition: opacity $transition-medium;
   position: relative;
+  opacity: 1;
+  transition: opacity $transition-medium ease;
   
   &.alert-success {
     background-color: rgba($color-green, 0.1);
@@ -20,15 +21,15 @@
   }
   
   &.alert-warning {
-    background-color: rgba($color-accent-orange, 0.1);
-    color: $color-accent-orange;
-    border-left: 4px solid $color-accent-orange;
+    background-color: rgba($color-warning, 0.1);
+    color: $color-warning;
+    border-left: 4px solid $color-warning;
   }
   
   &.alert-info {
-    background-color: rgba($color-blue, 0.1);
-    color: $color-blue;
-    border-left: 4px solid $color-blue;
+    background-color: rgba($color-info, 0.1);
+    color: $color-info;
+    border-left: 4px solid $color-info;
   }
   
   &.alert-dismissible {

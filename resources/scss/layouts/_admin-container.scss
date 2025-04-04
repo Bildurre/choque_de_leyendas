@@ -1,0 +1,10 @@
+@use '../abstracts/all' as *;
+
+.admin-container {
+  @include page-container;
+  padding: $spacing-md;
+  
+  @include responsive(mobile) {
+    padding: $spacing-sm;
+  }
+}
