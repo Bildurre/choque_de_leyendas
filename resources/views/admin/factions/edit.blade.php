@@ -2,7 +2,7 @@
   'title' => 'Facciones',
   'headerTitle' => 'Editar Facción',
   'containerTitle' => 'Facciones',
-  'subtitle' => 'Modifica los detalles de la facción {{ $faction->name }}',
+  'subtitle' => "Modifica los detalles de la facción {{ $faction->name }}",
   'createRoute' => route('admin.faction.create'),
   'createLabel' => '+ Nueva Facción'
 ])

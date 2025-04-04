@@ -5,7 +5,7 @@
   'subtitle' => 'Crea los detalles de una nueva clase',
   'createRoute' => route('admin.hero-classes.create'),
   'createLabel' => '+ Nueva Clase',
-  'back_route' => 'route("admin.hero-classes.index")'
+  'back_route' => route("admin.hero-classes.index")
 ])
 
 @section('page-content')
