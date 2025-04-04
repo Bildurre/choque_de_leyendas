@@ -4,50 +4,13 @@
   @include form-input-base;
 }
 
-// Tipos específicos de inputs
-input[type="color"].form-input, .form-color-input {
-  width: 50px;
-  height: 40px;
-  padding: 0;
-  border: none;
-  border-radius: $border-radius-sm;
-  background-color: transparent;
-  cursor: pointer;
-  
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-  
-  &::-webkit-color-swatch {
-    border: 1px solid $color-bg-dark-tertiary;
-    border-radius: $border-radius-sm;
-  }
-  
-  &::-moz-color-swatch {
-    border: 1px solid $color-bg-dark-tertiary;
-    border-radius: $border-radius-sm;
-  }
+// Variantes de tamaño
+.form-input-sm {
+  padding: $spacing-xs $spacing-sm;
+  font-size: 0.875rem;
 }
 
-// Input groups
-.input-group {
-  display: flex;
-  align-items: center;
-  
-  .form-input {
-    flex: 1;
-  }
-  
-  .input-group-append, 
-  .input-group-prepend {
-    display: flex;
-    align-items: center;
-  }
-  
-  .input-group-text {
-    padding: $spacing-sm;
-    background-color: $color-bg-dark-tertiary;
-    border: 1px solid $color-bg-dark-tertiary;
-    color: $color-text-muted;
-  }
+.form-input-lg {
+  padding: $spacing-md $spacing-lg;
+  font-size: 1.125rem;
 }

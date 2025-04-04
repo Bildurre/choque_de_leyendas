@@ -1,6 +1,6 @@
-// resources/scss/pages/_superclasses.scss
 @use '../abstracts/all' as *;
+@use 'base-page';
 
 .superclasses-container {
-  @include page-container;
+  @extend .base-admin-page;
 }

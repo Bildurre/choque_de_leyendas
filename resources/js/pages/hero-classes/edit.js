@@ -1,2 +1,7 @@
-// resources/js/pages/hero-classes/edit.js
-export { setupModifiersValidation } from './modifiers-validation';
+import { initFormPage } from '../../common/page-initializers';
+import { setupModifiersValidation } from './modifiers-validation';
+
+// Initialize hero class form page
+initFormPage({
+  customValidation: setupModifiersValidation
+});

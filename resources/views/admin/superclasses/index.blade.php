@@ -1,16 +1,13 @@
-@extends('layouts.admin')
+@extends('admin.layouts.page', [
+  'title' => 'Superclases',
+  'headerTitle' => 'Gestión de Superclases',
+  'containerTitle' => 'Superclases',
+  'subtitle' => 'Gestión de superclases para los héroes',
+  'createRoute' => route('admin.superclasses.create'),
+  'createLabel' => '+ Nueva Superclase'
+])
 
-@section('title', 'Superclases')
-
-@section('header-title', 'Gestión de Superclases')
-
-@section('content')
-<x-admin-container
-  title="Superclases"
-  subtitle="Gestión de superclases para los héroes"
-  :create_route="route('admin.superclasses.create')"
-  create_label="+ Nueva Superclase"
->
+@section('page-content')
   <x-entities-grid 
     empty_message="No hay superclases disponibles"
     :create_route="route('admin.superclasses.create')"
@@ -24,5 +21,4 @@
       />
     @endforeach
   </x-entities-grid>
-</x-admin-container>
 @endsection

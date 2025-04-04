@@ -1,15 +1,14 @@
-@extends('layouts.admin')
+@extends('admin.layouts.page', [
+  'title' => 'Crear Clase',
+  'headerTitle' => 'Crear Clase de Héroe',
+  'containerTitle' => 'Clases',
+  'subtitle' => 'Crea los detalles de una nueva clase',
+  'createRoute' => route('admin.hero-classes.create'),
+  'createLabel' => '+ Nueva Clase',
+  'back_route' => 'route("admin.hero-classes.index")'
+])
 
-@section('title', 'Nueva Clase de Héroe')
-
-@section('header-title', 'Crear Clase de Héroe')
-
-@section('content')
-<x-admin-container
-  title="Crear Clase"
-  subtitle="Crea los detalles de una nueva clase"
-  :back_route="route('admin.hero-classes.index')"
->
+@section('page-content')
   <form action="{{ route('admin.hero-classes.store') }}" method="POST" class="hero-class-form">
     @csrf
     
@@ -22,5 +21,4 @@
       </div>
     </x-form-card>
   </form>
-</x-admin-container>
 @endsection

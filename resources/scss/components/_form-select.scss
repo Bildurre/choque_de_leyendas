@@ -12,17 +12,8 @@
   background-size: 16px 12px;
   padding-right: $spacing-lg; // Space for the arrow
   
-  &:focus {
-    box-shadow: 0 0 0 1px rgba($color-accent-purple, 0.2);
-  }
-  
   &.is-invalid {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23F44336' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
-  }
-  
-  // Placeholder styling
-  &:required:invalid {
-    color: $color-text-muted;
   }
   
   option {
@@ -32,22 +23,5 @@
     &:first-child {
       color: $color-text-muted;
     }
-  }
-  
-  // Disabled state
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-  
-  // Size variants
-  &-sm {
-    padding: $spacing-xs $spacing-sm;
-    font-size: 0.875rem;
-  }
-  
-  &-lg {
-    padding: $spacing-md $spacing-lg;
-    font-size: 1.125rem;
   }
 }

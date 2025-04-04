@@ -1,11 +1,4 @@
-// resources/js/pages/superclasses/index.js
-import { setupDeleteConfirmations } from '../../common/confirmations';
-import { setupAlertDismissal } from '../../common/alerts';
+import { initEntityListPage } from '../../common/page-initializers';
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Set up delete confirmations
-  setupDeleteConfirmations('.delete-btn', 'data-superclass-name', 'superclase');
-  
-  // Set up alerts auto-dismissal
-  setupAlertDismissal();
-});
+// Initialize superclass list page
+initEntityListPage('.delete-btn', 'data-superclass-name', 'superclase');

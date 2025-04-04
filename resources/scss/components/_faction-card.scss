@@ -1,23 +1,11 @@
 @use '../abstracts/all' as *;
 
 .faction-card {
-  background-color: $color-bg-dark-secondary;
-  border-radius: $border-radius-md;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  transition: transform $transition-medium, box-shadow $transition-medium;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-md;
-  }
+  // Estilos específicos de faction-card que extienden entity-card
   
   .faction-card-content {
-    padding: $spacing-md;
     display: flex;
     align-items: center;
-    flex: 1;
   }
   
   .faction-icon {
@@ -63,15 +51,6 @@
       height: 12px;
       border-radius: 50%;
       margin-right: $spacing-xs;
-    }
-  }
-  
-  .faction-actions {
-    @include actions-container;
-    
-    .action-btn {
-      @include action-button-base;
-      @include action-button-hover-states;
     }
   }
 }

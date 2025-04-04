@@ -1,20 +1,9 @@
 @use '../abstracts/all' as *;
 
 .superclass-card {
-  background-color: $color-bg-dark-secondary;
-  border-radius: $border-radius-md;
-  display: flex;
-  transition: transform $transition-medium, box-shadow $transition-medium;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-md;
-  }
-
+  // Solo mantener los estilos específicos, heredando lo común de entity-card
+  
   .superclass-content {
-    flex: 1;
-    padding: $spacing-md;
-    
     .superclass-name {
       margin: 0 0 $spacing-sm;
       font-size: 1.2rem;
@@ -43,15 +32,6 @@
           color: $color-accent-purple;
         }
       }
-    }
-  }
-  
-  .superclass-actions {
-    @include actions-container;
-    
-    .action-btn {
-      @include action-button-base;
-      @include action-button-hover-states;
     }
   }
 }

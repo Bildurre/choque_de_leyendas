@@ -1,17 +1,8 @@
 @use '../abstracts/all' as *;
 
 .hero-class-card {
-  background-color: $color-bg-dark-secondary;
-  border-radius: $border-radius-md;
+  // Solo mantener los estilos específicos, heredando lo común de entity-card
   padding: $spacing-md;
-  display: flex;
-  flex-direction: column;
-  transition: transform $transition-medium, box-shadow $transition-medium;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-md;
-  }
 
   .hero-class-header {
     display: flex;
@@ -57,35 +48,6 @@
       color: $color-text-light;
       font-size: 0.9rem;
       line-height: 1.4;
-    }
-  }
-
-  .hero-class-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
-    border-top: 1px solid $color-bg-dark-tertiary;
-    padding-top: $spacing-sm;
-
-    .action-btn {
-      @include action-button-base;
-      width: 40px;
-      height: 40px;
-      margin-bottom: 0;
-
-      &.edit-btn {
-        color: $color-accent-purple;
-        &:hover {
-          background-color: rgba($color-accent-purple, 0.1);
-        }
-      }
-
-      &.delete-btn {
-        color: $color-red;
-        &:hover {
-          background-color: rgba($color-red, 0.1);
-        }
-      }
     }
   }
 }

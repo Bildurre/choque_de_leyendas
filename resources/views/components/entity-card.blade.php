@@ -3,16 +3,19 @@
   'editRoute' => null,
   'deleteRoute' => null,
   'deleteConfirmMessage' => '¿Estás seguro de querer eliminar este elemento?',
-  'deleteConfirmDataAttribute' => '',
-  'deleteConfirmValue' => ''
+  'deleteConfirmAttribute' => 'entity-name',
+  'deleteConfirmValue' => '',
+  'containerClass' => '',
+  'contentClass' => ''
 ])
 
-<div class="entity-card" @if($borderColor) style="border-left: 4px solid {{ $borderColor }}" @endif>
-  <div class="entity-content">
-    {{ $content }}
+<div {{ $attributes->merge(['class' => 'entity-card ' . $containerClass]) }} 
+     @if($borderColor) style="border-left: 4px solid {{ $borderColor }}" @endif>
+  <div class="entity-content {{ $contentClass }}">
+    {{ $slot }}
   </div>
   
-  @if($editRoute || $deleteRoute)
+  @if($editRoute || $deleteRoute || isset($actions))
     <div class="entity-actions">
       @if($editRoute)
         <a href="{{ $editRoute }}" class="action-btn edit-btn" title="Editar">
@@ -24,7 +27,7 @@
         <form action="{{ $deleteRoute }}" method="POST" class="delete-form">
           @csrf
           @method('DELETE')
-          <button type="submit" class="action-btn delete-btn" title="Eliminar" data-{{ $deleteConfirmDataAttribute }}="{{ $deleteConfirmValue }}">
+          <button type="submit" class="action-btn delete-btn" title="Eliminar" data-{{ $deleteConfirmAttribute }}="{{ $deleteConfirmValue }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
           </button>
         </form>

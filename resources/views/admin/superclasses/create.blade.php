@@ -1,42 +1,33 @@
-// resources/views/admin/superclasses/create.blade.php
-@extends('layouts.admin')
+@extends('admin.layouts.page', [
+  'title' => 'Nueva Superclase',
+  'headerTitle' => 'Crear Superclase',
+  'containerTitle' => 'Superclases',
+  'subtitle' => 'Crea una nueva superclase',
+  'createRoute' => route('admin.superclasses.create'),
+  'createLabel' => '+ Nueva Superclase'
+])
 
-@section('title', 'Nueva Superclase')
-
-@section('header-title', 'Crear Superclase')
-
-@section('content')
-<div class="superclass-form-container">
-  <x-header-actions-bar 
-    title="Nueva Superclase"
-    subtitle="Crera una nueva superclase"
-    :back_route="route('admin.superclasses.index')"
-  />
-
+@section('page-content')
   <form action="{{ route('admin.superclasses.store') }}" method="POST" class="superclass-form">
     @csrf
     
     <x-form-card 
-      :submit_label="isset($superclass) ? 'Guardar Cambios' : 'Crear Superclase'"
+      submit_label="Crear Superclase"
       :cancel_route="route('admin.superclasses.index')"
     >
-      <x-form.group name="name" label="Nombre de la Superclase" :required="true">
-        <x-form.input 
-          name="name" 
-          :value="$superclass->name ?? ''" 
-          :required="true" 
-          maxlength="255" 
-        />
-      </x-form.group>
+      <x-form.field 
+        name="name" 
+        label="Nombre de la Superclase" 
+        :required="true" 
+        maxlength="255" 
+      />
 
-      <x-form.group name="description" label="Descripción">
-        <x-form.textarea 
-          name="description" 
-          :value="$superclass->description ?? ''" 
-          rows="4" 
-        />
-      </x-form.group>
+      <x-form.field 
+        name="description" 
+        label="Descripción"
+        type="textarea" 
+        rows="4" 
+      />
     </x-form-card>
   </form>
-</div>
 @endsection

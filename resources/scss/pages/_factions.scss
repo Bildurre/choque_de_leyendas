@@ -1,5 +1,6 @@
 @use '../abstracts/all' as *;
+@use 'base-page';
 
 .factions-container {
-  @include page-container;
+  @extend .base-admin-page;
 }

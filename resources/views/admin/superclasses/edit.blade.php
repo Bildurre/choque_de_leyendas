@@ -1,43 +1,37 @@
-// resources/views/admin/superclasses/edit.blade.php
-@extends('layouts.admin')
+@extends('admin.layouts.page', [
+  'title' => 'Editar Superclase',
+  'headerTitle' => 'Editar Superclase',
+  'containerTitle' => 'Superclases',
+  'subtitle' => 'Modifica los detalles de la superclase {{ $superclass->name }}',
+  'createRoute' => route('admin.superclasses.create'),
+  'createLabel' => '+ Nueva Superclase',
+  'back_route' => 'route("admin.superclasses.index")'
+])
 
-@section('title', 'Editar Superclase')
-
-@section('header-title', 'Editar Superclase')
-
-@section('content')
-<div class="superclass-form-container">
-  <x-header-actions-bar 
-    title="Editar Superclase"
-    subtitle="Modifica los detalles de la superclase '{{ $superclass->name }}'"
-    :back_route="route('admin.superclasses.index')"
-  />
-
+@section('page-content')
   <form action="{{ route('admin.superclasses.update', $superclass) }}" method="POST" class="superclass-form">
     @csrf
     @method('PUT')
     
     <x-form-card 
-      :submit_label="isset($superclass) ? 'Guardar Cambios' : 'Crear Superclase'"
+      submit_label="Guardar Cambios"
       :cancel_route="route('admin.superclasses.index')"
     >
-      <x-form.group name="name" label="Nombre de la Superclase" :required="true">
-        <x-form.input 
-          name="name" 
-          :value="$superclass->name ?? ''" 
-          :required="true" 
-          maxlength="255" 
-        />
-      </x-form.group>
+      <x-form.field 
+        name="name" 
+        label="Nombre de la Superclase" 
+        :value="$superclass->name ?? ''" 
+        :required="true" 
+        maxlength="255" 
+      />
 
-      <x-form.group name="description" label="Descripción">
-        <x-form.textarea 
-          name="description" 
-          :value="$superclass->description ?? ''" 
-          rows="4" 
-        />
-      </x-form.group>
+      <x-form.field 
+        name="description" 
+        label="Descripción"
+        type="textarea"
+        :value="$superclass->description ?? ''" 
+        rows="4" 
+      />
     </x-form-card>
   </form>
-</div>
 @endsection

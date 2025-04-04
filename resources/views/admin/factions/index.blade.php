@@ -1,16 +1,13 @@
-@extends('layouts.admin')
+@extends('admin.layouts.page', [
+  'title' => 'Facciones',
+  'headerTitle' => 'Gestión de Facciones',
+  'containerTitle' => 'Facciones',
+  'subtitle' => 'Gestión de facciones del juego',
+  'createRoute' => route('admin.factions.create'),
+  'createLabel' => '+ Nueva Facción'
+])
 
-@section('title', 'Facciones')
-
-@section('header-title', 'Gestión de Facciones')
-
-@section('content')
-<x-admin-container
-  title="Facciones"
-  subtitle="Gestión de facciones del juego"
-  :create_route="route('admin.factions.create')"
-  create_label="+ Nueva Facción"
->
+@section('page-content')
   <x-entities-grid 
     empty_message="No hay facciones disponibles"
     :create_route="route('admin.factions.create')"
@@ -25,5 +22,4 @@
       />
     @endforeach
   </x-entities-grid>
-</x-admin-container>
 @endsection
