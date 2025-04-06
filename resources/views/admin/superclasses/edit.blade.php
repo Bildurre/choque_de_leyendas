@@ -5,7 +5,7 @@
   'subtitle' => 'Modifica los detalles de la superclase {{ $superclass->name }}',
   'createRoute' => route('admin.superclasses.create'),
   'createLabel' => '+ Nueva Superclase',
-  'back_route' => 'route("admin.superclasses.index")'
+  'backRoute' => 'route("admin.superclasses.index")'
 ])
 
 @section('page-content')
