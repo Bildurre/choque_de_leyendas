@@ -15,11 +15,13 @@ class SuperclassSeeder extends Seeder
     $superclasses = [
       [
         'name' => 'Luchador',
-        'description' => 'Los luchadores son maestros del combate cuerpo a cuerpo, dependiendo de su fuerza y resistencia.'
+        'description' => 'Los luchadores son maestros del combate cuerpo a cuerpo, dependiendo de su fuerza y resistencia.',
+        'color' => '#f53d3d'
       ],
       [
         'name' => 'Conjurador',
-        'description' => 'Los conjuradores utilizan magia y hechizos, dominando fuerzas arcanas y elementales.'
+        'description' => 'Los conjuradores utilizan magia y hechizos, dominando fuerzas arcanas y elementales.',
+        'color' => '#3d3df5'
       ]
     ];
 

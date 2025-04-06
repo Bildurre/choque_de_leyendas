@@ -2,7 +2,7 @@
   'title' => 'Editar Clase de Héroe',
   'headerTitle' => 'Editar Clase de Héroe',
   'containerTitle' => 'Clases',
-  'subtitle' => "Modifica los detalles de la clase {$heroClass->name}",
+  'subtitle' => "Modifica los detalles de la clase $heroClass->name",
   'createRoute' => route('admin.hero-classes.create'),
   'createLabel' => '+ Nueva Clase',
   'backRoute' => route('admin.hero-classes.index')
@@ -13,8 +13,10 @@
     @csrf
     @method('PUT')
     
-    <x-form-card submit_label="Editar Clase"
-    :cancel_route="route('admin.hero-classes.index')">
+    <x-form-card 
+      submit_label="Guardar Cambios"
+      :cancel_route="route('admin.hero-classes.index')"
+    >
       <div class="form-section">
         <x-form.field 
           name="name" 
@@ -25,19 +27,27 @@
         />
 
         <x-form.field 
+          name="description" 
+          label="Descripción"
+          type="textarea"
+          :value="$heroClass->description ?? ''"
+          rows="3"
+        />
+
+        <x-form.field 
           name="superclass_id" 
           label="Superclase" 
           :value="$heroClass->superclass_id ?? ''" 
           :required="true"
-          :type="select"
+          type="select"
           :options="$superclasses->pluck('name', 'id')->toArray()"
         />
 
         <x-form.field 
           name="passive" 
           label="Habilidad Pasiva" 
-          :value="$heroClass->passive"
-          :type="textarea"
+          :value="$heroClass->passive ?? ''"
+          type="textarea"
           rows="4"
         />
 
@@ -60,13 +70,26 @@
               <x-form.field
                 name="{{ $key }}_modifier" 
                 label="{{ $label }}" 
-                :value="{{ old($key . '_modifier', $heroClass->{$key . '_modifier'}) }}"
-                :type="number"
+                :value="$heroClass->{$key . '_modifier'} ?? 0"
+                type="number"
                 min="-2" 
                 max="2"
                 required
               />
             @endforeach
+          </div>
+
+          <div class="modifiers-total-section">
+            <p>Total de modificadores absolutos: <span id="modifiers-total">{{ 
+              abs($heroClass->agility_modifier) +
+              abs($heroClass->mental_modifier) +
+              abs($heroClass->will_modifier) +
+              abs($heroClass->strength_modifier) +
+              abs($heroClass->armor_modifier)
+            }}</span>/3</p>
+            @error('modifiers')
+              <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
           </div>
         </div>
       </div>

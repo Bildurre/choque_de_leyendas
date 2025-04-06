@@ -22,14 +22,15 @@ class UpdateSuperclassRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-          'name' => [
+      return [
+        'name' => [
           'required',
           'string',
           'max:255',
           Rule::unique('superclasses')->ignore($this->superclass->id)
-          ],
-          'description' => 'nullable|string',
-        ];
+        ],
+        'description' => 'nullable|string',
+        'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
+      ];
     }
 }

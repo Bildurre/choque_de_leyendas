@@ -2,10 +2,10 @@
   'title' => 'Editar Superclase',
   'headerTitle' => 'Editar Superclase',
   'containerTitle' => 'Superclases',
-  'subtitle' => 'Modifica los detalles de la superclase {{ $superclass->name }}',
+  'subtitle' => "Modifica los detalles de la superclase $superclass->name",
   'createRoute' => route('admin.superclasses.create'),
   'createLabel' => '+ Nueva Superclase',
-  'backRoute' => 'route("admin.superclasses.index")'
+  'backRoute' => route('admin.superclasses.index')
 ])
 
 @section('page-content')
@@ -31,6 +31,15 @@
         type="textarea"
         :value="$superclass->description ?? ''" 
         rows="4" 
+      />
+      
+      <x-form.field 
+        name="color" 
+        label="Color" 
+        type="color" 
+        :value="$superclass->color ?? '#3d3df5'" 
+        :required="true" 
+        help="Selecciona un color representativo para esta superclase"
       />
     </x-form-card>
   </form>

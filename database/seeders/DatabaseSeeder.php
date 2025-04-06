@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
       AdminUserSeeder::class,
       FactionSeeder::class,
       SuperclassSeeder::class,
+      HeroClassesSeeder::class,
       HeroAttributeConfigurationSeeder::class,
     ]);
   }

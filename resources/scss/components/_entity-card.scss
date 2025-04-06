@@ -6,6 +6,7 @@
   display: flex;
   transition: transform $transition-medium, box-shadow $transition-medium;
   overflow: hidden;
+  position: relative; // Importante para el posicionamiento de las acciones
 
   &:hover {
     transform: translateY(-2px);
@@ -15,10 +16,22 @@
   .entity-content {
     flex: 1;
     padding: $spacing-md;
+    padding-right: calc(#{$spacing-md} + 50px); // Garantizar espacio para acciones
+    width: 100%; // Asegurar que ocupe el ancho disponible
+    box-sizing: border-box;
   }
   
   .entity-actions {
-    @include actions-container;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $spacing-sm;
+    background-color: $color-bg-dark-tertiary;
+    z-index: 10; // Asegurar que está por encima del contenido
     
     .action-btn {
       @include action-button-base;

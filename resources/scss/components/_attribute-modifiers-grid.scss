@@ -1,41 +1,50 @@
 @use '../abstracts/all' as *;
 
-.modifiers-grid {
+.modifiers-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-sm;
+  // Este grid se ajustará automáticamente según el espacio disponible
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: $spacing-xs;
+  width: 100%;
+  
+  .modifier-item {
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    min-width: 0; // Para permitir que se encoja si es necesario
+    
+    &.positive {
+      background-color: rgba($color-green, 0.1);
+      color: $color-green;
+    }
 
-  @include responsive(mobile) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+    &.negative {
+      background-color: rgba($color-red, 0.1);
+      color: $color-red;
+    }
 
-.modifier-item {
-  display: flex;
-  justify-content: space-between;
-  padding: $spacing-xs $spacing-sm;
-  border-radius: $border-radius-sm;
+    &.neutral {
+      background-color: $color-bg-dark-tertiary;
+      color: $color-text-muted;
+    }
 
-  &.positive {
-    background-color: rgba($color-green, 0.1);
-    color: $color-green;
-  }
+    .modifier-label, .modifier-value {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .modifier-label {
+      font-weight: 500;
+      margin-right: $spacing-xs;
+      flex: 1; // Tomar espacio disponible
+      min-width: 0; // Para permitir ellipsis
+    }
 
-  &.negative {
-    background-color: rgba($color-red, 0.1);
-    color: $color-red;
-  }
-
-  &.neutral {
-    background-color: $color-bg-dark-tertiary;
-    color: $color-text-muted;
-  }
-
-  .modifier-label {
-    font-weight: 500;
-  }
-
-  .modifier-value {
-    font-weight: 600;
+    .modifier-value {
+      font-weight: 600;
+      flex-shrink: 0; // No encoger el valor
+    }
   }
 }

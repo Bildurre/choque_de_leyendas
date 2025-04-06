@@ -28,6 +28,15 @@
         type="textarea" 
         rows="4" 
       />
+      
+      <x-form.field 
+        name="color" 
+        label="Color" 
+        type="color" 
+        value="#3d3df5" 
+        :required="true" 
+        help="Selecciona un color representativo para esta superclase"
+      />
     </x-form-card>
   </form>
 @endsection

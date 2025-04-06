@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\HeroClass;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class HeroClassesSeeder extends Seeder
 {
@@ -12,6 +13,36 @@ class HeroClassesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        
+      $classes = [
+        [
+          'name' => 'Rogue',
+          'description' => 'Un asesino letal',
+          'passive' => 'Esta es la pasiva del picaro',
+          'superclass_id' => 1,
+          'agility_modifier' => 1,
+          'mental_modifier' => 0,
+          'will_modifier' => 0,
+          'strength_modifier' => 0,
+          'armor_modifier' => -1,
+        ],
+        [
+          'name' => 'Priest',
+          'description' => 'El mejor amigo de un guerrero',
+          'passive' => 'Esta es la pasiva del sacerdote',
+          'superclass_id' => 2,
+          'agility_modifier' => 0,
+          'mental_modifier' => 1,
+          'will_modifier' => 2,
+          'strength_modifier' => -1,
+          'armor_modifier' => -1,
+        ],
+      ];
+
+      foreach ($classes as $class) {
+        HeroClass::create($class);
+      }
+
+      $this->command->info('Clases iniciales creadas correctamente.');
     }
 }

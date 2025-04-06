@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('hero_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->text('description')->nullable();
             $table->text('passive')->nullable();
             $table->foreignId('superclass_id')->nullable()->constrained()->onDelete('set null');
             

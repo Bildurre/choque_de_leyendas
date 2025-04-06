@@ -15,6 +15,7 @@ class StoreHeroClassRequest extends FormRequest
   {
     return [
       'name' => 'required|string|max:255|unique:hero_classes',
+      'description' => 'nullable|string',
       'passive' => 'nullable|string',
       'superclass_id' => 'required|exists:superclasses,id',
       'agility_modifier' => 'required|integer|between:-2,2',

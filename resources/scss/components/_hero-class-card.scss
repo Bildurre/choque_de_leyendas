@@ -1,39 +1,51 @@
 @use '../abstracts/all' as *;
 
 .hero-class-card {
-  // Solo mantener los estilos específicos, heredando lo común de entity-card
-  padding: $spacing-md;
+  // Base styles inherited from entity-card
+  
+  .hero-class-content {
+    width: 100%;
+  }
 
   .hero-class-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: $spacing-md;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
 
     .hero-class-name {
       margin: 0;
       font-size: 1.2rem;
+      flex: 1;
+      min-width: 0; // Para que pueda encogerse si es necesario
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .hero-class-superclass {
       font-size: 0.9rem;
-      color: $color-text-muted;
-      background-color: $color-bg-dark-tertiary;
       padding: $spacing-xs $spacing-sm;
       border-radius: $border-radius-sm;
+      font-weight: 500;
+      white-space: nowrap;
+      // Color de fondo y texto viene de inline style
     }
   }
-
-  .hero-class-modifiers {
+  
+  .hero-class-description {
     margin-bottom: $spacing-md;
-
-    h4 {
-      margin-bottom: $spacing-sm;
+    
+    p {
+      margin: 0;
       color: $color-text-muted;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
     }
   }
-
+  
   .hero-class-passive {
     margin-bottom: $spacing-md;
     
@@ -48,6 +60,14 @@
       color: $color-text-light;
       font-size: 0.9rem;
       line-height: 1.4;
+    }
+  }
+
+  .hero-class-modifiers {
+    h4 {
+      margin-bottom: $spacing-sm;
+      color: $color-text-muted;
+      font-size: 1rem;
     }
   }
 }

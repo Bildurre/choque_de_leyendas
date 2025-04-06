@@ -1,13 +1,32 @@
 @use '../abstracts/all' as *;
 
 .superclass-card {
-  // Solo mantener los estilos específicos, heredando lo común de entity-card
-  
   .superclass-content {
-    .superclass-name {
-      margin: 0 0 $spacing-sm;
-      font-size: 1.2rem;
-      color: $color-text-light;
+    .superclass-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-sm;
+      
+      .superclass-name {
+        margin: 0;
+        font-size: 1.2rem;
+        color: $color-text-light;
+      }
+      
+      .superclass-color {
+        display: flex;
+        align-items: center;
+        font-size: 0.8rem;
+        color: $color-text-muted;
+        
+        .color-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin-right: $spacing-xs;
+        }
+      }
     }
     
     .superclass-description {

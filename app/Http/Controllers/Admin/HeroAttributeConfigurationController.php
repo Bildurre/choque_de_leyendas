@@ -50,11 +50,7 @@ class HeroAttributeConfigurationController extends Controller
         ->route('admin.hero-attributes.edit')
         ->with('success', 'Hero attribute configuration updated successfully.');
     } catch (\Exception $e) {
-      return back()
-        ->withInput()
-        ->withErrors([
-          'base_points' => $e->getMessage()
-        ]);
+      return back()->with('error', 'Ha ocurrido un error al actualizar la configuración');
     }
   }
 }

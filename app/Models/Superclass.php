@@ -11,7 +11,6 @@ use App\Models\Traits\HasImageAttribute;
 class Superclass extends Model
 {
   use HasFactory;
-  use HasSlug;
 
   /**
    * The attributes that are mass assignable.
@@ -20,7 +19,8 @@ class Superclass extends Model
    */
   protected $fillable = [
     'name',
-    'description'
+    'description',
+    'color'
   ];
 
   /**

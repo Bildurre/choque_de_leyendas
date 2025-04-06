@@ -5,6 +5,7 @@
 ])
 
 <x-entity-card
+  :borderColor="$superclass->color"
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="superclass-name"
@@ -12,7 +13,13 @@
   containerClass="superclass-card"
 >
   <div class="superclass-content">
-    <h3 class="superclass-name">{{ $superclass->name }}</h3>
+    <div class="superclass-header">
+      <h3 class="superclass-name">{{ $superclass->name }}</h3>
+      <div class="superclass-color">
+        <span class="color-dot" style="background-color: {{ $superclass->color }}"></span>
+        <span class="color-code">{{ $superclass->color }}</span>
+      </div>
+    </div>
     
     @if($superclass->description)
       <p class="superclass-description">{{ $superclass->description }}</p>

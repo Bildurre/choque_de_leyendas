@@ -1,7 +1,15 @@
 @props(['modifiers' => []])
 
-<div class="entities-grid">
+<div class="modifiers-container">
   @foreach($modifiers as $label => $value)
-    <x-game.attribute-modifier :label="$label" :value="$value" />
+    @php
+      $modifierClass = $value > 0 ? 'positive' : ($value < 0 ? 'negative' : 'neutral');
+    @endphp
+    <div class="modifier-item {{ $modifierClass }}">
+      <span class="modifier-label">{{ $label }}</span>
+      <span class="modifier-value">
+        {{ $value > 0 ? '+' : '' }}{{ $value }}
+      </span>
+    </div>
   @endforeach
 </div>

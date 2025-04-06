@@ -52,7 +52,7 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index')
         ->with('success', 'Facción creada correctamente.');
     } catch (\Exception $e) {
-      return back()->withInput()->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al crear la Facción');
     }
   }
 
@@ -85,7 +85,7 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index')
         ->with('success', 'Facción actualizada correctamente.');
     } catch (\Exception $e) {
-      return back()->withInput()->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al actualizar la Facción');
     }
   }
 
@@ -108,8 +108,7 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index')
         ->with('success', 'Facción eliminada correctamente.');
     } catch (\Exception $e) {
-      return redirect()->route('admin.factions.index')
-        ->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al eliminar la Facción');
     }
   }
 }

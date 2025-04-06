@@ -52,7 +52,7 @@ class SuperclassController extends Controller
       return redirect()->route('admin.superclasses.index')
         ->with('success', "La superclase {$superclass->name} ha sido creada correctamente.");
     } catch (\Exception $e) {
-      return back()->withInput()->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al crear la Superclase');
     }
   }
 
@@ -76,7 +76,7 @@ class SuperclassController extends Controller
       return redirect()->route('admin.superclasses.index')
         ->with('success', "La superclase {$superclass->name} ha sido actualizada correctamente.");
     } catch (\Exception $e) {
-      return back()->withInput()->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al actualizar la Superclase');
     }
   }
 
@@ -98,8 +98,7 @@ class SuperclassController extends Controller
       return redirect()->route('admin.superclasses.index')
         ->with('success', "La superclase {$superclassName} ha sido eliminada correctamente.");
     } catch (\Exception $e) {
-      return redirect()->route('admin.superclasses.index')
-        ->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al eliminar la Superclase');
     }
   }
 }

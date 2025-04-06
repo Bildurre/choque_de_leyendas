@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Traits\HasSlug;
 use App\Models\Traits\HasGameStatistics;
 
 class HeroClass extends Model
 {
   use HasFactory;
-  use HasSlug;
   use HasGameStatistics;
 
   /**
@@ -28,8 +26,9 @@ class HeroClass extends Model
    */
   protected $fillable = [
     'name',
+    'description',
     'passive',
-    'superclass_id', // Nuevo campo
+    'superclass_id',
     'agility_modifier',
     'mental_modifier',
     'will_modifier',

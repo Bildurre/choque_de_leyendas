@@ -21,9 +21,10 @@ class StoreSuperclassRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-          'name' => 'required|string|max:255|unique:superclasses',
-          'description' => 'nullable|string',
-        ];
+      return [
+        'name' => 'required|string|max:255|unique:superclasses',
+        'description' => 'nullable|string',
+        'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
+      ];
     }
 }
