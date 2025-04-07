@@ -1,11 +1,8 @@
 @use '../abstracts/all' as *;
 
 .entities-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-sm;
   width: 100%;
-  
-  .no-entities {
-    width: 100%;
-  }
 }

@@ -58,6 +58,14 @@ class HeroClass extends Model
   }
 
   /**
+   * Get the heros that belong to this hero class.
+   */
+  public function heroes()
+  {
+    return $this->hasMany(Hero::class);
+  }
+
+  /**
    * Validate attribute modifiers
    *
    * @return bool

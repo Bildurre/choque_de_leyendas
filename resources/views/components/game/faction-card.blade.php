@@ -1,6 +1,5 @@
 @props([
   'faction',
-  'showRoute' => null,
   'editRoute' => null,
   'deleteRoute' => null
 ])
@@ -12,32 +11,40 @@
   deleteConfirmAttribute="faction-name"
   :deleteConfirmValue="$faction->name"
   containerClass="faction-card"
+  :title="$faction->name"
+  :hasDetails="true"
 >
-  <div class="faction-card-content">
-    <div class="faction-icon">
-      @if($faction->icon)
+  <x-slot:badge>
+    @if($faction->icon)
+      <div class="faction-icon">
         <img src="{{ asset('storage/' . $faction->icon) }}" alt="{{ $faction->name }}">
-      @else
-        <div class="faction-icon-placeholder" style="background-color: {{ $faction->color }}">
-          {{ strtoupper(substr($faction->name, 0, 1)) }}
-        </div>
-      @endif
-    </div>
-    
-    <div class="faction-info">
-      <h3 class="faction-name">{{ $faction->name }}</h3>
-      <p class="faction-color">
-        <span class="color-dot" style="background-color: {{ $faction->color }}"></span>
-        <span class="color-code">{{ $faction->color }}</span>
-      </p>
+      </div>
+    @else
+      <div class="faction-badge" style="background-color: {{ $faction->color }}">
+        {{ strtoupper(substr($faction->name, 0, 1)) }}
+      </div>
+    @endif
+  </x-slot:badge>
+  
+  <div class="faction-summary">
+    <div class="faction-stats">
+      <div class="stat-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+        <span>{{ $faction->heroes_count ?? 0 }} {{ Str::plural('héroe', $faction->heroes_count ?? 0) }}</span>
+      </div>
+      <div class="stat-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        <span>{{ $faction->cards_count ?? 0 }} {{ Str::plural('carta', $faction->cards_count ?? 0) }}</span>
+      </div>
     </div>
   </div>
   
-  @if($showRoute)
-    <x-slot:actions>
-      <a href="{{ $showRoute }}" class="action-btn view-btn" title="Ver detalles">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-      </a>
-    </x-slot:actions>
-  @endif
+  <x-slot:details>
+    @if($faction->lore_text)
+      <div class="faction-lore">
+        <h4>Descripción</h4>
+        <p>{{ $faction->lore_text }}</p>
+      </div>
+    @endif
+  </x-slot:details>
 </x-entity-card>

@@ -1,67 +1,35 @@
 @use '../abstracts/all' as *;
 
 .superclass-card {
-  .superclass-content {
-    width: 100%;
+  .superclass-summary {
+    display: flex;
+    align-items: center;
     
-    .superclass-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: $spacing-sm;
-      
-      .superclass-name {
-        margin: 0;
-        font-size: 1.25rem;
-        color: $color-text-light;
-      }
-      
-      .superclass-color {
-        display: flex;
-        align-items: center;
-        font-size: 0.875rem;
-        color: $color-text-muted;
-        
-        .color-dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          margin-right: $spacing-xs;
-        }
-      }
-    }
-    
-    .superclass-description {
-      margin: 0 0 $spacing-md;
-      color: $color-text-muted;
-      font-size: 0.95rem;
-      line-height: 1.4;
-      max-width: 80%;
-    }
-    
-    .superclass-stats {
+    .stat-item {
       display: flex;
       align-items: center;
+      gap: $spacing-xs;
+      font-size: 0.8rem;
       color: $color-text-muted;
       
-      .hero-count {
-        display: flex;
-        align-items: center;
-        gap: $spacing-xs;
-        font-size: 0.875rem;
-        
-        svg {
-          color: $color-accent-purple;
-        }
+      svg {
+        stroke: $color-accent-purple;
       }
     }
   }
   
-  @include responsive(mobile) {
-    .superclass-content {
-      .superclass-description {
-        max-width: 100%;
-      }
+  .superclass-description {
+    h4 {
+      margin: 0 0 $spacing-xs;
+      font-size: 0.9rem;
+      color: $color-text-muted;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: $color-text-light;
+      line-height: 1.5;
     }
   }
 }

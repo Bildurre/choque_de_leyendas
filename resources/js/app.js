@@ -4,6 +4,11 @@ import '../scss/app.scss';
 import './alpine-init';
 import './components/sidebar';
 import { setupAlertDismissal } from './common/alerts';
+import EntityCardToggle from './components/entity-card-toggle';
+
+document.addEventListener('DOMContentLoaded', function() {
+  EntityCardToggle.init();
+});
 
 // Initialize common functionality
 setupAlertDismissal();

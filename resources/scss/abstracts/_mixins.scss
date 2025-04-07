@@ -3,7 +3,10 @@
 
 // Responsive Mixins
 @mixin responsive($breakpoint) {
-  @if $breakpoint == mobile {
+  @if $breakpoint == narrow {
+    @media (max-width: $breakpoint-narrow) { @content; }
+  }
+  @else if $breakpoint == mobile {
     @media (max-width: $breakpoint-mobile) { @content; }
   }
   @else if $breakpoint == tablet {

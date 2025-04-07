@@ -30,9 +30,10 @@ class HeroClassController extends Controller
   {
     $heroClasses = $this->heroClassService->getAllHeroClasses();
     
-    // Modificar la colección para agregar el nombre de la superclase como propiedad
+    // Obtenemos el conteo de héroes por cada clase
+    // Asumiendo que tienes una relación heroes() en el modelo HeroClass
     $heroClasses->each(function($heroClass) {
-      $heroClass->superclass_label = $heroClass->superclass ? $heroClass->superclass->name : 'Sin superclase';
+      $heroClass->heroCount = $heroClass->heroes()->count();
     });
     
     return view('admin.hero-classes.index', compact('heroClasses'));

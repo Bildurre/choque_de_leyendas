@@ -1,89 +1,56 @@
 @use '../abstracts/all' as *;
 
 .hero-class-card {
-  .hero-class-content {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-md;
+  .hero-class-superclass {
+    font-size: 0.7rem;
+    padding: $spacing-xs $spacing-xs;
+    border-radius: $border-radius-sm;
+    font-weight: 500;
+    white-space: nowrap;
   }
-
-  .hero-class-header {
-    grid-column: 1 / 3;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: $spacing-sm;
-    flex-wrap: wrap;
-    gap: $spacing-sm;
-
-    .hero-class-name {
-      margin: 0;
-      font-size: 1.25rem;
-      flex: 1;
-      min-width: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .hero-class-superclass {
-      font-size: 0.9rem;
-      padding: $spacing-xs $spacing-sm;
-      border-radius: $border-radius-sm;
-      font-weight: 500;
-      white-space: nowrap;
+  
+  .hero-class-summary {
+    .class-stats {
+      display: flex;
+      gap: $spacing-md;
+      
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        font-size: 0.8rem;
+        color: $color-text-muted;
+        
+        svg {
+          stroke: $color-accent-purple;
+        }
+      }
     }
   }
   
-  .hero-class-description {
-    grid-column: 1 / 3;
-    
-    p {
-      margin: 0;
-      color: $color-text-muted;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-  }
-  
-  .hero-class-passive {
-    grid-column: 1 / 2;
+  .class-description,
+  .class-passive {
+    margin-bottom: $spacing-md;
     
     h4 {
-      margin-bottom: $spacing-xs;
+      margin: 0 0 $spacing-xs;
+      font-size: 0.9rem;
       color: $color-text-muted;
-      font-size: 1rem;
     }
-
+    
     p {
       margin: 0;
+      font-size: 0.9rem;
       color: $color-text-light;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-  }
-
-  .hero-class-modifiers {
-    grid-column: 2 / 3;
-    
-    h4 {
-      margin-bottom: $spacing-sm;
-      color: $color-text-muted;
-      font-size: 1rem;
+      line-height: 1.5;
     }
   }
   
-  @include responsive(mobile) {
-    .hero-class-content {
-      grid-template-columns: 1fr;
-    }
-    
-    .hero-class-header, 
-    .hero-class-description,
-    .hero-class-passive,
-    .hero-class-modifiers {
-      grid-column: 1;
+  .class-modifiers {
+    h4 {
+      margin: 0 0 $spacing-xs;
+      font-size: 0.9rem;
+      color: $color-text-muted;
     }
   }
 }

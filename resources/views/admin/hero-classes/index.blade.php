@@ -16,6 +16,7 @@
     @foreach($heroClasses as $heroClass)
       <x-game.hero-class-card 
         :heroClass="$heroClass"
+        :heroCount="$heroClass->heroCount ?? 0"
         :editRoute="route('admin.hero-classes.edit', $heroClass)"
         :deleteRoute="route('admin.hero-classes.destroy', $heroClass)"
       />

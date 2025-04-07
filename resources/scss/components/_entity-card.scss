@@ -3,52 +3,82 @@
 .entity-card {
   background-color: $color-bg-dark-secondary;
   border-radius: $border-radius-md;
-  display: flex;
-  transition: transform $transition-medium, box-shadow $transition-medium;
   overflow: hidden;
   position: relative;
   width: 100%;
-  margin-bottom: $spacing-md;
-
+  margin-bottom: $spacing-sm;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+  
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+    box-shadow: $shadow-sm;
   }
 
-  .entity-content {
-    flex: 1;
-    padding: $spacing-md;
-    width: 100%;
-    box-sizing: border-box;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    border-bottom: 1px solid rgba($color-bg-dark-tertiary, 0.5);
+    @include responsive(narrow) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   
-  .entity-actions {
+  &__title {
     display: flex;
     align-items: center;
-    padding: $spacing-md;
-    background-color: $color-bg-dark-tertiary;
-    border-left: 1px solid $color-bg-dark-primary;
+    gap: $spacing-sm;
+    
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: $color-text-light;
+      @include text-truncate;
+      max-width: 100%;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    @include responsive(narrow) {
+      align-self: flex-end;
+      order: -1;
+    }
     
     .action-btn {
-      width: 36px;
-      height: 36px;
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: $border-radius-sm;
-      color: $color-text-light;
-      transition: background-color $transition-fast;
+      transition: background-color $transition-fast, stroke $transition-fast;
       cursor: pointer;
       border: none;
       background: none;
-      margin-left: $spacing-xs;
       
-      &:first-child {
-        margin-left: 0;
+      &.edit-btn svg {
+        stroke: $color-success;
       }
       
-      &.view-btn:hover {
-        background-color: $color-info;
+      &.delete-btn svg {
+        stroke: $color-danger;
+      }
+      
+      &.toggle-btn svg {
+        stroke: $color-accent-purple;
+      }
+      
+      &:hover {
+        background-color: rgba($color-bg-dark-tertiary, 0.7);
+        
+        svg {
+          stroke: $color-bg-dark-primary;
+        }
       }
       
       &.edit-btn:hover {
@@ -58,18 +88,47 @@
       &.delete-btn:hover {
         background-color: $color-danger;
       }
-    }
-    
-    @include responsive(mobile) {
-      position: relative;
-      width: 100%;
-      border-left: none;
-      border-top: 1px solid $color-bg-dark-primary;
-      justify-content: flex-end;
+      
+      &.toggle-btn:hover {
+        background-color: $color-accent-purple;
+      }
+      
+      &.toggle-btn {
+        .chevron-up {
+          display: none;
+        }
+        
+        .chevron-down {
+          display: block;
+        }
+      }
     }
   }
   
-  @include responsive(mobile) {
-    flex-direction: column;
+  &__content {
+    padding: $spacing-sm $spacing-md;
+  }
+  
+  &__details {
+    display: none;
+    padding-top: $spacing-sm;
+    margin-top: $spacing-sm;
+    border-top: 1px solid rgba($color-bg-dark-tertiary, 0.5);
+  }
+  
+  &.expanded {
+    .toggle-btn {
+      .chevron-down {
+        display: none;
+      }
+      
+      .chevron-up {
+        display: block;
+      }
+    }
+    
+    .entity-card__details {
+      display: block;
+    }
   }
 }
