@@ -16,7 +16,7 @@
 
   &__header {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
     align-items: center;
     padding: $spacing-sm $spacing-md;
     border-bottom: 1px solid rgba($color-bg-dark-tertiary, 0.5);
@@ -28,7 +28,7 @@
   
   &___title {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr auto;
     gap: $spacing-sm;
     align-items: center;
     
@@ -42,10 +42,13 @@
   }
   
   &__actions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(28px, auto));
+    display: flex; // Usamos flexbox para este caso específico
+    flex-direction: row; // Forzamos dirección horizontal
+    flex-wrap: nowrap; // Evitamos que los elementos se envuelvan
     gap: $spacing-xs;
     align-items: center;
+    justify-content: flex-end; // Alineamos a la derecha
+    
     @include responsive(narrow) {
       justify-self: end;
       order: -1;
@@ -54,13 +57,14 @@
     .action-btn {
       width: 28px;
       height: 28px;
-      display: grid;
+      display: grid; // Mantenemos grid para el contenido interno
       place-items: center;
       border-radius: $border-radius-sm;
       transition: background-color $transition-fast, stroke $transition-fast;
       cursor: pointer;
       border: none;
       background: none;
+      flex-shrink: 0; // Evitamos que los botones se reduzcan
       
       &.edit-btn svg {
         stroke: $color-success;

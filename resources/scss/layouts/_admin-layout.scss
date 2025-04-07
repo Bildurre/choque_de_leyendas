@@ -17,7 +17,6 @@
 
 .admin-main-container {
   display: grid;
-  grid-template-columns: auto 1fr;
   overflow: hidden;
   position: relative;
 }
@@ -27,6 +26,7 @@
   grid-template-rows: 1fr;
   height: calc(100vh - 60px); // Restamos la altura del header
   overflow: hidden;
+  width: 100%; // Aseguramos que utiliza todo el ancho disponible
   transition: padding-left $transition-medium;
   
   @media (min-width: $breakpoint-tablet + 1px) {
@@ -44,53 +44,9 @@
   flex: 1;
   overflow-y: auto;
   padding: $spacing-lg;
+  width: 100%; // Aseguramos que utiliza todo el ancho disponible
   
   @include responsive(mobile) {
     padding: $spacing-md;
-  }
-}
-
-.sidebar-toggle {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: $z-index-overlay;
-  width: 32px;
-  height: 32px;
-  border-radius: $border-radius-sm;
-  background-color: transparent;
-  border: none;
-  display: none;
-  grid-template-rows: repeat(3, auto);
-  gap: 4px;
-  place-items: center;
-  cursor: pointer;
-  
-  @include responsive(tablet) {
-    display: grid;
-  }
-  
-  span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background-color: $color-text-light;
-    margin: 2px 0;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  
-  // Animación para convertirse en X
-  .sidebar-open & {
-    span:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
-    }
-    
-    span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    span:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
-    }
   }
 }

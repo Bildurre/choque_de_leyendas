@@ -23,6 +23,55 @@
   gap: $spacing-md;
   align-items: center;
   position: relative;
+  @include responsive(tablet) {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+// Botón hamburguesa mejorado
+.sidebar-toggle {
+  position: relative; // Cambiado de absolute a relative
+  z-index: $z-index-overlay;
+  width: 32px;
+  height: 32px;
+  border-radius: $border-radius-sm;
+  background-color: transparent;
+  border: none;
+  display: none;
+  flex-direction: column; // Usamos flexbox en columna
+  justify-content: center; // Centramos verticalmente las barras
+  align-items: center; // Centramos horizontalmente las barras
+  gap: 5px; // Espacio uniforme entre las barras
+  cursor: pointer;
+  padding: 0; // Quitamos el padding para mejor control
+  
+  @include responsive(tablet) {
+    display: flex; // Cambiamos a flex en responsive
+  }
+  
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: $color-text-light;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center; // Aseguramos que rote desde el centro
+  }
+}
+
+// Aplicamos la transformación para la X cuando el sidebar está abierto
+.sidebar-open .sidebar-toggle {
+  span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg); // Ajustado para una X perfecta
+  }
+  
+  span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg); // Ajustado para una X perfecta
+  }
 }
 
 .header-logo {
@@ -30,11 +79,6 @@
   grid-template-columns: auto auto;
   gap: $spacing-xs;
   align-items: center;
-  
-  // Ajustar el margen para compensar la nueva posición de la hamburguesa
-  @include responsive(tablet) {
-    margin-left: 32px; // Ajustado para dar espacio suficiente
-  }
   
   .logo-container {
     display: grid;
