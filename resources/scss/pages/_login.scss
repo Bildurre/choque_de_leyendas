@@ -2,9 +2,8 @@
 @use '../abstracts/all' as *;
 
 .login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   min-height: 100vh;
   background-color: $color-bg-dark-primary;
 
@@ -25,8 +24,8 @@
   }
 
   &__form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: $spacing-md;
   }
 
@@ -46,7 +45,8 @@
   }
 
   &__button {
-    @include flex-center;
+    display: grid;
+    place-items: center;
     
     width: 100%;
     padding: $spacing-sm;
@@ -63,8 +63,8 @@
   }
 
   &__links {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-top: $spacing-md;
     
     a {

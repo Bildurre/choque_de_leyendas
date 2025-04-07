@@ -26,10 +26,10 @@
 
 // Button Base Styles
 .btn {
-  display: inline-block;
+  display: inline-grid;
+  place-items: center;
   padding: $spacing-sm $spacing-md;
   border-radius: $border-radius-md;
-  text-align: center;
   cursor: pointer;
   transition: all $transition-medium;
 

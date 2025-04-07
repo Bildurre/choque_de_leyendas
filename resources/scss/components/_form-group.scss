@@ -2,6 +2,8 @@
 
 .form-group {
   margin-bottom: $spacing-md;
+  display: grid;
+  grid-template-rows: auto auto auto;
   
   &:last-child {
     margin-bottom: 0;

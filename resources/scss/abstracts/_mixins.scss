@@ -20,16 +20,15 @@
   }
 }
 
-// Flexbox Mixins
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// Grid Mixins
+@mixin grid-center {
+  display: grid;
+  place-items: center;
 }
 
-@mixin flex-between {
-  display: flex;
-  justify-content: space-between;
+@mixin grid-between {
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
 }
 
@@ -72,9 +71,8 @@
 
 // Action Component Mixins
 @mixin action-button-base {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   width: 36px;
   height: 36px;
   margin-bottom: $spacing-xs;
@@ -106,8 +104,9 @@
 }
 
 @mixin actions-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, min-content);
+  gap: $spacing-xs;
   background-color: $color-bg-dark-tertiary;
   padding: $spacing-sm;
 }

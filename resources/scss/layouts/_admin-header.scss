@@ -4,9 +4,9 @@
   background-color: $color-bg-dark-secondary;
   border-bottom: 1px solid $color-bg-dark-tertiary;
   height: 60px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   padding: 0 $spacing-lg;
   width: 100%;
   position: relative;
@@ -18,13 +18,17 @@
 }
 
 .header-left {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: $spacing-md;
   align-items: center;
   position: relative;
 }
 
 .header-logo {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: $spacing-xs;
   align-items: center;
   
   // Ajustar el margen para compensar la nueva posición de la hamburguesa
@@ -33,7 +37,9 @@
   }
   
   .logo-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: $spacing-xs;
     align-items: center;
     margin-right: $spacing-sm;
     
@@ -80,19 +86,20 @@
 }
 
 .header-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: $spacing-md;
   align-items: center;
 }
 
-// Eliminamos el bloque del buscador
-
 .header-icons {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24px, auto));
+  gap: $spacing-md;
   
   .header-icon {
     width: 24px;
     height: 24px;
-    margin-left: $spacing-md;
     cursor: pointer;
     
     path {

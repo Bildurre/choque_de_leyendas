@@ -1,6 +1,9 @@
 @use '../abstracts/all' as *;
 
 .alert {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
   padding: $spacing-sm $spacing-md;
   border-radius: $border-radius-sm;
   margin-bottom: $spacing-md;
@@ -49,6 +52,8 @@
     color: inherit;
     opacity: 0.5;
     cursor: pointer;
+    display: grid;
+    place-items: center;
     
     &:hover {
       opacity: 1;

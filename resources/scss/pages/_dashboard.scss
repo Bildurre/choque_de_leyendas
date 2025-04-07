@@ -1,8 +1,8 @@
 @use '../abstracts/all' as *;
 
 .dashboard-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: $spacing-lg;
 }
 
@@ -41,6 +41,8 @@
   .card-icon {
     margin-bottom: $spacing-md;
     position: relative;
+    display: grid;
+    place-items: center;
     
     &::before {
       content: '';

@@ -9,23 +9,22 @@
 }
 
 .admin-layout {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   height: 100vh;
   position: relative;
 }
 
 .admin-main-container {
-  display: flex;
-  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
   overflow: hidden;
   position: relative;
 }
 
 .admin-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr;
   height: calc(100vh - 60px); // Restamos la altura del header
   overflow: hidden;
   transition: padding-left $transition-medium;
@@ -55,21 +54,20 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  //left: $spacing-lg; // Alineado con el padding del contenido de la barra lateral
   z-index: $z-index-overlay;
   width: 32px;
   height: 32px;
   border-radius: $border-radius-sm;
   background-color: transparent;
   border: none;
-  display: none; // Oculto por defecto
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: none;
+  grid-template-rows: repeat(3, auto);
+  gap: 4px;
+  place-items: center;
   cursor: pointer;
   
   @include responsive(tablet) {
-    display: flex; // Mostrar solo en tablet y móvil
+    display: grid;
   }
   
   span {

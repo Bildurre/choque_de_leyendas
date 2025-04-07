@@ -1,9 +1,10 @@
 @use '../abstracts/all' as *;
 
 .sidebar-nav-link {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: $spacing-sm;
+  align-items: center;
   padding: $spacing-sm $spacing-lg;
   color: $color-text-muted;
   transition: $transition-fast;

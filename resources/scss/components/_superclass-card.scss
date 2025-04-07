@@ -2,13 +2,15 @@
 
 .superclass-card {
   .superclass-summary {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
     
     .stat-item {
-      display: flex;
-      align-items: center;
+      display: grid;
+      grid-template-columns: auto 1fr;
       gap: $spacing-xs;
+      align-items: center;
       font-size: 0.8rem;
       color: $color-text-muted;
       

@@ -10,8 +10,8 @@
   background-color: $color-bg-dark-secondary;
   border-right: 1px solid $color-bg-dark-tertiary;
   height: calc(100vh - 60px); // Altura total menos el header
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr auto;
   transition: transform $transition-medium ease;
   
   @media (max-width: $breakpoint-tablet) {
@@ -47,8 +47,10 @@
 }
 
 .user-profile {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
+  gap: $spacing-sm;
   margin-bottom: $spacing-md;
   
   .user-avatar-dice {

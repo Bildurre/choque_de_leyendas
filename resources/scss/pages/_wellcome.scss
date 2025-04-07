@@ -1,9 +1,8 @@
 @use '../abstracts/all' as *;
 
 .welcome-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   min-height: 100vh;
   background-color: $color-bg-dark-primary;
   padding: $spacing-lg;
@@ -39,9 +38,12 @@
 
 .welcome-actions {
   margin-top: $spacing-xl;
+  display: grid;
+  place-items: center;
   
   .welcome-button {
-    display: inline-block;
+    display: inline-grid;
+    place-items: center;
     padding: $spacing-sm $spacing-lg;
     background-color: transparent;
     color: $color-accent-orange;

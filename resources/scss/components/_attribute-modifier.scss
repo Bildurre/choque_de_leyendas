@@ -1,8 +1,8 @@
 @use '../abstracts/all' as *;
 
 .modifier-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-sm;
   margin-bottom: $spacing-xs;

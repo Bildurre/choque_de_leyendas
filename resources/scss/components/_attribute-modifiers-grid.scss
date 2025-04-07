@@ -8,11 +8,11 @@
   width: 100%;
   
   .modifier-item {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     padding: $spacing-xs $spacing-sm;
     border-radius: $border-radius-sm;
-    min-width: 0; // Para permitir que se encoja si es necesario
+    min-width: 0;
     
     &.positive {
       background-color: rgba($color-green, 0.1);
@@ -38,13 +38,12 @@
     .modifier-label {
       font-weight: 500;
       margin-right: $spacing-xs;
-      flex: 1; // Tomar espacio disponible
-      min-width: 0; // Para permitir ellipsis
+      min-width: 0;
     }
-
+  
     .modifier-value {
       font-weight: 600;
-      flex-shrink: 0; // No encoger el valor
+      justify-self: end;
     }
   }
 }

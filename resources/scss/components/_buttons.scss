@@ -2,9 +2,8 @@
 @use '../abstracts/all' as *;
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
   padding: $spacing-sm $spacing-lg;
   border-radius: $border-radius-sm;
   font-weight: 500;

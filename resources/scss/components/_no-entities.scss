@@ -6,15 +6,18 @@
   padding: $spacing-xl $spacing-md;
   background-color: $color-bg-dark-secondary;
   border-radius: $border-radius-md;
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: $spacing-md;
+  place-items: center;
   
   p {
-    margin-bottom: $spacing-md;
     font-size: 1.125rem;
     color: $color-text-muted;
+    margin: 0;
   }
 
   .btn {
-    display: inline-block;
-    margin: 0 auto;
+    justify-self: center;
   }
 }

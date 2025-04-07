@@ -11,13 +11,15 @@
   
   .hero-class-summary {
     .class-stats {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, auto));
       gap: $spacing-md;
       
       .stat-item {
-        display: flex;
-        align-items: center;
+        display: grid;
+        grid-template-columns: auto 1fr;
         gap: $spacing-xs;
+        align-items: center;
         font-size: 0.8rem;
         color: $color-text-muted;
         

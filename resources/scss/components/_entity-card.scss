@@ -15,21 +15,22 @@
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
     padding: $spacing-sm $spacing-md;
     border-bottom: 1px solid rgba($color-bg-dark-tertiary, 0.5);
     @include responsive(narrow) {
-      flex-direction: column;
-      align-items: flex-start;
+      grid-template-columns: 1fr;
+      gap: $spacing-sm;
     }
   }
   
-  &__title {
-    display: flex;
-    align-items: center;
+  &___title {
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: $spacing-sm;
+    align-items: center;
     
     h3 {
       margin: 0;
@@ -41,20 +42,20 @@
   }
   
   &__actions {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28px, auto));
     gap: $spacing-xs;
+    align-items: center;
     @include responsive(narrow) {
-      align-self: flex-end;
+      justify-self: end;
       order: -1;
     }
     
     .action-btn {
       width: 28px;
       height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
       border-radius: $border-radius-sm;
       transition: background-color $transition-fast, stroke $transition-fast;
       cursor: pointer;

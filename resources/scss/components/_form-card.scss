@@ -14,12 +14,13 @@
   }
   
   .form-actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: $spacing-md;
     margin-top: $spacing-lg;
     
     @include responsive(mobile) {
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
     
     .btn {
