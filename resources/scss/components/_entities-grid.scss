@@ -1,11 +1,11 @@
 @use '../abstracts/all' as *;
 
 .entities-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   
-  @include responsive(mobile) {
-    grid-template-columns: 1fr;
+  .no-entities {
+    width: 100%;
   }
 }

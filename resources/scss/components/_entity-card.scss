@@ -6,7 +6,9 @@
   display: flex;
   transition: transform $transition-medium, box-shadow $transition-medium;
   overflow: hidden;
-  position: relative; // Importante para el posicionamiento de las acciones
+  position: relative;
+  width: 100%;
+  margin-bottom: $spacing-md;
 
   &:hover {
     transform: translateY(-2px);
@@ -16,26 +18,58 @@
   .entity-content {
     flex: 1;
     padding: $spacing-md;
-    padding-right: calc(#{$spacing-md} + 50px); // Garantizar espacio para acciones
-    width: 100%; // Asegurar que ocupe el ancho disponible
+    width: 100%;
     box-sizing: border-box;
   }
   
   .entity-actions {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: $spacing-sm;
+    align-items: center;
+    padding: $spacing-md;
     background-color: $color-bg-dark-tertiary;
-    z-index: 10; // Asegurar que está por encima del contenido
+    border-left: 1px solid $color-bg-dark-primary;
     
     .action-btn {
-      @include action-button-base;
-      @include action-button-hover-states;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $border-radius-sm;
+      color: $color-text-light;
+      transition: background-color $transition-fast;
+      cursor: pointer;
+      border: none;
+      background: none;
+      margin-left: $spacing-xs;
+      
+      &:first-child {
+        margin-left: 0;
+      }
+      
+      &.view-btn:hover {
+        background-color: $color-info;
+      }
+      
+      &.edit-btn:hover {
+        background-color: $color-success;
+      }
+      
+      &.delete-btn:hover {
+        background-color: $color-danger;
+      }
     }
+    
+    @include responsive(mobile) {
+      position: relative;
+      width: 100%;
+      border-left: none;
+      border-top: 1px solid $color-bg-dark-primary;
+      justify-content: flex-end;
+    }
+  }
+  
+  @include responsive(mobile) {
+    flex-direction: column;
   }
 }

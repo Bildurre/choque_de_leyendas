@@ -2,6 +2,8 @@
 
 .superclass-card {
   .superclass-content {
+    width: 100%;
+    
     .superclass-header {
       display: flex;
       justify-content: space-between;
@@ -10,14 +12,14 @@
       
       .superclass-name {
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         color: $color-text-light;
       }
       
       .superclass-color {
         display: flex;
         align-items: center;
-        font-size: 0.8rem;
+        font-size: 0.875rem;
         color: $color-text-muted;
         
         .color-dot {
@@ -32,8 +34,9 @@
     .superclass-description {
       margin: 0 0 $spacing-md;
       color: $color-text-muted;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.4;
+      max-width: 80%;
     }
     
     .superclass-stats {
@@ -50,6 +53,14 @@
         svg {
           color: $color-accent-purple;
         }
+      }
+    }
+  }
+  
+  @include responsive(mobile) {
+    .superclass-content {
+      .superclass-description {
+        max-width: 100%;
       }
     }
   }

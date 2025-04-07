@@ -1,25 +1,27 @@
 @use '../abstracts/all' as *;
 
 .hero-class-card {
-  // Base styles inherited from entity-card
-  
   .hero-class-content {
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md;
   }
 
   .hero-class-header {
+    grid-column: 1 / 3;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
     flex-wrap: wrap;
     gap: $spacing-sm;
 
     .hero-class-name {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       flex: 1;
-      min-width: 0; // Para que pueda encogerse si es necesario
+      min-width: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -31,12 +33,11 @@
       border-radius: $border-radius-sm;
       font-weight: 500;
       white-space: nowrap;
-      // Color de fondo y texto viene de inline style
     }
   }
   
   .hero-class-description {
-    margin-bottom: $spacing-md;
+    grid-column: 1 / 3;
     
     p {
       margin: 0;
@@ -47,7 +48,7 @@
   }
   
   .hero-class-passive {
-    margin-bottom: $spacing-md;
+    grid-column: 1 / 2;
     
     h4 {
       margin-bottom: $spacing-xs;
@@ -64,10 +65,25 @@
   }
 
   .hero-class-modifiers {
+    grid-column: 2 / 3;
+    
     h4 {
       margin-bottom: $spacing-sm;
       color: $color-text-muted;
       font-size: 1rem;
+    }
+  }
+  
+  @include responsive(mobile) {
+    .hero-class-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero-class-header, 
+    .hero-class-description,
+    .hero-class-passive,
+    .hero-class-modifiers {
+      grid-column: 1;
     }
   }
 }

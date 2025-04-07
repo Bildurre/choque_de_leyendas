@@ -1,8 +1,6 @@
 @use '../abstracts/all' as *;
 
 .faction-card {
-  // Estilos específicos de faction-card que extienden entity-card
-  
   .faction-card-content {
     display: flex;
     align-items: center;
@@ -12,20 +10,21 @@
     margin-right: $spacing-md;
     
     img {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: $border-radius-sm;
       object-fit: cover;
     }
     
     .faction-icon-placeholder {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: $border-radius-sm;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
+      font-size: 1.2rem;
       color: $color-text-light;
     }
   }
@@ -35,7 +34,7 @@
     
     .faction-name {
       margin: 0 0 $spacing-xs;
-      font-size: 1.125rem;
+      font-size: 1.25rem;
     }
     
     .faction-color {
@@ -51,6 +50,18 @@
       height: 12px;
       border-radius: 50%;
       margin-right: $spacing-xs;
+    }
+  }
+  
+  @include responsive(mobile) {
+    .faction-card-content {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .faction-icon {
+        margin-right: 0;
+        margin-bottom: $spacing-sm;
+      }
     }
   }
 }
