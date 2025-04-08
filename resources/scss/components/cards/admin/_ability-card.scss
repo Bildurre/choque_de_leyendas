@@ -1,18 +1,6 @@
 @use '../../../abstracts/all' as *;
 
-.attack-card {
-  .attack-badge {
-    font-size: 0.7rem;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $border-radius-sm;
-    font-weight: 500;
-    
-    &.passive-badge {
-      background-color: rgba($color-accent-purple, 0.2);
-      color: $color-accent-purple;
-    }
-  }
-  
+.attack-card {S  
   .attack-summary {
     .attack-meta {
       display: grid;
@@ -50,19 +38,6 @@
       display: grid;
       grid-template-columns: auto;
       gap: $spacing-sm;
-      
-      .stat-item {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: $spacing-xs;
-        align-items: center;
-        font-size: 0.8rem;
-        color: $color-text-muted;
-        
-        svg {
-          stroke: $color-accent-purple;
-        }
-      }
     }
   }
   

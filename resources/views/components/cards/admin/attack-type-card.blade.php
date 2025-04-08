@@ -9,22 +9,15 @@
 >
   <div class="type-summary">
     <div class="type-stats">
-      <div class="stat-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 20v-8l-8 8M8 16H4v-4"></path>
-          <path d="M4 4h16v4M12 12v-4"></path>
-        </svg>
-        <span>{{ $type->subtypes_count ?? 0 }} {{ Str::plural('subtipo', $type->subtypes_count ?? 0) }}</span>
-      </div>
+      <x-common.stat-item icon="subtypes" :count="$type->subtypes_count ?? 0" label="subtipo" />
     </div>
   </div>
   
   <x-slot:details>
     @if($type->description)
-      <div class="type-description">
-        <h4>Descripción</h4>
+      <x-common.description-section title="Descripción">
         <p>{{ $type->description }}</p>
-      </div>
+      </x-common.description-section>
     @endif
     
     @if($type->subtypes_count > 0 && isset($type->subtypes))

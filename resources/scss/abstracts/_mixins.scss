@@ -69,47 +69,6 @@
   border: 0;
 }
 
-// Action Component Mixins
-@mixin action-button-base {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  margin-bottom: $spacing-xs;
-  border-radius: $border-radius-sm;
-  color: $color-text-light;
-  transition: background-color $transition-fast;
-  cursor: pointer;
-  border: none;
-  background: none;
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-@mixin action-button-hover-states {
-  &.view-btn:hover {
-    background-color: $color-blue;
-  }
-  
-  &.edit-btn:hover {
-    background-color: $color-green;
-    color: $color-bg-dark-primary;
-  }
-  
-  &.delete-btn:hover {
-    background-color: $color-red;
-  }
-}
-
-@mixin actions-container {
-  display: grid;
-  grid-template-rows: repeat(auto-fit, min-content);
-  gap: $spacing-xs;
-  background-color: $color-bg-dark-tertiary;
-  padding: $spacing-sm;
-}
 
 // Form Mixins
 @mixin form-input-base {

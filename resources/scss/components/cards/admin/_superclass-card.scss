@@ -5,19 +5,6 @@
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    
-    .stat-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: $spacing-xs;
-      align-items: center;
-      font-size: 0.8rem;
-      color: $color-text-muted;
-      
-      svg {
-        stroke: $color-accent-purple;
-      }
-    }
   }
   
   .superclass-description {

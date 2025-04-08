@@ -9,6 +9,10 @@
 @use 'components/common/game-dice';
 @use 'components/common/header-actions-bar';
 @use 'components/common/no-entities';
+@use 'components/common/action-button';
+@use 'components/common/stat-item';
+@use 'components/common/badge';
+@use 'components/common/description-section';
 
 //COMPONENTS - FORMS
 @use 'components/forms/form-card';

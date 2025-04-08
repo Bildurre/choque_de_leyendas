@@ -10,29 +10,21 @@
 >
   <x-slot:badge>
     @if($subtype->type)
-      <span class="subtype-type-badge">
-        {{ $subtype->type->name }}
-      </span>
+      <x-common.badge>{{ $subtype->type->name }}</x-common.badge>
     @endif
   </x-slot:badge>
 
   <div class="subtype-summary">
     <div class="subtype-stats">
-      <div class="stat-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-        </svg>
-        <span>{{ $subtype->abilities_count ?? 0 }} {{ Str::plural('habilidad', $subtype->abilities_count ?? 0) }}</span>
-      </div>
+      <x-common.stat-item icon="heroes" :count="$subtype->abilities_count ?? 0" label="{{ Str::plural('habilidad', $subtype->abilities_count ?? 0) }}" />
     </div>
   </div>
   
   @if($subtype->description)
     <x-slot:details>
-      <div class="subtype-description">
-        <h4>Descripción</h4>
+      <x-common.description-section title="Descripción">
         <p>{{ $subtype->description }}</p>
-      </div>
+      </x-common.description-section>
     </x-slot:details>
   @endif
 </x-cards.admin.entity-card>

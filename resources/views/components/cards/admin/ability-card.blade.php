@@ -18,7 +18,7 @@
 >
   <x-slot:badge>
     @if($ability->is_passive)
-      <span class="ability-badge passive-badge">Pasiva</span>
+      <x-common.badge type="passive">Pasiva</x-common.badge>
     @else
       <x-widgets.cost-display :cost="$ability->cost" />
     @endif
@@ -45,19 +45,15 @@
     </div>
     
     <div class="ability-stats">
-      <span class="stat-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
-        <span>{{ $ability->heroes_count ?? 0 }} {{ Str::plural('héroe', $ability->heroes_count ?? 0) }}</span>
-      </span>
+      <x-common.stat-item icon="heroes" :count="$ability->heroes_count ?? 0" label="héroe" />
     </div>
   </div>
   
   <x-slot:details>
-    <div class="ability-description">
-      <h4>Descripción</h4>
+    <x-common.description-section title="Descripción">
       <div class="description-content">
         {!! $ability->description !!}
       </div>
-    </div>
+    </x-common.description-section>
   </x-slot:details>
 </x-cards.admin.entity-card>

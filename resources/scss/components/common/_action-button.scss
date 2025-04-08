@@ -1,0 +1,73 @@
+@use '../../abstracts/all' as *;
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  display: grid; // Mantenemos grid para el contenido interno
+  place-items: center;
+  border-radius: $border-radius-sm;
+  transition: background-color $transition-fast, stroke $transition-fast;
+  cursor: pointer;
+  border: none;
+  background: none;
+  flex-shrink: 0;
+  
+  &.edit-btn {
+    &:hover {
+      background-color: $color-success;
+      color: $color-bg-dark-primary;
+    }
+    
+    svg {
+      stroke: $color-success;
+    }
+    
+    &:hover svg {
+      stroke: $color-bg-dark-primary;
+    }
+  }
+  
+  &.delete-btn {
+    &:hover {
+      background-color: $color-danger;
+    }
+    
+    svg {
+      stroke: $color-danger;
+    }
+    
+    &:hover svg {
+      stroke: $color-bg-dark-primary;
+    }
+  }
+  
+  &.toggle-btn {
+    &:hover {
+      background-color: $color-accent-purple;
+    }
+    
+    svg {
+      stroke: $color-accent-purple;
+    }
+    
+    &:hover svg {
+      stroke: $color-bg-dark-primary;
+    }
+  }
+  
+  // Tamaños
+  &.action-btn-sm {
+    width: 28px;
+    height: 28px;
+  }
+  
+  &.action-btn-lg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// Formulario de acción (para botones tipo submit)
+.action-btn-form {
+  display: inline;
+}

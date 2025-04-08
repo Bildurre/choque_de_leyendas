@@ -1,17 +1,6 @@
 @use '../../../abstracts/all' as *;
 
 .faction-card {
-  .faction-badge {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-weight: bold;
-    font-size: 0.75rem;
-    color: $color-text-light;
-  }
-  
   .faction-icon {
     width: 24px;
     height: 24px;
@@ -29,34 +18,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, auto));
       gap: $spacing-md;
-      
-      .stat-item {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: $spacing-xs;
-        align-items: center;
-        font-size: 0.8rem;
-        color: $color-text-muted;
-        
-        svg {
-          stroke: $color-accent-purple;
-        }
-      }
-    }
-  }
-  
-  .faction-lore {
-    h4 {
-      margin: 0 0 $spacing-xs;
-      font-size: 0.9rem;
-      color: $color-text-muted;
-    }
-    
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: $color-text-light;
-      line-height: 1.5;
     }
   }
 }

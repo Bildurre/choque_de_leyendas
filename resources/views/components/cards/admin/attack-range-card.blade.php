@@ -13,14 +13,21 @@
   :title="$range->name"
   :hasDetails="$range->description ? true : false"
 >
+  <x-slot:badge>
+    @if($range->icon)
+      <div class="range-icon">
+        <img src="{{ asset('storage/' . $range->icon) }}" alt="{{ $range->name }}">
+      </div>
+    @else
+      <div class="icon-badge" style="background-color: {{ $range->color ?? '#111111' }}">
+        {{ strtoupper(substr($range->name, 0, 1)) }}
+      </div>
+    @endif
+  </x-slot:badge>
+
   <div class="range-summary">
     <div class="range-stats">
-      <div class="stat-item">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-        </svg>
-        <span>{{ $range->abilities_count ?? 0 }} {{ Str::plural('habilidad', $range->abilities_count ?? 0) }}</span>
-      </div>
+      <x-common.stat-item icon="heroes" :count="$range->abilities_count ?? 0" label="ataques" />
     </div>
     
     @if($range->icon)
@@ -32,10 +39,11 @@
   
   @if($range->description)
     <x-slot:details>
-      <div class="range-description">
-        <h4>Descripción</h4>
-        <p>{{ $range->description }}</p>
-      </div>
+      <x-common.description-section title="Descripción">
+        <div class="description-content">
+          <p>{{ $range->description }}</p>
+        </div>
+      </x-common.description-section>
     </x-slot:details>
   @endif
 </x-cards.admin.entity-card>

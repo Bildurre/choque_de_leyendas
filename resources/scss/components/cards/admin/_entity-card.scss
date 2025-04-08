@@ -55,49 +55,6 @@
     }
     
     .action-btn {
-      width: 28px;
-      height: 28px;
-      display: grid; // Mantenemos grid para el contenido interno
-      place-items: center;
-      border-radius: $border-radius-sm;
-      transition: background-color $transition-fast, stroke $transition-fast;
-      cursor: pointer;
-      border: none;
-      background: none;
-      flex-shrink: 0; // Evitamos que los botones se reduzcan
-      
-      &.edit-btn svg {
-        stroke: $color-success;
-      }
-      
-      &.delete-btn svg {
-        stroke: $color-danger;
-      }
-      
-      &.toggle-btn svg {
-        stroke: $color-accent-purple;
-      }
-      
-      &:hover {
-        background-color: rgba($color-bg-dark-tertiary, 0.7);
-        
-        svg {
-          stroke: $color-bg-dark-primary;
-        }
-      }
-      
-      &.edit-btn:hover {
-        background-color: $color-success;
-      }
-      
-      &.delete-btn:hover {
-        background-color: $color-danger;
-      }
-      
-      &.toggle-btn:hover {
-        background-color: $color-accent-purple;
-      }
-      
       &.toggle-btn {
         .chevron-up {
           display: none;
