@@ -2,114 +2,84 @@
  * Image Uploader Component
  * Handles drag and drop, file upload preview, and image removal
  */
-export default class ImageUploader {
-  /**
-   * Initialize image uploader components
-   */
-  static init() {
-    document.querySelectorAll('.image-uploader').forEach(uploader => {
-      new ImageUploader(uploader);
-    });
-  }
+export function initImageUploaders() {
+  document.querySelectorAll('.image-uploader').forEach(uploader => {
+    setupImageUploader(uploader);
+  });
+}
 
-  /**
-   * Constructor for the image uploader
-   * @param {HTMLElement} element - The uploader container element
-   */
-  constructor(element) {
-    this.container = element;
-    this.id = this.container.id.replace('-uploader', '');
-    this.dropzone = this.container.querySelector('.dropzone');
-    this.input = this.container.querySelector(`#${this.id}`);
-    this.removeBtn = this.container.querySelector(`#${this.id}-remove`);
-    this.preview = this.container.querySelector(`#${this.id}-preview`);
-    this.placeholder = this.container.querySelector('.uploader-placeholder');
-    this.removeInputField = document.querySelector(`#remove_${this.id}`);
-    
-    this.setupListeners();
+/**
+ * Setup a single image uploader component
+ * @param {HTMLElement} uploader - The uploader container
+ */
+function setupImageUploader(uploader) {
+  const id = uploader.id.replace('-uploader', '');
+  const dropzone = uploader.querySelector('.dropzone');
+  const input = uploader.querySelector(`#${id}`);
+  const removeBtn = uploader.querySelector(`#${id}-remove`);
+  const preview = uploader.querySelector(`#${id}-preview`);
+  const placeholder = uploader.querySelector('.uploader-placeholder');
+  const removeInputField = document.querySelector(`#remove_${id}`);
+  
+  // Drag and drop events
+  if (dropzone) {
+    dropzone.addEventListener('dragover', handleDragOver);
+    dropzone.addEventListener('dragleave', handleDragLeave);
+    dropzone.addEventListener('drop', handleDrop);
   }
-
-  /**
-   * Setup event listeners for the uploader
-   */
-  setupListeners() {
-    // Drag and drop events
-    this.dropzone.addEventListener('dragover', this.handleDragOver.bind(this));
-    this.dropzone.addEventListener('dragleave', this.handleDragLeave.bind(this));
-    this.dropzone.addEventListener('drop', this.handleDrop.bind(this));
-    
-    // File input change
-    this.input.addEventListener('change', this.handleFileChange.bind(this));
-    
-    // Remove button click
-    if (this.removeBtn) {
-      this.removeBtn.addEventListener('click', this.handleRemove.bind(this));
-    }
+  
+  // File input change
+  if (input) {
+    input.addEventListener('change', handleFileChange);
   }
-
-  /**
-   * Handle file selection
-   * @param {Event} event - The change event
-   */
-  handleFileChange(event) {
-    const file = event.target.files[0];
-    if (file) {
-      this.previewFile(file);
-      
-      // Reset remove flag if a new file is selected
-      if (this.removeInputField) {
-        this.removeInputField.value = "0";
-      }
-    }
+  
+  // Remove button click
+  if (removeBtn) {
+    removeBtn.addEventListener('click', handleRemove);
   }
-
-  /**
-   * Handle dragover event
-   * @param {DragEvent} event - The dragover event
-   */
-  handleDragOver(event) {
+  
+  function handleDragOver(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.dropzone.classList.add('drag-over');
+    dropzone.classList.add('drag-over');
   }
-
-  /**
-   * Handle dragleave event
-   * @param {DragEvent} event - The dragleave event
-   */
-  handleDragLeave(event) {
+  
+  function handleDragLeave(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.dropzone.classList.remove('drag-over');
+    dropzone.classList.remove('drag-over');
   }
-
-  /**
-   * Handle drop event
-   * @param {DragEvent} event - The drop event
-   */
-  handleDrop(event) {
+  
+  function handleDrop(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.dropzone.classList.remove('drag-over');
+    dropzone.classList.remove('drag-over');
     
-    // Get the dropped files
     const files = event.dataTransfer.files;
     if (files.length) {
-      this.input.files = files;
-      this.previewFile(files[0]);
+      input.files = files;
+      previewFile(files[0]);
       
-      // Reset remove flag if a new file is dropped
-      if (this.removeInputField) {
-        this.removeInputField.value = "0";
+      // Reset remove flag
+      if (removeInputField) {
+        removeInputField.value = "0";
       }
     }
   }
-
-  /**
-   * Preview the selected file
-   * @param {File} file - The file to preview
-   */
-  previewFile(file) {
+  
+  function handleFileChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      previewFile(file);
+      
+      // Reset remove flag
+      if (removeInputField) {
+        removeInputField.value = "0";
+      }
+    }
+  }
+  
+  function previewFile(file) {
     // Check if file is an image
     if (!file.type.match('image.*')) {
       alert('Solo se permiten imágenes');
@@ -119,36 +89,51 @@ export default class ImageUploader {
     // Check file size (max 2MB)
     if (file.size > 2 * 1024 * 1024) {
       alert('El tamaño máximo permitido es 2MB');
-      this.input.value = '';
+      input.value = '';
       return;
     }
     
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.preview.src = e.target.result;
-      this.preview.classList.add('active');
-      this.placeholder.classList.add('hidden');
-      this.removeBtn.classList.remove('hidden');
+      if (preview) {
+        preview.src = e.target.result;
+        preview.classList.add('active');
+      }
+      
+      if (placeholder) {
+        placeholder.classList.add('hidden');
+      }
+      
+      if (removeBtn) {
+        removeBtn.classList.remove('hidden');
+      }
     };
     reader.readAsDataURL(file);
   }
-
-  /**
-   * Handle image removal
-   */
-  handleRemove() {
-    // Clear the file input
-    this.input.value = '';
+  
+  function handleRemove() {
+    // Clear input
+    if (input) {
+      input.value = '';
+    }
     
-    // Reset the preview
-    this.preview.src = '';
-    this.preview.classList.remove('active');
-    this.placeholder.classList.remove('hidden');
-    this.removeBtn.classList.add('hidden');
+    // Reset preview
+    if (preview) {
+      preview.src = '';
+      preview.classList.remove('active');
+    }
     
-    // Set the remove flag to true
-    if (this.removeInputField) {
-      this.removeInputField.value = "1";
+    if (placeholder) {
+      placeholder.classList.remove('hidden');
+    }
+    
+    if (removeBtn) {
+      removeBtn.classList.add('hidden');
+    }
+    
+    // Set remove flag
+    if (removeInputField) {
+      removeInputField.value = "1";
     }
   }
 }

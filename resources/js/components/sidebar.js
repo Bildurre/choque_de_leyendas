@@ -2,64 +2,81 @@
  * Sidebar functionality handler
  * Manages sidebar state changes based on window size and user interactions
  */
-document.addEventListener('DOMContentLoaded', () => {
-  // Crear el overlay para cerrar el sidebar
-  const createOverlay = () => {
-    // Verificar si el overlay ya existe
-    if (!document.querySelector('.sidebar-overlay')) {
-      const overlay = document.createElement('div');
-      overlay.className = 'sidebar-overlay';
-      document.querySelector('.admin-main-container').appendChild(overlay);
+export function initSidebar() {
+  // Create overlay for closing sidebar on mobile
+  createOverlay();
+  
+  // Initial state based on window size
+  syncSidebarState();
+  
+  // Handle window resize events
+  window.addEventListener('resize', debounce(syncSidebarState, 100));
+}
+
+/**
+ * Create overlay for closing sidebar
+ */
+function createOverlay() {
+  if (!document.querySelector('.sidebar-overlay')) {
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    
+    const container = document.querySelector('.admin-main-container');
+    if (container) {
+      container.appendChild(overlay);
       
-      // Añadir evento para cerrar sidebar al hacer clic
+      // Add event to close sidebar when overlay is clicked
       overlay.addEventListener('click', () => {
-        const bodyElement = document.querySelector('body');
-        bodyElement.classList.remove('sidebar-open');
+        document.body.classList.remove('sidebar-open');
         
-        // Actualizar el estado en Alpine.js si está disponible
-        if (window.Alpine && bodyElement._x_dataStack && bodyElement._x_dataStack[0]) {
-          bodyElement._x_dataStack[0].sidebarOpen = false;
+        // Update Alpine state if available
+        if (window.Alpine) {
+          const bodyData = Alpine.raw(document.body);
+          if (bodyData && typeof bodyData.sidebarOpen !== 'undefined') {
+            bodyData.sidebarOpen = false;
+          }
         }
       });
     }
-  };
+  }
+}
 
-  // Función para sincronizar el estado del sidebar con el tamaño de la ventana
-  const syncSidebarState = () => {
-    const bodyElement = document.querySelector('body');
-    
-    if (window.innerWidth > 768) {
-      // En desktop, asegurarse de que el sidebar esté abierto
-      if (!bodyElement.classList.contains('sidebar-open')) {
-        bodyElement.classList.add('sidebar-open');
-        // Actualizar el estado en Alpine.js si está disponible
-        if (window.Alpine && bodyElement._x_dataStack && bodyElement._x_dataStack[0]) {
-          bodyElement._x_dataStack[0].sidebarOpen = true;
-        }
-      }
-    } else {
-      // En móvil/tablet, asegurarse de que el sidebar esté cerrado
-      if (bodyElement.classList.contains('sidebar-open')) {
-        bodyElement.classList.remove('sidebar-open');
-        // Actualizar el estado en Alpine.js si está disponible
-        if (window.Alpine && bodyElement._x_dataStack && bodyElement._x_dataStack[0]) {
-          bodyElement._x_dataStack[0].sidebarOpen = false;
-        }
-      }
+/**
+ * Synchronize sidebar state with window size
+ */
+function syncSidebarState() {
+  if (window.innerWidth > 768) {
+    // On desktop, sidebar should be open
+    document.body.classList.add('sidebar-open');
+    updateAlpineState(true);
+  } else {
+    // On mobile, sidebar should be closed by default
+    document.body.classList.remove('sidebar-open');
+    updateAlpineState(false);
+  }
+}
+
+/**
+ * Update Alpine.js state if available
+ */
+function updateAlpineState(isOpen) {
+  if (window.Alpine) {
+    const bodyData = Alpine.raw(document.body);
+    if (bodyData && typeof bodyData.sidebarOpen !== 'undefined') {
+      bodyData.sidebarOpen = isOpen;
     }
+  }
+}
+
+/**
+ * Simple debounce function to limit execution frequency
+ */
+function debounce(func, wait) {
+  let timeout;
+  return function() {
+    const context = this;
+    const args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
   };
-
-  // Crear overlay al cargar la página
-  createOverlay();
-
-  // Escuchar eventos de cambio de tamaño
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    // Usar debounce para no ejecutar demasiadas veces
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(syncSidebarState, 100);
-  });
-  
-  // Estado inicial del sidebar basado en el tamaño de ventana
-  syncSidebarState();
-});
+}

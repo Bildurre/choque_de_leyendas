@@ -1,16 +1,24 @@
-// resources/js/pages/attack-subtypes/edit.js
-import { initFormPage } from '../../common/page-initializers';
+// resources/js/pages/modules/attack-subtypes.js
+import { setupColorInputs } from '../../common/forms';
 
 /**
- * Initialize attack subtype edit page
+ * Default handler for attack subtype pages
+ * @param {string} action - Current CRUD action
  */
-export function initEditPage() {
-  // Initialize form with color input functionality
-  initFormPage({
-    hasColorInputs: true
-  });
-  
-  // Setup type selection to auto-set color based on parent type
+export default function attackSubtypeHandler(action) {
+  switch (action) {
+    case 'create':
+    case 'edit':
+      setupFormPage();
+      break;
+  }
+}
+
+/**
+ * Setup attack subtype form page
+ */
+function setupFormPage() {
+  setupColorInputs();
   setupTypeColorSync();
 }
 
@@ -53,5 +61,10 @@ function setupTypeColorSync() {
   }
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', initEditPage);
+export function create() {
+  setupFormPage();
+}
+
+export function edit() {
+  setupFormPage();
+}

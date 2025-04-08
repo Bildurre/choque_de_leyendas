@@ -1,33 +1,28 @@
 /**
- * Set up auto-hiding for alert messages
- * @param {string} selector - CSS selector for alert elements
+ * Set up auto-dismiss for alert messages
  * @param {number} timeout - Time in ms before hiding alerts
  */
-export default function setupAlertDismissal(selector = '.alert', timeout = 5000) {
-  document.addEventListener('DOMContentLoaded', function() {
-    // Select all alert elements
-    const alerts = document.querySelectorAll(selector);
-    
-    // Set up auto-dismissal
-    alerts.forEach(alert => {
+export function setupAlertDismissal(timeout = 5000) {
+  const alerts = document.querySelectorAll('.alert');
+  
+  // Set up auto-dismissal
+  alerts.forEach(alert => {
+    setTimeout(() => {
+      alert.style.opacity = '0';
       setTimeout(() => {
-        alert.style.opacity = '0';
-        setTimeout(() => {
-          alert.style.display = 'none';
-        }, 300); // Transition time
-      }, timeout);
-    });
+        alert.style.display = 'none';
+      }, 300); // Transition time
+    }, timeout);
     
     // Set up manual close buttons
-    const closeButtons = document.querySelectorAll(`${selector} .btn-close`);
-    closeButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const alert = this.closest('.alert');
+    const closeButton = alert.querySelector('.btn-close');
+    if (closeButton) {
+      closeButton.addEventListener('click', function() {
         alert.style.opacity = '0';
         setTimeout(() => {
           alert.style.display = 'none';
-        }, 300); // Transition time
+        }, 300);
       });
-    });
+    }
   });
 }
