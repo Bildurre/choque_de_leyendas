@@ -141,24 +141,3 @@
   gap: $spacing-md;
   align-items: center;
 }
-
-.header-icons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(24px, auto));
-  gap: $spacing-md;
-  
-  .header-icon {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    
-    path {
-      stroke: $color-text-muted;
-      transition: $transition-fast;
-    }
-    
-    &:hover path {
-      stroke: $color-text-light;
-    }
-  }
-}
