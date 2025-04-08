@@ -1,36 +1,31 @@
 @extends('admin.layouts.page', [
-  'title' => 'Editar Facción',
-  'headerTitle' => 'Editar Facción',
+  'title' => 'Nueva Facción',
+  'headerTitle' => 'Crear Facción',
   'containerTitle' => 'Facciones',
-  'subtitle' => "Modifica los detalles de la facción $faction->name",
-  'createRoute' => route('admin.factions.create'),
-  'createLabel' => '+ Nueva Facción',
+  'subtitle' => 'Crea una nueva facción para el juego',
   'backRoute' => route('admin.factions.index')
 ])
 
 @section('page-content')
-  <form action="{{ route('admin.factions.update', $faction) }}" method="POST" enctype="multipart/form-data" class="faction-form">
+  <form action="{{ route('admin.factions.store') }}" method="POST" enctype="multipart/form-data" class="faction-form">
     @csrf
-    @method('PUT')
     
     <x-form-card 
-      submit_label="Guardar Cambios"
+      submit_label="Crear Facción"
       :cancel_route="route('admin.factions.index')"
     >
       <div class="form-section">
         <x-form.field 
           name="name" 
           label="Nombre de la Facción" 
-          :value="$faction->name" 
           :required="true" 
-          maxlength="255"
+          maxlength="255" 
         />
 
         <x-form.field 
           name="lore_text" 
           label="Descripción / Lore" 
           type="textarea" 
-          :value="$faction->lore_text" 
           rows="5" 
         />
 
@@ -38,7 +33,7 @@
           name="color" 
           label="Color" 
           type="color" 
-          :value="$faction->color" 
+          value="#3d3df5" 
           :required="true" 
           help="Selecciona un color representativo para la facción"
         />
@@ -46,7 +41,6 @@
         <x-image-uploader
           name="icon" 
           label="Icono" 
-          :currentImage="$faction->icon"
           acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
         />
       </div>

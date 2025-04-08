@@ -57,8 +57,10 @@ function initCommonComponents() {
  */
 function initFactionPages(path) {
   if (path.includes('/create')) {
-    // Módulos para la página de creación de facciones
-    // Actualmente no hay un archivo específico para esta ruta
+    import('./pages/factions/create')
+      .catch(error => {
+        console.warn('No se pudo cargar el módulo de creación de facciones:', error);
+      });
   } 
   else if (path.includes('/edit')) {
     // Módulos para la página de edición de facciones
