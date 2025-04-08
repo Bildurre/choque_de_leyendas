@@ -15,7 +15,7 @@
     <div class="welcome-logo">
       <x-application-logo class="logo-large" />
       <h1 class="welcome-title">
-        <x-game-dice size="xl" class="dice-infinite-spin" />
+        <x-widgets.game-dice size="xl" class="dice-infinite-spin" />
         ALANDA
       </h1>
       <p class="welcome-subtitle">CHOQUE DE LEYENDAS</p>

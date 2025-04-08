@@ -1,6 +1,0 @@
-@use '../abstracts/all' as *;
-@use 'base-page';
-
-.hero-classes-container {
-  @extend .base-admin-page;
-}

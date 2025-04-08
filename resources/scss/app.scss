@@ -2,37 +2,44 @@
 @use 'base/normalize';
 @use 'base/base';
 
-//COMPONENTS
-@use 'components/game-dice';
-@use 'components/alert';
-@use 'components/buttons';
-@use 'components/forms';
-@use 'components/image-uploader';
-@use 'components/sidebar-nav-link';
-@use 'components/sidebar-section';
-@use 'components/header-actions-bar';
-@use 'components/form-card';
-@use 'components/form-group';
-@use 'components/form-input';
-@use 'components/form-textarea';
-@use 'components/form-select';
-@use 'components/form-color-input';
-@use 'components/entity-card';
-@use 'components/no-entities';
-@use 'components/attribute-modifiers-grid';
-@use 'components/hero-class-card';
-@use 'components/faction-card';
-@use 'components/superclass-card';
-@use 'components/entities-grid';
-@use 'components/cost-input';
-@use 'components/cost-display';
-@use 'components/wysiwyg-editor';
-@use 'components/ability-card';
-@use 'components/attack-range-card';
-@use 'components/attack-subtype-card';
-@use 'components/attack-type-card';
+//COMPONENTS - COMMON
+@use 'components/common/alert';
+@use 'components/common/buttons';
+@use 'components/common/entities-grid';
+@use 'components/common/game-dice';
+@use 'components/common/header-actions-bar';
+@use 'components/common/no-entities';
 
-//VENDOR
+//COMPONENTS - FORMS
+@use 'components/forms/form-card';
+@use 'components/forms/form-color-input';
+@use 'components/forms/form-group';
+@use 'components/forms/form-input';
+@use 'components/forms/form-select';
+@use 'components/forms/form-textarea';
+@use 'components/forms/forms';
+@use 'components/forms/image-uploader';
+@use 'components/forms/wysiwyg-editor';
+@use 'components/forms/cost-input';
+
+//COMPONENTS - CARDS
+@use 'components/cards/admin/ability-card';
+@use 'components/cards/admin/attack-range-card';
+@use 'components/cards/admin/attack-subtype-card';
+@use 'components/cards/admin/attack-type-card';
+@use 'components/cards/admin/entity-card';
+@use 'components/cards/admin/faction-card';
+@use 'components/cards/admin/hero-class-card';
+@use 'components/cards/admin/superclass-card';
+
+//COMPONENTS - NAVIGATION
+@use 'components/navigation/sidebar-nav-link';
+@use 'components/navigation/sidebar-section';
+
+//COMPONENTS - WIDGETS
+@use 'components/widgets/attribute-modifier';
+@use 'components/widgets/attribute-modifiers-grid';
+@use 'components/widgets/cost-display';
 
 //LAYOUT
 @use 'layouts/admin-layout';
@@ -40,16 +47,14 @@
 @use 'layouts/admin-sidebar';
 @use 'layouts/admin-container';
 
-//VIEWS
-
-//PAGES
-@use 'pages/base-page';
-@use 'pages/wellcome';
-@use 'pages/login';
-@use 'pages/dashboard';
-@use 'pages/factions';
-@use 'pages/hero-attributes';
-@use 'pages/hero-classes';
-@use 'pages/superclasses';
-@use 'pages/hero-ability-form';
-@use 'pages/hero-ability-detail';
+//PAGES - ADMIN
+@use 'pages/admin/base-page';
+@use 'pages/admin/dashboard';
+@use 'pages/admin/factions';
+@use 'pages/admin/hero-ability-form';
+@use 'pages/admin/hero-ability-detail';
+@use 'pages/admin/hero-attributes';
+@use 'pages/admin/hero-classes';
+@use 'pages/admin/login';
+@use 'pages/admin/superclasses';
+@use 'pages/admin/wellcome';

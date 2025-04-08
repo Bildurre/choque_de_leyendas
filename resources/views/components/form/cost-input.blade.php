@@ -24,7 +24,7 @@
     
     <div class="cost-preview" id="{{ $name }}-preview">
       @if($value)
-        <x-game.cost-display :cost="$value" />
+        <x-widgets.cost-display :cost="$value" />
       @endif
     </div>
   </div>

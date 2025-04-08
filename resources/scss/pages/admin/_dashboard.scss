@@ -1,0 +1,67 @@
+@use '../../abstracts/all' as *;
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.dashboard-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+  
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include responsive(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-card {
+  background-color: $color-bg-dark-secondary;
+  border: 1px solid $color-bg-dark-tertiary;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+  
+  &.dashboard-card-lg {
+    grid-column: span 3;
+    
+    @include responsive(tablet) {
+      grid-column: span 2;
+    }
+    
+    @include responsive(mobile) {
+      grid-column: span 1;
+    }
+  }
+  
+  .card-title {
+    @include font-primary;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: $spacing-sm;
+    color: $color-text-light;
+  }
+  
+  .card-text {
+    color: $color-text-muted;
+    margin-bottom: $spacing-md;
+    line-height: 1.5;
+  }
+  
+  .card-list {
+    padding-left: $spacing-lg;
+    
+    li {
+      color: $color-text-muted;
+      margin-bottom: $spacing-xs;
+      
+      &::marker {
+        color: $color-accent-purple;
+      }
+    }
+  }
+}

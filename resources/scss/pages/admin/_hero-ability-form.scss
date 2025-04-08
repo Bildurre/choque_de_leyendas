@@ -1,0 +1,56 @@
+@use '../../abstracts/all' as *;
+
+.hero-ability-form {
+  .form-section {
+    h3 {
+      margin: $spacing-lg 0 $spacing-md;
+      font-size: 1.2rem;
+      color: $color-text-light;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+      
+      @media (min-width: $breakpoint-tablet) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .heroes-selection {
+      margin-top: $spacing-md;
+      
+      .heroes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: $spacing-sm;
+        background-color: $color-bg-dark-tertiary;
+        padding: $spacing-md;
+        border-radius: $border-radius-sm;
+        margin-top: $spacing-xs;
+        
+        .hero-checkbox {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          
+          label {
+            font-size: 0.9rem;
+            color: $color-text-light;
+            cursor: pointer;
+          }
+          
+          input[type="checkbox"] {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

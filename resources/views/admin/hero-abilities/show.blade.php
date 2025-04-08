@@ -21,7 +21,7 @@
             @else
               <div class="ability-cost">
                 <span class="cost-label">Coste:</span>
-                <x-game.cost-display :cost="$heroAbility->cost" />
+                <x-widgets.cost-display :cost="$heroAbility->cost" />
               </div>
             @endif
           </div>

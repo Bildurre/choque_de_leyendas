@@ -1,0 +1,42 @@
+@use '../../abstracts/all' as *;
+
+.wysiwyg-editor-container {
+  margin-bottom: $spacing-md;
+  
+  .tox-tinymce {
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    border: 1px solid $color-bg-dark-tertiary;
+  }
+  
+  .tox {
+    // Customizar los colores del editor para que coincidan con el tema oscuro
+    &.tox-tinymce {
+      background-color: $color-bg-dark-tertiary;
+    }
+    
+    .tox-toolbar__group {
+      border-color: rgba($color-text-light, 0.1);
+    }
+    
+    .tox-toolbar-overlord, .tox-toolbar {
+      background-color: $color-bg-dark-tertiary;
+    }
+    
+    .tox-tbtn {
+      color: $color-text-light;
+      
+      &:hover {
+        background-color: rgba($color-text-light, 0.1);
+      }
+    }
+    
+    .tox-tbtn--enabled {
+      background-color: rgba($color-accent-purple, 0.2);
+    }
+    
+    .tox-edit-area__iframe {
+      background-color: $color-bg-dark-primary;
+    }
+  }
+}

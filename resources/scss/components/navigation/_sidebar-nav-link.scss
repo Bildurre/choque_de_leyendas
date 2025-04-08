@@ -1,0 +1,34 @@
+@use '../../abstracts/all' as *;
+
+.sidebar-nav-link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $spacing-sm;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+  color: $color-text-muted;
+  transition: $transition-fast;
+  text-decoration: none;
+  border-radius: $border-radius-sm;
+
+  &:hover {
+    background-color: $color-bg-dark-tertiary;
+    color: $color-text-light;
+  }
+
+  &.active {
+    color: $color-text-light;
+    position: relative;
+    background-color: rgba($color-accent-orange, 0.1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: $color-accent-orange;
+    }
+  }
+}

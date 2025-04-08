@@ -8,17 +8,17 @@
 ])
 
 @section('page-content')
-  <x-entities-grid 
+  <x-common.entities-grid 
     empty_message="No hay rangos de ataque disponibles"
     :create_route="route('admin.attack-ranges.create')"
     create_label="Crear el primer rango"
   >
     @foreach($attackRanges as $range)
-      <x-game.attack-range-card 
+      <x-cards.admin.attack-range-card 
         :range="$range"
         :editRoute="route('admin.attack-ranges.edit', $range)"
         :deleteRoute="route('admin.attack-ranges.destroy', $range)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-common.entities-grid>
 @endsection

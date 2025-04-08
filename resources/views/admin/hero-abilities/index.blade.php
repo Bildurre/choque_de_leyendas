@@ -8,20 +8,20 @@
 ])
 
 @section('page-content')
-  <x-entities-grid 
+  <x-common.entities-grid 
     empty_message="No hay habilidades disponibles"
     :create_route="route('admin.hero-abilities.create')"
     create_label="Crear la primera habilidad"
   >
     @foreach($heroAbilities as $ability)
-      <x-game.ability-card 
+      <x-cards.admin.ability-card 
         :ability="$ability"
         :showRoute="route('admin.hero-abilities.show', $ability)"
         :editRoute="route('admin.hero-abilities.edit', $ability)"
         :deleteRoute="route('admin.hero-abilities.destroy', $ability)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-common.entities-grid>
   
   <div class="pagination-container">
     {{ $heroAbilities->links() }}

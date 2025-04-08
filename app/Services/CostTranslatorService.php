@@ -63,7 +63,7 @@ class CostTranslatorService
     foreach ($costArray as $dice) {
       if (isset($this->colorMap[$dice])) {
         $variant = 'mono-' . $this->colorMap[$dice];
-        $html .= '<x-game-dice variant="' . $variant . '" size="sm" class="cost-dice" />';
+        $html .= '<x-widgets.game-dice variant="' . $variant . '" size="sm" class="cost-dice" />';
       }
     }
 

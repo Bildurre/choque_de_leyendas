@@ -1,0 +1,37 @@
+@use '../../../abstracts/all' as *;
+
+.superclass-card {
+  .superclass-summary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    
+    .stat-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: $spacing-xs;
+      align-items: center;
+      font-size: 0.8rem;
+      color: $color-text-muted;
+      
+      svg {
+        stroke: $color-accent-purple;
+      }
+    }
+  }
+  
+  .superclass-description {
+    h4 {
+      margin: 0 0 $spacing-xs;
+      font-size: 0.9rem;
+      color: $color-text-muted;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: $color-text-light;
+      line-height: 1.5;
+    }
+  }
+}

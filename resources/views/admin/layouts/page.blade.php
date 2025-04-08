@@ -5,7 +5,7 @@
 @section('header-title', $headerTitle ?? 'Admin Panel')
 
 @section('content')
-<x-admin-container
+<x-admin.admin-container
   :title="$containerTitle ?? ($title ?? 'Admin Panel')"
   :subtitle="$subtitle ?? ''"
   :back_route="$backRoute ?? null"
@@ -14,5 +14,5 @@
   :create_label="$createLabel ?? '+ Nuevo'"
 >
   @yield('page-content')
-</x-admin-container>
+</x-admin.admin-container>
 @endsection

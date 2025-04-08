@@ -8,18 +8,18 @@
 ])
 
 @section('page-content')
-  <x-entities-grid 
+  <x-common.entities-grid 
     empty_message="No hay facciones disponibles"
     :create_route="route('admin.factions.create')"
     create_label="Crear la primera facción"
   >
     @foreach($factions as $faction)
-      <x-game.faction-card 
+      <x-cards.admin.faction-card 
         :faction="$faction"
         :showRoute="route('admin.factions.show', $faction)"
         :editRoute="route('admin.factions.edit', $faction)"
         :deleteRoute="route('admin.factions.destroy', $faction)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-common.entities-grid>
 @endsection

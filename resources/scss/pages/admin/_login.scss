@@ -1,0 +1,86 @@
+@use "sass:color";
+@use '../../abstracts/all' as *;
+
+.login-page {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background-color: $color-bg-dark-primary;
+
+  &__container {
+    width: 100%;
+    max-width: 400px;
+    padding: $spacing-lg;
+    background-color: $color-bg-dark-secondary;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-lg;
+  }
+
+  &__title {
+    text-align: center;
+    color: $color-text-light;
+    margin-bottom: $spacing-lg;
+    font-family: 'almendra', serif;
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $spacing-sm;
+    background-color: $color-bg-dark-tertiary;
+    border: 1px solid $color-bg-dark-tertiary;
+    color: $color-text-light;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-fast ease;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent-purple;
+    }
+  }
+
+  &__button {
+    display: grid;
+    place-items: center;
+    
+    width: 100%;
+    padding: $spacing-sm;
+    background-color: $color-accent-orange;
+    color: $color-text-light;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: background-color $transition-medium ease;
+
+    &:hover {
+      background-color: color.scale($color-accent-orange, $lightness: -20%);
+    }
+  }
+
+  &__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: $spacing-md;
+    
+    a {
+      color: $color-accent-purple;
+      text-decoration: none;
+      font-size: 0.9rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__error {
+    color: $color-danger;
+    font-size: 0.8rem;
+    margin-top: $spacing-sm;
+  }
+}

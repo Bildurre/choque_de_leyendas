@@ -36,7 +36,7 @@
         <!-- Logo en el header -->
         <div class="header-logo">
           <a href="{{ route('admin.dashboard') }}" class="logo-container">
-            <x-game-dice variant="tricolor" size="bg"/>
+            <x-widgets.game-dice variant="tricolor" size="bg"/>
             <span class="logo-text">ALANDA</span>
           </a>
           <span class="logo-subtitle">CHOQUE DE LEYENDAS</span>
@@ -58,107 +58,107 @@
         <nav class="sidebar-nav">
           <!-- Dashboard link (standalone, before any groups) -->
           <div class="sidebar-dashboard-link">
-            <x-sidebar.nav-link 
+            <x-navigation-sidebar.nav-link 
               :route="route('admin.dashboard')"
               :active="request()->routeIs('admin.dashboard')" 
               icon="mono-blue"
             >
               Dashboard
-            </x-sidebar.nav-link>
+            </x-navigation-sidebar.nav-link>
           </div>
           
-          <x-sidebar.section title="Componentes">
+          <x-navigation-sidebar.section title="Componentes">
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.factions.index')"
                 :active="request()->routeIs('admin.factions.*')" 
                 icon="mono-red"
               >
                 Facciones
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.hero-abilities.index')"
                 :active="request()->routeIs('admin.hero-abilities.*')" 
                 icon="mono-green"
               >
                 Habilidades
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 route="#"
                 :active="request()->routeIs('admin.heroes.*')" 
                 icon="mono-blue"
               >
                 Héroes
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <!-- Otros enlaces de componentes se añadirán aquí -->
-          </x-sidebar.section>
+          </x-navigation-sidebar.section>
 
           <!-- Balance Section -->
-          <x-sidebar.section title="Balance">
+          <x-navigation-sidebar.section title="Balance">
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.hero-attributes.edit')"
                 :active="request()->routeIs('admin.hero-attributes.*')" 
                 icon="red-green"
               >
                 Configuración de Atributos
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.superclasses.index')"
                 :active="request()->routeIs('admin.superclasses.*')" 
                 icon="green-blue"
               >
                 Superclases
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.hero-classes.index')"
                 :active="request()->routeIs('admin.hero-classes.*')" 
                 icon="mono-green"
               >
                 Clases
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
-          </x-sidebar.section>
+          </x-navigation-sidebar.section>
 
           <!-- Habilidades Section -->
-          <x-sidebar.section title="Habilidades">
+          <x-navigation-sidebar.section title="Habilidades">
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.attack-types.index')"
                 :active="request()->routeIs('admin.attack-types.*')" 
                 icon="mono-red"
               >
                 Tipos
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.attack-subtypes.index')"
                 :active="request()->routeIs('admin.attack-subtypes.*')" 
                 icon="mono-green"
               >
                 Subtipos
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
             <li>
-              <x-sidebar.nav-link 
+              <x-navigation-sidebar.nav-link 
                 :route="route('admin.attack-ranges.index')"
                 :active="request()->routeIs('admin.attack-ranges.*')" 
                 icon="mono-blue"
               >
                 Rangos
-              </x-sidebar.nav-link>
+              </x-navigation-sidebar.nav-link>
             </li>
-          </x-sidebar.section>
+          </x-navigation-sidebar.section>
           
           
         </nav>

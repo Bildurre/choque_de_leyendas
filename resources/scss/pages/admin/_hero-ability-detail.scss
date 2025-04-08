@@ -1,0 +1,202 @@
+@use '../../abstracts/all' as *;
+
+.ability-detail-container {
+  .ability-detail-card {
+    background-color: $color-bg-dark-secondary;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    
+    .ability-header {
+      padding: $spacing-md;
+      border-bottom: 3px solid;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: $spacing-md;
+      align-items: center;
+      
+      @include responsive(mobile) {
+        grid-template-columns: 1fr;
+      }
+      
+      .ability-title {
+        h2 {
+          margin: 0 0 $spacing-sm;
+          font-size: 1.5rem;
+          color: $color-text-light;
+        }
+        
+        .ability-meta {
+          display: flex;
+          align-items: center;
+          gap: $spacing-md;
+          
+          .ability-badge {
+            font-size: 0.8rem;
+            padding: $spacing-xs $spacing-sm;
+            border-radius: $border-radius-sm;
+            font-weight: 500;
+            
+            &.passive-badge {
+              background-color: rgba($color-accent-purple, 0.2);
+              color: $color-accent-purple;
+            }
+          }
+          
+          .ability-cost {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            
+            .cost-label {
+              font-size: 0.9rem;
+              color: $color-text-muted;
+            }
+          }
+        }
+      }
+      
+      .ability-actions {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        gap: $spacing-sm;
+        
+        @include responsive(mobile) {
+          justify-content: start;
+        }
+        
+        .btn {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+        }
+      }
+    }
+    
+    .ability-body {
+      padding: $spacing-md;
+      
+      .ability-classification {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-md;
+        margin-bottom: $spacing-lg;
+        
+        @include responsive(mobile) {
+          grid-template-columns: 1fr;
+        }
+        
+        .classification-group {
+          h3 {
+            margin: 0 0 $spacing-sm;
+            font-size: 1.1rem;
+            color: $color-text-light;
+          }
+          
+          .type-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $spacing-xs;
+            
+            .type-badge {
+              font-size: 0.9rem;
+              padding: $spacing-xs $spacing-sm;
+              border-radius: $border-radius-sm;
+              font-weight: 500;
+            }
+            
+            .subtype-badge {
+              font-size: 0.9rem;
+              padding: $spacing-xs $spacing-sm;
+              border-radius: $border-radius-sm;
+              background-color: $color-bg-dark-tertiary;
+              color: $color-text-light;
+            }
+          }
+          
+          .range-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9rem;
+            padding: $spacing-xs $spacing-sm;
+            border-radius: $border-radius-sm;
+            background-color: $color-bg-dark-tertiary;
+            color: $color-text-light;
+            
+            .range-icon {
+              width: 18px;
+              height: 18px;
+              margin-right: $spacing-xs;
+            }
+          }
+        }
+      }
+      
+      .ability-description-section {
+        margin-bottom: $spacing-lg;
+        
+        h3 {
+          margin: 0 0 $spacing-sm;
+          font-size: 1.1rem;
+          color: $color-text-light;
+        }
+        
+        .ability-description-content {
+          background-color: $color-bg-dark-tertiary;
+          padding: $spacing-md;
+          border-radius: $border-radius-sm;
+          
+          p {
+            margin: 0 0 $spacing-sm;
+            line-height: 1.5;
+            
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+          
+          img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+          }
+        }
+      }
+      
+      .ability-heroes-section {
+        h3 {
+          margin: 0 0 $spacing-sm;
+          font-size: 1.1rem;
+          color: $color-text-light;
+        }
+        
+        .heroes-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: $spacing-sm;
+          
+          .hero-card {
+            background-color: $color-bg-dark-tertiary;
+            padding: $spacing-sm;
+            border-radius: $border-radius-sm;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            .hero-name {
+              font-size: 0.9rem;
+              color: $color-text-light;
+            }
+            
+            .default-badge {
+              font-size: 0.7rem;
+              padding: $spacing-xs;
+              border-radius: $border-radius-sm;
+              background-color: rgba($color-accent-orange, 0.2);
+              color: $color-accent-orange;
+            }
+          }
+        }
+      }
+    }
+  }
+}

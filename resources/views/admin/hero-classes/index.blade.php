@@ -8,18 +8,18 @@
 ])
 
 @section('page-content')
-  <x-entities-grid 
+  <x-common.entities-grid 
     empty_message="No hay clases de héroes disponibles"
     :create_route="route('admin.hero-classes.create')"
     create_label="Crear la primera clase"
     >
     @foreach($heroClasses as $heroClass)
-      <x-game.hero-class-card 
+      <x-cards.admin.hero-class-card 
         :heroClass="$heroClass"
         :heroCount="$heroClass->heroCount ?? 0"
         :editRoute="route('admin.hero-classes.edit', $heroClass)"
         :deleteRoute="route('admin.hero-classes.destroy', $heroClass)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-common.entities-grid>
 @endsection

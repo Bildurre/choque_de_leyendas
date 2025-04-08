@@ -1,0 +1,80 @@
+@use "sass:color";
+@use '../../abstracts/all' as *;
+
+.btn {
+  display: inline-grid;
+  place-items: center;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-sm;
+  font-weight: 500;
+  transition: all $transition-fast;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  &.btn-primary {
+    background-color: $color-accent-orange;
+    color: #fff;
+    
+    &:hover {
+      background-color: color.scale($color-accent-orange, $lightness: -17.1140939597%);
+    }
+  }
+  
+  &.btn-secondary {
+    background-color: $color-bg-dark-tertiary;
+    color: $color-text-light;
+    
+    &:hover {
+      background-color: color.scale($color-bg-dark-tertiary, $lightness: 6.25%)
+    }
+  }
+  
+  &.btn-info {
+    background-color: $color-info;
+    color: #fff;
+    
+    &:hover {
+      background-color: color.scale($color-accent-orange, $lightness: -17.1140939597%);
+    }
+  }
+  
+  &.btn-warning {
+    background-color: $color-warning;
+    color: $color-bg-dark-primary;
+    
+    &:hover {
+      background-color: color.scale($color-warning, $lightness: -17.1140939597%);
+    }
+  }
+  
+  &.btn-danger {
+    background-color: $color-danger;
+    color: #fff;
+    
+    &:hover {
+      background-color: color.scale($color-danger, $lightness: -17.1140939597%);
+    }
+  }
+  
+  &.btn-link {
+    background-color: transparent;
+    color: $color-accent-purple;
+    padding: $spacing-sm;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  &.btn-icon {
+    padding: $spacing-xs;
+    min-width: 32px;
+    height: 32px;
+  }
+}
