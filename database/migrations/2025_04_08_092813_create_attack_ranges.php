@@ -11,12 +11,11 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('superclasses', function (Blueprint $table) {
+    Schema::create('attack_ranges', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
       $table->text('description')->nullable();
-      $table->string('color', 7)->default('#3d3df5');
-      $table->boolean('text_is_dark')->default(false);
+      $table->string('icon')->nullable(); // Para guardar un icono representativo
       $table->datetimes();
     });
   }
@@ -26,6 +25,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('superclasses');
+    Schema::dropIfExists('attack_ranges');
   }
 };

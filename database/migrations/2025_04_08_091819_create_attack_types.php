@@ -11,7 +11,7 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('superclasses', function (Blueprint $table) {
+    Schema::create('attack_types', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
       $table->text('description')->nullable();
@@ -26,6 +26,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('superclasses');
+    Schema::dropIfExists('attack_types');
   }
 };

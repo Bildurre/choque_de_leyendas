@@ -67,7 +67,6 @@
             </x-sidebar.nav-link>
           </div>
           
-          <!-- Componentes Group -->
           <x-sidebar.section title="Componentes">
             <li>
               <x-sidebar.nav-link 
@@ -80,9 +79,18 @@
             </li>
             <li>
               <x-sidebar.nav-link 
+                :route="route('admin.hero-abilities.index')"
+                :active="request()->routeIs('admin.hero-abilities.*')" 
+                icon="mono-green"
+              >
+                Habilidades
+              </x-sidebar.nav-link>
+            </li>
+            <li>
+              <x-sidebar.nav-link 
                 route="#"
                 :active="request()->routeIs('admin.heroes.*')" 
-                icon="mono-green"
+                icon="mono-blue"
               >
                 Héroes
               </x-sidebar.nav-link>
@@ -90,6 +98,7 @@
             <!-- Otros enlaces de componentes se añadirán aquí -->
           </x-sidebar.section>
 
+          <!-- Balance Section -->
           <x-sidebar.section title="Balance">
             <li>
               <x-sidebar.nav-link 
@@ -119,44 +128,40 @@
               </x-sidebar.nav-link>
             </li>
           </x-sidebar.section>
-          
-          <!-- Placeholder para futuras secciones -->
-          <div class="sidebar-section">
-            <span class="sidebar-section-title">Reglas</span>
-            <ul class="sidebar-section-list">
-              <li><a href="#" class="sidebar-nav-link">Reglas básicas</a></li>
-              <li><a href="#" class="sidebar-nav-link">Componentes</a></li>
-              <li><a href="#" class="sidebar-nav-link">Anexos</a></li>
-            </ul>
-          </div>
-          
-          <div class="sidebar-section">
-            <span class="sidebar-section-title">Balance</span>
-            <ul class="sidebar-section-list">
-              <li><a href="#" class="sidebar-nav-link">Análisis de costes</a></li>
-              <li><a href="#" class="sidebar-nav-link">Probabilidades</a></li>
-            </ul>
-          </div>
-          
-          <div class="sidebar-section">
-            <span class="sidebar-section-title">Exportación</span>
-            <ul class="sidebar-section-list">
-              <li><a href="#" class="sidebar-nav-link">PDF</a></li>
-            </ul>
-          </div>
-          
-          <div class="sidebar-section">
-            <span class="sidebar-section-title">Sistema</span>
-            <ul class="sidebar-section-list">
-              <li><a href="#" class="sidebar-nav-link">Administradores</a></li>
-            </ul>
-          </div>
-        </nav>
 
-        <!-- User Profile Section -->
-        <div class="sidebar-footer">
-          <!-- ... resto del código ... -->
-        </div>
+          <!-- Habilidades Section -->
+          <x-sidebar.section title="Habilidades">
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.attack-types.index')"
+                :active="request()->routeIs('admin.attack-types.*')" 
+                icon="mono-red"
+              >
+                Tipos
+              </x-sidebar.nav-link>
+            </li>
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.attack-subtypes.index')"
+                :active="request()->routeIs('admin.attack-subtypes.*')" 
+                icon="mono-green"
+              >
+                Subtipos
+              </x-sidebar.nav-link>
+            </li>
+            <li>
+              <x-sidebar.nav-link 
+                :route="route('admin.attack-ranges.index')"
+                :active="request()->routeIs('admin.attack-ranges.*')" 
+                icon="mono-blue"
+              >
+                Rangos
+              </x-sidebar.nav-link>
+            </li>
+          </x-sidebar.section>
+          
+          
+        </nav>
       </aside>
 
       <!-- Main Content Area -->

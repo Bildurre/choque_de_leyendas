@@ -24,6 +24,10 @@
 @use 'components/faction-card';
 @use 'components/superclass-card';
 @use 'components/entities-grid';
+@use 'components/cost-input';
+@use 'components/cost-display';
+@use 'components/wysiwyg-editor';
+@use 'components/ability-card';
 
 //VENDOR
 
@@ -44,3 +48,5 @@
 @use 'pages/hero-attributes';
 @use 'pages/hero-classes';
 @use 'pages/superclasses';
+@use 'pages/hero-ability-form';
+@use 'pages/hero-ability-detail';

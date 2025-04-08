@@ -11,11 +11,12 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('superclasses', function (Blueprint $table) {
+    Schema::create('attack_subtypes', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
       $table->text('description')->nullable();
-      $table->string('color', 7)->default('#3d3df5');
+      $table->foreignId('attack_type_id')->constrained()->onDelete('cascade');
+      $table->string('color', 7)->nullable();
       $table->boolean('text_is_dark')->default(false);
       $table->datetimes();
     });
@@ -26,6 +27,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('superclasses');
+    Schema::dropIfExists('attack_subtypes');
   }
 };

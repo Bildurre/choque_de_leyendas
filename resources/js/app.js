@@ -5,9 +5,21 @@ import './alpine-init';
 import './components/sidebar';
 import { setupAlertDismissal } from './common/alerts';
 import EntityCardToggle from './components/entity-card-toggle';
+import { initWysiwygEditors } from './components/wysiwyg-editor';
+import CostInput from './components/cost-input';
 
 document.addEventListener('DOMContentLoaded', function() {
   EntityCardToggle.init();
+
+  // Initialize WYSIWYG editors if present
+  if (document.querySelector('.wysiwyg-editor')) {
+    initWysiwygEditors();
+  }
+  
+  // Initialize cost inputs if present
+  if (document.querySelector('.cost-input')) {
+    CostInput.init();
+  }
 });
 
 // Initialize common functionality
@@ -28,6 +40,18 @@ function initCurrentPage() {
   } 
   else if (path.startsWith('/admin/superclasses')) {
     initSuperclassPages(path);
+  }
+  if (path.startsWith('/admin/attack-types')) {
+    initAttackTypesPages(path);
+  } 
+  else if (path.startsWith('/admin/attack-subtypes')) {
+    initAttackSubtypesPages(path);
+  } 
+  else if (path.startsWith('/admin/attack-ranges')) {
+    initAttackRangesPages(path);
+  } 
+  else if (path.startsWith('/admin/hero-abilities')) {
+    initHeroAbilitiesPages(path);
   }
   
   // Inicializar componentes comunes basados en elementos en la página
@@ -58,23 +82,12 @@ function initCommonComponents() {
 function initFactionPages(path) {
   if (path.includes('/create')) {
     import('./pages/factions/create')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de creación de facciones:', error);
-      });
   } 
   else if (path.includes('/edit')) {
-    // Módulos para la página de edición de facciones
     import('./pages/factions/edit')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de edición de facciones:', error);
-      });
   } 
   else {
-    // Módulos para la página de listado de facciones
     import('./pages/factions/index')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de índice de facciones:', error);
-      });
   }
 }
 
@@ -83,25 +96,13 @@ function initFactionPages(path) {
  */
 function initHeroClassPages(path) {
   if (path.includes('/create')) {
-    // Módulos para la página de creación de clases de héroe
     import('./pages/hero-classes/create')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de creación de clases de héroe:', error);
-      });
   } 
   else if (path.includes('/edit')) {
-    // Módulos para la página de edición de clases de héroe
     import('./pages/hero-classes/edit')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de edición de clases de héroe:', error);
-      });
   } 
   else {
-    // Módulos para la página de listado de clases de héroe
     import('./pages/hero-classes/index')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de índice de clases de héroe:', error);
-      });
   }
 }
 
@@ -110,19 +111,56 @@ function initHeroClassPages(path) {
  */
 function initSuperclassPages(path) {
   if (path.includes('/create')) {
-    // Módulos para la página de creación de superclases
-    // Actualmente no hay un archivo específico para esta ruta
   } 
   else if (path.includes('/edit')) {
-    // Módulos para la página de edición de superclases
-    // Actualmente no hay un archivo específico para esta ruta
   } 
   else {
-    // Módulos para la página de listado de superclases
     import('./pages/superclasses/index')
-      .catch(error => {
-        console.warn('No se pudo cargar el módulo de índice de superclases:', error);
-      });
+  }
+}
+
+/**
+ * Inicializa páginas relacionadas con habilidades de héroe
+ */
+function initHeroAbilitiesPages(path) {
+  if (path.includes('/create')) {
+    import('./pages/hero-abilities/create');
+  } 
+  else if (path.includes('/edit')) {
+    import('./pages/hero-abilities/edit');
+  }
+  else if (path.includes('/show')) {
+    import('./pages/hero-abilities/show');
+  }
+  else {
+    import('./pages/hero-abilities/index');
+  }
+}
+
+/**
+ * Inicializa páginas relacionadas con tipos de ataque
+ */
+function initAttackTypesPages(path) {
+  if (path.includes('/index') || !path.includes('/')) {
+    import('./pages/attack-types/index');
+  }
+}
+
+/**
+ * Inicializa páginas relacionadas con subtipos de ataque
+ */
+function initAttackSubtypesPages(path) {
+  if (path.includes('/index') || !path.includes('/')) {
+    import('./pages/attack-subtypes/index');
+  }
+}
+
+/**
+ * Inicializa páginas relacionadas con rangos de ataque
+ */
+function initAttackRangesPages(path) {
+  if (path.includes('/index') || !path.includes('/')) {
+    import('./pages/attack-ranges/index');
   }
 }
 
