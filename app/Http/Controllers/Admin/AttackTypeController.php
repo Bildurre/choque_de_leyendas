@@ -26,10 +26,10 @@ class AttackTypeController extends Controller
    * Display a listing of attack types.
    */
   public function index()
-  {
-    $attackTypes = $this->attackTypeService->getAllTypes();
-    return view('admin.attack-types.index', compact('attackTypes'));
-  }
+{
+  $attackTypes = $this->attackTypeService->getAllTypesWithSubtypes();
+  return view('admin.attack-types.index', compact('attackTypes'));
+}
 
   /**
    * Show the form for creating a new attack type.

@@ -2,4 +2,4 @@
 import { initEntityListPage } from '../../common/page-initializers';
 
 // Initialize attack subtypes list page
-initEntityListPage('.delete-btn', 'data-attack-subtype-name', 'subtipo de habilidad');
+initEntityListPage('.delete-btn', 'data-attack-subtype-name', 'subtipo de ataque');

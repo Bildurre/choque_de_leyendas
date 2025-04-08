@@ -1,8 +1,8 @@
 @use '../abstracts/all' as *;
 
 .dashboard-container {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: $spacing-lg;
 }
 
@@ -38,53 +38,12 @@
     }
   }
   
-  .card-icon {
-    margin-bottom: $spacing-md;
-    position: relative;
-    display: grid;
-    place-items: center;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      width: 50px;
-      height: 50px;
-      background-color: rgba($color-accent-orange, 0.1);
-      z-index: 1;
-      border-radius: $border-radius-sm;
-    }
-    
-    .card-dice {
-      position: relative;
-      z-index: 2;
-    }
-  }
-  
   .card-title {
     @include font-primary;
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: $spacing-sm;
     color: $color-text-light;
-  }
-  
-  .card-value {
-    font-size: 2rem;
-    @include font-bold;
-    margin: 0 0 $spacing-md;
-    color: $color-text-light;
-  }
-  
-  .card-action {
-    color: $color-accent-orange;
-    text-decoration: none;
-    font-size: 0.9rem;
-    
-    &:hover {
-      text-decoration: underline;
-    }
   }
   
   .card-text {

@@ -3,7 +3,7 @@
  * @param {string} selector - CSS selector for alert elements
  * @param {number} timeout - Time in ms before hiding alerts
  */
-export function setupAlertDismissal(selector = '.alert', timeout = 5000) {
+export default function setupAlertDismissal(selector = '.alert', timeout = 5000) {
   document.addEventListener('DOMContentLoaded', function() {
     // Select all alert elements
     const alerts = document.querySelectorAll(selector);

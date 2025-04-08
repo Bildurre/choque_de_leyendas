@@ -3,13 +3,12 @@ import './bootstrap';
 import '../scss/app.scss';
 import './alpine-init';
 import './components/sidebar';
-import { setupAlertDismissal } from './common/alerts';
-import EntityCardToggle from './components/entity-card-toggle';
+import './common/alerts';
+import './components/entity-card-toggle';
 import { initWysiwygEditors } from './components/wysiwyg-editor';
 import CostInput from './components/cost-input';
 
 document.addEventListener('DOMContentLoaded', function() {
-  EntityCardToggle.init();
 
   // Initialize WYSIWYG editors if present
   if (document.querySelector('.wysiwyg-editor')) {
@@ -141,7 +140,13 @@ function initHeroAbilitiesPages(path) {
  * Inicializa páginas relacionadas con tipos de ataque
  */
 function initAttackTypesPages(path) {
-  if (path.includes('/index') || !path.includes('/')) {
+  if (path.includes('/create')) {
+    import('./pages/attack-types/create');
+  } 
+  else if (path.includes('/edit')) {
+    import('./pages/attack-types/edit');
+  } 
+  else {
     import('./pages/attack-types/index');
   }
 }
@@ -150,7 +155,13 @@ function initAttackTypesPages(path) {
  * Inicializa páginas relacionadas con subtipos de ataque
  */
 function initAttackSubtypesPages(path) {
-  if (path.includes('/index') || !path.includes('/')) {
+  if (path.includes('/create')) {
+    import('./pages/attack-subtypes/create');
+  } 
+  else if (path.includes('/edit')) {
+    import('./pages/attack-subtypes/edit');
+  } 
+  else {
     import('./pages/attack-subtypes/index');
   }
 }
@@ -159,8 +170,14 @@ function initAttackSubtypesPages(path) {
  * Inicializa páginas relacionadas con rangos de ataque
  */
 function initAttackRangesPages(path) {
-  if (path.includes('/index') || !path.includes('/')) {
-    import('./pages/attack-ranges/index');
+  if (path.includes('/create')) {
+    import('./pages/attack-ranges/create')
+  } 
+  else if (path.includes('/edit')) {
+    import('./pages/attack-ranges/edit')
+  } 
+  else {
+    import('./pages/attack-ranges/index')
   }
 }
 

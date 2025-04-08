@@ -1,4 +1,3 @@
-// resources/js/pages/attack-ranges/index.js
 import { initEntityListPage } from '../../common/page-initializers';
 
 // Initialize attack ranges list page
