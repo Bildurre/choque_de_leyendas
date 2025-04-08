@@ -6,7 +6,6 @@
 ])
 
 @section('page-content')
-  <x-session-alerts />
 
   <div class="configuration-info">
     <h2>Current Configuration Summary</h2>
