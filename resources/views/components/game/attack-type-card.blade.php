@@ -1,11 +1,4 @@
-@props([
-  'type',
-  'editRoute' => null,
-  'deleteRoute' => null
-])
-
 <x-entity-card
-  :borderColor="$type->color"
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="attack-type-name"
@@ -24,8 +17,6 @@
         <span>{{ $type->subtypes_count ?? 0 }} {{ Str::plural('subtipo', $type->subtypes_count ?? 0) }}</span>
       </div>
     </div>
-    
-    <div class="color-sample" style="background-color: {{ $type->color }}"></div>
   </div>
   
   <x-slot:details>

@@ -41,4 +41,12 @@ class AttackSubtype extends Model
   {
     return $this->hasMany(HeroAbility::class);
   }
+  
+  /**
+   * Get default color if none is specified
+   */
+  public function getColorAttribute($value)
+  {
+    return $value ?: '#666666';
+  }
 }

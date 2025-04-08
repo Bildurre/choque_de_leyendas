@@ -1,11 +1,5 @@
-@props([
-  'subtype',
-  'editRoute' => null,
-  'deleteRoute' => null
-])
-
 <x-entity-card
-  :borderColor="$subtype->color ?: ($subtype->type ? $subtype->type->color : '#666666')"
+  :borderColor="$subtype->color"
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="attack-subtype-name"
@@ -16,8 +10,7 @@
 >
   <x-slot:badge>
     @if($subtype->type)
-      <span class="subtype-type-badge" 
-            style="background-color: {{ $subtype->type->color }}; color: {{ $subtype->type->text_is_dark ? '#000000' : '#ffffff' }}">
+      <span class="subtype-type-badge">
         {{ $subtype->type->name }}
       </span>
     @endif
@@ -32,10 +25,6 @@
         <span>{{ $subtype->abilities_count ?? 0 }} {{ Str::plural('habilidad', $subtype->abilities_count ?? 0) }}</span>
       </div>
     </div>
-    
-    @if($subtype->color)
-      <div class="color-sample" style="background-color: {{ $subtype->color }}"></div>
-    @endif
   </div>
   
   @if($subtype->description)
