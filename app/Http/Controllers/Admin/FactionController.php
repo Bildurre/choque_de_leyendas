@@ -76,18 +76,24 @@ class FactionController extends Controller
    * Update the specified faction in storage.
    */
   public function update(UpdateFactionRequest $request, Faction $faction)
-  {
+{
     // La validación ya se ha realizado en el request
     $validated = $request->validated();
 
     try {
-      $this->factionService->update($faction, $validated);
-      return redirect()->route('admin.factions.index')
-        ->with('success', 'Facción actualizada correctamente.');
+        // Verificar si se ha solicitado eliminar la imagen
+        if (isset($request->remove_icon) && $request->remove_icon == "1") {
+            // Agregamos esta información al array de datos validados
+            $validated['remove_icon'] = true;
+        }
+
+        $this->factionService->update($faction, $validated);
+        return redirect()->route('admin.factions.index')
+            ->with('success', 'Facción actualizada correctamente.');
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar la Facción');
+        return back()->with('error', 'Ha ocurrido un error al actualizar la Facción');
     }
-  }
+}
 
   /**
    * Remove the specified faction from storage.

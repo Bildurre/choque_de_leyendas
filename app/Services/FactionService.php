@@ -74,12 +74,12 @@ class FactionService
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {
-      $this->imageService->delete($faction->icon);
-      $faction->icon = null;
+        $this->imageService->delete($faction->icon);
+        $faction->icon = null;
     }
     // Handle icon update
     elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $faction->icon = $this->imageService->update($data['icon'], $faction->icon, 'faction-icons');
+        $faction->icon = $this->imageService->update($data['icon'], $faction->icon, 'faction-icons');
     }
     
     $faction->save();
