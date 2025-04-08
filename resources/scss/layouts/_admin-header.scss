@@ -26,6 +26,9 @@
   @include responsive(tablet) {
     grid-template-columns: auto auto auto;
   }
+  @include responsive(narrow) {
+    grid-template-columns: auto auto;
+  }
 }
 
 // Botón hamburguesa mejorado
@@ -117,6 +120,9 @@
 }
 
 .header-title {
+  @include responsive(narrow) {
+    display: none;
+  }
   h1 {
     margin: 0;
     @include font-primary;

@@ -17,7 +17,7 @@
   &__header {
     display: grid;
     grid-template-columns: auto 1fr;
-    align-items: center;
+    align-items: baseline;
     padding: $spacing-sm $spacing-md;
     border-bottom: 1px solid rgba($color-bg-dark-tertiary, 0.5);
     @include responsive(narrow) {
@@ -26,9 +26,9 @@
     }
   }
   
-  &___title {
+  &__title {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
     gap: $spacing-sm;
     align-items: center;
     

@@ -27,7 +27,7 @@ class UpdateHeroClassRequest extends FormRequest
             'required',
             'string',
             'max:255',
-            Rule::unique('hero_classes')->ignore($this->heroClass->id)
+            Rule::unique('hero_classes')->ignore($this->hero_class->id)
           ],
           'description' => 'nullable|string',
           'passive' => 'nullable|string',

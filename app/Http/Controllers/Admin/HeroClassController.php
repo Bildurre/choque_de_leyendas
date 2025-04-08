@@ -7,7 +7,7 @@ use App\Models\Superclass;
 use App\Services\HeroClassService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HeroClass\StoreHeroClassRequest;
-use App\Http\Requests\Admin\HeroClass\updateHeroClassRequest;
+use App\Http\Requests\Admin\HeroClass\UpdateHeroClassRequest;
 
 class HeroClassController extends Controller
 {

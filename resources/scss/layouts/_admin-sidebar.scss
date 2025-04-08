@@ -12,13 +12,15 @@
   height: calc(100vh - 60px); // Altura total menos el header
   display: grid;
   grid-template-rows: 1fr auto;
-  transition: transform $transition-medium ease;
+  transition: transform $transition-medium ease, box-shadow $transition-medium ease;
   
   @media (max-width: $breakpoint-tablet) {
     transform: translateX(-100%);
+    box-shadow: none;
     
     .sidebar-open & {
       transform: translateX(0);
+      box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3); // Añadimos sombra al mostrar
     }
   }
 }
