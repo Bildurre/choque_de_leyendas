@@ -14,19 +14,7 @@ class AttackTypeService
    */
   public function getAllTypes(): Collection
   {
-    return AttackType::withCount('subtypes')->get();
-  }
-
-    /**
-   * Get all attack types with their subtypes
-   *
-   * @return Collection
-   */
-  public function getAllTypesWithSubtypes(): Collection
-  {
-    return AttackType::withCount('subtypes')
-      ->with('subtypes')
-      ->get();
+    return AttackType::all();
   }
 
   /**

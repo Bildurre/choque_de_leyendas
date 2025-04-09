@@ -17,7 +17,6 @@ class AttackRange extends Model
    */
   protected $fillable = [
     'name',
-    'description',
     'icon'
   ];
 

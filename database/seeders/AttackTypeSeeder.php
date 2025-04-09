@@ -13,21 +13,10 @@ class AttackTypeSeeder extends Seeder
   public function run(): void
   {
     $types = [
-      [
-        'name' => 'Físico',
-        'description' => 'Habilidades que requieren fuerza física o destreza corporal',
-        'color' => '#f53d3d'
-      ],
-      [
-        'name' => 'Mágico',
-        'description' => 'Habilidades que usan magia o poderes místicos',
-        'color' => '#3d3df5'
-      ],
-      [
-        'name' => 'Especial',
-        'description' => 'Habilidades únicas o raras que no encajan en otras categorías',
-        'color' => '#3df53d'
-      ]
+      ['name' => 'Marcial'],
+      ['name' => 'Proyectil'],
+      ['name' => 'Elemental'],
+      ['name' => 'Arcano']
     ];
 
     foreach ($types as $type) {

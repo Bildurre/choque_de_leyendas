@@ -86,11 +86,6 @@ class AttackRangeService
    */
   public function delete(AttackRange $attackRange): bool
   {
-    // Check for related abilities
-    if ($attackRange->abilities()->count() > 0) {
-      throw new \Exception("No se puede eliminar el rango porque tiene habilidades asociadas.");
-    }
-    
     // Delete icon if exists
     if ($attackRange->icon) {
       $this->imageService->delete($attackRange->icon);

@@ -14,18 +14,7 @@ class AttackSubtypeService
    */
   public function getAllSubtypes(): Collection
   {
-    return AttackSubtype::with('type')->get();
-  }
-
-  /**
-   * Get subtypes by type ID
-   * 
-   * @param int $typeId
-   * @return Collection
-   */
-  public function getSubtypesByType(int $typeId): Collection
-  {
-    return AttackSubtype::where('attack_type_id', $typeId)->get();
+    return AttackSubtype::all();
   }
 
   /**
@@ -37,16 +26,7 @@ class AttackSubtypeService
   public function create(array $data): AttackSubtype
   {
     $attackSubtype = new AttackSubtype();
-    $attackSubtype->fill($data);
-    
-    // Use parent color if not specified
-    if (empty($data['color']) && !empty($data['attack_type_id'])) {
-      $parentType = \App\Models\AttackType::find($data['attack_type_id']);
-      if ($parentType) {
-        $attackSubtype->color = $parentType->color;
-      }
-    }
-    
+    $attackSubtype->fill($data); 
     $attackSubtype->save();
     
     return $attackSubtype;

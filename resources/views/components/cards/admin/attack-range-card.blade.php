@@ -36,14 +36,4 @@
       </div>
     @endif
   </div>
-  
-  @if($range->description)
-    <x-slot:details>
-      <x-common.description-section title="Descripción">
-        <div class="description-content">
-          <p>{{ $range->description }}</p>
-        </div>
-      </x-common.description-section>
-    </x-slot:details>
-  @endif
 </x-cards.admin.entity-card>

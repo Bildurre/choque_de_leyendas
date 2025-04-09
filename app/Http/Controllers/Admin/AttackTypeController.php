@@ -26,10 +26,10 @@ class AttackTypeController extends Controller
    * Display a listing of attack types.
    */
   public function index()
-{
-  $attackTypes = $this->attackTypeService->getAllTypesWithSubtypes();
-  return view('admin.attack-types.index', compact('attackTypes'));
-}
+  {
+    $attackTypes = $this->attackTypeService->getAllTypes();
+    return view('admin.attack-types.index', compact('attackTypes'));
+  }
 
   /**
    * Show the form for creating a new attack type.
@@ -90,7 +90,7 @@ class AttackTypeController extends Controller
       return redirect()->route('admin.attack-types.index')
         ->with('success', "El tipo de habilidad {$typeName} ha sido eliminado correctamente.");
     } catch (\Exception $e) {
-      return back()->with('error', $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al borrar el tipo de habilidad: ' . $e->getMessage());
     }
   }
 }

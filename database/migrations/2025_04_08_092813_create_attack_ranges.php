@@ -14,7 +14,6 @@ return new class extends Migration
     Schema::create('attack_ranges', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
-      $table->text('description')->nullable();
       $table->string('icon')->nullable(); // Para guardar un icono representativo
       $table->datetimes();
     });

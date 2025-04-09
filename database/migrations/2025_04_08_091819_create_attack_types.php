@@ -14,9 +14,6 @@ return new class extends Migration
     Schema::create('attack_types', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
-      $table->text('description')->nullable();
-      $table->string('color', 7)->default('#3d3df5');
-      $table->boolean('text_is_dark')->default(false);
       $table->datetimes();
     });
   }

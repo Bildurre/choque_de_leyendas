@@ -14,10 +14,6 @@ return new class extends Migration
     Schema::create('attack_subtypes', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
-      $table->text('description')->nullable();
-      $table->foreignId('attack_type_id')->constrained()->onDelete('cascade');
-      $table->string('color', 7)->nullable();
-      $table->boolean('text_is_dark')->default(false);
       $table->datetimes();
     });
   }
