@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.wysiwyg-editor')) {
     import('./components/wysiwyg-editor').then(module => {
       module.initWysiwygEditors();
+    }).catch(err => {
+      console.error('Error loading TinyMCE:', err);
     });
   }
 });
