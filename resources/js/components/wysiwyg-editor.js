@@ -51,7 +51,14 @@ export function initWysiwygEditors() {
       icons_url: '/build/tinymce/icons/default/icons.min.js',
 
       // License key
-      license_key: 'gpl'
+      license_key: 'gpl',
+
+      // Populate textarea
+      setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+        });
+      }
     });
   });
 }
