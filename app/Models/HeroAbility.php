@@ -25,17 +25,7 @@ class HeroAbility extends Model
     'description',
     'attack_subtype_id',
     'attack_range_id',
-    'cost',
-    'is_passive'
-  ];
-
-  /**
-   * The attributes that should be cast.
-   *
-   * @var array
-   */
-  protected $casts = [
-    'is_passive' => 'boolean',
+    'cost'
   ];
 
   /**
@@ -60,7 +50,6 @@ class HeroAbility extends Model
   public function heroes(): BelongsToMany
   {
     return $this->belongsToMany(Hero::class, 'hero_hero_ability')
-      ->withPivot('is_default')
       ->withTimestamps();
   }
 

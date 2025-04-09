@@ -23,4 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initialize page-specific functionality
   setupPageHandlers();
+
+  // Initialize TinyMCE if we have wysiwyg-editor elements
+  if (document.querySelector('.wysiwyg-editor')) {
+    import('./components/wysiwyg-editor').then(module => {
+      module.initWysiwygEditors();
+    });
+  }
 });

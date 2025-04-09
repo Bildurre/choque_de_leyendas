@@ -18,8 +18,7 @@ return new class extends Migration
       $table->text('description')->nullable();
       $table->foreignId('attack_subtype_id')->nullable()->constrained()->nullOnDelete();
       $table->foreignId('attack_range_id')->nullable()->constrained()->nullOnDelete();
-      $table->string('cost', 5)->nullable(); // Formato: RGBRG, RGB, etc.
-      $table->boolean('is_passive')->default(false);
+      $table->string('cost', 5); // Formato: RGBRG, RGB, etc.
       $table->datetimes();
     });
 
@@ -28,7 +27,6 @@ return new class extends Migration
       $table->id();
       $table->foreignId('hero_id')->constrained()->onDelete('cascade');
       $table->foreignId('hero_ability_id')->constrained()->onDelete('cascade');
-      $table->boolean('is_default')->default(false); // Para indicar si es habilidad por defecto
       $table->datetimes();
 
       // Índice único para evitar duplicados

@@ -64,8 +64,7 @@ class HeroAbilityService
     
     // Assign to heroes if provided
     if (!empty($data['hero_ids'])) {
-      $isDefault = !empty($data['is_default']);
-      $this->assignToHeroes($heroAbility, $data['hero_ids'], $isDefault);
+      $this->assignToHeroes($heroAbility, $data['hero_ids']);
     }
     
     return $heroAbility;
@@ -91,33 +90,8 @@ class HeroAbilityService
     
     // Update hero assignments if provided
     if (isset($data['hero_ids'])) {
-      $currentHeroIds = $heroAbility->heroes()->pluck('hero_id')->toArray();
-      $newHeroIds = $data['hero_ids'] ?? [];
-      
-      // Determine which heroes to detach and which to attach
-      $heroesToDetach = array_diff($currentHeroIds, $newHeroIds);
-      $heroesToAttach = array_diff($newHeroIds, $currentHeroIds);
-      
-      // Detach heroes that aren't in the new list
-      if (!empty($heroesToDetach)) {
-        $heroAbility->heroes()->detach($heroesToDetach);
-      }
-      
-      // Attach new heroes
-      if (!empty($heroesToAttach)) {
-        $isDefault = !empty($data['is_default']);
-        $this->assignToHeroes($heroAbility, $heroesToAttach, $isDefault);
-      }
-      
-      // Update default status for existing heroes
-      if (isset($data['is_default'])) {
-        $heroIds = array_intersect($currentHeroIds, $newHeroIds);
-        foreach ($heroIds as $heroId) {
-          $heroAbility->heroes()->updateExistingPivot($heroId, [
-            'is_default' => !empty($data['is_default'])
-          ]);
-        }
-      }
+      // Sync heroes (detach all existing ones and attach the new ones)
+      $heroAbility->heroes()->sync($data['hero_ids'] ?? []);
     }
     
     return $heroAbility;
@@ -142,15 +116,11 @@ class HeroAbilityService
    *
    * @param HeroAbility $ability
    * @param array $heroIds
-   * @param bool $isDefault
    * @return void
    */
-  public function assignToHeroes(HeroAbility $ability, array $heroIds, bool $isDefault = false): void
+  public function assignToHeroes(HeroAbility $ability, array $heroIds): void
   {
-    $pivotData = array_fill(0, count($heroIds), ['is_default' => $isDefault]);
-    $heroIdsWithPivot = array_combine($heroIds, $pivotData);
-    
-    $ability->heroes()->attach($heroIdsWithPivot);
+    $ability->heroes()->attach($heroIds);
   }
 
   /**

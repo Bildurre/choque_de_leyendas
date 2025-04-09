@@ -4,7 +4,6 @@
   'ranges' => [], 
   'heroes' => [], 
   'selectedHeroes' => [], 
-  'isDefault' => false,
   'submitLabel' => 'Guardar', 
   'cancelRoute' => null
 ])
@@ -36,22 +35,13 @@
         maxlength="255" 
       />
       
-      <div class="form-row">
-        <x-form.field 
-          name="is_passive" 
-          label="Habilidad Pasiva" 
-          type="checkbox" 
-          :checked="$heroAbility->is_passive ?? false"
-          help="Marcar si la habilidad es pasiva (sin costo de activación)"
-        />
-      </div>
-
-      <div class="cost-section" id="cost-section">
+      <div class="cost-section">
         <x-form.cost-input 
           name="cost" 
           label="Coste de Activación" 
           :value="$heroAbility->cost ?? ''"
           placeholder="Ej: RRG (Rojo, Rojo, Verde)"
+          required
         />
       </div>
       
@@ -107,18 +97,8 @@
       
       <h3>Asignar a Héroes</h3>
       
-      <div class="form-row">
-        <x-form.field 
-          name="is_default" 
-          label="Habilidad por Defecto" 
-          type="checkbox" 
-          :checked="$isDefault"
-          help="Marcar si la habilidad viene por defecto con los héroes seleccionados"
-        />
-      </div>
-      
       <div class="heroes-selection">
-        <label class="form-label">Héroes que tienen esta habilidad</label>
+        <label class="form-label">Héroes que pueden usar esta habilidad</label>
         <div class="heroes-grid">
           @foreach($heroes as $hero)
             <div class="hero-checkbox">

@@ -1,4 +1,4 @@
-import { setupPassiveToggle, setupTypeSubtypeRelationship } from './hero-ability-helpers';
+import { setupTypeSubtypeRelationship } from './hero-ability-helpers';
 import { initWysiwygEditors } from '../../components/wysiwyg-editor';
 import { initCostInputs } from '../../components/cost-input';
 
@@ -50,9 +50,6 @@ export function show() {
  * @param {string|null} currentSubtypeId - Current subtype ID for edit pages
  */
 function setupFormPage(currentSubtypeId = null) {
-  // Setup passive checkbox toggle
-  setupPassiveToggle();
-  
   // Setup type and subtype relationship
   setupTypeSubtypeRelationship(currentSubtypeId);
   

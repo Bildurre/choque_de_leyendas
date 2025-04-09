@@ -27,11 +27,9 @@ class UpdateHeroAbilityRequest extends FormRequest
       'description' => 'required|string',
       'attack_subtype_id' => 'nullable|exists:attack_subtypes,id',
       'attack_range_id' => 'nullable|exists:attack_ranges,id',
-      'cost' => 'nullable|string|max:5',
-      'is_passive' => 'sometimes|boolean',
+      'cost' => 'required|string|max:5',
       'hero_ids' => 'sometimes|array',
       'hero_ids.*' => 'exists:heroes,id',
-      'is_default' => 'sometimes|boolean',
     ];
   }
 
@@ -45,6 +43,7 @@ class UpdateHeroAbilityRequest extends FormRequest
       'description.required' => 'La descripción de la habilidad es obligatoria.',
       'attack_subtype_id.exists' => 'El subtipo seleccionado no es válido.',
       'attack_range_id.exists' => 'El rango seleccionado no es válido.',
+      'cost.required' => 'El coste de activación es obligatorio.',
       'hero_ids.*.exists' => 'Uno de los héroes seleccionados no es válido.',
     ];
   }

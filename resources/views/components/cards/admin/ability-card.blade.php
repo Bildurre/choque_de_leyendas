@@ -17,11 +17,7 @@
   :hasDetails="true"
 >
   <x-slot:badge>
-    @if($ability->is_passive)
-      <x-common.badge type="passive">Pasiva</x-common.badge>
-    @else
-      <x-widgets.cost-display :cost="$ability->cost" />
-    @endif
+    <x-widgets.cost-display :cost="$ability->cost" />
   </x-slot:badge>
 
   <div class="ability-summary">

@@ -1,27 +1,4 @@
 /**
- * Toggle cost section based on passive checkbox
- */
-export function setupPassiveToggle() {
-  const passiveCheckbox = document.getElementById('is_passive');
-  const costSection = document.getElementById('cost-section');
-  
-  function toggleCostSection() {
-    if (passiveCheckbox && costSection) {
-      if (passiveCheckbox.checked) {
-        costSection.style.display = 'none';
-      } else {
-        costSection.style.display = 'block';
-      }
-    }
-  }
-  
-  if (passiveCheckbox && costSection) {
-    passiveCheckbox.addEventListener('change', toggleCostSection);
-    toggleCostSection(); // Initial state
-  }
-}
-
-/**
  * Handle type and subtype relationship
  * @param {string|null} currentSubtypeId - The current subtype ID for edit pages
  */

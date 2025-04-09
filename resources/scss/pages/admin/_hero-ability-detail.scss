@@ -30,18 +30,6 @@
           align-items: center;
           gap: $spacing-md;
           
-          .ability-badge {
-            font-size: 0.8rem;
-            padding: $spacing-xs $spacing-sm;
-            border-radius: $border-radius-sm;
-            font-weight: 500;
-            
-            &.passive-badge {
-              background-color: rgba($color-accent-purple, 0.2);
-              color: $color-accent-purple;
-            }
-          }
-          
           .ability-cost {
             display: flex;
             align-items: center;
@@ -185,14 +173,6 @@
             .hero-name {
               font-size: 0.9rem;
               color: $color-text-light;
-            }
-            
-            .default-badge {
-              font-size: 0.7rem;
-              padding: $spacing-xs;
-              border-radius: $border-radius-sm;
-              background-color: rgba($color-accent-orange, 0.2);
-              color: $color-accent-orange;
             }
           }
         }

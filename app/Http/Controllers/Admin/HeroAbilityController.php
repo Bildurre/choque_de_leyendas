@@ -87,15 +87,13 @@ class HeroAbilityController extends Controller
     $heroAbility->load('heroes');
     
     $selectedHeroes = $heroAbility->heroes->pluck('id')->toArray();
-    $isDefault = $heroAbility->heroes->where('pivot.is_default', true)->count() > 0;
     
     return view('admin.hero-abilities.edit', compact(
       'heroAbility', 
       'subtypes', 
       'ranges', 
       'heroes', 
-      'selectedHeroes',
-      'isDefault'
+      'selectedHeroes'
     ));
   }
 
