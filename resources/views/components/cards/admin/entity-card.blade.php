@@ -1,5 +1,6 @@
 @props([
   'borderColor' => null,
+  'showRoute' => null,
   'editRoute' => null,
   'deleteRoute' => null,
   'deleteConfirmAttribute' => 'entity-name',
@@ -22,6 +23,15 @@
     <div class="entity-card__actions">
       @if(isset($actions))
         {{ $actions }}
+      @endif
+
+      @if($showRoute)
+        <x-common.action-button 
+          type="view" 
+          :route="$showRoute" 
+          title="Ver detalles" 
+          icon="expand" 
+        />
       @endif
       
       @if($editRoute)

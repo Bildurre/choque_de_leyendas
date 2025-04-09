@@ -17,11 +17,12 @@ $border-radius-md: 0.5rem;
 $border-radius-lg: 1rem;
 
 // Breakpoints
-$breakpoint-narrow:   360px;
+$breakpoint-small:   480px;
 $breakpoint-mobile:   576px;
 $breakpoint-tablet:   768px;
 $breakpoint-desktop:  992px;
 $breakpoint-wide:     1200px;
+$breakpoint-ultrawide: 1440px;
 
 // Transitions
 $transition-fast:   0.2s;

@@ -3,8 +3,8 @@
 
 // Responsive Mixins
 @mixin responsive($breakpoint) {
-  @if $breakpoint == narrow {
-    @media (max-width: $breakpoint-narrow) { @content; }
+  @if $breakpoint == small {
+    @media (max-width: $breakpoint-small) { @content; }
   }
   @else if $breakpoint == mobile {
     @media (max-width: $breakpoint-mobile) { @content; }
@@ -17,6 +17,9 @@
   }
   @else if $breakpoint == wide {
     @media (max-width: $breakpoint-wide) { @content; }
+  }
+  @else if $breakpoint == ultrawide {
+    @media (max-width: $breakpoint-ultrawide) { @content; }
   }
 }
 

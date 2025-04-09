@@ -1,11 +1,13 @@
 @props([
   'faction',
+  'showRoute' => null,
   'editRoute' => null,
   'deleteRoute' => null
 ])
 
 <x-cards.admin.entity-card
   :borderColor="$faction->color"
+  :showRoute="$showRoute"
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="faction-name"

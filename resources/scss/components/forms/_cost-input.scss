@@ -32,8 +32,12 @@
     display: grid;
     grid-template-columns: repeat(4, auto);
     gap: $spacing-xs;
-    margin-top: $spacing-sm;
-    
+    margin-top: $spacing-sm; 
+    @include responsive(small) {
+      grid-template-columns: auto auto auto;
+    }
+
+
     .cost-button {
       font-weight: 600;
       
@@ -64,6 +68,11 @@
         
         &:hover {
           background-color: rgba($color-blue, 0.3);
+        }
+      }
+      @include responsive(small) {
+        &-clear {
+          grid-column: span 3;
         }
       }
     }
