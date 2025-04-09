@@ -13,12 +13,10 @@ class HeroSuperclassSeeder extends Seeder
   public function run(): void
   {
     $heroSuperclasses = [
-      [
-        'name' => 'Luchador',
-      ],
-      [
-        'name' => 'Conjurador',
-      ]
+      ['name' => 'Luchador'],
+      ['name' => 'Conjurador'],
+      ['name' => 'Conjurador'],
+      ['name' => 'Conjurador']
     ];
 
     foreach ($heroSuperclasses as $heroSuperclass) {
