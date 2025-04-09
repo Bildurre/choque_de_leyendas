@@ -22,6 +22,7 @@ class FactionController extends Controller
   {
     $this->factionService = $factionService;
   }
+  
   /**
    * Display a listing of factions.
    */
@@ -61,6 +62,11 @@ class FactionController extends Controller
    */
   public function show(Faction $faction)
   {
+    // Cargar relaciones necesarias para la vista detallada
+    $faction->load(['heroes.heroClass', 'cards']);
+    $faction->heroes_count = $faction->heroes->count();
+    $faction->cards_count = $faction->cards->count();
+    
     return view('admin.factions.show', compact('faction'));
   }
 
@@ -76,24 +82,24 @@ class FactionController extends Controller
    * Update the specified faction in storage.
    */
   public function update(UpdateFactionRequest $request, Faction $faction)
-{
+  {
     // La validación ya se ha realizado en el request
     $validated = $request->validated();
 
     try {
-        // Verificar si se ha solicitado eliminar la imagen
-        if (isset($request->remove_icon) && $request->remove_icon == "1") {
-            // Agregamos esta información al array de datos validados
-            $validated['remove_icon'] = true;
-        }
+      // Verificar si se ha solicitado eliminar la imagen
+      if (isset($request->remove_icon) && $request->remove_icon == "1") {
+          // Agregamos esta información al array de datos validados
+          $validated['remove_icon'] = true;
+      }
 
-        $this->factionService->update($faction, $validated);
-        return redirect()->route('admin.factions.index')
-            ->with('success', 'Facción actualizada correctamente.');
+      $this->factionService->update($faction, $validated);
+      return redirect()->route('admin.factions.index')
+          ->with('success', 'Facción actualizada correctamente.');
     } catch (\Exception $e) {
-        return back()->with('error', 'Ha ocurrido un error al actualizar la Facción');
+      return back()->with('error', 'Ha ocurrido un error al actualizar la Facción');
     }
-}
+  }
 
   /**
    * Remove the specified faction from storage.

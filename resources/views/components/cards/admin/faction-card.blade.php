@@ -29,7 +29,7 @@
   </x-slot:badge>
   
   <div class="faction-summary">
-    <div class="faction-stats">
+    <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$faction->heroes_count ?? 0" label="héroe" />
       <x-common.stat-item icon="cards" :count="$faction->cards_count ?? 0" label="carta" />
     </div>

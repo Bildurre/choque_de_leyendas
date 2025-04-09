@@ -6,19 +6,6 @@
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: $spacing-md;
-    
-    .type-stats {
-      display: grid;
-      grid-template-columns: auto;
-      gap: $spacing-sm;
-    }
-    
-    .color-sample {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 1px solid $color-bg-dark-tertiary;
-    }
   }
   
   .type-subtypes {

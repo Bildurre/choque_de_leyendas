@@ -16,7 +16,6 @@
     @foreach($heroAbilities as $ability)
       <x-cards.admin.ability-card 
         :ability="$ability"
-        :showRoute="route('admin.hero-abilities.show', $ability)"
         :editRoute="route('admin.hero-abilities.edit', $ability)"
         :deleteRoute="route('admin.hero-abilities.destroy', $ability)"
       />

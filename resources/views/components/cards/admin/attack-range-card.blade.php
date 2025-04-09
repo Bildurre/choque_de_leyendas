@@ -26,7 +26,7 @@
   </x-slot:badge>
 
   <div class="range-summary">
-    <div class="range-stats">
+    <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$range->abilities_count ?? 0" label="ataques" />
     </div>
     

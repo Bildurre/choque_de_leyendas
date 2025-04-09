@@ -17,6 +17,7 @@
         "vite-plugin-static-copy": "^2.3.0"
     },
     "dependencies": {
+        "chart.js": "^4.4.8",
         "tinymce": "^7.7.2"
     }
 }

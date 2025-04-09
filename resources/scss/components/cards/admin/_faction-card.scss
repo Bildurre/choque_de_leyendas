@@ -12,12 +12,4 @@
       object-fit: cover;
     }
   }
-  
-  .faction-summary {
-    .faction-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, auto));
-      gap: $spacing-md;
-    }
-  }
 }

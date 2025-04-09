@@ -67,15 +67,6 @@ class HeroAbilityController extends Controller
   }
 
   /**
-   * Display the specified hero ability.
-   */
-  public function show(HeroAbility $heroAbility)
-  {
-    $heroAbility->load(['subtype.type', 'range', 'heroes']);
-    return view('admin.hero-abilities.show', compact('heroAbility'));
-  }
-
-  /**
    * Show the form for editing the specified hero ability.
    */
   public function edit(HeroAbility $heroAbility)

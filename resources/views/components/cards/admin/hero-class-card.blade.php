@@ -23,7 +23,7 @@
   </x-slot:badge>
 
   <div class="hero-class-summary">
-    <div class="class-stats">
+    <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$heroClass->heroes_count ?? 0" label="héroe" />
     </div>
   </div>

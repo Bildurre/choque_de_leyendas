@@ -2,5 +2,6 @@
 
 <div class="stat-item">
   <x-common.icon :name="$icon" :size="$iconSize" />
-  <span>{{ $count }} {{ Str::plural($label, $count) }}</span>
+  <span class="stat-count">{{ $count }}</span>
+  <span class="stat-label">{{ Str::plural($label, $count) }}</span>
 </div>

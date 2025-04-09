@@ -7,12 +7,6 @@
     align-items: center;
     gap: $spacing-md;
     
-    .range-stats {
-      display: grid;
-      grid-template-columns: auto;
-      gap: $spacing-sm;
-    }
-    
     .range-icon-preview {
       width: 32px;
       height: 32px;

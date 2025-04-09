@@ -16,7 +16,9 @@
   
   <div class="entity-card__header">
     <div class="entity-card__title">
-      {{ $badge ?? '' }}
+      @if(isset($badge) && !empty($badge))
+        {{ $badge }}
+      @endif
       <h3>{{ $title }}</h3>
     </div>
     
@@ -30,7 +32,7 @@
           type="view" 
           :route="$showRoute" 
           title="Ver detalles" 
-          icon="expand" 
+          icon="view" 
         />
       @endif
       

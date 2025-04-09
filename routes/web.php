@@ -50,9 +50,10 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('attack-ranges', AttackRangeController::class);
 
   // Hero Abilities
-  Route::resource('hero-abilities', HeroAbilityController::class);
+  Route::resource('hero-abilities', HeroAbilityController::class)->except(['show']);
   Route::post('hero-abilities/validate-cost', [HeroAbilityController::class, 'validateCost'])
     ->name('hero-abilities.validate-cost');
+    
   });
 
 

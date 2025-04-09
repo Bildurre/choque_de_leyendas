@@ -27,7 +27,7 @@ class HeroAbilityService
    */
   public function getAllAbilities(): Collection
   {
-    return HeroAbility::with(['subtype.type', 'range'])->get();
+    return HeroAbility::with(['subtype.type', 'range', 'heroes'])->get();
   }
 
   /**
@@ -38,7 +38,7 @@ class HeroAbilityService
    */
   public function getPaginatedAbilities(int $perPage = 15)
   {
-    return HeroAbility::with(['subtype.type', 'range'])
+    return HeroAbility::with(['subtype.type', 'range', 'heroes'])
       ->withCount('heroes')
       ->orderBy('name')
       ->paginate($perPage);

@@ -15,7 +15,9 @@
   :hasDetails="$superclass->description ? true : false"
 >
   <div class="superclass-summary">
-    <x-common.stat-item icon="heroes" :count="$superclass->hero_classes_count" label="clase" />
+    <div class="stat-item-grid">
+      <x-common.stat-item icon="heroes" :count="$superclass->hero_classes_count" label="clase" />
+    </div>
   </div>
   
   <x-slot:details>

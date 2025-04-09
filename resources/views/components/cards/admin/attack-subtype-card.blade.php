@@ -15,7 +15,7 @@
   </x-slot:badge>
 
   <div class="subtype-summary">
-    <div class="subtype-stats">
+    <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$subtype->abilities_count ?? 0" label="{{ Str::plural('habilidad', $subtype->abilities_count ?? 0) }}" />
     </div>
   </div>

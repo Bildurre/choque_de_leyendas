@@ -41,6 +41,20 @@
     }
   }
   
+  &.view-btn {
+    &:hover {
+      background-color: $color-info;
+    }
+    
+    svg {
+      stroke: $color-info;
+    }
+    
+    &:hover svg {
+      stroke: $color-bg-dark-primary;
+    }
+  }
+  
   &.toggle-btn {
     &:hover {
       background-color: $color-accent-purple;

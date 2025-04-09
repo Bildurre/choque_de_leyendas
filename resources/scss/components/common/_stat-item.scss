@@ -1,14 +1,28 @@
 @use '../../abstracts/all' as *;
 
+.stat-item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
 .stat-item {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto auto auto;
   gap: $spacing-xs;
   align-items: center;
   font-size: 0.8rem;
-  color: $color-text-muted;
   
   svg {
     stroke: $color-accent-purple;
+  }
+  
+  .stat-count {
+    font-weight: 600;
+    color: $color-text-light;
+  }
+  
+  .stat-label {
+    color: $color-text-muted;
   }
 }

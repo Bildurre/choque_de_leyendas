@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AttackRange;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class AttackRangeSeeder extends Seeder
 {
@@ -12,41 +13,24 @@ class AttackRangeSeeder extends Seeder
    */
   public function run(): void
   {
-    $ranges = [
-      [
-        'name' => 'Cuerpo a cuerpo',
-        'description' => 'Habilidades que requieren contacto directo con el objetivo',
-      ],
-      [
-        'name' => 'Corto',
-        'description' => 'Habilidades que afectan a objetivos cercanos',
-      ],
-      [
-        'name' => 'Medio',
-        'description' => 'Habilidades que afectan a objetivos a distancia media',
-      ],
-      [
-        'name' => 'Largo',
-        'description' => 'Habilidades que afectan a objetivos lejanos',
-      ],
-      [
-        'name' => 'Global',
-        'description' => 'Habilidades que afectan a todo el campo de batalla',
-      ],
-      [
-        'name' => 'Personal',
-        'description' => 'Habilidades que solo afectan al usuario',
-      ],
-      [
-        'name' => 'Área',
-        'description' => 'Habilidades que afectan a múltiples objetivos en un área',
-      ]
-    ];
+    // Leer el archivo JSON
+    $json = File::get(database_path('data/attack-ranges.json'));
+    $ranges = json_decode($json, true);
 
-    foreach ($ranges as $range) {
-      AttackRange::create($range);
+    // Crear la carpeta para los iconos de facciones si no existe
+    if (!File::exists(storage_path('app/public/attack-ranges-icons'))) {
+      File::makeDirectory(storage_path('app/public/attack-ranges-icons'), 0755, true);
     }
 
-    $this->command->info('Rangos de habilidad iniciales creados correctamente.');
+    // Insertar cada facción
+    foreach ($ranges as $rangeData) {
+      $range = new AttackRange();
+      $range->name = $rangeData['nombre'];
+      $range->description = $rangeData['descripcion'];
+      
+      $range->save();
+      
+      $this->command->info("Rango '{$range->name}' creado con éxito.");
+    }
   }
 }

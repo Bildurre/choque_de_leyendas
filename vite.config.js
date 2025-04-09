@@ -20,12 +20,18 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('resources/js/pages/modules/')) {
-            return 'page-modules';
-          }
+        manualChunks: {
+          'page-modules': [
+            'resources/js/pages/modules/*.js',
+          ],
+          'vendors-chart': [
+            'chart.js'
+          ]
         }
       }
     }
+  },
+  optimizeDeps: {
+    include: ['chart.js']
   }
 });

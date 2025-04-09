@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "Cuerpo A cuerpo",
+    "descripcion": "Habilidades de lucha cercana como los cortes de una espada"
+  },
+  {
+    "nombre": "A Rango",
+    "descripcion": "Habilidades de rango medio como los estoques de una lanza"
+  },
+  {
+    "nombre": "A Distancia",
+    "descripcion": "Habilidades de largo alcance como las flechas de un archo"
+  },
+  {
+    "nombre": "Aura",
+    "descripcion": "Habilidades que irradian y envuelven al lanzador"
+  },
+  {
+    "nombre": "Contacto",
+    "descripcion": "Habilidades que requieren contacto directo"
+  },
+  {
+    "nombre": "Propio",
+    "descripcion": "Habilidades que afectan al propio lanzador"
+  }
+]

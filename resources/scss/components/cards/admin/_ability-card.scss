@@ -1,70 +1,82 @@
 @use '../../../abstracts/all' as *;
 
-.attack-card {S  
-  .attack-summary {
-    .attack-meta {
-      display: grid;
-      grid-template-columns: auto auto;
-      gap: $spacing-sm;
-      margin-bottom: $spacing-sm;
-      
-      .attack-type {
-        font-size: 0.7rem;
-        padding: $spacing-xs $spacing-sm;
-        border-radius: $border-radius-sm;
-        font-weight: 500;
-      }
-      
-      .attack-subtype {
-        font-size: 0.7rem;
-        color: $color-text-muted;
-      }
-      
-      .attack-range {
-        display: flex;
-        align-items: center;
-        font-size: 0.7rem;
-        color: $color-text-muted;
-        
-        .range-icon {
-          width: 14px;
-          height: 14px;
-          margin-right: $spacing-xs;
-        }
-      }
-    }
-    
-    .attack-stats {
-      display: grid;
-      grid-template-columns: auto;
-      gap: $spacing-sm;
-    }
+.ability-card {  
+  .ability-summary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: $spacing-md;
   }
   
-  .attack-description {
-    h4 {
-      margin: 0 0 $spacing-xs;
-      font-size: 0.9rem;
-      color: $color-text-muted;
-    }
-    
-    .description-content {
-      font-size: 0.85rem;
-      color: $color-text-light;
+  .ability-details-content {
+    .ability-attributes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-xs $spacing-md;
+      margin-bottom: $spacing-md;
+      background-color: $color-bg-dark-tertiary;
+      padding: $spacing-sm;
+      border-radius: $border-radius-sm;
       
-      p {
-        margin: 0 0 $spacing-sm;
-        line-height: 1.5;
-        
-        &:last-child {
-          margin-bottom: 0;
-        }
+      @include responsive(mobile) {
+        grid-template-columns: 1fr;
       }
       
-      img {
-        max-width: 100%;
-        height: auto;
-        vertical-align: middle;
+      .ability-cost,
+      .ability-type,
+      .ability-subtype,
+      .ability-range {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        
+        .attribute-label {
+          font-size: 0.8rem;
+          color: $color-text-muted;
+          white-space: nowrap;
+          min-width: 60px;
+        }
+        
+        .attribute-value {
+          font-size: 0.9rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          
+          .range-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+    }
+        
+    .ability-heroes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: $spacing-xs;
+      
+      .ability-hero-item {
+        background-color: $color-bg-dark-tertiary;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: $border-radius-sm;
+        font-size: 0.8rem;
+        display: grid;
+        grid-template-rows: auto auto;
+        
+        .ability-hero-name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+          font-weight: 500;
+        }
+        
+        .ability-hero-class {
+          font-size: 0.7rem;
+          color: $color-text-muted;
+        }
       }
     }
   }
