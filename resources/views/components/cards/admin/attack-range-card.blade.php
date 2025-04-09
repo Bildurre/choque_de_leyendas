@@ -11,7 +11,6 @@
   :deleteConfirmValue="$range->name"
   containerClass="attack-range-card"
   :title="$range->name"
-  :hasDetails="$range->description ? true : false"
 >
   <x-slot:badge>
     @if($range->icon)

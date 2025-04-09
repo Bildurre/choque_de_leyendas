@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Superclass;
+namespace App\Http\Requests\Admin\HeroSuperclass;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSuperclassRequest extends FormRequest
+class UpdateHeroSuperclassRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +23,14 @@ class StoreSuperclassRequest extends FormRequest
     public function rules(): array
     {
       return [
-        'name' => 'required|string|max:255|unique:superclasses',
-        'description' => 'nullable|string',
-        'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
+        'name' => [
+          'required',
+          'string',
+          'max:255',
+          Rule::unique('hero_superclasses')->ignore($this->heroSuperclass->id)
+        ],
+        'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'remove_icon' => 'nullable|boolean',
       ];
     }
 }

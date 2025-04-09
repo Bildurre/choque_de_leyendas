@@ -6,7 +6,6 @@
   :deleteConfirmValue="$subtype->name"
   containerClass="attack-subtype-card"
   :title="$subtype->name"
-  :hasDetails="$subtype->description ? true : false"
 >
   <div class="subtype-summary">
     <div class="stat-item-grid">

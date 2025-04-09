@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\HeroClass;
-use App\Models\Superclass;
+use App\Models\HeroSuperclass;
 use App\Services\HeroClassService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HeroClass\StoreHeroClassRequest;
@@ -44,8 +44,8 @@ class HeroClassController extends Controller
    */
   public function create()
   {
-    $superclasses = Superclass::all();
-    return view('admin.hero-classes.create', compact('superclasses'));
+    $heroSuperclasses = HeroSuperclass::all();
+    return view('admin.hero-classes.create', compact('heroSuperclasses'));
   }
 
   /**
@@ -69,8 +69,8 @@ class HeroClassController extends Controller
    */
   public function edit(HeroClass $heroClass)
   {
-    $superclasses = Superclass::all();
-    return view('admin.hero-classes.edit', compact('heroClass', 'superclasses'));
+    $heroSuperclasses = HeroSuperclass::all();
+    return view('admin.hero-classes.edit', compact('heroClass', 'heroSuperclasses'));
   }
 
   /**

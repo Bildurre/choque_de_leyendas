@@ -3,21 +3,21 @@
   'headerTitle' => 'Gestión de Superclases',
   'containerTitle' => 'Superclases',
   'subtitle' => 'Gestión de superclases para los héroes',
-  'createRoute' => route('admin.superclasses.create'),
+  'createRoute' => route('admin.hero-superclasses.create'),
   'createLabel' => '+ Nueva Superclase'
 ])
 
 @section('page-content')
   <x-common.entities-grid 
     empty_message="No hay superclases disponibles"
-    :create_route="route('admin.superclasses.create')"
+    :create_route="route('admin.hero-superclasses.create')"
     create_label="Crear la primera superclase"
   >
-    @foreach($superclasses as $superclass)
-      <x-cards.admin.superclass-card 
-        :superclass="$superclass"
-        :editRoute="route('admin.superclasses.edit', $superclass)"
-        :deleteRoute="route('admin.superclasses.destroy', $superclass)"
+    @foreach($heroSuperclasses as $heroSuperclass)
+      <x-cards.admin.hero-superclass-card 
+        :heroSuperclass="$heroSuperclass"
+        :editRoute="route('admin.hero-superclasses.edit', $heroSuperclass)"
+        :deleteRoute="route('admin.hero-superclasses.destroy', $heroSuperclass)"
       />
     @endforeach
   </x-common.entities-grid>

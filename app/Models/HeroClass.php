@@ -28,7 +28,7 @@ class HeroClass extends Model
     'name',
     'description',
     'passive',
-    'superclass_id',
+    'hero_superclass_id',
     'agility_modifier',
     'mental_modifier',
     'will_modifier',
@@ -52,9 +52,9 @@ class HeroClass extends Model
   /**
    * Get the superclass that owns the hero class.
    */
-  public function superclass(): BelongsTo
+  public function heroSuperclass(): BelongsTo
   {
-    return $this->belongsTo(Superclass::class);
+    return $this->belongsTo(HeroSuperclass::class, 'hero_superclass_id');
   }
 
   /**

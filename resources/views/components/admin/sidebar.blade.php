@@ -54,8 +54,8 @@
       </li>
       <li>
         <x-navigation.sidebar-nav-link 
-          :route="route('admin.superclasses.index')"
-          :active="request()->routeIs('admin.superclasses.*')" 
+          :route="route('admin.hero-superclasses.index')"
+          :active="request()->routeIs('admin.hero-superclasses.*')" 
           icon="green-blue"
         >
           Superclases

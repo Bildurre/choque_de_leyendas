@@ -14,7 +14,7 @@ class HeroClassService
    */
   public function getAllHeroClasses(): Collection
   {
-    return HeroClass::with('superclass')->get();
+    return HeroClass::with('heroSuperclass')->get();
   }
 
   /**

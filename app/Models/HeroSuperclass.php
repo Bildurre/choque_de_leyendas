@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasColorAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Traits\HasSlug;
 use App\Models\Traits\HasImageAttribute;
 
-class Superclass extends Model
+class HeroSuperclass extends Model
 {
   use HasFactory;
-  use HasColorAttribute;
+  use HasImageAttribute;
+
+  /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'hero_superclasses';
 
   /**
    * The attributes that are mass assignable.
@@ -29,7 +34,7 @@ class Superclass extends Model
    */
   public function heroClasses(): HasMany
   {
-    return $this->hasMany(HeroClass::class);
+    return $this->hasMany(HeroClass::class, 'hero_superclass_id');
   }
 
   /**
@@ -39,6 +44,6 @@ class Superclass extends Model
    */
   public function getImageDirectory(): string
   {
-    return 'superclass-icons';
+    return 'hero-superclass-icons';
   }
 }

@@ -2,15 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\FactionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroClassController;
 use App\Http\Controllers\Admin\AttackTypeController;
-use App\Http\Controllers\Admin\SuperclassController;
 use App\Http\Controllers\Admin\AttackRangeController;
 use App\Http\Controllers\Admin\HeroAbilityController;
 use App\Http\Controllers\Admin\AttackSubtypeController;
+use App\Http\Controllers\Admin\HeroSuperclassController;
 use App\Http\Controllers\Admin\HeroAttributeConfigurationController;
 
 Route::get('/', function () {
@@ -35,10 +34,10 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   // Hero Classes
   Route::resource('hero-classes', HeroClassController::class);
 
-  // Superclasses
-  Route::resource('superclasses', SuperclassController::class);
+  // Hero Superclasses
+  Route::resource('hero-superclasses', HeroSuperclassController::class);
 
- // Attack Types
+  // Attack Types
   Route::resource('attack-types', AttackTypeController::class);
 
   // Attack Subtypes

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
     $this->call([
       AdminUserSeeder::class,
       FactionSeeder::class,
-      SuperclassSeeder::class,
+      HeroSuperclassSeeder::class,
       HeroClassesSeeder::class,
       HeroAttributeConfigurationSeeder::class,
       AttackTypeSeeder::class,

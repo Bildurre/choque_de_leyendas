@@ -1,12 +1,12 @@
-@props(['superclass' => null, 'submitLabel' => 'Guardar', 'cancelRoute' => null])
+@props(['heroSuperclass' => null, 'submitLabel' => 'Guardar', 'cancelRoute' => null])
 
 <form 
-  action="{{ $superclass ? route('admin.superclasses.update', $superclass) : route('admin.superclasses.store') }}" 
+  action="{{ $hero-superclass ? route('admin.hero-superclasses.update', $hero-superclass) : route('admin.hero-superclasses.store') }}" 
   method="POST" 
-  class="superclass-form"
+  class="hero-superclass-form"
 >
   @csrf
-  @if($superclass) @method('PUT') @endif
+  @if($hero-superclass) @method('PUT') @endif
   
   <x-form-card 
     :submit_label="$submitLabel"
@@ -15,7 +15,7 @@
     <x-form.field 
       name="name" 
       label="Nombre de la Superclase" 
-      :value="$superclass->name ?? ''" 
+      :value="$hero-superclass->name ?? ''" 
       :required="true" 
       maxlength="255" 
     />
@@ -24,7 +24,7 @@
       name="description" 
       label="Descripción"
       type="textarea" 
-      :value="$superclass->description ?? ''" 
+      :value="$hero-superclass->description ?? ''" 
       rows="4" 
     />
     
@@ -32,7 +32,7 @@
       name="color" 
       label="Color" 
       type="color" 
-      :value="$superclass->color ?? '#3d3df5'" 
+      :value="$hero-superclass->color ?? '#3d3df5'" 
       :required="true" 
       help="Selecciona un color representativo para esta superclase"
     />
