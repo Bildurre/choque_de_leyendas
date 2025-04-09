@@ -1,4 +1,3 @@
-// resources/js/pages/index.js
 /**
  * Setup page-specific handlers based on current URL
  */
@@ -32,9 +31,12 @@ export function setupPageHandlers() {
     const isShow = path.includes('/show');
     const action = isCreate ? 'create' : (isEdit ? 'edit' : (isShow ? 'show' : 'index'));
     
-    // Try to import module handler dynamically without causing console errors
-    try {
-      import(/* @vite-ignore */ `./modules/${module}.js`)
+    // Use Vite's import.meta.glob for dynamic imports
+    const moduleFiles = import.meta.glob('./modules/*.js');
+    const modulePath = `./modules/${module}.js`;
+
+    if (moduleFiles[modulePath]) {
+      moduleFiles[modulePath]()
         .then(moduleHandler => {
           // Check if the module has the specific action handler
           if (moduleHandler[action]) {
@@ -44,12 +46,9 @@ export function setupPageHandlers() {
             moduleHandler.default(action);
           }
         })
-        .catch(() => {
-          // Silent fail - module might not exist but we don't want console errors
-          // console.debug(`No handler found for module: ${module}`);
+        .catch(error => {
+          console.error(`Error loading module ${module}:`, error);
         });
-    } catch (e) {
-      // Silent fail to prevent console errors
     }
   }
 }

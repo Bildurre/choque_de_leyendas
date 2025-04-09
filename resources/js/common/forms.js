@@ -9,7 +9,7 @@ export function setupFormComponents() {
 /**
  * Setup color input synchronization
  */
-function setupColorInputs() {
+export function setupColorInputs() {
   const colorInputs = document.querySelectorAll('input[type="color"]');
   
   colorInputs.forEach(colorInput => {
@@ -24,10 +24,11 @@ function setupColorInputs() {
   });
 }
 
+
 /**
  * Setup file validation before form submission
  */
-function setupFileValidation() {
+export function setupFileValidation() {
   const forms = document.querySelectorAll('form');
   
   forms.forEach(form => {
