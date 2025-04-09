@@ -21,9 +21,7 @@ class Superclass extends Model
    */
   protected $fillable = [
     'name',
-    'description',
-    'color',
-    'text_is_dark'
+    'icon'
   ];
 
   /**
