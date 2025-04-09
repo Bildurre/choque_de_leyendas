@@ -12,7 +12,6 @@
   <x-forms.hero-ability-form 
     :subtypes="$subtypes"
     :ranges="$ranges"
-    :heroes="$heroes"
     :selectedHeroes="[]"
     :isDefault="false"
     :submitLabel="'Crear Habilidad'" 

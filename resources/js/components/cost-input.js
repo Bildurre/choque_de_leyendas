@@ -3,8 +3,9 @@
  * Handles cost input for hero abilities and cards
  */
 export function initCostInputs() {
-  document.querySelectorAll('.cost-input').forEach(input => {
+  document.querySelectorAll('.cost-input:not([data-initialized])').forEach(input => {
     setupCostInput(input);
+    input.setAttribute('data-initialized', 'true');
   });
 }
 
@@ -16,6 +17,11 @@ function setupCostInput(input) {
   const previewContainer = document.getElementById(`${input.id}-preview`);
   const maxLength = 5; // Maximum cost length
   
+  // Remove any existing listeners to prevent duplication
+  const oldInput = input.cloneNode(true);
+  input.parentNode.replaceChild(oldInput, input);
+  input = oldInput;
+  
   // Input change/keyup event
   input.addEventListener('input', updatePreview);
   
@@ -25,13 +31,22 @@ function setupCostInput(input) {
     // Cost buttons (R, G, B)
     const costButtons = buttonContainer.querySelectorAll('.cost-button[data-cost]');
     costButtons.forEach(button => {
+      // Remove existing listeners
+      const oldButton = button.cloneNode(true);
+      button.parentNode.replaceChild(oldButton, button);
+      button = oldButton;
+      
       button.addEventListener('click', handleCostButtonClick);
     });
     
     // Clear button
     const clearButton = buttonContainer.querySelector('.cost-button-clear');
     if (clearButton) {
-      clearButton.addEventListener('click', () => {
+      // Remove existing listeners
+      const oldClearButton = clearButton.cloneNode(true);
+      clearButton.parentNode.replaceChild(oldClearButton, clearButton);
+      
+      oldClearButton.addEventListener('click', () => {
         input.value = '';
         updatePreview();
       });

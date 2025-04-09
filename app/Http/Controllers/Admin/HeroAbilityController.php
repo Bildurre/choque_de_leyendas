@@ -45,9 +45,8 @@ class HeroAbilityController extends Controller
   {
     $subtypes = AttackSubtype::with('type')->get();
     $ranges = AttackRange::all();
-    $heroes = Hero::all();
     
-    return view('admin.hero-abilities.create', compact('subtypes', 'ranges', 'heroes'));
+    return view('admin.hero-abilities.create', compact('subtypes', 'ranges'));
   }
 
   /**
@@ -83,17 +82,12 @@ class HeroAbilityController extends Controller
   {
     $subtypes = AttackSubtype::with('type')->get();
     $ranges = AttackRange::all();
-    $heroes = Hero::all();
     $heroAbility->load('heroes');
-    
-    $selectedHeroes = $heroAbility->heroes->pluck('id')->toArray();
     
     return view('admin.hero-abilities.edit', compact(
       'heroAbility', 
       'subtypes', 
-      'ranges', 
-      'heroes', 
-      'selectedHeroes'
+      'ranges'
     ));
   }
 

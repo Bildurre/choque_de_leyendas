@@ -2,7 +2,6 @@
   'heroAbility' => null, 
   'subtypes' => [], 
   'ranges' => [], 
-  'heroes' => [], 
   'selectedHeroes' => [], 
   'submitLabel' => 'Guardar', 
   'cancelRoute' => null
@@ -94,26 +93,6 @@
           ['title' => 'Dado Azul', 'value' => asset('images/dice-blue.svg')]
         ]"
       />
-      
-      <h3>Asignar a Héroes</h3>
-      
-      <div class="heroes-selection">
-        <label class="form-label">Héroes que pueden usar esta habilidad</label>
-        <div class="heroes-grid">
-          @foreach($heroes as $hero)
-            <div class="hero-checkbox">
-              <input 
-                type="checkbox" 
-                name="hero_ids[]" 
-                id="hero_{{ $hero->id }}" 
-                value="{{ $hero->id }}"
-                {{ in_array($hero->id, $selectedHeroes) ? 'checked' : '' }}
-              >
-              <label for="hero_{{ $hero->id }}">{{ $hero->name }}</label>
-            </div>
-          @endforeach
-        </div>
-      </div>
     </div>
   </x-form-card>
 </form>

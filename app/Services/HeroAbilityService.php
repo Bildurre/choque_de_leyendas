@@ -62,11 +62,6 @@ class HeroAbilityService
     $heroAbility->fill($data);
     $heroAbility->save();
     
-    // Assign to heroes if provided
-    if (!empty($data['hero_ids'])) {
-      $this->assignToHeroes($heroAbility, $data['hero_ids']);
-    }
-    
     return $heroAbility;
   }
 
@@ -87,12 +82,6 @@ class HeroAbilityService
     
     $heroAbility->fill($data);
     $heroAbility->save();
-    
-    // Update hero assignments if provided
-    if (isset($data['hero_ids'])) {
-      // Sync heroes (detach all existing ones and attach the new ones)
-      $heroAbility->heroes()->sync($data['hero_ids'] ?? []);
-    }
     
     return $heroAbility;
   }

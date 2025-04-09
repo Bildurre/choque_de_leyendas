@@ -13,7 +13,6 @@
     :heroAbility="$heroAbility"
     :subtypes="$subtypes"
     :ranges="$ranges"
-    :heroes="$heroes"
     :selectedHeroes="$selectedHeroes"
     :isDefault="$isDefault"
     :submitLabel="'Guardar Cambios'" 
