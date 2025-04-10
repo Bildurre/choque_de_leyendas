@@ -3,40 +3,45 @@
 .wysiwyg-editor-container {
   margin-bottom: $spacing-md;
   
-  .tox-tinymce {
+  // Ajustes para el editor TinyMCE con tema oscuro
+  .tox.tox-tinymce {
     border-radius: $border-radius-sm;
-    overflow: hidden;
     border: 1px solid $color-bg-dark-tertiary;
+    
+    &.tox-tinymce--disabled {
+      opacity: 0.7;
+    }
   }
   
-  .tox {
-    // Customizar los colores del editor para que coincidan con el tema oscuro
-    &.tox-tinymce {
-      background-color: $color-bg-dark-tertiary;
-    }
+  // Ajustes para la barra de herramientas
+  .tox .tox-toolbar__group {
+    border-color: rgba($color-text-light, 0.1);
+  }
+  
+  // Botones en la barra de herramientas
+  .tox .tox-tbtn {
+    color: $color-text-light;
     
-    .tox-toolbar__group {
-      border-color: rgba($color-text-light, 0.1);
-    }
-    
-    .tox-toolbar-overlord, .tox-toolbar {
-      background-color: $color-bg-dark-tertiary;
-    }
-    
-    .tox-tbtn {
-      color: $color-text-light;
-      
-      &:hover {
-        background-color: rgba($color-text-light, 0.1);
-      }
-    }
-    
-    .tox-tbtn--enabled {
+    &:hover {
       background-color: rgba($color-accent-purple, 0.2);
     }
     
-    .tox-edit-area__iframe {
-      background-color: $color-bg-dark-primary;
+    &.tox-tbtn--enabled {
+      background-color: rgba($color-accent-purple, 0.3);
+      color: $color-text-light;
     }
+  }
+  
+  // Área de edición
+  .tox .tox-edit-area__iframe {
+    background-color: $color-bg-dark-primary;
+  }
+  
+  // Mensajes de error
+  .invalid-feedback {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $color-danger;
+    font-size: 0.875rem;
   }
 }

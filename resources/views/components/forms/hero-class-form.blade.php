@@ -32,12 +32,11 @@
         />
       </div>
 
-      <x-form.field 
+      <x-form.wysiwyg-editor 
         name="passive" 
         label="Habilidad Pasiva" 
         :value="$heroClass->passive ?? ''"
-        type="textarea"
-        rows="4"
+        :required="true"
       />
     </div>
 

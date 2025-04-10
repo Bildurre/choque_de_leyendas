@@ -27,7 +27,7 @@ class AttackRange extends Model
    */
   public function getImageDirectory(): string
   {
-    return 'images/attack-range-icons';
+    return 'images/uploads/attack-range';
   }
 
   /**

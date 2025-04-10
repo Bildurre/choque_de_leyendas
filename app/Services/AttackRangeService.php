@@ -43,7 +43,7 @@ class AttackRangeService
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $attackRange->icon = $this->imageService->store($data['icon'], 'attack-range-icons');
+      $attackRange->icon = $this->imageService->store($data['icon'], $attackRange->getImageDirectory());
     }
     
     $attackRange->save();
@@ -69,7 +69,7 @@ class AttackRangeService
     }
     // Handle icon update
     elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $attackRange->icon = $this->imageService->update($data['icon'], $attackRange->icon, 'attack-range-icons');
+      $attackRange->icon = $this->imageService->update($data['icon'], $attackRange->icon, $attackRange->getImageDirectory());
     }
     
     $attackRange->save();

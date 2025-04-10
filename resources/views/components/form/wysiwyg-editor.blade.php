@@ -4,13 +4,17 @@
   'required' => false,
   'rows' => 10,
   'placeholder' => '',
-  'imageList' => null
+  'imageList' => null,
+  'advanced' => false
 ])
 
 @php
   if ($imageList === null) {
     $imageList = app(App\Services\WysiwygImageService::class)->getAvailableImages();
   }
+  
+  // Generamos un ID único para el elemento de configuración
+  $configId = $name . '-config-' . uniqid();
 @endphp
 
 <div class="wysiwyg-editor-container">
@@ -30,5 +34,11 @@
   
   <script type="application/json" id="{{ $name }}-image-list">
     @json($imageList)
+  </script>
+  
+  <script type="application/json" id="{{ $configId }}">
+    {
+      "advanced": {{ $advanced ? 'true' : 'false' }}
+    }
   </script>
 </div>

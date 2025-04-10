@@ -37,64 +37,64 @@ class HeroSuperclassService
    */
   public function create(array $data): HeroSuperclass
   {
-    $superclass = new HeroSuperclass();
-    $superclass->name = $data['name'];
+    $heroSuperclass = new HeroSuperclass();
+    $heroSuperclass->name = $data['name'];
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof \Illuminate\Http\UploadedFile) {
-      $superclass->icon = $this->imageService->store($data['icon'], 'hero-superclass-icons');
+      $heroSuperclass->icon = $this->imageService->store($data['icon'], 'hero-superclass-icons');
     }
     
-    $superclass->save();
+    $heroSuperclass->save();
     
-    return $superclass;
+    return $heroSuperclass;
   }
 
   /**
    * Update an existing superclass
    *
-   * @param HeroSuperclass $superclass
+   * @param HeroSuperclass $heroSuperclass
    * @param array $data
    * @return HeroSuperclass
    */
-  public function update(HeroSuperclass $superclass, array $data): HeroSuperclass
+  public function update(HeroSuperclass $heroSuperclass, array $data): HeroSuperclass
   {
-    $superclass->name = $data['name'];
+    $heroSuperclass->name = $data['name'];
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {
-      $this->imageService->delete($superclass->icon);
-      $superclass->icon = null;
+      $this->imageService->delete($heroSuperclass->icon);
+      $heroSuperclass->icon = null;
     }
     // Handle icon update
     elseif (isset($data['icon']) && $data['icon'] instanceof \Illuminate\Http\UploadedFile) {
-      $superclass->icon = $this->imageService->update($data['icon'], $superclass->icon, 'hero-superclass-icons');
+      $heroSuperclass->icon = $this->imageService->update($data['icon'], $heroSuperclass->icon, $heroSuperclass->getImageDirectory());
     }
     
-    $superclass->save();
+    $heroSuperclass->save();
     
-    return $superclass;
+    return $heroSuperclass;
   }
 
   /**
    * Delete a superclass
    *
-   * @param HeroSuperclass $superclass
+   * @param HeroSuperclass $heroSuperclass
    * @return bool
    * @throws \Exception
    */
-  public function delete(HeroSuperclass $superclass): bool
+  public function delete(HeroSuperclass $heroSuperclass): bool
   {
     // Check for related hero classes
-    if ($superclass->heroClasses()->count() > 0) {
+    if ($heroSuperclass->heroClasses()->count() > 0) {
       throw new \Exception("No se puede eliminar la superclase porque está siendo utilizada por clases de héroe.");
     }
     
     // Delete icon if exists
-    if ($superclass->icon) {
-      $this->imageService->delete($superclass->icon);
+    if ($heroSuperclass->icon) {
+      $this->imageService->delete($heroSuperclass->icon);
     }
     
-    return $superclass->delete();
+    return $heroSuperclass->delete();
   }
 }

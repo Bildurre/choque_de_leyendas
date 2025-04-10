@@ -28,7 +28,7 @@
   <x-slot:details>
     @if($heroClass->passive)
       <x-common.description-section title="Pasiva">
-        <p>{{ $heroClass->passive }}</p>
+        <div>{!! $heroClass->passive !!}</div>
       </x-common.description-section>
     @endif
     

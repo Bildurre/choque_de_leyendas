@@ -1,3 +1,5 @@
+import { initWysiwygEditors } from '../../components/wysiwyg-editor';
+
 /**
  * Default handler for hero class pages
  * @param {string} action - Current CRUD action (create, edit, index, show)
@@ -16,6 +18,7 @@ export default function heroClassHandler(action) {
  */
 function setupFormPage() {
   setupModifiersValidation();
+  initWysiwygEditors();
 }
 
 /**

@@ -44,6 +44,6 @@ class HeroSuperclass extends Model
    */
   public function getImageDirectory(): string
   {
-    return 'hero-superclass-icons';
+    return 'images/uploads/hero-superclass';
   }
 }

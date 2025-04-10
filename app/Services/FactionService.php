@@ -48,7 +48,7 @@ class FactionService
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $faction->icon = $this->imageService->store($data['icon'], 'faction-icons');
+      $faction->icon = $this->imageService->store($data['icon'], $faction->getImageDirectory());
     }
     
     $faction->save();
@@ -79,7 +79,7 @@ class FactionService
     }
     // Handle icon update
     elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-        $faction->icon = $this->imageService->update($data['icon'], $faction->icon, 'faction-icons');
+        $faction->icon = $this->imageService->update($data['icon'], $faction->icon, $faction->getImageDirectory());
     }
     
     $faction->save();
