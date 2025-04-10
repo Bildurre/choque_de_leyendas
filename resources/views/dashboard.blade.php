@@ -1,24 +1,17 @@
-@extends('admin.layouts.page', [
-  'title' => 'Dashboard',
-  'headerTitle' => 'Dashboard',
-  'containerTitle' => 'Admin Dashboard',
-  'subtitle' => 'Página de inicio de Administración'
-])
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-@section('page-content')
-<div class="dashboard-container">
-  <div class="dashboard-row">
-    <div class="dashboard-card dashboard-card-lg">
-      <h3 class="card-title">Bienvenido al Panel de Administración</h3>
-      <p class="card-text">Este es el panel de administración para gestionar el juego "Alanda: Choque de Leyendas". Desde aquí podrás:</p>
-      <ul class="card-list">
-        <li>Gestionar facciones, héroes y cartas</li>
-        <li>Administrar clases, razas y atributos</li>
-        <li>Verificar el balance del juego</li>
-        <li>Actualizar las reglas y anexos</li>
-        <li>Generar exportaciones en PDF</li>
-      </ul>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    {{ __("You're logged in!") }}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-@endsection
+</x-app-layout>
