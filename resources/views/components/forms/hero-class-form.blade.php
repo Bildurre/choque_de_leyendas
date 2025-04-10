@@ -39,7 +39,9 @@
         type="textarea"
         rows="4"
       />
+    </div>
 
+    <div class="form-section">
       <div class="attribute-modifiers-section">
         <h3>Modificadores de Atributos</h3>
         <p class="form-text">Ajusta los modificadores de atributos. El total de modificadores debe ser entre -3 y +3.</p>
@@ -54,7 +56,7 @@
           ];
         @endphp
 
-        <div class="entities-grid">
+        <div class="form-row">
           @foreach($attributes as $key => $label)
             <x-form.field
               name="{{ $key }}_modifier" 
@@ -69,7 +71,7 @@
         </div>
 
         <div class="modifiers-total-section">
-          <p>Total de modificadores absolutos: <span id="modifiers-total">{{ 
+          <p>Atributos modificados: <span id="modifiers-total">{{ 
             isset($heroClass) ? (
               abs($heroClass->agility_modifier) +
               abs($heroClass->mental_modifier) +
