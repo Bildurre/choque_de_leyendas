@@ -20,10 +20,10 @@ class AttackType extends Model
   ];
 
   /**
-   * Get the subtypes for this attack type.
+   * Get the abilities with this subtype.
    */
-  public function subtypes(): HasMany
+  public function abilities(): HasMany
   {
-    return $this->hasMany(AttackSubtype::class);
+    return $this->hasMany(HeroAbility::class);
   }
 }

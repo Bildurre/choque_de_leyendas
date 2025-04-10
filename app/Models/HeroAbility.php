@@ -12,7 +12,6 @@ use App\Services\CostTranslatorService;
 class HeroAbility extends Model
 {
   use HasFactory;
-  use HasSlug;
 
   /**
    * The attributes that are mass assignable.
@@ -21,12 +20,19 @@ class HeroAbility extends Model
    */
   protected $fillable = [
     'name',
-    'slug',
-    'description',
-    'attack_subtype_id',
     'attack_range_id',
+    'attack_type_id',
+    'attack_subtype_id',
     'cost'
   ];
+
+  /**
+   * Get the subtype for this ability.
+   */
+  public function type(): BelongsTo
+  {
+    return $this->belongsTo(AttackType::class, 'attack_type_id');
+  }
 
   /**
    * Get the subtype for this ability.
