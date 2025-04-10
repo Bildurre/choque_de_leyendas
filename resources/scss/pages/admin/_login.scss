@@ -13,7 +13,7 @@
     padding: $spacing-lg;
     background-color: $color-bg-dark-secondary;
     border-radius: $border-radius-md;
-    box-shadow: $shadow-lg;
+    @include shadow-lg($color-accent-orange);
   }
 
   &__title {

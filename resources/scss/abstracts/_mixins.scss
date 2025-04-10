@@ -23,55 +23,6 @@
   }
 }
 
-// Grid Mixins
-@mixin grid-center {
-  display: grid;
-  place-items: center;
-}
-
-@mixin grid-between {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-}
-
-// Hover Effect Mixin
-@mixin hover-effect {
-  transition: all $transition-medium ease;
-  
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: $shadow-md;
-  }
-}
-
-// Grid Column Mixin
-@mixin grid-columns($columns) {
-  display: grid;
-  grid-template-columns: repeat($columns, 1fr);
-  gap: $spacing-md;
-}
-
-// Text Truncate Mixin
-@mixin text-truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-// Accessibility Mixin
-@mixin visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 
 // Form Mixins
 @mixin form-input-base {
@@ -103,4 +54,15 @@
 @mixin page-container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+// Shadow mixins with customizable color
+@mixin shadow-sm($color: rgba(0, 0, 0, 0.12)) {
+  box-shadow: 0 0 2px 1px $color;
+}
+@mixin shadow-md($color: rgba(0, 0, 0, 0.16)) {
+  box-shadow: 0 0 4px 2px $color;
+}
+@mixin shadow-lg($color: rgba(0, 0, 0, 0.19)) {
+  box-shadow: 0 0 8px 4px $color;
 }

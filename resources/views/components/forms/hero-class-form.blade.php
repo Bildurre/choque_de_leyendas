@@ -13,22 +13,24 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-section">
-      <x-form.field 
-        name="name" 
-        label="Nombre de la Clase" 
-        :value="$heroClass->name ?? ''" 
-        :required="true"
-        maxlength="255"
-      />
-
-      <x-form.field 
-        name="hero_superclass_id" 
-        label="Superclase" 
-        :value="$heroClass->hero_superclass_id ?? ''" 
-        :required="true"
-        type="select"
-        :options="$heroSuperclasses->pluck('name', 'id')->toArray()"
-      />
+      <div class="form-row">
+        <x-form.field 
+          name="name" 
+          label="Nombre de la Clase" 
+          :value="$heroClass->name ?? ''" 
+          :required="true"
+          maxlength="255"
+        />
+        
+        <x-form.field 
+          name="hero_superclass_id" 
+          label="Superclase" 
+          :value="$heroClass->hero_superclass_id ?? ''" 
+          :required="true"
+          type="select"
+          :options="$heroSuperclasses->pluck('name', 'id')->toArray()"
+        />
+      </div>
 
       <x-form.field 
         name="passive" 

@@ -6,12 +6,10 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  margin-bottom: $spacing-sm;
-  transition: transform $transition-fast, box-shadow $transition-fast;
+  transition: box-shadow $transition-fast;
   
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: $shadow-sm;
+    @include shadow-sm($color-red-complementary);
   }
 
   &__header {
@@ -36,8 +34,10 @@
       margin: 0;
       font-size: 1rem;
       color: $color-text-light;
-      @include text-truncate;
       max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   

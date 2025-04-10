@@ -10,14 +10,14 @@
       </h1>
       
       <!-- Session Status -->
-      <x-auth-session-status class="mb-4" :status="session('status')" />
+      <x-auth-session-status :status="session('status')" />
 
       <form method="POST" action="{{ route('login') }}" class="login-page__form">
         @csrf
 
         <!-- Email Address -->
         <div>
-          <x-input-label for="email" :value="__('Email')" class="sr-only" />
+          <x-input-label for="email" :value="__('Email')" />
           <x-text-input 
             id="email" 
             class="login-page__input" 
@@ -29,12 +29,12 @@
             autocomplete="username" 
             placeholder="Email"
           />
-          <x-input-error :messages="$errors->get('email')" class="mt-2" />
+          <x-input-error :messages="$errors->get('email')" />
         </div>
 
         <!-- Password -->
         <div>
-          <x-input-label for="password" :value="__('Password')" class="sr-only" />
+          <x-input-label for="password" :value="__('Password')" />
           <x-text-input 
             id="password" 
             class="login-page__input"
@@ -44,23 +44,22 @@
             autocomplete="current-password" 
             placeholder="Password"
           />
-          <x-input-error :messages="$errors->get('password')" class="mt-2" />
+          <x-input-error :messages="$errors->get('password')" />
         </div>
 
         <!-- Remember Me -->
         <div class="login-page__links">
-          <label for="remember_me" class="inline-flex items-center">
+          <label for="remember_me" >
             <input 
               id="remember_me" 
               type="checkbox" 
-              class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" 
               name="remember"
             >
-            <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            <spam>{{ __('Remember me') }}</spam>
           </label>
 
           @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class="text-sm">
+            <a href="{{ route('password.request') }}">
               {{ __('Forgot password?') }}
             </a>
           @endif

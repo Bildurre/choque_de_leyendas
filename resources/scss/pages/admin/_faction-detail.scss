@@ -5,7 +5,7 @@
     background-color: $color-bg-dark-secondary;
     border-radius: $border-radius-md;
     overflow: hidden;
-    box-shadow: $shadow-md;
+    @include shadow-md($color-accent-purple);
     
     .faction-header {
       padding: $spacing-md $spacing-lg;
