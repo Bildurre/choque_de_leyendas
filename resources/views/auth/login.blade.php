@@ -17,7 +17,7 @@
 
         <!-- Email Address -->
         <div>
-          <x-input-label for="email" :value="__('Email')" />
+          <x-input-label for="email" :value="__('Email')" >
           <x-text-input 
             id="email" 
             class="login-page__input" 
@@ -53,13 +53,14 @@
             <input 
               id="remember_me" 
               type="checkbox" 
+              class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" 
               name="remember"
             >
-            <spam>{{ __('Remember me') }}</spam>
+            <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
           </label>
 
           @if (Route::has('password.request'))
-            <a href="{{ route('password.request') }}">
+            <a href="{{ route('password.request') }}" >
               {{ __('Forgot password?') }}
             </a>
           @endif
