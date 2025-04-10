@@ -1,12 +1,12 @@
 @props(['heroSuperclass' => null, 'submitLabel' => 'Guardar', 'cancelRoute' => null])
 
 <form 
-  action="{{ $hero-superclass ? route('admin.hero-superclasses.update', $hero-superclass) : route('admin.hero-superclasses.store') }}" 
+  action="{{ $herSuperclass ? route('admin.hero-superclasses.update', $herSuperclass) : route('admin.hero-superclasses.store') }}" 
   method="POST" 
   class="hero-superclass-form"
 >
   @csrf
-  @if($hero-superclass) @method('PUT') @endif
+  @if($herSuperclass) @method('PUT') @endif
   
   <x-form-card 
     :submit_label="$submitLabel"

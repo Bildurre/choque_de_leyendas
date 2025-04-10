@@ -1,5 +1,4 @@
 <x-cards.admin.entity-card
-  :borderColor="$subtype->color"
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="attack-subtype-name"

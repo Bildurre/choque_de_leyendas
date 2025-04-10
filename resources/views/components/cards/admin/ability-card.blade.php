@@ -5,7 +5,7 @@
 ])
 
 <x-cards.admin.entity-card
-  :borderColor="$ability->subtype && $ability->subtype->color ? $ability->subtype->color : '#666666'"
+  :borderColor="null"
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="ability-name"
@@ -43,16 +43,16 @@
         @if($ability->subtype)
           <div class="ability-type">
             <span class="attribute-label">Tipo:</span>
-            <span class="attribute-value" 
-                  style="color: {{ $ability->subtype->type->color }}">
+            <span class="attribute-value">
               {{ $ability->subtype->type->name }}
             </span>
           </div>
-          
+        @endif
+
+        @if($ability->subtype)
           <div class="ability-subtype">
             <span class="attribute-label">Subtipo:</span>
-            <span class="attribute-value"
-                  style="color: {{ $ability->subtype->color }}">
+            <span class="attribute-value">
               {{ $ability->subtype->name }}
             </span>
           </div>

@@ -10,19 +10,7 @@
       &:first-child {
         margin-top: 0;
       }
-    }
-    
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: $spacing-md;
-      margin-bottom: $spacing-md;
-      
-      @media (min-width: $breakpoint-tablet) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    
+    }    
     .heroes-selection {
       margin-top: $spacing-md;
       

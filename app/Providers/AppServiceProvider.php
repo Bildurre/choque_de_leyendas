@@ -58,9 +58,6 @@ class AppServiceProvider extends ServiceProvider
       $this->app->singleton(FactionService::class, function ($app) {
         return new FactionService($app->make(ImageService::class));
       });
-      $this->app->singleton(HeroSuperclassService::class, function ($app) {
-        return new HeroSuperclassService($app->make(ImageService::class));
-      });
     }
 
     /**

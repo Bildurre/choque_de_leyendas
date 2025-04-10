@@ -37,8 +37,7 @@ class AttackSubtypeController extends Controller
    */
   public function create()
   {
-    $attackTypes = AttackType::all();
-    return view('admin.attack-subtypes.create', compact('attackTypes'));
+    return view('admin.attack-subtypes.create');
   }
 
   /**
@@ -62,8 +61,7 @@ class AttackSubtypeController extends Controller
    */
   public function edit(AttackSubtype $attackSubtype)
   {
-    $attackTypes = AttackType::all();
-    return view('admin.attack-subtypes.edit', compact('attackSubtype', 'attackTypes'));
+    return view('admin.attack-subtypes.edit', compact('attackSubtype'));
   }
 
   /**

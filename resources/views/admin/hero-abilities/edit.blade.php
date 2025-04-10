@@ -11,8 +11,9 @@
 @section('page-content')
   <x-forms.hero-ability-form 
     :heroAbility="$heroAbility"
-    :subtypes="$subtypes"
     :ranges="$ranges"
+    :types="$types"
+    :subtypes="$subtypes"
     :selectedHeroes="$selectedHeroes"
     :isDefault="$isDefault"
     :submitLabel="'Guardar Cambios'" 

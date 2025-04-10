@@ -10,8 +10,9 @@
 
 @section('page-content')
   <x-forms.hero-ability-form 
-    :subtypes="$subtypes"
     :ranges="$ranges"
+    :types="$types"
+    :subtypes="$subtypes"
     :selectedHeroes="[]"
     :isDefault="false"
     :submitLabel="'Crear Habilidad'" 

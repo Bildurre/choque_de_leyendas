@@ -26,7 +26,7 @@ class AttackSubtypeService
   public function create(array $data): AttackSubtype
   {
     $attackSubtype = new AttackSubtype();
-    $attackSubtype->fill($data); 
+    $attackSubtype->name = $data['name'];
     $attackSubtype->save();
     
     return $attackSubtype;
@@ -41,7 +41,7 @@ class AttackSubtypeService
    */
   public function update(AttackSubtype $attackSubtype, array $data): AttackSubtype
   {
-    $attackSubtype->fill($data);
+    $attackSubtype->name = $data['name'];
     $attackSubtype->save();
     
     return $attackSubtype;

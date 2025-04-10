@@ -43,10 +43,11 @@ class HeroAbilityController extends Controller
    */
   public function create()
   {
-    $subtypes = AttackSubtype::with('type')->get();
     $ranges = AttackRange::all();
+    $types = AttackSubtype::all();
+    $subtypes = AttackSubtype::all();
     
-    return view('admin.hero-abilities.create', compact('subtypes', 'ranges'));
+    return view('admin.hero-abilities.create', compact('subtypes', 'ranges', 'types'));
   }
 
   /**
@@ -71,14 +72,16 @@ class HeroAbilityController extends Controller
    */
   public function edit(HeroAbility $heroAbility)
   {
-    $subtypes = AttackSubtype::with('type')->get();
     $ranges = AttackRange::all();
+    $types = AttackSubtype::all();
+    $subtypes = AttackSubtype::all();
     $heroAbility->load('heroes');
     
     return view('admin.hero-abilities.edit', compact(
-      'heroAbility', 
-      'subtypes', 
-      'ranges'
+      'heroAbility',
+      'ranges',
+      'types', 
+      'subtypes'
     ));
   }
 

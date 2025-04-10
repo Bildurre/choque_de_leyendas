@@ -8,10 +8,8 @@
   @include responsive(mobile) {
     padding: $spacing-md;
   }
+
   
-  .form-section {
-    margin-bottom: $spacing-lg;
-  }
   
   .form-actions {
     display: grid;
@@ -29,6 +27,24 @@
       @include responsive(mobile) {
         width: 100%;
       }
+    }
+  }
+
+  .form-section {
+    margin-bottom: $spacing-lg;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+    
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: $breakpoint-desktop) {
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 }
