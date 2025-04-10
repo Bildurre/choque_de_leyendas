@@ -26,14 +26,9 @@
 @use 'components/forms/cost-input';
 
 //COMPONENTS - CARDS
-@use 'components/cards/admin/ability-card';
-@use 'components/cards/admin/attack-range-card';
-@use 'components/cards/admin/attack-subtype-card';
-@use 'components/cards/admin/attack-type-card';
 @use 'components/cards/admin/entity-card';
+@use 'components/cards/admin/ability-card';
 @use 'components/cards/admin/faction-card';
-@use 'components/cards/admin/hero-class-card';
-@use 'components/cards/admin/superclass-card';
 
 //COMPONENTS - NAVIGATION
 @use 'components/navigation/sidebar-nav-link';

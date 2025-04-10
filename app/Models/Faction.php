@@ -31,7 +31,7 @@ class Faction extends Model
    */
   public function getImageDirectory(): string
   {
-    return 'faction-icons';
+    return 'images/faction-icons';
   }
 
   /**

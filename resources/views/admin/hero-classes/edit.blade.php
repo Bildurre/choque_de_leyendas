@@ -11,7 +11,7 @@
 @section('page-content')
   <x-forms.hero-class-form 
     :heroClass="$heroClass"
-    :superclasses="$heroSuperclasses"
+    :heroSuperclasses="$heroSuperclasses"
     :submitLabel="'Guardar Cambios'" 
     :cancelRoute="route('admin.hero-classes.index')" 
   />

@@ -1,12 +1,6 @@
 @use '../../../abstracts/all' as *;
 
-.ability-card {  
-  .ability-summary {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: $spacing-md;
-  }
+.ability-card { 
   
   .ability-details-content {
     .ability-attributes {

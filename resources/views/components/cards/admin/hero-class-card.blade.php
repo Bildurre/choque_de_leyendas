@@ -14,15 +14,12 @@
   :hasDetails="true"
 >
   <x-slot:badge>
-    <x-common.badge 
-      :color="$heroClass->superclass ? $heroClass->superclass->color : '#666666'" 
-      :textColor="$heroClass->superclass && $heroClass->superclass->text_is_dark ? '#000000' : '#ffffff'"
-    >
-      {{ $heroClass->superclass ? $heroClass->superclass->name : 'Sin superclase' }}
+    <x-common.badge>
+      {{ $heroClass->heroSuperclass ? $heroClass->heroSuperclass->name : 'Sin superclase' }}
     </x-common.badge>
   </x-slot:badge>
 
-  <div class="hero-class-summary">
+  <div class="card-summary">
     <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$heroClass->heroes_count ?? 0" label="héroe" />
     </div>

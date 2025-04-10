@@ -42,7 +42,8 @@ class AppServiceProvider extends ServiceProvider
         AttackTypeService::class,
         AttackSubtypeService::class,
         AttackRangeService::class,
-        HeroAbilityService::class
+        HeroAbilityService::class,
+        WysiwygImageService::class
       ];
       
       foreach ($services as $service) {

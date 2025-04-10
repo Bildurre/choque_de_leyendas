@@ -75,11 +75,6 @@
         label="Descripción"
         :value="$heroAbility->description ?? ''"
         :required="true" 
-        :imageList="[
-          ['title' => 'Dado Rojo', 'value' => asset('images/dices/dice-red.svg')],
-          ['title' => 'Dado Verde', 'value' => asset('images/dices/dice-green.svg')],
-          ['title' => 'Dado Azul', 'value' => asset('images/dices/dice-blue.svg')]
-        ]"
       />
     </div>
   </x-form-card>

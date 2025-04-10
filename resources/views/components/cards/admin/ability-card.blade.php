@@ -14,7 +14,7 @@
   :title="$ability->name"
   :hasDetails="true"
 >
-  <div class="ability-summary">
+  <div class="card-summary">
     <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$ability->heroes_count ?? 0" label="héroe" />
     </div>

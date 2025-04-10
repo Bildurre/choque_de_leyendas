@@ -18,7 +18,7 @@
 >
   <x-slot:badge>
     @if($faction->icon)
-      <div class="faction-icon">
+      <div class="icon-badge">
         <img src="{{ asset('storage/' . $faction->icon) }}" alt="{{ $faction->name }}">
       </div>
     @else
@@ -28,7 +28,7 @@
     @endif
   </x-slot:badge>
   
-  <div class="faction-summary">
+  <div class="card-summary">
     <div class="stat-item-grid">
       <x-common.stat-item icon="heroes" :count="$faction->heroes_count ?? 0" label="héroe" />
       <x-common.stat-item icon="cards" :count="$faction->cards_count ?? 0" label="carta" />

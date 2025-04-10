@@ -21,6 +21,16 @@ class AttackRange extends Model
   ];
 
   /**
+   * Get the directory for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageDirectory(): string
+  {
+    return 'images/attack-range-icons';
+  }
+
+  /**
    * Get the abilities with this range.
    */
   public function abilities(): HasMany

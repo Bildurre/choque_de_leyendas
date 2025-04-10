@@ -3,6 +3,7 @@
 <form 
   action="{{ $heroSuperclass ? route('admin.hero-superclasses.update', $heroSuperclass) : route('admin.hero-superclasses.store') }}" 
   method="POST" 
+  enctype="multipart/form-data"
   class="hero-superclass-form"
 >
   @csrf
@@ -23,9 +24,9 @@
     <x-image-uploader
       name="icon" 
       label="Icono" 
-      :currentImage="$attackRange->icon ?? null"
+      :currentImage="$heroSuperclass->icon ?? null"
       acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
-      help="Sube un icono representativo para este rango de ataque"
+      help="Sube un icono representativo para esta superclase"
     />
   </x-form-card>
 </form>

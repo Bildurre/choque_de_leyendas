@@ -17,11 +17,6 @@ class FactionSeeder extends Seeder
     $json = File::get(database_path('data/factions.json'));
     $factions = json_decode($json, true);
 
-    // Crear la carpeta para los iconos de facciones si no existe
-    if (!File::exists(storage_path('app/public/faction-icons'))) {
-      File::makeDirectory(storage_path('app/public/faction-icons'), 0755, true);
-    }
-
     // Insertar cada facción
     foreach ($factions as $factionData) {
       $faction = new Faction();

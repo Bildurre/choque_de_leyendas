@@ -1,4 +1,4 @@
-@props(['heroClass' => null, 'superclasses' => [], 'submitLabel' => 'Guardar', 'cancelRoute' => null])
+@props(['heroClass' => null, 'heroSuperclasses' => [], 'submitLabel' => 'Guardar', 'cancelRoute' => null])
 
 <form 
   action="{{ $heroClass ? route('admin.hero-classes.update', $heroClass) : route('admin.hero-classes.store') }}" 
@@ -22,12 +22,12 @@
       />
 
       <x-form.field 
-        name="superclass_id" 
+        name="hero_superclass_id" 
         label="Superclase" 
-        :value="$heroClass->superclass_id ?? ''" 
+        :value="$heroClass->hero_superclass_id ?? ''" 
         :required="true"
         type="select"
-        :options="$superclasses->pluck('name', 'id')->toArray()"
+        :options="$heroSuperclasses->pluck('name', 'id')->toArray()"
       />
 
       <x-form.field 

@@ -10,7 +10,7 @@
 
 @section('page-content')
   <x-forms.hero-class-form 
-    :superclasses="$heroSuperclasses"
+    :heroSuperclasses="$heroSuperclasses"
     :submitLabel="'Crear Clase'" 
     :cancelRoute="route('admin.hero-classes.index')" 
   />

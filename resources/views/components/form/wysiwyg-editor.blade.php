@@ -4,8 +4,14 @@
   'required' => false,
   'rows' => 10,
   'placeholder' => '',
-  'imageList' => []
+  'imageList' => null
 ])
+
+@php
+  if ($imageList === null) {
+    $imageList = app(App\Services\WysiwygImageService::class)->getAvailableImages();
+  }
+@endphp
 
 <div class="wysiwyg-editor-container">
   <textarea 

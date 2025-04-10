@@ -51,7 +51,8 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index')
         ->with('success', "La superclase {$heroSuperclass->name} ha sido creada correctamente.");
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al crear la Superclase: ' . $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al crear la Superclase: ' . $e->getMessage())
+        ->withInput();
     }
   }
 
@@ -75,7 +76,8 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index')
         ->with('success', "La superclase {$heroSuperclass->name} ha sido actualizada correctamente.");
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar la Superclase: ' . $e->getMessage());
+      return back()->with('error', 'Ha ocurrido un error al actualizar la Superclase: ' . $e->getMessage())
+        ->withInput();
     }
   }
 
