@@ -27,7 +27,7 @@ class UpdateHeroSuperclassRequest extends FormRequest
           'required',
           'string',
           'max:255',
-          Rule::unique('hero_superclasses')->ignore($this->heroSuperclass->id)
+          Rule::unique('hero_superclasses')->ignore($this->hero_superclass->id)
         ],
         'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'remove_icon' => 'nullable|boolean',

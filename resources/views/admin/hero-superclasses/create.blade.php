@@ -8,7 +8,7 @@
 ])
 
 @section('page-content')
-  <x-forms.superclass-form 
+  <x-forms.hero-superclass-form 
     :submitLabel="'Crear Superclase'" 
     :cancelRoute="route('admin.hero-superclasses.index')" 
   />

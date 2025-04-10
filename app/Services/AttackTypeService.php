@@ -56,11 +56,6 @@ class AttackTypeService
    */
   public function delete(AttackType $attackType): bool
   {
-    // Check for related subtypes
-    if ($attackType->subtypes()->count() > 0) {
-      throw new \Exception("No se puede eliminar el tipo porque tiene subtipos asociados.");
-    }
-    
     return $attackType->delete();
   }
 }

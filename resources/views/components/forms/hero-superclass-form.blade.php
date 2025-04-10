@@ -1,12 +1,12 @@
 @props(['heroSuperclass' => null, 'submitLabel' => 'Guardar', 'cancelRoute' => null])
 
 <form 
-  action="{{ $herSuperclass ? route('admin.hero-superclasses.update', $herSuperclass) : route('admin.hero-superclasses.store') }}" 
+  action="{{ $heroSuperclass ? route('admin.hero-superclasses.update', $heroSuperclass) : route('admin.hero-superclasses.store') }}" 
   method="POST" 
   class="hero-superclass-form"
 >
   @csrf
-  @if($herSuperclass) @method('PUT') @endif
+  @if($heroSuperclass) @method('PUT') @endif
   
   <x-form-card 
     :submit_label="$submitLabel"
@@ -15,18 +15,17 @@
     <x-form.field 
       name="name" 
       label="Nombre de la Superclase" 
-      :value="$hero-superclass->name ?? ''" 
+      :value="$heroSuperclass->name ?? ''" 
       :required="true" 
       maxlength="255" 
     />
     
-    <x-form.field 
-      name="color" 
-      label="Color" 
-      type="color" 
-      :value="$hero-superclass->color ?? '#3d3df5'" 
-      :required="true" 
-      help="Selecciona un color representativo para esta superclase"
+    <x-image-uploader
+      name="icon" 
+      label="Icono" 
+      :currentImage="$attackRange->icon ?? null"
+      acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
+      help="Sube un icono representativo para este rango de ataque"
     />
   </x-form-card>
 </form>

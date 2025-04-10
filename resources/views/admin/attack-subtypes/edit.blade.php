@@ -9,7 +9,6 @@
 @section('page-content')
   <x-forms.attack-subtype-form 
     :attackSubtype="$attackSubtype"
-    :attackTypes="$attackTypes"
     :submitLabel="'Guardar Cambios'" 
     :cancelRoute="route('admin.attack-subtypes.index')" 
   />

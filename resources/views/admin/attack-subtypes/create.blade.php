@@ -8,7 +8,6 @@
 
 @section('page-content')
   <x-forms.attack-subtype-form 
-    :attackTypes="$attackTypes"
     :submitLabel="'Crear Subtipo'" 
     :cancelRoute="route('admin.attack-subtypes.index')" 
   />

@@ -15,7 +15,7 @@ export function setupPageHandlers() {
     const knownModules = [
       'factions',
       'hero-classes',
-      'superclasses', 
+      'hero-superclasses', 
       'hero-abilities',
       'attack-types',
       'attack-subtypes',

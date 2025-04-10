@@ -20,15 +20,6 @@
         :required="true" 
         maxlength="255"
       />
-
-      <x-form.field 
-        name="color" 
-        label="Color" 
-        type="color" 
-        :value="$attackType->color ?? '#3d3df5'" 
-        :required="true" 
-        help="Color representativo para este tipo de ataque"
-      />
     </div>
   </x-form-card>
 </form>

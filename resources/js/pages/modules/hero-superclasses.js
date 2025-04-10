@@ -1,3 +1,5 @@
+import { initImageUploaders } from '../../components/image-uploader';
+
 /**
  * Default handler for superclass pages
  * @param {string} action - Current CRUD action
@@ -15,6 +17,7 @@ export default function superclassHandler(action) {
  * Setup superclass form page
  */
 function setupFormPage() {
+  initImageUploaders();
 }
 
 export function create() {
