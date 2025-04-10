@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('hero_abilities', function (Blueprint $table) {
       $table->id();
       $table->string('name');
+      $table->text('description')->nullable();
       $table->foreignId('attack_range_id')->nullable()->constrained()->nullOnDelete();
       $table->foreignId('attack_type_id')->nullable()->constrained()->nullOnDelete();
       $table->foreignId('attack_subtype_id')->nullable()->constrained()->nullOnDelete();

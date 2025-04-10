@@ -1,4 +1,4 @@
-import { setupTypeSubtypeRelationship } from './hero-ability-helpers';
+
 import { initWysiwygEditors } from '../../components/wysiwyg-editor';
 import { initCostInputs } from '../../components/cost-input';
 
@@ -31,11 +31,7 @@ export function create() {
  * Initialize hero ability edit page
  */
 export function edit() {
-  // Get current subtype ID for edit page
-  const currentSubtypeEl = document.getElementById('current-subtype-id');
-  const currentSubtypeId = currentSubtypeEl ? currentSubtypeEl.value : null;
-  
-  setupFormPage(currentSubtypeId);
+  setupFormPage();
 }
 
 /**
@@ -47,13 +43,8 @@ export function show() {
 
 /**
  * Common setup for hero ability form pages
- * @param {string|null} currentSubtypeId - Current subtype ID for edit pages
  */
-function setupFormPage(currentSubtypeId = null) {
-  // Setup type and subtype relationship
-  setupTypeSubtypeRelationship(currentSubtypeId);
-  
-  // Initialize WYSIWYG editor and cost inputs
+function setupFormPage() {
   initWysiwygEditors();
   initCostInputs();
 }

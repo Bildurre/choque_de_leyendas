@@ -23,7 +23,6 @@ class StoreAttackRangeRequest extends FormRequest
   {
     return [
       'name' => 'required|string|max:255|unique:attack_ranges',
-      'description' => 'nullable|string',
       'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
   }

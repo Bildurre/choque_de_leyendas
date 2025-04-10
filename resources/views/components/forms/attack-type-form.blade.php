@@ -22,14 +22,6 @@
       />
 
       <x-form.field 
-        name="description" 
-        label="Descripción" 
-        type="textarea" 
-        :value="$attackType->description ?? ''" 
-        rows="4" 
-      />
-
-      <x-form.field 
         name="color" 
         label="Color" 
         type="color" 

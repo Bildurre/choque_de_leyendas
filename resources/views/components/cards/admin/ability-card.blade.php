@@ -59,12 +59,6 @@
         @endif
       </div>
       
-      @if($ability->description)
-      <x-common.description-section title="Descripción">
-        <{!! $ability->description !!}</>
-      </x-common.description-section>
-      @endif
-      
       @if($ability->heroes && $ability->heroes->count() > 0)
         <div class="ability-heroes-section">
           <h4>Héroes con esta habilidad</h4>

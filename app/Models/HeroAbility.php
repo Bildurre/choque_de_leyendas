@@ -20,6 +20,7 @@ class HeroAbility extends Model
    */
   protected $fillable = [
     'name',
+    'description',
     'attack_range_id',
     'attack_type_id',
     'attack_subtype_id',

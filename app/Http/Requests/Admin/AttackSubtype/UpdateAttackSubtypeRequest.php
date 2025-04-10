@@ -28,10 +28,7 @@ class UpdateAttackSubtypeRequest extends FormRequest
         'string',
         'max:255',
         Rule::unique('attack_subtypes')->ignore($this->attack_subtype->id)
-      ],
-      'description' => 'nullable|string',
-      'attack_type_id' => 'required|exists:attack_types,id',
-      'color' => 'nullable|string|max:7|regex:/^#[0-9A-F]{6}$/i',
+      ]
     ];
   }
 
@@ -42,10 +39,7 @@ class UpdateAttackSubtypeRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre del subtipo es obligatorio.',
-      'name.unique' => 'Ya existe un subtipo con este nombre.',
-      'attack_type_id.required' => 'El tipo de habilidad es obligatorio.',
-      'attack_type_id.exists' => 'El tipo de habilidad seleccionado no es válido.',
-      'color.regex' => 'El color debe estar en formato hexadecimal (#RRGGBB).',
+      'name.unique' => 'Ya existe un subtipo con este nombre.'
     ];
   }
 }

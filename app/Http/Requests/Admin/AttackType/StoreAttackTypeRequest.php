@@ -22,9 +22,7 @@ class StoreAttackTypeRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => 'required|string|max:255|unique:attack_types',
-      'description' => 'nullable|string',
-      'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
+      'name' => 'required|string|max:255|unique:attack_types'
     ];
   }
 
@@ -35,9 +33,7 @@ class StoreAttackTypeRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre del tipo es obligatorio.',
-      'name.unique' => 'Ya existe un tipo con este nombre.',
-      'color.required' => 'El color del tipo es obligatorio.',
-      'color.regex' => 'El color debe estar en formato hexadecimal (#RRGGBB).',
+      'name.unique' => 'Ya existe un tipo con este nombre.'
     ];
   }
 }

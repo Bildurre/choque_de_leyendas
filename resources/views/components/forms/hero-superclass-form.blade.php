@@ -19,14 +19,6 @@
       :required="true" 
       maxlength="255" 
     />
-
-    <x-form.field 
-      name="description" 
-      label="Descripción"
-      type="textarea" 
-      :value="$hero-superclass->description ?? ''" 
-      rows="4" 
-    />
     
     <x-form.field 
       name="color" 

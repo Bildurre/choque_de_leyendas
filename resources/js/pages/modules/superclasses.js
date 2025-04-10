@@ -1,5 +1,3 @@
-import { setupColorInputs } from '../../common/forms';
-
 /**
  * Default handler for superclass pages
  * @param {string} action - Current CRUD action
@@ -17,7 +15,6 @@ export default function superclassHandler(action) {
  * Setup superclass form page
  */
 function setupFormPage() {
-  setupColorInputs();
 }
 
 export function create() {

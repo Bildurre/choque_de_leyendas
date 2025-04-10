@@ -22,14 +22,6 @@
       />
 
       <x-form.field 
-        name="description" 
-        label="Descripción"
-        type="textarea"
-        :value="$heroClass->description ?? ''"
-        rows="3"
-      />
-
-      <x-form.field 
         name="superclass_id" 
         label="Superclase" 
         :value="$heroClass->superclass_id ?? ''" 

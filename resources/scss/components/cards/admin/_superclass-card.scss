@@ -6,19 +6,4 @@
     grid-template-columns: auto 1fr;
     align-items: center;
   }
-  
-  .superclass-description {
-    h4 {
-      margin: 0 0 $spacing-xs;
-      font-size: 0.9rem;
-      color: $color-text-muted;
-    }
-    
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: $color-text-light;
-      line-height: 1.5;
-    }
-  }
 }

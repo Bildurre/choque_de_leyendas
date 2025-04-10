@@ -1,10 +1,11 @@
-@extends('layouts.admin')
+@extends('admin.layouts.page', [
+  'title' => 'Dashboard',
+  'headerTitle' => 'Dashboard',
+  'containerTitle' => 'Admin Dashboard',
+  'subtitle' => 'Página de inicio de Administración'
+])
 
-@section('title', 'Dashboard')
-
-@section('header-title', 'Dashboard')
-
-@section('content')
+@section('page-content')
 <div class="dashboard-container">
   <div class="dashboard-row">
     <div class="dashboard-card dashboard-card-lg">

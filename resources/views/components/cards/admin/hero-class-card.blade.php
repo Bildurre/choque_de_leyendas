@@ -29,12 +29,6 @@
   </div>
   
   <x-slot:details>
-    @if($heroClass->description)
-      <x-common.description-section title="Descripción">
-        <p>{{ $heroClass->description }}</p>
-      </x-common.description-section>
-    @endif
-
     @if($heroClass->passive)
       <x-common.description-section title="Pasiva">
         <p>{{ $heroClass->passive }}</p>

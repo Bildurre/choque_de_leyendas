@@ -17,7 +17,6 @@ class HeroClassesSeeder extends Seeder
       $classes = [
         [
           'name' => 'Rogue',
-          'description' => 'Un asesino letal',
           'passive' => 'Esta es la pasiva del picaro',
           'hero_superclass_id' => 1,
           'agility_modifier' => 1,
@@ -28,7 +27,6 @@ class HeroClassesSeeder extends Seeder
         ],
         [
           'name' => 'Priest',
-          'description' => 'El mejor amigo de un guerrero',
           'passive' => 'Esta es la pasiva del sacerdote',
           'hero_superclass_id' => 2,
           'agility_modifier' => 0,

@@ -29,7 +29,6 @@ class UpdateAttackRangeRequest extends FormRequest
         'max:255',
         Rule::unique('attack_ranges')->ignore($this->attack_range->id)
       ],
-      'description' => 'nullable|string',
       'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       'remove_icon' => 'nullable|boolean',
     ];

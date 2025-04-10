@@ -22,14 +22,6 @@
         maxlength="255" 
       />
 
-      <x-form.field 
-        name="description" 
-        label="Descripción" 
-        type="textarea" 
-        :value="$attackRange->description ?? ''" 
-        rows="4" 
-      />
-
       <x-image-uploader
         name="icon" 
         label="Icono" 

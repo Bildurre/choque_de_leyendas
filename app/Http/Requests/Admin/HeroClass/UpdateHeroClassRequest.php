@@ -29,9 +29,8 @@ class UpdateHeroClassRequest extends FormRequest
             'max:255',
             Rule::unique('hero_classes')->ignore($this->hero_class->id)
           ],
-          'description' => 'nullable|string',
           'passive' => 'nullable|string',
-          'superclass_id' => 'required|exists:superclasses,id',
+          'hero_superclass_id' => 'required|exists:hero_superclasses,id',
           'agility_modifier' => 'required|integer|between:-2,2',
           'mental_modifier' => 'required|integer|between:-2,2',
           'will_modifier' => 'required|integer|between:-2,2',
@@ -48,8 +47,8 @@ class UpdateHeroClassRequest extends FormRequest
       return [
         'name.required' => 'El nombre de la clase es obligatorio.',
         'name.unique' => 'Ya existe una clase con este nombre.',
-        'superclass_id.required' => 'La superclase es obligatoria.',
-        'superclass_id.exists' => 'La superclase seleccionada no es válida.',
+        'hero_superclass_id.required' => 'La superclase es obligatoria.',
+        'hero_superclass_id.exists' => 'La superclase seleccionada no es válida.',
         // Mensajes para los modificadores
         'agility_modifier.between' => 'El modificador de agilidad debe estar entre -2 y 2.',
         'mental_modifier.between' => 'El modificador mental debe estar entre -2 y 2.',

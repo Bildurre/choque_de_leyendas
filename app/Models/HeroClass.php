@@ -26,7 +26,6 @@ class HeroClass extends Model
    */
   protected $fillable = [
     'name',
-    'description',
     'passive',
     'hero_superclass_id',
     'agility_modifier',
