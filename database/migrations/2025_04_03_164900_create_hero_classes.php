@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->text('passive')->nullable();
-            $table->foreignId('hero_superclass_id')->constrained()->onDelete('set null');
+            $table->foreignId('hero_superclass_id')->nullable()->constrained()->onDelete('set null');
             
             // Attribute modifiers
             $table->integer('agility_modifier')->default(0);
