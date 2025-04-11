@@ -6,7 +6,7 @@
   top: 60px; // Comienza debajo del header
   left: 0;
   z-index: $z-index-dropdown;
-  width: 250px;
+  width: $sidebar-width;
   background-color: $color-bg-dark-secondary;
   border-right: 1px solid $color-bg-dark-tertiary;
   height: calc(100vh - 60px); // Altura total menos el header

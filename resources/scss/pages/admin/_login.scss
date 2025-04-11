@@ -50,7 +50,7 @@
     
     width: 100%;
     padding: $spacing-sm;
-    background-color: $color-accent-orange;
+    background-color: $color-accent-yellow;
     color: $color-text-light;
     border: none;
     border-radius: $border-radius-sm;
@@ -58,7 +58,7 @@
     transition: background-color $transition-medium ease;
 
     &:hover {
-      background-color: color.scale($color-accent-orange, $lightness: -20%);
+      background-color: $color-accent-orange;
     }
   }
 

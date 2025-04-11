@@ -9,7 +9,7 @@
   transition: box-shadow $transition-fast;
   
   &:hover {
-    @include shadow-sm($color-red-complementary);
+    @include shadow-sm($color-accent-yellow);
   }
 
   &__header {

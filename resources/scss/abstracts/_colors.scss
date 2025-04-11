@@ -5,11 +5,6 @@ $color-red:     #f53d3d;
 $color-green:   #3df53d;
 $color-blue:    #3d3df5;
 
-// Complementary Colors
-$color-red-complementary:    #3df5f5;
-$color-green-complementary:  #f53df5;
-$color-blue-complementary:   #f5f53d;
-
 // Dark Background Colors
 $color-bg-dark-primary:   #1A1A1A;
 $color-bg-dark-secondary: #262626;
@@ -21,15 +16,18 @@ $color-text-muted:    #999999;
 $color-text-dark:     #666666;
 
 // Accent Colors
-$color-accent-orange: #ff9800;
-$color-accent-purple: #9575cd;
+// $color-accent-orange: #ff9800;
+// $color-accent-purple: #9575cd;
+
+$color-accent-yellow: #FFD976;
+$color-accent-pink: #F67280;
+$color-accent-orange: #FF9D71;
+$color-accent-purple: #6C5B7B;
+$color-accent-blue: #35495E;
+
 
 // Semantic Colors
 $color-success:       #4CAF50;
 $color-warning:       #FFC107;
 $color-danger:        #F44336;
 $color-info:          #2196F3;
-
-// Transparent Variants
-$color-overlay-light: rgba(255, 255, 255, 0.1);
-$color-overlay-dark:  rgba(0, 0, 0, 0.3);

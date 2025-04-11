@@ -41,6 +41,6 @@
     <button type="button" class="btn btn-sm btn-secondary cost-button" data-cost="R">R</button>
     <button type="button" class="btn btn-sm btn-secondary cost-button" data-cost="G">G</button>
     <button type="button" class="btn btn-sm btn-secondary cost-button" data-cost="B">B</button>
-    <button type="button" class="btn btn-sm btn-danger cost-button-clear">Limpiar</button>
+    <button type="button" class="btn btn-sm btn-secondary cost-button-clear">Limpiar</button>
   </div>
 </div>

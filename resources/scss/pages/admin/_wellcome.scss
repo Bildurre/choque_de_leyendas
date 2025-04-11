@@ -36,15 +36,16 @@
     place-items: center;
     padding: $spacing-sm $spacing-lg;
     background-color: transparent;
-    color: $color-accent-orange;
-    border: 1px solid $color-accent-orange;
+    color: $color-accent-yellow;
+    border: 1px solid $color-accent-yellow;
     border-radius: $border-radius-sm;
     text-decoration: none;
     font-size: 1.1rem;
     transition: all $transition-medium;
     
     &:hover {
-      background-color: rgba($color-accent-orange, 0.1);
+      background-color: $color-accent-yellow;
+      color: $color-text-dark;
     }
   }
 }

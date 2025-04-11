@@ -17,9 +17,8 @@
   }
 
   &.active {
-    color: $color-text-light;
+    color: $color-accent-orange;
     position: relative;
-    background-color: rgba($color-accent-orange, 0.1);
 
     &::before {
       content: '';
@@ -28,7 +27,7 @@
       top: 0;
       bottom: 0;
       width: 4px;
-      background-color: $color-accent-orange;
+      background-color: $color-accent-yellow;
     }
   }
 }

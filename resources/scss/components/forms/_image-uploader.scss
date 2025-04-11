@@ -33,7 +33,7 @@
   }
   
   &.drag-over {
-    border-color: $color-accent-orange;
+    border-color: $color-accent-yellow;
     background-color: rgba($color-accent-orange, 0.05);
   }
 }
@@ -83,7 +83,7 @@
   transition: opacity $transition-medium;
   
   svg {
-    color: $color-accent-orange;
+    color: $color-accent-yellow;
     margin-bottom: $spacing-sm;
   }
   

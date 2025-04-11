@@ -31,7 +31,7 @@
   
   // Solo añadimos padding en desktop
   @media (min-width: $breakpoint-tablet + 1px) {
-    padding-left: 250px; // Ancho de la barra lateral
+    padding-left: $sidebar-width;
   }
   
   // Añadimos blur y oscurecimiento al contenido principal cuando el sidebar está abierto en móvil/tablet
