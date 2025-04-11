@@ -12,17 +12,10 @@
 </head>
 <body>
   <div class="welcome-container">
-    <div class="welcome-logo">
-      <x-application-logo class="logo-large" />
-      <h1 class="welcome-title">
-        <x-widgets.game-dice size="xl" class="dice-infinite-spin" />
-        ALANDA
-      </h1>
-      <p class="welcome-subtitle">CHOQUE DE LEYENDAS</p>
-      
-      <div class="welcome-actions">
-        <a href="{{ route('login') }}" class="welcome-button">Acceder</a>
-      </div>
+    <x-application-logo />
+    <x-widgets.game-dice size="lg" class="dice-infinite-spin" color1="#FFD976" color2="#FFD976" color3="#FFD976"/>
+    <div class="welcome-actions">
+      <a href="{{ route('login') }}" class="welcome-button">Acceder</a>
     </div>
   </div>
 </body>

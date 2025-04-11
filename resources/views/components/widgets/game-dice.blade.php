@@ -60,7 +60,7 @@ switch ($variant) {
 }
 @endphp
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" {{ $attributes->merge(['class' => $sizeClass . ' ' . $class]) }}>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" {{ $attributes->merge(['class' => "dice " . $sizeClass . ' ' . $class]) }}>
   {{-- Left face --}}
   <polygon 
     points="100,180 30,140 30,60 100,100" 

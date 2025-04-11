@@ -1,45 +1,35 @@
 @use '../../abstracts/all' as *;
 
 .welcome-container {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-xl;
   min-height: 100vh;
   background-color: $color-bg-dark-primary;
   padding: $spacing-lg;
+  text-align: center;
+  width: 100%;
+
+  @include responsive(small) {
+    justify-content: flex-start;
+  }
 }
 
-.welcome-logo {
-  text-align: center;
-  max-width: 500px;
-  
-  .logo-large {
-    width: 150px;
-    height: 150px;
-    margin-bottom: $spacing-md;
-  }
-  
-  .welcome-title {
-    font-family: 'almendra', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: $color-text-light;
-    margin: 0;
-    letter-spacing: 0.1em;
-  }
-  
-  .welcome-subtitle {
-    font-family: 'roboto', sans-serif;
-    font-size: 1.2rem;
-    color: $color-text-muted;
-    margin: $spacing-sm 0 $spacing-xl;
-    letter-spacing: 0.05em;
-  }
+.application-logo {
+  width: 100%;
+  max-width: 600px;
 }
+
 
 .welcome-actions {
-  margin-top: $spacing-xl;
   display: grid;
-  place-items: center;
+
+  @include responsive(small) {
+    width: 100%;
+    margin-top: $spacing-xl * 2;
+  }
   
   .welcome-button {
     display: inline-grid;
@@ -55,7 +45,6 @@
     
     &:hover {
       background-color: rgba($color-accent-orange, 0.1);
-      transform: translateY(-2px);
     }
   }
 }
