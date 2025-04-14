@@ -1,0 +1,27 @@
+@use '../../abstracts/all' as *;
+
+.form-group {
+  margin-bottom: $spacing-md;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    
+    .required {
+      color: $color-danger;
+    }
+  }
+
+  .invalid-feedback {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $color-danger;
+    font-size: 0.875rem;
+  }
+}

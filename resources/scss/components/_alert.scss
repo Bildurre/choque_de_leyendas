@@ -1,0 +1,66 @@
+@use '../abstracts/all' as *;
+
+.alert {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
+  position: relative;
+  opacity: 1;
+  transition: opacity $transition-medium ease;
+  
+  &.alert-success {
+    background-color: rgba($color-success, 0.1);
+    color: $color-success;
+    border-left: .25rem solid $color-success;
+  }
+  
+  &.alert-danger {
+    background-color: rgba($color-danger, 0.1);
+    color: $color-danger;
+    border-left: .25rem solid $color-danger;
+  }
+  
+  &.alert-warning {
+    background-color: rgba($color-warning, 0.1);
+    color: $color-warning;
+    border-left: .25rem solid $color-warning;
+  }
+  
+  &.alert-info {
+    background-color: rgba($color-info, 0.1);
+    color: $color-info;
+    border-left: .25rem solid $color-info;
+  }
+  
+  &.alert-dismissible {
+    padding-right: $spacing-lg;
+  }
+  
+  .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: $spacing-sm;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.5;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    &::before {
+      content: "×";
+    }
+  }
+}

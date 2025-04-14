@@ -1,106 +1,135 @@
 <aside class="admin-sidebar">
   <nav class="sidebar-nav">
-    <!-- Dashboard link (standalone, before any groups) -->
-    <div class="sidebar-dashboard-link">
-      <x-navigation.sidebar-nav-link 
-        :route="route('admin.dashboard')"
-        :active="request()->routeIs('admin.dashboard')" 
-        icon="mono-blue"
-      >
-        Dashboard
-      </x-navigation.sidebar-nav-link>
-    </div>
-    
-    <x-navigation.sidebar-section title="Componentes">
+    <x-admin.sidebar-section >
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
+          :route="route('admin.dashboard')"
+          :active="request()->routeIs('admin.dashboard')" 
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
+        >
+          Dashboard
+        </x-admin.sidebar-nav-link>
+      </li>
+    </x-admin.sidebar-section>
+    
+    <x-admin.sidebar-section title="Componentes">
+      <li>
+        <x-admin.sidebar-nav-link 
           :route="route('admin.factions.index')"
           :active="request()->routeIs('admin.factions.*')" 
-          icon="mono-red"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Facciones
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.hero-abilities.index')"
           :active="request()->routeIs('admin.hero-abilities.*')" 
-          icon="mono-green"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Habilidades
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           route="#"
           :active="request()->routeIs('admin.heroes.*')" 
-          icon="mono-blue"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Héroes
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
-    </x-navigation.sidebar-section>
+    </x-admin.sidebar-section>
 
-    <!-- Balance Section -->
-    <x-navigation.sidebar-section title="Balance">
+    <x-admin.sidebar-section title="Balance">
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.hero-attributes.edit')"
           :active="request()->routeIs('admin.hero-attributes.*')" 
-          icon="red-green"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Configuración de Atributos
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.hero-superclasses.index')"
           :active="request()->routeIs('admin.hero-superclasses.*')" 
-          icon="green-blue"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Superclases
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.hero-classes.index')"
-          :active="request()->routeIs('admin.hero-classes.*')" 
-          icon="mono-green"
+          :active="request()->routeIs('admin.hero-classes.*')"  
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Clases
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
-    </x-navigation.sidebar-section>
+    </x-admin.sidebar-section>
 
-    <!-- Habilidades Section -->
-    <x-navigation.sidebar-section title="Habilidades">
+    <x-admin.sidebar-section title="Habilidades">
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.attack-types.index')"
           :active="request()->routeIs('admin.attack-types.*')" 
-          icon="mono-red"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Tipos
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.attack-subtypes.index')"
           :active="request()->routeIs('admin.attack-subtypes.*')" 
-          icon="mono-green"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Subtipos
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
       <li>
-        <x-navigation.sidebar-nav-link 
+        <x-admin.sidebar-nav-link 
           :route="route('admin.attack-ranges.index')"
           :active="request()->routeIs('admin.attack-ranges.*')" 
-          icon="mono-blue"
+          icon="solid"
+          color1="#FFD976"
+          color2="#FFD976"
+          color3="#FFD976"
         >
           Rangos
-        </x-navigation.sidebar-nav-link>
+        </x-admin.sidebar-nav-link>
       </li>
-    </x-navigation.sidebar-section>
+    </x-admin.sidebar-section>
   </nav>
 </aside>

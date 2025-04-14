@@ -13,10 +13,8 @@
 <body>
   <div class="welcome-container">
     <x-application-logo />
-    <x-widgets.game-dice size="lg" class="dice-infinite-spin" color1="#FFD976" color2="#FFD976" color3="#FFD976"/>
-    <div class="welcome-actions">
-      <a href="{{ route('login') }}" class="welcome-button">Acceder</a>
-    </div>
+    <x-game-dice size="lg" animation="infinite-spin" color1="#FFD976" color2="#FFD976" color3="#FFD976"/>
+    <x-button :route="route('login')" filled="true">Acceder</x-button>
   </div>
 </body>
 </html>

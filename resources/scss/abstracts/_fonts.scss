@@ -119,32 +119,3 @@
   font-weight: 100;
   font-style: italic;
 }
-
-
-// Font Mixins
-@mixin font-primary {
-  font-family: 'roboto', sans-serif;
-  font-weight: 400;
-}
-
-@mixin font-secondary {
-  font-family: 'almendra', serif;
-  font-weight: 400;
-}
-
-@mixin font-bold {
-  font-weight: 700;
-}
-
-// Typography Classes
-.text-primary {
-  @include font-primary;
-}
-
-.text-secondary {
-  @include font-secondary;
-}
-
-.text-bold {
-  @include font-bold;
-}

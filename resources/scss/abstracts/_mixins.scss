@@ -4,22 +4,22 @@
 // Responsive Mixins
 @mixin responsive($breakpoint) {
   @if $breakpoint == small {
-    @media (max-width: $breakpoint-small) { @content; }
+    @media (min-width: $breakpoint-small) { @content; }
   }
   @else if $breakpoint == mobile {
-    @media (max-width: $breakpoint-mobile) { @content; }
+    @media (min-width: $breakpoint-mobile) { @content; }
   }
   @else if $breakpoint == tablet {
-    @media (max-width: $breakpoint-tablet) { @content; }
+    @media (min-width: $breakpoint-tablet) { @content; }
   }
   @else if $breakpoint == desktop {
-    @media (max-width: $breakpoint-desktop) { @content; }
+    @media (min-width: $breakpoint-desktop) { @content; }
   }
   @else if $breakpoint == wide {
-    @media (max-width: $breakpoint-wide) { @content; }
+    @media (min-width: $breakpoint-wide) { @content; }
   }
   @else if $breakpoint == ultrawide {
-    @media (max-width: $breakpoint-ultrawide) { @content; }
+    @media (min-width: $breakpoint-ultrawide) { @content; }
   }
 }
 
@@ -37,11 +37,11 @@
   &:focus {
     outline: none;
     border-color: $color-accent-purple;
-    box-shadow: 0 0 0 2px rgba($color-accent-purple, 0.1);
+    box-shadow: 0 0 0 1px $color-accent-purple;
   }
   
   &.is-invalid {
-    border-color: $color-red;
+    border-color: $color-danger;
   }
   
   &:disabled {
@@ -56,13 +56,23 @@
   margin: 0 auto;
 }
 
-// Shadow mixins with customizable color
-@mixin shadow-sm($color: rgba(0, 0, 0, 0.12)) {
-  box-shadow: 0 0 2px 1px $color;
+// Font Mixins
+@mixin font-primary {
+  font-family: 'roboto', sans-serif;
+  font-weight: 400;
 }
-@mixin shadow-md($color: rgba(0, 0, 0, 0.16)) {
-  box-shadow: 0 0 4px 2px $color;
+
+@mixin font-secondary {
+  font-family: 'almendra', serif;
+  font-weight: 400;
 }
-@mixin shadow-lg($color: rgba(0, 0, 0, 0.19)) {
-  box-shadow: 0 0 8px 4px $color;
+
+@mixin font-primary-bold {
+  font-family: 'roboto', sans-serif;
+  font-weight: 700;
+}
+
+@mixin font-secondary-bold {
+  font-family: 'almendra', serif;
+  font-weight: 700;
 }

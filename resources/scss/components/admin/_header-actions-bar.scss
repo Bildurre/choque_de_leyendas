@@ -1,0 +1,13 @@
+@use '../../abstracts/all' as *;
+
+.header-actions-bar {
+  display: grid;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  align-items: center;
+
+  @include responsive(tablet) {
+    grid-template-rows: 1fr auto;
+    margin-bottom: $spacing-lg;
+  }
+}

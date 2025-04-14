@@ -1,0 +1,59 @@
+@use '../abstracts/all' as *;
+
+.btn {
+  border: 1px solid $color-accent-yellow;
+  color: $color-accent-yellow;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  transition: border-color $transition-medium, color $transition-medium, background-color $transition-medium;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    border-color: $color-accent-pink;
+    color: $color-accent-pink;
+  }
+
+  &__filled {
+    background-color: $color-accent-yellow;
+    color: $color-text-dark;
+
+    &:hover {
+      border-color: $color-accent-pink;
+      background-color: $color-accent-pink;
+      color: $color-text-dark;
+    }
+  }
+
+  &__sm {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+  }
+
+  &__lg {
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius-md;
+  }
+
+  &__success {
+    border-color: $color-success;
+    color: $color-success;
+
+    &:hover {
+      border-color: $color-success;
+      background-color: $color-success;
+      color: $color-text-dark;
+    }
+  }
+
+  &__danger {
+    border-color: $color-danger;
+    color: $color-danger ;
+
+    &:hover {
+      border-color: $color-danger ;
+      background-color: $color-danger ;
+      color: $color-text-dark;
+    }
+  }
+}

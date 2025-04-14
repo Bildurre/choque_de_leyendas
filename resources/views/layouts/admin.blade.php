@@ -1,3 +1,10 @@
+@props([
+  'title' => '',
+  'headerTitle' => '',
+  'containerTitle' => '',
+  'subtitle' => ''
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -8,8 +15,6 @@
   <title>{{ config('app.name', 'Alanda') }} - @yield('title', 'Panel de Administración')</title>
 
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-  
-  @stack('styles')
 </head>
 <body class="admin-body" x-data="{ sidebarOpen: window.innerWidth > 768 }" 
   :class="{ 'sidebar-open': sidebarOpen }">
@@ -25,12 +30,26 @@
       <div class="admin-main">
         <!-- Main Content -->
         <main class="admin-content">
-          @yield('content')
+          <div {{ $attributes->merge(['class' => 'admin-container']) }}>
+            @if($title)
+              <x-admin.header-actions-bar 
+                :title="$title"
+                :subtitle="$subtitle"
+                {{ $attributes->only('create_route', 'create_label', 'back_route', 'back_label') }}
+              >
+                {{ $actions ?? '' }}
+              </x-admin.header-actions-bar>
+            @endif
+            
+            <x-session-alerts />
+            
+            <div class="page-content">
+              @yield('page-content')
+            </div>
+          </div>
         </main>
       </div>
     </div>
   </div>
-
-  @stack('scripts')
 </body>
 </html>
