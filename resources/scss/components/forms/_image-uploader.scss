@@ -1,15 +1,9 @@
 @use '../../abstracts/all' as *;
 
-.image-upload-container {
-  margin-bottom: $spacing-md;
-}
-
 .image-uploader {
-  width: 100%;
-  
   &.is-invalid {
     .dropzone {
-      border-color: $color-red;
+      border-color: $color-danger;
     }
   }
 }
@@ -20,16 +14,12 @@
   border-radius: $border-radius-md;
   display: grid;
   place-items: center;
-  height: 200px;
+  height: 12rem;
   transition: all $transition-fast;
   overflow: hidden;
   
   &:hover {
     border-color: $color-accent-purple;
-    
-    .uploader-text {
-      color: $color-text-light;
-    }
   }
   
   &.drag-over {
@@ -64,18 +54,17 @@
   width: auto;
   height: auto;
   object-fit: contain;
-  opacity: 0;
+  display: none;
   pointer-events: none;
   transition: opacity $transition-medium;
   
   &.active {
-    opacity: 1;
+    display: block;
   }
 }
 
 .uploader-placeholder {
   display: grid;
-  grid-template-rows: auto auto auto;
   gap: $spacing-sm;
   place-items: center;
   text-align: center;
@@ -93,13 +82,6 @@
   }
 }
 
-.uploader-text {
-  font-size: 1rem;
-  margin-bottom: $spacing-xs;
-  color: $color-text-muted;
-  transition: color $transition-fast;
-}
-
 .uploader-formats {
   font-size: 0.75rem;
   color: $color-text-muted;
@@ -109,24 +91,23 @@
   position: absolute;
   top: $spacing-xs;
   right: $spacing-xs;
-  background-color: rgba($color-bg-dark-primary, 0.7);
+  background-color: $color-bg-dark-primary;
   color: $color-red;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   display: grid;
   place-items: center;
   cursor: pointer;
   z-index: 20;
-  // Eliminamos opacity: 0; para que siempre esté visible
-  transition: all $transition-fast;
+  transition: all $transition-medium;
   
   &:hover {
-    background-color: rgba($color-bg-dark-primary, 0.9);
-    transform: scale(1.1); // Añadimos un pequeño efecto de escala al hover
+    background-color: $color-danger;
+    color: $color-text-dark;
   }
-  
+
   &.hidden {
     display: none;
   }

@@ -18,7 +18,8 @@
     gap: $spacing-md;
     margin-top: $spacing-lg;
     @include responsive(small) {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      display: flex;
+      justify-content: flex-end;
     }
   }
 
@@ -33,7 +34,6 @@
   }
 
   .form-text {
-    display: block;
     margin-bottom: $spacing-md;
     font-size: 0.875rem;
     color: $color-text-muted;

@@ -2,7 +2,11 @@
   'title' => '',
   'headerTitle' => '',
   'containerTitle' => '',
-  'subtitle' => ''
+  'subtitle' => '',
+  'createRoute' => null,
+  'createLabel' => null,
+  'backRoute' => null,
+  'backLabel' => null
 ])
 
 <!DOCTYPE html>
@@ -12,7 +16,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Alanda') }} - @yield('title', 'Panel de Administración')</title>
+  {{-- <title>{{ config('app.name', 'Alanda') }} - @yield('title', 'Panel de Administración')</title> --}}
+  <title>{{ $title ?? 'Panel de Administración'}}</title>
 
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
@@ -35,16 +40,17 @@
               <x-admin.header-actions-bar 
                 :title="$title"
                 :subtitle="$subtitle"
-                {{ $attributes->only('create_route', 'create_label', 'back_route', 'back_label') }}
-              >
-                {{ $actions ?? '' }}
-              </x-admin.header-actions-bar>
+                :createRoute="$createRoute"
+                :createLabel="$createLabel"
+                :backRoute="$backRoute"
+                :backLabel="$backLabel"
+              />
             @endif
             
             <x-session-alerts />
             
             <div class="page-content">
-              @yield('page-content')
+              {{ $slot }}
             </div>
           </div>
         </main>

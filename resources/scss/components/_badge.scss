@@ -1,0 +1,22 @@
+@use '../abstracts/all' as *;
+
+.badge {
+  font-size: 0.7rem;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  white-space: nowrap;
+  background-color: $color-bg-dark-tertiary;
+  color: $color-text-light;
+}
+
+.badge--icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0;
+}

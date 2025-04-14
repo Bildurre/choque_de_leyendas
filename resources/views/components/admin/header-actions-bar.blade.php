@@ -1,10 +1,10 @@
 @props([
   'title',
   'subtitle' => '',
-  'back_route' => null,
-  'back_label' => 'Volver al listado',
-  'create_route' => null,
-  'create_label' => '+ Nuevo'
+  'backRoute' => null,
+  'backLabel' => 'Volver al listado',
+  'createRoute' => null,
+  'createLabel' => '+ Nuevo'
 ])
 
 <div class="header-actions-bar">
@@ -15,18 +15,12 @@
     @endif
   </div>
   <div class="right-actions">
-    @if($back_route)
-      <a href="{{ $back_route }}" class="btn btn-secondary">
-        <span>{{ $back_label }}</span>
-      </a>
+    @if($createRoute)
+      <x-button route="{{ $createRoute }}">{{ $createLabel }}</x-button>
     @endif
     
-    @if($create_route)
-      <a href="{{ $create_route }}" class="btn btn-primary">
-        <span>{{ $create_label }}</span>
-      </a>
+    @if($backRoute)
+      <x-button route="{{ $backRoute }}">{{ $backLabel }}</x-button>
     @endif
-    
-    {{ $slot ?? '' }}
   </div>
 </div>

@@ -121,7 +121,7 @@
   @enderror
   
   @if($help)
-    <div class="form-text">{{ $help }}</div>
+    <p class="help-text">{{ $help }}</p>
   @endif
   
   {{ $slot }}

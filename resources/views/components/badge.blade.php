@@ -1,14 +1,14 @@
 @props([
-  'type' => 'default',
+  'variant' => null,
   'color' => null,
   'textColor' => null,
 ])
 
 @php
-  $badgeClass = 'entity-badge';
+  $badgeClass = 'badge';
   
-  if ($type) {
-    $badgeClass .= " entity-badge-{$type}";
+  if ($variant == 'icon') {
+    $badgeClass .= " badge--icon";
   }
   
   $style = '';

@@ -5,7 +5,7 @@
   'deleteRoute' => null
 ])
 
-<x-cards.admin.entity-card
+<x-admin.cards.entity-card
   :borderColor="$faction->color"
   :showRoute="$showRoute"
   :editRoute="$editRoute"
@@ -18,28 +18,26 @@
 >
   <x-slot:badge>
     @if($faction->icon)
-      <div class="icon-badge">
+      <x-badge variant="icon">
         <img src="{{ asset('storage/' . $faction->icon) }}" alt="{{ $faction->name }}">
-      </div>
+      </x-badge>
     @else
-      <div class="icon-badge" style="background-color: {{ $faction->color }}">
+      <x-badge variant="icon" color="{{ $faction->color }}">
         {{ strtoupper(substr($faction->name, 0, 1)) }}
-      </div>
+      </x-badge>
     @endif
   </x-slot:badge>
   
   <div class="card-summary">
-    <div class="stat-item-grid">
-      <x-common.stat-item icon="heroes" :count="$faction->heroes_count ?? 0" label="héroe" />
-      <x-common.stat-item icon="cards" :count="$faction->cards_count ?? 0" label="carta" />
-    </div>
+    <x-stat-item icon="heroes" :count="$faction->heroes_count ?? 0" label="héroe" />
+    <x-stat-item icon="cards" :count="$faction->cards_count ?? 0" label="carta" />
   </div>
   
   <x-slot:details>
     @if($faction->lore_text)
-      <x-common.description-section title="Descripción">
+      <x-description>
         <p>{{ $faction->lore_text }}</p>
-      </x-common.description-section>
+      </x-description>
     @endif
   </x-slot:details>
-</x-cards.admin.entity-card>
+</x-admin.cards.entity-card>

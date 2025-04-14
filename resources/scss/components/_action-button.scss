@@ -1,0 +1,108 @@
+@use '../abstracts/all' as *;
+
+.action-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: $border-radius-sm;
+  transition: background-color $transition-medium;
+  cursor: pointer;
+  border: none;
+  background: none;
+
+  svg {
+    transition: stroke $transition-medium;
+    stroke-width: 2.5px;
+  }
+
+  &--sm {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  &--lg {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  &--edit {
+    svg {
+      stroke: $color-success;
+    }
+
+    &:hover {
+      background-color: $color-success;
+      color: $color-bg-dark-primary;
+      svg {
+        stroke: $color-text-dark;
+      }
+    }
+  }
+  
+  &--delete {
+    svg {
+      stroke: $color-danger;
+    }
+
+    &:hover {
+      background-color: $color-danger;
+      color: $color-bg-dark-primary;
+      svg {
+        stroke: $color-text-dark;
+      }
+    }
+  }
+  
+  &--view {
+    svg {
+      stroke: $color-info;
+    }
+
+    &:hover {
+      background-color: $color-info;
+      color: $color-bg-dark-primary;
+      svg {
+        stroke: $color-text-dark;
+      }
+    }
+  }
+  
+  &--toggle {
+    svg {
+      stroke: $color-accent-orange;
+    }
+
+    &:hover {
+      background-color: $color-accent-orange;
+      color: $color-bg-dark-primary;
+      svg {
+        stroke: $color-text-dark;
+      }
+    }
+
+    .chevron-up {
+      display: none;
+    }
+    
+    .chevron-down {
+      display: block;
+    }
+  }
+}
+
+.expanded {
+  .action-btn--toggle {
+    .chevron-down {
+      display: none;
+    }
+    
+    .chevron-up {
+      display: block;
+    }
+  }
+  
+  .entity-card__details {
+    display: block;
+  }
+}

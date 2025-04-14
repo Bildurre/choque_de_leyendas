@@ -1,9 +1,9 @@
-@use '../../abstracts/all' as *;
+@use '../abstracts/all' as *;
 
 .description-section {
   margin-bottom: $spacing-md;
   
-  h4 {
+  h3 {
     margin: 0 0 $spacing-xs;
     font-size: 0.9rem;
     color: $color-text-muted;
@@ -12,7 +12,6 @@
   .description-content {
     font-size: 0.9rem;
     color: $color-text-light;
-    line-height: 1.5;
     
     p {
       margin: 0 0 $spacing-sm;
@@ -20,12 +19,6 @@
       &:last-child {
         margin-bottom: 0;
       }
-    }
-    
-    img {
-      max-width: 100%;
-      height: auto;
-      vertical-align: middle;
     }
   }
 }

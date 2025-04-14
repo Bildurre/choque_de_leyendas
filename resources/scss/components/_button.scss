@@ -8,13 +8,14 @@
   transition: border-color $transition-medium, color $transition-medium, background-color $transition-medium;
   cursor: pointer;
   text-align: center;
+  display: block;
 
   &:hover {
     border-color: $color-accent-pink;
     color: $color-accent-pink;
   }
 
-  &__filled {
+  &--filled {
     background-color: $color-accent-yellow;
     color: $color-text-dark;
 
@@ -25,17 +26,18 @@
     }
   }
 
-  &__sm {
+  &--sm {
     padding: $spacing-xs $spacing-sm;
     border-radius: $border-radius-sm;
+    font-size: .875rem;
   }
 
-  &__lg {
+  &--lg {
     padding: $spacing-md $spacing-lg;
     border-radius: $border-radius-md;
   }
 
-  &__success {
+  &--success {
     border-color: $color-success;
     color: $color-success;
 
@@ -46,7 +48,7 @@
     }
   }
 
-  &__danger {
+  &--danger {
     border-color: $color-danger;
     color: $color-danger ;
 

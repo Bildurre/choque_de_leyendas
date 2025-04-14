@@ -11,32 +11,28 @@
   opacity: 1;
   transition: opacity $transition-medium ease;
   
-  &.alert-success {
+  &.alert--success {
     background-color: rgba($color-success, 0.1);
     color: $color-success;
     border-left: .25rem solid $color-success;
   }
   
-  &.alert-danger {
+  &.alert--danger {
     background-color: rgba($color-danger, 0.1);
     color: $color-danger;
     border-left: .25rem solid $color-danger;
   }
   
-  &.alert-warning {
+  &.alert--warning {
     background-color: rgba($color-warning, 0.1);
     color: $color-warning;
     border-left: .25rem solid $color-warning;
   }
   
-  &.alert-info {
+  &.alert--info {
     background-color: rgba($color-info, 0.1);
     color: $color-info;
     border-left: .25rem solid $color-info;
-  }
-  
-  &.alert-dismissible {
-    padding-right: $spacing-lg;
   }
   
   .btn-close {

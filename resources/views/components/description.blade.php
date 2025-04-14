@@ -1,7 +1,9 @@
-@props(['title' => 'Descripción'])
+@props(['title' => null])
 
 <div class="description-section">
-  <h4>{{ $title }}</h4>
+  @if ($title)
+    <h3>{{ $title }}</h3>
+  @endif
   <div class="description-content">
     {{ $slot }}
   </div>

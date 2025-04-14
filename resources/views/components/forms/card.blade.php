@@ -6,10 +6,10 @@
   </div>
   
   <div class="form-actions">
-    <button type="submit" class="btn btn__success">{{ $submit_label }}</button>
-    
+    <x-button type="button" variant="success">{{ $submit_label }}</x-button>
+        
     @if($cancel_route)
-      <a href="{{ $cancel_route }}" class="btn btn__danger">{{ $cancel_label }}</a>
+      <x-button route="{{ $cancel_route }}" variant="danger">{{ $cancel_label }}</x-button>
     @endif
   </div>
 </div>

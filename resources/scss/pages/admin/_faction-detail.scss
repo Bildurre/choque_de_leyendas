@@ -1,0 +1,112 @@
+@use '../../abstracts/all' as *;
+
+.faction-detail-card {
+  background-color: $color-bg-dark-secondary;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+    
+  .faction-actions {
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 2px solid;
+    background-color: $color-bg-dark-tertiary;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+  }
+  
+  .faction-body {
+    padding: $spacing-lg;
+    
+    @include responsive(mobile) {
+      padding: $spacing-md;
+    }
+
+    .faction-lore {
+      background-color: $color-bg-dark-tertiary;
+      padding: $spacing-md;
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+
+      p {
+        margin: 0;
+        line-height: 1.6;
+        color: $color-text-light;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    
+    .faction-info {
+      margin-bottom: $spacing-lg;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      h3 {
+        margin: 0 0 $spacing-md;
+        font-size: 1.2rem;
+        color: $color-text-light;
+        border-bottom: 1px solid $color-bg-dark-tertiary;
+        padding-bottom: $spacing-xs;
+      }
+    }
+    
+    .faction-info-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-md;
+      place-items: center;
+
+      @include responsive(tablet) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      .faction-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: $spacing-sm;
+        width: 100%;
+        height: 100%;
+        background-color: $color-bg-dark-tertiary;
+        border-radius: $border-radius-md;
+        padding: $spacing-md $spacing-sm;
+        
+        .label {
+          font-weight: 600;
+          color: $color-text-muted;
+          font-size: 0.9rem;
+        }
+        
+        .value {
+          color: $color-text-light;
+          font-size: 2.5rem;
+          font-weight: 700;
+          
+          &.color-sample {
+            width: 4rem;
+            height: 4rem;
+            border-radius: $border-radius-sm;
+            border: 1px solid $color-bg-dark-tertiary;
+          }
+        }
+        .faction-icon-container {
+          width: 4rem;
+          height: 4rem;
+          
+          .faction-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
+}

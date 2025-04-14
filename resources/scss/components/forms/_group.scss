@@ -24,4 +24,10 @@
     color: $color-danger;
     font-size: 0.875rem;
   }
+  
+  .help-text {
+    font-size: 0.875rem;
+    color: $color-text-muted;
+    margin-top: $spacing-xs;
+  }
 }

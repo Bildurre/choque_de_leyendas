@@ -1,16 +1,27 @@
 @props([
   'filled' => false,
   'route' => '#',
-  'size' => 'md'
+  'size' => 'md',
+  'type' => null,
+  'variant' => null
 ])
 
 @php
-  $buttonClass = "btn" .( $filled ? " btn__filled" : "");
+  $buttonClass = "btn" .( $filled ? " btn--filled" : "");
 
   if ($size !== 'md') {
-    $buttonClass .= " btn__{$size}";
+    $buttonClass .= " btn--{$size}";
+  }
+
+  if ($variant == 'success') {
+    $buttonClass .= " btn--success";
+  } else if ($variant == 'danger') {
+    $buttonClass .= " btn--danger";
   }
 @endphp
-  <a href={{ $route }} class="{{ $buttonClass }}" >
-    {{ $slot }}
-  </a>
+
+@if ($type == 'button')
+  <button type="submit" class="{{ $buttonClass }}">{{ $slot }}</button>
+@else
+  <a href={{ $route }} class="{{ $buttonClass }}" >{{ $slot }}</a>
+@endif

@@ -9,12 +9,12 @@
   @csrf
   @if($faction) @method('PUT') @endif
   
-  <x-form-card 
+  <x-forms.card 
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
     <div class="form-section">
-      <x-form.field 
+      <x-forms.field 
         name="name" 
         label="Nombre de la Facción" 
         :value="$faction->name ?? ''" 
@@ -22,7 +22,7 @@
         maxlength="255" 
       />
 
-      <x-form.field 
+      <x-forms.field 
         name="lore_text" 
         label="Descripción / Lore" 
         type="textarea" 
@@ -30,7 +30,7 @@
         rows="5" 
       />
 
-      <x-form.field 
+      <x-forms.field 
         name="color" 
         label="Color" 
         type="color" 
@@ -39,12 +39,12 @@
         help="Selecciona un color representativo para la facción"
       />
 
-      <x-image-uploader
+      <x-forms.image-uploader
         name="icon" 
         label="Icono" 
         :currentImage="$faction->icon ?? null"
         acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
       />
     </div>
-  </x-form-card>
+  </x-forms.card>
 </form>

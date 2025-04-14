@@ -1,86 +1,86 @@
 @use '../abstracts/all' as *;
 
-.dice__sm {
+.dice--sm {
   width: .75rem;
   height: .75rem;
 }
-.dice__md {
+.dice--md {
   width: 1rem;
   height: 1rem;
 }
-.dice__lg {
+.dice--lg {
   width: 1.5rem;
   height: 1.5rem;
 }
-.dice__xl {
+.dice--xl {
   width: 2rem;
   height: 2rem;
 }
 
 
-.dice__pulse {
+.dice--pulse {
   animation: pulse 2s infinite ease-in-out;
 }
 
-.dice__bounce {
+.dice--bounce {
   animation: bounce 1.5s infinite ease-in-out;
 }
 
-.dice__shake {
+.dice--shake {
   animation: shake 0.8s infinite;
 }
 
-.dice__spin-to-stop {
+.dice--spin-to-stop {
   animation: spinToStop 3s infinite ease-out;
 }
 
-.dice__fade-in-out {
+.dice--fade-in-out {
   animation: fadeInOut 3s infinite ease-in-out;
 }
 
-.dice__vibrate {
+.dice--vibrate {
   animation: vibrate 0.3s infinite linear;
 }
 
-.dice__infinite-spin {
+.dice--infinite-spin {
   animation: infiniteSpin 2s infinite linear;
 }
 
-.dice__swing {
+.dice--swing {
   animation: swing 3s infinite ease-in-out;
   transform-origin: top center;
 }
 
-.dice__float {
+.dice--float {
   animation: float 5s infinite ease-in-out;
 }
 
-.dice__wobble {
+.dice--wobble {
   animation: wobble 3s infinite ease-in-out;
 }
 
-.dice__heartbeat {
+.dice--heartbeat {
   animation: heartbeat 1.5s infinite ease-in-out;
 }
 
-.dice__tilt {
+.dice--tilt {
   animation: tilt 5s infinite ease-in-out;
 }
 
-.dice__color-pulse {
+.dice--color-pulse {
   animation: colorPulse 4s infinite linear;
 }
 
-.dice__jello {
+.dice--jello {
   animation: jello 2.5s infinite;
 }
 
-.dice__shadow-pulse {
+.dice--shadow-pulse {
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
   animation: shadowPulse 2s infinite ease-in-out;
 }
 
-.dice__roll {
+.dice--roll {
   animation: roll 3s infinite ease-in-out;
 }
 
