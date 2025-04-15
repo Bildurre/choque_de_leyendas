@@ -15,32 +15,28 @@
 >
   <x-slot:badge>
     <x-badge>
-      {{ $heroClass->heroSuperclass ? $heroClass->heroSuperclass->name : 'Sin superclase' }}
+      {{ $heroClass->heroSuperclass->name }}
     </x-badge>
   </x-slot:badge>
 
   <div class="card-summary">
-    <div class="stat-item-grid">
-      <x-stat-item icon="heroes" :count="$heroClass->heroes_count ?? 0" label="héroe" />
-    </div>
+    <x-stat-item icon="heroes" :count="$heroClass->heroes_count ?? 0" label="héroe" />
   </div>
   
   <x-slot:details>
     @if($heroClass->passive)
-      <x-description title="Pasiva">
+      <x-description title="Pasiva:">
         <div>{!! $heroClass->passive !!}</div>
       </x-description>
     @endif
+
+    <x-description wrapper>
+      <x-description title="Agilidad:" row>{{ $heroClass->agility_modifier }}</x-description>
+      <x-description title="Mente:" row>{{ $heroClass->mental_modifier }}</x-description>
+      <x-description title="Voluntad:" row>{{ $heroClass->will_modifier }}</x-description>
+      <x-description title="Fuerza:" row>{{ $heroClass->strength_modifier }}</x-description>
+      <x-description title="Armadura:" row>{{ $heroClass->armor_modifier }}</x-description>
+    </x-description>
     
-    <div class="class-modifiers">
-      <h4>Modificadores</h4>
-      <x-attribute-modifiers-grid :modifiers="[
-        'Agilidad' => $heroClass->agility_modifier,
-        'Mental' => $heroClass->mental_modifier,
-        'Voluntad' => $heroClass->will_modifier,
-        'Fuerza' => $heroClass->strength_modifier,
-        'Armadura' => $heroClass->armor_modifier
-      ]" />
-    </div>
   </x-slot:details>
 </x-cards.entity-card>

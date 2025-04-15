@@ -66,8 +66,12 @@
         :options="$subtypes->pluck('name', 'id')->toArray()"
         required
       />
-
     </div>
+    
+    <x-form.checkbox
+      name="blast" 
+      label="Área"
+    />
     
     <x-form.wysiwyg
       name="description"

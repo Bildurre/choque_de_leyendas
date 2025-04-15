@@ -7,8 +7,6 @@
   :title="$subtype->name"
 >
   <div class="card-summary">
-    <div class="stat-item-grid">
-      <x-stat-item icon="heroes" :count="$subtype->abilities_count ?? 0" label="{{ Str::plural('habilidad', $subtype->abilities_count ?? 0) }}" />
-    </div>
+    <x-stat-item icon="abilities" :count="$subtype->abilities_count ?? 0" label="habilidad" />
   </div>
 </x-cards.entity-card>

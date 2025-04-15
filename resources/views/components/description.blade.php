@@ -1,10 +1,20 @@
-@props(['title' => null])
+@props([
+  'wrapper' => false,
+  'title' => null,
+  'row' => false
+])
 
-<div class="description-section">
-  @if ($title)
-    <h3>{{ $title }}</h3>
-  @endif
-  <div class="description-content">
+@if ($wrapper)
+  <div class="description__wrapper">
     {{ $slot }}
   </div>
-</div>
+@else
+  <div class="description @if($row)description--row @endif">
+    @if ($title)
+      <h3>{{ $title }}</h3>
+    @endif
+    <div class="description__content" >
+      {{ $slot }}
+    </div>
+  </div>
+@endif

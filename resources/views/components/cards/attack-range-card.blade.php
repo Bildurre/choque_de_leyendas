@@ -25,6 +25,6 @@
   </x-slot:badge>
 
   <div class="card-summary">
-    <x-stat-item icon="heroes" :count="$range->abilities_count ?? 0" label="ataques" />
+    <x-stat-item icon="abilities" :count="$range->abilities_count ?? 0" label="habilidad" />
   </div>
 </x-cards.entity-card>

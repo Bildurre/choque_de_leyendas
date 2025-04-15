@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
       AttackTypeSeeder::class,
       AttackSubtypeSeeder::class,
       AttackRangeSeeder::class,
+      HeroAbilitiesSeeder::class,
     ]);
   }
 }

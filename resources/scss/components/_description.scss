@@ -1,6 +1,6 @@
 @use '../abstracts/all' as *;
 
-.description-section {
+.description {
   margin-bottom: $spacing-md;
   
   h3 {
@@ -9,7 +9,7 @@
     color: $color-text-muted;
   }
   
-  .description-content {
+  &__content {
     font-size: 0.9rem;
     color: $color-text-light;
     
@@ -21,4 +21,26 @@
       }
     }
   }
+
+  &--row {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: baseline;
+    gap: $spacing-sm;
+    text-align: left;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: $spacing-lg;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: center;
+    margin-bottom: $spacing-md;
+    .description {
+      margin-bottom: 0;
+    }
+  }
 }
+

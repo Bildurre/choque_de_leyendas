@@ -20,7 +20,7 @@
     >
     
     @if($label)
-      <x-form.label:for="$name" :required="$required" :isCheckbox="true">
+      <x-form.label :for="$name" :required="$required" :isCheckbox="true">
         {{ $label }}
       </x-form.label>
     @endif
