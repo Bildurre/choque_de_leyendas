@@ -1,11 +1,13 @@
 @props([
   'name',
+  'label' => 'wysiwyg',
   'value' => '',
   'required' => false,
   'rows' => 10,
   'placeholder' => '',
   'imageList' => null,
-  'advanced' => false
+  'advanced' => false,
+  'help' => null
 ])
 
 @php
@@ -17,7 +19,11 @@
   $configId = $name . '-config-' . uniqid();
 @endphp
 
-<div class="wysiwyg-editor-container">
+<x-form.group>
+  <x-form.label :for="$name" :required="$required">
+    {{ $label }}
+  </x-form.label>
+  
   <textarea 
     id="{{ $name }}" 
     name="{{ $name }}" 
@@ -28,9 +34,9 @@
     {{ $attributes }}
   >{{ old($name, $value) }}</textarea>
   
-  @error($name)
-    <div class="invalid-feedback">{{ $message }}</div>
-  @enderror
+  <x-form.error :name="$name" />
+  
+  <x-form.help :text="$help" />
   
   <script type="application/json" id="{{ $name }}-image-list">
     @json($imageList)
@@ -41,4 +47,4 @@
       "advanced": {{ $advanced ? 'true' : 'false' }}
     }
   </script>
-</div>
+</x-form.group>

@@ -6,7 +6,7 @@
   :createRoute="route('admin.factions.create')"
   createLabel='+ Nueva'
   :backRoute="route('admin.factions.index')"
-  backLabel="Volver"
+  backLabel="⬅ Volver"
 >
 
   <x-forms.faction-form 

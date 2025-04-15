@@ -31,10 +31,7 @@
 @use 'components/form/textarea';
 @use 'components/form/image-uploader';
 @use 'components/form/checkbox';
-
-//COMPONENTS - CARDS
-//COMPONENTS - NAVIGATION
-//COMPONENTS - WIDGETS
+@use 'components/form/cost-input';
 
 //LAYOUT
 @use 'layouts/admin';

@@ -13,7 +13,7 @@
     create_label="Crear la primera habilidad"
   >
   @foreach($heroAbilities as $ability)
-    <x-cards.ability-card 
+    <x-cards.hero-ability-card 
       :ability="$ability"
       :editRoute="route('admin.hero-abilities.edit', $ability)"
       :deleteRoute="route('admin.hero-abilities.destroy', $ability)"

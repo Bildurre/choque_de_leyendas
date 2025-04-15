@@ -6,7 +6,7 @@
   :createRoute="route('admin.attack-types.create')"
   createLabel='+ Nueva'
   :backRoute="route('admin.attack-types.index')"
-  backLabel="Volver"
+  backLabel="⬅ Volver"
 >
 
   <x-forms.attack-type-form 

@@ -25,7 +25,7 @@
       <div class="ability-attributes">
         <div class="ability-cost">
           <span class="attribute-label">Coste:</span>
-          <x-widgets.cost-display :cost="$ability->cost" :showTotal="false" />
+          <x-cost-display :cost="$ability->cost" :showTotal="false" />
         </div>
         
         @if($ability->range)
@@ -40,14 +40,14 @@
           </div>
         @endif
         
-        @if($ability->subtype)
+        {{-- @if($ability->subtype)
           <div class="ability-type">
             <span class="attribute-label">Tipo:</span>
             <span class="attribute-value">
               {{ $ability->subtype->type->name }}
             </span>
           </div>
-        @endif
+        @endif --}}
 
         @if($ability->subtype)
           <div class="ability-subtype">

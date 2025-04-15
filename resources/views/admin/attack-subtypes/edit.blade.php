@@ -6,7 +6,7 @@
   :createRoute="route('admin.attack-subtypes.create')"
   createLabel='+ Nueva'
   :backRoute="route('admin.attack-subtypes.index')"
-  backLabel="Volver"
+  backLabel="⬅ Volver"
 >
 
   <x-forms.attack-subtype-form 

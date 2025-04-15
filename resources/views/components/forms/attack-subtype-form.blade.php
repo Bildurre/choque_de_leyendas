@@ -12,14 +12,12 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <div class="form-section">
-      <x-form.field 
-        name="name" 
-        label="Nombre del Subtipo" 
-        :value="$attackSubtype->name ?? ''" 
-        :required="true" 
-        maxlength="255" 
-      />
-    </div>
+    <x-form.field 
+      name="name" 
+      label="Nombre del Subtipo" 
+      :value="$attackSubtype->name ?? ''" 
+      required
+      max="255" 
+    />
   </x-form.card>
 </form>

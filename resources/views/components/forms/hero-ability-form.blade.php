@@ -24,58 +24,56 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <div class="form-section">
+    <x-form.field 
+      name="name" 
+      label="Nombre de la Habilidad" 
+      :value="$heroAbility->name ?? ''" 
+      required
+      max="255" 
+    />
+    
+    <x-form.cost-input 
+      name="cost" 
+      label="Coste de Activación" 
+      :value="$heroAbility->cost ?? ''"
+      required
+    />
 
-      <x-form.field 
-        name="name" 
-        label="Nombre de la Habilidad" 
-        :value="$heroAbility->name ?? ''" 
-        :required="true" 
-        maxlength="255" 
-      />
-      
-      <x-form.cost-input 
-        name="cost" 
-        label="Coste de Activación" 
-        :value="$heroAbility->cost ?? ''"
-        placeholder="Ej: RRG (Rojo, Rojo, Verde)"
+    <div class="form-row">
+      <x-form.select
+        name="attack_range_id" 
+        label="Rango" 
+        placeholder="Selecciona un rango"
+        :value="$heroAbility->attack_range_id ?? ''"
+        :options="$ranges->pluck('name', 'id')->toArray()"
         required
       />
-      <div class="form-row">
-        <x-form.field 
-          name="attack_range_id" 
-          label="Rango" 
-          type="select"
-          placeholder="Selecciona un rango"
-          :value="$heroAbility->attack_range_id ?? ''"
-          :options="$ranges->pluck('name', 'id')->toArray()"
-        />
 
-        <x-form.field 
-          name="attack_type_id" 
-          label="Tipo" 
-          type="select"
-          placeholder="Selecciona un tipo"
-          :value="$heroAbility->attack_type_id ?? ''"
-          :options="$types->pluck('name', 'id')->toArray()"
-        />
-
-        <x-form.field 
-          name="attack_subtype_id" 
-          label="Subtipo" 
-          type="select"
-          placeholder="Selecciona un subtipo"
-          :value="$heroAbility->attack_subtype_id ?? ''"
-          :options="$subtypes->pluck('name', 'id')->toArray()"
-        />
-      </div>
-      
-      <x-form.wysiwyg-editor 
-        name="description"
-        label="Descripción"
-        :value="$heroAbility->description ?? ''"
-        :required="true" 
+      <x-form.select
+        name="attack_type_id" 
+        label="Tipo" 
+        placeholder="Selecciona un tipo"
+        :value="$heroAbility->attack_type_id ?? ''"
+        :options="$types->pluck('name', 'id')->toArray()"
+        required
       />
+
+      <x-form.select
+        name="attack_subtype_id" 
+        label="Subtipo" 
+        placeholder="Selecciona un subtipo"
+        :value="$heroAbility->attack_subtype_id ?? ''"
+        :options="$subtypes->pluck('name', 'id')->toArray()"
+        required
+      />
+
     </div>
+    
+    <x-form.wysiwyg
+      name="description"
+      label="Descripción"
+      :value="$heroAbility->description ?? ''"
+      required
+    />
   </x-form.card>
 </form>

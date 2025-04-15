@@ -57,12 +57,30 @@ function setupCostInput(input) {
   updatePreview();
   
   function updatePreview() {
-    const cost = input.value.toUpperCase();
+    let cost = input.value.toUpperCase();
     
     // Validate the cost (only R, G, B allowed)
     if (cost && !/^[RGB]*$/.test(cost)) {
       input.value = input.value.replace(/[^RGBrgb]/g, '').toUpperCase();
-      return;
+      cost = input.value;
+    }
+    
+    // Reorder the input value
+    if (cost) {
+      const orderedCost = orderCostString(cost);
+      
+      // Only update the input if the order has changed
+      if (orderedCost !== cost) {
+        // Save cursor position relative to the end of the input
+        const distanceFromEnd = cost.length - input.selectionStart;
+        
+        // Update input value with ordered cost
+        input.value = orderedCost;
+        
+        // Restore cursor position from the end
+        const newPosition = Math.max(0, orderedCost.length - distanceFromEnd);
+        input.setSelectionRange(newPosition, newPosition);
+      }
     }
     
     if (previewContainer) {
@@ -70,8 +88,8 @@ function setupCostInput(input) {
       previewContainer.innerHTML = '';
       
       if (cost) {
-        // Create a new cost display
-        fetchCostPreview(cost);
+        // Render the dice SVGs directly in the preview container
+        renderDicePreview(input.value);
       }
     }
   }
@@ -84,69 +102,57 @@ function setupCostInput(input) {
     }
   }
   
-  function fetchCostPreview(cost) {
-    // Use the CostTranslatorService via AJAX
-    fetch('/admin/hero-abilities/validate-cost', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ cost })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.valid) {
-        renderCostPreview(data.formattedCost);
-      }
-    })
-    .catch(error => {
-      console.error('Error validating cost:', error);
+  function renderDicePreview(cost) {
+    // Process each character in the cost string
+    [...cost].forEach(costChar => {
+      // Create dice SVG based on the cost character and append directly to previewContainer
+      previewContainer.innerHTML += createDiceSVG(costChar);
     });
   }
   
-  function renderCostPreview(formattedCost) {
-    // Create container for dice display
-    const costDisplay = document.createElement('div');
-    costDisplay.className = 'cost-display';
+  function orderCostString(cost) {
+    // Count each color
+    const rCount = (cost.match(/R/g) || []).length;
+    const gCount = (cost.match(/G/g) || []).length;
+    const bCount = (cost.match(/B/g) || []).length;
     
-    // Add dice for each color
-    for (const [color, count] of Object.entries(formattedCost)) {
-      for (let i = 0; i < count; i++) {
-        const diceWrapper = document.createElement('div');
-        diceWrapper.className = 'cost-dice-wrapper';
-        diceWrapper.innerHTML = createDiceSvg(color);
-        costDisplay.appendChild(diceWrapper);
-      }
-    }
-    
-    // Add total count
-    const totalCount = Object.values(formattedCost).reduce((a, b) => a + b, 0);
-    if (totalCount > 0) {
-      const totalElement = document.createElement('span');
-      totalElement.className = 'cost-total';
-      totalElement.textContent = totalCount;
-      costDisplay.appendChild(totalElement);
-    }
-    
-    previewContainer.appendChild(costDisplay);
+    // Create ordered string
+    return 'R'.repeat(rCount) + 'G'.repeat(gCount) + 'B'.repeat(bCount);
   }
   
-  function createDiceSvg(color) {
-    const colorHex = getColorHex(color);
-    return `<svg class="cost-dice" viewBox="0 0 200 200">
-      <polygon points="100,180 30,140 30,60 100,100" fill="${colorHex}" stroke="#000" stroke-width="2" stroke-linejoin="round" />
-      <polygon points="100,180 100,100 170,60 170,140" fill="${colorHex}" stroke="#000" stroke-width="2" stroke-linejoin="round" />
-      <polygon points="100,100 30,60 100,20 170,60" fill="${colorHex}" stroke="#000" stroke-width="2" stroke-linejoin="round" />
-    </svg>`;
-  }
-  
-  function getColorHex(colorName) {
+  function createDiceSVG(costChar) {
+    // Map cost types to colors
     const colorMap = {
-      'red': '#f53d3d',
-      'green': '#3df53d',
-      'blue': '#3d3df5'
+      'R': '#f53d3d', // Red
+      'G': '#3df53d', // Green
+      'B': '#3d3df5'  // Blue
     };
-    return colorMap[colorName] || '#999999';
+    
+    const color = colorMap[costChar] || '#f53d3d';
+    
+    // Using the same classes as game-dice component
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="dice dice--static dice--xl">
+      <polygon 
+        points="100,180 30,140 30,60 100,100" 
+        fill="${color}" 
+        stroke="#000" 
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+      <polygon 
+        points="100,180 100,100 170,60 170,140" 
+        fill="${color}" 
+        stroke="#000" 
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+      <polygon 
+        points="100,100 30,60 100,20 170,60" 
+        fill="${color}" 
+        stroke="#000" 
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+    </svg>`;
   }
 }

@@ -3,7 +3,7 @@
   headerTitle='Crear Superclase'
   containerTitle='Superclases'
   subtitle='Crea una nueva superclase'
-  backLabel="Volver"
+  backLabel="⬅ Volver"
   :backRoute="route('admin.hero-superclasses.index')"
 >
 

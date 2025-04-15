@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Hero;
-use App\Models\HeroAbility;
+use App\Models\AttackType;
 use App\Models\AttackRange;
+use App\Models\HeroAbility;
 use App\Models\AttackSubtype;
 use App\Http\Controllers\Controller;
 use App\Services\HeroAbilityService;
@@ -44,7 +44,7 @@ class HeroAbilityController extends Controller
   public function create()
   {
     $ranges = AttackRange::all();
-    $types = AttackSubtype::all();
+    $types = AttackType::all();
     $subtypes = AttackSubtype::all();
     
     return view('admin.hero-abilities.create', compact('subtypes', 'ranges', 'types'));
@@ -73,7 +73,7 @@ class HeroAbilityController extends Controller
   public function edit(HeroAbility $heroAbility)
   {
     $ranges = AttackRange::all();
-    $types = AttackSubtype::all();
+    $types = AttackType::all();
     $subtypes = AttackSubtype::all();
     $heroAbility->load('heroes');
     

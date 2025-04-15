@@ -6,7 +6,7 @@
   :createRoute="route('admin.hero-abilities.create')"
   createLabel='+ Nueva'
   :backRoute="route('admin.hero-abilities.index')"
-  backLabel="Volver"
+  backLabel="⬅ Volver"
 >
 
   <x-forms.hero-ability-form 
@@ -14,8 +14,6 @@
     :ranges="$ranges"
     :types="$types"
     :subtypes="$subtypes"
-    :selectedHeroes="$selectedHeroes"
-    :isDefault="$isDefault"
     :submitLabel="'Guardar Cambios'" 
     :cancelRoute="route('admin.hero-abilities.index')" 
   />

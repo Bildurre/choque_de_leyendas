@@ -12,21 +12,21 @@
     <x-form.card 
       submit_label="Login"
       cancel_route="{{ route('wellcome') }}"
-      cancel_label="Volver"
+      cancel_label="⬅ Volver"
     >
       <h2>Login</h2>
       <x-form.field 
         name="email" 
         label="email" 
         :value="old('email')" 
-        :required="true" 
+        required
       />
 
       <x-form.field 
         name="password" 
         label="password"
         type="password"
-        :required="true" 
+        required
       />
 
       <div class="form-row">

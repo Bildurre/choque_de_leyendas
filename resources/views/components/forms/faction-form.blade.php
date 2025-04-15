@@ -13,37 +13,35 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <div class="form-section">
-      <x-form.field 
-        name="name" 
-        label="Nombre de la Facción" 
-        :value="$faction->name ?? ''" 
-        :required="true" 
-        maxlength="255" 
-      />
+    <x-form.field 
+      name="name" 
+      label="Nombre de la Facción" 
+      :value="$faction->name ?? ''" 
+      required
+      maxlength="255" 
+    />
 
-      <x-form.field 
-        name="lore_text" 
-        label="Descripción / Lore" 
-        type="textarea" 
-        :value="$faction->lore_text ?? ''" 
-        rows="5" 
-      />
+    <x-form.textarea
+      name="lore_text" 
+      label="Descripción" 
+      :value="$faction->lore_text ?? ''" 
+      rows="5"
+      :required="true"
+    />
 
-      <x-form.field 
-        name="color" 
-        label="Color" 
-        type="color" 
-        :value="$faction->color ?? '#3d3df5'" 
-        :required="true" 
-        help="Selecciona un color representativo para la facción"
+    <div class="form-row">
+      <x-form.color 
+        name="color"
+        label="El Color de la Facción"
+        :required=true
+        :value="$faction->color ?? '#f0f0f0'"
+        :required="true"
       />
-
-      <x-form.image-uploader
-        name="icon" 
-        label="Icono" 
+      
+      <x-form.image-uploader 
+        name="icon"
+        label="Icono de la Facción"
         :currentImage="$faction->icon ?? null"
-        acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
       />
     </div>
   </x-form.card>

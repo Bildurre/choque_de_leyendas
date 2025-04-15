@@ -13,20 +13,20 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <x-form.field 
-      name="name" 
-      label="Nombre de la Superclase" 
-      :value="$heroSuperclass->name ?? ''" 
-      :required="true" 
-      maxlength="255" 
-    />
-    
-    <x-form.image-uploader
-      name="icon" 
-      label="Icono" 
-      :currentImage="$heroSuperclass->icon ?? null"
-      acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
-      help="Sube un icono representativo para esta superclase"
-    />
+    <div class="form-row">
+      <x-form.field 
+        name="name" 
+        label="Nombre de la Superclase" 
+        :value="$heroSuperclass->name ?? ''" 
+        required
+        max="255" 
+      />
+      
+      <x-form.image-uploader
+        name="icon" 
+        label="Icono" 
+        :currentImage="$heroSuperclass->icon ?? null"
+      />
+    </div>
   </x-form.card>
 </form>

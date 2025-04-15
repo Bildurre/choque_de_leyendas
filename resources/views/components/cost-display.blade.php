@@ -10,7 +10,7 @@
   @foreach($costArray as $color => $count)
     @if($count > 0)
       @for($i = 0; $i < $count; $i++)
-        <x-widgets.game-dice variant="mono-{{ $color }}" size="sm" class="cost-dice" />
+        <x-game-dice variant="mono-{{ $color }}" size="sm" class="cost-dice" />
       @endfor
     @endif
   @endforeach

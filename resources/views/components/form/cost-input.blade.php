@@ -1,16 +1,20 @@
 @props([
   'name' => 'cost',
+  'label' => null,
   'value' => '',
   'required' => false,
   'placeholder' => 'Ej: RRG (Rojo, Rojo, Verde)',
-  'helpText' => 'Usar R (Rojo), G (Verde), B (Azul). Máximo 5 dados.',
-  'label' => 'Coste de Activación'
+  'help' => 'Usar R (Rojo), G (Verde), B (Azul). Máximo 5 dados.'
 ])
 
-<div class="cost-input-container">
-  <label for="{{ $name }}" class="form-label">{{ $label }}</label>
+<x-form.group>
+  @if($label)
+    <x-form.label :for="$name" :required="$required">
+      {{ $label }}
+    </x-form.label>
+  @endif
   
-  <div class="cost-input-group">
+  <div class="cost-input-container">
     <input 
       type="text" 
       id="{{ $name }}" 
@@ -23,24 +27,19 @@
     >
     
     <div class="cost-preview" id="{{ $name }}-preview">
-      @if($value)
-        <x-cost-display :cost="$value" />
-      @endif
+      {{-- El contenido será manejado por JS --}}
+    </div>
+    
+    <div class="cost-buttons">
+      <button type="button" class="cost-button" data-cost="R">R</button>
+      <button type="button" class="cost-button" data-cost="G">G</button>
+      <button type="button" class="cost-button" data-cost="B">B</button>
+      <button type="button" class="cost-button-clear">Limpiar</button>
     </div>
   </div>
   
-  @error($name)
-    <div class="invalid-feedback">{{ $message }}</div>
-  @enderror
+  <x-form.error :name="$name" />
   
-  <div class="cost-help">
-    <span class="form-text">{{ $helpText }}</span>
-  </div>
-  
-  <div class="cost-buttons">
-    <button type="button" class="btn btn-sm btn-secondary cost-button" data-cost="R">R</button>
-    <button type="button" class="btn btn-sm btn-secondary cost-button" data-cost="G">G</button>
-    <button type="button" class="btn btn-sm btn-secondary cost-button" data-cost="B">B</button>
-    <button type="button" class="btn btn-sm btn-secondary cost-button-clear">Limpiar</button>
-  </div>
-</div>
+  <x-form.help :text="$help" />
+
+</x-form.group>

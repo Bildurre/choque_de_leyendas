@@ -6,7 +6,7 @@
   :createRoute="route('admin.attack-ranges.create')"
   createLabel='+ Nueva'
   :backRoute="route('admin.attack-ranges.index')"
-  backLabel="Volver"
+  backLabel="⬅ Volver"
 >
 
   <x-forms.attack-range-form 

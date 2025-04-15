@@ -18,7 +18,7 @@
         name="name" 
         label="Nombre del Rango" 
         :value="$attackRange->name ?? ''" 
-        :required="true" 
+        required
         maxlength="255" 
       />
 
@@ -26,8 +26,6 @@
         name="icon" 
         label="Icono" 
         :currentImage="$attackRange->icon ?? null"
-        acceptFormats="image/jpeg,image/png,image/gif,image/svg+xml"
-        help="Sube un icono representativo para este rango de ataque"
       />
     </div>
   </x-form.card>

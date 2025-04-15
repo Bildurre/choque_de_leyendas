@@ -6,7 +6,7 @@
   :createRoute="route('admin.hero-superclasses.create')"
   createLabel='+ Nueva'
   :backRoute="route('admin.hero-superclasses.index')"
-  backLabel="Volver"
+  backLabel="⬅ Volver"
 >
 
   <x-forms.hero-superclass-form 

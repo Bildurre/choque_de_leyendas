@@ -3,7 +3,7 @@
   headerTitle='Crear Clase de Héroe'
   containerTitle='Clases'
   subtitle='Crea los detalles de una nueva clase'
-  backLabel="Volver"
+  backLabel="⬅ Volver"
   :backRoute="route('admin.hero-classes.index')"
 >
 
