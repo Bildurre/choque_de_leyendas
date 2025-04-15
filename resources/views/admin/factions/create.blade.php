@@ -7,9 +7,9 @@
   :backRoute="route('admin.factions.index')"
 >
 
-  <x-admin.forms.faction-form 
-  submitLabel="Crear Facción" 
-  :cancelRoute="route('admin.factions.index')" 
+  <x-forms.faction-form 
+    submitLabel="Crear Facción" 
+    :cancelRoute="route('admin.factions.index')" 
   />
 
 </x-admin-layout>

@@ -9,20 +9,20 @@
   >
     @csrf
     
-    <x-forms.card 
+    <x-form.card 
       submit_label="Login"
       cancel_route="{{ route('wellcome') }}"
       cancel_label="Volver"
     >
       <h2>Login</h2>
-      <x-forms.field 
+      <x-form.field 
         name="email" 
         label="email" 
         :value="old('email')" 
         :required="true" 
       />
 
-      <x-forms.field 
+      <x-form.field 
         name="password" 
         label="password"
         type="password"
@@ -30,7 +30,7 @@
       />
 
       <div class="form-row">
-        <x-forms.field 
+        <x-form.field 
           name="remember" 
           label="remember me"
           type="checkbox"
@@ -42,6 +42,6 @@
           </a>
         @endif
       </div>
-    </x-forms.card>
+    </x-form.card>
   </form>
 </x-guest-layout>

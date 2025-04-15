@@ -1,0 +1,27 @@
+@use '../abstracts/all' as *;
+
+.header-actions-bar {
+  display: grid;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  align-items: first baseline;
+
+  @include responsive(mobile) {
+    grid-template-columns: 1fr auto;
+  }
+
+  .right-actions {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: flex-end;
+    
+    @include responsive(tablet) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  
+    @include responsive(desktop) {
+      display: flex;
+    }
+  }
+}

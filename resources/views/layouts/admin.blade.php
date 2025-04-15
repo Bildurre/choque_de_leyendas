@@ -25,11 +25,11 @@
   :class="{ 'sidebar-open': sidebarOpen }">
   <div class="admin-layout">
     <!-- Top Header Bar -->
-    <x-admin.header :title="$headerTitle" />
+    <x-header :title="$headerTitle" />
 
     <div class="admin-main-container">
       <!-- Sidebar -->
-      <x-admin.sidebar />
+      <x-sidebar />
 
       <!-- Main Content Area -->
       <div class="admin-main">
@@ -37,7 +37,7 @@
         <main class="admin-content">
           <div {{ $attributes->merge(['class' => 'admin-container']) }}>
             @if($title)
-              <x-admin.header-actions-bar 
+              <x-header-actions-bar 
                 :title="$title"
                 :subtitle="$subtitle"
                 :createRoute="$createRoute"

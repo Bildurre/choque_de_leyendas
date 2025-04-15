@@ -13,7 +13,7 @@
     createLabel="Crear la primera facción"
   >
     @foreach($factions as $faction)
-      <x-admin.cards.faction-card 
+      <x-cards.faction-card 
         :faction="$faction"
         :showRoute="route('admin.factions.show', $faction)"
         :editRoute="route('admin.factions.edit', $faction)"

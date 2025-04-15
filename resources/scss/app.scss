@@ -13,26 +13,24 @@
 @use 'components/action-button';
 @use 'components/stat-item';
 @use 'components/description';
+@use 'components/header';
+@use 'components/header-actions-bar';
+@use 'components/sidebar';
+@use 'components/sidebar-section';
+@use 'components/sidebar-nav-link';
 
-//COMPONENTS - ADMIN
-@use 'components/admin/header';
-@use 'components/admin/header-actions-bar';
-@use 'components/admin/sidebar';
-@use 'components/admin/sidebar-section';
-@use 'components/admin/sidebar-nav-link';
+//COMPONENTS - CARDS
+@use 'components/cards/entity-card';
 
-//COMPONENTS - ADMIN - CARDS
-@use 'components/admin/cards/entity-card';
-
-//COMPONENTS - FORMS
-@use 'components/forms/card';
-@use 'components/forms/color-input';
-@use 'components/forms/group';
-@use 'components/forms/input';
-@use 'components/forms/select';
-@use 'components/forms/textarea';
-@use 'components/forms/image-uploader';
-@use 'components/forms/checkbox';
+//COMPONENTS - FORM
+@use 'components/form/card';
+@use 'components/form/color-input';
+@use 'components/form/group';
+@use 'components/form/input';
+@use 'components/form/select';
+@use 'components/form/textarea';
+@use 'components/form/image-uploader';
+@use 'components/form/checkbox';
 
 //COMPONENTS - CARDS
 //COMPONENTS - NAVIGATION

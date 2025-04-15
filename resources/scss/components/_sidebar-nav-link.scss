@@ -1,0 +1,20 @@
+@use '../abstracts/all' as *;
+
+.sidebar-nav-link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $spacing-xs;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+  color: $color-text-muted;
+  transition: $transition-fast;
+
+  &:hover {
+    background-color: $color-bg-dark-tertiary;
+  }
+
+  &.active {
+    color: $color-accent-orange;
+    box-shadow: inset .25rem 0 0 0 $color-accent-yellow;
+  }
+}

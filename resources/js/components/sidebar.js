@@ -45,7 +45,7 @@ function createOverlay() {
  * Synchronize sidebar state with window size
  */
 function syncSidebarState() {
-  if (window.innerWidth > 768) {
+  if (window.innerWidth > 767) {
     // On desktop, sidebar should be open
     document.body.classList.add('sidebar-open');
     updateAlpineState(true);

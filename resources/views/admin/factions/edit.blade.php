@@ -9,7 +9,7 @@
   backLabel="Volver"
 >
 
-  <x-admin.forms.faction-form 
+  <x-forms.faction-form 
   :faction="$faction" 
   submitLabel="Guardar Cambios" 
   :cancelRoute="route('admin.factions.index')" 
