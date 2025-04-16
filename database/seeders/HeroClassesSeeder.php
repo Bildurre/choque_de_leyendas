@@ -4,43 +4,34 @@ namespace Database\Seeders;
 
 use App\Models\HeroClass;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\File;
 
 class HeroClassesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        
-      $classes = [
-        [
-          'name' => 'Rogue',
-          'passive' => 'Esta es la pasiva del picaro',
-          'hero_superclass_id' => 1,
-          'agility_modifier' => 1,
-          'mental_modifier' => 0,
-          'will_modifier' => 0,
-          'strength_modifier' => 0,
-          'armor_modifier' => -1,
-        ],
-        [
-          'name' => 'Priest',
-          'passive' => 'Esta es la pasiva del sacerdote',
-          'hero_superclass_id' => 2,
-          'agility_modifier' => 0,
-          'mental_modifier' => 1,
-          'will_modifier' => 2,
-          'strength_modifier' => -1,
-          'armor_modifier' => -1,
-        ],
-      ];
+  /**
+   * Run the database seeds.
+   */
+  public function run(): void
+  {
+      
+    // Leer el archivo JSON
+    $json = File::get(database_path('data/heroClasses.json'));
+    $classes = json_decode($json, true);
 
-      foreach ($classes as $class) {
-        HeroClass::create($class);
-      }
+    // Insertar cada facción
+    foreach ($classes as $classData) {
+      $class = new HeroClass();
+      $class->name = $classData['name'];
+      $class->passive = $classData['passive'];
+      $class->hero_superclass_id = $classData['hero_superclass_id'];
+      $class->agility_modifier = $classData['agility_modifier'];
+      $class->mental_modifier = $classData['mental_modifier'];
+      $class->will_modifier = $classData['will_modifier'];
+      $class->strength_modifier = $classData['strength_modifier'];
+      $class->armor_modifier = $classData['armor_modifier'];
 
-      $this->command->info('Clases iniciales creadas correctamente.');
+      $class->save();
     }
+    $this->command->info("Clases iniciales creadas con exito");
+  }
 }
