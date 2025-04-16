@@ -81,11 +81,11 @@
       }
     }
 
-    .chevron-up {
+    .icon--chevron-up {
       display: none;
     }
     
-    .chevron-down {
+    .icon--chevron-down {
       display: block;
     }
   }
@@ -93,11 +93,11 @@
 
 .expanded {
   .action-btn--toggle {
-    .chevron-down {
+    .icon--chevron-down {
       display: none;
     }
     
-    .chevron-up {
+    .icon--chevron-up {
       display: block;
     }
   }
