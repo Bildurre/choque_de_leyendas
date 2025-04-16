@@ -26,12 +26,13 @@ class HeroRaceService
    */
   public function create(array $data): HeroRace
   {
-    if (!$this->validateModifiers($data)) {
-      throw new \Exception('La suma total de los valores absolutos de los modificadores no puede superar 3.');
-    }
-    
     $heroRace = new HeroRace();
     $heroRace->fill($data);
+
+    if (!$heroRace->isValidModifiers()) {
+      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
+    }
+    
     $heroRace->save();
     
     return $heroRace;
@@ -47,11 +48,12 @@ class HeroRaceService
    */
   public function update(HeroRace $heroRace, array $data): HeroRace
   {
-    if (!$this->validateModifiers($data)) {
-      throw new \Exception('La suma total de los valores absolutos de los modificadores no puede superar 3.');
+    $heroRace->fill($data);
+
+    if (!$heroRace->isValidModifiers()) {
+      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
     }
     
-    $heroRace->fill($data);
     $heroRace->save();
     
     return $heroRace;
@@ -72,22 +74,5 @@ class HeroRaceService
     }
     
     return $heroRace->delete();
-  }
-  
-  /**
-   * Validate modifiers total
-   *
-   * @param array $data
-   * @return bool
-   */
-  public function validateModifiers(array $data): bool
-  {
-    $totalModifiers = abs($data['agility_modifier'] ?? 0) +
-                     abs($data['mental_modifier'] ?? 0) +
-                     abs($data['will_modifier'] ?? 0) +
-                     abs($data['strength_modifier'] ?? 0) +
-                     abs($data['armor_modifier'] ?? 0);
-    
-    return $totalModifiers <= 3;
   }
 }

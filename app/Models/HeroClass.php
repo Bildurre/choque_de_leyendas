@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Traits\HasAttributeModifiers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class HeroClass extends Model
 {
   use HasFactory;
+  use HasAttributeModifiers;
 
   /**
    * The table associated with the model.
@@ -63,19 +65,21 @@ class HeroClass extends Model
   }
 
   /**
-   * Validate attribute modifiers
+   * Check if modifiers are valid using configured limits
    *
    * @return bool
    */
-  public function validateModifiers(): bool
+  public function isValidModifiers(): bool
   {
-    $totalModifiers = abs($this->agility_modifier) +
-      abs($this->mental_modifier) +
-      abs($this->will_modifier) +
-      abs($this->strength_modifier) +
-      abs($this->armor_modifier);
-
-    // Assume a reasonable limit for total modifier points
-    return $totalModifiers <= 3;
+    return $this->validateModifiers([
+      'max_absolute_sum' => 3,
+      'attribute_limits' => [
+        'agility' => 2,
+        'mental' => 2,
+        'will' => 2,
+        'strength' => 2,
+        'armor' => 2
+      ]
+    ]);
   }
 }

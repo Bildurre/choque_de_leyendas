@@ -1,3 +1,4 @@
+import { setupModifiersValidation } from '../common/modifier-validation';
 import { initWysiwygEditors } from '../../components/wysiwyg-editor';
 
 /**
@@ -22,59 +23,29 @@ function setupFormPage() {
 }
 
 /**
- * Setup validation for hero class modifiers
+ * Setup hero class form page
  */
-function setupModifiersValidation() {
-  const modifierInputs = [
+function setupFormPage() {
+  const modifierFields = [
     'agility_modifier', 
     'mental_modifier', 
     'will_modifier', 
     'strength_modifier', 
     'armor_modifier'
   ];
-
-  const submitButton = document.querySelector('button[type="submit"]');
-  if (!submitButton) return;
-
-  function calculateTotalModifiers() {
-    return modifierInputs.reduce((total, inputId) => {
-      const input = document.getElementById(inputId);
-      return total + Math.abs(parseInt(input?.value || 0));
-    }, 0);
-  }
-
-  function updateValidation() {
-    const total = calculateTotalModifiers();
-    const isValid = total <= 3;
-
-    submitButton.disabled = !isValid;
-
-    // Visual feedback
-    modifierInputs.forEach(inputId => {
-      const input = document.getElementById(inputId);
-      if (input) {
-        input.classList.toggle('is-invalid', !isValid);
-      }
-    });
-    
-    // Display the total
-    const totalDisplay = document.getElementById('modifiers-total');
-    if (totalDisplay) {
-      totalDisplay.textContent = total;
-      totalDisplay.classList.toggle('text-danger', !isValid);
-    }
-  }
-
-  modifierInputs.forEach(inputId => {
-    const input = document.getElementById(inputId);
-    if (input) {
-      input.addEventListener('change', updateValidation);
-      input.addEventListener('input', updateValidation);
+  
+  setupModifiersValidation(modifierFields, {
+    maxAbsoluteSum: 3,
+    attributeLimits: {
+      agility: 2,
+      mental: 2,
+      will: 2,
+      strength: 2,
+      armor: 2
     }
   });
-
-  // Initial validation
-  updateValidation();
+  
+  initWysiwygEditors();
 }
 
 export function create() {

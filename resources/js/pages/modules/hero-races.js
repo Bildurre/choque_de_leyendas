@@ -1,4 +1,4 @@
-import { setupModifiersValidation } from './common/modifier-validation';
+import { setupModifiersValidation } from '../common/modifier-validation';
 
 /**
  * Default handler for hero race pages
@@ -17,13 +17,24 @@ export default function heroRaceHandler(action) {
  * Setup hero race form page
  */
 function setupFormPage() {
-  setupModifiersValidation([
+  const modifierFields = [
     'agility_modifier', 
     'mental_modifier', 
     'will_modifier', 
     'strength_modifier', 
     'armor_modifier'
-  ], 3);
+  ];
+  
+  setupModifiersValidation(modifierFields, {
+    maxAbsoluteSum: 3,
+    attributeLimits: {
+      agility: 3,
+      mental: 3,
+      will: 3,
+      strength: 3,
+      armor: 3
+    }
+  });
 }
 
 export function create() {

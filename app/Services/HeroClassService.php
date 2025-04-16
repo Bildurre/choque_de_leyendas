@@ -22,11 +22,17 @@ class HeroClassService
    *
    * @param array $data
    * @return HeroClass
+   * @throws \Exception
    */
   public function create(array $data): HeroClass
   {
     $heroClass = new HeroClass();
     $heroClass->fill($data);
+    
+    if (!$heroClass->isValidModifiers()) {
+      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
+    }
+    
     $heroClass->save();
     
     return $heroClass;
@@ -38,10 +44,16 @@ class HeroClassService
    * @param HeroClass $heroClass
    * @param array $data
    * @return HeroClass
+   * @throws \Exception
    */
   public function update(HeroClass $heroClass, array $data): HeroClass
   {
     $heroClass->fill($data);
+    
+    if (!$heroClass->isValidModifiers()) {
+      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
+    }
+    
     $heroClass->save();
     
     return $heroClass;
@@ -56,22 +68,5 @@ class HeroClassService
   public function delete(HeroClass $heroClass): bool
   {
     return $heroClass->delete();
-  }
-  
-  /**
-   * Validate modifiers total
-   *
-   * @param array $data
-   * @return bool
-   */
-  public function validateModifiers(array $data): bool
-  {
-    $totalModifiers = abs($data['agility_modifier']) +
-                     abs($data['mental_modifier']) +
-                     abs($data['will_modifier']) +
-                     abs($data['strength_modifier']) +
-                     abs($data['armor_modifier']);
-    
-    return $totalModifiers <= 3;
   }
 }
