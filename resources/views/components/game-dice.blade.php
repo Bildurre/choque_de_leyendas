@@ -38,6 +38,9 @@ switch ($variant) {
   case 'red-green':
     $facesFill = [$color1, $color2, $color1];
     break;
+  case 'mono-yellow':
+    $facesFill = ['#FFD976', '#FFD976', '#FFD976'];
+    break;
   default:
     $facesFill = [$color2, $color3, $color1];
     break;

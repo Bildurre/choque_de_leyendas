@@ -20,6 +20,7 @@ class Hero extends Model
     'name',
     'description',
     'faction_id',
+    'hero_race_id',
     'hero_class_id',
     'agility',
     'mental',
@@ -37,6 +38,14 @@ class Hero extends Model
     return $this->belongsTo(Faction::class);
   }
 
+  /**
+   * Get the race that owns the hero.
+   */
+  public function race(): BelongsTo
+  {
+    return $this->belongsTo(HeroRace::class, 'hero_race_id');
+  }
+  
   /**
    * Get the class that owns the hero.
    */

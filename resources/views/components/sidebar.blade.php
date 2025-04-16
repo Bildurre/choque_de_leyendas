@@ -5,10 +5,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.dashboard')"
           :active="request()->routeIs('admin.dashboard')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Dashboard
         </x-sidebar-nav-link>
@@ -20,10 +17,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.factions.index')"
           :active="request()->routeIs('admin.factions.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Facciones
         </x-sidebar-nav-link>
@@ -32,10 +26,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.hero-abilities.index')"
           :active="request()->routeIs('admin.hero-abilities.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Habilidades
         </x-sidebar-nav-link>
@@ -44,10 +35,7 @@
         <x-sidebar-nav-link 
           route="#"
           :active="request()->routeIs('admin.heroes.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Héroes
         </x-sidebar-nav-link>
@@ -59,10 +47,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.hero-attributes.edit')"
           :active="request()->routeIs('admin.hero-attributes.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Configuración de Atributos
         </x-sidebar-nav-link>
@@ -71,10 +56,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.hero-superclasses.index')"
           :active="request()->routeIs('admin.hero-superclasses.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Superclases
         </x-sidebar-nav-link>
@@ -83,12 +65,19 @@
         <x-sidebar-nav-link 
           :route="route('admin.hero-classes.index')"
           :active="request()->routeIs('admin.hero-classes.*')"  
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Clases
+        </x-sidebar-nav-link>
+      </li>
+
+      <li>
+        <x-sidebar-nav-link 
+          :route="route('admin.hero-races.index')"
+          :active="request()->routeIs('admin.hero-races.*')" 
+          icon="mono-yellow"
+        >
+          Razas
         </x-sidebar-nav-link>
       </li>
     </x-sidebar-section>
@@ -98,10 +87,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.attack-types.index')"
           :active="request()->routeIs('admin.attack-types.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Tipos
         </x-sidebar-nav-link>
@@ -110,10 +96,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.attack-subtypes.index')"
           :active="request()->routeIs('admin.attack-subtypes.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Subtipos
         </x-sidebar-nav-link>
@@ -122,10 +105,7 @@
         <x-sidebar-nav-link 
           :route="route('admin.attack-ranges.index')"
           :active="request()->routeIs('admin.attack-ranges.*')" 
-          icon="solid"
-          color1="#FFD976"
-          color2="#FFD976"
-          color3="#FFD976"
+          icon="mono-yellow"
         >
           Rangos
         </x-sidebar-nav-link>

@@ -16,6 +16,7 @@ return new class extends Migration
       $table->string('name');
       $table->text('description')->nullable();
       $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');
+      $table->foreignId('hero_race_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('hero_class_id')->nullable()->constrained()->onDelete('set null');
       $table->integer('agility')->default(0);
       $table->integer('mental')->default(0);

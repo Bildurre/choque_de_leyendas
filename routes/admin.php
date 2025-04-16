@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Admin\FactionController;
-use App\Http\Controllers\Admin\HeroAbilityController;
-use App\Http\Controllers\Admin\HeroAttributeConfigurationController;
-use App\Http\Controllers\Admin\HeroSuperclassController;
+use App\Http\Controllers\Admin\HeroRaceController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroClassController;
 use App\Http\Controllers\Admin\AttackTypeController;
-use App\Http\Controllers\Admin\AttackSubtypeController;
 use App\Http\Controllers\Admin\AttackRangeController;
-use App\Http\Middleware\EnsureIsAdmin;
+use App\Http\Controllers\Admin\HeroAbilityController;
+use App\Http\Controllers\Admin\AttackSubtypeController;
+use App\Http\Controllers\Admin\HeroSuperclassController;
+use App\Http\Controllers\Admin\HeroAttributeConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
@@ -51,4 +52,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Attack Ranges
   Route::resource('attack-ranges', AttackRangeController::class);
+
+  // Hero Races
+  Route::resource('hero-races', HeroRaceController::class);
 });
