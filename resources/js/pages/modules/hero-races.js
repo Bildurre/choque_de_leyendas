@@ -1,4 +1,4 @@
-import { setupModifiersValidation } from '../common/modifier-validation';
+import { setupModifiersValidation } from './common/modifier-validation';
 
 /**
  * Default handler for hero race pages
@@ -26,14 +26,8 @@ function setupFormPage() {
   ];
   
   setupModifiersValidation(modifierFields, {
-    maxAbsoluteSum: 3,
-    attributeLimits: {
-      agility: 3,
-      mental: 3,
-      will: 3,
-      strength: 3,
-      armor: 3
-    }
+    attributeLimits: 1,
+    maxModifiableAttributes: 2
   });
 }
 

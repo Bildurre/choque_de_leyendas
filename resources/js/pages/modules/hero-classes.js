@@ -1,4 +1,4 @@
-import { setupModifiersValidation } from '../common/modifier-validation';
+import { setupModifiersValidation } from './common/modifier-validation';
 import { initWysiwygEditors } from '../../components/wysiwyg-editor';
 
 /**
@@ -18,14 +18,6 @@ export default function heroClassHandler(action) {
  * Setup hero class form page
  */
 function setupFormPage() {
-  setupModifiersValidation();
-  initWysiwygEditors();
-}
-
-/**
- * Setup hero class form page
- */
-function setupFormPage() {
   const modifierFields = [
     'agility_modifier', 
     'mental_modifier', 
@@ -35,14 +27,8 @@ function setupFormPage() {
   ];
   
   setupModifiersValidation(modifierFields, {
-    maxAbsoluteSum: 3,
-    attributeLimits: {
-      agility: 2,
-      mental: 2,
-      will: 2,
-      strength: 2,
-      armor: 2
-    }
+    attributeLimits: 1,
+    maxModifiableAttributes: 3
   });
   
   initWysiwygEditors();

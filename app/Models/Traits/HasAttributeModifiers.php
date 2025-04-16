@@ -62,22 +62,6 @@ trait HasAttributeModifiers
     
     return $count;
   }
-
-  /**
-   * Calculate the sum of absolute values of all modifiers
-   *
-   * @return int
-   */
-  public function getAbsoluteModifiersSum(): int
-  {
-    $sum = 0;
-    
-    foreach ($this->getAttributeModifierFields() as $field) {
-      $sum += abs($this->{$field} ?? 0);
-    }
-    
-    return $sum;
-  }
   
   /**
    * Calculate the sum of all modifiers
@@ -121,8 +105,6 @@ trait HasAttributeModifiers
   {
     // Get all the values we need for validation
     $modifiedCount = $this->getModifiedAttributesCount();
-    $absoluteSum = $this->getAbsoluteModifiersSum();
-    $totalSum = $this->getTotalModifiersSum();
     $fieldValues = $this->getModifierValues();
 
     // Validate max modifiable attributes count
@@ -130,41 +112,45 @@ trait HasAttributeModifiers
       return false;
     }
 
-    // Validate absolute value sum
-    if (isset($options['max_absolute_sum']) && $absoluteSum > $options['max_absolute_sum']) {
-      return false;
-    }
-
     // Validate total sum
-    if (isset($options['max_total_sum']) && abs($totalSum) > $options['max_total_sum']) {
+    if (isset($options['max_total_sum']) && abs($this->getTotalModifiersSum()) > $options['max_total_sum']) {
       return false;
     }
 
-    // Validate per attribute limits
+    // Process attribute_limits - can be a single value or an array of limits
+    $attributeLimits = [];
     if (isset($options['attribute_limits'])) {
-      foreach ($fieldValues as $field => $value) {
-        $attributeName = str_replace('_modifier', '', $field);
-        if (isset($options['attribute_limits'][$attributeName])) {
-          $limit = $options['attribute_limits'][$attributeName];
-          
-          if (is_array($limit)) {
-            // If limit is [min, max]
-            if ($value < $limit[0] || $value > $limit[1]) {
-              return false;
-            }
-          } else {
-            // If limit is just a max absolute value
-            if (abs($value) > $limit) {
-              return false;
-            }
-          }
+      if (is_array($options['attribute_limits'])) {
+        // If it's already an array with specific limits
+        $attributeLimits = $options['attribute_limits'];
+      } else {
+        // If it's a single value to be applied to all attributes
+        $limit = $options['attribute_limits'];
+        foreach ($this->getAttributeModifierFields() as $field) {
+          $attributeName = str_replace('_modifier', '', $field);
+          $attributeLimits[$attributeName] = $limit;
         }
       }
     }
 
-    // Check for custom validation if defined
-    if (isset($options['custom_validation']) && is_callable($options['custom_validation'])) {
-      return $options['custom_validation']($this, $fieldValues);
+    // Validate per attribute limits
+    foreach ($fieldValues as $field => $value) {
+      $attributeName = str_replace('_modifier', '', $field);
+      if (isset($attributeLimits[$attributeName])) {
+        $limit = $attributeLimits[$attributeName];
+        
+        if (is_array($limit)) {
+          // If limit is [min, max]
+          if ($value < $limit[0] || $value > $limit[1]) {
+            return false;
+          }
+        } else {
+          // If limit is just a max absolute value
+          if (abs($value) > $limit) {
+            return false;
+          }
+        }
+      }
     }
 
     return true;

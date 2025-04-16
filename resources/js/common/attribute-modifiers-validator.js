@@ -8,27 +8,53 @@ export class AttributeModifiersValidator {
    * @param {Object} options Configuration options
    * @param {Array} options.fieldIds Array of input field IDs to track
    * @param {Number} options.maxModifiableAttributes Maximum number of attributes that can be modified (optional)
-   * @param {Number} options.maxAbsoluteSum Maximum sum of absolute values of modifiers (optional)
    * @param {Number} options.maxTotalSum Maximum sum of all modifiers (optional)
-   * @param {Object} options.attributeLimits Per-attribute limits (optional)
+   * @param {Object|Number} options.attributeLimits Per-attribute limits or a single limit for all (optional)
    * @param {String} options.totalElementId ID of element to display the total (optional)
    * @param {String} options.countElementId ID of element to display the count (optional)
    * @param {String} options.errorClass CSS class to apply to invalid fields (optional)
-   * @param {Function} options.customValidator Custom validation function (optional)
    */
   constructor(options) {
     this.fieldIds = options.fieldIds || [];
     this.maxModifiableAttributes = options.maxModifiableAttributes || null;
-    this.maxAbsoluteSum = options.maxAbsoluteSum || null;
     this.maxTotalSum = options.maxTotalSum || null;
-    this.attributeLimits = options.attributeLimits || null;
+    this.attributeLimits = this.processAttributeLimits(options.attributeLimits);
     this.totalElementId = options.totalElementId || null;
     this.countElementId = options.countElementId || null;
     this.errorClass = options.errorClass || 'is-invalid';
-    this.customValidator = options.customValidator || null;
     this.submitButton = document.querySelector('button[type="submit"]');
     
     this.init();
+  }
+  
+  /**
+   * Process attribute limits - handle both object and single value
+   * @param {Object|Number} limits 
+   * @returns {Object} Processed attribute limits
+   */
+  processAttributeLimits(limits) {
+    if (limits === null || limits === undefined) {
+      return null;
+    }
+    
+    // If it's already an object, return it as is
+    if (typeof limits === 'object' && !Array.isArray(limits)) {
+      return limits;
+    }
+    
+    // If it's a single value (number), apply to all attributes
+    if (typeof limits === 'number') {
+      const processedLimits = {};
+      
+      this.fieldIds.forEach(fieldId => {
+        const attributeName = fieldId.replace('_modifier', '');
+        processedLimits[attributeName] = limits;
+      });
+      
+      return processedLimits;
+    }
+    
+    return null;
   }
   
   /**
@@ -65,23 +91,6 @@ export class AttributeModifiersValidator {
     });
     
     return count;
-  }
-  
-  /**
-   * Calculate sum of absolute values
-   * @returns {Number}
-   */
-  calculateAbsoluteSum() {
-    let sum = 0;
-    
-    this.fieldIds.forEach(fieldId => {
-      const input = document.getElementById(fieldId);
-      if (input) {
-        sum += Math.abs(parseInt(input.value || 0));
-      }
-    });
-    
-    return sum;
   }
   
   /**
@@ -125,7 +134,6 @@ export class AttributeModifiersValidator {
   validate() {
     // Get all the values we need for validation
     const modifiedCount = this.calculateModifiedCount();
-    const absoluteSum = this.calculateAbsoluteSum();
     const totalSum = this.calculateTotalSum();
     const fieldValues = this.getFieldValues();
     
@@ -135,12 +143,6 @@ export class AttributeModifiersValidator {
     // Validate max modifiable attributes
     if (this.maxModifiableAttributes !== null && modifiedCount > this.maxModifiableAttributes) {
       this.setInvalid(`No puedes modificar más de ${this.maxModifiableAttributes} atributos`);
-      return false;
-    }
-    
-    // Validate absolute sum
-    if (this.maxAbsoluteSum !== null && absoluteSum > this.maxAbsoluteSum) {
-      this.setInvalid(`La suma de modificadores no puede superar ${this.maxAbsoluteSum}`);
       return false;
     }
     
@@ -176,14 +178,8 @@ export class AttributeModifiersValidator {
       }
     }
     
-    // Custom validation
-    if (this.customValidator && !this.customValidator(fieldValues)) {
-      this.setInvalid('Validación personalizada fallida');
-      return false;
-    }
-    
     // Update display elements
-    this.updateDisplay(modifiedCount, absoluteSum);
+    this.updateDisplay(modifiedCount);
     
     return true;
   }
@@ -226,9 +222,8 @@ export class AttributeModifiersValidator {
   /**
    * Update display elements with current values
    * @param {Number} count Number of modified attributes
-   * @param {Number} sum Sum of absolute values
    */
-  updateDisplay(count, sum) {
+  updateDisplay(count) {
     // Update count display
     if (this.countElementId) {
       const countElement = document.getElementById(this.countElementId);
@@ -237,17 +232,13 @@ export class AttributeModifiersValidator {
       }
     }
     
-    // Update sum display
+    // Update total display
     if (this.totalElementId) {
       const totalElement = document.getElementById(this.totalElementId);
+      const totalValue = Math.abs(this.calculateTotalSum());
+      
       if (totalElement) {
-        totalElement.textContent = sum;
-        
-        // Add visual feedback if approaching limit
-        if (this.maxAbsoluteSum) {
-          totalElement.classList.toggle('text-warning', sum > this.maxAbsoluteSum * 0.7);
-          totalElement.classList.toggle('text-danger', sum > this.maxAbsoluteSum);
-        }
+        totalElement.textContent = totalValue;
       }
     }
   }

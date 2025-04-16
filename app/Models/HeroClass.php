@@ -65,21 +65,15 @@ class HeroClass extends Model
   }
 
   /**
-   * Check if modifiers are valid using configured limits
-   *
-   * @return bool
-   */
-  public function isValidModifiers(): bool
-  {
-    return $this->validateModifiers([
-      'max_absolute_sum' => 3,
-      'attribute_limits' => [
-        'agility' => 2,
-        'mental' => 2,
-        'will' => 2,
-        'strength' => 2,
-        'armor' => 2
-      ]
-    ]);
-  }
+ * Check if modifiers are valid using configured limits
+ *
+ * @return bool
+ */
+public function isValidModifiers(): bool
+{
+  return $this->validateModifiers([
+    'max_modifiable_attributes' => 3,
+    'attribute_limits' => 1
+  ]);
+}
 }

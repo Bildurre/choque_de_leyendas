@@ -8,9 +8,8 @@ import { AttributeModifiersValidator } from '../../../common/attribute-modifiers
  */
 export function setupModifiersValidation(modifierFields, options = {}) {
   const defaultOptions = {
-    maxAbsoluteSum: 3,
     totalElementId: 'modifiers-total',
-    maxElementId: 'modifiers-max'
+    countElementId: 'modifiers-count'
   };
   
   const config = {

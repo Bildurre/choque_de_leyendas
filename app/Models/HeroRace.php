@@ -48,21 +48,15 @@ class HeroRace extends Model
   }
 
   /**
-   * Check if modifiers are valid using configured limits
-   *
-   * @return bool
-   */
+ * Check if modifiers are valid using configured limits
+ *
+ * @return bool
+ */
   public function isValidModifiers(): bool
   {
     return $this->validateModifiers([
-      'max_absolute_sum' => 3,
-      'attribute_limits' => [
-        'agility' => 3,
-        'mental' => 3,
-        'will' => 3,
-        'strength' => 3,
-        'armor' => 3
-      ]
+      'max_modifiable_attributes' => 2,
+      'attribute_limits' => 1
     ]);
   }
 }
