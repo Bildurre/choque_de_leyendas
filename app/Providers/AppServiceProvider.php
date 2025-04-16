@@ -8,6 +8,8 @@ use App\Services\HeroClassService;
 use App\Services\AttackTypeService;
 use App\Services\AttackRangeService;
 use App\Services\HeroAbilityService;
+use Illuminate\Pagination\Paginator;
+use App\Services\WysiwygImageService;
 use App\Services\AttackSubtypeService;
 use App\Services\CostTranslatorService;
 use App\Services\HeroSuperclassService;
@@ -66,6 +68,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+      Paginator::defaultView('vendor.pagination.custom');
+      Paginator::defaultSimpleView('vendor.pagination.custom');
     }
 }

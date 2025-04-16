@@ -34,7 +34,7 @@ class HeroAbilityController extends Controller
    */
   public function index()
   {
-    $heroAbilities = $this->heroAbilityService->getPaginatedAbilities();
+    $heroAbilities = $this->heroAbilityService->getPaginatedAbilities(12);
     return view('admin.hero-abilities.index', compact('heroAbilities'));
   }
 

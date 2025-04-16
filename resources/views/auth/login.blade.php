@@ -30,10 +30,9 @@
       />
 
       <div class="form-row">
-        <x-form.field 
+        <x-form.checkbox 
           name="remember" 
           label="remember me"
-          type="checkbox"
         />
         
         @if (Route::has('password.request'))

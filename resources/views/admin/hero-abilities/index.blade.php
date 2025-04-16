@@ -7,6 +7,9 @@
   createLabel='+ Nueva'
 >
 
+  
+  {{ $heroAbilities->links() }}
+
   <x-entities-grid 
     empty_message="No hay habilidades disponibles"
     :create_route="route('admin.hero-abilities.create')"
@@ -21,8 +24,6 @@
   @endforeach
   </x-entities-grid>
 
-  <div class="pagination-container">
-    {{ $heroAbilities->links() }}
-  </div>
+  {{ $heroAbilities->links() }}
 
 </x-admin-layout>

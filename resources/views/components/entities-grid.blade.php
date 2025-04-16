@@ -5,7 +5,7 @@
   'columns' => false
 ])
 
-<div {{ $attributes->merge(['class' => 'entities-grid' . ($columns ? ' entities-grid--columns' : '')]) }}>
+<div {{ $attributes->merge(['class' => 'entities-grid' . ($columns ? ' entities-grid--columns' : '')]) }}>  
   @if(!$slot->isEmpty())
     {{ $slot }}
   @else
