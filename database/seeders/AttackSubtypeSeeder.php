@@ -15,19 +15,46 @@ class AttackSubtypeSeeder extends Seeder
   {
     
     $subtypes = [
-      ['name' => 'Cortante'],
-      ['name' => 'Perforante'],
-      ['name' => 'Contundente'],
-      ['name' => 'Lacerante'],
-      ['name' => 'Fuego'],
-      ['name' => 'Agua'],
-      ['name' => 'Electricidad'],
-      ['name' => 'Aire'],
-      ['name' => 'Tierra'],
-      ['name' => 'Luz'],
-      ['name' => 'Oscuridad'],
-      ['name' => 'Arcano'],
-      ['name' => 'Psíquico']
+      [
+        'name' => 'Cortante',
+        'attack_type_id' => 1
+      ],
+      [
+        'name' => 'Perforante',
+        'attack_type_id' => 1
+      ],
+      [
+        'name' => 'Contundente',
+        'attack_type_id' => 1
+      ],
+      [
+        'name' => 'Fuego',
+        'attack_type_id' => 2
+      ],
+      [
+        'name' => 'Electricidad',
+        'attack_type_id' => 2
+      ],
+      [
+        'name' => 'Agua',
+        'attack_type_id' => 2
+      ],
+      [
+        'name' => 'Tierra',
+        'attack_type_id' => 2
+      ],
+      [
+        'name' => 'Aire',
+        'attack_type_id' => 2
+      ],
+      [
+        'name' => 'Luz',
+        'attack_type_id' => 3
+      ],
+      [
+        'name' => 'Oscuridad',
+        'attack_type_id' => 3
+      ],
     ];
 
     foreach ($subtypes as $subtype) {

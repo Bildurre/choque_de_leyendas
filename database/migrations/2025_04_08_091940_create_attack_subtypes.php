@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('attack_subtypes', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
+      $table->foreignId('attack_type_id')->constrained()->onDelete('cascade');
       $table->datetimes();
     });
   }

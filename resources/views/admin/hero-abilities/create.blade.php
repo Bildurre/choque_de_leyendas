@@ -9,7 +9,6 @@
 
   <x-forms.hero-ability-form 
     :ranges="$ranges"
-    :types="$types"
     :subtypes="$subtypes"
     :selectedHeroes="[]"
     :isDefault="false"

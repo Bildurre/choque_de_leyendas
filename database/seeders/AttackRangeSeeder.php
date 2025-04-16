@@ -17,7 +17,6 @@ class AttackRangeSeeder extends Seeder
       ['name' => 'A Rango'],
       ['name' => 'A Distancia'],
       ['name' => 'Aura'],
-      ['name' => 'Contacto'],
       ['name' => 'Propio']
     ];
 

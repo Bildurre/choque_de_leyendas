@@ -27,6 +27,7 @@ class AttackSubtypeService
   {
     $attackSubtype = new AttackSubtype();
     $attackSubtype->name = $data['name'];
+    $attackSubtype->attack_type_id = $data['attack_type_id'];
     $attackSubtype->save();
     
     return $attackSubtype;
@@ -42,6 +43,7 @@ class AttackSubtypeService
   public function update(AttackSubtype $attackSubtype, array $data): AttackSubtype
   {
     $attackSubtype->name = $data['name'];
+    $attackSubtype->attack_type_id = $data['attack_type_id'];
     $attackSubtype->save();
     
     return $attackSubtype;

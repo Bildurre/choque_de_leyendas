@@ -12,7 +12,6 @@
   <x-forms.hero-ability-form 
     :heroAbility="$heroAbility"
     :ranges="$ranges"
-    :types="$types"
     :subtypes="$subtypes"
     :submitLabel="'Guardar Cambios'" 
     :cancelRoute="route('admin.hero-abilities.index')" 

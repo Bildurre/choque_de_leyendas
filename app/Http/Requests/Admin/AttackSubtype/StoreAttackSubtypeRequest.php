@@ -23,6 +23,7 @@ class StoreAttackSubtypeRequest extends FormRequest
   {
     return [
       'name' => 'required|string|max:255|unique:attack_subtypes',
+      'attack_type_id' => 'required|exists:attack_types,id',
     ];
   }
 

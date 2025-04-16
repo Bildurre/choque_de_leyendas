@@ -50,15 +50,6 @@
       />
 
       <x-form.select
-        name="attack_type_id" 
-        label="Tipo" 
-        placeholder="Selecciona un tipo"
-        :value="$heroAbility->attack_type_id ?? ''"
-        :options="$types->pluck('name', 'id')->toArray()"
-        required
-      />
-
-      <x-form.select
         name="attack_subtype_id" 
         label="Subtipo" 
         placeholder="Selecciona un subtipo"

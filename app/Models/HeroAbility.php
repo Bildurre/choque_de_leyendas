@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Traits\HasSlug;
 use App\Services\CostTranslatorService;
 
 class HeroAbility extends Model
@@ -31,9 +30,9 @@ class HeroAbility extends Model
   /**
    * Get the subtype for this ability.
    */
-  public function type(): BelongsTo
+  public function type()
   {
-    return $this->belongsTo(AttackType::class, 'attack_type_id');
+    return $this->subtype ? $this->subtype->type() : null;
   }
 
   /**

@@ -13,8 +13,7 @@ class AttackTypeSeeder extends Seeder
   public function run(): void
   {
     $types = [
-      ['name' => 'Marcial'],
-      ['name' => 'Proyectil'],
+      ['name' => 'Físico'],
       ['name' => 'Elemental'],
       ['name' => 'Arcano']
     ];

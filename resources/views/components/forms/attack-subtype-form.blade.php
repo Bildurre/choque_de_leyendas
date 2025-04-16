@@ -12,12 +12,22 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <x-form.field 
-      name="name" 
-      label="Nombre del Subtipo" 
-      :value="$attackSubtype->name ?? ''" 
-      required
-      max="255" 
-    />
+    <div class="form-row">
+      <x-form.field 
+        name="name" 
+        label="Nombre del Subtipo" 
+        :value="$attackSubtype->name ?? ''" 
+        required
+        max="255" 
+      />
+      
+      <x-form.select
+        name="attack_type_id" 
+        label="Tipo de Ataque" 
+        :value="$attackSubtype->attack_type_id ?? ''"
+        :options="$attackTypes->pluck('name', 'id')->toArray()"
+        required
+      />
+    </div>
   </x-form.card>
 </form>

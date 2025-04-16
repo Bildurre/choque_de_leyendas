@@ -44,10 +44,9 @@ class HeroAbilityController extends Controller
   public function create()
   {
     $ranges = AttackRange::all();
-    $types = AttackType::all();
-    $subtypes = AttackSubtype::all();
+    $subtypes = AttackSubtype::with('type')->get();
     
-    return view('admin.hero-abilities.create', compact('subtypes', 'ranges', 'types'));
+    return view('admin.hero-abilities.create', compact('subtypes', 'ranges'));
   }
 
   /**

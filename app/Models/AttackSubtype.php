@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AttackSubtype extends Model
@@ -19,6 +20,14 @@ class AttackSubtype extends Model
     'name'
   ];
 
+  /**
+   * Get the type for this subtype.
+   */
+  public function type(): BelongsTo
+  {
+    return $this->belongsTo(AttackType::class, 'attack_type_id');
+  }
+  
   /**
    * Get the abilities with this subtype.
    */

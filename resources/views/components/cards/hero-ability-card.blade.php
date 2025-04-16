@@ -25,7 +25,7 @@
         <x-cost-display :cost="$ability->cost"/>  
       </x-description>
       <x-description title="Rango:" row>{{ $ability->range->name }}</x-description>
-      <x-description title="Tipo:" row>{{ $ability->type->name }}</x-description>
+      <x-description title="Tipo:" row>{{ $ability->subtype->type->name ?? 'N/A' }}</x-description>
       <x-description title="Subtipo:" row>{{ $ability->subtype->name }}</x-description>
       <x-description title="Área:" row>{{ $ability->blast ? "Área" : "Un Objetivo" }}</x-description>
     </x-description>    

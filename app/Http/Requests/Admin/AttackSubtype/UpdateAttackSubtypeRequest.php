@@ -28,7 +28,8 @@ class UpdateAttackSubtypeRequest extends FormRequest
         'string',
         'max:255',
         Rule::unique('attack_subtypes')->ignore($this->attack_subtype->id)
-      ]
+      ],
+      'attack_type_id' => 'required|exists:attack_types,id',
     ];
   }
 

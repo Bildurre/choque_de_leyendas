@@ -25,7 +25,6 @@ class StoreHeroAbilityRequest extends FormRequest
     return [
       'name' => 'required|string|max:255',
       'description' => 'required|string',
-      'attack_type_id' => 'nullable|exists:attack_types,id',
       'attack_subtype_id' => 'nullable|exists:attack_subtypes,id',
       'attack_range_id' => 'nullable|exists:attack_ranges,id',
       'cost' => 'required|string|max:5'
@@ -40,7 +39,6 @@ class StoreHeroAbilityRequest extends FormRequest
     return [
       'name.required' => 'El nombre de la habilidad es obligatorio.',
       'description.required' => 'La descripción de la habilidad es obligatoria.',
-      'attack_type_id.exists' => 'El tipo seleccionado no es válido.',
       'attack_subtype_id.exists' => 'El subtipo seleccionado no es válido.',
       'attack_range_id.exists' => 'El rango seleccionado no es válido.',
       'cost.required' => 'El coste de activación es obligatorio.'

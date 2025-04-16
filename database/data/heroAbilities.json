@@ -3,7 +3,6 @@
     "name": "Corte Fugaz",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 1,
     "cost": "RR",
     "blast": false
@@ -12,8 +11,7 @@
     "name": "Luz Concentrada",
     "description": "<p>Hace 3 + Mente de daño al héroe rival emparejado o cura 3 de vida a 1 héroe aliado adyacente.</p>",
     "attack_range_id": 2,
-    "attack_type_id": 4,
-    "attack_subtype_id": 10, 
+    "attack_subtype_id": 9, 
     "cost": "GB",
     "blast": false
   },
@@ -21,7 +19,6 @@
     "name": "Tiro Lejano",
     "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si ganaste la tirada de iniciativa hace +2 de daño.</p>",
     "attack_range_id": 3,
-    "attack_type_id": 2,
     "attack_subtype_id": 2, 
     "cost": "RG",
     "blast": false
@@ -30,7 +27,6 @@
     "name": "Flecha Certera",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado o a un héroe rival adyacente.</p>",
     "attack_range_id": 3,
-    "attack_type_id": 2,
     "attack_subtype_id": 2,
     "cost": "RB",
     "blast": false
@@ -39,7 +35,6 @@
     "name": "Cuchillada Precisa",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 1,
     "cost": "RG",
     "blast": false
@@ -48,7 +43,6 @@
     "name": "Embate Inspirador",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Coloca 1 contador de beneficio: Inspirado sobre un héroe aliado adyacente aleatorio que no tenga ya al menos 1.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 3, 
     "cost": "BB",
     "blast": false
@@ -57,7 +51,6 @@
     "name": "Golpe Brillante",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 2,
     "attack_subtype_id": 3, 
     "cost": "RG",
     "blast": false
@@ -66,8 +59,7 @@
     "name": "Explosión Aurea",
     "description": "<p>Hace 2 + Mente de daño al héroe rival emparejado y a cada héroe rival adyacente.</p><p>Si este héroe tiene al menos 1 contador de beneficio: Exaltado sobre él, cura 2 de vida al héroe aliado con menos vida entre este héroe y los adyacentes.</p>",
     "attack_range_id": 2,
-    "attack_type_id": 4,
-    "attack_subtype_id": 10, 
+    "attack_subtype_id": 9, 
     "cost": "RBB",
     "blast": true
   },
@@ -75,7 +67,6 @@
     "name": "Martillazo Luminoso",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 3, 
     "cost": "RG",
     "blast": false
@@ -84,8 +75,7 @@
     "name": "Martillazo Radiante",
     "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y 2 + Mente de daño a 1 héroe rival adyacente aleatorio.</p><p>Si es el primer Ataque Luz que este héroe juega en este Combate Singular coloca 1 contador de perjuicio: Aturdido sobre cada héroe dañado de esta forma.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
-    "attack_subtype_id": 10, 
+    "attack_subtype_id": 9, 
     "cost": "BB",
     "blast": true
   },
@@ -93,7 +83,6 @@
     "name": "Martillazo",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 3,
     "cost": "RR",
     "blast": false
@@ -102,7 +91,6 @@
     "name": "Martillazo de Conmoción",
     "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Aturdido.</p><p>Si este héroe tiene al menos 1 Arma Maza anexada y activa hace +2 de daño.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 3, 
     "cost": "GB",
     "blast": false
@@ -111,7 +99,6 @@
     "name": "Cortes Encadenados",
     "description": "<p>Hace 2 + Fuerza de daño el héroe rival emparejado y a cada héroe rival adyacente.</p><p>Si este héroe tiene 2 Armas Espada anexadas y activas, el coste de esta Habilidad es <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'><img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 1, 
     "cost": "GBB",
     "blast": true
@@ -120,7 +107,6 @@
     "name": "Golpe Combinado",
     "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Hace +1 de daño por cada héroe aliado adyacente con al menos 1 Arma anexada.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 1, 
     "cost": "RR",
     "blast": false
@@ -129,7 +115,6 @@
     "name": "Escudero Veloz",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Revela la primera Carta de tu mazo. Si es un Equipo colócalo en tu mano.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 1,
     "cost": "RB",
     "blast": false
@@ -138,7 +123,6 @@
     "name": "Espadazo Mortal",
     "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
     "attack_range_id": 1,
-    "attack_type_id": 1,
     "attack_subtype_id": 1, 
     "cost": "RR",
     "blast": false
@@ -146,289 +130,113 @@
   {
     "name": "Espada Sobrecargada",
     "description": "<p>Hace 2 + Mente de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Sobrecargado.</p><p>Si este héroe a guardado al menos 2 Dados <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> hace +2 de daño.</p>",
-    "attack_range_id": 1,
-    "attack_type_id": 1,
-    "attack_subtype_id": 7,
+    "attack_range_id": 2,
+    "attack_subtype_id": 5,
     "cost": "GB",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Estrella Fulminante",
+    "description": "<p>Hace 2 + Mente de daño el héroe rival emparejado. Hace +1 de daño por cada <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> que haya guardado este héroe (máximo +2 de daño).</p>",
+    "attack_range_id": 3,
+    "attack_subtype_id": 5,
+    "cost": "RR",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Lanza Eléctrica",
+    "description": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>",
+    "attack_range_id": 2,
+    "attack_subtype_id": 2,
+    "cost": "GG",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Ruptura",
+    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Entumecido.</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 2,
+    "cost": "RR",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Emboscada",
+    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular este Ataque ignora la mitad de la Armadura del objetivo (redondeando hacia abajo).</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 2,
+    "cost": "RB",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Caricia de Acero",
+    "description": "<p>Hace 2 + Fuerza de daño 2 veces al héroe rival emparejado (se consideran 2 Ataques independientes a todos los efectos).</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "RB",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Baile Mortal",
+    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Si no tienes ningun Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> preparado prepara 1 de tus Dados Gastados como Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>",
+    "attack_range_id": 2,
+    "attack_subtype_id": 1,
+    "cost": "GG",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Tajo Presto",
+    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Coloca 1 contador de beneficio: Presteza sobre este héroe o un héroe aliado adyacente.</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "GB",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Tiro Preciso",
+    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
+    "attack_range_id": 3,
+    "attack_subtype_id": 2,
+    "cost": "RG",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Flecha Alada",
+    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Si este héroe a guardado al menos 2 Dados <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> hace 2 + Fuerza de daño de daño a 1 héroe rival de los emparejamientos posteriores aleatorio (este ataque gana el atributo Área).</p>",
+    "attack_range_id": 3,
+    "attack_subtype_id": 5,
+    "cost": "GB",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Agarrotar",
+    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular le coloca 1 contador de perjuicio: Exhausto.</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 3,
+    "cost": "RG",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Puñalada",
+    "description": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 2,
+    "cost": "RB",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Golpe Concentrado",
+    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id":  1,
+    "cost": "RG",
     "blast": false
   },
   {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
-    "blast": false
-  },
-  {
-    "name":
-    "description":
-    "attack_range_id":
-    "attack_type_id": 
-    "attack_subtype_id": 
-    "cost":,
+    "name": "Hoja Vendaval",
+    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a 1 héroe rival adyacente aleatorio.<p></p>Si este héroe tiene al menos 1 contador de beneficio: Presteza sobre él les hace +1 de daño.</p>",
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "BB",
     "blast": false
   }
 ]
