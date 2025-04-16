@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Traits\HasGameStatistics;
 
 class HeroRace extends Model
 {
   use HasFactory;
-  use HasGameStatistics;
 
   /**
    * The attributes that are mass assignable.

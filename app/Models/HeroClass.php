@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Traits\HasGameStatistics;
 
 class HeroClass extends Model
 {
   use HasFactory;
-  use HasGameStatistics;
 
   /**
    * The table associated with the model.
