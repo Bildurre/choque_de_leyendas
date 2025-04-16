@@ -11,13 +11,13 @@
       @if ($paginator->onFirstPage())
         <li class="pagination-item pagination-item--disabled">
           <span class="pagination-link pagination-link--disabled">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <x-icon name="chevron-left" />
           </span>
         </li>
       @else
         <li class="pagination-item">
           <a href="{{ $paginator->previousPageUrl() }}" class="pagination-link" rel="prev">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            <x-icon name="chevron-left" />
           </a>
         </li>
       @endif
@@ -51,13 +51,13 @@
       @if ($paginator->hasMorePages())
         <li class="pagination-item">
           <a href="{{ $paginator->nextPageUrl() }}" class="pagination-link" rel="next">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <x-icon name="chevron-right" />
           </a>
         </li>
       @else
         <li class="pagination-item pagination-item--disabled">
           <span class="pagination-link pagination-link--disabled">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <x-icon name="chevron-right" />
           </span>
         </li>
       @endif

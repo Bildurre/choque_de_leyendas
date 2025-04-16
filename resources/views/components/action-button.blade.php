@@ -38,8 +38,8 @@
     class="{{ $buttonClass }}"
     data-toggle="entity-details"
   >
-    <x-icon name="expand" class="chevron-down" />
-    <x-icon name="collapse" class="chevron-up" />
+    <x-icon name="chevron-down" class="chevron-down" />
+    <x-icon name="chevron-up" class="chevron-up" />
   </button>
 @else
   <a 

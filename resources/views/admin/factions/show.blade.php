@@ -3,9 +3,7 @@
   headerTitle='Detalle de Facción'
   containerTitle="{{ $faction->name }}"
   subtitle='Información detallada de la facción'
-  createLabel="+ Nueva"
   :createRoute="route('admin.factions.create')"
-  backLabel="⬅ Volver"
   :backRoute="route('admin.factions.index')"
 >
 

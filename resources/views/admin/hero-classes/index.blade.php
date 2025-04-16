@@ -4,13 +4,12 @@
   containerTitle='Clases de Héroes'
   subtitle='Gestión de clases para la creación de héroes'
   :createRoute="route('admin.hero-classes.create')"
-  createLabel='+ Nueva'
 >
 
   <x-entities-grid 
     empty_message="No hay clases de héroes disponibles"
-    :create_route="route('admin.hero-classes.create')"
-    create_label="Crear la primera clase"
+    :createRoute="route('admin.hero-classes.create')"
+    createLabel="Crear la primera clase"
   >
   @foreach($heroClasses as $heroClass)
     <x-cards.hero-class-card 

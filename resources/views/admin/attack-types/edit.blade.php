@@ -4,9 +4,7 @@
   containerTitle='Tipos de Ataques'
   subtitle="Modifica los detalles del tipo {{ $attackType->name }}"
   :createRoute="route('admin.attack-types.create')"
-  createLabel='+ Nueva'
   :backRoute="route('admin.attack-types.index')"
-  backLabel="⬅ Volver"
 >
 
   <x-forms.attack-type-form 

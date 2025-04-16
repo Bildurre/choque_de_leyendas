@@ -4,13 +4,12 @@
   containerTitle='Superclases'
   subtitle='Gestión de superclases para los héroes'
   :createRoute="route('admin.hero-superclasses.create')"
-  createLabel='+ Nueva'
 >
 
   <x-entities-grid 
     empty_message="No hay superclases disponibles"
-    :create_route="route('admin.hero-superclasses.create')"
-    create_label="Crear la primera superclase"
+    :createRoute="route('admin.hero-superclasses.create')"
+    createLabel="Crear la primera superclase"
   >
     @foreach($heroSuperclasses as $heroSuperclass)
       <x-cards.hero-superclass-card 

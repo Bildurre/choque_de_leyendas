@@ -4,7 +4,6 @@
   containerTitle='Habilidades de Héroes'
   subtitle='Gestión de habilidades para los héroes'
   :createRoute="route('admin.hero-abilities.create')"
-  createLabel='+ Nueva'
 >
 
   
@@ -12,8 +11,8 @@
 
   <x-entities-grid 
     empty_message="No hay habilidades disponibles"
-    :create_route="route('admin.hero-abilities.create')"
-    create_label="Crear la primera habilidad"
+    :createRoute="route('admin.hero-abilities.create')"
+    createLabel="Crear la primera habilidad"
   >
   @foreach($heroAbilities as $ability)
     <x-cards.hero-ability-card 

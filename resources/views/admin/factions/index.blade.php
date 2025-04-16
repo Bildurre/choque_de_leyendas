@@ -4,7 +4,6 @@
   containerTitle='Facciones'
   subtitle='Gestión de facciones del juego'
   :createRoute="route('admin.factions.create')"
-  createLabel='+ Nueva'
 >
 
   <x-entities-grid 

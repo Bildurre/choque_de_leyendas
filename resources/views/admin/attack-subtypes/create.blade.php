@@ -3,7 +3,6 @@
   headerTitle='Crear Subtipo de Ataque'
   containerTitle='Subtipos de Ataque'
   subtitle='Crea un nuevo subtipo para categorizar ataques y habilidades'
-  backLabel="⬅ Volver"
   :backRoute="route('admin.attack-subtypes.index')"
 >
 

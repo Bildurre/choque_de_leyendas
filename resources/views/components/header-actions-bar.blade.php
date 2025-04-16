@@ -1,10 +1,12 @@
 @props([
   'title',
   'subtitle' => '',
+  'backIcon' => 'arrow-left',
   'backRoute' => null,
-  'backLabel' => 'Volver al listado',
+  'backLabel' => 'Volver',
   'createRoute' => null,
-  'createLabel' => '+ Nuevo'
+  'createIcon' => 'plus',
+  'createLabel' => 'Nueva'
 ])
 
 <div class="header-actions-bar">
@@ -16,11 +18,21 @@
   </div>
   <div class="right-actions">
     @if($createRoute)
-      <x-button route="{{ $createRoute }}">{{ $createLabel }}</x-button>
+      <x-button route="{{ $createRoute }}">
+        @if ($createIcon)
+          <x-icon name="{{ $createIcon }}" />
+        @endif
+        {{ $createLabel }}
+      </x-button>
     @endif
     
     @if($backRoute)
-      <x-button route="{{ $backRoute }}">{{ $backLabel }}</x-button>
+      <x-button route="{{ $backRoute }}">
+        @if ($backIcon)
+          <x-icon name="{{ $backIcon }}" />
+        @endif
+        {{ $backLabel }}
+      </x-button>
     @endif
   </div>
 </div>

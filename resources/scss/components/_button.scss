@@ -8,7 +8,9 @@
   transition: border-color $transition-medium, color $transition-medium, background-color $transition-medium;
   cursor: pointer;
   text-align: center;
-  display: block;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  place-items: center;
 
   &:hover {
     border-color: $color-accent-pink;

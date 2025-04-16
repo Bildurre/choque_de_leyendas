@@ -3,7 +3,6 @@
   headerTitle='Crear Rango de Ataque'
   containerTitle='Rangos de Ataque'
   subtitle='Crea un nuevo rango para los ataques y habilidades'
-  backLabel="⬅ Volver"
   :backRoute="route('admin.attack-ranges.index')"
 >
 

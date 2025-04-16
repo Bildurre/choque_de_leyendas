@@ -4,9 +4,7 @@
   containerTitle='Habilidades'
   subtitle="Modifica los detalles de la habilidad {{ $heroAbility->name }}"
   :createRoute="route('admin.hero-abilities.create')"
-  createLabel='+ Nueva'
   :backRoute="route('admin.hero-abilities.index')"
-  backLabel="⬅ Volver"
 >
 
   <x-forms.hero-ability-form 

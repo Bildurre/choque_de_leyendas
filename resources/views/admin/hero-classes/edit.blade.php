@@ -4,9 +4,7 @@
   containerTitle='Clasess'
   subtitle="Modifica los detalles de la clase {{ $heroClass->nam }}e"
   :createRoute="route('admin.hero-classes.create')"
-  createLabel='+ Nueva'
   :backRoute="route('admin.hero-classes.index')"
-  backLabel="⬅ Volver"
 >
 
   <x-forms.hero-class-form 

@@ -3,7 +3,6 @@
   headerTitle='Crear Habilidad'
   containerTitle='Habilidades'
   subtitle='Crea una nueva habilidad para héroes'
-  backLabel="⬅ Volver"
   :backRoute="route('admin.hero-abilities.index')"
 >
 

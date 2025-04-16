@@ -3,8 +3,10 @@
   'headerTitle' => '',
   'containerTitle' => '',
   'subtitle' => '',
+  'createIcon' => null,
   'createRoute' => null,
   'createLabel' => null,
+  'backIcon' => null,
   'backRoute' => null,
   'backLabel' => null
 ])
@@ -42,8 +44,10 @@
                 :subtitle="$subtitle"
                 :createRoute="$createRoute"
                 :createLabel="$createLabel"
+                :createIcon="$createIcon"
                 :backRoute="$backRoute"
                 :backLabel="$backLabel"
+                :backIcon="$backIcon"
               />
             @endif
             

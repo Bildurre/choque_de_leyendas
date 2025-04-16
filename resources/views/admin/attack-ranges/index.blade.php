@@ -4,13 +4,12 @@
   containerTitle='Rangos de Ataque'
   subtitle='Gestión de rangos para los ataques y habilidades'
   :createRoute="route('admin.attack-ranges.create')"
-  createLabel='+ Nueva'
 >
 
   <x-entities-grid 
     empty_message="No hay rangos de ataque disponibles"
-    :create_route="route('admin.attack-ranges.create')"
-    create_label="Crear el primer rango"
+    :createRoute="route('admin.attack-ranges.create')"
+    createLabel="Crear el primer rango"
     >
     @foreach($attackRanges as $range)
       <x-cards.attack-range-card 

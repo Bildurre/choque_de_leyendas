@@ -4,9 +4,7 @@
   containerTitle='Facciones'
   subtitle="Modifica los detalles de la facción {{ $faction->name }}"
   :createRoute="route('admin.factions.create')"
-  createLabel='+ Nueva'
   :backRoute="route('admin.factions.index')"
-  backLabel="⬅ Volver"
 >
 
   <x-forms.faction-form 
