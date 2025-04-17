@@ -29,14 +29,5 @@
         <div>{!! $heroClass->passive !!}</div>
       </x-description>
     @endif
-
-    <x-description wrapper>
-      <x-description title="Agilidad:" row>{{ $heroClass->agility_modifier }}</x-description>
-      <x-description title="Mente:" row>{{ $heroClass->mental_modifier }}</x-description>
-      <x-description title="Voluntad:" row>{{ $heroClass->will_modifier }}</x-description>
-      <x-description title="Fuerza:" row>{{ $heroClass->strength_modifier }}</x-description>
-      <x-description title="Armadura:" row>{{ $heroClass->armor_modifier }}</x-description>
-    </x-description>
-    
   </x-slot:details>
 </x-cards.entity-card>

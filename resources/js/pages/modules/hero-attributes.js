@@ -1,5 +1,4 @@
-import {setupLifePointsCalculator} from "./hero-attributes-helper.js"
-
+import {setupLifePointsCalculator} from "../../pages/helpers/attribute-points-calculator.js"
 /**
  * Default handler for hero attributes pages
  * @param {string} action - Current CRUD action

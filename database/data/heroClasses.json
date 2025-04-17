@@ -33,10 +33,10 @@
     "name": "Swordcaster",
     "passive": "<p>Este héroe solo puede jugar Hechizos Electricidad y Aire. Este héroe puede jugar Técnicas.</p>",
     "hero_superclass_id": 2,
-    "agility_modifier": 2,
-    "mental_modifier": 2,
+    "agility_modifier": 1,
+    "mental_modifier": 1,
     "will_modifier": 0,
-    "strength_modifier": 2,
+    "strength_modifier": 1,
     "armor_modifier": 0
   },
   {

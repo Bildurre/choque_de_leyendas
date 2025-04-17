@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class HeroRace extends Model
 {
   use HasFactory;
-  use HasAttributeModifiers;
 
   /**
    * The attributes that are mass assignable.
@@ -19,24 +18,6 @@ class HeroRace extends Model
    */
   protected $fillable = [
     'name',
-    'agility_modifier',
-    'mental_modifier',
-    'will_modifier',
-    'strength_modifier',
-    'armor_modifier'
-  ];
-
-  /**
-   * The attributes that should be cast.
-   *
-   * @var array
-   */
-  protected $casts = [
-    'agility_modifier' => 'integer',
-    'mental_modifier' => 'integer',
-    'will_modifier' => 'integer',
-    'strength_modifier' => 'integer',
-    'armor_modifier' => 'integer'
   ];
 
   /**

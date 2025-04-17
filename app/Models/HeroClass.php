@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class HeroClass extends Model
 {
   use HasFactory;
-  use HasAttributeModifiers;
 
   /**
    * The table associated with the model.
@@ -28,24 +27,6 @@ class HeroClass extends Model
     'name',
     'passive',
     'hero_superclass_id',
-    'agility_modifier',
-    'mental_modifier',
-    'will_modifier',
-    'strength_modifier',
-    'armor_modifier'
-  ];
-
-  /**
-   * The attributes that should be cast.
-   *
-   * @var array
-   */
-  protected $casts = [
-    'agility_modifier' => 'integer',
-    'mental_modifier' => 'integer',
-    'will_modifier' => 'integer',
-    'strength_modifier' => 'integer',
-    'armor_modifier' => 'integer'
   ];
 
   /**
@@ -72,7 +53,7 @@ class HeroClass extends Model
 public function isValidModifiers(): bool
 {
   return $this->validateModifiers([
-    'max_modifiable_attributes' => 3,
+    // 'max_modifiable_attributes' => 3,
     'attribute_limits' => 1
   ]);
 }

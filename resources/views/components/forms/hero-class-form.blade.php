@@ -36,48 +36,5 @@
       :value="$heroClass->passive ?? ''"
       :required="true"
     />
-  </div>
-
-  <div class="form-section">
-    <div class="attribute-modifiers-section">   
-      @php
-        $attributes = [
-          'agility' => 'Agilidad',
-          'mental' => 'Mental',
-          'will' => 'Voluntad', 
-          'strength' => 'Fuerza',
-          'armor' => 'Armadura'
-        ];
-      @endphp
-
-      <div class="form-row">
-        @foreach($attributes as $key => $label)
-          <x-form.field
-            name="{{ $key }}_modifier" 
-            label="{{ $label }}" 
-            :value="$heroClass->{$key . '_modifier'} ?? 0"
-            type="number"
-            min="-1" 
-            max="1"
-            required
-          />
-        @endforeach
-      </div>
-
-      <div class="modifiers-total-section">
-        <p>Atributos modificados: <span id="modifiers-total">{{ 
-          isset($heroClass) ? (
-            abs($heroClass->agility_modifier) +
-            abs($heroClass->mental_modifier) +
-            abs($heroClass->will_modifier) +
-            abs($heroClass->strength_modifier) +
-            abs($heroClass->armor_modifier)
-          ) : 0
-        }}</span>/3</p>
-        @error('modifiers')
-          <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-      </div>
-    </div>
   </x-form.card>
 </form>

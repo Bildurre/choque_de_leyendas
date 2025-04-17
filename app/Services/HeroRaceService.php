@@ -49,11 +49,6 @@ class HeroRaceService
   public function update(HeroRace $heroRace, array $data): HeroRace
   {
     $heroRace->fill($data);
-
-    if (!$heroRace->isValidModifiers()) {
-      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
-    }
-    
     $heroRace->save();
     
     return $heroRace;

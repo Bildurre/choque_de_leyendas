@@ -1,4 +1,3 @@
-import { setupModifiersValidation } from './common/modifier-validation';
 import { initWysiwygEditors } from '../../components/wysiwyg-editor';
 
 /**
@@ -18,19 +17,6 @@ export default function heroClassHandler(action) {
  * Setup hero class form page
  */
 function setupFormPage() {
-  const modifierFields = [
-    'agility_modifier', 
-    'mental_modifier', 
-    'will_modifier', 
-    'strength_modifier', 
-    'armor_modifier'
-  ];
-  
-  setupModifiersValidation(modifierFields, {
-    attributeLimits: 1,
-    maxModifiableAttributes: 3
-  });
-  
   initWysiwygEditors();
 }
 

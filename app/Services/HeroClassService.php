@@ -27,12 +27,7 @@ class HeroClassService
   public function create(array $data): HeroClass
   {
     $heroClass = new HeroClass();
-    $heroClass->fill($data);
-    
-    if (!$heroClass->isValidModifiers()) {
-      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
-    }
-    
+    $heroClass->fill($data);    
     $heroClass->save();
     
     return $heroClass;
