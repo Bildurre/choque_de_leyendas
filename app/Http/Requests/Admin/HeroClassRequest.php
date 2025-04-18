@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Admin\HeroClass;
+namespace App\Http\Requests\Admin;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateHeroClassRequest extends FormRequest
+class HeroClassRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
    */
   public function authorize(): bool
   {
-      return true;
+    return true;
   }
 
   /**
@@ -22,16 +22,24 @@ class UpdateHeroClassRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
+    $rules = [
       'name' => [
         'required',
         'string',
         'max:255',
-        Rule::unique('hero_classes')->ignore($this->hero_class->id)
       ],
       'passive' => 'nullable|string',
       'hero_superclass_id' => 'required|exists:hero_superclasses,id'
     ];
+
+    // Add unique rule for creation or update differently
+    if ($this->isMethod('post')) {
+      $rules['name'][] = 'unique:hero_classes';
+    } else {
+      $rules['name'][] = Rule::unique('hero_classes')->ignore($this->hero_class);
+    }
+
+    return $rules;
   }
 
   /**

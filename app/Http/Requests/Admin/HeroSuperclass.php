@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\AttackRange;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreAttackRangeRequest extends FormRequest
+class HeroSuperclassRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -21,10 +22,24 @@ class StoreAttackRangeRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
-      'name' => 'required|string|max:255|unique:attack_ranges',
+    $rules = [
+      'name' => [
+        'required',
+        'string',
+        'max:255',
+      ],
       'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
+
+    // Add unique rule for creation or update differently
+    if ($this->isMethod('post')) {
+      $rules['name'][] = 'unique:hero_superclasses';
+    } else {
+      $rules['name'][] = Rule::unique('hero_superclasses')->ignore($this->hero_superclass);
+      $rules['remove_icon'] = 'nullable|boolean';
+    }
+
+    return $rules;
   }
 
   /**
@@ -33,8 +48,8 @@ class StoreAttackRangeRequest extends FormRequest
   public function messages(): array
   {
     return [
-      'name.required' => 'El nombre del rango es obligatorio.',
-      'name.unique' => 'Ya existe un rango con este nombre.',
+      'name.required' => 'El nombre de la superclase es obligatorio.',
+      'name.unique' => 'Ya existe una superclase con este nombre.',
       'icon.image' => 'El archivo debe ser una imagen.',
       'icon.max' => 'La imagen no debe superar los 2MB.',
     ];

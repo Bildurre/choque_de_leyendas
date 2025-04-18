@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Models\HeroAttributesConfiguration;
 use App\Services\HeroAttributesConfigurationService;
-use App\Http\Requests\Admin\HeroAttributesConfiguration\UpdateHeroAttributesConfigurationRequest;
+use App\Http\Requests\Admin\HeroAttributesConfigurationRequest;
 
 class HeroAttributesConfigurationController extends Controller
 {
@@ -37,7 +35,7 @@ class HeroAttributesConfigurationController extends Controller
   /**
    * Update hero attributes configuration
    */
-  public function update(UpdateHeroAttributesConfigurationRequest $request): RedirectResponse
+  public function update(HeroAttributesConfigurationRequest $request): RedirectResponse
   {
     // Validate the input
     $validated = $request->validated();

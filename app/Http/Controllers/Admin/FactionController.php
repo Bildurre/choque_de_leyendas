@@ -6,8 +6,7 @@ use App\Models\Faction;
 use App\Services\FactionService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Admin\Faction\StoreFactionRequest;
-use App\Http\Requests\Admin\Faction\UpdateFactionRequest;
+use App\Http\Requests\Admin\FactionRequest;
 
 class FactionController extends Controller
 {
@@ -43,7 +42,7 @@ class FactionController extends Controller
   /**
    * Store a newly created faction in storage.
    */
-  public function store(StoreFactionRequest $request)
+  public function store(FactionRequest $request)
   {
     // La validación ya se ha realizado en el request
     $validated = $request->validated();
@@ -81,7 +80,7 @@ class FactionController extends Controller
   /**
    * Update the specified faction in storage.
    */
-  public function update(UpdateFactionRequest $request, Faction $faction)
+  public function update(FactionRequest $request, Faction $faction)
   {
     // La validación ya se ha realizado en el request
     $validated = $request->validated();

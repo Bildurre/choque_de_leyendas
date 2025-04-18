@@ -6,8 +6,7 @@ use App\Models\AttackType;
 use App\Models\AttackSubtype;
 use App\Http\Controllers\Controller;
 use App\Services\AttackSubtypeService;
-use App\Http\Requests\Admin\AttackSubtype\StoreAttackSubtypeRequest;
-use App\Http\Requests\Admin\AttackSubtype\UpdateAttackSubtypeRequest;
+use App\Http\Requests\Admin\AttackSubtypeRequest;
 
 class AttackSubtypeController extends Controller
 {
@@ -44,7 +43,7 @@ class AttackSubtypeController extends Controller
   /**
    * Store a newly created attack subtype in storage.
    */
-  public function store(StoreAttackSubtypeRequest $request)
+  public function store(AttackSubtypeRequest $request)
   {
     $validated = $request->validated();
 
@@ -69,7 +68,7 @@ class AttackSubtypeController extends Controller
   /**
    * Update the specified attack subtype in storage.
    */
-  public function update(UpdateAttackSubtypeRequest $request, AttackSubtype $attackSubtype)
+  public function update(AttackSubtypeRequest $request, AttackSubtype $attackSubtype)
   {
     $validated = $request->validated();
 

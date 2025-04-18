@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\HeroRace;
 use App\Http\Controllers\Controller;
 use App\Services\HeroRaceService;
-use App\Http\Requests\Admin\HeroRace\StoreHeroRaceRequest;
-use App\Http\Requests\Admin\HeroRace\UpdateHeroRaceRequest;
+use App\Http\Requests\Admin\HeroRaceRequest;
 
 class HeroRaceController extends Controller
 {
@@ -43,7 +42,7 @@ class HeroRaceController extends Controller
   /**
    * Store a newly created hero race in storage.
    */
-  public function store(StoreHeroRaceRequest $request)
+  public function store(HeroRaceRequest $request)
   {
     $validated = $request->validated();
 
@@ -67,7 +66,7 @@ class HeroRaceController extends Controller
   /**
    * Update the specified hero race in storage.
    */
-  public function update(UpdateHeroRaceRequest $request, HeroRace $heroRace)
+  public function update(HeroRaceRequest $request, HeroRace $heroRace)
   {
     $validated = $request->validated();
 

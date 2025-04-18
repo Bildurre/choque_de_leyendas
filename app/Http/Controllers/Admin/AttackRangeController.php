@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AttackRange;
 use App\Http\Controllers\Controller;
 use App\Services\AttackRangeService;
-use App\Http\Requests\Admin\AttackRange\StoreAttackRangeRequest;
-use App\Http\Requests\Admin\AttackRange\UpdateAttackRangeRequest;
+use App\Http\Requests\Admin\AttackRangeRequest;
 
 class AttackRangeController extends Controller
 {
@@ -42,7 +41,7 @@ class AttackRangeController extends Controller
   /**
    * Store a newly created attack range in storage.
    */
-  public function store(StoreAttackRangeRequest $request)
+  public function store(AttackRangeRequest $request)
   {
     $validated = $request->validated();
 
@@ -66,7 +65,7 @@ class AttackRangeController extends Controller
   /**
    * Update the specified attack range in storage.
    */
-  public function update(UpdateAttackRangeRequest $request, AttackRange $attackRange)
+  public function update(AttackRangeRequest $request, AttackRange $attackRange)
   {
     $validated = $request->validated();
 

@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AttackType;
 use App\Http\Controllers\Controller;
 use App\Services\AttackTypeService;
-use App\Http\Requests\Admin\AttackType\StoreAttackTypeRequest;
-use App\Http\Requests\Admin\AttackType\UpdateAttackTypeRequest;
+use App\Http\Requests\Admin\AttackTypeRequest;
 
 class AttackTypeController extends Controller
 {
@@ -42,7 +41,7 @@ class AttackTypeController extends Controller
   /**
    * Store a newly created attack type in storage.
    */
-  public function store(StoreAttackTypeRequest $request)
+  public function store(AttackTypeRequest $request)
   {
     $validated = $request->validated();
 
@@ -66,7 +65,7 @@ class AttackTypeController extends Controller
   /**
    * Update the specified attack type in storage.
    */
-  public function update(UpdateAttackTypeRequest $request, AttackType $attackType)
+  public function update(AttackTypeRequest $request, AttackType $attackType)
   {
     $validated = $request->validated();
 

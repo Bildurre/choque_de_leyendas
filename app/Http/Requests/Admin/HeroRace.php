@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\AttackRange;
+namespace App\Http\Requests\Admin;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateAttackRangeRequest extends FormRequest
+class HeroRaceRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -22,28 +22,32 @@ class UpdateAttackRangeRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
+    $rules = [
       'name' => [
         'required',
         'string',
         'max:255',
-        Rule::unique('attack_ranges')->ignore($this->attack_range->id)
       ],
-      'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-      'remove_icon' => 'nullable|boolean',
     ];
-  }
 
+    // Add unique rule for creation or update differently
+    if ($this->isMethod('post')) {
+      $rules['name'][] = 'unique:hero_races';
+    } else {
+      $rules['name'][] = Rule::unique('hero_races')->ignore($this->hero_race);
+    }
+
+    return $rules;
+  }
+  
   /**
    * Get custom messages for validator errors.
    */
   public function messages(): array
   {
     return [
-      'name.required' => 'El nombre del rango es obligatorio.',
-      'name.unique' => 'Ya existe un rango con este nombre.',
-      'icon.image' => 'El archivo debe ser una imagen.',
-      'icon.max' => 'La imagen no debe superar los 2MB.',
+      'name.required' => 'El nombre de la raza es obligatorio.',
+      'name.unique' => 'Ya existe una raza con este nombre.'
     ];
   }
 }

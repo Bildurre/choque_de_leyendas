@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\HeroSuperclass;
 use App\Services\HeroSuperclassService;
-use App\Http\Requests\Admin\HeroSuperclass\StoreHeroSuperclassRequest;
-use App\Http\Requests\Admin\HeroSuperclass\UpdateHeroSuperclassRequest;
+use App\Http\Requests\Admin\HeroSuperclassRequest;
 
 class HeroSuperclassController extends Controller
 {
@@ -42,7 +41,7 @@ class HeroSuperclassController extends Controller
   /**
    * Store a newly created superclass in storage.
    */
-  public function store(StoreHeroSuperclassRequest $request)
+  public function store(HeroSuperclassRequest $request)
   {
     $validated = $request->validated();
 
@@ -67,7 +66,7 @@ class HeroSuperclassController extends Controller
   /**
    * Update the specified superclass in storage.
    */
-  public function update(UpdateHeroSuperclassRequest $request, HeroSuperclass $heroSuperclass)
+  public function update(HeroSuperclassRequest $request, HeroSuperclass $heroSuperclass)
   {
     $validated = $request->validated();
 

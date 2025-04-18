@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\HeroAbility;
+namespace App\Http\Requests\Admin;
 
 use App\Services\CostTranslatorService;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateHeroAbilityRequest extends FormRequest
+class HeroAbilityRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.

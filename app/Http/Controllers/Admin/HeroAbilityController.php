@@ -9,8 +9,7 @@ use App\Models\AttackSubtype;
 use App\Http\Controllers\Controller;
 use App\Services\HeroAbilityService;
 use App\Services\CostTranslatorService;
-use App\Http\Requests\Admin\HeroAbility\StoreHeroAbilityRequest;
-use App\Http\Requests\Admin\HeroAbility\UpdateHeroAbilityRequest;
+use App\Http\Requests\Admin\HeroAbilityRequest;
 
 class HeroAbilityController extends Controller
 {
@@ -52,7 +51,7 @@ class HeroAbilityController extends Controller
   /**
    * Store a newly created hero ability in storage.
    */
-  public function store(StoreHeroAbilityRequest $request)
+  public function store(HeroAbilityRequest $request)
   {
     $validated = $request->validated();
 
@@ -87,7 +86,7 @@ class HeroAbilityController extends Controller
   /**
    * Update the specified hero ability in storage.
    */
-  public function update(UpdateHeroAbilityRequest $request, HeroAbility $heroAbility)
+  public function update(HeroAbilityRequest $request, HeroAbility $heroAbility)
   {
     $validated = $request->validated();
 

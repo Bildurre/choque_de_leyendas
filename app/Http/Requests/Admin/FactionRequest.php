@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Faction;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateFactionRequest extends FormRequest
+class FactionRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -22,18 +22,26 @@ class UpdateFactionRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
+    $rules = [
       'name' => [
         'required',
         'string',
         'max:255',
-        Rule::unique('factions')->ignore($this->faction->id),
       ],
       'lore_text' => 'nullable|string',
       'color' => 'required|string|max:7|regex:/^#[0-9A-F]{6}$/i',
       'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-      'remove_icon' => 'nullable|boolean',
     ];
+
+    // Add unique rule for creation or update differently
+    if ($this->isMethod('post')) {
+      $rules['name'][] = 'unique:factions';
+    } else {
+      $rules['name'][] = Rule::unique('factions')->ignore($this->faction);
+      $rules['remove_icon'] = 'nullable|boolean';
+    }
+
+    return $rules;
   }
   
   /**

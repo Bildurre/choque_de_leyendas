@@ -6,8 +6,7 @@ use App\Models\HeroClass;
 use App\Models\HeroSuperclass;
 use App\Services\HeroClassService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\HeroClass\StoreHeroClassRequest;
-use App\Http\Requests\Admin\HeroClass\UpdateHeroClassRequest;
+use App\Http\Requests\Admin\HeroClassRequest;
 
 class HeroClassController extends Controller
 {
@@ -51,7 +50,7 @@ class HeroClassController extends Controller
   /**
    * Store a newly created hero class in storage.
    */
-  public function store(StoreHeroClassRequest $request)
+  public function store(HeroClassRequest $request)
   {
     $validated = $request->validated();
 
@@ -76,7 +75,7 @@ class HeroClassController extends Controller
   /**
    * Update the specified hero class in storage.
    */
-  public function update(UpdateHeroClassRequest $request, HeroClass $heroClass)
+  public function update(HeroClassRequest $request, HeroClass $heroClass)
   {
     $validated = $request->validated();
 

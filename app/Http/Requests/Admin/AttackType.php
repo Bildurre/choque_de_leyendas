@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\AttackType;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreAttackTypeRequest extends FormRequest
+class AttackTypeRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -21,9 +22,22 @@ class StoreAttackTypeRequest extends FormRequest
    */
   public function rules(): array
   {
-    return [
-      'name' => 'required|string|max:255|unique:attack_types'
+    $rules = [
+      'name' => [
+        'required',
+        'string',
+        'max:255',
+      ]
     ];
+
+    // Add unique rule for creation or update differently
+    if ($this->isMethod('post')) {
+      $rules['name'][] = 'unique:attack_types';
+    } else {
+      $rules['name'][] = Rule::unique('attack_types')->ignore($this->attack_type);
+    }
+
+    return $rules;
   }
 
   /**
