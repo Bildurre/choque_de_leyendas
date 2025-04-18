@@ -2,28 +2,28 @@
 
 namespace App\Services;
 
-use App\Models\HeroAttributeConfiguration;
+use App\Models\HeroAttributesConfiguration;
 
-class HeroAttributeConfigurationService
+class HeroAttributesConfigurationService
 {
   /**
    * Get the hero attribute configuration
    *
-   * @return HeroAttributeConfiguration
+   * @return HeroAttributesConfiguration
    */
-  public function getConfiguration(): HeroAttributeConfiguration
+  public function getConfiguration(): HeroAttributesConfiguration
   {
-    return HeroAttributeConfiguration::firstOrCreate([]);
+    return HeroAttributesConfiguration::firstOrCreate([]);
   }
 
   /**
    * Update hero attributes configuration
    *
    * @param array $data
-   * @return HeroAttributeConfiguration
+   * @return HeroAttributesConfiguration
    * @throws \Exception
    */
-  public function updateConfiguration(array $data): HeroAttributeConfiguration
+  public function updateConfiguration(array $data): HeroAttributesConfiguration
   {
     // Validate that min value is not greater than max value
     if ($data['min_attribute_value'] > $data['max_attribute_value']) {
@@ -36,7 +36,7 @@ class HeroAttributeConfigurationService
     }
     
     // Get the configuration (or create if not exists)
-    $configuration = HeroAttributeConfiguration::firstOrCreate([]);
+    $configuration = HeroAttributesConfiguration::firstOrCreate([]);
     $configuration->update($data);
 
     return $configuration;

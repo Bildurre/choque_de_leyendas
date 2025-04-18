@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\AttackRangeController;
 use App\Http\Controllers\Admin\HeroAbilityController;
 use App\Http\Controllers\Admin\AttackSubtypeController;
 use App\Http\Controllers\Admin\HeroSuperclassController;
-use App\Http\Controllers\Admin\HeroAttributeConfigurationController;
+use App\Http\Controllers\Admin\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
@@ -33,10 +33,10 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   });
 
   // Hero Attribute Configuration
-  Route::get('/hero-attributes-configuration', [HeroAttributeConfigurationController::class, 'edit'])
-    ->name('hero-attributes-configuration.edit');
-  Route::put('/hero-attributes-configuration', [HeroAttributeConfigurationController::class, 'update'])
-    ->name('hero-attributes-configuration.update');
+  Route::get('/hero-attributes-configurations', [HeroAttributesConfigurationController::class, 'edit'])
+    ->name('hero-attributes-configurations.edit');
+  Route::put('/hero-attributes-configurations', [HeroAttributesConfigurationController::class, 'update'])
+    ->name('hero-attributes-configurations.update');
 
   // Hero Superclasses
   Route::resource('hero-superclasses', HeroSuperclassController::class);

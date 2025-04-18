@@ -20,7 +20,7 @@ export function setupPageHandlers() {
       'attack-types',
       'attack-subtypes',
       'attack-ranges',
-      'hero-attributes-configuration'
+      'hero-attributes-configurations'
     ];
     
     if (!knownModules.includes(module)) return;

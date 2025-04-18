@@ -6,20 +6,20 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Models\HeroAttributeConfiguration;
-use App\Services\HeroAttributeConfigurationService;
-use App\Http\Requests\Admin\HeroAttributeConfiguration\UpdateHeroAttributeConfigurationRequest;
+use App\Models\HeroAttributesConfiguration;
+use App\Services\HeroAttributesConfigurationService;
+use App\Http\Requests\Admin\HeroAttributesConfiguration\UpdateHeroAttributesConfigurationRequest;
 
-class HeroAttributeConfigurationController extends Controller
+class HeroAttributesConfigurationController extends Controller
 {
   protected $configurationService;
 
   /**
    * Create a new controller instance.
    *
-   * @param HeroAttributeConfigurationService $configurationService
+   * @param HeroAttributesConfigurationService $configurationService
    */
-  public function __construct(HeroAttributeConfigurationService $configurationService)
+  public function __construct(HeroAttributesConfigurationService $configurationService)
   {
     $this->configurationService = $configurationService;
   }
@@ -31,13 +31,13 @@ class HeroAttributeConfigurationController extends Controller
   {
     // Get the configuration
     $configuration = $this->configurationService->getConfiguration();
-    return view('admin.hero-attributes-configuration.edit', compact('configuration'));
+    return view('admin.hero-attributes-configurations.edit', compact('configuration'));
   }
 
   /**
    * Update hero attributes configuration
    */
-  public function update(UpdateHeroAttributeConfigurationRequest $request): RedirectResponse
+  public function update(UpdateHeroAttributesConfigurationRequest $request): RedirectResponse
   {
     // Validate the input
     $validated = $request->validated();
@@ -47,7 +47,7 @@ class HeroAttributeConfigurationController extends Controller
       
       // Redirect with success message
       return redirect()
-        ->route('admin.hero-attributes-configuration.edit')
+        ->route('admin.hero-attributes-configurations.edit')
         ->with('success', 'Configuración de atributos actualizada correctamente.');
     } catch (\Exception $e) {
       return back()->with('error', 'Error al actualizar la configuración: ' . $e->getMessage())

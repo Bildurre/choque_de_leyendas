@@ -11,7 +11,7 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('hero_attributes_configuration', function (Blueprint $table) {
+    Schema::create('hero_attributes_configurations', function (Blueprint $table) {
       $table->id();
       
       // Attribute value constraints
@@ -42,6 +42,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('hero_attributes_configuration');
+    Schema::dropIfExists('hero_attributes_configurations');
   }
 };

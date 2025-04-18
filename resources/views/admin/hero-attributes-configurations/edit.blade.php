@@ -6,7 +6,7 @@
   :backRoute="route('admin.dashboard')"
 >
 
-  <x-forms.hero-attributes-configuration-form
+  <x-forms.hero-attributes-configurations-form
     :configuration="$configuration"
     :submitLabel="'Guardar Cambios'" 
     :cancelRoute="route('admin.dashboard')" 
