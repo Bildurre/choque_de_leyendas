@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,11 +22,11 @@ class DatabaseSeeder extends Seeder
       FactionSeeder::class,
       HeroSuperclassSeeder::class,
       HeroClassesSeeder::class,
-      HeroAttributeConfigurationSeeder::class,
       AttackTypeSeeder::class,
       AttackSubtypeSeeder::class,
       AttackRangeSeeder::class,
       HeroAbilitiesSeeder::class,
+      HeroRacesSeeder::class,
     ]);
   }
 }

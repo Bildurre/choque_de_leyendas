@@ -24,11 +24,6 @@ class HeroClassesSeeder extends Seeder
       $class->name = $classData['name'];
       $class->passive = $classData['passive'];
       $class->hero_superclass_id = $classData['hero_superclass_id'];
-      $class->agility_modifier = $classData['agility_modifier'];
-      $class->mental_modifier = $classData['mental_modifier'];
-      $class->will_modifier = $classData['will_modifier'];
-      $class->strength_modifier = $classData['strength_modifier'];
-      $class->armor_modifier = $classData['armor_modifier'];
 
       $class->save();
     }
