@@ -45,8 +45,8 @@
     <x-sidebar-section title="Balance">
       <li>
         <x-sidebar-nav-link 
-          :route="route('admin.hero-attributes.edit')"
-          :active="request()->routeIs('admin.hero-attributes.*')" 
+          :route="route('admin.hero-attributes-configuration.edit')"
+          :active="request()->routeIs('admin.hero-attributes-configuration.*')" 
           icon="mono-yellow"
         >
           Configuración de Atributos

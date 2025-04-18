@@ -13,7 +13,7 @@ class HeroAttributeConfigurationService
    */
   public function getConfiguration(): HeroAttributeConfiguration
   {
-    return HeroAttributeConfiguration::firstOrFail();
+    return HeroAttributeConfiguration::firstOrCreate([]);
   }
 
   /**
@@ -25,47 +25,51 @@ class HeroAttributeConfigurationService
    */
   public function updateConfiguration(array $data): HeroAttributeConfiguration
   {
-    // Calculate total base points
-    $basePointsTotal = 
-      $data['base_agility'] + 
-      $data['base_mental'] + 
-      $data['base_will'] + 
-      $data['base_strength'] + 
-      $data['base_armor'];
-
-    // Validate that base points don't exceed total points
-    if ($basePointsTotal > $data['total_points']) {
-      throw new \Exception('The sum of base attributes cannot exceed the total points.');
+    // Validate that min value is not greater than max value
+    if ($data['min_attribute_value'] > $data['max_attribute_value']) {
+      throw new \Exception('El valor mínimo de atributo no puede ser mayor que el valor máximo.');
     }
-
-    // Get the configuration
-    $configuration = HeroAttributeConfiguration::firstOrFail();
+    
+    // Validate that min total is not greater than max total
+    if ($data['min_total_attributes'] > $data['max_total_attributes']) {
+      throw new \Exception('El valor mínimo total de atributos no puede ser mayor que el valor máximo total.');
+    }
+    
+    // Get the configuration (or create if not exists)
+    $configuration = HeroAttributeConfiguration::firstOrCreate([]);
     $configuration->update($data);
 
     return $configuration;
   }
 
   /**
-   * Get remaining points for hero creation based on current attributes
+   * Validate a set of attributes against configuration constraints
    *
-   * @param array $attributes Current attributes
-   * @return int
+   * @param array $attributes
+   * @return bool
    */
-  public function getRemainingPoints(array $attributes): int
+  public function validateAttributes(array $attributes): bool
   {
     $configuration = $this->getConfiguration();
-    return $configuration->getRemainingPoints($attributes);
+    return $configuration->validateAttributes($attributes);
   }
 
   /**
-   * Validate that the total points are correctly distributed
+   * Calculate health for a set of attributes
    *
-   * @param array $attributes Attributes to validate
-   * @return bool
+   * @param array $attributes
+   * @return int
    */
-  public function validatePointDistribution(array $attributes): bool
+  public function calculateHealth(array $attributes): int
   {
     $configuration = $this->getConfiguration();
-    return $configuration->validatePointDistribution($attributes);
+    
+    return $configuration->calculateHealth(
+      $attributes['agility'] ?? 0,
+      $attributes['mental'] ?? 0,
+      $attributes['will'] ?? 0,
+      $attributes['strength'] ?? 0,
+      $attributes['armor'] ?? 0
+    );
   }
 }

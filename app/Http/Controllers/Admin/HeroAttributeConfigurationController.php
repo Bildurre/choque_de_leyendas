@@ -29,9 +29,9 @@ class HeroAttributeConfigurationController extends Controller
    */
   public function edit(): View
   {
-    // Get the first (and only) configuration
+    // Get the configuration
     $configuration = $this->configurationService->getConfiguration();
-    return view('admin.hero-attributes.edit', compact('configuration'));
+    return view('admin.hero-attributes-configuration.edit', compact('configuration'));
   }
 
   /**
@@ -47,10 +47,11 @@ class HeroAttributeConfigurationController extends Controller
       
       // Redirect with success message
       return redirect()
-        ->route('admin.hero-attributes.edit')
-        ->with('success', 'Hero attribute configuration updated successfully.');
+        ->route('admin.hero-attributes-configuration.edit')
+        ->with('success', 'Configuración de atributos actualizada correctamente.');
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar la configuración');
+      return back()->with('error', 'Error al actualizar la configuración: ' . $e->getMessage())
+        ->withInput();
     }
   }
 }

@@ -12,12 +12,16 @@ class HeroAttributeConfiguration extends Model
    * @var array
    */
   protected $fillable = [
-    'base_agility',
-    'base_mental', 
-    'base_will',
-    'base_strength',
-    'base_armor',
-    'total_points'
+    'min_attribute_value',
+    'max_attribute_value',
+    'min_total_attributes',
+    'max_total_attributes',
+    'agility_multiplier',
+    'mental_multiplier',
+    'will_multiplier',
+    'strength_multiplier',
+    'armor_multiplier',
+    'total_health_base'
   ];
 
   /**
@@ -26,63 +30,67 @@ class HeroAttributeConfiguration extends Model
    * @var array
    */
   protected $casts = [
-    'base_agility' => 'integer',
-    'base_mental' => 'integer',
-    'base_will' => 'integer', 
-    'base_strength' => 'integer',
-    'base_armor' => 'integer',
-    'total_points' => 'integer'
+    'min_attribute_value' => 'integer',
+    'max_attribute_value' => 'integer',
+    'min_total_attributes' => 'integer',
+    'max_total_attributes' => 'integer',
+    'agility_multiplier' => 'integer',
+    'mental_multiplier' => 'integer',
+    'will_multiplier' => 'integer',
+    'strength_multiplier' => 'integer',
+    'armor_multiplier' => 'integer',
+    'total_health_base' => 'integer'
   ];
 
   /**
-   * Validate that the total points are correctly distributed
+   * Calculate health for a set of attributes
    * 
-   * @param array $attributes Attributes to validate
-   * @return bool
+   * @param int $agility
+   * @param int $mental
+   * @param int $will
+   * @param int $strength
+   * @param int $armor
+   * @return int
    */
-  public function validatePointDistribution(array $attributes): bool
+  public function calculateHealth(int $agility, int $mental, int $will, int $strength, int $armor): int
   {
-    $baseTotal = 
-      $this->base_agility + 
-      $this->base_mental + 
-      $this->base_will + 
-      $this->base_strength + 
-      $this->base_armor;
-    
-    $additionalPoints = array_sum([
-      $attributes['agility'] ?? 0,
-      $attributes['mental'] ?? 0,
-      $attributes['will'] ?? 0,
-      $attributes['strength'] ?? 0,
-      $attributes['armor'] ?? 0
-    ]);
-
-    return ($baseTotal + $additionalPoints) <= $this->total_points;
+    return $this->total_health_base + 
+           ($agility * $this->agility_multiplier) +
+           ($mental * $this->mental_multiplier) +
+           ($will * $this->will_multiplier) +
+           ($strength * $this->strength_multiplier) +
+           ($armor * $this->armor_multiplier);
   }
 
   /**
-   * Calculate remaining points for hero creation
+   * Validate attributes against configuration constraints
    * 
-   * @param array $attributes Current attributes
-   * @return int
+   * @param array $attributes
+   * @return bool
    */
-  public function getRemainingPoints(array $attributes): int
+  public function validateAttributes(array $attributes): bool
   {
-    $baseTotal = 
-      $this->base_agility + 
-      $this->base_mental + 
-      $this->base_will + 
-      $this->base_strength + 
-      $this->base_armor;
+    // Extract attributes
+    $agility = $attributes['agility'] ?? 0;
+    $mental = $attributes['mental'] ?? 0;
+    $will = $attributes['will'] ?? 0;
+    $strength = $attributes['strength'] ?? 0;
+    $armor = $attributes['armor'] ?? 0;
     
-    $additionalPoints = array_sum([
-      $attributes['agility'] ?? 0,
-      $attributes['mental'] ?? 0,
-      $attributes['will'] ?? 0,
-      $attributes['strength'] ?? 0,
-      $attributes['armor'] ?? 0
-    ]);
-
-    return $this->total_points - ($baseTotal + $additionalPoints);
+    // Check individual attribute constraints
+    if ($agility < $this->min_attribute_value || $agility > $this->max_attribute_value ||
+        $mental < $this->min_attribute_value || $mental > $this->max_attribute_value ||
+        $will < $this->min_attribute_value || $will > $this->max_attribute_value ||
+        $strength < $this->min_attribute_value || $strength > $this->max_attribute_value ||
+        $armor < $this->min_attribute_value || $armor > $this->max_attribute_value) {
+      return false;
+    }
+    
+    // Calculate total attributes
+    $totalAttributes = $agility + $mental + $will + $strength + $armor;
+    
+    // Check total attributes constraints
+    return $totalAttributes >= $this->min_total_attributes && 
+           $totalAttributes <= $this->max_total_attributes;
   }
 }

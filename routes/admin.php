@@ -33,10 +33,10 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   });
 
   // Hero Attribute Configuration
-  Route::get('/hero-attributes', [HeroAttributeConfigurationController::class, 'edit'])
-    ->name('hero-attributes.edit');
-  Route::put('/hero-attributes', [HeroAttributeConfigurationController::class, 'update'])
-    ->name('hero-attributes.update');
+  Route::get('/hero-attributes-configuration', [HeroAttributeConfigurationController::class, 'edit'])
+    ->name('hero-attributes-configuration.edit');
+  Route::put('/hero-attributes-configuration', [HeroAttributeConfigurationController::class, 'update'])
+    ->name('hero-attributes-configuration.update');
 
   // Hero Superclasses
   Route::resource('hero-superclasses', HeroSuperclassController::class);

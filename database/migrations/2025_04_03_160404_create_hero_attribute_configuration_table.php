@@ -14,16 +14,23 @@ return new class extends Migration
     Schema::create('hero_attribute_configurations', function (Blueprint $table) {
       $table->id();
       
-      // Base values for each attribute
-      $table->integer('base_agility')->default(3);
-      $table->integer('base_mental')->default(3);
-      $table->integer('base_will')->default(3);
-      $table->integer('base_strength')->default(3);
-      $table->integer('base_armor')->default(3);
+      // Attribute value constraints
+      $table->integer('min_attribute_value')->default(1);
+      $table->integer('max_attribute_value')->default(5);
       
-      // Total maximum points for hero creation
-      $table->integer('total_points')->default(45);
+      // Total attributes constraints
+      $table->integer('min_total_attributes')->default(12);
+      $table->integer('max_total_attributes')->default(18);
       
+      // Health calculation multipliers
+      $table->integer('agility_multiplier')->default(-1);
+      $table->integer('mental_multiplier')->default(-1);
+      $table->integer('will_multiplier')->default(1);
+      $table->integer('strength_multiplier')->default(-1);
+      $table->integer('armor_multiplier')->default(1);
+      
+      // Base health value
+      $table->integer('total_health_base')->default(25);
       
       // Timestamps
       $table->datetimes();

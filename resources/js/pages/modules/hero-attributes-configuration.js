@@ -1,9 +1,9 @@
-import {setupLifePointsCalculator} from "../../pages/helpers/attribute-points-calculator.js"
+import {heroAttributesHandler} from "./helpers/attribute-points-calculator.js"
 /**
  * Default handler for hero attributes pages
  * @param {string} action - Current CRUD action
  */
-export default function heroAttributesHandler(action) {
+export default function heroAttributesConfigurationHandler(action) {
   // This module primarily handles the attributes configuration page
   if (action === 'index') {
     setupAttributesForm();
