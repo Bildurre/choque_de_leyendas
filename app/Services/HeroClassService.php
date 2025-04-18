@@ -43,12 +43,7 @@ class HeroClassService
    */
   public function update(HeroClass $heroClass, array $data): HeroClass
   {
-    $heroClass->fill($data);
-    
-    if (!$heroClass->isValidModifiers()) {
-      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
-    }
-    
+    $heroClass->fill($data);    
     $heroClass->save();
     
     return $heroClass;

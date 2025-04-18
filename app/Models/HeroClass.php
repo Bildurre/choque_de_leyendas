@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\HasAttributeModifiers;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -44,17 +43,4 @@ class HeroClass extends Model
   {
     return $this->hasMany(Hero::class);
   }
-
-  /**
- * Check if modifiers are valid using configured limits
- *
- * @return bool
- */
-public function isValidModifiers(): bool
-{
-  return $this->validateModifiers([
-    // 'max_modifiable_attributes' => 3,
-    'attribute_limits' => 1
-  ]);
-}
 }

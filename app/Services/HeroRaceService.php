@@ -28,11 +28,6 @@ class HeroRaceService
   {
     $heroRace = new HeroRace();
     $heroRace->fill($data);
-
-    if (!$heroRace->isValidModifiers()) {
-      throw new \Exception('Los modificadores de atributos no cumplen con las restricciones establecidas.');
-    }
-    
     $heroRace->save();
     
     return $heroRace;
