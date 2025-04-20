@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Traits\HasImageAttribute;
+use App\Models\Traits\HasSlug;
 
 class Hero extends Model
 {
   use HasFactory;
+  use HasImageAttribute;
+  use HasSlug;
 
   /**
    * The attributes that are mass assignable.
@@ -19,16 +22,53 @@ class Hero extends Model
   protected $fillable = [
     'name',
     'description',
+    'passive_name',
+    'passive_description',
+    'image',
     'faction_id',
     'hero_race_id',
     'hero_class_id',
+    'gender',
     'agility',
     'mental',
     'will',
     'strength',
-    'armor',
-    'health'
+    'armor'
   ];
+
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'gender' => 'string',
+    'agility' => 'integer',
+    'mental' => 'integer',
+    'will' => 'integer',
+    'strength' => 'integer',
+    'armor' => 'integer'
+  ];
+
+  /**
+   * Get the directory for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageDirectory(): string
+  {
+    return 'images/uploads/heroes';
+  }
+
+  /**
+   * Get the source field for slug generation
+   * 
+   * @return string
+   */
+  public function getSlugSourceField(): string
+  {
+    return 'name';
+  }
 
   /**
    * Get the faction that owns the hero.
@@ -53,22 +93,66 @@ class Hero extends Model
   {
     return $this->belongsTo(HeroClass::class);
   }
-  
+
   /**
-   * Get the abilities that belong to this hero.
+   * Get the superclass through class relation.
    */
-  public function abilities(): BelongsToMany
+  public function getSuperclassAttribute()
   {
-    return $this->belongsToMany(HeroAbility::class, 'hero_hero_ability')
-      ->withPivot('is_default')
-      ->withTimestamps();
+    return $this->heroClass ? $this->heroClass->heroSuperclass : null;
   }
 
   /**
-   * Get only the default abilities of this hero.
+   * Calculate hero's health based on current configuration
+   * 
+   * @return int
    */
-  public function defaultAbilities()
+  public function calculateHealth(): int
   {
-    return $this->abilities()->wherePivot('is_default', true);
+    $config = app(HeroAttributesConfiguration::class)->first();
+    
+    if (!$config) {
+      return 10; // Default value if no configuration exists
+    }
+    
+    return $config->calculateHealth(
+      $this->agility,
+      $this->mental,
+      $this->will,
+      $this->strength,
+      $this->armor
+    );
+  }
+
+  /**
+   * Get the total attribute points spent
+   * 
+   * @return int
+   */
+  public function getTotalAttributePoints(): int
+  {
+    return $this->agility + $this->mental + $this->will + $this->strength + $this->armor;
+  }
+
+  /**
+   * Check if hero attributes are valid according to current configuration
+   * 
+   * @return bool
+   */
+  public function hasValidAttributes(): bool
+  {
+    $config = app(HeroAttributesConfiguration::class)->first();
+    
+    if (!$config) {
+      return true; // If no configuration exists, consider it valid
+    }
+    
+    return $config->validateAttributes([
+      'agility' => $this->agility,
+      'mental' => $this->mental,
+      'will' => $this->will,
+      'strength' => $this->strength,
+      'armor' => $this->armor
+    ]);
   }
 }

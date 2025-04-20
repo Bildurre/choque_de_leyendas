@@ -15,7 +15,8 @@ use App\Services\AttackSubtypeService;
 use App\Services\CostTranslatorService;
 use App\Services\HeroSuperclassService;
 use Illuminate\Support\ServiceProvider;
-use App\Services\HeroAttributeConfigurationService;
+use App\Services\HeroAttributesConfigurationService;
+use App\Services\HeroService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         ImageService::class,
         HeroClassService::class,
         HeroSuperclassService::class,
-        HeroAttributeConfigurationService::class,
+        HeroAttributesConfigurationService::class,
         CostTranslatorService::class,
         AttackTypeService::class,
         AttackSubtypeService::class,
@@ -62,6 +63,12 @@ class AppServiceProvider extends ServiceProvider
     {
       $this->app->singleton(FactionService::class, function ($app) {
         return new FactionService($app->make(ImageService::class));
+      });
+      $this->app->singleton(HeroService::class, function ($app) {
+        return new HeroService(
+          $app->make(ImageService::class),
+          $app->make(HeroAttributesConfigurationService::class)
+        );
       });
     }
 

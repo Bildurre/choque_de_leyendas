@@ -33,7 +33,7 @@
       </li>
       <li>
         <x-sidebar-nav-link 
-          route="#"
+          :route="route('admin.heroes.index')"
           :active="request()->routeIs('admin.heroes.*')" 
           icon="mono-yellow"
         >

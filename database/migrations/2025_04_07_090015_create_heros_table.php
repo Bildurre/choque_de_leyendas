@@ -14,16 +14,20 @@ return new class extends Migration
     Schema::create('heroes', function (Blueprint $table) {
       $table->id();
       $table->string('name');
+      $table->string('slug')->unique();
       $table->text('description')->nullable();
+      $table->string('passive_name')->nullable();
+      $table->text('passive_description')->nullable();
+      $table->string('image')->nullable();
       $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('hero_race_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('hero_class_id')->nullable()->constrained()->onDelete('set null');
-      $table->integer('agility')->default(0);
-      $table->integer('mental')->default(0);
-      $table->integer('will')->default(0);
-      $table->integer('strength')->default(0);
-      $table->integer('armor')->default(0);
-      $table->integer('health')->default(10);
+      $table->enum('gender', ['male', 'female'])->default('male');
+      $table->integer('agility')->default(2);
+      $table->integer('mental')->default(2);
+      $table->integer('will')->default(2);
+      $table->integer('strength')->default(2);
+      $table->integer('armor')->default(2);
       $table->datetimes();
     });
   }

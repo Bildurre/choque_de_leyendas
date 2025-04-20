@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
+use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\FactionController;
 use App\Http\Controllers\Admin\HeroRaceController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -55,4 +56,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Hero Races
   Route::resource('hero-races', HeroRaceController::class);
+
+  // Heroes
+  Route::resource('heroes', HeroController::class);
 });
