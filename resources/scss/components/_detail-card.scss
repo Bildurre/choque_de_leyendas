@@ -1,0 +1,50 @@
+@use '../abstracts/all' as *;
+
+.detail-card {
+  background-color: $color-bg-dark-secondary;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  margin-bottom: $spacing-lg;
+  
+  &__header {
+    padding: $spacing-md;
+    background-color: $color-bg-dark-tertiary;
+    border-bottom: 2px solid $color-accent-yellow;
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    @include responsive(mobile) {
+      grid-template-columns: 1fr auto;
+      padding: $spacing-md $spacing-lg;
+    }
+  }
+  
+  &__title {
+    font-size: 1.5rem;
+    margin: 0;
+    
+    @include responsive(mobile) {
+      font-size: 1.75rem;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+    
+    @include responsive(mobile) {
+      order: 2;
+      margin-bottom: 0;
+    }
+  }
+  
+  &__body {
+    padding: $spacing-md;
+    
+    @include responsive(mobile) {
+      padding: $spacing-lg;
+    }
+  }
+}

@@ -20,6 +20,13 @@
 @use 'components/sidebar-section';
 @use 'components/sidebar-nav-link';
 @use 'components/pagination';
+@use 'components/detail-card';
+@use 'components/detail-section';
+@use 'components/info-grid';
+@use 'components/attributes-grid';
+@use 'components/detail-text';
+@use 'components/detail-image';
+@use 'components/color-sample';
 
 //COMPONENTS - CARDS
 @use 'components/cards/entity-card';
@@ -43,5 +50,5 @@
 @use 'pages/login';
 
 //PAGES - ADMIN
-@use 'pages/admin/faction-detail';
-@use 'pages/admin/hero-detail';
+// @use 'pages/admin/faction-detail';
+// @use 'pages/admin/hero-detail';

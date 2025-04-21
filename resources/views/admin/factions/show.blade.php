@@ -7,63 +7,49 @@
   :backRoute="route('admin.factions.index')"
 >
 
-  <div class="faction-detail-card">
-    <div class="faction-actions" style="border-color: {{ $faction->color }}">      
-      <x-action-button 
-        variant="edit" 
-        :route="route('admin.factions.create', $faction)"
-        icon="edit" 
-      />
-      
-      <x-action-button 
-        variant="delete" 
-        :route="route('admin.factions.destroy', $faction)"
-        method="DELETE" 
-        icon="delete" 
-        confirm="true" 
-        :confirmAttribute="$faction->name"
-        deleteConfirmValue='faction-name'
-      />
-    </div>
+  <x-detail-card 
+    :title="$faction->name"
+    :accentColor="$faction->color"
+    :model="$faction"
+    :editRoute="route('admin.factions.edit', $faction)"
+    :deleteRoute="route('admin.factions.destroy', $faction)"
+    confirmAttribute="name"
+  >
+    @if($faction->lore_text)
+      <x-detail-section>
+        <x-detail-text :content="$faction->lore_text" />
+      </x-detail-section>
+    @endif
+
+    <x-detail-section title="Información General y Estadísticas">
+      <x-info-grid :columns="4">
+        @if($faction->icon)
+          <div class="faction-item">
+            <x-detail-image 
+              :src="asset('storage/' . $faction->icon)" 
+              :alt="$faction->name" 
+              size="sm" 
+            />
+            <span class="label">Icono</span>
+          </div>
+        @endif
+        
+        <div class="faction-item">
+          <x-color-sample :color="$faction->color" label="Color" />
+        </div>
+        
+        <x-info-grid-item 
+          label="{{ Str::plural('Héroe', $faction->heroes_count ?? 0) }}" 
+          :value="$faction->heroes_count ?? 0" 
+        />
+        
+        <x-info-grid-item 
+          label="{{ Str::plural('Carta', $faction->cards_count ?? 0) }}" 
+          :value="$faction->cards_count ?? 0" 
+        />
+      </x-info-grid>
+    </x-detail-section>
     
-    <div class="faction-body">
-      @if($faction->lore_text)
-        <div class="faction-lore">
-          <p>{{ $faction->lore_text }}</p>
-        </div>
-      @endif
-
-
-      <div class="faction-info">
-        <h3>Información General y Estadísticas</h3>
-        <div class="faction-info-content">
-          @if($faction->icon)
-            <div class="faction-item">
-              <div class="faction-icon-container">
-                <img src="{{ asset('storage/' . $faction->icon) }}" alt="{{ $faction->name }}" class="faction-icon">
-              </div>
-              <span class="label">Icono</span>
-            </div>
-          @endif
-
-          <div class="faction-item">
-            <span class="value color-sample" style="background-color: {{ $faction->color }}"></span>
-            <span class="label">Color</span>
-          </div>
-          
-          <div class="faction-item">
-            <span class="value">{{ $faction->heroes_count ?? 0 }}</span>
-            <span class="label">{{ Str::plural('Héroe', $faction->heroes_count ?? 0) }}</span>
-          </div>
-          
-          <div class="faction-item">
-            <span class="value">{{ $faction->cards_count ?? 0 }}</span>
-            <span class="label">{{ Str::plural('Carta', $faction->cards_count ?? 0) }}</span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
+  </x-detail-card>
 
 </x-admin-layout>

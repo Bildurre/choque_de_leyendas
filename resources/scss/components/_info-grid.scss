@@ -1,0 +1,43 @@
+@use '../abstracts/all' as *;
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+  
+  @include responsive(small) {
+    &--2-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    &--3-cols {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    &--4-cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @include responsive(tablet) {
+    &--4-cols {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+}
+
+.info-grid-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $spacing-sm;
+  align-items: center;
+  
+  &__label {
+    font-weight: 600;
+    color: $color-text-muted;
+  }
+  
+  &__value {
+    color: $color-text-light;
+  }
+}
