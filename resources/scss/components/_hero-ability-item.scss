@@ -1,0 +1,93 @@
+@use '../abstracts/all' as *;
+
+.hero-abilities-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+  
+  @include responsive(small) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include responsive(desktop) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.hero-ability-item {
+  background-color: $color-bg-dark-tertiary;
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  
+  .ability-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: $spacing-sm;
+    align-items: center;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .ability-name {
+    margin: 0;
+    font-size: 1rem;
+    color: $color-text-light;
+  }
+  
+  .ability-cost {
+    display: flex;
+    align-items: center;
+    
+    .cost-display {
+      display: flex;
+      gap: 2px;
+    }
+  }
+  
+  .ability-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+    
+    span {
+      font-size: 0.7rem;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      background-color: $color-bg-dark-secondary;
+      color: $color-text-muted;
+    }
+    
+    .ability-type {
+      background-color: rgba($color-accent-purple, 0.2);
+      color: $color-accent-purple;
+    }
+    
+    .ability-subtype {
+      background-color: rgba($color-accent-yellow, 0.2);
+      color: $color-accent-yellow;
+    }
+    
+    .ability-range {
+      background-color: rgba($color-accent-orange, 0.2);
+      color: $color-accent-orange;
+    }
+    
+    .ability-area {
+      background-color: rgba($color-accent-blue, 0.2);
+      color: $color-accent-blue;
+    }
+  }
+  
+  .ability-description {
+    font-size: 0.85rem;
+    color: $color-text-light;
+    
+    p {
+      margin: 0 0 $spacing-xs;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

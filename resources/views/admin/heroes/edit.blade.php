@@ -13,6 +13,7 @@
     :heroRaces="$heroRaces"
     :heroClasses="$heroClasses"
     :attributesConfig="$attributesConfig"
+    :abilities="$abilities"
     :submitLabel="'Guardar Cambios'" 
     :cancelRoute="route('admin.heroes.index')" 
   />

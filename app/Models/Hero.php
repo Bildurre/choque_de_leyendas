@@ -95,6 +95,14 @@ class Hero extends Model
   }
 
   /**
+   * Get the abilities off the hero.
+   */
+  public function abilities()
+  {
+    return $this->belongsToMany(HeroAbility::class, 'hero_hero_ability');
+  }
+
+  /**
    * Get the superclass through class relation.
    */
   public function getSuperclassAttribute()

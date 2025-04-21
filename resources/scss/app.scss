@@ -27,6 +27,7 @@
 @use 'components/detail-text';
 @use 'components/detail-image';
 @use 'components/color-sample';
+@use 'components/hero-ability-item';
 
 //COMPONENTS - CARDS
 @use 'components/cards/entity-card';
@@ -41,6 +42,7 @@
 @use 'components/form/image-uploader';
 @use 'components/form/checkbox';
 @use 'components/form/cost-input';
+@use 'components/form/hero-abilities-selector';
 
 //LAYOUT
 @use 'layouts/admin';

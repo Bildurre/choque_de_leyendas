@@ -61,6 +61,36 @@
       </x-detail-section>
     @endif
 
+    @if($hero->abilities->isNotEmpty())
+      <x-detail-section title="Habilidades">
+        <div class="hero-abilities-grid">
+          @foreach($hero->abilities as $ability)
+            <div class="hero-ability-item">
+              <div class="ability-header">
+                <div class="ability-cost">
+                  <x-cost-display :cost="$ability->cost"/>
+                </div>
+                <h4 class="ability-name">{{ $ability->name }}</h4>
+              </div>
+              
+              <div class="ability-meta">
+                <span class="ability-type">{{ $ability->subtype->type->name ?? 'Sin tipo' }}</span>
+                <span class="ability-subtype">{{ $ability->subtype->name ?? 'Sin subtipo' }}</span>
+                <span class="ability-range">{{ $ability->range->name ?? 'Sin rango' }}</span>
+                @if($ability->blast)
+                  <span class="ability-area">Área</span>
+                @endif
+              </div>
+              
+              <div class="ability-description">
+                {!! $ability->description !!}
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </x-detail-section>
+    @endif
+
   </x-detail-card>
 
 </x-admin-layout>

@@ -41,6 +41,8 @@ class HeroRequest extends FormRequest
       'armor' => "required|integer|min:{$attributesConfig->min_attribute_value}|max:{$attributesConfig->max_attribute_value}",
       'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       'remove_image' => 'nullable|boolean',
+      'abilities' => 'nullable|array',
+      'abilities.*' => 'exists:hero_abilities,id',
     ];
 
     return $rules;

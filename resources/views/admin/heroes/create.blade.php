@@ -11,6 +11,7 @@
     :heroRaces="$heroRaces"
     :heroClasses="$heroClasses"
     :attributesConfig="$attributesConfig"
+    :abilities="$abilities"
     :submitLabel="'Crear Héroe'" 
     :cancelRoute="route('admin.heroes.index')" 
   />

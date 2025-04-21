@@ -1,3 +1,5 @@
+import { initHeroAbilitiesSelector } from '../../components/hero-abilities-selector';
+
 /**
  * Default handler for hero pages
  * @param {string} action - Current CRUD action
@@ -19,6 +21,7 @@ export default function heroHandler(action) {
  */
 function setupFormPage() {
   setupAttributeCalculations();
+  initHeroAbilitiesSelector();
 }
 
 /**

@@ -58,6 +58,11 @@ class HeroService
     
     $hero->save();
     
+    // Asociar habilidades si se han seleccionado
+    if (isset($data['abilities']) && is_array($data['abilities'])) {
+      $hero->abilities()->sync($data['abilities']);
+    }
+    
     return $hero;
   }
 
@@ -86,6 +91,14 @@ class HeroService
     
     $hero->fill($data);
     $hero->save();
+    
+    // Actualizar habilidades
+    if (isset($data['abilities'])) {
+      $hero->abilities()->sync($data['abilities']);
+    } else {
+      // Si no se envían habilidades, eliminar todas las relaciones
+      $hero->abilities()->detach();
+    }
     
     return $hero;
   }

@@ -3,6 +3,7 @@
   'factions' => [], 
   'heroRaces' => [],
   'heroClasses' => [], 
+  'abilities' => [],
   'attributesConfig' => null,
   'submitLabel' => 'Guardar', 
   'cancelRoute' => null
@@ -171,6 +172,11 @@
       label="Descripción de la Pasiva" 
       :value="$hero->passive_description ?? ''"
       rows="5"
+    />
+
+    <x-forms.hero-abilities-selector 
+      :abilities="$abilities" 
+      :selectedAbilities="$hero ? $hero->abilities->pluck('id')->toArray() : []"
     />
     
     <x-form.image-uploader
