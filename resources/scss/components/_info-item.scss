@@ -1,6 +1,6 @@
 @use '../abstracts/all' as *;
 
-.stat-item {
+.info-item {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: $spacing-xs;
@@ -9,11 +9,6 @@
   
   svg {
     stroke: $color-accent-purple;
-  }
-  
-  &__count {
-    font-weight: 600;
-    color: $color-text-muted;
   }
   
   &__label {

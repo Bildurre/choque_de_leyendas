@@ -24,7 +24,7 @@
  - upload: Icono de subida al servidor (flecha hacia arriba con línea)
 --}}
 
-@props(['name', 'size' => 18])
+@props(['name', 'size' => '1rem'])
 
 @php
   $paths = [

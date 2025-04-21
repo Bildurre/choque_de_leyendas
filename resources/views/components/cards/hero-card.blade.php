@@ -19,55 +19,23 @@
   <x-slot:badge>
     @if($hero->image)
       <x-badge variant="icon">
-        <img src="{{ asset('storage/' . $hero->image) }}" alt="{{ $hero->name }}" class="hero-avatar">
+        <img src="{{ asset('storage/' . $hero->image) }}" alt="{{ $hero->name }}">
       </x-badge>
     @else
-      <x-badge variant="icon" :color="$hero->faction->color ?? '#444444'">
+      <x-badge variant="icon" :color="$hero->faction->color">
         {{ strtoupper(substr($hero->name, 0, 1)) }}
       </x-badge>
     @endif
   </x-slot:badge>
 
   <div class="card-summary">
-    @if($hero->heroClass)
-      <span class="hero-class">{{ $hero->heroClass->name }}</span>
-    @endif
-    @if($hero->race)
-      <span class="hero-race">{{ $hero->race->name }}</span>
-    @endif
+    <x-info-item icon="heroes" label="{{ $hero->race->name . ' ' . $hero->heroClass->name }}" />
   </div>
   
   <x-slot:details>
-    <div class="hero-attributes">
-      <div class="attribute">
-        <span class="attribute-label">AG</span>
-        <span class="attribute-value">{{ $hero->agility }}</span>
-      </div>
-      <div class="attribute">
-        <span class="attribute-label">ME</span>
-        <span class="attribute-value">{{ $hero->mental }}</span>
-      </div>
-      <div class="attribute">
-        <span class="attribute-label">VO</span>
-        <span class="attribute-value">{{ $hero->will }}</span>
-      </div>
-      <div class="attribute">
-        <span class="attribute-label">FU</span>
-        <span class="attribute-value">{{ $hero->strength }}</span>
-      </div>
-      <div class="attribute">
-        <span class="attribute-label">AR</span>
-        <span class="attribute-value">{{ $hero->armor }}</span>
-      </div>
-      <div class="attribute health">
-        <span class="attribute-label">VIDA</span>
-        <span class="attribute-value">{{ $hero->calculateHealth() }}</span>
-      </div>
-    </div>
-
-    @if($hero->passive_name)
-      <x-description title="Pasiva: {{ $hero->passive_name }}">
-        <div>{!! $hero->passive_description !!}</div>
+    @if($hero->lore_text)
+      <x-description>
+        <p>{{ $hero->lore_text }}</p>
       </x-description>
     @endif
   </x-slot:details>

@@ -15,7 +15,7 @@ return new class extends Migration
       $table->id();
       $table->string('name');
       $table->string('slug')->unique();
-      $table->text('description')->nullable();
+      $table->text('lore_text')->nullable();
       $table->string('passive_name')->nullable();
       $table->text('passive_description')->nullable();
       $table->string('image')->nullable();

@@ -10,7 +10,6 @@
     empty_message="No hay héroes disponibles"
     :createRoute="route('admin.heroes.create')"
     createLabel="Crear el primer héroe"
-    columns="true"
   >
     @foreach($heroes as $hero)
       <x-cards.hero-card 

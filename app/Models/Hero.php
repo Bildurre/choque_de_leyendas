@@ -21,7 +21,7 @@ class Hero extends Model
    */
   protected $fillable = [
     'name',
-    'description',
+    'lore_text',
     'passive_name',
     'passive_description',
     'image',

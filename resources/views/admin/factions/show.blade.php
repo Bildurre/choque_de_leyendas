@@ -7,7 +7,6 @@
   :backRoute="route('admin.factions.index')"
 >
 
-
   <div class="faction-detail-card">
     <div class="faction-actions" style="border-color: {{ $faction->color }}">      
       <x-action-button 

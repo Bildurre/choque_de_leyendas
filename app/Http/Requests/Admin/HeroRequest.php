@@ -27,7 +27,7 @@ class HeroRequest extends FormRequest
     
     $rules = [
       'name' => ['required', 'string', 'max:255'],
-      'description' => 'nullable|string',
+      'lore_text' => 'nullable|string',
       'passive_name' => 'nullable|string|max:255',
       'passive_description' => 'nullable|string',
       'faction_id' => 'nullable|exists:factions,id',

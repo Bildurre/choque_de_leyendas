@@ -78,121 +78,106 @@
       />
     </div>
     
-    <x-form.wysiwyg
-      name="description" 
+    <x-form.textarea
+      name="lore_text" 
       label="Descripción del Héroe" 
-      :value="$hero->description ?? ''"
+      :value="$hero->lore_text ?? ''"
       rows="5"
     />
     
-    <div class="form-section">
-      <h3>Atributos del Héroe</h3>
-      <p class="form-text">
-        Los valores de atributos deben estar entre {{ $attributesConfig->min_attribute_value }} y {{ $attributesConfig->max_attribute_value }}.<br>
-        La suma total debe estar entre {{ $attributesConfig->min_total_attributes }} y {{ $attributesConfig->max_total_attributes }}.
-      </p>
-      
-      <div class="form-row attributes-row">
-        <x-form.field 
-          name="agility" 
-          label="Agilidad" 
-          type="number"
-          :value="$hero->agility ?? 2" 
-          required
-          min="{{ $attributesConfig->min_attribute_value }}"
-          max="{{ $attributesConfig->max_attribute_value }}"
-          data-attribute="true"
-        />
-        
-        <x-form.field 
-          name="mental" 
-          label="Mental" 
-          type="number"
-          :value="$hero->mental ?? 2" 
-          required
-          min="{{ $attributesConfig->min_attribute_value }}"
-          max="{{ $attributesConfig->max_attribute_value }}"
-          data-attribute="true"
-        />
-        
-        <x-form.field 
-          name="will" 
-          label="Voluntad" 
-          type="number"
-          :value="$hero->will ?? 2" 
-          required
-          min="{{ $attributesConfig->min_attribute_value }}"
-          max="{{ $attributesConfig->max_attribute_value }}"
-          data-attribute="true"
-        />
-        
-        <x-form.field 
-          name="strength" 
-          label="Fuerza" 
-          type="number"
-          :value="$hero->strength ?? 2" 
-          required
-          min="{{ $attributesConfig->min_attribute_value }}"
-          max="{{ $attributesConfig->max_attribute_value }}"
-          data-attribute="true"
-        />
-        
-        <x-form.field 
-          name="armor" 
-          label="Armadura" 
-          type="number"
-          :value="$hero->armor ?? 2" 
-          required
-          min="{{ $attributesConfig->min_attribute_value }}"
-          max="{{ $attributesConfig->max_attribute_value }}"
-          data-attribute="true"
-        />
-      </div>
-      
-      <div class="attributes-summary">
-        <div class="attribute-total">
-          <span>Total:</span>
-          <span id="total-attributes-value" class="{{ isset($errors) && $errors->has('total_attributes') ? 'invalid-total' : '' }}">
-            {{ ($hero ? $hero->getTotalAttributePoints() : 10) }}
-          </span>
-        </div>
-        <div class="attribute-health">
-          <span>Vida estimada:</span>
-          <span id="calculated-health">{{ ($hero ? $hero->calculateHealth() : 25) }}</span>
-        </div>
-      </div>
-      
-      @error('total_attributes')
-        <div class="attributes-error">{{ $message }}</div>
-      @enderror
-    </div>
-    
-    <div class="form-section">
-      <h3>Habilidad Pasiva</h3>
+    <div class="form-row attributes-row">
+      <x-form.field 
+        name="agility" 
+        label="Agilidad" 
+        type="number"
+        :value="$hero->agility ?? 2" 
+        required
+        min="{{ $attributesConfig->min_attribute_value }}"
+        max="{{ $attributesConfig->max_attribute_value }}"
+        data-attribute="true"
+      />
       
       <x-form.field 
-        name="passive_name" 
-        label="Nombre de la Pasiva" 
-        :value="$hero->passive_name ?? ''" 
+        name="mental" 
+        label="Mental" 
+        type="number"
+        :value="$hero->mental ?? 2" 
+        required
+        min="{{ $attributesConfig->min_attribute_value }}"
+        max="{{ $attributesConfig->max_attribute_value }}"
+        data-attribute="true"
       />
       
-      <x-form.wysiwyg
-        name="passive_description" 
-        label="Descripción de la Pasiva" 
-        :value="$hero->passive_description ?? ''"
-        rows="5"
+      <x-form.field 
+        name="will" 
+        label="Voluntad" 
+        type="number"
+        :value="$hero->will ?? 2" 
+        required
+        min="{{ $attributesConfig->min_attribute_value }}"
+        max="{{ $attributesConfig->max_attribute_value }}"
+        data-attribute="true"
+      />
+      
+      <x-form.field 
+        name="strength" 
+        label="Fuerza" 
+        type="number"
+        :value="$hero->strength ?? 2" 
+        required
+        min="{{ $attributesConfig->min_attribute_value }}"
+        max="{{ $attributesConfig->max_attribute_value }}"
+        data-attribute="true"
+      />
+      
+      <x-form.field 
+        name="armor" 
+        label="Armadura" 
+        type="number"
+        :value="$hero->armor ?? 2" 
+        required
+        min="{{ $attributesConfig->min_attribute_value }}"
+        max="{{ $attributesConfig->max_attribute_value }}"
+        data-attribute="true"
       />
     </div>
     
-    <div class="form-section">
-      <h3>Imagen del Héroe</h3>
-      
-      <x-form.image-uploader
-        name="image" 
-        label="Imagen del Héroe" 
-        :currentImage="$hero->image ?? null"
-        help="Formatos: JPEG, PNG, JPG, GIF, SVG. Tamaño máximo: 2MB."
-      />
-    </div>
+    <p class="form-text">
+      Los valores de atributos deben estar entre {{ $attributesConfig->min_attribute_value }} y {{ $attributesConfig->max_attribute_value }}. 
+      La suma total debe estar entre {{ $attributesConfig->min_total_attributes }} y {{ $attributesConfig->max_total_attributes }}.
+    </p>
+    <p class="form-text">
+      Total:
+      <span id="total-attributes-value" class="{{ isset($errors) && $errors->has('total_attributes') ? 'invalid-total' : '' }}">
+        {{ ($hero ? $hero->getTotalAttributePoints() : 10) }}
+      </span>
+        - Vida:
+      <span id="calculated-health">
+        {{ ($hero ? $hero->calculateHealth() : 25) }}
+      </span>
+    </p>  
+    @error('total_attributes')
+      <div class="attributes-error">{{ $message }}</div>
+    @enderror
+   
+    <x-form.field 
+      name="passive_name" 
+      label="Nombre de la Pasiva" 
+      :value="$hero->passive_name ?? ''" 
+    />
+    
+    <x-form.wysiwyg
+      name="passive_description" 
+      label="Descripción de la Pasiva" 
+      :value="$hero->passive_description ?? ''"
+      rows="5"
+    />
+    
+    <x-form.image-uploader
+      name="image" 
+      label="Imagen del Héroe" 
+      :currentImage="$hero->image ?? null"
+      help="Formatos: JPEG, PNG, JPG, GIF, SVG. Tamaño máximo: 2MB."
+    />
   </x-form.card>
 </form>
