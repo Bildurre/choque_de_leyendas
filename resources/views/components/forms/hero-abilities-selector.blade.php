@@ -44,7 +44,7 @@
         
         sort($types);
         sort($subtypes);
-        sort($ranges);
+        sort($ranges); 
       @endphp
       
       <div class="filter-selects">
