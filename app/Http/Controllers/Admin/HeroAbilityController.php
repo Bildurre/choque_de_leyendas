@@ -71,14 +71,12 @@ class HeroAbilityController extends Controller
   public function edit(HeroAbility $heroAbility)
   {
     $ranges = AttackRange::all();
-    $types = AttackType::all();
     $subtypes = AttackSubtype::all();
     $heroAbility->load('heroes');
     
     return view('admin.hero-abilities.edit', compact(
       'heroAbility',
       'ranges',
-      'types', 
       'subtypes'
     ));
   }

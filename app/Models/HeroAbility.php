@@ -28,11 +28,31 @@ class HeroAbility extends Model
   ];
 
   /**
-   * Get the subtype for this ability.
+   * Get the type (physical or magical) for this ability.
    */
-  public function type()
+  public function getTypeAttribute()
   {
-    return $this->subtype ? $this->subtype->type() : null;
+    return $this->subtype ? $this->subtype->type : null;
+  }
+
+  /**
+   * Check if the ability is a physical attack
+   * 
+   * @return bool
+   */
+  public function isPhysicalAttack(): bool
+  {
+    return $this->subtype && $this->subtype->isPhysical();
+  }
+
+  /**
+   * Check if the ability is a magical attack
+   * 
+   * @return bool
+   */
+  public function isMagicalAttack(): bool
+  {
+    return $this->subtype && $this->subtype->isMagical();
   }
 
   /**

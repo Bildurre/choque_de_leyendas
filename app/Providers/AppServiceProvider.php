@@ -43,7 +43,6 @@ class AppServiceProvider extends ServiceProvider
         HeroSuperclassService::class,
         HeroAttributesConfigurationService::class,
         CostTranslatorService::class,
-        AttackTypeService::class,
         AttackSubtypeService::class,
         AttackRangeService::class,
         HeroAbilityService::class,

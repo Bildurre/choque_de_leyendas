@@ -45,9 +45,6 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   // Hero Classes
   Route::resource('hero-classes', HeroClassController::class);
 
-  // Attack Types
-  Route::resource('attack-types', AttackTypeController::class);
-
   // Attack Subtypes
   Route::resource('attack-subtypes', AttackSubtypeController::class);
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AttackType;
 use App\Models\AttackSubtype;
 use App\Http\Controllers\Controller;
 use App\Services\AttackSubtypeService;
@@ -36,8 +35,7 @@ class AttackSubtypeController extends Controller
    */
   public function create()
   {
-    $attackTypes = AttackType::all();
-    return view('admin.attack-subtypes.create', compact('attackTypes'));
+    return view('admin.attack-subtypes.create');
   }
 
   /**
@@ -61,8 +59,7 @@ class AttackSubtypeController extends Controller
    */
   public function edit(AttackSubtype $attackSubtype)
   {
-    $attackTypes = AttackType::all();
-    return view('admin.attack-subtypes.edit', compact('attackSubtype', 'attackTypes'));
+    return view('admin.attack-subtypes.edit', compact('attackSubtype'));
   }
 
   /**
@@ -94,14 +91,5 @@ class AttackSubtypeController extends Controller
     } catch (\Exception $e) {
       return back()->with('error', $e->getMessage());
     }
-  }
-
-  /**
-   * Get subtypes for a specific type (AJAX)
-   */
-  public function getByType($typeId)
-  {
-    $subtypes = $this->attackSubtypeService->getSubtypesByType($typeId);
-    return response()->json($subtypes);
   }
 }

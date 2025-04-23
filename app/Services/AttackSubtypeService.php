@@ -8,13 +8,24 @@ use Illuminate\Database\Eloquent\Collection;
 class AttackSubtypeService
 {
   /**
-   * Get all attack subtypes with related type
+   * Get all attack subtypes
    *
    * @return Collection
    */
   public function getAllSubtypes(): Collection
   {
-    return AttackSubtype::all();
+    return AttackSubtype::withCount('abilities')->get();
+  }
+
+  /**
+   * Get subtypes by type (physical or magical)
+   *
+   * @param string $type
+   * @return Collection
+   */
+  public function getSubtypesByType(string $type): Collection
+  {
+    return AttackSubtype::where('type', $type)->get();
   }
 
   /**
@@ -27,7 +38,7 @@ class AttackSubtypeService
   {
     $attackSubtype = new AttackSubtype();
     $attackSubtype->name = $data['name'];
-    $attackSubtype->attack_type_id = $data['attack_type_id'];
+    $attackSubtype->type = $data['type'];
     $attackSubtype->save();
     
     return $attackSubtype;
@@ -43,7 +54,7 @@ class AttackSubtypeService
   public function update(AttackSubtype $attackSubtype, array $data): AttackSubtype
   {
     $attackSubtype->name = $data['name'];
-    $attackSubtype->attack_type_id = $data['attack_type_id'];
+    $attackSubtype->type = $data['type'];
     $attackSubtype->save();
     
     return $attackSubtype;

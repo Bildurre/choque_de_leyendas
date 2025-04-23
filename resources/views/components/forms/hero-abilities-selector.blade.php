@@ -11,20 +11,11 @@
       <input type="text" id="abilities-search" class="form-input" placeholder="Buscar habilidades...">
       
       @php
-        // Extraer los tipos, subtipos y rangos únicos
-        $types = [];
+        
         $subtypes = [];
         $ranges = [];
         
         foreach($abilities as $ability) {
-          // Extraer tipos
-          if ($ability->subtype && $ability->subtype->type) {
-            $typeName = $ability->subtype->type->name;
-            if (!in_array($typeName, $types)) {
-              $types[] = $typeName;
-            }
-          }
-          
           // Extraer subtipos
           if ($ability->subtype) {
             $subtypeName = $ability->subtype->name;
@@ -42,19 +33,11 @@
           }
         }
         
-        sort($types);
         sort($subtypes);
         sort($ranges); 
       @endphp
       
-      <div class="filter-selects">
-        <select id="abilities-type-filter" class="form-select">
-          <option value="">Todos los tipos</option>
-          @foreach($types as $typeName)
-            <option value="{{ $typeName }}">{{ $typeName }}</option>
-          @endforeach
-        </select>
-        
+      <div class="filter-selects">        
         <select id="abilities-subtype-filter" class="form-select">
           <option value="">Todos los subtipos</option>
           @foreach($subtypes as $subtypeName)
@@ -79,11 +62,11 @@
         @foreach($abilities as $ability)
           @if(!in_array($ability->id, $selectedAbilities))
             <div class="ability-card" 
-                 data-id="{{ $ability->id }}"
-                 data-type="{{ $ability->subtype->type->name ?? '' }}"
-                 data-subtype="{{ $ability->subtype->name ?? '' }}"
-                 data-range="{{ $ability->range->name ?? '' }}"
-                 data-name="{{ $ability->name }}">
+              data-id="{{ $ability->id }}"
+              data-type="{{ $ability->subtype->type ?? '' }}"
+              data-subtype="{{ $ability->subtype->name ?? '' }}"
+              data-range="{{ $ability->range->name ?? '' }}"
+              data-name="{{ $ability->name }}">
               <div class="ability-header">
                 <div class="ability-cost">
                   <x-cost-display :cost="$ability->cost"/>
@@ -91,7 +74,7 @@
                 <h5 class="ability-name">{{ $ability->name }}</h5>
               </div>
               <div class="ability-types">
-                <span class="ability-type">{{ $ability->subtype->type->name ?? 'Sin tipo' }}</span>
+                <span class="ability-type">{{ $ability->subtype ? ($ability->subtype->type === 'physical' ? 'Físico' : 'Mágico') : 'Sin tipo' }}</span>
                 <span class="ability-subtype">{{ $ability->subtype->name ?? 'Sin subtipo' }}</span>
                 <span class="ability-range">{{ $ability->range->name ?? 'Sin rango' }}</span>
               </div>

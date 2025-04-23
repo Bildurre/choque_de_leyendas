@@ -85,15 +85,6 @@
     <x-sidebar-section title="Habilidades">
       <li>
         <x-sidebar-nav-link 
-          :route="route('admin.attack-types.index')"
-          :active="request()->routeIs('admin.attack-types.*')" 
-          icon="mono-yellow"
-        >
-          Tipos
-        </x-sidebar-nav-link>
-      </li>
-      <li>
-        <x-sidebar-nav-link 
           :route="route('admin.attack-subtypes.index')"
           :active="request()->routeIs('admin.attack-subtypes.*')" 
           icon="mono-yellow"

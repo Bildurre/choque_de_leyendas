@@ -64,7 +64,7 @@
             <div class="preview-hero-ability__header">
               <h5 class="preview-hero-ability__name">{{ $ability->name }}</h5>
               <div class="preview-hero-ability__meta">
-                <span class="preview-hero-ability__type">{{ $ability->subtype?->type?->name ?? 'Sin tipo' }} - </span>
+                <span class="preview-hero-ability__type">{{ $ability->subtype ? ($ability->subtype->type === 'physical' ? 'Físico' : 'Mágico') : 'Sin tipo' }} - </span>
                 <span class="preview-hero-ability__subtype">{{ $ability->subtype?->name ?? 'Sin subtipo' }} - </span>
                 <span class="preview-hero-ability__range">{{ $ability->range?->name ?? 'Sin rango' }}</span>
                 @if($ability->blast)

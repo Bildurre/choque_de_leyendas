@@ -1,4 +1,4 @@
-@props(['attackSubtype' => null, 'attackTypes' => [], 'submitLabel' => 'Guardar', 'cancelRoute' => null])
+@props(['attackSubtype' => null, 'submitLabel' => 'Guardar', 'cancelRoute' => null])
 
 <form 
   action="{{ $attackSubtype ? route('admin.attack-subtypes.update', $attackSubtype) : route('admin.attack-subtypes.store') }}" 
@@ -22,10 +22,10 @@
       />
       
       <x-form.select
-        name="attack_type_id" 
+        name="type" 
         label="Tipo de Ataque" 
-        :value="$attackSubtype->attack_type_id ?? ''"
-        :options="$attackTypes->pluck('name', 'id')->toArray()"
+        :value="$attackSubtype->type ?? 'physical'"
+        :options="['physical' => 'Físico', 'magical' => 'Mágico']"
         required
       />
     </div>
