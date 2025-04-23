@@ -28,6 +28,11 @@
 @use 'components/detail-image';
 @use 'components/color-sample';
 @use 'components/hero-ability-item';
+@use 'components/attribute-icon';
+
+//COMPONENTS - PREVIEWS
+@use 'components/previews/base-preview';
+@use 'components/previews/hero-preview';
 
 //COMPONENTS - CARDS
 @use 'components/cards/entity-card';

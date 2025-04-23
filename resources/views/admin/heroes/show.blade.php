@@ -15,13 +15,18 @@
     :deleteRoute="route('admin.heroes.destroy', $hero)"
     confirmAttribute="name"
   >
-    @if($hero->image)
-      <x-detail-image 
-        :src="asset('storage/' . $hero->image)" 
-        :alt="$hero->name" 
-        size="lg"
-      />
-    @endif
+    <x-detail-section>
+      @if($hero->image)
+        <x-detail-image 
+          :src="asset('storage/' . $hero->image)" 
+          :alt="$hero->name" 
+          size="lg"
+        />
+      @endif
+      
+      <x-previews.hero-preview :hero="$hero" />
+      
+    </x-detail-section>
     
     @if($hero->lore_text)
       <x-detail-section>
