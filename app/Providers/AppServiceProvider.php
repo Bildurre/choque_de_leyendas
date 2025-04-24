@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\HeroService;
 use App\Services\ImageService;
 use App\Services\FactionService;
 use App\Services\HeroRaceService;
@@ -12,11 +13,11 @@ use App\Services\HeroAbilityService;
 use Illuminate\Pagination\Paginator;
 use App\Services\WysiwygImageService;
 use App\Services\AttackSubtypeService;
+use App\Services\EquipmentTypeService;
 use App\Services\CostTranslatorService;
 use App\Services\HeroSuperclassService;
 use Illuminate\Support\ServiceProvider;
 use App\Services\HeroAttributesConfigurationService;
-use App\Services\HeroService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -48,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
         HeroAbilityService::class,
         WysiwygImageService::class,
         HeroRaceService::class,
+        EquipmentTypeService::class,
       ];
       
       foreach ($services as $service) {

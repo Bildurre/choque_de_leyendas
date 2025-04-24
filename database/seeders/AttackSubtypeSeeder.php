@@ -17,43 +17,43 @@ class AttackSubtypeSeeder extends Seeder
     $subtypes = [
       [
         'name' => 'Cortante',
-        'attack_type_id' => 1
+        'type' => 'physical'
       ],
       [
         'name' => 'Perforante',
-        'attack_type_id' => 1
+        'type' => 'physical'
       ],
       [
         'name' => 'Contundente',
-        'attack_type_id' => 1
+        'type' => 'physical'
       ],
       [
         'name' => 'Fuego',
-        'attack_type_id' => 2
+        'type' => 'magical'
       ],
       [
         'name' => 'Electricidad',
-        'attack_type_id' => 2
+        'type' => 'magical'
       ],
       [
         'name' => 'Agua',
-        'attack_type_id' => 2
+        'type' => 'magical'
       ],
       [
         'name' => 'Tierra',
-        'attack_type_id' => 2
+        'type' => 'magical'
       ],
       [
         'name' => 'Aire',
-        'attack_type_id' => 2
+        'type' => 'magical'
       ],
       [
         'name' => 'Luz',
-        'attack_type_id' => 3
+        'type' => 'magical'
       ],
       [
         'name' => 'Oscuridad',
-        'attack_type_id' => 3
+        'type' => 'magical'
       ],
     ];
 

@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
       FactionSeeder::class,
       HeroSuperclassSeeder::class,
       HeroClassesSeeder::class,
-      AttackTypeSeeder::class,
       AttackSubtypeSeeder::class,
       AttackRangeSeeder::class,
       HeroAbilitiesSeeder::class,

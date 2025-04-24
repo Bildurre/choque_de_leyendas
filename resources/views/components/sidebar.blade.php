@@ -70,19 +70,9 @@
           Clases
         </x-sidebar-nav-link>
       </li>
-
-      <li>
-        <x-sidebar-nav-link 
-          :route="route('admin.hero-races.index')"
-          :active="request()->routeIs('admin.hero-races.*')" 
-          icon="mono-yellow"
-        >
-          Razas
-        </x-sidebar-nav-link>
-      </li>
     </x-sidebar-section>
 
-    <x-sidebar-section title="Habilidades">
+    <x-sidebar-section title="Selectores">
       <li>
         <x-sidebar-nav-link 
           :route="route('admin.attack-subtypes.index')"
@@ -99,6 +89,24 @@
           icon="mono-yellow"
         >
           Rangos
+        </x-sidebar-nav-link>
+      </li>
+      <li>
+        <x-sidebar-nav-link 
+          :route="route('admin.equipment-types.index')"
+          :active="request()->routeIs('admin.equipment-types.*')" 
+          icon="mono-yellow"
+        >
+          Tipos de Equipo
+        </x-sidebar-nav-link>
+      </li>
+      <li>
+        <x-sidebar-nav-link 
+          :route="route('admin.hero-races.index')"
+          :active="request()->routeIs('admin.hero-races.*')" 
+          icon="mono-yellow"
+        >
+          Razas
         </x-sidebar-nav-link>
       </li>
     </x-sidebar-section>

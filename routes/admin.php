@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AttackTypeController;
 use App\Http\Controllers\Admin\AttackRangeController;
 use App\Http\Controllers\Admin\HeroAbilityController;
 use App\Http\Controllers\Admin\AttackSubtypeController;
+use App\Http\Controllers\Admin\EquipmentTypeController;
 use App\Http\Controllers\Admin\HeroSuperclassController;
 use App\Http\Controllers\Admin\HeroAttributesConfigurationController;
 
@@ -56,4 +57,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Heroes
   Route::resource('heroes', HeroController::class);
+
+  // Equipment Types
+  Route::resource('equipment-types', EquipmentTypeController::class);
 });
