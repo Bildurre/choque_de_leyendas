@@ -7,51 +7,32 @@ use Illuminate\Validation\Rule;
 
 class AttackRangeRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   */
   public function authorize(): bool
   {
     return true;
   }
 
-  /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-   */
   public function rules(): array
   {
     $rules = [
-      'name' => [
-        'required',
-        'string',
-        'max:255',
-      ],
-      'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'name' => ['required', 'string', 'max:255'],
     ];
 
-    // Add unique rule for creation or update differently
-    if ($this->isMethod('post')) {
-      $rules['name'][] = 'unique:attack_ranges';
+    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+      $attackRangeId = $this->route('attack_range');
+      $rules['name'][] = Rule::unique('attack_ranges')->ignore($attackRangeId);
     } else {
-      $rules['name'][] = Rule::unique('attack_ranges')->ignore($this->attack_range);
-      $rules['remove_icon'] = 'nullable|boolean';
+      $rules['name'][] = 'unique:attack_ranges,name';
     }
 
     return $rules;
   }
 
-  /**
-   * Get custom messages for validator errors.
-   */
   public function messages(): array
   {
     return [
-      'name.required' => 'El nombre del rango es obligatorio.',
-      'name.unique' => 'Ya existe un rango con este nombre.',
-      'icon.image' => 'El archivo debe ser una imagen.',
-      'icon.max' => 'La imagen no debe superar los 2MB.',
+      'name.required' => 'El nombre del rango de ataque es obligatorio.',
+      'name.unique' => 'Ya existe un rango de ataque con este nombre.',
     ];
   }
 }

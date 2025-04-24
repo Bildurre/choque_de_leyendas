@@ -7,47 +7,32 @@ use Illuminate\Validation\Rule;
 
 class HeroRaceRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   */
   public function authorize(): bool
   {
     return true;
   }
 
-  /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-   */
   public function rules(): array
   {
     $rules = [
-      'name' => [
-        'required',
-        'string',
-        'max:255',
-      ],
+      'name' => ['required', 'string', 'max:255'],
     ];
 
-    // Add unique rule for creation or update differently
-    if ($this->isMethod('post')) {
-      $rules['name'][] = 'unique:hero_races';
+    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+      $heroRaceId = $this->route('hero_race');
+      $rules['name'][] = Rule::unique('hero_races')->ignore($heroRaceId);
     } else {
-      $rules['name'][] = Rule::unique('hero_races')->ignore($this->hero_race);
+      $rules['name'][] = 'unique:hero_races,name';
     }
 
     return $rules;
   }
-  
-  /**
-   * Get custom messages for validator errors.
-   */
+
   public function messages(): array
   {
     return [
       'name.required' => 'El nombre de la raza es obligatorio.',
-      'name.unique' => 'Ya existe una raza con este nombre.'
+      'name.unique' => 'Ya existe una raza con este nombre.',
     ];
   }
 }

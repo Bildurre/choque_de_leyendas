@@ -2,72 +2,49 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Services\CostTranslatorService;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class HeroAbilityRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   */
   public function authorize(): bool
   {
     return true;
   }
 
-  /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-   */
   public function rules(): array
   {
-    return [
-      'name' => 'required|string|max:255',
-      'description' => 'required|string',
-      'attack_subtype_id' => 'nullable|exists:attack_subtypes,id',
-      'attack_range_id' => 'nullable|exists:attack_ranges,id',
-      'cost' => 'required|string|max:5'
+    $rules = [
+      'name' => ['required', 'string', 'max:255'],
+      'description' => ['nullable', 'string'],
+      'attack_range_id' => ['required', 'exists:attack_ranges,id'],
+      'attack_subtype_id' => ['required', 'exists:attack_subtypes,id'],
+      'blast' => ['boolean'],
+      'cost' => ['required', 'string', 'max:5', 'regex:/^[RGBrgb]*$/'],
     ];
+
+    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+      $heroAbilityId = $this->route('hero_ability');
+      $rules['name'][] = Rule::unique('hero_abilities')->ignore($heroAbilityId);
+    } else {
+      $rules['name'][] = 'unique:hero_abilities,name';
+    }
+
+    return $rules;
   }
 
-  /**
-   * Get custom messages for validator errors.
-   */
   public function messages(): array
   {
     return [
       'name.required' => 'El nombre de la habilidad es obligatorio.',
-      'description.required' => 'La descripción de la habilidad es obligatoria.',
-      'attack_subtype_id.exists' => 'El subtipo seleccionado no es válido.',
-      'attack_range_id.exists' => 'El rango seleccionado no es válido.',
-      'cost.required' => 'El coste de activación es obligatorio.'
+      'name.unique' => 'Ya existe una habilidad con este nombre.',
+      'attack_range_id.required' => 'El rango de ataque es obligatorio.',
+      'attack_range_id.exists' => 'El rango de ataque seleccionado no existe.',
+      'attack_subtype_id.required' => 'El subtipo de ataque es obligatorio.',
+      'attack_subtype_id.exists' => 'El subtipo de ataque seleccionado no existe.',
+      'cost.required' => 'El coste de la habilidad es obligatorio.',
+      'cost.regex' => 'El coste solo puede contener los caracteres R, G, B.',
+      'cost.max' => 'El coste no puede tener más de 5 caracteres.',
     ];
-  }
-
-  /**
-   * Configure the validator instance.
-   *
-   * @param \Illuminate\Validation\Validator $validator
-   * @return void
-   */
-  public function withValidator($validator)
-  {
-    $validator->after(function ($validator) {
-      $cost = $this->input('cost');
-      
-      // Skip validation if cost is empty
-      if (empty($cost)) {
-        return;
-      }
-      
-      $costTranslator = app(CostTranslatorService::class);
-      if (!$costTranslator->isValidCost($cost)) {
-        $validator->errors()->add(
-          'cost', 
-          'El coste debe contener solo los caracteres R, G, B y tener un máximo de 5 dados.'
-        );
-      }
-    });
   }
 }

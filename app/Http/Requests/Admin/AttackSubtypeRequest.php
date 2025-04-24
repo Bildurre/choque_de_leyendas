@@ -3,36 +3,39 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AttackSubtypeRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   */
   public function authorize(): bool
   {
     return true;
   }
 
-  /**
-   * Get the validation rules that apply to the request.
-   */
   public function rules(): array
   {
-    return [
-      'name' => 'required|string|max:255|unique:attack_subtypes,name,' . $this->route('attack_subtype.id'),
-      'type' => 'required|in:physical,magical'
+    $rules = [
+      'name' => ['required', 'string', 'max:255'],
+      'type' => ['required', 'in:physical,magical'],
     ];
+
+    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+      $attackSubtypeId = $this->route('attack_subtype');
+      $rules['name'][] = Rule::unique('attack_subtypes')->ignore($attackSubtypeId);
+    } else {
+      $rules['name'][] = 'unique:attack_subtypes,name';
+    }
+
+    return $rules;
   }
 
-  /**
-   * Get custom attributes for validator errors.
-   */
-  public function attributes(): array
+  public function messages(): array
   {
     return [
-      'name' => 'nombre',
-      'type' => 'tipo'
+      'name.required' => 'El nombre del subtipo de ataque es obligatorio.',
+      'name.unique' => 'Ya existe un subtipo de ataque con este nombre.',
+      'type.required' => 'El tipo de ataque es obligatorio.',
+      'type.in' => 'El tipo debe ser físico o mágico.',
     ];
   }
 }
