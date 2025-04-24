@@ -102,6 +102,15 @@
       </li>
       <li>
         <x-sidebar-nav-link 
+          :route="route('admin.card-types.index')"
+          :active="request()->routeIs('admin.card-types.*')" 
+          icon="mono-yellow"
+        >
+          Tipos de Carta
+        </x-sidebar-nav-link>
+      </li>
+      <li>
+        <x-sidebar-nav-link 
           :route="route('admin.hero-races.index')"
           :active="request()->routeIs('admin.hero-races.*')" 
           icon="mono-yellow"

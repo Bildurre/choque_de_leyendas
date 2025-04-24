@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Traits\HasImageAttribute;
 
 class HeroSuperclass extends Model
@@ -35,6 +36,14 @@ class HeroSuperclass extends Model
   public function heroClasses(): HasMany
   {
     return $this->hasMany(HeroClass::class, 'hero_superclass_id');
+  }
+
+  /**
+   * Get the card type associated with this superclass.
+   */
+  public function cardType(): HasOne
+  {
+    return $this->hasOne(CardType::class, 'hero_superclass_id');
   }
 
   /**

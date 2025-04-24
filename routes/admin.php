@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\FactionController;
+use App\Http\Controllers\Admin\CardTypeController;
 use App\Http\Controllers\Admin\HeroRaceController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroClassController;
@@ -60,4 +61,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Equipment Types
   Route::resource('equipment-types', EquipmentTypeController::class);
+
+  // Card Types
+  Route::resource('card-types', CardTypeController::class);
 });

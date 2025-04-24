@@ -22,7 +22,8 @@ export function setupPageHandlers() {
       'attack-ranges',
       'hero-attributes-configurations',
       'heroes',
-      'equipment-types'
+      'equipment-types',
+      'card-types'
     ];
     
     if (!knownModules.includes(module)) return;

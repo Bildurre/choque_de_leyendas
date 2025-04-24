@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\HeroService;
 use App\Services\ImageService;
 use App\Services\FactionService;
+use App\Services\CardTypeService;
 use App\Services\HeroRaceService;
 use App\Services\HeroClassService;
 use App\Services\AttackTypeService;
@@ -50,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
         WysiwygImageService::class,
         HeroRaceService::class,
         EquipmentTypeService::class,
+        CardTypeService::class,
       ];
       
       foreach ($services as $service) {
