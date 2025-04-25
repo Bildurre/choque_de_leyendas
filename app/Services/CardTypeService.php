@@ -14,6 +14,7 @@ class CardTypeService
    */
   public function getAllCardTypes(): Collection
   {
+    // Esto debería ser correcto, asumiendo que estás utilizando eager loading
     return CardType::with('heroSuperclass')->get();
   }
 

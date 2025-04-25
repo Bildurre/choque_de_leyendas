@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CardType extends Model
@@ -23,8 +23,8 @@ class CardType extends Model
   /**
    * Get the hero superclass associated with the card type.
    */
-  public function heroSuperclass(): HasOne
+  public function heroSuperclass(): BelongsTo
   {
-    return $this->hasOne(HeroSuperclass::class);
+    return $this->belongsTo(HeroSuperclass::class);
   }
 }
