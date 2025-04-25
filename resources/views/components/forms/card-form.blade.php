@@ -48,7 +48,6 @@
         :value="$card->card_type_id ?? ''"
         :options="$cardTypes->pluck('name', 'id')->toArray()"
         required
-        id="card_type_id"
       />
       
       <x-form.select
@@ -57,8 +56,7 @@
         placeholder="Selecciona un tipo de equipo"
         :value="$card->equipment_type_id ?? ''"
         :options="$equipmentTypes->pluck('name', 'id')->toArray()"
-        id="equipment_type_id"
-        :hiddenCondition="true"
+        :hiddenCondition="!(isset($card) && $card->isEquipment())"
       />
       
       <x-form.field 
@@ -68,9 +66,8 @@
         :value="$card->hands ?? ''" 
         min="1"
         max="2"
-        id="hands_field"
         class="hands-field"
-        :hiddenCondition="true"
+        :hiddenCondition="!(isset($card) && $card->isWeapon())"
       />
     </div>
     
@@ -79,14 +76,12 @@
         name="is_attack" 
         label="Es un Ataque"
         :checked="$card->is_attack ?? false"
-        id="is_attack_checkbox"
       />
       
       <x-form.checkbox
         name="has_hero_ability" 
         label="Añade Habilidad de Héroe"
         :checked="$card->has_hero_ability ?? false"
-        id="has_hero_ability_checkbox"
       />
     </div>
     
@@ -97,7 +92,6 @@
         placeholder="Selecciona un rango"
         :value="$card->attack_range_id ?? ''"
         :options="$attackRanges->pluck('name', 'id')->toArray()"
-        id="attack_range_id"
         :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
       
@@ -107,7 +101,6 @@
         placeholder="Selecciona un subtipo"
         :value="$card->attack_subtype_id ?? ''"
         :options="$attackSubtypes->pluck('name', 'id')->toArray()"
-        id="attack_subtype_id"
         :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
       
@@ -115,7 +108,6 @@
         name="blast" 
         label="Área"
         :checked="$card->blast ?? false"
-        id="blast_checkbox"
         :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
     </div>
@@ -126,7 +118,6 @@
       placeholder="Selecciona una habilidad"
       :value="$card->hero_ability_id ?? ''"
       :options="$heroAbilities->pluck('name', 'id')->toArray()"
-      id="hero_ability_id"
       :hiddenCondition="!(isset($card) && $card->has_hero_ability)"
     />
     
@@ -134,14 +125,12 @@
       name="lore_text" 
       label="Trasfondo" 
       :value="$card->lore_text ?? ''"
-      rows="3"
     />
     
     <x-form.wysiwyg
       name="effect" 
       label="Efecto" 
       :value="$card->effect ?? ''"
-      rows="5"
       advanced="true"
     />
     
@@ -149,7 +138,6 @@
       name="restriction" 
       label="Restricción" 
       :value="$card->restriction ?? ''"
-      rows="3"
     />
     
     <x-form.image-uploader

@@ -18,10 +18,13 @@ export default function cardHandler(action) {
  * Setup card form page
  */
 function setupFormPage() {
-  setupCardTypeHandler();
-  setupEquipmentTypeHandler();
-  setupAttackFieldsHandler();
-  setupHeroAbilityHandler();
+  // Añadir pequeño retraso para asegurar que el DOM esté completamente cargado
+  setTimeout(() => {
+    setupCardTypeHandler();
+    setupEquipmentTypeHandler();
+    setupAttackFieldsHandler();
+    setupHeroAbilityHandler();
+  }, 100);
 }
 
 /**
@@ -37,13 +40,19 @@ function setupShowPage() {
  */
 function setupCardTypeHandler() {
   const cardTypeSelect = document.getElementById('card_type_id');
-  const equipmentTypeGroup = document.getElementById('equipment_type_id')?.closest('.form-group');
+  const equipmentTypeSelect = document.getElementById('equipment_type_id');
   const form = document.getElementById('card-form');
   
-  if (!cardTypeSelect || !equipmentTypeGroup || !form) {
-    console.error('Missing required elements for card type handler');
+  if (!cardTypeSelect || !equipmentTypeSelect || !form) {
+    console.log('Missing required elements for card type handler', {
+      cardTypeSelect: !!cardTypeSelect,
+      equipmentTypeSelect: !!equipmentTypeSelect,
+      form: !!form
+    });
     return;
   }
+
+  const equipmentTypeGroup = equipmentTypeSelect.closest('.form-group');
   
   // Get equipment card types from data attribute
   let equipmentTypes = [];
@@ -69,16 +78,13 @@ function setupCardTypeHandler() {
       equipmentTypeGroup.style.display = 'none';
       
       // Hide hands field as well
-      const handsFieldGroup = document.getElementById('hands_field')?.closest('.form-group');
+      const handsFieldGroup = document.querySelector('.hands-field')?.closest('.form-group');
       if (handsFieldGroup) {
         handsFieldGroup.style.display = 'none';
       }
       
       // Reset equipment type select
-      const equipmentTypeSelect = document.getElementById('equipment_type_id');
-      if (equipmentTypeSelect) {
-        equipmentTypeSelect.value = '';
-      }
+      equipmentTypeSelect.value = '';
     }
   }
   
@@ -92,13 +98,19 @@ function setupCardTypeHandler() {
  */
 function setupEquipmentTypeHandler() {
   const equipmentTypeSelect = document.getElementById('equipment_type_id');
-  const handsFieldGroup = document.getElementById('hands_field')?.closest('.form-group');
+  const handsField = document.querySelector('.hands-field');
   const form = document.getElementById('card-form');
   
-  if (!equipmentTypeSelect || !handsFieldGroup || !form) {
-    console.error('Missing required elements for equipment handler');
+  if (!equipmentTypeSelect || !handsField || !form) {
+    console.log('Missing required elements for equipment handler', {
+      equipmentTypeSelect: !!equipmentTypeSelect,
+      handsField: !!handsField,
+      form: !!form
+    });
     return;
   }
+
+  const handsFieldGroup = handsField.closest('.form-group');
   
   // Get weapon types from data attribute
   let weaponTypes = [];
@@ -113,7 +125,6 @@ function setupEquipmentTypeHandler() {
   
   function updateHandsVisibility() {
     const selectedValue = equipmentTypeSelect.value;
-    const handsField = document.getElementById('hands_field');
     
     // Check if the equipment type field is visible
     const equipmentTypeGroup = equipmentTypeSelect.closest('.form-group');
@@ -125,15 +136,16 @@ function setupEquipmentTypeHandler() {
     // Check if selected equipment type is a weapon
     if (selectedValue && weaponTypes.includes(parseInt(selectedValue))) {
       handsFieldGroup.style.display = 'grid';
-      if (handsField) handsField.required = true;
+      handsField.required = true;
     } else {
       handsFieldGroup.style.display = 'none';
-      if (handsField) {
-        handsField.required = false;
-        handsField.value = '';
-      }
+      handsField.required = false;
+      handsField.value = '';
     }
   }
+  
+  // Update visibility initially
+  updateHandsVisibility();
 }
 
 /**
@@ -141,16 +153,25 @@ function setupEquipmentTypeHandler() {
  * Controls visibility of attack fields based on is_attack checkbox
  */
 function setupAttackFieldsHandler() {
-  const isAttackCheckbox = document.getElementById('is_attack_checkbox');
-  const attackFields = [
-    'attack_range_id', 
-    'attack_subtype_id', 
-    'blast_checkbox'
-  ];
+  const isAttackCheckbox = document.querySelector('input[name="is_attack"]');
   
   if (!isAttackCheckbox) {
-    console.error('Missing is_attack checkbox');
+    console.log('Missing is_attack checkbox');
     return;
+  }
+  
+  const attackFields = [
+    document.getElementById('attack_range_id'),
+    document.getElementById('attack_subtype_id'),
+    document.querySelector('input[name="blast"]')
+  ];
+  
+  if (attackFields.some(field => !field)) {
+    console.log('Missing some attack fields', {
+      rangeField: !!attackFields[0],
+      subtypeField: !!attackFields[1],
+      blastField: !!attackFields[2]
+    });
   }
   
   // Add event listener
@@ -159,8 +180,7 @@ function setupAttackFieldsHandler() {
   function updateAttackFieldsVisibility() {
     const isChecked = isAttackCheckbox.checked;
     
-    attackFields.forEach(fieldId => {
-      const field = document.getElementById(fieldId);
+    attackFields.forEach(field => {
       if (field) {
         const fieldGroup = field.closest('.form-group');
         if (fieldGroup) {
@@ -179,11 +199,14 @@ function setupAttackFieldsHandler() {
  * Controls visibility of hero ability field based on has_hero_ability checkbox
  */
 function setupHeroAbilityHandler() {
-  const hasHeroAbilityCheckbox = document.getElementById('has_hero_ability_checkbox');
+  const hasHeroAbilityCheckbox = document.querySelector('input[name="has_hero_ability"]');
   const heroAbilityField = document.getElementById('hero_ability_id');
   
   if (!hasHeroAbilityCheckbox || !heroAbilityField) {
-    console.error('Missing hero ability checkbox or field');
+    console.log('Missing hero ability checkbox or field', {
+      hasHeroAbilityCheckbox: !!hasHeroAbilityCheckbox,
+      heroAbilityField: !!heroAbilityField
+    });
     return;
   }
   

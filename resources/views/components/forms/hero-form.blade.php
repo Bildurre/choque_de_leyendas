@@ -83,7 +83,6 @@
       name="lore_text" 
       label="Descripción del Héroe" 
       :value="$hero->lore_text ?? ''"
-      rows="5"
     />
     
     <div class="form-row attributes-row">
@@ -171,7 +170,6 @@
       name="passive_description" 
       label="Descripción de la Pasiva" 
       :value="$hero->passive_description ?? ''"
-      rows="5"
     />
 
     <x-forms.hero-abilities-selector 

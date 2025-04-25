@@ -24,8 +24,7 @@
     <x-form.textarea
       name="lore_text" 
       label="Descripción" 
-      :value="$faction->lore_text ?? ''" 
-      rows="5"
+      :value="$faction->lore_text ?? ''"
       :required="true"
     />
 
