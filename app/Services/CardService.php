@@ -89,8 +89,8 @@ class CardService
       throw new \Exception("El coste proporcionado no es válido. Debe usar solo caracteres R, G, B con un máximo de 5.");
     }
 
-    // Check equipment type and hands consistency
-    $this->validateEquipmentTypeAndHands($data);
+    // Process conditional fields
+    $data = $this->processConditionalFields($data);
 
     $card = new Card();
     
@@ -120,8 +120,8 @@ class CardService
       throw new \Exception("El coste proporcionado no es válido. Debe usar solo caracteres R, G, B con un máximo de 5.");
     }
 
-    // Check equipment type and hands consistency
-    $this->validateEquipmentTypeAndHands($data);
+    // Process conditional fields
+    $data = $this->processConditionalFields($data);
 
     // Handle image removal
     if (isset($data['remove_image']) && $data['remove_image'] == "1") {
@@ -187,24 +187,47 @@ class CardService
   }
 
   /**
-   * Get card count by type for faction
+   * Process conditional fields based on checkboxes and selects
    *
-   * @param int $factionId
+   * @param array $data
    * @return array
    */
-  public function getCardCountByTypeForFaction(int $factionId): array
+  protected function processConditionalFields(array $data): array
   {
-    $cardTypes = CardType::all();
-    $result = [];
+    // Set default values for checkboxes if not present
+    $data['is_attack'] = isset($data['is_attack']) ? (bool)$data['is_attack'] : false;
+    $data['has_hero_ability'] = isset($data['has_hero_ability']) ? (bool)$data['has_hero_ability'] : false;
+    $data['blast'] = isset($data['blast']) ? (bool)$data['blast'] : false;
     
-    foreach ($cardTypes as $type) {
-      $count = Card::where('faction_id', $factionId)
-        ->where('card_type_id', $type->id)
-        ->count();
-      
-      $result[$type->name] = $count;
+    // Handle attack fields
+    if (!$data['is_attack']) {
+      $data['attack_range_id'] = null;
+      $data['attack_subtype_id'] = null;
+      $data['blast'] = false;
     }
     
-    return $result;
+    // Handle hero ability
+    if (!$data['has_hero_ability']) {
+      $data['hero_ability_id'] = null;
+    }
+    
+    // Handle equipment fields
+    $isEquipmentCard = false;
+    if (isset($data['card_type_id'])) {
+      $cardType = \App\Models\CardType::find($data['card_type_id']);
+      $isEquipmentCard = $cardType && $cardType->name === 'Equipo';
+    }
+    
+    if (!$isEquipmentCard) {
+      $data['equipment_type_id'] = null;
+      $data['hands'] = null;
+    } else if (isset($data['equipment_type_id'])) {
+      $equipmentType = \App\Models\EquipmentType::find($data['equipment_type_id']);
+      if (!$equipmentType || !$equipmentType->isWeapon()) {
+        $data['hands'] = null;
+      }
+    }
+    
+    return $data;
   }
 }

@@ -57,6 +57,12 @@
       </x-info-grid>
     </x-detail-section>
     
+    @if($card->lore_text)
+      <x-detail-section title="Trasfondo">
+        <x-detail-text :content="$card->lore_text" />
+      </x-detail-section>
+    @endif
+    
     @if($card->effect)
       <x-detail-section title="Efecto">
         <x-detail-text :content="$card->effect" isHtml="true" />

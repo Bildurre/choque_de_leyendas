@@ -7,7 +7,9 @@
   'placeholder' => '',
   'help' => null,
   'min' => null,
-  'max' => null
+  'max' => null,
+  'hidden' => false,
+  'hiddenCondition' => null
 ])
 
 @php
@@ -15,7 +17,7 @@
   $isTextType = in_array($type, $textTypes);
 @endphp
 
-<x-form.group>
+<x-form.group :hasCheckbox="false" :hidden="$hidden" :hiddenCondition="$hiddenCondition">
   @if($label)
     <x-form.label :for="$name" :required="$required">
       {{ $label }}

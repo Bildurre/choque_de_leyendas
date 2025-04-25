@@ -18,17 +18,57 @@ class CardRequest extends FormRequest
       'name' => ['required', 'string', 'max:255'],
       'faction_id' => ['nullable', 'exists:factions,id'],
       'card_type_id' => ['required', 'exists:card_types,id'],
-      'equipment_type_id' => ['nullable', 'exists:equipment_types,id'],
-      'attack_range_id' => ['nullable', 'exists:attack_ranges,id'],
-      'attack_subtype_id' => ['nullable', 'exists:attack_subtypes,id'],
-      'hero_ability_id' => ['nullable', 'exists:hero_abilities,id'],
-      'hands' => ['nullable', 'integer', 'in:1,2'],
+      'lore_text' => ['nullable', 'string'],
+      'is_attack' => ['boolean'],
+      'has_hero_ability' => ['boolean'],
       'cost' => ['nullable', 'string', 'max:5', 'regex:/^[RGBrgb]*$/'],
       'effect' => ['nullable', 'string'],
       'restriction' => ['nullable', 'string'],
-      'blast' => ['nullable', 'boolean'],
       'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
     ];
+
+    // Rules that depend on conditional fields
+    if ($this->input('is_attack')) {
+      $rules['attack_range_id'] = ['required', 'exists:attack_ranges,id'];
+      $rules['attack_subtype_id'] = ['required', 'exists:attack_subtypes,id'];
+      $rules['blast'] = ['boolean'];
+    } else {
+      $rules['attack_range_id'] = ['nullable'];
+      $rules['attack_subtype_id'] = ['nullable'];
+      $rules['blast'] = ['nullable'];
+    }
+    
+    if ($this->input('has_hero_ability')) {
+      $rules['hero_ability_id'] = ['required', 'exists:hero_abilities,id'];
+    } else {
+      $rules['hero_ability_id'] = ['nullable'];
+    }
+
+    // Determine if this is an equipment card
+    $cardTypeId = $this->input('card_type_id');
+    $isEquipmentCard = false;
+    
+    if ($cardTypeId) {
+      $cardType = \App\Models\CardType::find($cardTypeId);
+      $isEquipmentCard = $cardType && $cardType->name === 'Equipo';
+    }
+
+    if ($isEquipmentCard) {
+      $rules['equipment_type_id'] = ['required', 'exists:equipment_types,id'];
+      
+      // If equipment type is weapon, require hands
+      if ($this->input('equipment_type_id')) {
+        $equipmentType = \App\Models\EquipmentType::find($this->input('equipment_type_id'));
+        if ($equipmentType && $equipmentType->isWeapon()) {
+          $rules['hands'] = ['required', 'integer', 'in:1,2'];
+        } else {
+          $rules['hands'] = ['nullable'];
+        }
+      }
+    } else {
+      $rules['equipment_type_id'] = ['nullable'];
+      $rules['hands'] = ['nullable'];
+    }
 
     // Añadir regla de unicidad de nombre para crear o actualizar
     if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {

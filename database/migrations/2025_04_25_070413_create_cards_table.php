@@ -16,6 +16,7 @@ return new class extends Migration
       $table->string('name');
       $table->string('slug')->unique();
       $table->string('image')->nullable();
+      $table->text('lore_text')->nullable();
       $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('card_type_id')->constrained()->onDelete('restrict');
       $table->foreignId('equipment_type_id')->nullable()->constrained()->onDelete('set null');

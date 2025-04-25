@@ -23,7 +23,8 @@ export function setupPageHandlers() {
       'hero-attributes-configurations',
       'heroes',
       'equipment-types',
-      'card-types'
+      'card-types',
+      'cards'
     ];
     
     if (!knownModules.includes(module)) return;

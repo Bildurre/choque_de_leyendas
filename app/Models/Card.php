@@ -23,6 +23,7 @@ class Card extends Model
   protected $fillable = [
     'name',
     'image',
+    'lore_text',
     'faction_id',
     'card_type_id',
     'equipment_type_id',
@@ -34,6 +35,8 @@ class Card extends Model
     'effect',
     'restriction',
     'blast',
+    'is_attack',
+    'has_hero_ability',
   ];
 
   /**
@@ -44,6 +47,8 @@ class Card extends Model
   protected $casts = [
     'blast' => 'boolean',
     'hands' => 'integer',
+    'is_attack' => 'boolean',
+    'has_hero_ability' => 'boolean',
   ];
 
   /**

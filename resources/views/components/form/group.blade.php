@@ -1,7 +1,14 @@
 @props([
-  'hasCheckbox' => false
+  'hasCheckbox' => false,
+  'hidden' => false,
+  'hiddenCondition' => null
 ])
 
-<div class="form-group {{ $hasCheckbox ? 'form-group-checkbox' : '' }}">
+@php
+  $isHidden = $hidden || ($hiddenCondition !== null && $hiddenCondition);
+  $style = $isHidden ? 'display: none;' : '';
+@endphp
+
+<div class="form-group {{ $hasCheckbox ? 'form-group-checkbox' : '' }}" style="{{ $style }}">
   {{ $slot }}
 </div>

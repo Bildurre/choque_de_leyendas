@@ -6,6 +6,8 @@
   enctype="multipart/form-data" 
   class="card-form"
   id="card-form"
+  data-weapon-types="{{ htmlspecialchars(json_encode($equipmentTypes->where('category', 'weapon')->pluck('id')->toArray()), ENT_QUOTES, 'UTF-8') }}"
+  data-equipment-types="{{ htmlspecialchars(json_encode($cardTypes->where('name', 'Equipo')->pluck('id')->toArray()), ENT_QUOTES, 'UTF-8') }}"
 >
   @csrf
   @if($card) @method('PUT') @endif
@@ -21,6 +23,12 @@
         :value="$card->name ?? ''" 
         required
         maxlength="255" 
+      />
+      
+      <x-form.cost-input 
+        name="cost" 
+        label="Coste" 
+        :value="$card->cost ?? ''"
       />
       
       <x-form.select
@@ -40,15 +48,17 @@
         :value="$card->card_type_id ?? ''"
         :options="$cardTypes->pluck('name', 'id')->toArray()"
         required
+        id="card_type_id"
       />
       
       <x-form.select
         name="equipment_type_id" 
         label="Tipo de Equipo" 
-        placeholder="Selecciona un tipo de equipo (opcional)"
+        placeholder="Selecciona un tipo de equipo"
         :value="$card->equipment_type_id ?? ''"
         :options="$equipmentTypes->pluck('name', 'id')->toArray()"
         id="equipment_type_id"
+        :hiddenCondition="true"
       />
       
       <x-form.field 
@@ -60,48 +70,72 @@
         max="2"
         id="hands_field"
         class="hands-field"
+        :hiddenCondition="true"
       />
     </div>
     
     <div class="form-row">
+      <x-form.checkbox
+        name="is_attack" 
+        label="Es un Ataque"
+        :checked="$card->is_attack ?? false"
+        id="is_attack_checkbox"
+      />
+      
+      <x-form.checkbox
+        name="has_hero_ability" 
+        label="Añade Habilidad de Héroe"
+        :checked="$card->has_hero_ability ?? false"
+        id="has_hero_ability_checkbox"
+      />
+    </div>
+    
+    <div class="form-row attack-fields">
       <x-form.select
         name="attack_range_id" 
         label="Rango de Ataque" 
-        placeholder="Selecciona un rango (opcional)"
+        placeholder="Selecciona un rango"
         :value="$card->attack_range_id ?? ''"
         :options="$attackRanges->pluck('name', 'id')->toArray()"
+        id="attack_range_id"
+        :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
       
       <x-form.select
         name="attack_subtype_id" 
         label="Subtipo de Ataque" 
-        placeholder="Selecciona un subtipo (opcional)"
+        placeholder="Selecciona un subtipo"
         :value="$card->attack_subtype_id ?? ''"
         :options="$attackSubtypes->pluck('name', 'id')->toArray()"
+        id="attack_subtype_id"
+        :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
       
       <x-form.checkbox
         name="blast" 
         label="Área"
         :checked="$card->blast ?? false"
+        id="blast_checkbox"
+        :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
     </div>
     
-    <div class="form-row">
-      <x-form.cost-input 
-        name="cost" 
-        label="Coste" 
-        :value="$card->cost ?? ''"
-      />
-      
-      <x-form.select
-        name="hero_ability_id" 
-        label="Habilidad de Héroe" 
-        placeholder="Selecciona una habilidad (opcional)"
-        :value="$card->hero_ability_id ?? ''"
-        :options="$heroAbilities->pluck('name', 'id')->toArray()"
-      />
-    </div>
+    <x-form.select
+      name="hero_ability_id" 
+      label="Habilidad de Héroe" 
+      placeholder="Selecciona una habilidad"
+      :value="$card->hero_ability_id ?? ''"
+      :options="$heroAbilities->pluck('name', 'id')->toArray()"
+      id="hero_ability_id"
+      :hiddenCondition="!(isset($card) && $card->has_hero_ability)"
+    />
+    
+    <x-form.textarea
+      name="lore_text" 
+      label="Trasfondo" 
+      :value="$card->lore_text ?? ''"
+      rows="3"
+    />
     
     <x-form.wysiwyg
       name="effect" 
@@ -126,32 +160,3 @@
     />
   </x-form.card>
 </form>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const equipmentTypeSelect = document.getElementById('equipment_type_id');
-    const handsField = document.getElementById('hands_field');
-    
-    // Initial state
-    updateHandsVisibility();
-    
-    // Add event listener for equipment type change
-    if (equipmentTypeSelect) {
-      equipmentTypeSelect.addEventListener('change', updateHandsVisibility);
-    }
-    
-    function updateHandsVisibility() {
-      // Get all weapon equipment types
-      const weaponTypes = {!! json_encode($equipmentTypes->where('category', 'weapon')->pluck('id')->toArray()) !!};
-      
-      if (equipmentTypeSelect.value && weaponTypes.includes(parseInt(equipmentTypeSelect.value))) {
-        handsField.parentElement.style.display = 'block';
-        handsField.required = true;
-      } else {
-        handsField.parentElement.style.display = 'none';
-        handsField.required = false;
-        handsField.value = '';
-      }
-    }
-  });
-</script>
