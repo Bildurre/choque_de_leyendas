@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CardService;
 use App\Services\HeroService;
 use App\Services\ImageService;
 use App\Services\FactionService;
@@ -71,6 +72,12 @@ class AppServiceProvider extends ServiceProvider
         return new HeroService(
           $app->make(ImageService::class),
           $app->make(HeroAttributesConfigurationService::class)
+        );
+      });
+      $this->app->singleton(CardService::class, function ($app) {
+        return new CardService(
+          $app->make(ImageService::class),
+          $app->make(CostTranslatorService::class)
         );
       });
     }

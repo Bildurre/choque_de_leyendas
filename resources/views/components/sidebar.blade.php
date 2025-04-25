@@ -24,6 +24,15 @@
       </li>
       <li>
         <x-sidebar-nav-link 
+          :route="route('admin.cards.index')"
+          :active="request()->routeIs('admin.cards.*')" 
+          icon="mono-yellow"
+        >
+          Cartas
+        </x-sidebar-nav-link>
+      </li>
+      <li>
+        <x-sidebar-nav-link 
           :route="route('admin.hero-abilities.index')"
           :active="request()->routeIs('admin.hero-abilities.*')" 
           icon="mono-yellow"

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
+use App\Http\Controllers\Admin\CardController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\FactionController;
 use App\Http\Controllers\Admin\CardTypeController;
@@ -64,4 +65,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Card Types
   Route::resource('card-types', CardTypeController::class);
+
+  // Cards
+  Route::resource('cards', CardController::class);
 });

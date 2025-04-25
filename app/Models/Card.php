@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasImageAttribute;
+use App\Models\Traits\HasSlug;
+use App\Services\CostTranslatorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Card extends Model
 {
   use HasFactory;
+  use HasSlug;
+  use HasImageAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -17,12 +22,39 @@ class Card extends Model
    */
   protected $fillable = [
     'name',
-    'description',
+    'image',
     'faction_id',
-    'type',
+    'card_type_id',
+    'equipment_type_id',
+    'attack_range_id',
+    'attack_subtype_id',
+    'hero_ability_id',
+    'hands',
     'cost',
-    'effect'
+    'effect',
+    'restriction',
+    'blast',
   ];
+
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'blast' => 'boolean',
+    'hands' => 'integer',
+  ];
+
+  /**
+   * Get the directory for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageDirectory(): string
+  {
+    return 'images/uploads/cards';
+  }
 
   /**
    * Get the faction that owns the card.
@@ -30,5 +62,89 @@ class Card extends Model
   public function faction(): BelongsTo
   {
     return $this->belongsTo(Faction::class);
+  }
+
+  /**
+   * Get the card type that owns the card.
+   */
+  public function cardType(): BelongsTo
+  {
+    return $this->belongsTo(CardType::class);
+  }
+
+  /**
+   * Get the equipment type that owns the card.
+   */
+  public function equipmentType(): BelongsTo
+  {
+    return $this->belongsTo(EquipmentType::class);
+  }
+
+  /**
+   * Get the attack range that owns the card.
+   */
+  public function attackRange(): BelongsTo
+  {
+    return $this->belongsTo(AttackRange::class);
+  }
+
+  /**
+   * Get the attack subtype that owns the card.
+   */
+  public function attackSubtype(): BelongsTo
+  {
+    return $this->belongsTo(AttackSubtype::class);
+  }
+
+  /**
+   * Get the hero ability that owns the card.
+   */
+  public function heroAbility(): BelongsTo
+  {
+    return $this->belongsTo(HeroAbility::class);
+  }
+
+  /**
+   * Check if the card is a weapon.
+   */
+  public function isWeapon(): bool
+  {
+    return $this->equipmentType && $this->equipmentType->isWeapon();
+  }
+
+  /**
+   * Check if the card is an armor.
+   */
+  public function isArmor(): bool
+  {
+    return $this->equipmentType && $this->equipmentType->isArmor();
+  }
+
+  /**
+   * Check if the card is equipment.
+   */
+  public function isEquipment(): bool
+  {
+    return $this->equipmentType !== null;
+  }
+
+  /**
+   * Get formatted cost as array of color occurrences
+   *
+   * @return array
+   */
+  public function getFormattedCostAttribute(): array
+  {
+    return app(CostTranslatorService::class)->translateToArray($this->cost);
+  }
+
+  /**
+   * Get the cost translated to HTML components
+   *
+   * @return string
+   */
+  public function getHtmlCostAttribute(): string
+  {
+    return app(CostTranslatorService::class)->translateToHtml($this->cost);
   }
 }
