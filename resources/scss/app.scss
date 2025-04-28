@@ -30,6 +30,7 @@
 @use 'components/hero-ability-item';
 @use 'components/attribute-icon';
 @use 'components/language-selector';
+@use 'components/translate-tabs';
 
 //COMPONENTS - PREVIEWS
 @use 'components/previews/base-preview';
@@ -49,6 +50,7 @@
 @use 'components/form/checkbox';
 @use 'components/form/cost-input';
 @use 'components/form/hero-abilities-selector';
+@use 'components/form/translate-field';
 
 //LAYOUT
 @use 'layouts/admin';

@@ -1,0 +1,79 @@
+@use '../abstracts/all' as *;
+
+.translate-tabs {
+  width: 100%;
+  
+  &__header {
+    display: flex;
+    gap: $spacing-xs;
+    border-bottom: 1px solid $color-bg-dark-tertiary;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__tab {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: $spacing-xs;
+    align-items: center;
+    padding: $spacing-sm;
+    background-color: $color-bg-dark-secondary;
+    border: 1px solid $color-bg-dark-tertiary;
+    border-bottom: 0;
+    border-top-left-radius: $border-radius-sm;
+    border-top-right-radius: $border-radius-sm;
+    color: $color-text-muted;
+    transition: all $transition-fast;
+    
+    &:hover {
+      background-color: $color-bg-dark-tertiary;
+      color: $color-text-light;
+    }
+    
+    &--active {
+      background-color: $color-bg-dark-tertiary;
+      color: $color-accent-yellow;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: $color-bg-dark-tertiary;
+      }
+    }
+  }
+  
+  &__locale {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: $color-bg-dark-primary;
+    color: $color-text-light;
+    font-size: 0.75rem;
+    font-weight: bold;
+    
+    .translate-tabs__tab--active & {
+      background-color: $color-accent-yellow;
+      color: $color-text-dark;
+    }
+  }
+  
+  &__name {
+    font-size: 0.875rem;
+  }
+  
+  &__content {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__pane {
+    &--active {
+      display: block;
+    }
+  }
+}
