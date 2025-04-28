@@ -13,10 +13,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre de la Clase" 
-        :value="$heroClass->name ?? ''" 
+        :value="$heroClass ? $heroClass->getTranslations('name') : []" 
         :required="true"
         max="255"
       />
@@ -30,10 +30,10 @@
       />
     </div>
 
-    <x-form.wysiwyg 
+    <x-form.translate-wysiwyg 
       name="passive" 
       label="Habilidad Pasiva" 
-      :value="$heroClass->passive ?? ''"
+      :value="$heroClass ? $heroClass->getTranslations('passive') : []"
       :required="true"
     />
   </x-form.card>

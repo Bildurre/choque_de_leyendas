@@ -13,10 +13,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre del Tipo de Equipo" 
-        :value="$equipmentType->name ?? ''" 
+        :value="$equipmentType ? $equipmentType->getTranslations('name') : []" 
         required
         max="255" 
       />

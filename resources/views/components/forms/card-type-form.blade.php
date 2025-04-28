@@ -12,10 +12,10 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <x-form.field 
+    <x-form.translate-field 
       name="name" 
       label="Nombre del Tipo de Carta" 
-      :value="$cardType->name ?? ''" 
+      :value="$cardType ? $cardType->getTranslations('name') : []" 
       required
       max="255" 
     />

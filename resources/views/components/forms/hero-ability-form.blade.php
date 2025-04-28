@@ -24,10 +24,10 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <x-form.field 
+    <x-form.translate-field 
       name="name" 
       label="Nombre de la Habilidad" 
-      :value="$heroAbility->name ?? ''" 
+      :value="$heroAbility ? $heroAbility->getTranslations('name') : []" 
       required
       max="255" 
     />
@@ -62,12 +62,13 @@
     <x-form.checkbox
       name="blast" 
       label="Área"
+      :checked="$heroAbility->blast ?? false"
     />
     
-    <x-form.wysiwyg
+    <x-form.translate-wysiwyg
       name="description"
       label="Descripción"
-      :value="$heroAbility->description ?? ''"
+      :value="$heroAbility ? $heroAbility->getTranslations('description') : []"
       required
     />
   </x-form.card>

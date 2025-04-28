@@ -14,10 +14,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre de la Superclase" 
-        :value="$heroSuperclass->name ?? ''" 
+        :value="$heroSuperclass ? $heroSuperclass->getTranslations('name') : []" 
         required
         max="255" 
       />

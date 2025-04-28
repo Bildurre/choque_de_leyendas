@@ -13,18 +13,18 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <x-form.field 
+    <x-form.translate-field 
       name="name" 
       label="Nombre de la Facción" 
-      :value="$faction->name ?? ''" 
+      :value="$faction ? $faction->getTranslations('name') : []" 
       required
       maxlength="255" 
     />
 
-    <x-form.textarea
+    <x-form.translate-textarea
       name="lore_text" 
       label="Descripción" 
-      :value="$faction->lore_text ?? ''"
+      :value="$faction ? $faction->getTranslations('lore_text') : []"
       :required="true"
     />
 

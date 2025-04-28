@@ -14,10 +14,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre del Rango" 
-        :value="$attackRange->name ?? ''" 
+        :value="$attackRange ? $attackRange->getTranslations('name') : []" 
         required
         maxlength="255" 
       />

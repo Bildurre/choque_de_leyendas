@@ -17,10 +17,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre de la Carta" 
-        :value="$card->name ?? ''" 
+        :value="$card ? $card->getTranslations('name') : []" 
         required
         maxlength="255" 
       />
@@ -121,23 +121,23 @@
       :hiddenCondition="!(isset($card) && $card->has_hero_ability)"
     />
     
-    <x-form.textarea
+    <x-form.translate-textarea
       name="lore_text" 
       label="Trasfondo" 
-      :value="$card->lore_text ?? ''"
+      :value="$card ? $card->getTranslations('lore_text') : []"
     />
     
-    <x-form.wysiwyg
+    <x-form.translate-wysiwyg
       name="effect" 
       label="Efecto" 
-      :value="$card->effect ?? ''"
+      :value="$card ? $card->getTranslations('effect') : []"
       advanced="true"
     />
     
-    <x-form.wysiwyg
+    <x-form.translate-wysiwyg
       name="restriction" 
       label="Restricción" 
-      :value="$card->restriction ?? ''"
+      :value="$card ? $card->getTranslations('restriction') : []"
     />
     
     <x-form.image-uploader

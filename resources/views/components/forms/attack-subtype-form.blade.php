@@ -13,10 +13,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre del Subtipo" 
-        :value="$attackSubtype->name ?? ''" 
+        :value="$attackSubtype ? $attackSubtype->getTranslations('name') : []" 
         required
         max="255" 
       />

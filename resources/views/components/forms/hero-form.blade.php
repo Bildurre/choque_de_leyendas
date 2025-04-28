@@ -34,10 +34,10 @@
     :cancel_route="$cancelRoute"
   >
     <div class="form-row">
-      <x-form.field 
+      <x-form.translate-field 
         name="name" 
         label="Nombre del Héroe" 
-        :value="$hero->name ?? ''" 
+        :value="$hero ? $hero->getTranslations('name') : []" 
         required
         maxlength="255" 
       />
@@ -79,10 +79,10 @@
       />
     </div>
     
-    <x-form.textarea
+    <x-form.translate-textarea
       name="lore_text" 
       label="Descripción del Héroe" 
-      :value="$hero->lore_text ?? ''"
+      :value="$hero ? $hero->getTranslations('lore_text') : []"
     />
     
     <div class="form-row attributes-row">
@@ -160,16 +160,16 @@
       <div class="attributes-error">{{ $message }}</div>
     @enderror
    
-    <x-form.field 
+    <x-form.translate-field
       name="passive_name" 
       label="Nombre de la Pasiva" 
-      :value="$hero->passive_name ?? ''" 
+      :value="$hero ? $hero->getTranslations('passive_name') : []" 
     />
     
-    <x-form.wysiwyg
+    <x-form.translate-wysiwyg
       name="passive_description" 
       label="Descripción de la Pasiva" 
-      :value="$hero->passive_description ?? ''"
+      :value="$hero ? $hero->getTranslations('passive_description') : []"
     />
 
     <x-forms.hero-abilities-selector 

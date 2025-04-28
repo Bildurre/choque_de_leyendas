@@ -12,10 +12,10 @@
     :submit_label="$submitLabel"
     :cancel_route="$cancelRoute"
   >
-    <x-form.field 
+    <x-form.translate-field 
       name="name" 
       label="Nombre de la Raza" 
-      :value="$heroRace->name ?? ''" 
+      :value="$heroRace ? $heroRace->getTranslations('name') : []" 
       required
       max="255" 
     />
