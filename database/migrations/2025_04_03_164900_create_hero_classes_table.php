@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('hero_classes', function (Blueprint $table) {
       $table->id();
-      $table->json('name')->unique();
+      $table->json('name');
       $table->json('passive')->nullable();
       $table->foreignId('hero_superclass_id')->nullable()->constrained()->onDelete('set null');
       

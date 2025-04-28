@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('hero_races', function (Blueprint $table) {
       $table->id();
-      $table->json('name')->unique();
+      $table->json('name');
       $table->datetimes();
     });
   }
