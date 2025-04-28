@@ -1,8 +1,8 @@
 <x-admin-layout
-  title='Editar Carta'
-  headerTitle='Editar Carta'
-  containerTitle='Cartas'
-  subtitle="Modifica los detalles de la carta {{ $card->name }}"
+  title='{{ __("cards.edit") }}'
+  headerTitle='{{ __("cards.edit") }}'
+  containerTitle='{{ __("cards.title") }}'
+  subtitle="{{ __('cards.edit_subtitle_with_name', ['name' => $card->name]) }}"
   :createRoute="route('admin.cards.create')"
   :backRoute="route('admin.cards.index')"
 >
@@ -15,7 +15,7 @@
     :attackRanges="$attackRanges"
     :attackSubtypes="$attackSubtypes"
     :heroAbilities="$heroAbilities"
-    :submitLabel="'Guardar Cambios'" 
+    :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.cards.index')" 
   />
 

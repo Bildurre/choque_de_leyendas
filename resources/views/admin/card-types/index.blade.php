@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Tipos de Carta'
-  headerTitle='Gestión de Tipos de Carta'
-  containerTitle='Tipos de Carta'
-  subtitle='Gestión de tipos de carta para categorizar cartas en el juego'
+  title='{{ __("card_types.title") }}'
+  headerTitle='{{ __("card_types.management") }}'
+  containerTitle='{{ __("card_types.title") }}'
+  subtitle='{{ __("card_types.management_subtitle") }}'
   :createRoute="route('admin.card-types.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay tipos de carta disponibles"
+    :empty_message="__('card_types.no_items')"
     :createRoute="route('admin.card-types.create')"
-    createLabel="Crear el primer tipo de carta"
+    :createLabel="__('card_types.create_first')"
   >
     @foreach($cardTypes as $cardType)
       <x-cards.card-type-card 

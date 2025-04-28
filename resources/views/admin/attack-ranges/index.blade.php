@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Rangos de Ataque'
-  headerTitle='Gestión de Rangos'
-  containerTitle='Rangos de Ataque'
-  subtitle='Gestión de rangos para los ataques y habilidades'
+  title='{{ __("attack_ranges.title") }}'
+  headerTitle='{{ __("attack_ranges.management") }}'
+  containerTitle='{{ __("attack_ranges.title") }}'
+  subtitle='{{ __("attack_ranges.management_subtitle") }}'
   :createRoute="route('admin.attack-ranges.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay rangos de ataque disponibles"
+    :empty_message="__('attack_ranges.no_items')"
     :createRoute="route('admin.attack-ranges.create')"
-    createLabel="Crear el primer rango"
+    :createLabel="__('attack_ranges.create_first')"
     >
     @foreach($attackRanges as $range)
       <x-cards.attack-range-card 

@@ -1,8 +1,8 @@
 <x-admin-layout
-  title='Nueva Carta'
-  headerTitle='Crear Carta'
-  containerTitle='Cartas'
-  subtitle='Crea una nueva carta para el juego'
+  title='{{ __("cards.new") }}'
+  headerTitle='{{ __("cards.create") }}'
+  containerTitle='{{ __("cards.title") }}'
+  subtitle='{{ __("cards.create_subtitle") }}'
   :backRoute="route('admin.cards.index')"
 >
 
@@ -13,7 +13,7 @@
     :attackRanges="$attackRanges"
     :attackSubtypes="$attackSubtypes"
     :heroAbilities="$heroAbilities"
-    :submitLabel="'Crear Carta'" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('cards.singular')])" 
     :cancelRoute="route('admin.cards.index')" 
   />
 

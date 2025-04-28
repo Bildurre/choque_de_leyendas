@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Subtipos de Ataque'
-  headerTitle='Gestión de Subtipos'
-  containerTitle='Subtipos de Ataque'
-  subtitle='Gestión de subtipos para categorizar ataques y habilidades'
+  title='{{ __("attack_subtypes.title") }}'
+  headerTitle='{{ __("attack_subtypes.management") }}'
+  containerTitle='{{ __("attack_subtypes.title") }}'
+  subtitle='{{ __("attack_subtypes.management_subtitle") }}'
   :createRoute="route('admin.attack-subtypes.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay subtipos de ataque disponibles"
+    :empty_message="__('attack_subtypes.no_items')"
     :createRoute="route('admin.attack-subtypes.create')"
-    createLabel="Crear el primer subtipo"
+    :createLabel="__('attack_subtypes.create_first')"
   >
     @foreach($attackSubtypes as $subtype)
       <x-cards.attack-subtype-card 

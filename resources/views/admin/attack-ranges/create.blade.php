@@ -1,13 +1,13 @@
 <x-admin-layout
-  title='Nuevo Rango de Ataque'
-  headerTitle='Crear Rango de Ataque'
-  containerTitle='Rangos de Ataque'
-  subtitle='Crea un nuevo rango para los ataques y habilidades'
+  title='{{ __("attack_ranges.new") }}'
+  headerTitle='{{ __("attack_ranges.create") }}'
+  containerTitle='{{ __("attack_ranges.title") }}'
+  subtitle='{{ __("attack_ranges.create_subtitle") }}'
   :backRoute="route('admin.attack-ranges.index')"
 >
 
   <x-forms.attack-range-form 
-    submitLabel="Crear Rango" 
+    submitLabel="{{ __('common.actions.create_entity', ['entity' => __('attack_ranges.singular')]) }}" 
     :cancelRoute="route('admin.attack-ranges.index')" 
   />
 

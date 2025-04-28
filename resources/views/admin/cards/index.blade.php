@@ -1,16 +1,16 @@
 <x-admin-layout
-  title='Cartas'
-  headerTitle='Gestión de Cartas'
-  containerTitle='Cartas'
-  subtitle='Gestión de cartas para el juego'
+  title='{{ __("cards.title") }}'
+  headerTitle='{{ __("cards.management") }}'
+  containerTitle='{{ __("cards.title") }}'
+  subtitle='{{ __("cards.management_subtitle") }}'
   :createRoute="route('admin.cards.create')"
 >
 
   <x-entities-grid 
     columns="true"
-    empty_message="No hay cartas disponibles"
+    :empty_message="__('cards.no_items')"
     :createRoute="route('admin.cards.create')"
-    createLabel="Crear la primera carta"
+    :createLabel="__('cards.create_first')"
   >
     @foreach($cards as $card)
       <x-cards.card-card 

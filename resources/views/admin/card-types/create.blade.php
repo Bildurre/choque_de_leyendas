@@ -1,14 +1,14 @@
 <x-admin-layout
-  title='Nuevo Tipo de Carta'
-  headerTitle='Crear Tipo de Carta'
-  containerTitle='Tipos de Carta'
-  subtitle='Crea un nuevo tipo de carta para el juego'
+  title='{{ __("card_types.new") }}'
+  headerTitle='{{ __("card_types.create") }}'
+  containerTitle='{{ __("card_types.title") }}'
+  subtitle='{{ __("card_types.create_subtitle") }}'
   :backRoute="route('admin.card-types.index')"
 >
 
   <x-forms.card-type-form 
     :availableSuperclasses="$availableSuperclasses"
-    :submitLabel="'Crear Tipo de Carta'" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('card_types.singular')])" 
     :cancelRoute="route('admin.card-types.index')" 
   />
 

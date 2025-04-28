@@ -1,13 +1,13 @@
 <x-admin-layout
-  title='Nuevo Subtipo de Ataque'
-  headerTitle='Crear Subtipo de Ataque'
-  containerTitle='Subtipos de Ataque'
-  subtitle='Crea un nuevo subtipo para categorizar ataques y habilidades'
+  title='{{ __("attack_subtypes.new") }}'
+  headerTitle='{{ __("attack_subtypes.create") }}'
+  containerTitle='{{ __("attack_subtypes.title") }}'
+  subtitle='{{ __("attack_subtypes.create_subtitle") }}'
   :backRoute="route('admin.attack-subtypes.index')"
 >
 
   <x-forms.attack-subtype-form 
-    :submitLabel="'Crear Subtipo'" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('attack_subtypes.singular')])" 
     :cancelRoute="route('admin.attack-subtypes.index')" 
   />
 
