@@ -5,10 +5,14 @@ namespace App\Services;
 use App\Models\AttackRange;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
+use App\Services\Traits\HandlesTranslations;
 
 class AttackRangeService
 {
+  use HandlesTranslations;
+  
   protected $imageService;
+  protected $translatableFields = ['name'];
 
   /**
    * Create a new service instance.
@@ -40,10 +44,11 @@ class AttackRangeService
   {
     $attackRange = new AttackRange();
     
-    // Establecer traducciones directamente si es un array
-    if (isset($data['name']) && is_array($data['name'])) {
-      $attackRange->setTranslations('name', $data['name']);
-    }
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($attackRange, $data, $this->translatableFields);
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
@@ -64,10 +69,11 @@ class AttackRangeService
    */
   public function update(AttackRange $attackRange, array $data): AttackRange
   {
-    // Establecer traducciones directamente si es un array
-    if (isset($data['name']) && is_array($data['name'])) {
-      $attackRange->setTranslations('name', $data['name']);
-    }
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($attackRange, $data, $this->translatableFields);
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {
@@ -93,6 +99,11 @@ class AttackRangeService
    */
   public function delete(AttackRange $attackRange): bool
   {
+    // Check for related abilities
+    if ($attackRange->abilities()->count() > 0) {
+      throw new \Exception("No se puede eliminar el rango porque tiene habilidades asociadas.");
+    }
+    
     // Delete icon if exists
     if ($attackRange->icon) {
       $this->imageService->delete($attackRange->icon);

@@ -4,9 +4,14 @@ namespace App\Services;
 
 use App\Models\AttackSubtype;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class AttackSubtypeService
 {
+  use HandlesTranslations;
+  
+  protected $translatableFields = ['name'];
+
   /**
    * Get all attack subtypes
    *
@@ -37,8 +42,16 @@ class AttackSubtypeService
   public function create(array $data): AttackSubtype
   {
     $attackSubtype = new AttackSubtype();
-    $attackSubtype->setTranslations('name', $data['name']);
+    
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($attackSubtype, $data, $this->translatableFields);
+    
+    // Set non-translatable fields
     $attackSubtype->type = $data['type'];
+    
     $attackSubtype->save();
     
     return $attackSubtype;
@@ -53,8 +66,17 @@ class AttackSubtypeService
    */
   public function update(AttackSubtype $attackSubtype, array $data): AttackSubtype
   {
-    $attackSubtype->setTranslations('name', $data['name']);
-    $attackSubtype->type = $data['type'];
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($attackSubtype, $data, $this->translatableFields);
+    
+    // Update non-translatable fields
+    if (isset($data['type'])) {
+      $attackSubtype->type = $data['type'];
+    }
+    
     $attackSubtype->save();
     
     return $attackSubtype;

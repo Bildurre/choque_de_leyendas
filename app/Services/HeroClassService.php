@@ -4,9 +4,14 @@ namespace App\Services;
 
 use App\Models\HeroClass;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class HeroClassService
 {
+  use HandlesTranslations;
+  
+  protected $translatableFields = ['name', 'passive'];
+
   /**
    * Get all hero classes with related superclass
    *
@@ -28,15 +33,13 @@ class HeroClassService
   {
     $heroClass = new HeroClass();
     
-    // Aplicar datos directamente ya que la validación se hace en el Request
-    if (isset($data['name']) && is_array($data['name'])) {
-      $heroClass->setTranslations('name', $data['name']);
-    }
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    if (isset($data['passive']) && is_array($data['passive'])) {
-      $heroClass->setTranslations('passive', $data['passive']);
-    }
+    // Apply translations
+    $this->applyTranslations($heroClass, $data, $this->translatableFields);
     
+    // Set non-translatable fields
     if (isset($data['hero_superclass_id'])) {
       $heroClass->hero_superclass_id = $data['hero_superclass_id'];
     }
@@ -56,15 +59,13 @@ class HeroClassService
    */
   public function update(HeroClass $heroClass, array $data): HeroClass
   {
-    // Aplicar datos directamente ya que la validación se hace en el Request
-    if (isset($data['name']) && is_array($data['name'])) {
-      $heroClass->setTranslations('name', $data['name']);
-    }
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    if (isset($data['passive']) && is_array($data['passive'])) {
-      $heroClass->setTranslations('passive', $data['passive']);
-    }
+    // Apply translations
+    $this->applyTranslations($heroClass, $data, $this->translatableFields);
     
+    // Update non-translatable fields
     if (isset($data['hero_superclass_id'])) {
       $heroClass->hero_superclass_id = $data['hero_superclass_id'];
     }
@@ -82,6 +83,11 @@ class HeroClassService
    */
   public function delete(HeroClass $heroClass): bool
   {
+    // Check for related heroes
+    if ($heroClass->heroes()->count() > 0) {
+      throw new \Exception("No se puede eliminar la clase porque tiene héroes asociados.");
+    }
+    
     return $heroClass->delete();
   }
 }

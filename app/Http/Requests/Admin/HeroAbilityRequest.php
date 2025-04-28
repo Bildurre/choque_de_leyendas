@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Models\Traits\ValidatesTranslatableUniqueness;
+use App\Http\Requests\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
 
 class HeroAbilityRequest extends FormRequest

@@ -5,11 +5,14 @@ namespace App\Services;
 use App\Models\Hero;
 use App\Models\HeroAbility;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\App;
+use App\Services\Traits\HandlesTranslations;
 
 class HeroAbilityService
 {
+  use HandlesTranslations;
+  
   protected $costTranslator;
+  protected $translatableFields = ['name', 'description'];
 
   /**
    * Create a new service instance.
@@ -59,11 +62,20 @@ class HeroAbilityService
       throw new \Exception("El coste proporcionado no es válido. Debe usar solo caracteres R, G, B con un máximo de 5.");
     }
     
-    // Procesar los datos traducibles
-    $data = $this->processTranslationData($data);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
     
     $heroAbility = new HeroAbility();
-    $heroAbility->fill($data);
+    
+    // Apply translations
+    $this->applyTranslations($heroAbility, $data, $this->translatableFields);
+    
+    // Set non-translatable fields
+    $heroAbility->cost = $data['cost'] ?? '';
+    $heroAbility->attack_range_id = $data['attack_range_id'] ?? null;
+    $heroAbility->attack_subtype_id = $data['attack_subtype_id'] ?? null;
+    $heroAbility->blast = $data['blast'] ?? false;
+    
     $heroAbility->save();
     
     return $heroAbility;
@@ -84,10 +96,29 @@ class HeroAbilityService
       throw new \Exception("El coste proporcionado no es válido. Debe usar solo caracteres R, G, B con un máximo de 5.");
     }
     
-    // Procesar los datos traducibles
-    $data = $this->processTranslationData($data);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    $heroAbility->fill($data);
+    // Apply translations
+    $this->applyTranslations($heroAbility, $data, $this->translatableFields);
+    
+    // Update non-translatable fields
+    if (isset($data['cost'])) {
+      $heroAbility->cost = $data['cost'];
+    }
+    
+    if (isset($data['attack_range_id'])) {
+      $heroAbility->attack_range_id = $data['attack_range_id'];
+    }
+    
+    if (isset($data['attack_subtype_id'])) {
+      $heroAbility->attack_subtype_id = $data['attack_subtype_id'];
+    }
+    
+    if (isset($data['blast'])) {
+      $heroAbility->blast = $data['blast'];
+    }
+    
     $heroAbility->save();
     
     return $heroAbility;
@@ -128,37 +159,5 @@ class HeroAbilityService
   public function getAbilitiesByHero(Hero $hero): Collection
   {
     return $hero->abilities()->with(['subtype.type', 'range'])->get();
-  }
-
-  /**
-   * Process translation data from form
-   * 
-   * @param array $data
-   * @return array
-   */
-  protected function processTranslationData(array $data): array
-  {
-    $processedData = $data;
-    $translatableFields = ['name', 'description'];
-    
-    foreach ($translatableFields as $field) {
-      if (isset($data[$field.'_translations']) && is_array($data[$field.'_translations'])) {
-        $translations = [];
-        
-        foreach ($data[$field.'_translations'] as $locale => $value) {
-          if (!empty($value)) {
-            $translations[$locale] = $value;
-          }
-        }
-        
-        // If we have translations, set them on the model
-        if (!empty($translations)) {
-          $processedData[$field] = $translations;
-          unset($processedData[$field.'_translations']);
-        }
-      }
-    }
-    
-    return $processedData;
   }
 }

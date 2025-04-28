@@ -4,9 +4,14 @@ namespace App\Services;
 
 use App\Models\HeroRace;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class HeroRaceService
 {
+  use HandlesTranslations;
+  
+  protected $translatableFields = ['name'];
+
   /**
    * Get all hero races
    *
@@ -27,7 +32,13 @@ class HeroRaceService
   public function create(array $data): HeroRace
   {
     $heroRace = new HeroRace();
-    $heroRace->fill($data);
+    
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($heroRace, $data, $this->translatableFields);
+    
     $heroRace->save();
     
     return $heroRace;
@@ -43,7 +54,12 @@ class HeroRaceService
    */
   public function update(HeroRace $heroRace, array $data): HeroRace
   {
-    $heroRace->fill($data);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($heroRace, $data, $this->translatableFields);
+    
     $heroRace->save();
     
     return $heroRace;

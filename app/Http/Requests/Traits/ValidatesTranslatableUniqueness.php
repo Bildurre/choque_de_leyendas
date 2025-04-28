@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Traits;
+namespace App\Http\Requests\Traits;
 
 use Illuminate\Validation\Rule;
 

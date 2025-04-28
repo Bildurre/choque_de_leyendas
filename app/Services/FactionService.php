@@ -5,10 +5,14 @@ namespace App\Services;
 use App\Models\Faction;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class FactionService
 {
+  use HandlesTranslations;
+  
   protected $imageService;
+  protected $translatableFields = ['name', 'lore_text'];
 
   /**
    * Create a new FactionService instance
@@ -40,40 +44,13 @@ class FactionService
   {
     $faction = new Faction();
     
-    // Procesar campos traducibles separados por idioma
-    $currentLocale = app()->getLocale();
-    $availableLocales = config('app.available_locales', ['es']);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    // Nombre (obligatorio al menos en el idioma actual)
-    if (isset($data['name'][$currentLocale])) {
-      foreach ($availableLocales as $locale) {
-        if (isset($data['name'][$locale]) && !empty($data['name'][$locale])) {
-          $faction->setTranslation('name', $locale, $data['name'][$locale]);
-        } elseif ($locale === $currentLocale) {
-          // Si falta el idioma actual, usar el valor proporcionado directamente
-          $faction->setTranslation('name', $locale, $data['name'] ?? '');
-          break;
-        }
-      }
-    } else {
-      // Compatibilidad con versión anterior - si es un string simple
-      $faction->setTranslation('name', $currentLocale, $data['name'] ?? '');
-    }
+    // Apply translations to model
+    $this->applyTranslations($faction, $data, $this->translatableFields);
     
-    // Texto de lore (opcional)
-    if (isset($data['lore_text'])) {
-      if (is_array($data['lore_text'])) {
-        foreach ($availableLocales as $locale) {
-          if (isset($data['lore_text'][$locale])) {
-            $faction->setTranslation('lore_text', $locale, $data['lore_text'][$locale]);
-          }
-        }
-      } else {
-        // Compatibilidad con versión anterior - si es un string simple
-        $faction->setTranslation('lore_text', $currentLocale, $data['lore_text']);
-      }
-    }
-    
+    // Set non-translatable fields
     $faction->color = $data['color'];
     
     // Set text color based on background
@@ -98,38 +75,18 @@ class FactionService
    */
   public function update(Faction $faction, array $data): Faction
   {
-    // Procesar campos traducibles separados por idioma
-    $availableLocales = config('app.available_locales', ['es']);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    // Nombre
-    if (isset($data['name']) && is_array($data['name'])) {
-      foreach ($availableLocales as $locale) {
-        if (isset($data['name'][$locale]) && !empty($data['name'][$locale])) {
-          $faction->setTranslation('name', $locale, $data['name'][$locale]);
-        }
-      }
-    } elseif (isset($data['name'])) {
-      // Compatibilidad con versión anterior - si es un string simple
-      $faction->setTranslation('name', app()->getLocale(), $data['name']);
+    // Apply translations to model
+    $this->applyTranslations($faction, $data, $this->translatableFields);
+    
+    // Update non-translatable fields
+    if (isset($data['color'])) {
+      $faction->color = $data['color'];
+      // Set text color based on background
+      $faction->setTextColorBasedOnBackground();
     }
-    
-    // Texto de lore
-    if (isset($data['lore_text']) && is_array($data['lore_text'])) {
-      foreach ($availableLocales as $locale) {
-        if (isset($data['lore_text'][$locale])) {
-          $faction->setTranslation('lore_text', $locale, $data['lore_text'][$locale]);
-        }
-      }
-    } elseif (isset($data['lore_text'])) {
-      // Compatibilidad con versión anterior - si es un string simple
-      $faction->setTranslation('lore_text', app()->getLocale(), $data['lore_text']);
-    }
-    
-    // Otros campos no traducibles
-    $faction->color = $data['color'];
-    
-    // Set text color based on background
-    $faction->setTextColorBasedOnBackground();
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {
