@@ -178,6 +178,6 @@ class Card extends Model
       return null;
     }
 
-    return trans_choice('cards.hands', $this->hands);
+    return trans_choice('cards.hands', $this->hands, ['count' => $this->hands]);
   }
 }

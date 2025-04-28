@@ -66,6 +66,6 @@ class EquipmentType extends Model
    */
   public function getTranslatedCategoryAttribute(): string
   {
-    return __('equipment.' . $this->category);
+    return __('equipment.categories.' . $this->category);
   }
 }

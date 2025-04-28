@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use App\Models\Hero;
-use App\Models\HeroAttributesConfiguration;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class HeroService
 {
+  use HandlesTranslations;
+  
   protected $imageService;
   protected $attributesConfigService;
+  protected $translatableFields = ['name', 'lore_text', 'passive_name', 'passive_description'];
 
   /**
    * Create a new service instance.
@@ -48,8 +51,24 @@ class HeroService
     // Validate attribute constraints
     $this->validateHeroAttributes($data);
     
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
     $hero = new Hero();
-    $hero->fill($data);
+    
+    // Apply translations
+    $this->applyTranslations($hero, $data, $this->translatableFields);
+    
+    // Set non-translatable fields
+    $hero->faction_id = $data['faction_id'] ?? null;
+    $hero->hero_race_id = $data['hero_race_id'];
+    $hero->hero_class_id = $data['hero_class_id'];
+    $hero->gender = $data['gender'];
+    $hero->agility = $data['agility'];
+    $hero->mental = $data['mental'];
+    $hero->will = $data['will'];
+    $hero->strength = $data['strength'];
+    $hero->armor = $data['armor'];
     
     // Handle image if provided
     if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
@@ -58,7 +77,7 @@ class HeroService
     
     $hero->save();
     
-    // Asociar habilidades si se han seleccionado
+    // Associate abilities if selected
     if (isset($data['abilities']) && is_array($data['abilities'])) {
       $hero->abilities()->sync($data['abilities']);
     }
@@ -79,6 +98,12 @@ class HeroService
     // Validate attribute constraints
     $this->validateHeroAttributes($data);
     
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($hero, $data, $this->translatableFields);
+    
     // Handle image removal
     if (isset($data['remove_image']) && $data['remove_image'] == "1") {
       $this->imageService->delete($hero->image);
@@ -89,14 +114,24 @@ class HeroService
       $hero->image = $this->imageService->update($data['image'], $hero->image, $hero->getImageDirectory());
     }
     
-    $hero->fill($data);
+    // Update non-translatable fields
+    $hero->faction_id = $data['faction_id'] ?? null;
+    $hero->hero_race_id = $data['hero_race_id'];
+    $hero->hero_class_id = $data['hero_class_id'];
+    $hero->gender = $data['gender'];
+    $hero->agility = $data['agility'];
+    $hero->mental = $data['mental'];
+    $hero->will = $data['will'];
+    $hero->strength = $data['strength'];
+    $hero->armor = $data['armor'];
+    
     $hero->save();
     
-    // Actualizar habilidades
+    // Update abilities
     if (isset($data['abilities'])) {
       $hero->abilities()->sync($data['abilities']);
     } else {
-      // Si no se envían habilidades, eliminar todas las relaciones
+      // If no abilities are submitted, remove all relationships
       $hero->abilities()->detach();
     }
     
@@ -116,6 +151,9 @@ class HeroService
     if ($hero->image) {
       $this->imageService->delete($hero->image);
     }
+    
+    // Detach abilities
+    $hero->abilities()->detach();
     
     return $hero->delete();
   }

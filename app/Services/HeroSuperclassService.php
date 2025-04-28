@@ -4,10 +4,14 @@ namespace App\Services;
 
 use App\Models\HeroSuperclass;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class HeroSuperclassService
 {
+  use HandlesTranslations;
+  
   protected $imageService;
+  protected $translatableFields = ['name'];
 
   /**
    * Create a new service instance.
@@ -39,18 +43,15 @@ class HeroSuperclassService
   {
     $heroSuperclass = new HeroSuperclass();
     
-    // Procesar campos traducibles
-    if (isset($data['name'])) {
-      foreach (config('app.available_locales', ['es']) as $locale) {
-        if (isset($data["name_{$locale}"])) {
-          $heroSuperclass->setTranslation('name', $locale, $data["name_{$locale}"]);
-        }
-      }
-    }
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($heroSuperclass, $data, $this->translatableFields);
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof \Illuminate\Http\UploadedFile) {
-      $heroSuperclass->icon = $this->imageService->store($data['icon'], 'hero-superclass-icons');
+      $heroSuperclass->icon = $this->imageService->store($data['icon'], $heroSuperclass->getImageDirectory());
     }
     
     $heroSuperclass->save();
@@ -67,12 +68,11 @@ class HeroSuperclassService
    */
   public function update(HeroSuperclass $heroSuperclass, array $data): HeroSuperclass
   {
-    // Procesar campos traducibles
-    foreach (config('app.available_locales', ['es']) as $locale) {
-      if (isset($data["name_{$locale}"])) {
-        $heroSuperclass->setTranslation('name', $locale, $data["name_{$locale}"]);
-      }
-    }
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($heroSuperclass, $data, $this->translatableFields);
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {

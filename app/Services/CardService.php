@@ -8,11 +8,15 @@ use App\Models\EquipmentType;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Services\Traits\HandlesTranslations;
 
 class CardService
 {
+  use HandlesTranslations;
+  
   protected $imageService;
   protected $costTranslator;
+  protected $translatableFields = ['name', 'lore_text', 'effect', 'restriction'];
 
   /**
    * Create a new service instance.
@@ -92,14 +96,32 @@ class CardService
     // Process conditional fields
     $data = $this->processConditionalFields($data);
 
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
     $card = new Card();
+    
+    // Apply translations
+    $this->applyTranslations($card, $data, $this->translatableFields);
     
     // Handle image if provided
     if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-      $data['image'] = $this->imageService->store($data['image'], $card->getImageDirectory());
+      $card->image = $this->imageService->store($data['image'], $card->getImageDirectory());
     }
     
-    $card->fill($data);
+    // Set non-translatable fields
+    $card->faction_id = $data['faction_id'] ?? null;
+    $card->card_type_id = $data['card_type_id'];
+    $card->equipment_type_id = $data['equipment_type_id'] ?? null;
+    $card->attack_range_id = $data['attack_range_id'] ?? null;
+    $card->attack_subtype_id = $data['attack_subtype_id'] ?? null;
+    $card->hero_ability_id = $data['hero_ability_id'] ?? null;
+    $card->hands = $data['hands'] ?? null;
+    $card->cost = $data['cost'] ?? null;
+    $card->blast = $data['blast'] ?? false;
+    $card->is_attack = $data['is_attack'] ?? false;
+    $card->has_hero_ability = $data['has_hero_ability'] ?? false;
+    
     $card->save();
     
     return $card;
@@ -123,17 +145,35 @@ class CardService
     // Process conditional fields
     $data = $this->processConditionalFields($data);
 
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($card, $data, $this->translatableFields);
+    
     // Handle image removal
     if (isset($data['remove_image']) && $data['remove_image'] == "1") {
       $this->imageService->delete($card->image);
-      $data['image'] = null;
+      $card->image = null;
     }
     // Handle image update
     elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-      $data['image'] = $this->imageService->update($data['image'], $card->image, $card->getImageDirectory());
+      $card->image = $this->imageService->update($data['image'], $card->image, $card->getImageDirectory());
     }
     
-    $card->fill($data);
+    // Update non-translatable fields
+    $card->faction_id = $data['faction_id'] ?? null;
+    $card->card_type_id = $data['card_type_id'];
+    $card->equipment_type_id = $data['equipment_type_id'] ?? null;
+    $card->attack_range_id = $data['attack_range_id'] ?? null;
+    $card->attack_subtype_id = $data['attack_subtype_id'] ?? null;
+    $card->hero_ability_id = $data['hero_ability_id'] ?? null;
+    $card->hands = $data['hands'] ?? null;
+    $card->cost = $data['cost'] ?? null;
+    $card->blast = $data['blast'] ?? false;
+    $card->is_attack = $data['is_attack'] ?? false;
+    $card->has_hero_ability = $data['has_hero_ability'] ?? false;
+    
     $card->save();
     
     return $card;
@@ -153,37 +193,6 @@ class CardService
     }
     
     return $card->delete();
-  }
-
-  /**
-   * Validate equipment type and hands consistency
-   *
-   * @param array $data
-   * @throws \Exception
-   */
-  private function validateEquipmentTypeAndHands(array $data): void
-  {
-    // If equipment type is provided, check if it exists
-    if (!empty($data['equipment_type_id'])) {
-      $equipmentType = EquipmentType::find($data['equipment_type_id']);
-      
-      if (!$equipmentType) {
-        throw new \Exception("El tipo de equipo seleccionado no existe.");
-      }
-      
-      // If it's a weapon, hands must be specified
-      if ($equipmentType->isWeapon()) {
-        if (empty($data['hands']) || !in_array($data['hands'], [1, 2])) {
-          throw new \Exception("Para las armas debe especificar el número de manos (1 o 2).");
-        }
-      } else {
-        // If it's not a weapon, hands should be null
-        $data['hands'] = null;
-      }
-    } else {
-      // If no equipment type, hands should be null
-      $data['hands'] = null;
-    }
   }
 
   /**
@@ -214,7 +223,7 @@ class CardService
     // Handle equipment fields
     $isEquipmentCard = false;
     if (isset($data['card_type_id'])) {
-      $cardType = \App\Models\CardType::find($data['card_type_id']);
+      $cardType = CardType::find($data['card_type_id']);
       $isEquipmentCard = $cardType && $cardType->name === 'Equipo';
     }
     
@@ -222,7 +231,7 @@ class CardService
       $data['equipment_type_id'] = null;
       $data['hands'] = null;
     } else if (isset($data['equipment_type_id'])) {
-      $equipmentType = \App\Models\EquipmentType::find($data['equipment_type_id']);
+      $equipmentType = EquipmentType::find($data['equipment_type_id']);
       if (!$equipmentType || !$equipmentType->isWeapon()) {
         $data['hands'] = null;
       }

@@ -4,9 +4,14 @@ namespace App\Services;
 
 use App\Models\CardType;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class CardTypeService
 {
+  use HandlesTranslations;
+  
+  protected $translatableFields = ['name'];
+
   /**
    * Get all card types with related superclass
    *
@@ -35,7 +40,18 @@ class CardTypeService
     }
     
     $cardType = new CardType();
-    $cardType->fill($data);
+    
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($cardType, $data, $this->translatableFields);
+    
+    // Set non-translatable fields
+    if (isset($data['hero_superclass_id'])) {
+      $cardType->hero_superclass_id = $data['hero_superclass_id'];
+    }
+    
     $cardType->save();
     
     return $cardType;
@@ -66,7 +82,17 @@ class CardTypeService
       }
     }
     
-    $cardType->fill($data);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($cardType, $data, $this->translatableFields);
+    
+    // Update non-translatable fields
+    if (isset($data['hero_superclass_id'])) {
+      $cardType->hero_superclass_id = $data['hero_superclass_id'];
+    }
+    
     $cardType->save();
     
     return $cardType;

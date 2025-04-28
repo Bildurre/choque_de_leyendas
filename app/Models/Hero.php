@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Traits\HasImageAttribute;
 use App\Models\Traits\HasSlug;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
+use App\Services\HeroAttributesConfigurationService;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Hero extends Model
 {
@@ -132,7 +133,7 @@ class Hero extends Model
    */
   public function calculateHealth(): int
   {
-    $config = app(HeroAttributesConfiguration::class)->first();
+    $config = app(HeroAttributesConfigurationService::class)->getConfiguration();
     
     if (!$config) {
       return 10; // Default value if no configuration exists
@@ -164,7 +165,7 @@ class Hero extends Model
    */
   public function hasValidAttributes(): bool
   {
-    $config = app(HeroAttributesConfiguration::class)->first();
+    $config = app(HeroAttributesConfigurationService::class)->getConfiguration();
     
     if (!$config) {
       return true; // If no configuration exists, consider it valid

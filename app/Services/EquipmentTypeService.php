@@ -4,9 +4,14 @@ namespace App\Services;
 
 use App\Models\EquipmentType;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\Traits\HandlesTranslations;
 
 class EquipmentTypeService
 {
+  use HandlesTranslations;
+  
+  protected $translatableFields = ['name'];
+
   /**
    * Get all equipment types
    *
@@ -58,8 +63,11 @@ class EquipmentTypeService
   {
     $equipmentType = new EquipmentType();
     
-    // Set translatable fields
-    $equipmentType->setTranslations('name', $data['name']);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($equipmentType, $data, $this->translatableFields);
     
     // Set non-translatable fields
     $equipmentType->category = $data['category'];
@@ -78,11 +86,16 @@ class EquipmentTypeService
    */
   public function update(EquipmentType $equipmentType, array $data): EquipmentType
   {
-    // Update translatable fields
-    $equipmentType->setTranslations('name', $data['name']);
+    // Process translatable fields
+    $data = $this->processTranslatableFields($data, $this->translatableFields);
+    
+    // Apply translations
+    $this->applyTranslations($equipmentType, $data, $this->translatableFields);
     
     // Update non-translatable fields
-    $equipmentType->category = $data['category'];
+    if (isset($data['category'])) {
+      $equipmentType->category = $data['category'];
+    }
     
     $equipmentType->save();
     
