@@ -20,4 +20,8 @@
   <div class="header-title">
     <h1>{{ $title ?? 'Dashboard' }}</h1>
   </div>
+
+  <div class="header-right">
+    <x-language-selector variant="buttons" />
+  </div>
 </header>
