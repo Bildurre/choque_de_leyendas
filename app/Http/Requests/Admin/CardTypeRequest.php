@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\App;
 
 class CardTypeRequest extends FormRequest
 {
+  use ValidatesTranslatableUniqueness;
+
   public function authorize(): bool
   {
     return true;
@@ -15,41 +16,38 @@ class CardTypeRequest extends FormRequest
 
   public function rules(): array
   {
+    $cardTypeId = $this->route('card_type');
     $locales = config('app.available_locales', ['es']);
-    $rules = [];
     
-    // Reglas para cada idioma
-    foreach ($locales as $locale) {
-      $rules["name.{$locale}"] = ['required', 'string', 'max:255'];
-      
-      // Regla de unicidad por idioma
-      if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-        $cardTypeId = $this->route('card_type');
-        $rules["name.{$locale}"][] = Rule::unique('card_types', 'name->' . $locale)->ignore($cardTypeId);
-      } else {
-        $rules["name.{$locale}"][] = Rule::unique('card_types', 'name->' . $locale);
-      }
-    }
+    $rules = [
+      'name' => ['required', 'array'],
+      'name.es' => ['required', 'string', 'max:255'],
+      'hero_superclass_id' => ['nullable', 'exists:hero_superclasses,id'],
+    ];
     
-    // Reglas adicionales
-    $rules['hero_superclass_id'] = ['nullable', 'exists:hero_superclasses,id'];
+    // Agregar reglas de unicidad para cada idioma
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('card_types', 'name', $cardTypeId, $locales)
+    );
     
     return $rules;
   }
 
   public function messages(): array
   {
-    $messages = [];
-    $locales = config('app.available_locales', ['es']);
+    $messages = [
+      'name.required' => 'El nombre del tipo de carta es obligatorio.',
+      'name.array' => 'El nombre debe ser un array con traducciones.',
+      'name.es.required' => 'El nombre en español es obligatorio.',
+      'hero_superclass_id.exists' => 'La superclase seleccionada no existe.',
+    ];
     
-    foreach ($locales as $locale) {
-      $langName = locale_name($locale);
-      
-      $messages["name.{$locale}.required"] = "El nombre en {$langName} es obligatorio.";
-      $messages["name.{$locale}.unique"] = "Ya existe un tipo de carta con este nombre en {$langName}.";
+    // Mensajes para la unicidad en cada idioma
+    foreach (config('app.available_locales', ['es']) as $locale) {
+      $localeName = locale_name($locale);
+      $messages["name.{$locale}.unique"] = "Ya existe un tipo de carta con este nombre en {$localeName}.";
     }
-    
-    $messages['hero_superclass_id.exists'] = 'La superclase seleccionada no existe.';
     
     return $messages;
   }

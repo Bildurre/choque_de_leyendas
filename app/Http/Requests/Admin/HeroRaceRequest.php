@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class HeroRaceRequest extends FormRequest
 {
+  use ValidatesTranslatableUniqueness;
+
   public function authorize(): bool
   {
     return true;
@@ -14,43 +16,34 @@ class HeroRaceRequest extends FormRequest
 
   public function rules(): array
   {
-    $rules = [];
-    
-    // Obtenemos los locales disponibles
+    $heroRaceId = $this->route('hero_race');
     $locales = config('app.available_locales', ['es']);
     
-    // Creamos reglas para cada locale
-    foreach ($locales as $locale) {
-      $rules["name.{$locale}"] = [
-        'required', 
-        'string', 
-        'max:255'
-      ];
-      
-      // Para validar unicidad, usamos una validación personalizada
-      if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-        $heroRaceId = $this->route('hero_race');
-        $rules["name.{$locale}"][] = Rule::unique('hero_races', 'name->' . $locale)->ignore($heroRaceId);
-      } else {
-        $rules["name.{$locale}"][] = Rule::unique('hero_races', 'name->' . $locale);
-      }
-    }
+    $rules = [
+      'name' => ['required', 'array'],
+      'name.es' => ['required', 'string', 'max:255'],
+    ];
+    
+    // Agregar reglas de unicidad para cada idioma
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('hero_races', 'name', $heroRaceId, $locales)
+    );
 
     return $rules;
   }
 
   public function messages(): array
   {
-    $messages = [];
+    $messages = [
+      'name.required' => 'El nombre de la raza es obligatorio.',
+      'name.array' => 'El nombre debe ser un array con traducciones.',
+      'name.es.required' => 'El nombre en español es obligatorio.',
+    ];
     
-    // Obtenemos los locales disponibles
-    $locales = config('app.available_locales', ['es']);
-    
-    // Creamos mensajes para cada locale
-    foreach ($locales as $locale) {
+    // Mensajes para la unicidad en cada idioma
+    foreach (config('app.available_locales', ['es']) as $locale) {
       $localeName = locale_name($locale);
-      
-      $messages["name.{$locale}.required"] = "El nombre en {$localeName} es obligatorio.";
       $messages["name.{$locale}.unique"] = "Ya existe una raza con este nombre en {$localeName}.";
     }
 

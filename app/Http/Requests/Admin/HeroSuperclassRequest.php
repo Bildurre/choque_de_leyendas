@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Spatie\Translatable\Facades\Translatable;
 
 class HeroSuperclassRequest extends FormRequest
 {
+  use ValidatesTranslatableUniqueness;
+
   public function authorize(): bool
   {
     return true;
@@ -15,40 +16,40 @@ class HeroSuperclassRequest extends FormRequest
 
   public function rules(): array
   {
-    $rules = [];
+    $heroSuperclassId = $this->route('hero_superclass');
+    $locales = config('app.available_locales', ['es']);
     
-    // Reglas de validación para cada idioma
-    foreach (config('app.available_locales', ['es']) as $locale) {
-      $nameRules = ['required', 'string', 'max:255'];
-      
-      // Validación de unicidad para cada idioma
-      if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-        $heroSuperclassId = $this->route('hero_superclass');
-        $nameRules[] = Rule::unique('hero_superclasses', 'name->'. $locale)->ignore($heroSuperclassId);
-      } else {
-        $nameRules[] = Rule::unique('hero_superclasses', 'name->'. $locale);
-      }
-      
-      $rules["name_{$locale}"] = $nameRules;
-    }
+    $rules = [
+      'name' => ['required', 'array'],
+      'name.es' => ['required', 'string', 'max:255'],
+      'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+    ];
     
-    $rules['icon'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'];
+    // Agregar reglas de unicidad para cada idioma
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('hero_superclasses', 'name', $heroSuperclassId, $locales)
+    );
     
     return $rules;
   }
 
   public function messages(): array
   {
-    $messages = [];
+    $messages = [
+      'name.required' => 'El nombre de la superclase es obligatorio.',
+      'name.array' => 'El nombre debe ser un array con traducciones.',
+      'name.es.required' => 'El nombre en español es obligatorio.',
+      'icon.image' => 'El archivo debe ser una imagen.',
+      'icon.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg, gif, svg.',
+      'icon.max' => 'La imagen no debe pesar más de 2MB.',
+    ];
     
+    // Mensajes para la unicidad en cada idioma
     foreach (config('app.available_locales', ['es']) as $locale) {
-      $messages["name_{$locale}.required"] = "El nombre en " . locale_name($locale) . " es obligatorio.";
-      $messages["name_{$locale}.unique"] = "Ya existe una superclase con este nombre en " . locale_name($locale) . ".";
+      $localeName = locale_name($locale);
+      $messages["name.{$locale}.unique"] = "Ya existe una superclase con este nombre en {$localeName}.";
     }
-    
-    $messages["icon.image"] = "El archivo debe ser una imagen.";
-    $messages["icon.mimes"] = "La imagen debe ser de tipo: jpeg, png, jpg, gif, svg.";
-    $messages["icon.max"] = "La imagen no debe pesar más de 2MB.";
     
     return $messages;
   }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Traits\ValidatesTranslatableUniqueness;
+use App\Models\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

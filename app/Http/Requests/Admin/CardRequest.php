@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Spatie\Translatable\Rules\TranslatableRequiredRule;
 
 class CardRequest extends FormRequest
 {
+  use ValidatesTranslatableUniqueness;
+
   public function authorize(): bool
   {
     return true;
@@ -15,35 +17,27 @@ class CardRequest extends FormRequest
 
   public function rules(): array
   {
+    $cardId = $this->route('card');
+    $locales = config('app.available_locales', ['es']);
+    
     $rules = [
       'name' => ['required', new TranslatableRequiredRule(['es']), 'array'],
-      'name.es' => [
-        'string', 
-        'max:255',
-        Rule::unique('cards', 'name->es')->ignore($this->route('card')),
-      ],
-      'name.en' => [
-        'nullable',
-        'string', 
-        'max:255',
-        Rule::unique('cards', 'name->en')->ignore($this->route('card')),
-      ],
       'faction_id' => ['nullable', 'exists:factions,id'],
       'card_type_id' => ['required', 'exists:card_types,id'],
       'lore_text' => ['nullable', 'array'],
-      'lore_text.es' => ['nullable', 'string'],
-      'lore_text.en' => ['nullable', 'string'],
       'is_attack' => ['boolean'],
       'has_hero_ability' => ['boolean'],
       'cost' => ['nullable', 'string', 'max:5', 'regex:/^[RGBrgb]*$/'],
       'effect' => ['nullable', 'array'],
-      'effect.es' => ['nullable', 'string'],
-      'effect.en' => ['nullable', 'string'],
       'restriction' => ['nullable', 'array'],
-      'restriction.es' => ['nullable', 'string'],
-      'restriction.en' => ['nullable', 'string'],
       'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
     ];
+
+    // Agregar reglas de unicidad para cada idioma
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('cards', 'name', $cardId, $locales)
+    );
 
     // Rules that depend on conditional fields
     if ($this->input('is_attack')) {
@@ -93,11 +87,9 @@ class CardRequest extends FormRequest
 
   public function messages(): array
   {
-    return [
+    $messages = [
       'name.required' => 'El nombre de la carta es obligatorio.',
       'name.es.required' => 'El nombre de la carta en español es obligatorio.',
-      'name.es.unique' => 'Ya existe una carta con este nombre en español.',
-      'name.en.unique' => 'Ya existe una carta con este nombre en inglés.',
       'card_type_id.required' => 'El tipo de carta es obligatorio.',
       'card_type_id.exists' => 'El tipo de carta seleccionado no existe.',
       'equipment_type_id.exists' => 'El tipo de equipo seleccionado no existe.',
@@ -111,5 +103,13 @@ class CardRequest extends FormRequest
       'image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg, gif, svg.',
       'image.max' => 'La imagen no debe pesar más de 2MB.',
     ];
+
+    // Mensajes para la unicidad en cada idioma
+    foreach (config('app.available_locales', ['es']) as $locale) {
+      $localeName = locale_name($locale);
+      $messages["name.{$locale}.unique"] = "Ya existe una carta con este nombre en {$localeName}.";
+    }
+
+    return $messages;
   }
 }

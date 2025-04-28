@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class HeroAbilityRequest extends FormRequest
 {
+  use ValidatesTranslatableUniqueness;
+
   public function authorize(): bool
   {
     return true;
@@ -14,34 +16,24 @@ class HeroAbilityRequest extends FormRequest
 
   public function rules(): array
   {
+    $heroAbilityId = $this->route('hero_ability');
     $locales = config('app.available_locales', ['es']);
+    
     $rules = [
+      'name' => ['required', 'array'],
+      'name.es' => ['required', 'string', 'max:255'],
+      'description' => ['nullable', 'array'],
       'attack_range_id' => ['required', 'exists:attack_ranges,id'],
       'attack_subtype_id' => ['required', 'exists:attack_subtypes,id'],
       'blast' => ['boolean'],
       'cost' => ['required', 'string', 'max:5', 'regex:/^[RGBrgb]*$/'],
     ];
 
-    // Agregar reglas de validación para cada idioma
-    foreach ($locales as $locale) {
-      $rules["name_translations.{$locale}"] = ['required', 'string', 'max:255'];
-      $rules["description_translations.{$locale}"] = ['nullable', 'string'];
-      
-      // Regla unique para el nombre en cada idioma
-      if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-        $heroAbilityId = $this->route('hero_ability');
-        $rules["name_translations.{$locale}"][] = Rule::unique('hero_abilities', 'name->'. $locale)
-          ->ignore($heroAbilityId)
-          ->where(function ($query) use ($locale) {
-            $query->whereRaw("JSON_EXTRACT(name, '$.{$locale}') IS NOT NULL");
-          });
-      } else {
-        $rules["name_translations.{$locale}"][] = Rule::unique('hero_abilities', 'name->'. $locale)
-          ->where(function ($query) use ($locale) {
-            $query->whereRaw("JSON_EXTRACT(name, '$.{$locale}') IS NOT NULL");
-          });
-      }
-    }
+    // Agregar reglas de unicidad para cada idioma
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('hero_abilities', 'name', $heroAbilityId, $locales)
+    );
 
     return $rules;
   }
@@ -49,6 +41,9 @@ class HeroAbilityRequest extends FormRequest
   public function messages(): array
   {
     $messages = [
+      'name.required' => 'El nombre de la habilidad es obligatorio.',
+      'name.array' => 'El nombre debe ser un array con traducciones.',
+      'name.es.required' => 'El nombre en español es obligatorio.',
       'attack_range_id.required' => __('abilities.attack_range') . ' ' . __('validation.required'),
       'attack_range_id.exists' => __('abilities.attack_range') . ' ' . __('validation.exists'),
       'attack_subtype_id.required' => __('abilities.attack_subtype') . ' ' . __('validation.required'),
@@ -58,13 +53,10 @@ class HeroAbilityRequest extends FormRequest
       'cost.max' => __('abilities.cost') . ' ' . __('validation.max.string', ['max' => 5]),
     ];
     
-    // Agregar mensajes de validación para cada idioma
-    foreach (config('app.available_locales', ['es']) as $locale) {
+    // Mensajes para la unicidad en cada idioma
+    foreach ($locales as $locale) {
       $localeName = locale_name($locale);
-      
-      $messages["name_translations.{$locale}.required"] = __('abilities.name') . " ({$localeName}) " . __('validation.required');
-      $messages["name_translations.{$locale}.max"] = __('abilities.name') . " ({$localeName}) " . __('validation.max.string', ['max' => 255]);
-      $messages["name_translations.{$locale}.unique"] = __('abilities.name') . " ({$localeName}) " . __('validation.unique');
+      $messages["name.{$locale}.unique"] = "Ya existe una habilidad con este nombre en {$localeName}.";
     }
 
     return $messages;
