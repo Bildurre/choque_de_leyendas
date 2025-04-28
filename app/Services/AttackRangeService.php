@@ -40,11 +40,9 @@ class AttackRangeService
   {
     $attackRange = new AttackRange();
     
-    // Manejar las traducciones del nombre
-    foreach (available_locales() as $locale) {
-      if (isset($data[$locale]['name'])) {
-        $attackRange->setTranslation('name', $locale, $data[$locale]['name']);
-      }
+    // Establecer traducciones directamente si es un array
+    if (isset($data['name']) && is_array($data['name'])) {
+      $attackRange->setTranslations('name', $data['name']);
     }
     
     // Handle icon if provided
@@ -66,11 +64,9 @@ class AttackRangeService
    */
   public function update(AttackRange $attackRange, array $data): AttackRange
   {
-    // Manejar las traducciones del nombre
-    foreach (available_locales() as $locale) {
-      if (isset($data[$locale]['name'])) {
-        $attackRange->setTranslation('name', $locale, $data[$locale]['name']);
-      }
+    // Establecer traducciones directamente si es un array
+    if (isset($data['name']) && is_array($data['name'])) {
+      $attackRange->setTranslations('name', $data['name']);
     }
     
     // Handle icon removal

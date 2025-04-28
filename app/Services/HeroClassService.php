@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\HeroClass;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 
 class HeroClassService
 {
@@ -27,11 +26,21 @@ class HeroClassService
    */
   public function create(array $data): HeroClass
   {
-    // Validar unicidad del nombre en todos los idiomas disponibles
-    $this->validateNameUniqueness($data['name']);
-    
     $heroClass = new HeroClass();
-    $heroClass->fill($data);    
+    
+    // Aplicar datos directamente ya que la validación se hace en el Request
+    if (isset($data['name']) && is_array($data['name'])) {
+      $heroClass->setTranslations('name', $data['name']);
+    }
+    
+    if (isset($data['passive']) && is_array($data['passive'])) {
+      $heroClass->setTranslations('passive', $data['passive']);
+    }
+    
+    if (isset($data['hero_superclass_id'])) {
+      $heroClass->hero_superclass_id = $data['hero_superclass_id'];
+    }
+    
     $heroClass->save();
     
     return $heroClass;
@@ -47,10 +56,19 @@ class HeroClassService
    */
   public function update(HeroClass $heroClass, array $data): HeroClass
   {
-    // Validar unicidad del nombre excluyendo el registro actual
-    $this->validateNameUniqueness($data['name'], $heroClass->id);
+    // Aplicar datos directamente ya que la validación se hace en el Request
+    if (isset($data['name']) && is_array($data['name'])) {
+      $heroClass->setTranslations('name', $data['name']);
+    }
     
-    $heroClass->fill($data);    
+    if (isset($data['passive']) && is_array($data['passive'])) {
+      $heroClass->setTranslations('passive', $data['passive']);
+    }
+    
+    if (isset($data['hero_superclass_id'])) {
+      $heroClass->hero_superclass_id = $data['hero_superclass_id'];
+    }
+    
     $heroClass->save();
     
     return $heroClass;
@@ -65,31 +83,5 @@ class HeroClassService
   public function delete(HeroClass $heroClass): bool
   {
     return $heroClass->delete();
-  }
-  
-  /**
-   * Validate that the name is unique in all translations
-   *
-   * @param array $names
-   * @param int|null $excludeId
-   * @return void
-   * @throws \Exception
-   */
-  protected function validateNameUniqueness(array $names, ?int $excludeId = null): void
-  {
-    foreach ($names as $locale => $name) {
-      if (empty($name)) continue;
-      
-      // Consulta para verificar unicidad
-      $query = HeroClass::whereRaw("JSON_EXTRACT(name, '$.\"{$locale}\"') = ?", [$name]);
-      
-      if ($excludeId) {
-        $query->where('id', '!=', $excludeId);
-      }
-      
-      if ($query->exists()) {
-        throw new \Exception("Ya existe una clase con el nombre '{$name}' en el idioma " . locale_name($locale));
-      }
-    }
   }
 }

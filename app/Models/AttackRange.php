@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Translatable\HasTranslations;
-use Illuminate\Validation\Rule;
 
 class AttackRange extends Model
 {
@@ -48,27 +47,5 @@ class AttackRange extends Model
   public function abilities(): HasMany
   {
     return $this->hasMany(HeroAbility::class);
-  }
-
-  /**
-   * Validate if the name is unique for a specific locale
-   *
-   * @param string $locale
-   * @param string $name
-   * @param int|null $excludeId
-   * @return bool
-   */
-  public static function isNameUniqueInLocale(string $locale, string $name, ?int $excludeId = null): bool
-  {
-    $query = static::query()
-      ->where(function ($query) use ($locale, $name) {
-        $query->whereRaw("JSON_EXTRACT(name, '$.{$locale}') = ?", [$name]);
-      });
-    
-    if ($excludeId) {
-      $query->where('id', '!=', $excludeId);
-    }
-    
-    return $query->count() === 0;
   }
 }

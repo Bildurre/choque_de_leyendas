@@ -6,7 +6,6 @@ use App\Models\AttackRange;
 use App\Http\Controllers\Controller;
 use App\Services\AttackRangeService;
 use App\Http\Requests\Admin\AttackRangeRequest;
-use Illuminate\Support\Facades\App;
 
 class AttackRangeController extends Controller
 {
@@ -36,8 +35,7 @@ class AttackRangeController extends Controller
    */
   public function create()
   {
-    $availableLocales = available_locales();
-    return view('admin.attack-ranges.create', compact('availableLocales'));
+    return view('admin.attack-ranges.create');
   }
 
   /**
@@ -46,18 +44,6 @@ class AttackRangeController extends Controller
   public function store(AttackRangeRequest $request)
   {
     $validated = $request->validated();
-
-    // Procesamos las traducciones
-    $translations = [];
-    foreach (available_locales() as $locale) {
-      if ($request->has($locale)) {
-        $translations[$locale] = $request->input($locale);
-      }
-    }
-    
-    if (!empty($translations)) {
-      $validated['translations'] = $translations;
-    }
 
     try {
       $attackRange = $this->attackRangeService->create($validated);
@@ -73,8 +59,7 @@ class AttackRangeController extends Controller
    */
   public function edit(AttackRange $attackRange)
   {
-    $availableLocales = available_locales();
-    return view('admin.attack-ranges.edit', compact('attackRange', 'availableLocales'));
+    return view('admin.attack-ranges.edit', compact('attackRange'));
   }
 
   /**
@@ -83,18 +68,6 @@ class AttackRangeController extends Controller
   public function update(AttackRangeRequest $request, AttackRange $attackRange)
   {
     $validated = $request->validated();
-
-    // Procesamos las traducciones
-    $translations = [];
-    foreach (available_locales() as $locale) {
-      if ($request->has($locale)) {
-        $translations[$locale] = $request->input($locale);
-      }
-    }
-    
-    if (!empty($translations)) {
-      $validated['translations'] = $translations;
-    }
 
     try {
       $this->attackRangeService->update($attackRange, $validated);
@@ -111,7 +84,6 @@ class AttackRangeController extends Controller
   public function destroy(AttackRange $attackRange)
   {
     try {
-      $rangeName = $attackRange->name;
       $this->attackRangeService->delete($attackRange);
       return redirect()->route('admin.attack-ranges.index')
         ->with('success', __('app.deleted_successfully', ['entity' => __('app.attack_range')]));
