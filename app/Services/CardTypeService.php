@@ -14,7 +14,6 @@ class CardTypeService
    */
   public function getAllCardTypes(): Collection
   {
-    // Esto debería ser correcto, asumiendo que estás utilizando eager loading
     return CardType::with('heroSuperclass')->get();
   }
 
@@ -31,7 +30,7 @@ class CardTypeService
     if (isset($data['hero_superclass_id']) && $data['hero_superclass_id']) {
       $existingCardType = CardType::where('hero_superclass_id', $data['hero_superclass_id'])->first();
       if ($existingCardType) {
-        throw new \Exception("La superclase seleccionada ya está asignada a otro tipo de carta.");
+        throw new \Exception(trans('card_types.superclass_assigned'));
       }
     }
     
@@ -62,7 +61,7 @@ class CardTypeService
                                     ->where('id', '!=', $cardType->id)
                                     ->first();
         if ($existingCardType) {
-          throw new \Exception("La superclase seleccionada ya está asignada a otro tipo de carta.");
+          throw new \Exception(trans('card_types.superclass_assigned'));
         }
       }
     }

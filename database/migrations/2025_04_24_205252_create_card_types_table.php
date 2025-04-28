@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('card_types', function (Blueprint $table) {
       $table->id();
-      $table->string('name')->unique();
+      $table->json('name');
       $table->foreignId('hero_superclass_id')->nullable()->unique()->constrained()->nullOnDelete();
       $table->datetimes();
     });

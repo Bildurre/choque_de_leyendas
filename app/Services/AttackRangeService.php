@@ -39,7 +39,13 @@ class AttackRangeService
   public function create(array $data): AttackRange
   {
     $attackRange = new AttackRange();
-    $attackRange->fill($data);
+    
+    // Manejar las traducciones del nombre
+    foreach (available_locales() as $locale) {
+      if (isset($data[$locale]['name'])) {
+        $attackRange->setTranslation('name', $locale, $data[$locale]['name']);
+      }
+    }
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
@@ -60,7 +66,12 @@ class AttackRangeService
    */
   public function update(AttackRange $attackRange, array $data): AttackRange
   {
-    $attackRange->fill($data);
+    // Manejar las traducciones del nombre
+    foreach (available_locales() as $locale) {
+      if (isset($data[$locale]['name'])) {
+        $attackRange->setTranslation('name', $locale, $data[$locale]['name']);
+      }
+    }
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {

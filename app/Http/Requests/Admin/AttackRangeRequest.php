@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\AttackRange;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class AttackRangeRequest extends FormRequest
 {
@@ -14,25 +14,41 @@ class AttackRangeRequest extends FormRequest
 
   public function rules(): array
   {
-    $rules = [
-      'name' => ['required', 'string', 'max:255'],
-    ];
-
-    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-      $attackRangeId = $this->route('attack_range');
-      $rules['name'][] = Rule::unique('attack_ranges')->ignore($attackRangeId);
-    } else {
-      $rules['name'][] = 'unique:attack_ranges,name';
+    $rules = [];
+    
+    // Validación para cada locale disponible
+    foreach (available_locales() as $locale) {
+      $rules[$locale . '.name'] = [
+        'required', 
+        'string', 
+        'max:255',
+        function ($attribute, $value, $fail) use ($locale) {
+          $excludeId = $this->route('attack_range') ? $this->route('attack_range')->id : null;
+          
+          if (!AttackRange::isNameUniqueInLocale($locale, $value, $excludeId)) {
+            $localeName = locale_name($locale);
+            $fail("El nombre '{$value}' en {$localeName} ya está en uso.");
+          }
+        }
+      ];
     }
-
+    
+    // Otras reglas no relacionadas con traducciones
+    $rules['icon'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'];
+    
     return $rules;
   }
 
   public function messages(): array
   {
-    return [
-      'name.required' => 'El nombre del rango de ataque es obligatorio.',
-      'name.unique' => 'Ya existe un rango de ataque con este nombre.',
-    ];
+    $messages = [];
+    
+    foreach (available_locales() as $locale) {
+      $localeName = locale_name($locale);
+      $messages[$locale . '.name.required'] = "El nombre en {$localeName} es obligatorio.";
+      $messages[$locale . '.name.max'] = "El nombre en {$localeName} no debe exceder los 255 caracteres.";
+    }
+    
+    return $messages;
   }
 }

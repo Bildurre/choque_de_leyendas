@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Traits\HasImageAttribute;
+use Spatie\Translatable\HasTranslations;
 
 class HeroSuperclass extends Model
 {
   use HasFactory;
   use HasImageAttribute;
+  use HasTranslations;
 
   /**
    * The table associated with the model.
@@ -28,6 +30,15 @@ class HeroSuperclass extends Model
   protected $fillable = [
     'name',
     'icon'
+  ];
+
+  /**
+   * The attributes that are translatable.
+   *
+   * @var array
+   */
+  public $translatable = [
+    'name',
   ];
 
   /**

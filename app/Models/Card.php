@@ -8,12 +8,14 @@ use App\Services\CostTranslatorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Translatable\HasTranslations;
 
 class Card extends Model
 {
   use HasFactory;
   use HasSlug;
   use HasImageAttribute;
+  use HasTranslations;
 
   /**
    * The attributes that are mass assignable.
@@ -49,6 +51,18 @@ class Card extends Model
     'hands' => 'integer',
     'is_attack' => 'boolean',
     'has_hero_ability' => 'boolean',
+  ];
+
+  /**
+   * The attributes that are translatable.
+   *
+   * @var array
+   */
+  public $translatable = [
+    'name',
+    'lore_text',
+    'effect',
+    'restriction',
   ];
 
   /**
@@ -151,5 +165,19 @@ class Card extends Model
   public function getHtmlCostAttribute(): string
   {
     return app(CostTranslatorService::class)->translateToHtml($this->cost);
+  }
+
+  /**
+   * Get translated hands text based on current locale
+   * 
+   * @return string|null
+   */
+  public function getHandsTextAttribute(): ?string
+  {
+    if ($this->hands === null) {
+      return null;
+    }
+
+    return trans_choice('cards.hands', $this->hands);
   }
 }

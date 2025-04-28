@@ -14,7 +14,6 @@ class EquipmentTypeService
    */
   public function getAllTypes(): Collection
   {
-    // return EquipmentType::withCount('equipment')->get();
     return EquipmentType::all();
   }
 
@@ -58,7 +57,13 @@ class EquipmentTypeService
   public function create(array $data): EquipmentType
   {
     $equipmentType = new EquipmentType();
-    $equipmentType->fill($data);
+    
+    // Set translatable fields
+    $equipmentType->setTranslations('name', $data['name']);
+    
+    // Set non-translatable fields
+    $equipmentType->category = $data['category'];
+    
     $equipmentType->save();
     
     return $equipmentType;
@@ -73,7 +78,12 @@ class EquipmentTypeService
    */
   public function update(EquipmentType $equipmentType, array $data): EquipmentType
   {
-    $equipmentType->fill($data);
+    // Update translatable fields
+    $equipmentType->setTranslations('name', $data['name']);
+    
+    // Update non-translatable fields
+    $equipmentType->category = $data['category'];
+    
     $equipmentType->save();
     
     return $equipmentType;

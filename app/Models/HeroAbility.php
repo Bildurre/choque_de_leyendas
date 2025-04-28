@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Services\CostTranslatorService;
+use Spatie\Translatable\HasTranslations;
 
 class HeroAbility extends Model
 {
   use HasFactory;
+  use HasTranslations;
 
   /**
    * The attributes that are mass assignable.
@@ -25,6 +27,16 @@ class HeroAbility extends Model
     'attack_subtype_id',
     'blast',
     'cost'
+  ];
+
+  /**
+   * The attributes that are translatable.
+   *
+   * @var array
+   */
+  public $translatable = [
+    'name',
+    'description'
   ];
 
   /**

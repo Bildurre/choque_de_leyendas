@@ -14,15 +14,26 @@ class HeroRaceRequest extends FormRequest
 
   public function rules(): array
   {
-    $rules = [
-      'name' => ['required', 'string', 'max:255'],
-    ];
-
-    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-      $heroRaceId = $this->route('hero_race');
-      $rules['name'][] = Rule::unique('hero_races')->ignore($heroRaceId);
-    } else {
-      $rules['name'][] = 'unique:hero_races,name';
+    $rules = [];
+    
+    // Obtenemos los locales disponibles
+    $locales = config('app.available_locales', ['es']);
+    
+    // Creamos reglas para cada locale
+    foreach ($locales as $locale) {
+      $rules["name.{$locale}"] = [
+        'required', 
+        'string', 
+        'max:255'
+      ];
+      
+      // Para validar unicidad, usamos una validación personalizada
+      if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+        $heroRaceId = $this->route('hero_race');
+        $rules["name.{$locale}"][] = Rule::unique('hero_races', 'name->' . $locale)->ignore($heroRaceId);
+      } else {
+        $rules["name.{$locale}"][] = Rule::unique('hero_races', 'name->' . $locale);
+      }
     }
 
     return $rules;
@@ -30,9 +41,19 @@ class HeroRaceRequest extends FormRequest
 
   public function messages(): array
   {
-    return [
-      'name.required' => 'El nombre de la raza es obligatorio.',
-      'name.unique' => 'Ya existe una raza con este nombre.',
-    ];
+    $messages = [];
+    
+    // Obtenemos los locales disponibles
+    $locales = config('app.available_locales', ['es']);
+    
+    // Creamos mensajes para cada locale
+    foreach ($locales as $locale) {
+      $localeName = locale_name($locale);
+      
+      $messages["name.{$locale}.required"] = "El nombre en {$localeName} es obligatorio.";
+      $messages["name.{$locale}.unique"] = "Ya existe una raza con este nombre en {$localeName}.";
+    }
+
+    return $messages;
   }
 }

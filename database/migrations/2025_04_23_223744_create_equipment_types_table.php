@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('equipment_types', function (Blueprint $table) {
       $table->id();
-      $table->string('name')->unique();
+      $table->json('name'); // Cambiado de string a json
       $table->enum('category', ['weapon', 'armor']);
       $table->datetimes();
     });

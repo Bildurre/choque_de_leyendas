@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('attack_subtypes', function (Blueprint $table) {
       $table->id();
-      $table->string('name')->unique();
+      $table->json('name')->unique();
       $table->enum('type', ['physical', 'magical'])->default('physical');
       $table->datetimes();
     });

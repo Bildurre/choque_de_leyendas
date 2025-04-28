@@ -13,8 +13,8 @@ return new class extends Migration
   {
     Schema::create('hero_classes', function (Blueprint $table) {
       $table->id();
-      $table->string('name')->unique();
-      $table->text('passive')->nullable();
+      $table->json('name')->unique();
+      $table->json('passive')->nullable();
       $table->foreignId('hero_superclass_id')->nullable()->constrained()->onDelete('set null');
       
       $table->datetimes();

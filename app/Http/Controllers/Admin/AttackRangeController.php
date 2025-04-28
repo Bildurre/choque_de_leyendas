@@ -6,6 +6,7 @@ use App\Models\AttackRange;
 use App\Http\Controllers\Controller;
 use App\Services\AttackRangeService;
 use App\Http\Requests\Admin\AttackRangeRequest;
+use Illuminate\Support\Facades\App;
 
 class AttackRangeController extends Controller
 {
@@ -35,7 +36,8 @@ class AttackRangeController extends Controller
    */
   public function create()
   {
-    return view('admin.attack-ranges.create');
+    $availableLocales = available_locales();
+    return view('admin.attack-ranges.create', compact('availableLocales'));
   }
 
   /**
@@ -45,10 +47,22 @@ class AttackRangeController extends Controller
   {
     $validated = $request->validated();
 
+    // Procesamos las traducciones
+    $translations = [];
+    foreach (available_locales() as $locale) {
+      if ($request->has($locale)) {
+        $translations[$locale] = $request->input($locale);
+      }
+    }
+    
+    if (!empty($translations)) {
+      $validated['translations'] = $translations;
+    }
+
     try {
       $attackRange = $this->attackRangeService->create($validated);
       return redirect()->route('admin.attack-ranges.index')
-        ->with('success', "El rango de habilidad {$attackRange->name} ha sido creado correctamente.");
+        ->with('success', __('app.created_successfully', ['entity' => __('app.attack_range')]));
     } catch (\Exception $e) {
       return back()->with('error', 'Ha ocurrido un error al crear el rango de habilidad: ' . $e->getMessage());
     }
@@ -59,7 +73,8 @@ class AttackRangeController extends Controller
    */
   public function edit(AttackRange $attackRange)
   {
-    return view('admin.attack-ranges.edit', compact('attackRange'));
+    $availableLocales = available_locales();
+    return view('admin.attack-ranges.edit', compact('attackRange', 'availableLocales'));
   }
 
   /**
@@ -69,10 +84,22 @@ class AttackRangeController extends Controller
   {
     $validated = $request->validated();
 
+    // Procesamos las traducciones
+    $translations = [];
+    foreach (available_locales() as $locale) {
+      if ($request->has($locale)) {
+        $translations[$locale] = $request->input($locale);
+      }
+    }
+    
+    if (!empty($translations)) {
+      $validated['translations'] = $translations;
+    }
+
     try {
       $this->attackRangeService->update($attackRange, $validated);
       return redirect()->route('admin.attack-ranges.index')
-        ->with('success', "El rango de habilidad {$attackRange->name} ha sido actualizado correctamente.");
+        ->with('success', __('app.updated_successfully', ['entity' => __('app.attack_range')]));
     } catch (\Exception $e) {
       return back()->with('error', 'Ha ocurrido un error al actualizar el rango de habilidad: ' . $e->getMessage());
     }
@@ -87,7 +114,7 @@ class AttackRangeController extends Controller
       $rangeName = $attackRange->name;
       $this->attackRangeService->delete($attackRange);
       return redirect()->route('admin.attack-ranges.index')
-        ->with('success', "El rango de habilidad {$rangeName} ha sido eliminado correctamente.");
+        ->with('success', __('app.deleted_successfully', ['entity' => __('app.attack_range')]));
     } catch (\Exception $e) {
       return back()->with('error', $e->getMessage());
     }

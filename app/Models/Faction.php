@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Traits\HasColorAttribute;
 use App\Models\Traits\HasImageAttribute;
 use App\Models\Traits\HasSlug;
+use Spatie\Translatable\HasTranslations;
 
 class Faction extends Model
 {
@@ -15,6 +16,12 @@ class Faction extends Model
   use HasColorAttribute;
   use HasImageAttribute;
   use HasSlug;
+  use HasTranslations;
+
+  public $translatable = [
+    'name',
+    'lore_text'
+  ];
 
   protected $fillable = [
     'name',
@@ -56,57 +63,5 @@ class Faction extends Model
   public function decks(): HasMany
   {
     return $this->hasMany(Deck::class);
-  }
-  
-  /**
-   * Get data for card type chart
-   * 
-   * @return array
-   */
-  public function getCardTypesChartData(): array
-  {
-    if (!$this->relationLoaded('cards')) {
-      $this->load('cards');
-    }
-    
-    $types = [
-      'equipment' => 'Equipo',
-      'technique' => 'Técnica',
-      'spell' => 'Hechizo',
-      'trick' => 'Ardid',
-      'support' => 'Apoyo'
-    ];
-    
-    $data = [];
-    $labels = [];
-    $backgroundColors = [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(255, 206, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(153, 102, 255, 0.2)'
-    ];
-    $borderColors = [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)'
-    ];
-    
-    $i = 0;
-    foreach ($types as $type => $label) {
-      $count = $this->cards->where('type', $type)->count();
-      $data[] = $count;
-      $labels[] = $label;
-      $i++;
-    }
-    
-    return [
-      'labels' => $labels,
-      'data' => $data,
-      'backgroundColors' => array_slice($backgroundColors, 0, count($data)),
-      'borderColors' => array_slice($borderColors, 0, count($data))
-    ];
   }
 }

@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Translatable\HasTranslations;
 
 class EquipmentType extends Model
 {
   use HasFactory;
+  use HasTranslations;
 
   /**
    * The attributes that are mass assignable.
@@ -18,6 +20,15 @@ class EquipmentType extends Model
   protected $fillable = [
     'name',
     'category'
+  ];
+
+  /**
+   * The attributes that are translatable.
+   *
+   * @var array
+   */
+  public $translatable = [
+    'name'
   ];
 
   /**
@@ -46,5 +57,15 @@ class EquipmentType extends Model
   public function isArmor(): bool
   {
     return $this->category === 'armor';
+  }
+
+  /**
+   * Get translated category name
+   * 
+   * @return string
+   */
+  public function getTranslatedCategoryAttribute(): string
+  {
+    return __('equipment.' . $this->category);
   }
 }

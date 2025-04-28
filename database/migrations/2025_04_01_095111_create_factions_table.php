@@ -13,12 +13,12 @@ return new class extends Migration
   {
     Schema::create('factions', function (Blueprint $table) {
       $table->id();
-      $table->string('name');
+      $table->json('name');
       $table->string('slug')->unique();
-      $table->text('lore_text')->nullable();
-      $table->string('color', 7); // formato HEX #RRGGBB
-      $table->string('icon')->nullable(); // ruta al icono o SVG
-      $table->boolean('text_is_dark')->default(false); // true = texto oscuro, false = texto claro
+      $table->json('lore_text')->nullable();
+      $table->string('color', 7);
+      $table->string('icon')->nullable();
+      $table->boolean('text_is_dark')->default(false);
       $table->datetimes();
     });
   }

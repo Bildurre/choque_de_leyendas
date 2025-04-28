@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Spatie\Translatable\Rules\TranslatableRequiredRule;
 
 class CardRequest extends FormRequest
 {
@@ -15,15 +16,32 @@ class CardRequest extends FormRequest
   public function rules(): array
   {
     $rules = [
-      'name' => ['required', 'string', 'max:255'],
+      'name' => ['required', new TranslatableRequiredRule(['es']), 'array'],
+      'name.es' => [
+        'string', 
+        'max:255',
+        Rule::unique('cards', 'name->es')->ignore($this->route('card')),
+      ],
+      'name.en' => [
+        'nullable',
+        'string', 
+        'max:255',
+        Rule::unique('cards', 'name->en')->ignore($this->route('card')),
+      ],
       'faction_id' => ['nullable', 'exists:factions,id'],
       'card_type_id' => ['required', 'exists:card_types,id'],
-      'lore_text' => ['nullable', 'string'],
+      'lore_text' => ['nullable', 'array'],
+      'lore_text.es' => ['nullable', 'string'],
+      'lore_text.en' => ['nullable', 'string'],
       'is_attack' => ['boolean'],
       'has_hero_ability' => ['boolean'],
       'cost' => ['nullable', 'string', 'max:5', 'regex:/^[RGBrgb]*$/'],
-      'effect' => ['nullable', 'string'],
-      'restriction' => ['nullable', 'string'],
+      'effect' => ['nullable', 'array'],
+      'effect.es' => ['nullable', 'string'],
+      'effect.en' => ['nullable', 'string'],
+      'restriction' => ['nullable', 'array'],
+      'restriction.es' => ['nullable', 'string'],
+      'restriction.en' => ['nullable', 'string'],
       'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
     ];
 
@@ -70,14 +88,6 @@ class CardRequest extends FormRequest
       $rules['hands'] = ['nullable'];
     }
 
-    // Añadir regla de unicidad de nombre para crear o actualizar
-    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-      $cardId = $this->route('card');
-      $rules['name'][] = Rule::unique('cards')->ignore($cardId);
-    } else {
-      $rules['name'][] = 'unique:cards,name';
-    }
-
     return $rules;
   }
 
@@ -85,7 +95,9 @@ class CardRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre de la carta es obligatorio.',
-      'name.unique' => 'Ya existe una carta con este nombre.',
+      'name.es.required' => 'El nombre de la carta en español es obligatorio.',
+      'name.es.unique' => 'Ya existe una carta con este nombre en español.',
+      'name.en.unique' => 'Ya existe una carta con este nombre en inglés.',
       'card_type_id.required' => 'El tipo de carta es obligatorio.',
       'card_type_id.exists' => 'El tipo de carta seleccionado no existe.',
       'equipment_type_id.exists' => 'El tipo de equipo seleccionado no existe.',

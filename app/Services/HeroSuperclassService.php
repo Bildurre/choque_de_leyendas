@@ -20,7 +20,7 @@ class HeroSuperclassService
   }
 
   /**
-   * Get all superclasses with count of related hero classes
+   * Get all hero superclasses with count of related hero classes
    *
    * @return Collection
    */
@@ -38,7 +38,15 @@ class HeroSuperclassService
   public function create(array $data): HeroSuperclass
   {
     $heroSuperclass = new HeroSuperclass();
-    $heroSuperclass->name = $data['name'];
+    
+    // Procesar campos traducibles
+    if (isset($data['name'])) {
+      foreach (config('app.available_locales', ['es']) as $locale) {
+        if (isset($data["name_{$locale}"])) {
+          $heroSuperclass->setTranslation('name', $locale, $data["name_{$locale}"]);
+        }
+      }
+    }
     
     // Handle icon if provided
     if (isset($data['icon']) && $data['icon'] instanceof \Illuminate\Http\UploadedFile) {
@@ -59,7 +67,12 @@ class HeroSuperclassService
    */
   public function update(HeroSuperclass $heroSuperclass, array $data): HeroSuperclass
   {
-    $heroSuperclass->name = $data['name'];
+    // Procesar campos traducibles
+    foreach (config('app.available_locales', ['es']) as $locale) {
+      if (isset($data["name_{$locale}"])) {
+        $heroSuperclass->setTranslation('name', $locale, $data["name_{$locale}"]);
+      }
+    }
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Hero;
 use App\Models\HeroAbility;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\App;
 
 class HeroAbilityService
 {
@@ -58,6 +59,9 @@ class HeroAbilityService
       throw new \Exception("El coste proporcionado no es válido. Debe usar solo caracteres R, G, B con un máximo de 5.");
     }
     
+    // Procesar los datos traducibles
+    $data = $this->processTranslationData($data);
+    
     $heroAbility = new HeroAbility();
     $heroAbility->fill($data);
     $heroAbility->save();
@@ -79,6 +83,9 @@ class HeroAbilityService
     if (!empty($data['cost']) && !$this->costTranslator->isValidCost($data['cost'])) {
       throw new \Exception("El coste proporcionado no es válido. Debe usar solo caracteres R, G, B con un máximo de 5.");
     }
+    
+    // Procesar los datos traducibles
+    $data = $this->processTranslationData($data);
     
     $heroAbility->fill($data);
     $heroAbility->save();
@@ -121,5 +128,37 @@ class HeroAbilityService
   public function getAbilitiesByHero(Hero $hero): Collection
   {
     return $hero->abilities()->with(['subtype.type', 'range'])->get();
+  }
+
+  /**
+   * Process translation data from form
+   * 
+   * @param array $data
+   * @return array
+   */
+  protected function processTranslationData(array $data): array
+  {
+    $processedData = $data;
+    $translatableFields = ['name', 'description'];
+    
+    foreach ($translatableFields as $field) {
+      if (isset($data[$field.'_translations']) && is_array($data[$field.'_translations'])) {
+        $translations = [];
+        
+        foreach ($data[$field.'_translations'] as $locale => $value) {
+          if (!empty($value)) {
+            $translations[$locale] = $value;
+          }
+        }
+        
+        // If we have translations, set them on the model
+        if (!empty($translations)) {
+          $processedData[$field] = $translations;
+          unset($processedData[$field.'_translations']);
+        }
+      }
+    }
+    
+    return $processedData;
   }
 }

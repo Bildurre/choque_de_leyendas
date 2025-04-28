@@ -15,16 +15,21 @@ class HeroClassRequest extends FormRequest
   public function rules(): array
   {
     $rules = [
-      'name' => ['required', 'string', 'max:255'],
-      'passive' => ['nullable', 'string'],
+      // El nombre será un array con traducciones
+      'name' => ['required', 'array'],
+      'name.*' => ['string', 'max:255'],
+      'name.es' => ['required', 'string', 'max:255'], // El español es obligatorio
+      'passive' => ['nullable', 'array'],
+      'passive.*' => ['nullable', 'string'],
       'hero_superclass_id' => ['required', 'exists:hero_superclasses,id'],
     ];
 
+    // Para la validación de uniqueness, necesitamos un enfoque diferente 
+    // cuando trabajamos con campos traducibles
     if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
       $heroClassId = $this->route('hero_class');
-      $rules['name'][] = Rule::unique('hero_classes')->ignore($heroClassId);
-    } else {
-      $rules['name'][] = 'unique:hero_classes,name';
+      // No podemos usar Rule::unique directamente con JSON
+      // La validación de uniqueness se manejará a nivel de servicio
     }
 
     return $rules;
@@ -34,7 +39,8 @@ class HeroClassRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre de la clase es obligatorio.',
-      'name.unique' => 'Ya existe una clase con este nombre.',
+      'name.*.max' => 'El nombre no puede tener más de 255 caracteres.',
+      'name.es.required' => 'El nombre en español es obligatorio.',
       'hero_superclass_id.required' => 'La superclase es obligatoria.',
       'hero_superclass_id.exists' => 'La superclase seleccionada no existe.',
     ];

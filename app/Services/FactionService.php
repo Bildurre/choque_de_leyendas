@@ -39,8 +39,41 @@ class FactionService
   public function create(array $data): Faction
   {
     $faction = new Faction();
-    $faction->name = $data['name'];
-    $faction->lore_text = $data['lore_text'] ?? null;
+    
+    // Procesar campos traducibles separados por idioma
+    $currentLocale = app()->getLocale();
+    $availableLocales = config('app.available_locales', ['es']);
+    
+    // Nombre (obligatorio al menos en el idioma actual)
+    if (isset($data['name'][$currentLocale])) {
+      foreach ($availableLocales as $locale) {
+        if (isset($data['name'][$locale]) && !empty($data['name'][$locale])) {
+          $faction->setTranslation('name', $locale, $data['name'][$locale]);
+        } elseif ($locale === $currentLocale) {
+          // Si falta el idioma actual, usar el valor proporcionado directamente
+          $faction->setTranslation('name', $locale, $data['name'] ?? '');
+          break;
+        }
+      }
+    } else {
+      // Compatibilidad con versión anterior - si es un string simple
+      $faction->setTranslation('name', $currentLocale, $data['name'] ?? '');
+    }
+    
+    // Texto de lore (opcional)
+    if (isset($data['lore_text'])) {
+      if (is_array($data['lore_text'])) {
+        foreach ($availableLocales as $locale) {
+          if (isset($data['lore_text'][$locale])) {
+            $faction->setTranslation('lore_text', $locale, $data['lore_text'][$locale]);
+          }
+        }
+      } else {
+        // Compatibilidad con versión anterior - si es un string simple
+        $faction->setTranslation('lore_text', $currentLocale, $data['lore_text']);
+      }
+    }
+    
     $faction->color = $data['color'];
     
     // Set text color based on background
@@ -65,8 +98,34 @@ class FactionService
    */
   public function update(Faction $faction, array $data): Faction
   {
-    $faction->name = $data['name'];
-    $faction->lore_text = $data['lore_text'] ?? null;
+    // Procesar campos traducibles separados por idioma
+    $availableLocales = config('app.available_locales', ['es']);
+    
+    // Nombre
+    if (isset($data['name']) && is_array($data['name'])) {
+      foreach ($availableLocales as $locale) {
+        if (isset($data['name'][$locale]) && !empty($data['name'][$locale])) {
+          $faction->setTranslation('name', $locale, $data['name'][$locale]);
+        }
+      }
+    } elseif (isset($data['name'])) {
+      // Compatibilidad con versión anterior - si es un string simple
+      $faction->setTranslation('name', app()->getLocale(), $data['name']);
+    }
+    
+    // Texto de lore
+    if (isset($data['lore_text']) && is_array($data['lore_text'])) {
+      foreach ($availableLocales as $locale) {
+        if (isset($data['lore_text'][$locale])) {
+          $faction->setTranslation('lore_text', $locale, $data['lore_text'][$locale]);
+        }
+      }
+    } elseif (isset($data['lore_text'])) {
+      // Compatibilidad con versión anterior - si es un string simple
+      $faction->setTranslation('lore_text', app()->getLocale(), $data['lore_text']);
+    }
+    
+    // Otros campos no traducibles
     $faction->color = $data['color'];
     
     // Set text color based on background
@@ -74,12 +133,12 @@ class FactionService
     
     // Handle icon removal
     if (isset($data['remove_icon']) && $data['remove_icon'] == "1") {
-        $this->imageService->delete($faction->icon);
-        $faction->icon = null;
+      $this->imageService->delete($faction->icon);
+      $faction->icon = null;
     }
     // Handle icon update
     elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-        $faction->icon = $this->imageService->update($data['icon'], $faction->icon, $faction->getImageDirectory());
+      $faction->icon = $this->imageService->update($data['icon'], $faction->icon, $faction->getImageDirectory());
     }
     
     $faction->save();

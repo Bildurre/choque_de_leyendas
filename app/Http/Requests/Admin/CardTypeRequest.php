@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 
 class CardTypeRequest extends FormRequest
 {
@@ -14,27 +15,42 @@ class CardTypeRequest extends FormRequest
 
   public function rules(): array
   {
-    $rules = [
-      'name' => ['required', 'string', 'max:255'],
-      'hero_superclass_id' => ['nullable', 'exists:hero_superclasses,id'],
-    ];
-
-    if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-      $cardTypeId = $this->route('card_type');
-      $rules['name'][] = Rule::unique('card_types')->ignore($cardTypeId);
-    } else {
-      $rules['name'][] = 'unique:card_types,name';
+    $locales = config('app.available_locales', ['es']);
+    $rules = [];
+    
+    // Reglas para cada idioma
+    foreach ($locales as $locale) {
+      $rules["name.{$locale}"] = ['required', 'string', 'max:255'];
+      
+      // Regla de unicidad por idioma
+      if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+        $cardTypeId = $this->route('card_type');
+        $rules["name.{$locale}"][] = Rule::unique('card_types', 'name->' . $locale)->ignore($cardTypeId);
+      } else {
+        $rules["name.{$locale}"][] = Rule::unique('card_types', 'name->' . $locale);
+      }
     }
-
+    
+    // Reglas adicionales
+    $rules['hero_superclass_id'] = ['nullable', 'exists:hero_superclasses,id'];
+    
     return $rules;
   }
 
   public function messages(): array
   {
-    return [
-      'name.required' => 'El nombre del tipo de carta es obligatorio.',
-      'name.unique' => 'Ya existe un tipo de carta con este nombre.',
-      'hero_superclass_id.exists' => 'La superclase seleccionada no existe.',
-    ];
+    $messages = [];
+    $locales = config('app.available_locales', ['es']);
+    
+    foreach ($locales as $locale) {
+      $langName = locale_name($locale);
+      
+      $messages["name.{$locale}.required"] = "El nombre en {$langName} es obligatorio.";
+      $messages["name.{$locale}.unique"] = "Ya existe un tipo de carta con este nombre en {$langName}.";
+    }
+    
+    $messages['hero_superclass_id.exists'] = 'La superclase seleccionada no existe.';
+    
+    return $messages;
   }
 }
