@@ -41,7 +41,7 @@
           <x-info-grid-item label="{{ __('cards.attack_type') }}" :value="$card->attackSubtype->typeName" />
         @endif
         
-        @if($card->blast)
+        @if($card->area)
           <x-info-grid-item label="{{ __('cards.area') }}" :value="{{ __('common.yes') }}" />
         @endif
         

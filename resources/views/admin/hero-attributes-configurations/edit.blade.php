@@ -1,14 +1,14 @@
 <x-admin-layout
-  title='Editar Configuración de Atributos de Héroe'
-  headerTitle='Editar Configuración'
-  containerTitle='Atributos'
-  subtitle="Modifica la configuración de los atributos de héroe"
+  title='{{ __("hero_attributes.edit") }}'
+  headerTitle='{{ __("hero_attributes.configuration") }}'
+  containerTitle='{{ __("hero_attributes.title") }}'
+  subtitle="{{ __('hero_attributes.configuration') }}"
   :backRoute="route('admin.dashboard')"
 >
 
   <x-forms.hero-attributes-configurations-form
     :configuration="$configuration"
-    :submitLabel="'Guardar Cambios'" 
+    :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.dashboard')" 
   />
 

@@ -1,47 +1,119 @@
 [
   {
-    "name": "Ranger",
-    "passive": "<p>Este héroe recibe -1 de daño de Ataques de Área.</p>",
-    "hero_superclass_id": 4
-  },
-  {
-    "name": "Warrior",
-    "passive": "<p>Cuando este héroe juegue la primera Técnica de 1 Objetivo en cada Combate Singular esa Técnica hace +1 de daño.</p>",
+    "name":
+    {
+      "en": "Warrior",
+      "es": "Guerrero"
+    },
+    "passive":
+    {
+      "en": "<p>When this hero plays the first Single-Target Technique in each Singular Combat, that Technique deals +1 damage</p>",
+      "es": "<p>Cuando este héroe juegue la primera Técnica de 1 Objetivo en cada Combate Singular, esa Técnica hace +1 de daño.</p>"
+    },
     "hero_superclass_id": 1
   },
   {
-    "name": "Rogue",
-    "passive": "<p>El jugador rival no puede elegir a este héroe a la hora de hacer Emparejamientos.</p>",
-    "hero_superclass_id": 4
-  },
-  {
-    "name": "Swordcaster",
-    "passive": "<p>Este héroe solo puede jugar Hechizos Electricidad y Aire. Este héroe puede jugar Técnicas.</p>",
-    "hero_superclass_id": 2
-  },
-  {
-    "name": "Mage",
-    "passive": "<p>Cuando este héroe haga la Acción Universal: Robar 1 Carta, en vez de robar 1 Carta puedes robar 2 y descartar 1.</p>",
-    "hero_superclass_id": 2
-  },
-  {
-    "name": "Paladin",
-    "passive": "<p>Este héroe solo puede jugar Letanías Luz. Este héroe puede jugar Técnicas.</p>",
-    "hero_superclass_id": 3
-  },
-  {
-    "name": "Knight",
-    "passive": "<p>A la hora de preparar los Dados de Acción, antes de hacer ninguna tirada, este héroe puede guardar 1 Dado <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> como Dado Preparado.</p>",
+    "name":
+    {
+      "en": "Knight",
+      "es": "Caballero"
+    },
+    "passive":
+    {
+      "en": "<p>When preparing Action Dice, before any roll, this hero can set aside 1 <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> Die as Prepared Die</p>",
+      "es": "<p>Al preparar los Dados de Acción, antes de hacer ninguna tirada, este héroe puede guardar 1 Dado <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> como Dado Preparado.</p>"
+    },
     "hero_superclass_id": 1
   },
   {
-    "name": "Priest",
-    "passive": "<p>Cada Letanía de 1 Objetivo que juegue este héroe hace +1 de Sanación o de Daño.</p>",
+    "name":
+    {
+      "en": "Ranger",
+      "es": "Explorador"
+    },
+    "passive":
+    {
+      "en": "<p>This hero takes -1 damage from Area Attacks</p>",
+      "es": "<p>Este héroe recibe -1 de daño de Ataques de Área.</p>"
+    },
     "hero_superclass_id": 3
   },
   {
-    "name": "Shaman",
-    "passive": "<p>Cuando este héroe juegue el segundo Ataque Mágico de un mismo subtipo en cada Combate Singular roba 1 Carta.</p>",
+    "name":
+    {
+      "en": "Rogue",
+      "es": "Pícaro"
+    },
+    "passive":
+    {
+      "en": "<p>When making Pairings, the opposing player cannot choose this hero if other heros are available</p>",
+      "es": "<p>Al realizar los Emparejamientos, el jugador rival no puede elegir a este héroe si hay otros héroes disponibles.</p>"
+    },
+    "hero_superclass_id": 3
+  },
+  {
+    "name":
+    {
+      "en": "Paladin",
+      "es": "Paladín"
+    },
+    "passive":
+    {
+      "en": "<p>This hero can only play Light Litanies. This hero can play Techniques.</p>",
+      "es": "<p>Este héroe solo puede jugar Letanías Luz. Este héroe puede jugar Técnicas.</p>"
+    },
+    "hero_superclass_id": 4
+  },
+  {
+    "name":
+    {
+      "en": "Priest",
+      "es": "Sacerdote"
+    },
+    "passive":
+    {
+      "en": "<p>Each Single-Target Litany played by this hero deals +1 Healing or Damage.</p>",
+      "es": "<p>Cada Letanía de 1 Objetivo que juegue este héroe hace +1 de Sanación o de Daño.</p>"
+    },
+    "hero_superclass_id": 4
+  },
+  {
+    "name":
+    {
+      "en": "Swordcaster",
+      "es": "Hechicero"
+    },
+    "passive":
+    {
+      "en": "<p>This hero can only play Electricity and Air Spells. This hero can play Techniques.</p>",
+      "es": "<p>Este héroe solo puede jugar Hechizos Electricidad y Aire. Este héroe puede jugar Técnicas.</p>"
+    },
+    "hero_superclass_id": 2
+  },
+  {
+    "name":
+    {
+      "en": "Mage",
+      "es": "Mago"
+    },
+    "passive":
+    {
+      "en": "<p>When this hero performs the Universal Action: Draw 1 Card, instead of drawing 1 Card you may draw 2 and discard 1.</p>",
+      "es": "<p>Cuando este héroe haga la Acción Universal: Robar 1 Carta, en vez de robar 1 Carta puedes robar 2 y descartar 1.</p>"
+    },
+    "hero_superclass_id": 2
+  },
+  {
+    "name":
+    {
+      "en": "Shaman",
+      "es": "Chamán"
+    },
+    "passive":
+    {
+      "en": "<p>When this hero plays the second Magical Attack of the same subtype in each Singular Combat, draw 1 Card.</p>",
+      "es": "<p>Cuando este héroe juegue el segundo Ataque Mágico de un mismo subtipo en cada Combate Singular roba 1 Carta.</p>"
+    },
     "hero_superclass_id": 2
   }
 ]

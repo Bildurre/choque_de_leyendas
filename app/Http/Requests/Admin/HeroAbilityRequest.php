@@ -25,7 +25,7 @@ class HeroAbilityRequest extends FormRequest
       'description' => ['nullable', 'array'],
       'attack_range_id' => ['required', 'exists:attack_ranges,id'],
       'attack_subtype_id' => ['required', 'exists:attack_subtypes,id'],
-      'blast' => ['boolean'],
+      'area' => ['boolean'],
       'cost' => ['required', 'string', 'max:5', 'regex:/^[RGBrgb]*$/'],
     ];
 

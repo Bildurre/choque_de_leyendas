@@ -6,7 +6,7 @@ use App\Models\Faction;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-class FactionSeeder extends Seeder
+class FactionsSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -20,19 +20,15 @@ class FactionSeeder extends Seeder
     // Insertar cada facción
     foreach ($factions as $factionData) {
       $faction = new Faction();
-      $faction->name = $factionData['nombre'];
-      $faction->lore_text = $factionData['descripcion'];
+      $faction->name = $factionData['name'];
+      $faction->lore_text = $factionData['lore_text'];
       $faction->color = $factionData['color'];
       
-      // Determinar automáticamente el color del texto
       $faction->setTextColorBasedOnBackground();
       
-      // Si existiera un icon_path en los datos, podrías procesarlo aquí
-      // $faction->icon = $factionData['icon_path'] ?? null;
-      
       $faction->save();
-      
-      $this->command->info("Facción '{$faction->name}' creada con éxito.");
     }
+
+    $this->command->info("Facciones iniciales creadas con éxito.");
   }
 }

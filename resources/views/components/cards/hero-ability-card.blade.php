@@ -27,7 +27,7 @@
       <x-description title="Rango:" row>{{ $ability->range->name }}</x-description>
       <x-description title="Tipo:" row>{{ $ability->subtype->typeName ?? 'N/A' }}</x-description>
       <x-description title="Subtipo:" row>{{ $ability->subtype->name }}</x-description>
-      <x-description title="Área:" row>{{ $ability->blast ? "Área" : "Un Objetivo" }}</x-description>
+      <x-description title="Área:" row>{{ $ability->area ? "Área" : "Un Objetivo" }}</x-description>
     </x-description>    
     
     <x-description title="Descripción">{!! $ability->description !!}</x-description>

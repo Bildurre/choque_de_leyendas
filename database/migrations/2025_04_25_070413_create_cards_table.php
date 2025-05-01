@@ -27,7 +27,7 @@ return new class extends Migration
       $table->string('cost', 5)->nullable();
       $table->json('effect')->nullable(); // Cambiado a json
       $table->json('restriction')->nullable(); // Cambiado a json
-      $table->boolean('blast')->default(false);
+      $table->boolean('area')->default(false);
       $table->datetimes();
     });
   }

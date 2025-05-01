@@ -1,18 +1,17 @@
 <x-admin-layout
-  title='Habilidades de Héroes'
-  headerTitle='Gestión de Habilidades'
-  containerTitle='Habilidades de Héroes'
-  subtitle='Gestión de habilidades para los héroes'
+  title='{{ __("hero_abilities.title") }}'
+  headerTitle='{{ __("hero_abilities.management") }}'
+  containerTitle='{{ __("hero_abilities.title") }}'
+  subtitle='{{ __("hero_abilities.management_subtitle") }}'
   :createRoute="route('admin.hero-abilities.create')"
 >
 
-  
   {{ $heroAbilities->links() }}
 
   <x-entities-grid 
-    empty_message="No hay habilidades disponibles"
+    empty_message="{{ __('hero_abilities.no_items') }}"
     :createRoute="route('admin.hero-abilities.create')"
-    createLabel="Crear la primera habilidad"
+    createLabel="{{ __('hero_abilities.create_first') }}"
   >
   @foreach($heroAbilities as $ability)
     <x-cards.hero-ability-card 

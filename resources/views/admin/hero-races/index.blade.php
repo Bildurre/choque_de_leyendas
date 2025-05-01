@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Razas de Héroes'
-  headerTitle='Gestión de Razas'
-  containerTitle='Razas de Héroes'
-  subtitle='Gestión de razas para la creación de héroes'
+  title='{{ __("hero_races.title") }}'
+  headerTitle='{{ __("hero_races.management") }}'
+  containerTitle='{{ __("hero_races.title") }}'
+  subtitle='{{ __("hero_races.management_subtitle") }}'
   :createRoute="route('admin.hero-races.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay razas de héroes disponibles"
+    empty_message="{{ __('hero_races.no_items') }}"
     :createRoute="route('admin.hero-races.create')"
-    createLabel="Crear la primera raza"
+    createLabel="{{ __('hero_races.create_first') }}"
   >
   @foreach($heroRaces as $heroRace)
     <x-cards.hero-race-card 

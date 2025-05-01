@@ -31,7 +31,7 @@ class FactionService
    */
   public function getAllFactions(): Collection
   {
-    return Faction::all();
+    return Faction::withCount(['heroes', 'cards'])->get();
   }
 
   /**

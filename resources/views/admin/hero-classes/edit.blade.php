@@ -1,8 +1,8 @@
 <x-admin-layout
-  title='Editar Clase de Héroe'
-  headerTitle='Editar Clase de Héroee'
-  containerTitle='Clasess'
-  subtitle="Modifica los detalles de la clase {{ $heroClass->nam }}e"
+  title='{{ __("hero_classes.edit") }}'
+  headerTitle='{{ __("hero_classes.edit") }}'
+  containerTitle='{{ __("hero_classes.title") }}'
+  subtitle="{{ __('hero_classes.edit_subtitle_with_name', ['name' => $heroClass->name]) }}"
   :createRoute="route('admin.hero-classes.create')"
   :backRoute="route('admin.hero-classes.index')"
 >
@@ -10,7 +10,7 @@
   <x-forms.hero-class-form 
     :heroClass="$heroClass"
     :heroSuperclasses="$heroSuperclasses"
-    :submitLabel="'Guardar Cambios'" 
+    :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.hero-classes.index')" 
   />
 

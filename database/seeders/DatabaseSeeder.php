@@ -19,13 +19,15 @@ class DatabaseSeeder extends Seeder
     // ]);
     $this->call([
       AdminUserSeeder::class,
-      FactionSeeder::class,
-      HeroSuperclassSeeder::class,
+      FactionsSeeder::class,
+      HeroSuperclassesSeeder::class,
       HeroClassesSeeder::class,
-      AttackSubtypeSeeder::class,
-      AttackRangeSeeder::class,
+      AttackSubtypesSeeder::class,
+      AttackRangesSeeder::class,
       HeroAbilitiesSeeder::class,
       HeroRacesSeeder::class,
+      CardTypesSeeder::class,
+      EquipmentTypesSeeder::class
     ]);
   }
 }

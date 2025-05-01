@@ -1,8 +1,8 @@
 <x-admin-layout
   title="{{ $hero->name }}"
-  headerTitle='Detalle de Héroe'
+  headerTitle='{{ __("heroes.show") }}'
   containerTitle="{{ $hero->name }}"
-  subtitle='Información detallada del héroe'
+  subtitle='{{ __("heroes.show_subtitle") }}'
   :createRoute="route('admin.heroes.create')"
   :backRoute="route('admin.heroes.index')"
 >
@@ -34,17 +34,17 @@
       </x-detail-section>
     @endif
     
-    <x-detail-section title="Información General">
+    <x-detail-section title="{{ __('heroes.general_info') }}">
       <x-info-grid :columns="2">
-        <x-info-grid-item label="Facción" :value="$hero->faction->name" />
-        <x-info-grid-item label="Raza" :value="$hero->race->name ?? 'No asignada'" />
-        <x-info-grid-item label="Clase" :value="$hero->heroClass->name ?? 'No asignada'" />
-        <x-info-grid-item label="Superclase" :value="$hero->heroClass->heroSuperclass->name ?? 'No asignada'" />
-        <x-info-grid-item label="Género" :value="$hero->gender == 'male' ? 'Masculino' : 'Femenino'" />
+        <x-info-grid-item label="{{ __('heroes.faction') }}" :value="$hero->faction->name ?? __('common.not_assigned')" />
+        <x-info-grid-item label="{{ __('heroes.race') }}" :value="$hero->race->name ?? __('common.not_assigned')" />
+        <x-info-grid-item label="{{ __('heroes.class') }}" :value="$hero->heroClass->name ?? __('common.not_assigned')" />
+        <x-info-grid-item label="{{ __('heroes.superclass') }}" :value="$hero->heroClass->heroSuperclass->name ?? __('common.not_assigned')" />
+        <x-info-grid-item label="{{ __('heroes.gender') }}" :value="$hero->gender == 'male' ? __('heroes.male') : __('heroes.female')" />
       </x-info-grid>
     </x-detail-section>
     
-    <x-detail-section title="Atributos">
+    <x-detail-section title="{{ __('heroes.attributes') }}">
       <x-attributes-grid 
         :columns="5" 
         :showTotal="true" 
@@ -52,22 +52,22 @@
         :showHealth="true" 
         :healthValue="$hero->calculateHealth()"
       >
-        <x-attribute-item label="Agilidad" :value="$hero->agility" />
-        <x-attribute-item label="Mental" :value="$hero->mental" />
-        <x-attribute-item label="Voluntad" :value="$hero->will" />
-        <x-attribute-item label="Fuerza" :value="$hero->strength" />
-        <x-attribute-item label="Armadura" :value="$hero->armor" />
+        <x-attribute-item label="{{ __('heroes.agility') }}" :value="$hero->agility" />
+        <x-attribute-item label="{{ __('heroes.mental') }}" :value="$hero->mental" />
+        <x-attribute-item label="{{ __('heroes.will') }}" :value="$hero->will" />
+        <x-attribute-item label="{{ __('heroes.strength') }}" :value="$hero->strength" />
+        <x-attribute-item label="{{ __('heroes.armor') }}" :value="$hero->armor" />
       </x-attributes-grid>
     </x-detail-section>
     
     @if($hero->passive_name)
-      <x-detail-section title="Habilidad Pasiva: {{ $hero->passive_name }}">
+      <x-detail-section title="{{ __('heroes.passive_name') }}: {{ $hero->passive_name }}">
         <x-detail-text :content="$hero->passive_description" isHtml="true" />
       </x-detail-section>
     @endif
 
     @if($hero->abilities->isNotEmpty())
-      <x-detail-section title="Habilidades">
+      <x-detail-section title="{{ __('heroes.abilities') }}">
         <div class="hero-abilities-grid">
           @foreach($hero->abilities as $ability)
             <div class="hero-ability-item">
@@ -79,11 +79,11 @@
               </div>
               
               <div class="ability-meta">
-                <span class="ability-type">{{ $ability->subtype->type->name ?? 'Sin tipo' }}</span>
-                <span class="ability-subtype">{{ $ability->subtype->name ?? 'Sin subtipo' }}</span>
-                <span class="ability-range">{{ $ability->range->name ?? 'Sin rango' }}</span>
-                @if($ability->blast)
-                  <span class="ability-area">Área</span>
+                <span class="ability-type">{{ $ability->subtype->type->name ?? __('common.not_assigned') }}</span>
+                <span class="ability-subtype">{{ $ability->subtype->name ?? __('common.not_assigned') }}</span>
+                <span class="ability-range">{{ $ability->range->name ?? __('common.not_assigned') }}</span>
+                @if($ability->area)
+                  <span class="ability-area">{{ __('hero_abilities.area') }}</span>
                 @endif
               </div>
               

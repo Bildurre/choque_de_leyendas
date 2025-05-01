@@ -13,11 +13,10 @@ class HeroRacesSeeder extends Seeder
   public function run(): void
   {
     $types = [
-      ['name' => 'Human'],
-      ['name' => 'Elf'],
-      ['name' => 'Orc'],
-      ['name' => 'Leonin'],
-      ['name' => 'Draconid']
+      ['name' => ["en" => "Human", "es" => "Humano"]],
+      ['name' => ["en" => "Elf", "es" => "Elfo"]],
+      ['name' => ["en" => "Orc", "es" => "Orco"]],
+      ['name' => ["en" => "Leonin", "es" => "Leonino"]],
     ];
 
     foreach ($types as $type) {

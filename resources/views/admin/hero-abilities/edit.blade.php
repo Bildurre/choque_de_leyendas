@@ -1,8 +1,8 @@
 <x-admin-layout
-  title='Editar Habilidad de Héroe'
-  headerTitle='Editar Habilidad'
-  containerTitle='Habilidades'
-  subtitle="Modifica los detalles de la habilidad {{ $heroAbility->name }}"
+  title='{{ __("hero_abilities.edit") }}'
+  headerTitle='{{ __("hero_abilities.edit") }}'
+  containerTitle='{{ __("hero_abilities.title") }}'
+  subtitle="{{ __('hero_abilities.edit_subtitle_with_name', ['name' => $heroAbility->name]) }}"
   :createRoute="route('admin.hero-abilities.create')"
   :backRoute="route('admin.hero-abilities.index')"
 >
@@ -11,7 +11,7 @@
     :heroAbility="$heroAbility"
     :ranges="$ranges"
     :subtypes="$subtypes"
-    :submitLabel="'Guardar Cambios'" 
+    :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.hero-abilities.index')" 
   />
 

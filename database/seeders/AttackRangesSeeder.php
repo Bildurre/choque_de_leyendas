@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\AttackRange;
 use Illuminate\Database\Seeder;
 
-class AttackRangeSeeder extends Seeder
+class AttackRangesSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -13,11 +13,11 @@ class AttackRangeSeeder extends Seeder
   public function run(): void
   {
     $ranges = [
-      ['name' => 'Cuerpo a cuerpo'],
-      ['name' => 'A Rango'],
-      ['name' => 'A Distancia'],
-      ['name' => 'Aura'],
-      ['name' => 'Propio']
+      ['name' => ["en" => "Melee", "es" => "Melee"]],
+      ['name' => ["en" => "Reach", "es" => "Alcance"]],
+      ['name' => ["en" => "Ranged", "es" => "Distante"]],
+      ['name' => ["en" => "Aura", "es" => "Aura"]],
+      ['name' => ["en" => "Self", "es" => "Propio"]]
     ];
 
     foreach ($ranges as $range) {

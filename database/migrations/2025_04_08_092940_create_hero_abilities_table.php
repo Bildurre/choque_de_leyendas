@@ -17,7 +17,7 @@ return new class extends Migration
       $table->json('description')->nullable();
       $table->foreignId('attack_range_id')->nullable()->constrained()->nullOnDelete();
       $table->foreignId('attack_subtype_id')->nullable()->constrained()->nullOnDelete();
-      $table->boolean('blast')->default(false);
+      $table->boolean('area')->default(false);
       $table->string('cost', 5); // Formato: RGBRG, RGB, etc.
       $table->datetimes();
     });

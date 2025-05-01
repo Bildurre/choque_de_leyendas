@@ -1,0 +1,25 @@
+<?php
+
+return [
+  'title' => 'Habilidades de Héroe',
+  'singular' => 'Habilidad',
+  'new' => 'Nueva Habilidad',
+  'create' => 'Crear Habilidad',
+  'edit' => 'Editar Habilidad',
+  'management' => 'Gestión de Habilidades',
+  'management_subtitle' => 'Gestiona las habilidades para los héroes',
+  'create_subtitle' => 'Crea una nueva habilidad para héroes',
+  'edit_subtitle_with_name' => 'Modifica los detalles de la habilidad :name',
+  'no_items' => 'No hay habilidades disponibles',
+  'create_first' => 'Crear la primera habilidad',
+  'cost' => 'Coste de Activación',
+  'range' => 'Rango',
+  'subtype' => 'Subtipo',
+  'area' => 'Área',
+  'description' => 'Descripción',
+  'search' => 'Buscar habilidades...',
+  'filter_type' => 'Todos los tipos',
+  'filter_subtype' => 'Todos los subtipos',
+  'filter_range' => 'Todos los rangos',
+  'assign_abilities' => 'Asignar Habilidades',
+ ];

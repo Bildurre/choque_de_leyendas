@@ -18,7 +18,7 @@ class HeroClassesSeeder extends Seeder
     $json = File::get(database_path('data/heroClasses.json'));
     $classes = json_decode($json, true);
 
-    // Insertar cada facción
+    // Insertar cada clase
     foreach ($classes as $classData) {
       $class = new HeroClass();
       $class->name = $classData['name'];

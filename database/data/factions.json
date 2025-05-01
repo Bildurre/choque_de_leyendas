@@ -1,17 +1,41 @@
 [
   {
-    "nombre": "Defensores de Terik",
-    "descripcion": "Terik, la joya del Ulkhimarel, se alza tras sus murallas imponentes. Los Defensores, unidos en apariencia, libran una guerra silenciosa. Cada casa noble conspira por el control, pero las puertas de Terik permanecen cerradas a sus enemigos. Aquí, la lealtad es un arma tan afilada como la espada.",
+    "name": 
+    {
+      "en": "Defenders of Terik",
+      "es": "Defensores de Terik"
+    },
+    "lore_text":
+    {
+      "en": "Terik, the jewel of Ulkhimarel, rises behind its imposing walls. The Defenders, united in appearance, wage a silent war. Each noble house conspires for control, but Terik's gates remain closed to its enemies. Here, loyalty is a weapon as sharp as the sword.",
+      "es": "Terik, la joya del Ulkhimarel, se alza tras sus murallas imponentes. Los Defensores, unidos en apariencia, libran una guerra silenciosa. Cada casa noble conspira por el control, pero las puertas de Terik permanecen cerradas a sus enemigos. Aquí, la lealtad es un arma tan afilada como la espada."
+    }, 
     "color": "#29b8f0"
   },
   {
-    "nombre": "Guardabosques de Thenân",
-    "descripcion": "El Bosque de Thenân es un lugar de belleza y peligro, donde los Guardabosques reinan como protectores silenciosos. Vestidos de lino blanco y armaduras relucientes, dominan la espada, el sigilo y la magia eléctrica. Nadie cruza sus límites sin su consentimiento. Son los guardianes de un mundo mágico, donde la naturaleza y los elfos viven en armonía, lejos de miradas indiscretas.",
+    "name": 
+    {
+      "en": "Forest Wardens of Thenân",
+      "es": "Guardabosques de Thenân"
+    },
+    "lore_text":
+    {
+      "en": "The Forest of Thenân is a place of beauty and danger, where Forest Wardens reign as silent protectors. Dressed in white linen and gleaming armor, they master the sword, stealth, and electric magic. No one crosses their boundaries without their consent. They are the guardians of a magical world, where nature and elves live in harmony, far from prying eyes.",
+      "es": "El Bosque de Thenân es un lugar de belleza y peligro, donde los Guardabosques reinan como protectores silenciosos. Vestidos de lino blanco y armaduras relucientes, dominan la espada, el sigilo y la magia eléctrica. Nadie cruza sus límites sin su consentimiento. Son los guardianes de un mundo mágico, donde la naturaleza y los elfos viven en armonía, lejos de miradas indiscretas."
+    }, 
     "color": "#2a7a5d"
   },
   {
-    "nombre": "Tribu Llama Furiosa",
-    "descripcion": "Nómadas, saqueadores, devoradores de esperanza. La Tribu Llama Furiosa arrasa como un incendio, dejando solo ruina a su paso. Sin hogar fijo, sin lealtades, su brutalidad es su ley. Noche y día, sus emboscadas sorben el miedo de sus víctimas antes de arrancarles la vida. Donde pisotean, ni la tierra vuelve a crecer.",
+    "name": 
+    {
+      "en": "Raging Flame Tribe",
+      "es": "Tribu Llama Furiosa"
+    },
+    "lore_text":
+    {
+      "en": "Nomads, raiders, devourers of hope. The Raging Flame Tribe devastates like a wildfire, leaving only ruin in their wake. Without a fixed home, without loyalties, their brutality is their law. Night and day, their ambushes drink the fear of their victims before tearing away their lives. Where they trample, not even the earth grows again.",
+      "es": "Nómadas, saqueadores, devoradores de esperanza. La Tribu Llama Furiosa arrasa como un incendio, dejando solo ruina a su paso. Sin hogar fijo, sin lealtades, su brutalidad es su ley. Noche y día, sus emboscadas sorben el miedo de sus víctimas antes de arrancarles la vida. Donde pisotean, ni la tierra vuelve a crecer."
+    }, 
     "color": "#151d20"
   }
 ]

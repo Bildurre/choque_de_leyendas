@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -35,6 +36,22 @@ return new class extends Migration
       // Timestamps
       $table->datetimes();
     });
+
+    // Insert a default configuration record
+    DB::table('hero_attributes_configurations')->insert([
+      'min_attribute_value' => 1,
+      'max_attribute_value' => 5,
+      'min_total_attributes' => 12,
+      'max_total_attributes' => 18,
+      'agility_multiplier' => -1,
+      'mental_multiplier' => -1,
+      'will_multiplier' => 1,
+      'strength_multiplier' => -1,
+      'armor_multiplier' => 1,
+      'total_health_base' => 30,
+      'created_at' => now(),
+      'updated_at' => now()
+    ]);
   }
 
   /**

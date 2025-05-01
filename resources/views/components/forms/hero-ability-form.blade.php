@@ -60,9 +60,9 @@
     </div>
     
     <x-form.checkbox
-      name="blast" 
+      name="area" 
       label="Área"
-      :checked="$heroAbility->blast ?? false"
+      :checked="$heroAbility->area ?? false"
     />
     
     <x-form.translate-wysiwyg

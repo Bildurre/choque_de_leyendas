@@ -1,8 +1,8 @@
 <x-admin-layout
-  title='Editar Héroe'
-  headerTitle='Editar Héroe'
-  containerTitle='Héroes'
-  subtitle="Modifica los detalles del héroe {{ $hero->name }}"
+  title='{{ __("heroes.edit") }}'
+  headerTitle='{{ __("heroes.edit") }}'
+  containerTitle='{{ __("heroes.title") }}'
+  subtitle="{{ __('heroes.edit_subtitle_with_name', ['name' => $hero->name]) }}"
   :createRoute="route('admin.heroes.create')"
   :backRoute="route('admin.heroes.index')"
 >
@@ -14,7 +14,7 @@
     :heroClasses="$heroClasses"
     :attributesConfig="$attributesConfig"
     :abilities="$abilities"
-    :submitLabel="'Guardar Cambios'" 
+    :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.heroes.index')" 
   />
 

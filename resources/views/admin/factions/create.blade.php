@@ -1,13 +1,13 @@
 <x-admin-layout
-  title='Nueva Facción'
-  headerTitle='Crear Facción'
-  containerTitle='Facciones'
-  subtitle='Crea una nueva facción para el juego'
+  title='{{ __("factions.new") }}'
+  headerTitle='{{ __("factions.create") }}'
+  containerTitle='{{ __("factions.title") }}'
+  subtitle='{{ __("factions.create_subtitle") }}'
   :backRoute="route('admin.factions.index')"
 >
 
   <x-forms.faction-form 
-    submitLabel="Crear Facción" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('factions.singular')])" 
     :cancelRoute="route('admin.factions.index')" 
   />
 

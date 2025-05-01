@@ -6,7 +6,7 @@ use App\Models\AttackType;
 use App\Models\AttackSubtype;
 use Illuminate\Database\Seeder;
 
-class AttackSubtypeSeeder extends Seeder
+class AttackSubtypesSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -16,43 +16,47 @@ class AttackSubtypeSeeder extends Seeder
     
     $subtypes = [
       [
-        'name' => 'Cortante',
+        'name' => ["en" => "Slashing", "es" => "Cortante"],
         'type' => 'physical'
       ],
       [
-        'name' => 'Perforante',
+        'name' => ["en" => "Piercing", "es" => "Perforante"],
         'type' => 'physical'
       ],
       [
-        'name' => 'Contundente',
+        'name' => ["en" => "Crushing", "es" => "Contundente"],
         'type' => 'physical'
       ],
       [
-        'name' => 'Fuego',
+        'name' => ["en" => "Rending", "es" => "Lacerante"],
+        'type' => 'physical'
+      ],
+      [
+        'name' => ["en" => "Fire", "es" => "Fuego"],
         'type' => 'magical'
       ],
       [
-        'name' => 'Electricidad',
+        'name' => ["en" => "Lightning", "es" => "Electricidad"],
         'type' => 'magical'
       ],
       [
-        'name' => 'Agua',
+        'name' => ["en" => "Water", "es" => "Agua"],
         'type' => 'magical'
       ],
       [
-        'name' => 'Tierra',
+        'name' => ["en" => "Earth", "es" => "Tierra"],
         'type' => 'magical'
       ],
       [
-        'name' => 'Aire',
+        'name' => ["en" => "Air", "es" => "Aire"],
         'type' => 'magical'
       ],
       [
-        'name' => 'Luz',
+        'name' => ["en" => "Light", "es" => "Luz"],
         'type' => 'magical'
       ],
       [
-        'name' => 'Oscuridad',
+        'name' => ["en" => "Darkness", "es" => "Oscuridad"],
         'type' => 'magical'
       ],
     ];

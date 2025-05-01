@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Héroes'
-  headerTitle='Gestión de Héroes'
-  containerTitle='Héroes'
-  subtitle='Gestión de héroes para el juego'
+  title='{{ __("heroes.title") }}'
+  headerTitle='{{ __("heroes.management") }}'
+  containerTitle='{{ __("heroes.title") }}'
+  subtitle='{{ __("heroes.management_subtitle") }}'
   :createRoute="route('admin.heroes.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay héroes disponibles"
+    empty_message="{{ __('heroes.no_items') }}"
     :createRoute="route('admin.heroes.create')"
-    createLabel="Crear el primer héroe"
+    createLabel="{{ __('heroes.create_first') }}"
   >
     @foreach($heroes as $hero)
       <x-cards.hero-card 

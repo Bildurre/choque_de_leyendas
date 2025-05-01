@@ -1,13 +1,13 @@
 <x-admin-layout
-  title='Crear Raza'
-  headerTitle='Crear Raza de Héroe'
-  containerTitle='Razas'
-  subtitle='Crea los detalles de una nueva raza'
+  title='{{ __("hero_races.create") }}'
+  headerTitle='{{ __("hero_races.create") }}'
+  containerTitle='{{ __("hero_races.title") }}'
+  subtitle='{{ __("hero_races.create_subtitle") }}'
   :backRoute="route('admin.hero-races.index')"
 >
 
   <x-forms.hero-race-form 
-    :submitLabel="'Crear Raza'" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('hero_races.singular')])" 
     :cancelRoute="route('admin.hero-races.index')" 
   />
 

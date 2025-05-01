@@ -1,13 +1,13 @@
 <x-admin-layout
-  title='Nueva Superclase'
-  headerTitle='Crear Superclase'
-  containerTitle='Superclases'
-  subtitle='Crea una nueva superclase'
+  title='{{ __("hero_superclasses.new") }}'
+  headerTitle='{{ __("hero_superclasses.create") }}'
+  containerTitle='{{ __("hero_superclasses.title") }}'
+  subtitle='{{ __("hero_superclasses.create_subtitle") }}'
   :backRoute="route('admin.hero-superclasses.index')"
 >
 
   <x-forms.hero-superclass-form 
-    :submitLabel="'Crear Superclase'" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('hero_superclasses.singular')])" 
     :cancelRoute="route('admin.hero-superclasses.index')" 
   />
 

@@ -1,8 +1,8 @@
 <x-admin-layout
   title="{{ $faction->name }}"
-  headerTitle='Detalle de Facción'
+  headerTitle='{{ __("factions.show") }}'
   containerTitle="{{ $faction->name }}"
-  subtitle='Información detallada de la facción'
+  subtitle='{{ __("factions.show_subtitle") }}'
   :createRoute="route('admin.factions.create')"
   :backRoute="route('admin.factions.index')"
 >
@@ -21,7 +21,7 @@
       </x-detail-section>
     @endif
 
-    <x-detail-section title="Información General y Estadísticas">
+    <x-detail-section title="{{ __('common.general_info') }}">
       <x-info-grid :columns="4">
         @if($faction->icon)
           <div class="faction-item">
@@ -30,21 +30,21 @@
               :alt="$faction->name" 
               size="sm" 
             />
-            <span class="label">Icono</span>
+            <span class="label">{{ __('factions.icon') }}</span>
           </div>
         @endif
         
         <div class="faction-item">
-          <x-color-sample :color="$faction->color" label="Color" />
+          <x-color-sample :color="$faction->color" label="{{ __('factions.color') }}" />
         </div>
         
         <x-info-grid-item 
-          label="{{ Str::plural('Héroe', $faction->heroes_count ?? 0) }}" 
+          label="{{ Str::plural(__('heroes.title'), $faction->heroes_count ?? 0) }}" 
           :value="$faction->heroes_count ?? 0" 
         />
         
         <x-info-grid-item 
-          label="{{ Str::plural('Carta', $faction->cards_count ?? 0) }}" 
+          label="{{ Str::plural(__('cards.title'), $faction->cards_count ?? 0) }}" 
           :value="$faction->cards_count ?? 0" 
         />
       </x-info-grid>

@@ -9,7 +9,6 @@ use App\Services\FactionService;
 use App\Services\CardTypeService;
 use App\Services\HeroRaceService;
 use App\Services\HeroClassService;
-use App\Services\AttackTypeService;
 use App\Services\AttackRangeService;
 use App\Services\HeroAbilityService;
 use Illuminate\Pagination\Paginator;
@@ -18,6 +17,7 @@ use App\Services\AttackSubtypeService;
 use App\Services\EquipmentTypeService;
 use App\Services\CostTranslatorService;
 use App\Services\HeroSuperclassService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use App\Services\HeroAttributesConfigurationService;
 
@@ -89,5 +89,8 @@ class AppServiceProvider extends ServiceProvider
     {
       Paginator::defaultView('vendor.pagination.custom');
       Paginator::defaultSimpleView('vendor.pagination.custom');
+
+      Model::preventLazyLoading(!app()->isProduction());
+      Model::preventSilentlyDiscardingAttributes(!app()->isProduction());
     }
 }

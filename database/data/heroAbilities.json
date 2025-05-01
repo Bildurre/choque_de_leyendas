@@ -1,242 +1,434 @@
 [
   {
-    "name": "Corte Fugaz",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
-    "attack_range_id": 1,
+    "name":
+    {
+      "en": "Swift Cut",
+      "es": "Corte Fugaz"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
+    "attack_range_id" : 1,
     "attack_subtype_id": 1,
     "cost": "RR",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Luz Concentrada",
-    "description": "<p>Hace 3 + Mente de daño al héroe rival emparejado o cura 3 de vida a 1 héroe aliado adyacente.</p>",
-    "attack_range_id": 2,
-    "attack_subtype_id": 9, 
+    "name":
+    {
+      "en": "Precise Slash",
+      "es": "Cuchillada Precisa"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "RG",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Light Beam",
+      "es": "Rayo de Luz"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Mental damage to the paired enemy hero or heals 3 health to 1 adjacent allied hero.</p>",
+      "es": "<p>Hace 3 + Mente de daño al héroe rival emparejado o cura 3 de vida a 1 héroe aliado adyacente.</p>"
+    },
+    "attack_range_id" : 2,
+    "attack_subtype_id": 10,
     "cost": "GB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Tiro Lejano",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si ganaste la tirada de iniciativa hace +2 de daño.</p>",
+    "name":
+    {
+      "en": "Long Shot",
+      "es": "Tiro Lejano"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero. If you won the initiative roll, it deals +2 damage.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si ganaste la tirada de iniciativa hace +2 de daño.</p>"
+    },
     "attack_range_id": 3,
     "attack_subtype_id": 2, 
     "cost": "RG",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Flecha Certera",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado o a un héroe rival adyacente.</p>",
+    "name":
+    {
+      "en": "Precise Shot",
+      "es": "Disparo Preciso"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero or to an adjacent enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado o a un héroe rival adyacente.</p>"
+    },
     "attack_range_id": 3,
     "attack_subtype_id": 2,
     "cost": "RB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Cuchillada Precisa",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
-    "attack_range_id": 1,
-    "attack_subtype_id": 1,
-    "cost": "RG",
-    "blast": false
-  },
-  {
-    "name": "Embate Inspirador",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Coloca 1 contador de beneficio: Inspirado sobre un héroe aliado adyacente aleatorio que no tenga ya al menos 1.</p>",
+    "name":
+    {
+      "en": "Inspiring Strike",
+      "es": "Embate Inspirador"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p><p>Place 1 boon counter: Inspired on a random adjacent allied hero that doesn't already have at least 1.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Coloca 1 contador de beneficio: Inspirado sobre un héroe aliado adyacente aleatorio que no tenga ya al menos 1.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 3, 
     "cost": "BB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Golpe Brillante",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
+    "name":
+    {
+      "en": "Crushing Impact",
+      "es": "Impacto Demoledor"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 3, 
     "cost": "RG",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Explosión Aurea",
-    "description": "<p>Hace 2 + Mente de daño al héroe rival emparejado y a cada héroe rival adyacente.</p><p>Si este héroe tiene al menos 1 contador de beneficio: Exaltado sobre él, cura 2 de vida al héroe aliado con menos vida entre este héroe y los adyacentes.</p>",
-    "attack_range_id": 2,
-    "attack_subtype_id": 9, 
+    "name":
+    {
+      "en": "Golden Blast",
+      "es": "Explosión Aurea"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Mental damage to the paired enemy hero and to each adjacent enemy hero.</p><p>If this hero has at least 1 boon counter: Exalted on them, heal 2 health to the allied hero with the lowest health among this hero and adjacent ones.</p>",
+      "es": "<p>Hace 2 + Mente de daño al héroe rival emparejado y a cada héroe rival adyacente.</p><p>Si este héroe tiene al menos 1 contador de beneficio: Exaltado sobre él, cura 2 de vida al héroe aliado con menos vida entre este héroe y los adyacentes.</p>"
+    },
+    "attack_range_id": 4,
+    "attack_subtype_id": 10, 
     "cost": "RBB",
-    "blast": true
+    "area": true
   },
   {
-    "name": "Martillazo Luminoso",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
+    "name":
+    {
+      "en": "Hammer of Light",
+      "es": "Martillazo Luminoso"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and 2 + Mental damage to 1 random adjacent enemy hero.</p><p>If this is the first Light Attack this hero plays in this Singular Combat, place 1 bane counter: Stunned on each hero damaged this way.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y 2 + Mente de daño a 1 héroe rival adyacente aleatorio.</p><p>Si es el primer Ataque Luz que este héroe juega en este Combate Singular coloca 1 contador de perjuicio: Aturdido sobre cada héroe dañado de esta forma.</p>"
+    },
     "attack_range_id": 1,
-    "attack_subtype_id": 3, 
-    "cost": "RG",
-    "blast": false
-  },
-  {
-    "name": "Martillazo Radiante",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y 2 + Mente de daño a 1 héroe rival adyacente aleatorio.</p><p>Si es el primer Ataque Luz que este héroe juega en este Combate Singular coloca 1 contador de perjuicio: Aturdido sobre cada héroe dañado de esta forma.</p>",
-    "attack_range_id": 1,
-    "attack_subtype_id": 9, 
+    "attack_subtype_id": 10, 
     "cost": "BB",
-    "blast": true
+    "area": true
   },
   {
-    "name": "Martillazo",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
+    "name":
+    {
+      "en": "Hammer Blow",
+      "es": "Martillazo"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 3,
     "cost": "RR",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Martillazo de Conmoción",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Aturdido.</p><p>Si este héroe tiene al menos 1 Arma Maza anexada y activa hace +2 de daño.</p>",
+    "name":
+    {
+      "en": "Concussive Smash",
+      "es": "Mazazo Conmocionante"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and places 1 bane counter: Stunned on them.</p><p>If this hero has at least 1 Mace Weapon attached and active, it deals +2 damage.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Aturdido.</p><p>Si este héroe tiene al menos 1 Arma Maza anexada y activa, hace +2 de daño.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 3, 
     "cost": "GB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Cortes Encadenados",
-    "description": "<p>Hace 2 + Fuerza de daño el héroe rival emparejado y a cada héroe rival adyacente.</p><p>Si este héroe tiene 2 Armas Espada anexadas y activas, el coste de esta Habilidad es <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'><img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>",
+    "name":
+    {
+      "en": "Chained Cuts",
+      "es": "Cortes Encadenados"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and to each adjacent enemy hero.</p><p>If this hero has 2 Sword Weapons attached and active, the cost of this Ability is <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'><img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a cada héroe rival adyacente.</p><p>Si este héroe tiene 2 Armas Espada anexadas y activas, el coste de esta Habilidad es <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'><img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 1, 
     "cost": "GBB",
-    "blast": true
+    "area": true
   },
   {
-    "name": "Golpe Combinado",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Hace +1 de daño por cada héroe aliado adyacente con al menos 1 Arma anexada.</p>",
+    "name":
+    {
+      "en": "Combined Strike",
+      "es": "Golpe Combinado"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero. Deals +1 damage for each adjacent allied hero with at least 1 Weapon attached.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Hace +1 de daño por cada héroe aliado adyacente con al menos 1 Arma anexada.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 1, 
     "cost": "RR",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Escudero Veloz",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Revela la primera Carta de tu mazo. Si es un Equipo colócalo en tu mano.</p>",
+    "name":
+    {
+      "en": "Swift Squire",
+      "es": "Escudero Veloz"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p><p>Reveal the top Card of your Deck. If it's an Equipment, add it to your hand.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Revela la primera Carta de tu Mazo. Si es un Equipo colócalo en tu mano.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 1,
     "cost": "RB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Espadazo Mortal",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
-    "attack_range_id": 1,
-    "attack_subtype_id": 1, 
-    "cost": "RR",
-    "blast": false
-  },
-  {
-    "name": "Espada Sobrecargada",
-    "description": "<p>Hace 2 + Mente de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Sobrecargado.</p><p>Si este héroe a guardado al menos 2 Dados <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> hace +2 de daño.</p>",
+    "name":
+    {
+      "en": "Overcharged Blade",
+      "es": "Hoja Sobrecargada"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Mental damage to the paired enemy hero and places 1 bane counter: Overloaded on them.</p><p>If this hero has saved at least 2 <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> Dice, deals +2 damage.</p>",
+      "es": "<p>Hace 2 + Mente de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Sobrecargado.</><p>Si este héroe ha guardado al menos 2 Dados <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> hace +2 de daño.</p>"
+    },
     "attack_range_id": 2,
-    "attack_subtype_id": 5,
+    "attack_subtype_id": 6,
     "cost": "GB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Estrella Fulminante",
-    "description": "<p>Hace 2 + Mente de daño el héroe rival emparejado. Hace +1 de daño por cada <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> que haya guardado este héroe (máximo +2 de daño).</p>",
+    "name":
+    {
+      "en": "Blazing Star",
+      "es": "Estrella Fulminante"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Mind damage to the paired enemy hero. Deals +1 damage for each <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> this hero has saved (maximum +2 damage).</p>",
+      "es": "<p>Hace 2 + Mente de daño al héroe rival emparejado. Hace +1 de daño por cada <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> que haya guardado este héroe (máximo +2 de daño).</p>"
+    },
     "attack_range_id": 3,
-    "attack_subtype_id": 5,
+    "attack_subtype_id": 6,
     "cost": "RR",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Lanza Eléctrica",
-    "description": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>",
+    "name":
+    {
+      "en": "Piercing Thrust",
+      "es": "Lanzazo Perforante"
+    },
+    "description":
+    {
+      "en": "<p>Deals 4 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
     "attack_range_id": 2,
     "attack_subtype_id": 2,
     "cost": "GG",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Ruptura",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Entumecido.</p>",
+    "name":
+    {
+      "en": "Rupture",
+      "es": "Ruptura"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and places 1 bane counter: Numbed on them.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Entumecido.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 2,
     "cost": "RR",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Emboscada",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular este Ataque ignora la mitad de la Armadura del objetivo (redondeando hacia abajo).</p>",
+    "name":
+    {
+      "en": "Ambush",
+      "es": "Emboscada"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. If this is the first Action this hero performs in the Singular Combat, this Attack ignores half of the target's Armor (rounded down).</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular este Ataque ignora la mitad de la Armadura del objetivo (redondeando hacia abajo).</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 2,
     "cost": "RB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Caricia de Acero",
-    "description": "<p>Hace 2 + Fuerza de daño 2 veces al héroe rival emparejado (se consideran 2 Ataques independientes a todos los efectos).</p>",
+    "name":
+    {
+      "en": "Steel Caress",
+      "es": "Caricia de Acero"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage twice to the paired enemy hero (these are considered 2 independent Attacks for all purposes).</p>",
+      "es": "<p>Hace 2 + Fuerza de daño 2 veces al héroe rival emparejado (se consideran 2 Ataques independientes a todos los efectos).</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 1,
     "cost": "RB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Baile Mortal",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Si no tienes ningun Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> preparado prepara 1 de tus Dados Gastados como Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>",
+    "name":
+    {
+      "en": "Death Dance",
+      "es": "Danza Mortal"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p><p>If you don't have any <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> Dice prepared, prepare 1 of your Spent Dice as a <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> Die.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Si no tienes ningún Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> preparado prepara 1 de tus Dados Gastados como Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'>.</p>"
+    },
     "attack_range_id": 2,
     "attack_subtype_id": 1,
     "cost": "GG",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Tajo Presto",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Coloca 1 contador de beneficio: Presteza sobre este héroe o un héroe aliado adyacente.</p>",
+    "name":
+    {
+      "en": "Quick Slice",
+      "es": "Tajo Presto"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p><p>Place 1 boon counter: Swiftness on this hero or an adjacent allied hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p><p>Coloca 1 contador de beneficio: Presteza sobre este héroe o un héroe aliado adyacente.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 1,
     "cost": "GB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Tiro Preciso",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
+    "name":
+    {
+      "en": "Arrow Shot",
+      "es": "Flechazo"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
     "attack_range_id": 3,
     "attack_subtype_id": 2,
     "cost": "RG",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Flecha Alada",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Si este héroe a guardado al menos 2 Dados <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> hace 2 + Fuerza de daño de daño a 1 héroe rival de los emparejamientos posteriores aleatorio (este ataque gana el atributo Área).</p>",
+    "name":
+    {
+      "en": "Winged Shot",
+      "es": "Flecha Alada"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.<p></p>If this hero has kept at least 2 <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> Dice, deal 2 + Strength damage to 1 random enemy hero from subsequent pairings (this attack gains the Area attribute).</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.<p></p>Si este héroe ha guardado al menos 2 Dados <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> hace 2 + Fuerza de daño a 1 héroe rival de los emparejamientos posteriores aleatorio (este ataque gana el atributo Área).</p>"
+    },
     "attack_range_id": 3,
-    "attack_subtype_id": 5,
+    "attack_subtype_id": 6,
     "cost": "GB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Agarrotar",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular le coloca 1 contador de perjuicio: Exhausto.</p>",
+    "name":
+    {
+      "en": "Stiffen",
+      "es": "Agarrotar"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero. If this is the first Action this hero performs in the Singular Combat, place 1 bane counter: Exhausted on them.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular le coloca 1 contador de perjuicio: Exhausto.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 3,
     "cost": "RG",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Puñalada",
-    "description": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>",
+    "name":
+    {
+      "en": "Backstab",
+      "es": "Apuñalar"
+    },
+    "description":
+    {
+      "en": "<p>Deals 4 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 2,
     "cost": "RB",
-    "blast": false
+    "area": false
   },
   {
-    "name": "Golpe Concentrado",
-    "description": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>",
-    "attack_range_id": 1,
-    "attack_subtype_id":  1,
-    "cost": "RG",
-    "blast": false
-  },
-  {
-    "name": "Hoja Vendaval",
-    "description": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a 1 héroe rival adyacente aleatorio.<p></p>Si este héroe tiene al menos 1 contador de beneficio: Presteza sobre él les hace +1 de daño.</p>",
+    "name":
+    {
+      "en": "Gale Blade",
+      "es": "Hoja Vendaval"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and to 1 random adjacent enemy hero.<p></p>If this hero has at least 1 boon counter: Swiftness on them, deal +1 damage to them.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a 1 héroe rival adyacente aleatorio.<p></p>Si este héroe tiene al menos 1 contador de beneficio: Presteza sobre él, les hace +1 de daño.</p>"
+    },
     "attack_range_id": 1,
     "attack_subtype_id": 1,
     "cost": "BB",
-    "blast": false
+    "area": false
   }
 ]

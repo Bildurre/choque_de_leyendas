@@ -118,7 +118,7 @@ class CardService
     $card->hero_ability_id = $data['hero_ability_id'] ?? null;
     $card->hands = $data['hands'] ?? null;
     $card->cost = $data['cost'] ?? null;
-    $card->blast = $data['blast'] ?? false;
+    $card->area = $data['area'] ?? false;
     $card->is_attack = $data['is_attack'] ?? false;
     $card->has_hero_ability = $data['has_hero_ability'] ?? false;
     
@@ -170,7 +170,7 @@ class CardService
     $card->hero_ability_id = $data['hero_ability_id'] ?? null;
     $card->hands = $data['hands'] ?? null;
     $card->cost = $data['cost'] ?? null;
-    $card->blast = $data['blast'] ?? false;
+    $card->area = $data['area'] ?? false;
     $card->is_attack = $data['is_attack'] ?? false;
     $card->has_hero_ability = $data['has_hero_ability'] ?? false;
     
@@ -206,13 +206,13 @@ class CardService
     // Set default values for checkboxes if not present
     $data['is_attack'] = isset($data['is_attack']) ? (bool)$data['is_attack'] : false;
     $data['has_hero_ability'] = isset($data['has_hero_ability']) ? (bool)$data['has_hero_ability'] : false;
-    $data['blast'] = isset($data['blast']) ? (bool)$data['blast'] : false;
+    $data['area'] = isset($data['area']) ? (bool)$data['area'] : false;
     
     // Handle attack fields
     if (!$data['is_attack']) {
       $data['attack_range_id'] = null;
       $data['attack_subtype_id'] = null;
-      $data['blast'] = false;
+      $data['area'] = false;
     }
     
     // Handle hero ability

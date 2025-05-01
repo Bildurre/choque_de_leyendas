@@ -43,11 +43,11 @@ class CardRequest extends FormRequest
     if ($this->input('is_attack')) {
       $rules['attack_range_id'] = ['required', 'exists:attack_ranges,id'];
       $rules['attack_subtype_id'] = ['required', 'exists:attack_subtypes,id'];
-      $rules['blast'] = ['boolean'];
+      $rules['area'] = ['boolean'];
     } else {
       $rules['attack_range_id'] = ['nullable'];
       $rules['attack_subtype_id'] = ['nullable'];
-      $rules['blast'] = ['nullable'];
+      $rules['area'] = ['nullable'];
     }
     
     if ($this->input('has_hero_ability')) {

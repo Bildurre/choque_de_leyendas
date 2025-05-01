@@ -49,7 +49,7 @@ class HeroController extends Controller
     $heroRaces = HeroRace::all();
     $heroClasses = HeroClass::with('heroSuperclass')->get();
     $attributesConfig = $this->attributesConfigService->getConfiguration();
-    $abilities = HeroAbility::with(['subtype.type', 'range'])->get();
+    $abilities = HeroAbility::with(['subtype', 'range'])->get();
     
     return view('admin.heroes.create', compact(
       'factions',
@@ -97,7 +97,7 @@ class HeroController extends Controller
     $attributesConfig = $this->attributesConfigService->getConfiguration();
     
     // Asegurarnos de cargar todas las habilidades con sus relaciones
-    $abilities = HeroAbility::with(['subtype.type', 'range'])->get();
+    $abilities = HeroAbility::with(['subtype', 'range'])->get();
     
     // Cargar las habilidades relacionadas con el héroe
     $hero->load('abilities');

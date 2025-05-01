@@ -163,14 +163,14 @@ function setupAttackFieldsHandler() {
   const attackFields = [
     document.getElementById('attack_range_id'),
     document.getElementById('attack_subtype_id'),
-    document.querySelector('input[name="blast"]')
+    document.querySelector('input[name="area"]')
   ];
   
   if (attackFields.some(field => !field)) {
     console.log('Missing some attack fields', {
       rangeField: !!attackFields[0],
       subtypeField: !!attackFields[1],
-      blastField: !!attackFields[2]
+      areaField: !!attackFields[2]
     });
   }
   

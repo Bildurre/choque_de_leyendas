@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Clases de Héroes'
-  headerTitle='Gestión de Clases'
-  containerTitle='Clases de Héroes'
-  subtitle='Gestión de clases para la creación de héroes'
+  title='{{ __("hero_classes.title") }}'
+  headerTitle='{{ __("hero_classes.management") }}'
+  containerTitle='{{ __("hero_classes.title") }}'
+  subtitle='{{ __("hero_classes.management_subtitle") }}'
   :createRoute="route('admin.hero-classes.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay clases de héroes disponibles"
+    empty_message="{{ __('hero_classes.no_items') }}"
     :createRoute="route('admin.hero-classes.create')"
-    createLabel="Crear la primera clase"
+    createLabel="{{ __('hero_classes.create_first') }}"
   >
   @foreach($heroClasses as $heroClass)
     <x-cards.hero-class-card 

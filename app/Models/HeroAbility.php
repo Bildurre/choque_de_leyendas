@@ -25,7 +25,7 @@ class HeroAbility extends Model
     'attack_range_id',
     'attack_type_id',
     'attack_subtype_id',
-    'blast',
+    'area',
     'cost'
   ];
 

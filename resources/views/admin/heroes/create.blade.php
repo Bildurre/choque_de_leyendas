@@ -1,8 +1,8 @@
 <x-admin-layout
-  title='Nuevo Héroe'
-  headerTitle='Crear Héroe'
-  containerTitle='Héroes'
-  subtitle='Crea un nuevo héroe para el juego'
+  title='{{ __("heroes.new") }}'
+  headerTitle='{{ __("heroes.create") }}'
+  containerTitle='{{ __("heroes.title") }}'
+  subtitle='{{ __("heroes.create_subtitle") }}'
   :backRoute="route('admin.heroes.index')"
 >
 
@@ -12,7 +12,7 @@
     :heroClasses="$heroClasses"
     :attributesConfig="$attributesConfig"
     :abilities="$abilities"
-    :submitLabel="'Crear Héroe'" 
+    :submitLabel="__('common.actions.create_entity', ['entity' => __('heroes.singular')])" 
     :cancelRoute="route('admin.heroes.index')" 
   />
 

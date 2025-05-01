@@ -1,4 +1,3 @@
-<!-- resources/views/components/cards/hero-race-card.blade.php -->
 @props([
   'heroRace',
   'editRoute' => null,

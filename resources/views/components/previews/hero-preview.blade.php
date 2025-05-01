@@ -67,7 +67,7 @@
                 <span class="preview-hero-ability__type">{{ $ability->subtype ? ($ability->subtype->type === 'physical' ? 'Físico' : 'Mágico') : 'Sin tipo' }} - </span>
                 <span class="preview-hero-ability__subtype">{{ $ability->subtype?->name ?? 'Sin subtipo' }} - </span>
                 <span class="preview-hero-ability__range">{{ $ability->range?->name ?? 'Sin rango' }}</span>
-                @if($ability->blast)
+                @if($ability->area)
                   <span class="preview-hero-ability__area"> - Área</span>
                 @endif
               </div>

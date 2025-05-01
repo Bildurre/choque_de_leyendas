@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Superclases'
-  headerTitle='Gestión de Superclases'
-  containerTitle='Superclases'
-  subtitle='Gestión de superclases para los héroes'
+  title='{{ __("hero_superclasses.title") }}'
+  headerTitle='{{ __("hero_superclasses.management") }}'
+  containerTitle='{{ __("hero_superclasses.title") }}'
+  subtitle='{{ __("hero_superclasses.management_subtitle") }}'
   :createRoute="route('admin.hero-superclasses.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay superclases disponibles"
+    empty_message="{{ __('hero_superclasses.no_items') }}"
     :createRoute="route('admin.hero-superclasses.create')"
-    createLabel="Crear la primera superclase"
+    createLabel="{{ __('hero_superclasses.create_first') }}"
   >
     @foreach($heroSuperclasses as $heroSuperclass)
       <x-cards.hero-superclass-card 

@@ -1,4 +1,3 @@
-<!-- resources/views/components/session-alerts.blade.php -->
 @if(session('success'))
   <x-alert type="success">
     {{ session('success') }}

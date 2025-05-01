@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\HeroSuperclass;
 use Illuminate\Database\Seeder;
 
-class HeroSuperclassSeeder extends Seeder
+class HeroSuperclassesSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -13,10 +13,10 @@ class HeroSuperclassSeeder extends Seeder
   public function run(): void
   {
     $heroSuperclasses = [
-      ['name' => 'Combatiente'],
-      ['name' => 'Conjurador'],
-      ['name' => 'Adalid'],
-      ['name' => 'Saboteador']
+      ['name' => ["en" => "Fighter", "es" => "Combatiente"]],
+      ['name' => ["en" => "Caster", "es" => "Conjurador"]],
+      ['name' => ["en" => "Saboteur", "es" => "Saboteador"]],
+      ['name' => ["en" => "Chosen", "es" => "Elegido"]],
     ];
 
     foreach ($heroSuperclasses as $heroSuperclass) {

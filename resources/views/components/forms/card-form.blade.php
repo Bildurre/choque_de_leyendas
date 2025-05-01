@@ -105,9 +105,9 @@
       />
       
       <x-form.checkbox
-        name="blast" 
+        name="area" 
         label="Área"
-        :checked="$card->blast ?? false"
+        :checked="$card->area ?? false"
         :hiddenCondition="!(isset($card) && $card->is_attack)"
       />
     </div>

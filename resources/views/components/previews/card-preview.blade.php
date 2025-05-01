@@ -10,7 +10,7 @@
                       (($card->attackRange?->name ?? '') . 
                        ($card->attackSubtype ? (' - ' . $card->attackSubtype->typeName) : '') .
                        ($card->attackSubtype ? (' - ' . $card->attackSubtype->name) : '') .
-                       ($card->blast ? ' - Área' : '')) : '')"
+                       ($card->area ? ' - Área' : '')) : '')"
   :faction-color="$card->faction?->color ?? '#3d3df5'"
   :faction-text-is-dark="$card->faction?->text_is_dark ?? true"
   :faction-icon="$card->faction?->icon ? asset('storage/' . $card->faction->icon) : ''"

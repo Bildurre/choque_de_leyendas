@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Tipos de Equipo'
-  headerTitle='Gestión de Tipos de Equipo'
-  containerTitle='Tipos de Equipo'
-  subtitle='Gestión de tipos de armas y armaduras para el juego'
+  title='{{ __("equipment_types.title") }}'
+  headerTitle='{{ __("equipment_types.management") }}'
+  containerTitle='{{ __("equipment_types.title") }}'
+  subtitle='{{ __("equipment_types.management_subtitle") }}'
   :createRoute="route('admin.equipment-types.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay tipos de equipo disponibles"
+    empty_message="{{ __('equipment_types.no_items') }}"
     :createRoute="route('admin.equipment-types.create')"
-    createLabel="Crear el primer tipo de equipo"
+    createLabel="{{ __('equipment_types.create_first') }}"
   >
     @foreach($equipmentTypes as $equipmentType)
       <x-cards.equipment-type-card 

@@ -74,7 +74,7 @@ class HeroAbilityService
     $heroAbility->cost = $data['cost'] ?? '';
     $heroAbility->attack_range_id = $data['attack_range_id'] ?? null;
     $heroAbility->attack_subtype_id = $data['attack_subtype_id'] ?? null;
-    $heroAbility->blast = $data['blast'] ?? false;
+    $heroAbility->area = $data['area'] ?? false;
     
     $heroAbility->save();
     
@@ -115,8 +115,8 @@ class HeroAbilityService
       $heroAbility->attack_subtype_id = $data['attack_subtype_id'];
     }
     
-    if (isset($data['blast'])) {
-      $heroAbility->blast = $data['blast'];
+    if (isset($data['area'])) {
+      $heroAbility->area = $data['area'];
     }
     
     $heroAbility->save();

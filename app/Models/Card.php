@@ -36,7 +36,7 @@ class Card extends Model
     'cost',
     'effect',
     'restriction',
-    'blast',
+    'area',
     'is_attack',
     'has_hero_ability',
   ];
@@ -47,7 +47,7 @@ class Card extends Model
    * @var array
    */
   protected $casts = [
-    'blast' => 'boolean',
+    'area' => 'boolean',
     'hands' => 'integer',
     'is_attack' => 'boolean',
     'has_hero_ability' => 'boolean',

@@ -1,15 +1,15 @@
 <x-admin-layout
-  title='Facciones'
-  headerTitle='Gestión de Facciones'
-  containerTitle='Facciones'
-  subtitle='Gestión de facciones del juego'
+  title='{{ __("factions.title") }}'
+  headerTitle='{{ __("factions.management") }}'
+  containerTitle='{{ __("factions.title") }}'
+  subtitle='{{ __("factions.management_subtitle") }}'
   :createRoute="route('admin.factions.create')"
 >
 
   <x-entities-grid 
-    empty_message="No hay facciones disponibles"
+    empty_message="{{ __('factions.no_items') }}"
     :createRoute="route('admin.factions.create')"
-    createLabel="Crear la primera facción"
+    createLabel="{{ __('factions.create_first') }}"
   >
     @foreach($factions as $faction)
       <x-cards.faction-card 
