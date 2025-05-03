@@ -8,25 +8,28 @@ use App\Models\Traits\HasImageAttribute;
 
 class ContentBlock extends Model
 {
-  use HasTranslations;
-  use HasImageAttribute;
+  use HasTranslations, HasImageAttribute;
   
   protected $fillable = [
     'content_section_id',
     'type',
     'content',
     'image',
+    'metadata',
     'model_type',
     'filters',
     'settings',
-    'order'
+    'order',
+    'include_in_index'
   ];
   
   public $translatable = [
-    'content'
+    'content',
+    'metadata' // Para títulos/subtítulos traducibles
   ];
   
   protected $casts = [
+    'metadata' => 'array',
     'filters' => 'array',
     'settings' => 'array'
   ];
@@ -36,74 +39,69 @@ class ContentBlock extends Model
     return $this->belongsTo(ContentSection::class, 'content_section_id');
   }
   
-  /**
-   * Get the directory for storing images for this model
-   */
   public function getImageDirectory(): string
   {
     return 'content/blocks';
   }
 
-  /**
-   * Render this block based on its type
-   */
+  // Método para renderizar el bloque según su tipo
   public function render()
   {
-    switch ($this->type) {
-      case 'text':
-        return view('components.content.text-block', ['block' => $this]);
-      case 'image':
-        return view('components.content.image-block', ['block' => $this]);
-      case 'text_image':
-        return view('components.content.text-image-block', ['block' => $this]);
-      case 'list':
-        return view('components.content.list-block', ['block' => $this]);
-      case 'table':
-        return view('components.content.table-block', ['block' => $this]);
-      case 'model_list':
-        return $this->renderModelList();
-      default:
-        return view('components.content.text-block', ['block' => $this]);
+    $viewPath = 'components.content.blocks.' . str_replace('_', '-', $this->type);
+    
+    if (view()->exists($viewPath)) {
+      return view($viewPath, [
+        'block' => $this,
+        'models' => $this->getModels()
+      ]);
     }
+    
+    // Fallback a bloque de texto por defecto
+    return view('components.content.blocks.text', ['block' => $this]);
   }
 
-  /**
-   * Render a model list block with the appropriate model data
-   */
-  protected function renderModelList()
+  protected function getModels()
   {
-    $modelType = $this->model_type;
-    $filters = $this->filters ?? [];
-    
-    // Get the appropriate model class and query based on model_type
-    switch ($modelType) {
-      case 'heroes':
-        $models = Hero::query();
-        break;
-      case 'cards':
-        $models = Card::query();
-        break;
-      case 'factions':
-        $models = Faction::query();
-        break;
-      default:
-        $models = collect([]);
+    if ($this->type !== 'model_list' || !$this->model_type) {
+      return collect();
     }
     
-    // Apply filters if models is a query
-    if (method_exists($models, 'where')) {
-      foreach ($filters as $key => $value) {
-        if (!empty($value)) {
-          $models->where($key, $value);
-        }
+    $modelClass = match($this->model_type) {
+      'heroes' => Hero::class,
+      'cards' => Card::class,
+      'factions' => Faction::class,
+      'hero_abilities' => HeroAbility::class,
+      'attack_ranges' => AttackRange::class,
+      'attack_subtypes' => AttackSubtype::class,
+      default => null
+    };
+    
+    if (!$modelClass) {
+      return collect();
+    }
+    
+    $query = $modelClass::query();
+    
+    // Aplicar filtros
+    foreach ($this->filters ?? [] as $key => $value) {
+      if (!empty($value)) {
+        $query->where($key, $value);
       }
-      $models = $models->get();
     }
     
-    return view('components.content.model-list-block', [
-      'block' => $this,
-      'models' => $models,
-      'modelType' => $modelType
-    ]);
+    return $query->get();
+  }
+
+  // Obtener configuración del bloque
+  public function getSetting($key, $default = null)
+  {
+    return data_get($this->settings, $key, $default);
+  }
+
+  // Obtener metadata traducida
+  public function getMetadata($key, $locale = null)
+  {
+    $metadata = $this->getTranslation('metadata', $locale ?? app()->getLocale());
+    return data_get($metadata, $key);
   }
 }

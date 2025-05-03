@@ -11,10 +11,10 @@ return new class extends Migration
       $table->id();
       $table->foreignId('content_page_id')->constrained()->onDelete('cascade');
       $table->json('title');
-      $table->string('slug')->nullable();
-      $table->string('anchor_id')->nullable(); // For linking to specific sections
+      $table->string('anchor_id')->nullable(); // Para enlaces a secciones específicas
       $table->integer('order')->default(0);
       $table->boolean('include_in_index')->default(true);
+      $table->json('settings')->nullable(); // Configuración general (background, padding, etc.)
       $table->datetimes();
     });
   }

@@ -13,14 +13,18 @@ class ContentSection extends Model
   protected $fillable = [
     'content_page_id',
     'title',
-    'slug',
     'anchor_id',
     'order',
-    'include_in_index'
+    'include_in_index',
+    'settings'
   ];
   
   public $translatable = [
     'title'
+  ];
+  
+  protected $casts = [
+    'settings' => 'array'
   ];
   
   public function page(): BelongsTo
