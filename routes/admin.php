@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\CardTypeController;
 use App\Http\Controllers\Admin\HeroRaceController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroClassController;
-use App\Http\Controllers\Admin\AttackTypeController;
 use App\Http\Controllers\Admin\AttackRangeController;
 use App\Http\Controllers\Admin\ContentPageController;
 use App\Http\Controllers\Admin\HeroAbilityController;
