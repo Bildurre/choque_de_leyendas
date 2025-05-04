@@ -54,7 +54,7 @@ class HeroAbilityRequest extends FormRequest
     ];
     
     // Mensajes para la unicidad en cada idioma
-    foreach ($locales as $locale) {
+    foreach (config('app.available_locales', ['es']) as $locale) {
       $localeName = locale_name($locale);
       $messages["name.{$locale}.unique"] = "Ya existe una habilidad con este nombre en {$localeName}.";
     }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Content;
 
-use App\Models\ContentPage;
 use Illuminate\View\View;
+use App\Models\ContentPage;
+use App\Http\Controllers\Controller;
+use App\Services\ContentPageService;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ContentPageRequest;
-use App\Services\ContentPageService;
 
 class ContentPageController extends Controller
 {

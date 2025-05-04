@@ -5,7 +5,7 @@ use App\Models\ContentBlock;
 use App\Services\Media\ImageService;
 use Illuminate\Http\UploadedFile;
 
-class ContentBlockService extends ImageService
+class ContentBlockService
 {
   public function __construct(
     protected ImageService $imageService
