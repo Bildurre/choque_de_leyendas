@@ -1,0 +1,123 @@
+@use '../abstracts/all' as *;
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  width: 1em;
+  height: 1em;
+  
+  // Tamaños
+  &--sm {
+    width: 0.875em;
+    height: 0.875em;
+  }
+  
+  &--lg {
+    width: 1.5em;
+    height: 1.5em;
+  }
+  
+  &--xl {
+    width: 2em;
+    height: 2em;
+  }
+  
+  // Variantes específicas por nombre de icono
+  &--edit {
+    stroke: $color-success;
+  }
+  
+  &--delete {
+    stroke: $color-danger;
+  }
+  
+  &--view {
+    stroke: $color-info;
+  }
+  
+  &--plus {
+    stroke: $color-success;
+  }
+  
+  &--settings {
+    stroke: $color-accent-purple;
+  }
+  
+  &--search {
+    stroke: $color-accent-yellow;
+  }
+  
+  &--download {
+    stroke: $color-accent-orange;
+  }
+  
+  &--upload {
+    stroke: $color-accent-yellow;
+  }
+  
+  &--chevron-down,
+  &--chevron-up,
+  &--chevron-left,
+  &--chevron-right {
+    transition: transform $transition-medium;
+  }
+  
+  // Rotaciones para iconos de chevron
+  .is-open &--chevron-down,
+  .expanded &--chevron-down {
+    transform: rotate(180deg);
+  }
+  
+  // Interacción con botones
+  .btn:hover &,
+  .action-btn:hover & {
+    stroke: currentColor;
+  }
+  
+  // Especial para iconos de atributos
+  &--attribute {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: $spacing-xs;
+  }
+  
+  // Especial para iconos de entidades
+  &--heroes,
+  &--cards,
+  &--abilities {
+    stroke: $color-accent-purple;
+  }
+  
+  // Animaciones
+  &--spin {
+    animation: icon-spin 2s infinite linear;
+  }
+  
+  &--pulse {
+    animation: icon-pulse 1s infinite ease-in-out;
+  }
+}
+
+// Keyframes para animaciones
+@keyframes icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}

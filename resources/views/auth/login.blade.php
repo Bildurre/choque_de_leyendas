@@ -1,5 +1,5 @@
 <x-guest-layout>
-  <x-auth-session-status :status="session('status')" />
+  <auth.x-auth-session-status :status="session('status')" />
 
   <form 
     action="{{ route('login') }}"" 
@@ -11,7 +11,7 @@
     
     <x-form.card 
       submit_label="Login"
-      cancel_route="{{ route('wellcome') }}"
+      cancel_route="{{ route('welcome') }}"
       cancel_label="⬅ Volver"
     >
       <h2>Login</h2>

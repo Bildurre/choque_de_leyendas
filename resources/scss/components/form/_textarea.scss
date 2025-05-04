@@ -1,7 +1,0 @@
-@use '../../abstracts/all' as *;
-
-.form-textarea {
-  @include form-input-base;
-  resize: vertical;
-  min-height: 100px;
-}

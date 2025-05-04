@@ -12,9 +12,9 @@
 </head>
 <body>
   <div class="welcome-container">
-    <x-application-logo />
-    <x-game-dice size="lg" animation="infinite-spin" color1="#FFD976" color2="#FFD976" color3="#FFD976"/>
-    <x-button :route="route('login')" filled="true">Acceder</x-button>
+    <x-core.application-logo />
+    <x-game.game-dice size="lg" animation="infinite-spin" color1="#FFD976" color2="#FFD976" color3="#FFD976"/>
+    <x-core.button :route="route('login')" filled="true">Acceder</x-core.button>
   </div>
 </body>
 </html>

@@ -6,10 +6,10 @@
   </div>
   
   <div class="form-actions">
-    <x-button type="button" variant="success">{{ $submit_label }}</x-button>
+    <x-core.button type="button" variant="success">{{ $submit_label }}</x-core.button>
         
     @if($cancel_route)
-      <x-button route="{{ $cancel_route }}" variant="danger">{{ $cancel_label }}</x-button>
+      <x-core.button route="{{ $cancel_route }}" variant="danger">{{ $cancel_label }}</x-core.button>
     @endif
   </div>
 </div>

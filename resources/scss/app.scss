@@ -1,64 +1,66 @@
-//BASE
+// Base
 @use 'base/normalize';
 @use 'base/base';
 
-//COMPONENTS
-@use 'components/application-logo';
-@use 'components/game-dice';
-@use 'components/button';
-@use 'components/alert';
-@use 'components/entities-grid';
-@use 'components/no-entities';
-@use 'components/badge';
-@use 'components/action-button';
-@use 'components/stat-item';
-@use 'components/info-item';
-@use 'components/description';
-@use 'components/header';
-@use 'components/header-actions-bar';
-@use 'components/sidebar';
-@use 'components/sidebar-section';
-@use 'components/sidebar-nav-link';
-@use 'components/pagination';
-@use 'components/detail-card';
-@use 'components/detail-section';
-@use 'components/info-grid';
-@use 'components/attributes-grid';
-@use 'components/detail-text';
-@use 'components/detail-image';
-@use 'components/color-sample';
-@use 'components/hero-ability-item';
-@use 'components/attribute-icon';
-@use 'components/language-selector';
-@use 'components/translate-tabs';
+// Abstracts están importados implícitamente por los demás archivos
 
-//COMPONENTS - PREVIEWS
-@use 'components/previews/base-preview';
-@use 'components/previews/hero-preview';
+// Core Components
+@use 'core/alert';
+@use 'core/application-logo';
+@use 'core/button';
+@use 'core/header';
+@use 'core/icon';
+@use 'core/language-selector';
+@use 'core/pagination';
+@use 'core/sidebar';
+@use 'core/sidebar-nav-link';
+@use 'core/sidebar-section';
 
-//COMPONENTS - CARDS
-@use 'components/cards/entity-card';
+// Form Components
+@use 'form/card';
+@use 'form/checkbox';
+@use 'form/color-input';
+@use 'form/cost-input';
+@use 'form/group';
+@use 'form/image-uploader';
+@use 'form/input';
+@use 'form/select';
+@use 'form/textarea';
+@use 'form/translate-field';
+@use 'form/wysiwyg';
 
-//COMPONENTS - FORM
-@use 'components/form/card';
-@use 'components/form/color-input';
-@use 'components/form/group';
-@use 'components/form/input';
-@use 'components/form/select';
-@use 'components/form/textarea';
-@use 'components/form/image-uploader';
-@use 'components/form/checkbox';
-@use 'components/form/cost-input';
-@use 'components/form/hero-abilities-selector';
-@use 'components/form/translate-field';
+// Admin Components
+@use 'admin/action-button';
+@use 'admin/header-actions-bar';
+@use 'admin/hero-abilities-selector';
+@use 'admin/layout';
 
-//LAYOUT
-@use 'layouts/admin';
+// Game Components
+@use 'game/attribute-icon';
+@use 'game/attributes-grid';
+@use 'game/badge';
+@use 'game/color-sample';
+@use 'game/cost-display';
+@use 'game/description';
+@use 'game/detail-card';
+@use 'game/detail-image';
+@use 'game/detail-section';
+@use 'game/detail-text';
+@use 'game/entities-grid';
+@use 'game/game-dice';
+@use 'game/hero-ability-item';
+@use 'game/info-grid';
+@use 'game/info-item';
+@use 'game/no-entities';
+@use 'game/stat-item';
 
-//PAGES
-@use 'pages/wellcome';
+// Game Cards
+@use 'game/cards/entity-card';
+
+// Game Previews
+@use 'game/previews/base-preview';
+@use 'game/previews/hero-preview';
+
+// Pages
 @use 'pages/login';
-
-//PAGES - ADMIN
-// @use 'pages/admin/faction-detail';
-// @use 'pages/admin/hero-detail';
+@use 'pages/welcome';

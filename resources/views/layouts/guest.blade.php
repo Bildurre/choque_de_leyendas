@@ -14,7 +14,7 @@
         <div>
             <div>
                 <a href="/">
-                    <x-application-logo />
+                    <x-core.application-logo />
                 </a>
             </div>
 

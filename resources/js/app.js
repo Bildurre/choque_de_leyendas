@@ -2,10 +2,15 @@ import './bootstrap';
 import '../scss/app.scss';
 import Alpine from 'alpinejs';
 
-// Core components and utilities
-import { setupComponents } from './components';
-import { setupPageHandlers } from './pages';
-import { setupCommonHandlers } from './common';
+// Core utilities
+import { setupAlerts } from './core/alerts';
+import { setupConfirmations } from './core/confirmations';
+
+// Admin functionality
+import { initSidebar } from './admin/sidebar';
+
+// Router - loads appropriate module based on current route
+import { setupPageHandlers } from './router';
 
 // Make Alpine available globally
 window.Alpine = Alpine;
@@ -15,18 +20,23 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize Alpine.js
   Alpine.start();
   
-  // Setup global components that might be present on any page
-  setupComponents();
+  // Setup global alert handlers
+  setupAlerts();
   
-  // Setup common handlers (alerts, confirmations, etc.)
-  setupCommonHandlers();
+  // Setup confirmation dialogs
+  setupConfirmations();
+  
+  // Initialize sidebar if in admin section
+  if (document.querySelector('.admin-sidebar')) {
+    initSidebar();
+  }
   
   // Initialize page-specific functionality
   setupPageHandlers();
 
   // Initialize TinyMCE if we have wysiwyg-editor elements
   if (document.querySelector('.wysiwyg-editor')) {
-    import('./components/wysiwyg-editor').then(module => {
+    import('./form/wysiwyg-editor').then(module => {
       module.initWysiwygEditors();
     }).catch(err => {
       console.error('Error loading TinyMCE:', err);
