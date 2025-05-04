@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Content\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Content\ContentPageRequest;
 use App\Models\ContentPage;
 use App\Services\Content\ContentPageService;
-use Illuminate\Http\Request;
 
 class ContentPageController extends Controller
 {
@@ -40,19 +40,9 @@ class ContentPageController extends Controller
   /**
    * Store a newly created page in storage.
    */
-  public function store(Request $request)
+  public function store(ContentPageRequest $request)
   {
-    $validated = $request->validate([
-      'title' => 'required|array',
-      'title.es' => 'required|string|max:255',
-      'slug' => 'nullable|string|max:255|unique:content_pages,slug',
-      'meta_description' => 'nullable|array',
-      'background_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-      'is_published' => 'boolean',
-      'show_in_menu' => 'boolean',
-      'order' => 'integer',
-      'parent_slug' => 'nullable|string|exists:content_pages,slug',
-    ]);
+    $validated = $request->validated();
 
     try {
       $page = $this->contentPageService->create($validated);
@@ -78,20 +68,9 @@ class ContentPageController extends Controller
   /**
    * Update the specified page in storage.
    */
-  public function update(Request $request, ContentPage $page)
+  public function update(ContentPageRequest $request, ContentPage $page)
   {
-    $validated = $request->validate([
-      'title' => 'required|array',
-      'title.es' => 'required|string|max:255',
-      'slug' => 'nullable|string|max:255|unique:content_pages,slug,' . $page->id,
-      'meta_description' => 'nullable|array',
-      'background_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-      'remove_background_image' => 'nullable|in:0,1',
-      'is_published' => 'boolean',
-      'show_in_menu' => 'boolean',
-      'order' => 'integer',
-      'parent_slug' => 'nullable|string|exists:content_pages,slug',
-    ]);
+    $validated = $request->validated();
 
     try {
       $this->contentPageService->update($page, $validated);

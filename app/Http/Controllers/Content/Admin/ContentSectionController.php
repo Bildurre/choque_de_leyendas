@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Content\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Content\ContentSectionRequest;
 use App\Models\ContentPage;
 use App\Models\ContentSection;
 use App\Services\Content\ContentSectionService;
@@ -31,16 +32,9 @@ class ContentSectionController extends Controller
   /**
    * Store a newly created section in storage.
    */
-  public function store(Request $request, ContentPage $page)
+  public function store(ContentSectionRequest $request, ContentPage $page)
   {
-    $validated = $request->validate([
-      'title' => 'required|array',
-      'title.es' => 'required|string|max:255',
-      'anchor_id' => 'nullable|string|max:255',
-      'include_in_index' => 'boolean',
-      'background_color' => 'nullable|string|max:7',
-      'order' => 'integer',
-    ]);
+    $validated = $request->validated();
 
     try {
       $section = $this->contentSectionService->create($page, $validated);
@@ -66,20 +60,13 @@ class ContentSectionController extends Controller
   /**
    * Update the specified section in storage.
    */
-  public function update(Request $request, ContentPage $page, ContentSection $section)
+  public function update(ContentSectionRequest $request, ContentPage $page, ContentSection $section)
   {
     if ($section->content_page_id !== $page->id) {
       abort(404);
     }
     
-    $validated = $request->validate([
-      'title' => 'required|array',
-      'title.es' => 'required|string|max:255',
-      'anchor_id' => 'nullable|string|max:255',
-      'include_in_index' => 'boolean',
-      'background_color' => 'nullable|string|max:7',
-      'order' => 'integer',
-    ]);
+    $validated = $request->validated();
 
     try {
       $this->contentSectionService->update($section, $validated);

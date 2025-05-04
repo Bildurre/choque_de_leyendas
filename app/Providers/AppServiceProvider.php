@@ -19,6 +19,10 @@ use App\Services\Game\EquipmentTypeService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
 use App\Services\Game\HeroSuperclassService;
+use App\Services\Content\ContentPageService;
+use App\Services\Content\ContentBlockService;
+use App\Services\Content\ContentImageService;
+use App\Services\Content\ContentSectionService;
 use App\Services\Game\HeroAttributesConfigurationService;
 
 
@@ -67,20 +71,38 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerDependentServices(): void
     {
+      // Game services
       $this->app->singleton(FactionService::class, function ($app) {
         return new FactionService($app->make(ImageService::class));
       });
+      
       $this->app->singleton(HeroService::class, function ($app) {
         return new HeroService(
           $app->make(ImageService::class),
           $app->make(HeroAttributesConfigurationService::class)
         );
       });
+      
       $this->app->singleton(CardService::class, function ($app) {
         return new CardService(
           $app->make(ImageService::class),
           $app->make(CostTranslatorService::class)
         );
+      });
+      
+      // Content services
+      $this->app->singleton(ContentImageService::class, function ($app) {
+        return new ContentImageService($app->make(ImageService::class));
+      });
+      
+      $this->app->singleton(ContentPageService::class, function ($app) {
+        return new ContentPageService($app->make(ContentImageService::class));
+      });
+      
+      $this->app->singleton(ContentSectionService::class);
+      
+      $this->app->singleton(ContentBlockService::class, function ($app) {
+        return new ContentBlockService($app->make(ContentImageService::class));
       });
     }
 

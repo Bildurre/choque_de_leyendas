@@ -5,24 +5,23 @@ namespace App\Services\Content;
 use App\Models\ContentPage;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 
 class ContentPageService
 {
   use HandlesTranslations;
 
-  protected $imageService;
+  protected $contentImageService;
   protected $translatableFields = ['title', 'meta_description'];
   
   /**
    * Create a new service instance.
    *
-   * @param ImageService $imageService
+   * @param ContentImageService $contentImageService
    */
-  public function __construct(ImageService $imageService)
+  public function __construct(ContentImageService $contentImageService)
   {
-    $this->imageService = $imageService;
+    $this->contentImageService = $contentImageService;
   }
 
   /**
@@ -79,10 +78,7 @@ class ContentPageService
     
     // Handle image if provided
     if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-      $page->background_image = $this->imageService->store(
-        $data['background_image'], 
-        'images/uploads/content-pages'
-      );
+      $page->background_image = $this->contentImageService->storePageBackground($data['background_image']);
     }
     
     $page->save();
@@ -125,15 +121,14 @@ class ContentPageService
     
     // Handle image removal
     if (isset($data['remove_background_image']) && $data['remove_background_image'] == "1") {
-      $this->imageService->delete($page->background_image);
+      $this->contentImageService->deletePageBackground($page->background_image);
       $page->background_image = null;
     }
     // Handle image update
     elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-      $page->background_image = $this->imageService->update(
+      $page->background_image = $this->contentImageService->updatePageBackground(
         $data['background_image'], 
-        $page->background_image, 
-        'images/uploads/content-pages'
+        $page->background_image
       );
     }
     
@@ -149,7 +144,7 @@ class ContentPageService
   {
     // Delete background image if exists
     if ($page->background_image) {
-      $this->imageService->delete($page->background_image);
+      $this->contentImageService->deletePageBackground($page->background_image);
     }
     
     // Delete the page and its sections and blocks

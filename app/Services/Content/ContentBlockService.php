@@ -6,24 +6,23 @@ use App\Models\ContentBlock;
 use App\Models\ContentSection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 
 class ContentBlockService
 {
   use HandlesTranslations;
 
-  protected $imageService;
+  protected $contentImageService;
   protected $translatableFields = ['content'];
 
   /**
    * Create a new service instance.
    *
-   * @param ImageService $imageService
+   * @param ContentImageService $contentImageService
    */
-  public function __construct(ImageService $imageService)
+  public function __construct(ContentImageService $contentImageService)
   {
-    $this->imageService = $imageService;
+    $this->contentImageService = $contentImageService;
   }
 
   /**
@@ -65,10 +64,7 @@ class ContentBlockService
     
     // Handle image if provided
     if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-      $block->image = $this->imageService->store(
-        $data['image'], 
-        'images/uploads/content-blocks'
-      );
+      $block->image = $this->contentImageService->storeBlockImage($data['image']);
     }
     
     $block->save();
@@ -122,15 +118,14 @@ class ContentBlockService
     
     // Handle image removal
     if (isset($data['remove_image']) && $data['remove_image'] == "1") {
-      $this->imageService->delete($block->image);
+      $this->contentImageService->deleteBlockImage($block->image);
       $block->image = null;
     }
     // Handle image update
     elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-      $block->image = $this->imageService->update(
+      $block->image = $this->contentImageService->updateBlockImage(
         $data['image'], 
-        $block->image, 
-        'images/uploads/content-blocks'
+        $block->image
       );
     }
     
@@ -146,7 +141,7 @@ class ContentBlockService
   {
     // Delete image if exists
     if ($block->image) {
-      $this->imageService->delete($block->image);
+      $this->contentImageService->deleteBlockImage($block->image);
     }
     
     return $block->delete();
