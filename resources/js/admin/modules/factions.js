@@ -3,7 +3,7 @@ import { initImageUploaders } from '../../form/image-uploader';
 
 /**
  * Default handler for faction pages
- * @param {string} action - Current CRUD action (create, edit, index, show)
+ * @param {string} action - Current CRUD action
  */
 export default function factionHandler(action) {
   switch (action) {
@@ -15,23 +15,13 @@ export default function factionHandler(action) {
 }
 
 /**
- * Setup faction form page
- */
-export function create() {
-  setupFormPage();
-}
-
-/**
- * Setup faction edit page
- */
-export function edit() {
-  setupFormPage();
-}
-
-/**
  * Common setup for faction form pages
  */
 function setupFormPage() {
   setupColorInputs();
   initImageUploaders();
 }
+
+// Named exports for direct router calls
+export const create = setupFormPage;
+export const edit = setupFormPage;

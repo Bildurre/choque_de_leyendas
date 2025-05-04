@@ -1,77 +1,34 @@
-/**
- * Utility functions for the application
- */
+import { getInputValue, getWysiwygContent } from '../../core/utilities';
 
 /**
- * Debounce function to limit execution frequency
- * @param {Function} func - Function to debounce
- * @param {number} wait - Wait time in milliseconds
- * @returns {Function} - Debounced function
+ * Create a preview updater for a specific type of content
+ * @param {string} formSelector - Selector for the form
+ * @param {string} previewSelector - Selector for the preview container
+ * @param {Function} updateFunction - Function to update the preview with form data
  */
-export function debounce(func, wait) {
-  let timeout;
-  return function() {
-    const context = this;
-    const args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
-}
-
-/**
- * Format a date according to specified format
- * @param {Date|string} date - Date to format
- * @param {string} format - Format to use (default: 'dd/mm/yyyy')
- * @returns {string} - Formatted date
- */
-export function formatDate(date, format = 'dd/mm/yyyy') {
-  const d = new Date(date);
+export function createPreviewUpdater(formSelector, previewSelector, updateFunction) {
+  const form = document.querySelector(formSelector);
+  const preview = document.querySelector(previewSelector);
   
-  if (isNaN(d)) {
-    return '';
-  }
+  if (!form || !preview) return;
   
-  const day = String(d.getDate()).padStart(2, '0');
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const year = d.getFullYear();
+  // Initial preview update
+  updateFunction(form, preview);
   
-  return format
-    .replace('dd', day)
-    .replace('mm', month)
-    .replace('yyyy', year);
-}
-
-/**
- * Validate a form field
- * @param {HTMLElement} field - Form field to validate
- * @returns {boolean} - Whether the field is valid
- */
-export function validateField(field) {
-  if (!field) return true;
-  
-  // Check for required fields
-  if (field.required && !field.value.trim()) {
-    return false;
-  }
-  
-  // Check for min/max values for number inputs
-  if (field.type === 'number') {
-    const value = parseFloat(field.value);
+  // Update preview on form changes
+  const formInputs = form.querySelectorAll('input, select, textarea');
+  formInputs.forEach(input => {
+    input.addEventListener('input', () => updateFunction(form, preview));
     
-    if (field.min && value < parseFloat(field.min)) {
-      return false;
+    // For select elements, also listen for change event
+    if (input.tagName === 'SELECT') {
+      input.addEventListener('change', () => updateFunction(form, preview));
     }
-    
-    if (field.max && value > parseFloat(field.max)) {
-      return false;
-    }
-  }
-  
-  return true;
+  });
 }
 
 /**
- * Get input value from form, handling translated fields
+ * Get input value from form
  * @param {HTMLElement} form - The form element
  * @param {string} name - Input name
  * @returns {string} - Input value

@@ -20,10 +20,6 @@ function setupFormPage() {
   initImageUploaders();
 }
 
-export function create() {
-  setupFormPage();
-}
-
-export function edit() {
-  setupFormPage();
-}
+// Named exports for direct router calls
+export const create = setupFormPage;
+export const edit = setupFormPage;

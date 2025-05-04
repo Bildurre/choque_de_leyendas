@@ -1,10 +1,10 @@
- /**
+/**
  * Initialize TinyMCE WYSIWYG editors
  */
 import 'tinymce';
 
 export function initWysiwygEditors() {
-  document.querySelectorAll('.wysiwyg-editor').forEach(editor => {
+  document.querySelectorAll('.wysiwyg-editor:not([data-initialized])').forEach(editor => {
     const editorId = editor.id;
     if (tinymce.get(editorId)) {
       return;
@@ -13,7 +13,7 @@ export function initWysiwygEditors() {
     const rows = parseInt(editor.getAttribute('rows') || 10);
     const height = rows * 24;
 
-    // Obtener configuración del editor
+    // Get editor configuration
     let isAdvanced = false;
     const configElements = document.querySelectorAll(`script[id$="-config"]`);
     configElements.forEach(element => {
@@ -24,7 +24,7 @@ export function initWysiwygEditors() {
             isAdvanced = true;
           }
         } catch (e) {
-          console.error('Error parsing editor config:', e);
+          // Silent error in production
         }
       }
     });
@@ -37,10 +37,10 @@ export function initWysiwygEditors() {
         imageList = JSON.parse(imageListData.textContent);
       }
     } catch (e) {
-      console.error('Error parsing image list:', e);
+      // Silent error in production
     }
     
-    // Configuración base según si es avanzado o simple
+    // Configuration based on whether it's advanced or simple
     const plugins = isAdvanced 
       ? 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount'
       : 'autolink link image code';
@@ -93,8 +93,11 @@ export function initWysiwygEditors() {
       // Populate textarea
       setup: function (editor) {
         editor.on('change', function () {
-            tinymce.triggerSave();
+          tinymce.triggerSave();
         });
+        
+        // Mark as initialized in the DOM
+        document.getElementById(editorId).setAttribute('data-initialized', 'true');
       }
     });
   });

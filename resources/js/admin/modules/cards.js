@@ -11,7 +11,7 @@ export default function cardHandler(action) {
       setupFormPage();
       break;
     case 'show':
-      setupShowPage();
+      // Show page specific functionality if needed
       break;
   }
 }
@@ -23,20 +23,11 @@ function setupFormPage() {
   // Initialize image uploaders first to ensure they're ready
   initImageUploaders();
   
-  // Add a small delay for other components to ensure DOM is fully processed
-  setTimeout(() => {
-    setupCardTypeHandler();
-    setupEquipmentTypeHandler();
-    setupAttackFieldsHandler();
-    setupHeroAbilityHandler();
-  }, 100);
-}
-
-/**
- * Setup card show page
- */
-function setupShowPage() {
-  // Add any specific show page functionality
+  // Setup form field handlers
+  setupCardTypeHandler();
+  setupEquipmentTypeHandler();
+  setupAttackFieldsHandler();
+  setupHeroAbilityHandler();
 }
 
 /**
@@ -49,11 +40,6 @@ function setupCardTypeHandler() {
   const form = document.getElementById('card-form');
   
   if (!cardTypeSelect || !equipmentTypeSelect || !form) {
-    console.log('Missing required elements for card type handler', {
-      cardTypeSelect: !!cardTypeSelect,
-      equipmentTypeSelect: !!equipmentTypeSelect,
-      form: !!form
-    });
     return;
   }
 
@@ -64,7 +50,9 @@ function setupCardTypeHandler() {
   try {
     equipmentTypes = JSON.parse(form.getAttribute('data-equipment-types') || '[]');
   } catch (e) {
-    console.error('Error parsing equipment types:', e);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Error parsing equipment types:', e);
+    }
   }
   
   // Add event listener
@@ -107,11 +95,6 @@ function setupEquipmentTypeHandler() {
   const form = document.getElementById('card-form');
   
   if (!equipmentTypeSelect || !handsField || !form) {
-    console.log('Missing required elements for equipment handler', {
-      equipmentTypeSelect: !!equipmentTypeSelect,
-      handsField: !!handsField,
-      form: !!form
-    });
     return;
   }
 
@@ -122,7 +105,9 @@ function setupEquipmentTypeHandler() {
   try {
     weaponTypes = JSON.parse(form.getAttribute('data-weapon-types') || '[]');
   } catch (e) {
-    console.error('Error parsing weapon types:', e);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Error parsing weapon types:', e);
+    }
   }
   
   // Add event listener
@@ -161,7 +146,6 @@ function setupAttackFieldsHandler() {
   const isAttackCheckbox = document.querySelector('input[name="is_attack"]');
   
   if (!isAttackCheckbox) {
-    console.log('Missing is_attack checkbox');
     return;
   }
   
@@ -172,11 +156,7 @@ function setupAttackFieldsHandler() {
   ];
   
   if (attackFields.some(field => !field)) {
-    console.log('Missing some attack fields', {
-      rangeField: !!attackFields[0],
-      subtypeField: !!attackFields[1],
-      areaField: !!attackFields[2]
-    });
+    return;
   }
   
   // Add event listener
@@ -208,10 +188,6 @@ function setupHeroAbilityHandler() {
   const heroAbilityField = document.getElementById('hero_ability_id');
   
   if (!hasHeroAbilityCheckbox || !heroAbilityField) {
-    console.log('Missing hero ability checkbox or field', {
-      hasHeroAbilityCheckbox: !!hasHeroAbilityCheckbox,
-      heroAbilityField: !!heroAbilityField
-    });
     return;
   }
   
@@ -237,14 +213,5 @@ function setupHeroAbilityHandler() {
   updateHeroAbilityVisibility();
 }
 
-export function create() {
-  setupFormPage();
-}
-
-export function edit() {
-  setupFormPage();
-}
-
-export function show() {
-  setupShowPage();
-}
+export const create = setupFormPage;
+export const edit = setupFormPage;

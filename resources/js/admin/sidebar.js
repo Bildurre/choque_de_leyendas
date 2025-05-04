@@ -28,14 +28,7 @@ function createOverlay() {
       // Add event to close sidebar when overlay is clicked
       overlay.addEventListener('click', () => {
         document.body.classList.remove('sidebar-open');
-        
-        // Update Alpine state if available
-        if (window.Alpine) {
-          const bodyData = Alpine.raw(document.body);
-          if (bodyData && typeof bodyData.sidebarOpen !== 'undefined') {
-            bodyData.sidebarOpen = false;
-          }
-        }
+        updateAlpineState(false);
       });
     }
   }
@@ -45,15 +38,9 @@ function createOverlay() {
  * Synchronize sidebar state with window size
  */
 function syncSidebarState() {
-  if (window.innerWidth > 767) {
-    // On desktop, sidebar should be open
-    document.body.classList.add('sidebar-open');
-    updateAlpineState(true);
-  } else {
-    // On mobile, sidebar should be closed by default
-    document.body.classList.remove('sidebar-open');
-    updateAlpineState(false);
-  }
+  const isMobile = window.innerWidth <= 767;
+  document.body.classList.toggle('sidebar-open', !isMobile);
+  updateAlpineState(!isMobile);
 }
 
 /**

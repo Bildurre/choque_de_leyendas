@@ -1,6 +1,6 @@
 /**
  * Default handler for hero race pages
- * @param {string} action - Current CRUD action (create, edit, index, show)
+ * @param {string} action - Current CRUD action
  */
 export default function heroRaceHandler(action) {
   switch (action) {
@@ -15,12 +15,9 @@ export default function heroRaceHandler(action) {
  * Setup hero race form page
  */
 function setupFormPage() {
+  // Any specific setup for hero race forms
 }
 
-export function create() {
-  setupFormPage();
-}
-
-export function edit() {
-  setupFormPage();
-}
+// Named exports for direct router calls
+export const create = setupFormPage;
+export const edit = setupFormPage;

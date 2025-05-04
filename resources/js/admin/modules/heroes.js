@@ -113,14 +113,7 @@ function setupAttributeCalculations() {
   });
 }
 
-export function create() {
-  setupFormPage();
-}
-
-export function edit() {
-  setupFormPage();
-}
-
-export function show() {
-  setupShowPage();
-}
+// Named exports for direct router calls
+export const create = setupFormPage;
+export const edit = setupFormPage;
+export const show = setupShowPage;

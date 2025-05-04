@@ -1,4 +1,3 @@
-
 import { initWysiwygEditors } from '../../form/wysiwyg-editor';
 import { initCostInputs } from '../../form/cost-input';
 
@@ -9,36 +8,13 @@ import { initCostInputs } from '../../form/cost-input';
 export default function heroAbilityHandler(action) {
   switch (action) {
     case 'create':
-      create();
-      break;
     case 'edit':
-      edit();
+      setupFormPage();
       break;
     case 'show':
-      show();
+      // Any show-specific functionality would go here
       break;
   }
-}
-
-/**
- * Initialize hero ability creation page
- */
-export function create() {
-  setupFormPage();
-}
-
-/**
- * Initialize hero ability edit page
- */
-export function edit() {
-  setupFormPage();
-}
-
-/**
- * Initialize hero ability show page
- */
-export function show() {
-  // Any show page specific functionality
 }
 
 /**
@@ -48,3 +24,7 @@ function setupFormPage() {
   initWysiwygEditors();
   initCostInputs();
 }
+
+// Named exports for direct router calls
+export { setupFormPage as create };
+export { setupFormPage as edit };

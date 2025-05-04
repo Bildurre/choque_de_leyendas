@@ -4,7 +4,7 @@
  */
 export default function heroAttributesConfigurationHandler(action) {
   // This module primarily handles the attributes configuration page
-  if (action === 'index') {
+  if (action === 'index' || action === 'edit') {
     setupAttributesForm();
   }
 }
@@ -13,8 +13,8 @@ export default function heroAttributesConfigurationHandler(action) {
  * Setup hero attributes form page
  */
 function setupAttributesForm() {
+  // Any specific initialization for attributes configuration
 }
 
-export function edit() {
-  setupAttributesForm();
-}
+// Named export for edit action
+export const edit = setupAttributesForm;

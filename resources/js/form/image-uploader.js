@@ -7,15 +7,11 @@ export function initImageUploaders() {
   const uploaders = document.querySelectorAll('.image-uploader:not([data-initialized])');
   
   if (uploaders.length === 0) {
-    console.log('No new image uploaders found to initialize');
     return;
   }
   
-  console.log(`Initializing ${uploaders.length} image uploaders`);
-  
   uploaders.forEach(uploader => {
     setupImageUploader(uploader);
-    // Mark as initialized to prevent duplicate initialization
     uploader.setAttribute('data-initialized', 'true');
   });
 }
@@ -33,27 +29,18 @@ function setupImageUploader(uploader) {
   const placeholder = uploader.querySelector('.uploader-placeholder');
   const removeInputField = document.querySelector(`#remove_${id}`);
   
-  // Debug log
-  console.log(`Setting up image uploader for ${id}`, {
-    dropzone: !!dropzone,
-    input: !!input,
-    removeBtn: !!removeBtn,
-    preview: !!preview,
-    placeholder: !!placeholder,
-    removeInputField: !!removeInputField
-  });
+  // Verify all required elements are present
+  if (!dropzone || !input || !preview || !placeholder) {
+    return;
+  }
   
   // Drag and drop events
-  if (dropzone) {
-    dropzone.addEventListener('dragover', handleDragOver);
-    dropzone.addEventListener('dragleave', handleDragLeave);
-    dropzone.addEventListener('drop', handleDrop);
-  }
+  dropzone.addEventListener('dragover', handleDragOver);
+  dropzone.addEventListener('dragleave', handleDragLeave);
+  dropzone.addEventListener('drop', handleDrop);
   
   // File input change
-  if (input) {
-    input.addEventListener('change', handleFileChange);
-  }
+  input.addEventListener('change', handleFileChange);
   
   // Remove button click
   if (removeBtn) {
@@ -117,14 +104,9 @@ function setupImageUploader(uploader) {
     
     const reader = new FileReader();
     reader.onload = (e) => {
-      if (preview) {
-        preview.src = e.target.result;
-        preview.classList.add('active');
-      }
-      
-      if (placeholder) {
-        placeholder.classList.add('hidden');
-      }
+      preview.src = e.target.result;
+      preview.classList.add('active');
+      placeholder.classList.add('hidden');
       
       if (removeBtn) {
         removeBtn.classList.remove('hidden');
@@ -135,19 +117,12 @@ function setupImageUploader(uploader) {
   
   function handleRemove() {
     // Clear input
-    if (input) {
-      input.value = '';
-    }
+    input.value = '';
     
     // Reset preview
-    if (preview) {
-      preview.src = '';
-      preview.classList.remove('active');
-    }
-    
-    if (placeholder) {
-      placeholder.classList.remove('hidden');
-    }
+    preview.src = '';
+    preview.classList.remove('active');
+    placeholder.classList.remove('hidden');
     
     if (removeBtn) {
       removeBtn.classList.add('hidden');
@@ -160,12 +135,6 @@ function setupImageUploader(uploader) {
   }
 }
 
-// Add a global event handler for custom content loaded events
-document.addEventListener('contentLoaded', () => {
-  initImageUploaders();
-});
-
-// Automatic initialization when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  initImageUploaders();
-});
+// Add global event handlers for dynamic content
+document.addEventListener('contentLoaded', initImageUploaders);
+document.addEventListener('DOMContentLoaded', initImageUploaders);

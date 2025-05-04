@@ -10,12 +10,9 @@ import { setupConfirmations } from './core/confirmations';
 import { initSidebar } from './admin/sidebar';
 
 // Form components
-import { initImageUploaders } from './form/image-uploader';
-import { initWysiwygEditors } from './form/wysiwyg-editor';
-import { initCostInputs } from './form/cost-input';
-import { setupTranslateFields } from './form/translate-fields';
+import { initFormComponents } from './form/form-components';
 
-// Router - loads appropriate module based on current route
+// Router
 import { setupPageHandlers } from './router';
 
 // Make Alpine available globally
@@ -23,16 +20,11 @@ window.Alpine = Alpine;
 
 // Initialize main app when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded - initializing application');
-  
   // Initialize Alpine.js
   Alpine.start();
-  console.log('Alpine.js initialized');
   
-  // Setup global alert handlers
+  // Setup global handlers
   setupAlerts();
-  
-  // Setup confirmation dialogs
   setupConfirmations();
   
   // Initialize sidebar if in admin section
@@ -41,35 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Initialize common form components
-  initImageUploaders();
-  setupTranslateFields();
-  initCostInputs();
+  initFormComponents();
   
   // Initialize page-specific functionality
   setupPageHandlers();
-
-  // Initialize TinyMCE if we have wysiwyg-editor elements
-  if (document.querySelector('.wysiwyg-editor')) {
-    initWysiwygEditors();
-  }
   
   // Trigger a custom event when everything is initialized
   document.dispatchEvent(new CustomEvent('appInitialized'));
-  
-  console.log('Application initialization completed');
 });
 
-// Also set up event listeners for AJAX-loaded content
+// Re-initialize components for AJAX-loaded content
 document.addEventListener('contentLoaded', function() {
-  console.log('New content loaded - initializing components');
-  
-  // Re-initialize form components on new content
-  initImageUploaders();
-  setupTranslateFields();
-  initCostInputs();
-  
-  // Initialize TinyMCE for any new editors
-  if (document.querySelector('.wysiwyg-editor:not([data-initialized])')) {
-    initWysiwygEditors();
-  }
+  initFormComponents();
 });

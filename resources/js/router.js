@@ -3,7 +3,6 @@
  */
 export function setupPageHandlers() {
   const path = window.location.pathname;
-  console.log('Setting up page handlers for path:', path);
   
   // Check if we're in admin section
   if (path.startsWith('/admin')) {
@@ -12,7 +11,6 @@ export function setupPageHandlers() {
     const module = pathParts[2]?.toLowerCase();
     
     if (!module) {
-      console.log('No module segment found in path');
       return; // Exit if no module segment found
     }
     
@@ -27,13 +25,12 @@ export function setupPageHandlers() {
       'hero-attributes-configurations': 'hero-attributes-configurations',
       'equipment-types': 'equipment-types',
       'card-types': 'card-types',
-      // Add other mappings as needed
+      // Additional mappings here
     };
     
     const modulePath = moduleMapping[module] || module;
     
     if (!modulePath) {
-      console.log(`No module mapping found for ${module}`);
       return;
     }
     
@@ -50,30 +47,24 @@ export function setupPageHandlers() {
       }
     }
     
-    console.log(`Loading module: ${modulePath}, action: ${action}`);
-    
     // Use dynamic import to load the appropriate module
     import(`./admin/modules/${modulePath}.js`)
       .then(moduleHandler => {
         // Check if the module has the specific action handler
         if (typeof moduleHandler[action] === 'function') {
-          console.log(`Executing ${action} handler for ${modulePath}`);
           moduleHandler[action]();
         } else if (typeof moduleHandler.default === 'function') {
           // Fall back to default handler
-          console.log(`Executing default handler for ${modulePath} with action ${action}`);
           moduleHandler.default(action);
-        } else {
-          console.warn(`No handler found for ${action} in module ${modulePath}`);
         }
       })
       .catch(error => {
-        console.error(`Error loading module ${modulePath}:`, error);
+        // Silent fail in production, log error in development
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(`Error loading module ${modulePath}:`, error);
+        }
       });
   }
-  
-  // Event to notify that page handlers have been set up
-  document.dispatchEvent(new CustomEvent('pageHandlersSet'));
 }
 
 // Initialize page handlers when DOM is loaded

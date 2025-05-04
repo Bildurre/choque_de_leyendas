@@ -8,7 +8,9 @@ export function initEntityCards() {
   toggleButtons.forEach(button => {
     button.addEventListener('click', function() {
       const card = this.closest('.entity-card');
-      card.classList.toggle('expanded');
+      if (card) {
+        card.classList.toggle('expanded');
+      }
     });
   });
 }

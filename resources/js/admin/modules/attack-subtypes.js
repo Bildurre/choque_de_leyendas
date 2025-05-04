@@ -15,12 +15,9 @@ export default function attackSubtypeHandler(action) {
  * Setup attack subtype form page
  */
 function setupFormPage() {
+  // Any specific functionality for attack subtypes
 }
 
-export function create() {
-  setupFormPage();
-}
-
-export function edit() {
-  setupFormPage();
-}
+// Named exports for direct router calls
+export const create = setupFormPage;
+export const edit = setupFormPage;

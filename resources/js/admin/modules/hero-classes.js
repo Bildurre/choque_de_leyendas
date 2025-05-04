@@ -2,7 +2,7 @@ import { initWysiwygEditors } from '../../form/wysiwyg-editor';
 
 /**
  * Default handler for hero class pages
- * @param {string} action - Current CRUD action (create, edit, index, show)
+ * @param {string} action - Current CRUD action
  */
 export default function heroClassHandler(action) {
   switch (action) {
@@ -20,10 +20,6 @@ function setupFormPage() {
   initWysiwygEditors();
 }
 
-export function create() {
-  setupFormPage();
-}
-
-export function edit() {
-  setupFormPage();
-}
+// Named exports for direct router calls
+export const create = setupFormPage;
+export const edit = setupFormPage;
