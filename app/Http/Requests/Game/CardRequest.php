@@ -4,7 +4,6 @@ namespace App\Http\Requests\Game;
 
 use App\Http\Requests\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Spatie\Translatable\Rules\TranslatableRequiredRule;
 
 class CardRequest extends FormRequest
 {
@@ -21,7 +20,7 @@ class CardRequest extends FormRequest
     $locales = config('app.available_locales', ['es']);
     
     $rules = [
-      'name' => ['required', new TranslatableRequiredRule(['es']), 'array'],
+      'name' => ['required', 'array'],
       'faction_id' => ['nullable', 'exists:factions,id'],
       'card_type_id' => ['required', 'exists:card_types,id'],
       'lore_text' => ['nullable', 'array'],

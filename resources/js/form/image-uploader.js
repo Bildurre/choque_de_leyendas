@@ -3,8 +3,20 @@
  * Handles drag and drop, file upload preview, and image removal
  */
 export function initImageUploaders() {
-  document.querySelectorAll('.image-uploader').forEach(uploader => {
+  // Select all image uploaders that haven't been initialized yet
+  const uploaders = document.querySelectorAll('.image-uploader:not([data-initialized])');
+  
+  if (uploaders.length === 0) {
+    console.log('No new image uploaders found to initialize');
+    return;
+  }
+  
+  console.log(`Initializing ${uploaders.length} image uploaders`);
+  
+  uploaders.forEach(uploader => {
     setupImageUploader(uploader);
+    // Mark as initialized to prevent duplicate initialization
+    uploader.setAttribute('data-initialized', 'true');
   });
 }
 
@@ -20,6 +32,16 @@ function setupImageUploader(uploader) {
   const preview = uploader.querySelector(`#${id}-preview`);
   const placeholder = uploader.querySelector('.uploader-placeholder');
   const removeInputField = document.querySelector(`#remove_${id}`);
+  
+  // Debug log
+  console.log(`Setting up image uploader for ${id}`, {
+    dropzone: !!dropzone,
+    input: !!input,
+    removeBtn: !!removeBtn,
+    preview: !!preview,
+    placeholder: !!placeholder,
+    removeInputField: !!removeInputField
+  });
   
   // Drag and drop events
   if (dropzone) {
@@ -137,3 +159,13 @@ function setupImageUploader(uploader) {
     }
   }
 }
+
+// Add a global event handler for custom content loaded events
+document.addEventListener('contentLoaded', () => {
+  initImageUploaders();
+});
+
+// Automatic initialization when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  initImageUploaders();
+});

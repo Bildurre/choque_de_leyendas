@@ -1,4 +1,5 @@
-import { initHeroAbilitiesSelector } from '../hero-abilities-selector';
+import { initImageUploaders } from '../../form/image-uploader.js';
+import { initHeroAbilitiesSelector } from '../hero-abilities-selector.js';
 
 /**
  * Default handler for hero pages
@@ -20,6 +21,7 @@ export default function heroHandler(action) {
  * Setup hero form page
  */
 function setupFormPage() {
+  initImageUploaders();
   setupAttributeCalculations();
   initHeroAbilitiesSelector();
 }

@@ -1,4 +1,4 @@
-import { setupColorInputs } from '../../forms';
+import { setupColorInputs } from '../../form/color-input';
 import { initImageUploaders } from '../../form/image-uploader';
 
 /**

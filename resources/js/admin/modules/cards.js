@@ -1,3 +1,5 @@
+import { initImageUploaders } from '../../form/image-uploader.js';
+
 /**
  * Default handler for card pages
  * @param {string} action - Current CRUD action
@@ -18,7 +20,10 @@ export default function cardHandler(action) {
  * Setup card form page
  */
 function setupFormPage() {
-  // Añadir pequeño retraso para asegurar que el DOM esté completamente cargado
+  // Initialize image uploaders first to ensure they're ready
+  initImageUploaders();
+  
+  // Add a small delay for other components to ensure DOM is fully processed
   setTimeout(() => {
     setupCardTypeHandler();
     setupEquipmentTypeHandler();
