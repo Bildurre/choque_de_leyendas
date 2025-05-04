@@ -6,7 +6,7 @@ use App\Http\Controllers\LanguageController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('wellcome');
+})->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

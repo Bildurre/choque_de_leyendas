@@ -25,15 +25,19 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('factions', FactionController::class);
 
   // Hero Abilities
-  Route::controller(HeroAbilityController::class)->prefix('hero-abilities')->name('hero-abilities.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{heroAbility}/edit', 'edit')->name('edit');
-    Route::put('/{heroAbility}', 'update')->name('update');
-    Route::delete('/{heroAbility}', 'destroy')->name('destroy');
-    Route::post('/validate-cost', 'validateCost')->name('validate-cost');
-  });
+  // Route::controller(HeroAbilityController::class)->prefix('hero-abilities')->name('hero-abilities.')->group(function () {
+  //   Route::get('/', 'index')->name('index');
+  //   Route::get('/create', 'create')->name('create');
+  //   Route::post('/', 'store')->name('store');
+  //   Route::get('/{heroAbility}/edit', 'edit')->name('edit');
+  //   Route::put('/{heroAbility}', 'update')->name('update'); 
+  //   Route::delete('/{heroAbility}', 'destroy')->name('destroy');
+  //   Route::post('/validate-cost', 'validateCost')->name('validate-cost');
+  // });
+
+  Route::resource('hero-abilities', HeroAbilityController::class)->except(['show']);
+  Route::post('hero-abilities/validate-cost', [HeroAbilityController::class, 'validateCost'])
+    ->name('hero-abilities.validate-cost');
 
   // Hero Attribute Configuration
   Route::get('/hero-attributes-configurations', [HeroAttributesConfigurationController::class, 'edit'])
