@@ -47,7 +47,7 @@
         
         @if($card->cost)
           <x-info-grid-item label="{{ __('cards.cost') }}">
-            <x-cost-display :cost="$card->cost"/>
+            <x-game.cost-display :cost="$card->cost"/>
           </x-info-grid-item>
         @endif
         

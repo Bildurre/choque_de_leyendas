@@ -22,6 +22,6 @@
   </div>
 
   <div class="header-right">
-    <x-language-selector variant="buttons" />
+    <x-core.language-selector variant="buttons" />
   </div>
 </header>

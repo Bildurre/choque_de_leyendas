@@ -1,29 +1,29 @@
 @if(session('success'))
-  <x-alert type="success">
+  <x-core.alert type="success">
     {{ session('success') }}
-  </x-alert>
+  </x-core.alert>
 @endif
 
 @if(session('error'))
-  <x-alert type="danger">
+  <x-core.alert type="danger">
     {{ session('error') }}
-  </x-alert>
+  </x-core.alert>
 @endif
 
 @if(session('warning'))
-  <x-alert type="warning">
+  <x-core.alert type="warning">
     {{ session('warning') }}
-  </x-alert>
+  </x-core.alert>
 @endif
 
 @if(session('info'))
-  <x-alert type="info">
+  <x-core.alert type="info">
     {{ session('info') }}
-  </x-alert>
+  </x-core.alert>
 @endif
 
 @if(session('status'))
-  <x-alert type="info">
+  <x-core.alert type="info">
     {{ session('status') }}
-  </x-alert>
+  </x-core.alert>
 @endif

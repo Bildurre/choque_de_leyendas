@@ -72,7 +72,7 @@
                 @endif
               </div>
               <div class="preview-hero-ability__cost">
-                <x-cost-display :cost="$ability->cost"/>
+                <x-game.cost-display :cost="$ability->cost"/>
               </div>
             </div>
             <div class="preview-hero-ability__description">{!! $ability->description !!}</div>

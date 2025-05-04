@@ -23,7 +23,7 @@
   
   // Obtener lista de imágenes si no se proporciona
   if ($imageList === null) {
-    $imageList = app(App\Services\WysiwygImageService::class)->getAvailableImages();
+    $imageList = app(App\Services\Media\WysiwygImageService::class)->getAvailableImages();
   }
 @endphp
 

@@ -11,13 +11,13 @@
       @if ($paginator->onFirstPage())
         <li class="pagination-item pagination-item--disabled">
           <span class="pagination-link pagination-link--disabled">
-            <x-icon name="chevron-left" />
+            <x-core.icon name="chevron-left" />
           </span>
         </li>
       @else
         <li class="pagination-item">
           <a href="{{ $paginator->previousPageUrl() }}" class="pagination-link" rel="prev">
-            <x-icon name="chevron-left" />
+            <x-core.icon name="chevron-left" />
           </a>
         </li>
       @endif
@@ -51,13 +51,13 @@
       @if ($paginator->hasMorePages())
         <li class="pagination-item">
           <a href="{{ $paginator->nextPageUrl() }}" class="pagination-link" rel="next">
-            <x-icon name="chevron-right" />
+            <x-core.icon name="chevron-right" />
           </a>
         </li>
       @else
         <li class="pagination-item pagination-item--disabled">
           <span class="pagination-link pagination-link--disabled">
-            <x-icon name="chevron-right" />
+            <x-core.icon name="chevron-right" />
           </span>
         </li>
       @endif

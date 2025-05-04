@@ -7,7 +7,7 @@
   :backRoute="route('admin.attack-subtypes.index')"
 >
 
-  <x-forms.attack-subtype-form 
+  <x-admin.forms.attack-subtype-form 
     :attackSubtype="$attackSubtype"
     :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.attack-subtypes.index')" 

@@ -3,9 +3,10 @@
 namespace App\Services\Content;
 
 use App\Models\ContentPage;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
+use App\Services\Media\ImageService;
+use Illuminate\Database\Eloquent\Collection;
 
 class ContentPageService
 {

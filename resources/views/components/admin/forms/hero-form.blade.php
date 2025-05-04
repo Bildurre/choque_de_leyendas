@@ -172,7 +172,7 @@
       :value="$hero ? $hero->getTranslations('passive_description') : []"
     />
 
-    <x-forms.hero-abilities-selector 
+    <x-admin.hero-abilities-selector 
       :abilities="$abilities" 
       :selectedAbilities="$hero ? $hero->abilities->pluck('id')->toArray() : []"
     />

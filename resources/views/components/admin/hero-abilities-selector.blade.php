@@ -69,7 +69,7 @@
               data-name="{{ $ability->name }}">
               <div class="ability-header">
                 <div class="ability-cost">
-                  <x-cost-display :cost="$ability->cost"/>
+                  <x-game.cost-display :cost="$ability->cost"/>
                 </div>
                 <h5 class="ability-name">{{ $ability->name }}</h5>
               </div>
@@ -82,7 +82,7 @@
                 {!! $ability->description !!}
               </div>
               <button type="button" class="add-ability-btn" data-id="{{ $ability->id }}">
-                <x-icon name="plus" />
+                <x-core.icon name="plus" />
               </button>
             </div>
           @endif
@@ -103,7 +103,7 @@
                  data-name="{{ $ability->name }}">
               <div class="ability-header">
                 <div class="ability-cost">
-                  <x-cost-display :cost="$ability->cost"/>
+                  <x-game.cost-display :cost="$ability->cost"/>
                 </div>
                 <h5 class="ability-name">{{ $ability->name }}</h5>
               </div>
@@ -116,7 +116,7 @@
                 {!! $ability->description !!}
               </div>
               <button type="button" class="remove-ability-btn" data-id="{{ $ability->id }}">
-                <x-icon name="delete" />
+                <x-core.icon name="delete" />
               </button>
               
               <input type="hidden" name="abilities[]" value="{{ $ability->id }}">

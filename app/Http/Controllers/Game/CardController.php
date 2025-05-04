@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CardRequest;
+use App\Http\Requests\Game\CardRequest;
 use App\Models\AttackRange;
 use App\Models\AttackSubtype;
 use App\Models\Card;
@@ -11,7 +11,7 @@ use App\Models\CardType;
 use App\Models\EquipmentType;
 use App\Models\Faction;
 use App\Models\HeroAbility;
-use App\Services\CardService;
+use App\Services\Game\CardService;
 
 class CardController extends Controller
 {

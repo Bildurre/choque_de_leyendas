@@ -1,7 +1,7 @@
 @props(['cost' => ''])
 
 @php
-  $costArray = app(App\Services\CostTranslatorService::class)->translateToArray($cost);
+  $costArray = app(App\Services\Game\CostTranslatorService::class)->translateToArray($cost);
 @endphp
 
 <div {{ $attributes->merge(['class' => 'cost-display']) }}>

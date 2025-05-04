@@ -6,7 +6,7 @@ use App\Models\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
-use App\Services\HeroAttributesConfigurationService;
+use App\Services\Game\HeroAttributesConfigurationService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Game;
 
 use App\Models\Faction;
-use App\Services\FactionService;
+use App\Services\Game\FactionService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Admin\FactionRequest;
+use App\Http\Requests\Game\FactionRequest;
 
 class FactionController extends Controller
 {

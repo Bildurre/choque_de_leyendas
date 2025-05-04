@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Game;
 
 use App\Models\CardType;
 use App\Http\Controllers\Controller;
-use App\Services\CardTypeService;
-use App\Http\Requests\Admin\CardTypeRequest;
+use App\Services\Game\CardTypeService;
+use App\Http\Requests\Game\CardTypeRequest;
 
 class CardTypeController extends Controller
 {

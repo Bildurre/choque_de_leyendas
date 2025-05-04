@@ -6,18 +6,18 @@
   :createRoute="route('admin.attack-ranges.create')"
 >
 
-  <x-entities-grid 
+  <x-game.entities-grid 
     :empty_message="__('attack_ranges.no_items')"
     :createRoute="route('admin.attack-ranges.create')"
     :createLabel="__('attack_ranges.create_first')"
     >
     @foreach($attackRanges as $range)
-      <x-cards.attack-range-card 
+      <x-game.cards.attack-range-card 
         :range="$range"
         :editRoute="route('admin.attack-ranges.edit', $range)"
         :deleteRoute="route('admin.attack-ranges.destroy', $range)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-game.entities-grid>
 
 </x-admin-layout>

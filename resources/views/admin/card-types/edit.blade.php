@@ -7,7 +7,7 @@
   :backRoute="route('admin.card-types.index')"
 >
 
-  <x-forms.card-type-form 
+  <x-admin.forms.card-type-form 
     :cardType="$cardType"
     :availableSuperclasses="$availableSuperclasses"
     :submitLabel="__('common.actions.save_changes')" 

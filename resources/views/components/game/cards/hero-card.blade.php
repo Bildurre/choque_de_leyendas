@@ -5,7 +5,7 @@
   'deleteRoute' => null
 ])
 
-<x-cards.entity-card
+<x-game.cards.entity-card
   :borderColor="$hero->faction->color ?? null"
   :showRoute="$showRoute"
   :editRoute="$editRoute"
@@ -18,25 +18,25 @@
 >
   <x-slot:badge>
     @if($hero->image)
-      <x-badge variant="icon">
+      <x-core.badge variant="icon">
         <img src="{{ asset('storage/' . $hero->image) }}" alt="{{ $hero->name }}">
-      </x-badge>
+      </x-core.badge>
     @else
-      <x-badge variant="icon" :color="$hero->faction->color">
+      <x-core.badge variant="icon" :color="$hero->faction->color">
         {{ strtoupper(substr($hero->name, 0, 1)) }}
-      </x-badge>
+      </x-core.badge>
     @endif
   </x-slot:badge>
 
   <div class="card-summary">
-    <x-info-item icon="heroes" label="{{ $hero->race->name . ' ' . $hero->heroClass->name }}" />
+    <x-core.info-item icon="heroes" label="{{ $hero->race->name . ' ' . $hero->heroClass->name }}" />
   </div>
   
   <x-slot:details>
     @if($hero->lore_text)
-      <x-description>
+      <x-core.description>
         <p>{{ $hero->lore_text }}</p>
-      </x-description>
+      </x-core.description>
     @endif
   </x-slot:details>
-</x-cards.entity-card>
+</x-game.cards.entity-card>

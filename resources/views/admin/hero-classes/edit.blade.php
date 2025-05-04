@@ -7,7 +7,7 @@
   :backRoute="route('admin.hero-classes.index')"
 >
 
-  <x-forms.hero-class-form 
+  <x-admin.forms.hero-class-form 
     :heroClass="$heroClass"
     :heroSuperclasses="$heroSuperclasses"
     :submitLabel="__('common.actions.save_changes')" 

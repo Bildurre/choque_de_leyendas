@@ -14,7 +14,7 @@
     @if ($iconType == 'dice')
       <x-game.game-dice variant="{{ $icon }}" size="md" :color1="$color1" :color2="$color2" :color3="$color3"/>
     @else
-      <x-icon name="{{ $icon }}" />
+      <x-core.icon name="{{ $icon }}" />
     @endif
   @endif
   {{ $slot }}

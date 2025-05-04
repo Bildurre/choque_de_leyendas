@@ -6,7 +6,7 @@
   :backRoute="route('admin.heroes.index')"
 >
 
-  <x-forms.hero-form 
+  <x-admin.forms.hero-form 
     :factions="$factions"
     :heroRaces="$heroRaces"
     :heroClasses="$heroClasses"

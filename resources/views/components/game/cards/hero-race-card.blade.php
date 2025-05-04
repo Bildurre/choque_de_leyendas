@@ -4,7 +4,7 @@
   'deleteRoute' => null
 ])
 
-<x-cards.entity-card
+<x-game.cards.entity-card
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="hero-race-name"
@@ -14,6 +14,6 @@
   :hasDetails="true"
 >
   <div class="card-summary">
-    <x-stat-item icon="heroes" :count="$heroRace->heroes_count ?? 0" label="héroe" />
+    <x-core.stat-item icon="heroes" :count="$heroRace->heroes_count ?? 0" label="héroe" />
   </div>
-</x-cards.entity-card>
+</x-game.cards.entity-card>

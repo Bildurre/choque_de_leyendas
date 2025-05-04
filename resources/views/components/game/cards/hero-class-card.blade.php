@@ -4,7 +4,7 @@
   'deleteRoute' => null
 ])
 
-<x-cards.entity-card
+<x-game.cards.entity-card
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="hero-class-name"
@@ -14,20 +14,20 @@
   :hasDetails="true"
 >
   <x-slot:badge>
-    <x-badge>
+    <x-core.badge>
       {{ $heroClass->heroSuperclass->name }}
-    </x-badge>
+    </x-core.badge>
   </x-slot:badge>
 
   <div class="card-summary">
-    <x-stat-item icon="heroes" :count="$heroClass->heroes_count ?? 0" label="héroe" />
+    <x-core.stat-item icon="heroes" :count="$heroClass->heroes_count ?? 0" label="héroe" />
   </div>
   
   <x-slot:details>
     @if($heroClass->passive)
-      <x-description title="Pasiva:">
+      <x-core.description title="Pasiva:">
         <div>{!! $heroClass->passive !!}</div>
-      </x-description>
+      </x-core.description>
     @endif
   </x-slot:details>
-</x-cards.entity-card>
+</x-game.cards.entity-card>

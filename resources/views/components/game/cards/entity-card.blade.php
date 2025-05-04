@@ -16,7 +16,7 @@
   <div class="entity-card__header">
     <div class="entity-card__actions">
       @if($showRoute)
-        <x-action-button 
+        <x-admin.action-button 
           variant="view" 
           :route="$showRoute"
           icon="view" 
@@ -24,7 +24,7 @@
       @endif
       
       @if($editRoute)
-        <x-action-button 
+        <x-admin.action-button 
           variant="edit" 
           :route="$editRoute"
           icon="edit" 
@@ -32,7 +32,7 @@
       @endif
 
       @if($deleteRoute)
-        <x-action-button 
+        <x-admin.action-button 
           variant="delete" 
           :route="$deleteRoute"
           method="DELETE" 
@@ -44,7 +44,7 @@
       @endif
       
       @if($hasDetails)
-        <x-action-button 
+        <x-admin.action-button 
         variant="toggle"
         icon="expand"
         data-toggle="entity-details"

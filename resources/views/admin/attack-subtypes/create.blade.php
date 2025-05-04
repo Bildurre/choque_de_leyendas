@@ -6,7 +6,7 @@
   :backRoute="route('admin.attack-subtypes.index')"
 >
 
-  <x-forms.attack-subtype-form 
+  <x-admin.forms.attack-subtype-form 
     :submitLabel="__('common.actions.create_entity', ['entity' => __('attack_subtypes.singular')])" 
     :cancelRoute="route('admin.attack-subtypes.index')" 
   />

@@ -24,7 +24,7 @@
         <span class="language-selector__flag">{{ strtoupper(substr($currentLocale, 0, 2)) }}</span>
         <span class="language-selector__name">{{ $localeNames[$currentLocale] ?? $currentLocale }}</span>
       </span>
-      <x-icon name="chevron-down" class="language-selector__icon" />
+      <x-core.icon name="chevron-down" class="language-selector__icon" />
     </button>
 
     <div 

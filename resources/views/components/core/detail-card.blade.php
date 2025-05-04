@@ -5,7 +5,7 @@
     @if($editRoute || $deleteRoute)
       <div class="detail-card__actions">
         @if($editRoute)
-          <x-action-button 
+          <x-admin.action-button 
             variant="edit" 
             :route="$editRoute"
             icon="edit" 
@@ -13,7 +13,7 @@
         @endif
         
         @if($deleteRoute && $model)
-          <x-action-button 
+          <x-admin.action-button 
             variant="delete" 
             :route="$deleteRoute"
             method="DELETE" 

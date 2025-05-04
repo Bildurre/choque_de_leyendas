@@ -2,7 +2,7 @@
 namespace App\Services\Content;
 
 use App\Models\ContentBlock;
-use App\Services\ImageService;
+use App\Services\Media\ImageService;
 use Illuminate\Http\UploadedFile;
 
 class ContentBlockService extends ImageService

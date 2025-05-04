@@ -12,7 +12,7 @@
 
 @php
   if ($imageList === null) {
-    $imageList = app(App\Services\WysiwygImageService::class)->getAvailableImages();
+    $imageList = app(App\Services\Media\WysiwygImageService::class)->getAvailableImages();
   }
   
   // Generamos un ID único para el elemento de configuración

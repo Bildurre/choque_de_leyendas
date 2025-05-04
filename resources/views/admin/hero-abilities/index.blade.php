@@ -8,19 +8,19 @@
 
   {{ $heroAbilities->links() }}
 
-  <x-entities-grid 
+  <x-game.entities-grid 
     empty_message="{{ __('hero_abilities.no_items') }}"
     :createRoute="route('admin.hero-abilities.create')"
     createLabel="{{ __('hero_abilities.create_first') }}"
   >
   @foreach($heroAbilities as $ability)
-    <x-cards.hero-ability-card 
+    <x-game.cards.hero-ability-card 
       :ability="$ability"
       :editRoute="route('admin.hero-abilities.edit', $ability)"
       :deleteRoute="route('admin.hero-abilities.destroy', $ability)"
     />
   @endforeach
-  </x-entities-grid>
+  </x-game.entities-grid>
 
   {{ $heroAbilities->links() }}
 

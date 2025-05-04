@@ -34,7 +34,7 @@
         
         <!-- Icono de placeholder y texto de instrucciones -->
         <div class="uploader-placeholder {{ $currentImage ? 'hidden' : '' }}">
-          <x-icon name="upload" />
+          <x-core.icon name="upload" />
           <span class="uploader-text">
             Arrastra una imagen aquí o haz clic para explorar
           </span>
@@ -50,7 +50,7 @@
           id="{{ $name }}-remove"
           data-input="{{ $name }}"
         >
-          <x-icon name="delete" />
+          <x-core.icon name="delete" />
         </button>
       </div>
     </div>

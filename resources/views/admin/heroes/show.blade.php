@@ -73,7 +73,7 @@
             <div class="hero-ability-item">
               <div class="ability-header">
                 <div class="ability-cost">
-                  <x-cost-display :cost="$ability->cost"/>
+                  <x-game.cost-display :cost="$ability->cost"/>
                 </div>
                 <h4 class="ability-name">{{ $ability->name }}</h4>
               </div>

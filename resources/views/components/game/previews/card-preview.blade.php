@@ -18,7 +18,7 @@
 >
   <x-slot name="sideInfo">
     <div class="preview-card-cost">
-      <x-cost-display :cost="$card->cost"/>
+      <x-game.cost-display :cost="$card->cost"/>
     </div>
   </x-slot>
 

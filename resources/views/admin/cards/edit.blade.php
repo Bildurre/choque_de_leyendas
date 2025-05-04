@@ -7,7 +7,7 @@
   :backRoute="route('admin.cards.index')"
 >
 
-  <x-forms.card-form 
+  <x-admin.forms.card-form 
     :card="$card"
     :factions="$factions"
     :cardTypes="$cardTypes"

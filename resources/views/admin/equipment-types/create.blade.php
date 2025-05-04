@@ -6,7 +6,7 @@
   :backRoute="route('admin.equipment-types.index')"
 >
 
-  <x-forms.equipment-type-form 
+  <x-admin.forms.equipment-type-form 
     :submitLabel="__('common.actions.create_entity', ['entity' => __('equipment_types.singular')])" 
     :cancelRoute="route('admin.equipment-types.index')" 
   />

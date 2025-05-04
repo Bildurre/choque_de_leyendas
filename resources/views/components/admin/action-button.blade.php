@@ -28,7 +28,7 @@
         data-{{ $confirmAttribute }}="{{ $confirmValue }}"
       @endif
     >
-      <x-icon :name="$icon" />
+      <x-core.icon :name="$icon" />
       {{ $slot }}
     </button>
   </form>
@@ -38,15 +38,15 @@
     class="{{ $buttonClass }}"
     data-toggle="entity-details"
   >
-    <x-icon name="chevron-down" class="chevron-down" />
-    <x-icon name="chevron-up" class="chevron-up" />
+    <x-core.icon name="chevron-down" class="chevron-down" />
+    <x-core.icon name="chevron-up" class="chevron-up" />
   </button>
 @else
   <a 
     href="{{ $route }}" 
     class="{{ $buttonClass }}"
   >
-    <x-icon :name="$icon" />
+    <x-core.icon :name="$icon" />
     {{ $slot }}
   </a>
 @endif

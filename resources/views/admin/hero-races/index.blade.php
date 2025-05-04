@@ -6,18 +6,18 @@
   :createRoute="route('admin.hero-races.create')"
 >
 
-  <x-entities-grid 
+  <x-game.entities-grid 
     empty_message="{{ __('hero_races.no_items') }}"
     :createRoute="route('admin.hero-races.create')"
     createLabel="{{ __('hero_races.create_first') }}"
   >
   @foreach($heroRaces as $heroRace)
-    <x-cards.hero-race-card 
+    <x-game.cards.hero-race-card 
       :heroRace="$heroRace"
       :editRoute="route('admin.hero-races.edit', $heroRace)"
       :deleteRoute="route('admin.hero-races.destroy', $heroRace)"
     />
   @endforeach
-  </x-entities-grid>
+  </x-game.entities-grid>
 
 </x-admin-layout>

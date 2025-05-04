@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\HasImageAttribute;
 use App\Models\Traits\HasSlug;
-use App\Services\CostTranslatorService;
+use App\Services\Game\CostTranslatorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

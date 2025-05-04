@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Game;
 
 use App\Models\HeroClass;
 use App\Models\HeroSuperclass;
-use App\Services\HeroClassService;
+use App\Services\Game\HeroClassService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\HeroClassRequest;
+use App\Http\Requests\Game\HeroClassRequest;
 
 class HeroClassController extends Controller
 {

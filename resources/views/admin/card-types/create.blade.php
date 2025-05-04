@@ -6,7 +6,7 @@
   :backRoute="route('admin.card-types.index')"
 >
 
-  <x-forms.card-type-form 
+  <x-admin.forms.card-type-form 
     :availableSuperclasses="$availableSuperclasses"
     :submitLabel="__('common.actions.create_entity', ['entity' => __('card_types.singular')])" 
     :cancelRoute="route('admin.card-types.index')" 

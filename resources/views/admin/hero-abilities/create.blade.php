@@ -6,7 +6,7 @@
   :backRoute="route('admin.hero-abilities.index')"
 >
 
-  <x-forms.hero-ability-form 
+  <x-admin.forms.hero-ability-form 
     :ranges="$ranges"
     :subtypes="$subtypes"
     :selectedHeroes="[]"

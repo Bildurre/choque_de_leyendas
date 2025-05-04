@@ -4,7 +4,7 @@
   'deleteRoute' => null
 ])
 
-<x-cards.entity-card
+<x-game.cards.entity-card
   :editRoute="$editRoute"
   :deleteRoute="$deleteRoute"
   deleteConfirmAttribute="attack-range-name"
@@ -14,17 +14,17 @@
 >
   <x-slot:badge>
     @if($range->icon)
-      <x-badge variant="icon">
+      <x-core.badge variant="icon">
         <img src="{{ asset('storage/' . $range->icon) }}" alt="{{ $range->name }}">
-      </x-badge>
+      </x-core.badge>
     @else
-      <x-badge variant="icon">
+      <x-core.badge variant="icon">
         {{ strtoupper(substr($range->name, 0, 1)) }}
-      </x-badge>
+      </x-core.badge>
     @endif
   </x-slot:badge>
 
   <div class="card-summary">
-    <x-stat-item icon="abilities" :count="$range->abilities_count ?? 0" label="habilidad" />
+    <x-core.stat-item icon="abilities" :count="$range->abilities_count ?? 0" label="habilidad" />
   </div>
-</x-cards.entity-card>
+</x-game.cards.entity-card>

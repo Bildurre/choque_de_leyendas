@@ -7,7 +7,7 @@
   :backRoute="route('admin.hero-races.index')"
 >
 
-  <x-forms.hero-race-form 
+  <x-admin.forms.hero-race-form 
     :heroRace="$heroRace"
     :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.hero-races.index')" 

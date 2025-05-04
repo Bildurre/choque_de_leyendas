@@ -6,7 +6,7 @@
   :backRoute="route('admin.attack-ranges.index')"
 >
 
-  <x-forms.attack-range-form 
+  <x-admin.forms.attack-range-form 
     submitLabel="{{ __('common.actions.create_entity', ['entity' => __('attack_ranges.singular')]) }}" 
     :cancelRoute="route('admin.attack-ranges.index')" 
   />

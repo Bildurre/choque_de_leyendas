@@ -7,7 +7,7 @@
 
 <div class="info-item">
   @if ($icon)
-    <x-icon :name="$icon" :size="$iconSize" />
+    <x-core.icon :name="$icon" :size="$iconSize" />
   @endif
   <span class="info-item__label">{{ $label }}</span>
 </div>

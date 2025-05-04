@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Game;
 
 use App\Models\AttackSubtype;
 use App\Http\Controllers\Controller;
-use App\Services\AttackSubtypeService;
-use App\Http\Requests\Admin\AttackSubtypeRequest;
+use App\Services\Game\AttackSubtypeService;
+use App\Http\Requests\Game\AttackSubtypeRequest;
 
 class AttackSubtypeController extends Controller
 {

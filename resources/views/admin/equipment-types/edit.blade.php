@@ -7,7 +7,7 @@
   :backRoute="route('admin.equipment-types.index')"
 >
 
-  <x-forms.equipment-type-form 
+  <x-admin.forms.equipment-type-form 
     :equipmentType="$equipmentType"
     :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.equipment-types.index')" 

@@ -7,7 +7,7 @@
   :backRoute="route('admin.factions.index')"
 >
 
-  <x-forms.faction-form 
+  <x-admin.forms.faction-form 
     :faction="$faction" 
     :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.factions.index')" 

@@ -2,22 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
-use App\Http\Controllers\Admin\CardController;
-use App\Http\Controllers\Admin\HeroController;
-use App\Http\Controllers\Admin\FactionController;
-use App\Http\Controllers\Admin\CardTypeController;
-use App\Http\Controllers\Admin\HeroRaceController;
+use App\Http\Controllers\Game\CardController;
+use App\Http\Controllers\Game\HeroController;
+use App\Http\Controllers\Game\FactionController;
+use App\Http\Controllers\Game\CardTypeController;
+use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\HeroClassController;
-use App\Http\Controllers\Admin\AttackRangeController;
+use App\Http\Controllers\Game\HeroClassController;
+use App\Http\Controllers\Game\AttackRangeController;
 use App\Http\Controllers\Admin\ContentPageController;
-use App\Http\Controllers\Admin\HeroAbilityController;
+use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Admin\ContentBlockController;
-use App\Http\Controllers\Admin\AttackSubtypeController;
-use App\Http\Controllers\Admin\EquipmentTypeController;
+use App\Http\Controllers\Game\AttackSubtypeController;
+use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Admin\ContentSectionController;
-use App\Http\Controllers\Admin\HeroSuperclassController;
-use App\Http\Controllers\Admin\HeroAttributesConfigurationController;
+use App\Http\Controllers\Game\HeroSuperclassController;
+use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard

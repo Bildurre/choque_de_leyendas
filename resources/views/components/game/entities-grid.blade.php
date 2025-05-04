@@ -9,7 +9,7 @@
   @if(!$slot->isEmpty())
     {{ $slot }}
   @else
-    <x-no-entities 
+    <x-game.no-entities 
       :message="$emptyMessage"
       :createRoute="$createRoute"
       :createLabel="$createLabel"

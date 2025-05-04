@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Game;
 
-use App\Models\AttackType;
 use App\Models\AttackRange;
 use App\Models\HeroAbility;
 use App\Models\AttackSubtype;
 use App\Http\Controllers\Controller;
-use App\Services\HeroAbilityService;
-use App\Services\CostTranslatorService;
-use App\Http\Requests\Admin\HeroAbilityRequest;
+use App\Services\Game\HeroAbilityService;
+use App\Services\Game\CostTranslatorService;
+use App\Http\Requests\Game\HeroAbilityRequest;
 
 class HeroAbilityController extends Controller
 {

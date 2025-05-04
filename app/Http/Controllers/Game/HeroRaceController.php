@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Game;
 
 use App\Models\HeroRace;
 use App\Http\Controllers\Controller;
-use App\Services\HeroRaceService;
-use App\Http\Requests\Admin\HeroRaceRequest;
+use App\Services\Game\HeroRaceService;
+use App\Http\Requests\Game\HeroRaceRequest;
 
 class HeroRaceController extends Controller
 {

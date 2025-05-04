@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Game;
 
 use App\Models\AttackRange;
 use App\Http\Controllers\Controller;
-use App\Services\AttackRangeService;
-use App\Http\Requests\Admin\AttackRangeRequest;
+use App\Services\Game\AttackRangeService;
+use App\Http\Requests\Game\AttackRangeRequest;
 
 class AttackRangeController extends Controller
 {

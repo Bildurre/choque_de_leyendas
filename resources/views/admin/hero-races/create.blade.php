@@ -6,7 +6,7 @@
   :backRoute="route('admin.hero-races.index')"
 >
 
-  <x-forms.hero-race-form 
+  <x-admin.forms.hero-race-form 
     :submitLabel="__('common.actions.create_entity', ['entity' => __('hero_races.singular')])" 
     :cancelRoute="route('admin.hero-races.index')" 
   />

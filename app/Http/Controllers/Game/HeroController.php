@@ -7,10 +7,10 @@ use App\Models\Faction;
 use App\Models\HeroRace;
 use App\Models\HeroClass;
 use App\Models\HeroAbility;
-use App\Services\HeroService;
+use App\Services\Game\HeroService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\HeroRequest;
-use App\Services\HeroAttributesConfigurationService;
+use App\Http\Requests\Game\HeroRequest;
+use App\Services\Game\HeroAttributesConfigurationService;
 
 class HeroController extends Controller
 {

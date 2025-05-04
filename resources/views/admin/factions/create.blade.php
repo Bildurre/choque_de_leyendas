@@ -6,7 +6,7 @@
   :backRoute="route('admin.factions.index')"
 >
 
-  <x-forms.faction-form 
+  <x-admin.forms.faction-form 
     :submitLabel="__('common.actions.create_entity', ['entity' => __('factions.singular')])" 
     :cancelRoute="route('admin.factions.index')" 
   />

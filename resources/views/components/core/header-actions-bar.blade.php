@@ -20,7 +20,7 @@
     @if($createRoute)
       <x-core.button route="{{ $createRoute }}">
         @if ($createIcon)
-          <x-icon name="{{ $createIcon }}" />
+          <x-core.icon name="{{ $createIcon }}" />
         @endif
         {{ $createLabel }}
       </x-core.button>
@@ -29,7 +29,7 @@
     @if($backRoute)
       <x-core.button route="{{ $backRoute }}">
         @if ($backIcon)
-          <x-icon name="{{ $backIcon }}" />
+          <x-core.icon name="{{ $backIcon }}" />
         @endif
         {{ $backLabel }}
       </x-core.button>

@@ -7,7 +7,7 @@
   :backRoute="route('admin.attack-ranges.index')"
 >
 
-  <x-forms.attack-range-form 
+  <x-admin.forms.attack-range-form 
     :attackRange="$attackRange"
     :submitLabel="__('common.actions.save_changes')" 
     :cancelRoute="route('admin.attack-ranges.index')" 

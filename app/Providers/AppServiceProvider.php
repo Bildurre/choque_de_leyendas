@@ -2,24 +2,26 @@
 
 namespace App\Providers;
 
-use App\Services\CardService;
-use App\Services\HeroService;
-use App\Services\ImageService;
-use App\Services\FactionService;
-use App\Services\CardTypeService;
-use App\Services\HeroRaceService;
-use App\Services\HeroClassService;
-use App\Services\AttackRangeService;
-use App\Services\HeroAbilityService;
+use App\Services\Game\CardService;
+use App\Services\Game\HeroService;
+use App\Services\Media\ImageService;
 use Illuminate\Pagination\Paginator;
-use App\Services\WysiwygImageService;
-use App\Services\AttackSubtypeService;
-use App\Services\EquipmentTypeService;
-use App\Services\CostTranslatorService;
-use App\Services\HeroSuperclassService;
+use App\Services\Game\FactionService;
+use App\Services\Game\CardTypeService;
+use App\Services\Game\HeroRaceService;
+use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use App\Services\HeroAttributesConfigurationService;
+use App\Services\Game\AttackRangeService;
+use App\Services\Game\HeroAbilityService;
+use App\Services\Game\AttackSubtypeService;
+use App\Services\Game\EquipmentTypeService;
+use App\Services\Media\WysiwygImageService;
+use App\Services\Game\CostTranslatorService;
+use App\Services\Game\HeroSuperclassService;
+use App\Services\Game\HeroAttributesConfigurationService;
+
+
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -6,19 +6,19 @@
   :createRoute="route('admin.factions.create')"
 >
 
-  <x-entities-grid 
+  <x-game.entities-grid 
     empty_message="{{ __('factions.no_items') }}"
     :createRoute="route('admin.factions.create')"
     createLabel="{{ __('factions.create_first') }}"
   >
     @foreach($factions as $faction)
-      <x-cards.faction-card 
+      <x-game.cards.faction-card 
         :faction="$faction"
         :showRoute="route('admin.factions.show', $faction)"
         :editRoute="route('admin.factions.edit', $faction)"
         :deleteRoute="route('admin.factions.destroy', $faction)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-game.entities-grid>
 
 </x-admin-layout>

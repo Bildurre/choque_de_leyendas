@@ -6,18 +6,18 @@
   :createRoute="route('admin.hero-superclasses.create')"
 >
 
-  <x-entities-grid 
+  <x-game.entities-grid 
     empty_message="{{ __('hero_superclasses.no_items') }}"
     :createRoute="route('admin.hero-superclasses.create')"
     createLabel="{{ __('hero_superclasses.create_first') }}"
   >
     @foreach($heroSuperclasses as $heroSuperclass)
-      <x-cards.hero-superclass-card 
+      <x-game.cards.hero-superclass-card 
         :heroSuperclass="$heroSuperclass"
         :editRoute="route('admin.hero-superclasses.edit', $heroSuperclass)"
         :deleteRoute="route('admin.hero-superclasses.destroy', $heroSuperclass)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-game.entities-grid>
 
 </x-admin-layout>

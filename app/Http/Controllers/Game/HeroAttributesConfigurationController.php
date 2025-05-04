@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Game;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Services\HeroAttributesConfigurationService;
-use App\Http\Requests\Admin\HeroAttributesConfigurationRequest;
+use App\Services\Game\HeroAttributesConfigurationService;
+use App\Http\Requests\Game\HeroAttributesConfigurationRequest;
 
 class HeroAttributesConfigurationController extends Controller
 {

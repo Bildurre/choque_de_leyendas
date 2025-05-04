@@ -6,19 +6,19 @@
   :createRoute="route('admin.heroes.create')"
 >
 
-  <x-entities-grid 
+  <x-game.entities-grid 
     empty_message="{{ __('heroes.no_items') }}"
     :createRoute="route('admin.heroes.create')"
     createLabel="{{ __('heroes.create_first') }}"
   >
     @foreach($heroes as $hero)
-      <x-cards.hero-card 
+      <x-game.cards.hero-card 
         :hero="$hero"
         :showRoute="route('admin.heroes.show', $hero)"
         :editRoute="route('admin.heroes.edit', $hero)"
         :deleteRoute="route('admin.heroes.destroy', $hero)"
       />
     @endforeach
-  </x-entities-grid>
+  </x-game.entities-grid>
 
 </x-admin-layout>

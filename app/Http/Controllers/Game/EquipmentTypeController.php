@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Game;
 
 use App\Models\EquipmentType;
 use App\Http\Controllers\Controller;
-use App\Services\EquipmentTypeService;
-use App\Http\Requests\Admin\EquipmentTypeRequest;
+use App\Services\Game\EquipmentTypeService;
+use App\Http\Requests\Game\EquipmentTypeRequest;
 
 class EquipmentTypeController extends Controller
 {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Services\CostTranslatorService;
+use App\Services\Game\CostTranslatorService;
 use Spatie\Translatable\HasTranslations;
 
 class HeroAbility extends Model
