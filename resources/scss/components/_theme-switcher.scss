@@ -1,0 +1,73 @@
+@use '../abstracts/all' as *;
+
+.theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+  
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    color: var(--color-accent-tertiary);
+  }
+  
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    
+    &--light {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+    
+    &--dark {
+      opacity: 1;
+    }
+  }
+}
+
+// Show/hide icons based on theme
+[data-theme="light"] {
+  .theme-switcher {
+    &__icon {
+      &--light {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0);
+      }
+      
+      &--dark {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .theme-switcher {
+    &__icon {
+      &--light {
+        opacity: 0;
+      }
+      
+      &--dark {
+        opacity: 1;
+      }
+    }
+  }
+}

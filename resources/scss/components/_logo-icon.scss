@@ -7,5 +7,16 @@
     width: 100%;
     height: auto;
     display: block;
+    
+    path {
+      transition: fill 0.3s ease;
+    }
+  }
+  
+  // Opcionalmente, podemos ajustar los colores del logo para cada tema
+  [data-theme="light"] & {
+    path {
+      opacity: 0.9; // Ajustamos la opacidad para el tema claro
+    }
   }
 }

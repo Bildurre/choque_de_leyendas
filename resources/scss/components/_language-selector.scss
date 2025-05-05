@@ -1,7 +1,5 @@
 @use '../abstracts/all' as *;
 
-// En resources/scss/layout/_public-header.scss
-
 .language-selector {
   display: flex;
   gap: $spacing-xs;
@@ -11,22 +9,22 @@
     align-items: center;
     justify-content: center;
     background: none;
-    color: $color-text-muted;
+    color: var(--color-text-secondary);
     text-decoration: none;
     font-weight: 600;
-    min-width: 32px;
+    min-width: 2rem;
     transition: all $transition-fast;
     
     &:hover {
-      border-color: $color-text-light;
-      color: $color-text-light;
+      border-color: var(--color-text-primary);
+      color: var(--color-text-primary);
     }
     
     &.is-active {
-      color: $color-accent-yellow;
+      color: var(--color-accent-primary);
       
       &:hover {
-        color: lighten($color-accent-yellow, 10%);
+        color: var(--color-accent-primary-hover);
       }
     }
   }

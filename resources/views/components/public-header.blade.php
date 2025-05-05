@@ -22,6 +22,7 @@
     
     <div class="header-actions">
       <x-language-selector />
+      <x-theme-switcher />
     </div>
   </div>
 </header>

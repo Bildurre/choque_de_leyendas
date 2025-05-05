@@ -16,12 +16,12 @@ $border-radius-md: 0.5rem;
 $border-radius-lg: 1rem;
 
 // Breakpoints
-$breakpoint-small:   480px;
-$breakpoint-mobile:   576px;
-$breakpoint-tablet:   768px;
-$breakpoint-desktop:  992px;
-$breakpoint-wide:     1200px;
-$breakpoint-ultrawide: 1440px;
+$breakpoint-small:   30rem;    // 480px
+$breakpoint-mobile:  36rem;    // 576px
+$breakpoint-tablet:  48rem;    // 768px
+$breakpoint-desktop: 62rem;    // 992px
+$breakpoint-wide:    75rem;    // 1200px
+$breakpoint-ultrawide: 90rem;  // 1440px
 
 // Transitions
 $transition-fast:   0.2s;
@@ -31,7 +31,7 @@ $transition-slow:   0.5s;
 // Z-Index
 $z-index-base:      1;
 $z-index-dropdown:  10;
-$z-index-header:  10;
+$z-index-header:    10;
 $z-index-overlay:   100;
 $z-index-modal:     1000;
 
