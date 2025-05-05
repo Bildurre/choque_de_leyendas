@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/public.blade.php (updated) -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -9,10 +8,19 @@
   <title>{{ config('app.name', 'Alanda - Choque de Leyendas') }}</title>
   <meta name="description" content="@yield('meta_description', 'Explora el mundo de Alanda - Choque de Leyendas, todas las cartas, heroes y facciones del juego')">
 
-  <!-- Theme detector script - loaded separately and early -->
-  @vite('resources/js/theme-detector.js')
-  
-  <!-- Main scripts and styles -->
+  <!-- Theme Script (debe ir antes de los estilos) -->
+  <script>
+    // Detectar y aplicar el tema inmediatamente para evitar parpadeo
+    (function() {
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- Scripts and Styles -->
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body class="public-layout">
