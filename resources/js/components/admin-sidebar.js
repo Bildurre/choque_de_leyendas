@@ -11,13 +11,13 @@ export default function initSidebar() {
   
   // Función para manejar el toggle del sidebar
   function toggleSidebar() {
-    if (isTabletOrLarger()) return; // No hacemos nada en tablet o superior
-    
     layout.classList.toggle('sidebar-visible');
     
     // Guardamos el estado en localStorage (solo para móvil)
     const isVisible = layout.classList.contains('sidebar-visible');
-    localStorage.setItem('sidebarVisible', isVisible ? 'true' : 'false');
+    if (!isTabletOrLarger()) {
+      localStorage.setItem('sidebarVisible', isVisible ? 'true' : 'false');
+    }
   }
   
   // Evento para el botón de hamburguesa
@@ -29,13 +29,9 @@ export default function initSidebar() {
       // En tablet o superior, aseguramos que sidebar-visible no esté presente
       layout.classList.remove('sidebar-visible');
     } else {
-      // En móvil, podemos restaurar el estado guardado
-      const wasVisible = localStorage.getItem('sidebarVisible') === 'true';
-      if (wasVisible) {
-        layout.classList.add('sidebar-visible');
-      } else {
-        layout.classList.remove('sidebar-visible');
-      }
+      // En móvil, SIEMPRE ocultamos el sidebar al cambiar el tamaño
+      layout.classList.remove('sidebar-visible');
+      localStorage.setItem('sidebarVisible', 'false');
     }
   }
   
@@ -48,4 +44,15 @@ export default function initSidebar() {
   
   // Configuración inicial
   handleResize();
+  
+  // Cerrar el sidebar al hacer clic fuera de él en modo móvil
+  document.addEventListener('click', (event) => {
+    if (!isTabletOrLarger() && 
+        !event.target.closest('.admin-sidebar') && 
+        !event.target.closest('#sidebar-toggle') && 
+        layout.classList.contains('sidebar-visible')) {
+      layout.classList.remove('sidebar-visible');
+      localStorage.setItem('sidebarVisible', 'false');
+    }
+  });
 }

@@ -6,6 +6,7 @@
   grid-template-columns: 1fr;
   height: 100vh;
   width: 100%;
+  overflow: hidden;
   
   @include responsive(tablet) {
     grid-template-columns: $sidebar-width 1fr;
@@ -13,9 +14,12 @@
 }
 
 .admin-content-wrapper {
+  grid-column: 1 / -1;
+  grid-row: 2;
   display: grid;
   grid-template-columns: 1fr;
   overflow: hidden;
+  position: relative;
   
   @include responsive(tablet) {
     grid-template-columns: $sidebar-width 1fr;
@@ -27,23 +31,35 @@
   overflow-y: auto;
   background-color: var(--color-background);
   transition: background-color 0.3s ease;
-  padding: $spacing-md;
+  padding: $spacing-xl $spacing-md;
+  height: calc(100vh - #{$header-height});
   
   @include responsive(tablet) {
     grid-column: 2;
+    padding: $spacing-xxl;
   }
 }
 
-// Cuando el sidebar está visible en mobile
+// Ajustamos el sidebar
+.admin-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: $sidebar-width;
+  transform: translateX(-100%);
+  z-index: $z-index-dropdown;
+  
+  @include responsive(tablet) {
+    position: relative;
+    transform: translateX(0);
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+// Cuando el sidebar está visible en móvil
 .sidebar-visible {
-  .admin-content-wrapper {
-    grid-template-columns: $sidebar-width 1fr;
-  }
-  
-  .admin-content {
-    grid-column: 2;
-  }
-  
   .admin-sidebar {
     transform: translateX(0);
   }

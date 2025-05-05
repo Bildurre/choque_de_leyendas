@@ -1,20 +1,16 @@
 @use '../abstracts/all' as *;
 
 .admin-sidebar {
-  grid-column: 1;
-  grid-row: 1;
   background-color: var(--color-card-bg);
   border-right: 0.0625rem solid var(--color-card-border);
+  box-shadow: 0.125rem 0 0.25rem rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  z-index: $z-index-dropdown;
   transition: transform $transition-medium ease, background-color 0.3s ease;
-  
-  // Oculto por defecto en móvil
-  transform: translateX(-100%);
-  
-  @include responsive(tablet) {
-    transform: translateX(0); // Visible por defecto en tablet
-    grid-row: unset; // Remueve la superposición
+  width: 100%;
+  box-shadow: 0 .125rem 0.25rem 0.0125rem var(--random-accent-color);
+
+  @include responsive(small) {
+    width: $sidebar-width;
   }
   
   &__inner {

@@ -8,14 +8,13 @@
       </button>
       
       <a href="{{ route('admin.dashboard') }}" class="admin-header__logo">
-        <x-logo-icon />
-        <span class="admin-header__title">{{ config('app.name') }}</span>
+        <x-logo />
       </a>
     </div>
 
     <div class="admin-header__right">
-      <x-theme-switcher />
       <x-language-selector />
+      <x-theme-switcher />
     </div>
   </div>
 </header>
