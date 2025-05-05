@@ -2,26 +2,9 @@
   <svg xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 1465 489">
 
-    <defs>
-      <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#f53d3d" />
-        <stop offset="50%" stop-color="#FFC371" />
-        <stop offset="100%" stop-color="#FFD976" />
-      </linearGradient>
-      <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#f53d3d" />
-        <stop offset="50%" stop-color="#FFC371" />
-        <stop offset="100%" stop-color="#FFD976" />
-      </linearGradient>
-      <linearGradient id="gradient3" x1="50%" y1="100%" x2="50%" y2="0%">
-        <stop offset="0%" stop-color="#f53d3d" />
-        <stop offset="50%" stop-color="#FFC371" />
-        <stop offset="100%" stop-color="#FFD976" />
-      </linearGradient>
-    </defs>
-
-    <path 
-      fill="url(#gradient1)" fill-rule="evenodd"
+    <path
+      class="logo-path"
+      fill-rule="evenodd"
       d="M 248.23,273.90
       C 279.64,272.34 354.14,270.94 357.31,270.81
       361.06,270.73 361.39,270.71 363.04,270.59
@@ -152,8 +135,9 @@
       923.86,185.56 921.86,185.10 923.48,180.88
       923.62,180.88 928.94,164.47 928.94,164.47 Z" />
 
-    <path 
-      fill="url(#gradient2)" fill-rule="evenodd"
+    <path
+      class="logo-path"
+      fill-rule="evenodd"
       d="M 1040.58,86.75
       C 1043.27,107.10 1039.27,102.62 1038.10,118.00
       1037.90,120.74 1038.08,122.86 1038.88,125.50
@@ -240,8 +224,9 @@
       1002.90,114.47 998.52,87.51 1019.33,83.60
       1029.87,81.62 1025.82,88.51 1040.58,86.75 Z" />
 
-    <path 
-      fill="url(#gradient3)" fill-rule="evenodd"
+    <path
+      class="logo-path"
+      fill-rule="evenodd"
       d="M 94.00,428.06
       C 95.30,429.93 97.02,431.28 99.17,432.12
       101.33,432.96 104.13,433.38 107.58,433.38

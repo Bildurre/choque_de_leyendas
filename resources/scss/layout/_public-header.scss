@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   background-color: var(--color-header-bg);
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.5rem var(--color-shadow);
   z-index: $z-index-header;
   transition: transform $transition-medium ease-in-out, 
               background-color 0.3s ease, 
@@ -34,11 +34,11 @@
     font-weight: bold;
     
     .logo-link {
-      color: var(--color-accent-primary);
+      color: var(--random-accent-color);
       text-decoration: none;
       
       &:hover {
-        color: var(--color-accent-primary-hover);
+        color: var(--random-accent-color-hover);
       }
     }
   }
@@ -64,7 +64,7 @@
       transition: color $transition-fast;
       
       &:hover {
-        color: var(--color-accent-primary);
+        color: var(--random-accent-color);
       }
     }
   }

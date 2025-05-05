@@ -11,10 +11,10 @@ body {
 }
 
 a {
-  color: var(--color-link);
+  color: var(--random-accent-color);
   
   &:hover {
-    color: var(--color-link-hover);
+    color: var(--random-accent-color-hover);
   }
 }
 

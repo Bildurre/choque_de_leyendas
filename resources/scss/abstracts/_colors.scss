@@ -1,89 +1,80 @@
-// resources/scss/abstracts/_colors.scss (simplified)
+// resources/scss/abstracts/_colors.scss
 // Color Palette for Alanda: Choque de Leyendas
 
-// Primary Game Colors (from logo)
-$color-red:     #f53d3d; // Rojo del logo
-$color-orange:  #FFC371; // Naranja claro del logo
-$color-yellow:  #FFD976; // Amarillo del logo
+// Primary Game Colors - Simplified
+$color-green-light: #5fcb8a;  // Más claro que antes
+$color-green: #29ab5f;
+$color-green-dark: #1a7440;   // Más oscuro que antes
+$color-green-transparent: rgba(41, 171, 95, 0.1);
 
-// Secondary Game Colors
-$color-green:   #3df53d;
-$color-blue:    #3d3df5;
+$color-blue-light: #6fadfe;   // Más claro que antes
+$color-blue: #408cfd;
+$color-blue-dark: #195ec0;    // Más oscuro que antes
+$color-blue-transparent: rgba(64, 140, 253, 0.1);
+
+$color-red-light: #f58080;    // Más claro que antes
+$color-red: #f15959;
+$color-red-dark: #c62121;     // Más oscuro que antes
+$color-red-transparent: rgba(241, 89, 89, 0.1);
 
 // Dark Background Colors
-$color-bg-dark-primary:   #1A1A1A;
+$color-bg-dark-primary: #1A1A1A;
 $color-bg-dark-secondary: #262626;
-$color-bg-dark-tertiary:  #333333;
-$color-bg-dark-header:    #222222;
+$color-bg-dark-tertiary: #333333;
 
 // Light Background Colors
-$color-bg-light-primary:   #F5F5F5;
-$color-bg-light-secondary: #E8E8E8;
-$color-bg-light-tertiary:  #DADADA;
-$color-bg-light-header:    #FFFFFF;
+$color-bg-light-primary: #E8E8E8;
+$color-bg-light-secondary: #DADADA;
+$color-bg-light-tertiary: #CCCCCC;
 
 // Text Colors
-$color-text-light:    #dddddd;
-$color-text-muted:    #929292;
-$color-text-dark:     #272727;
+$color-text-light: #dddddd;
+$color-text-light-dim: #ababab;
+$color-text-muted: #929292;
+$color-text-dark: #272727;
+$color-text-dark-dim: #4a4a4a;
+
 
 // Theme variables
 :root {
-  // Establish the dark theme as the root default
-  --color-accent-primary: #{$color-yellow};
-  --color-accent-primary-hover: #{lighten($color-yellow, 10%)};
-  --color-accent-secondary: #{$color-red};
-  --color-accent-secondary-hover: #{lighten($color-red, 10%)};
-  --color-accent-tertiary: #{$color-orange};
-  --color-accent-tertiary-hover: #{lighten($color-orange, 10%)};
+  // Random accent color (inicializado en azul)
+  --random-accent-color: #{$color-blue};
+  --random-accent-color-hover: #{$color-blue-light};
+  --random-accent-color-dark: #{$color-blue-dark};
+  --random-accent-color-bg: #{$color-blue-transparent};
   
   --color-background: #{$color-bg-dark-primary};
   --color-card-bg: #{$color-bg-dark-secondary};
   --color-card-border: #{$color-bg-dark-tertiary};
-  --color-header-bg: #{$color-bg-dark-header};
+  --color-header-bg: #{$color-bg-dark-secondary};
   
   --color-text-primary: #{$color-text-light};
   --color-text-secondary: #{$color-text-muted};
-  --color-link: #{$color-yellow};
-  --color-link-hover: #{lighten($color-yellow, 10%)};
+
+  // Game colors
+  --color-game-red: #{$color-red};
+  --color-game-blue: #{$color-blue};
+  --color-game-green: #{$color-green};
 }
 
 // Light theme variables
 [data-theme="light"] {
-  --color-accent-primary: #{$color-yellow};
-  --color-accent-primary-hover: #{darken($color-yellow, 15%)};
-  --color-accent-secondary: #{$color-red};
-  --color-accent-secondary-hover: #{darken($color-red, 15%)};
-  --color-accent-tertiary: #{$color-orange};
-  --color-accent-tertiary-hover: #{darken($color-orange, 15%)};
-  
   --color-background: #{$color-bg-light-primary};
   --color-card-bg: #{$color-bg-light-secondary};
   --color-card-border: #{$color-bg-light-tertiary};
-  --color-header-bg: #{$color-bg-light-header};
+  --color-header-bg: #{$color-bg-light-secondary};
   
   --color-text-primary: #{$color-text-dark};
-  --color-text-secondary: #{darken($color-text-muted, 20%)};
-  --color-link: #{darken($color-yellow, 25%)};
-  --color-link-hover: #{darken($color-yellow, 35%)};
+  --color-text-secondary: #{$color-text-dark-dim};
 }
 
-// Dark theme variables (explicit, for clarity)
+// Dark theme variables
 [data-theme="dark"] {
-  --color-accent-primary: #{$color-yellow};
-  --color-accent-primary-hover: #{lighten($color-yellow, 10%)};
-  --color-accent-secondary: #{$color-red};
-  --color-accent-secondary-hover: #{lighten($color-red, 10%)};
-  --color-accent-tertiary: #{$color-orange};
-  --color-accent-tertiary-hover: #{lighten($color-orange, 10%)};
-  
   --color-background: #{$color-bg-dark-primary};
   --color-card-bg: #{$color-bg-dark-secondary};
   --color-card-border: #{$color-bg-dark-tertiary};
-  --color-header-bg: #{$color-bg-dark-header};
+  --color-header-bg: #{$color-bg-dark-secondary};
   
   --color-text-primary: #{$color-text-light};
   --color-text-secondary: #{$color-text-muted};
-  --color-link: #{$color-yellow};
-  --color-link-hover: #{lighten($color-yellow, 10%)};
 }

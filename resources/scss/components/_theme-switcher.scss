@@ -15,8 +15,7 @@
   position: relative;
   
   &:hover {
-    background-color: rgba(128, 128, 128, 0.1);
-    color: var(--color-accent-tertiary);
+    color: var(--random-accent-color);
   }
   
   &__icon {

@@ -1,14 +1,14 @@
 // base
-@import 'base/base';
+@use 'base/base';
 
 // Layout
-@import 'layout/public-header';
-@import 'layout/public-footer';
-@import 'layout/public-main';
+@use 'layout/public-header';
+@use 'layout/public-footer';
+@use 'layout/public-main';
 
 // Components
-@import 'components/icons';
-@import 'components/language-selector';
-@import 'components/logo';
-@import 'components/logo-icon';
-@import 'components/theme-switcher';
+@use 'components/icons';
+@use 'components/language-selector';
+@use 'components/logo';
+@use 'components/theme-switcher';
+@use 'components/button';

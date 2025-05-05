@@ -10,8 +10,8 @@
       </div>
       
       <div class="welcome-actions">
-        <a href="{{ route('login') }}" class="btn btn-primary">{{ __('welcome.login') }}</a>
-        <a href="{{ route('content.index') }}" class="btn btn-secondary">{{ __('welcome.explore') }}</a>
+        <a href="{{ route('login') }}" class="btn btn--primary">{{ __('welcome.login') }}</a>
+        <a href="{{ route('content.index') }}" class="btn btn--secondary">{{ __('welcome.explore') }}</a>
       </div>
     </div>
     
@@ -123,8 +123,8 @@
       <div class="section-content">
         <p class="cta-description">{{ __('welcome.cta_description') }}</p>
         <div class="cta-buttons">
-          <a href="{{ route('login') }}" class="btn btn-primary">{{ __('welcome.login') }}</a>
-          <a href="{{ route('content.index') }}" class="btn btn-secondary">{{ __('welcome.explore') }}</a>
+          <a href="{{ route('login') }}" class="btn btn--primary">{{ __('welcome.login') }}</a>
+          <a href="{{ route('content.index') }}" class="btn btn--secondary">{{ __('welcome.explore') }}</a>
         </div>
       </div>
     </section>

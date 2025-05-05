@@ -21,10 +21,10 @@
     }
     
     &.is-active {
-      color: var(--color-accent-primary);
+      color: var(--random-accent-color);
       
       &:hover {
-        color: var(--color-accent-primary-hover);
+        color: var(--random-accent-color-hover);
       }
     }
   }
