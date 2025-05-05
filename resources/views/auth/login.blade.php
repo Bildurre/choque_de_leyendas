@@ -35,18 +35,16 @@
         autocomplete="current-password"
       />
 
-      <div class="form-row">
-        <x-form.checkbox 
-          name="remember" 
-          label="{{ __('auth.remember_me') }}"
-        />
-        
-        @if (Route::has('password.request'))
-          <a href="{{ route('password.request') }}" class="pswd-forgot">
-            {{ __('auth.forgot_password') }}
-          </a>
-        @endif
-      </div>
+      <x-form.checkbox 
+        name="remember" 
+        label="{{ __('auth.remember_me') }}"
+      />
+      
+      @if (Route::has('password.request'))
+        <a href="{{ route('password.request') }}" class="pswd-forgot">
+          {{ __('auth.forgot_password') }}
+        </a>
+      @endif
     </x-form.card>
   </form>
 </x-public-layout>

@@ -1,7 +1,7 @@
 @use '../../abstracts/all' as *;
 
 .form-card {
-  max-width: 30rem;
+  width: 100%;
   margin: 0 auto;
   background-color: var(--color-card-bg);
   border-radius: $border-radius-md;
@@ -50,6 +50,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: $spacing-md;
+    flex-wrap: wrap;
   }
   
   .pswd-forgot {

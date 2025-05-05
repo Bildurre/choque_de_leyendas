@@ -9,7 +9,7 @@ return [
   'confirm_password' => 'Confirmar contraseña',
   'remember_me' => 'Recordarme',
   'forgot_password' => '¿Olvidaste tu contraseña?',
-  'back' => '⬅ Volver',
+  'back' => 'Volver',
   'failed' => 'Estas credenciales no coinciden con nuestros registros.',
   'password_failure' => 'La contraseña ingresada no es correcta.',
   'throttle' => 'Demasiados intentos de acceso. Por favor inténtalo de nuevo en :seconds segundos.',
