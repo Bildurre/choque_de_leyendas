@@ -17,18 +17,27 @@ $color-text-muted:    #929292;
 $color-text-dark:     #272727;
 
 // Accent Colors
-// $color-accent-orange: #ff9800;
-// $color-accent-purple: #9575cd;
-
 $color-accent-yellow: #FFD976;
 $color-accent-pink: #F67280;
 $color-accent-orange: #FF9D71;
 $color-accent-purple: #6C5B7B;
 $color-accent-blue: #35495E;
 
-
 // Semantic Colors
 $color-success:       #4CAF50;
 $color-warning:       #FFC107;
 $color-danger:        #F44336;
 $color-info:          #2196F3;
+
+// UI Colors
+$color-primary: $color-accent-blue;
+$color-secondary: $color-accent-orange;
+$color-background: $color-bg-dark-primary;
+$color-card-bg: $color-bg-dark-secondary;
+$color-card-border: $color-bg-dark-tertiary;
+
+// Text Colors
+$color-text-primary: $color-text-light;
+$color-text-secondary: $color-text-muted;
+$color-link: $color-accent-yellow;
+$color-link-hover: lighten($color-accent-yellow, 10%);

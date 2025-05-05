@@ -1,0 +1,27 @@
+@use '../abstracts/all' as *;
+
+body {
+  font-family: 'roboto', sans-serif;
+  background-color: $color-background;
+  color: $color-text-primary;
+  margin: 0;
+  padding: 0;
+  line-height: $base-line-height;
+}
+
+a {
+  color: $color-link;
+  
+  &:hover {
+    color: $color-link-hover;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+}
