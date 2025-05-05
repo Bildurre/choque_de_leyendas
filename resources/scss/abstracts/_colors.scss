@@ -1,9 +1,10 @@
+// resources/scss/abstracts/_colors.scss (simplified)
 // Color Palette for Alanda: Choque de Leyendas
 
 // Primary Game Colors (from logo)
 $color-red:     #f53d3d; // Rojo del logo
 $color-orange:  #FFC371; // Naranja claro del logo
-$color-yellow:  #FFD976; // Amarillo del logo (mantenemos este)
+$color-yellow:  #FFD976; // Amarillo del logo
 
 // Secondary Game Colors
 $color-green:   #3df53d;
@@ -13,134 +14,76 @@ $color-blue:    #3d3df5;
 $color-bg-dark-primary:   #1A1A1A;
 $color-bg-dark-secondary: #262626;
 $color-bg-dark-tertiary:  #333333;
-$color-bg-dark-header:    #222222; // Color sólido para el header (oscuro)
+$color-bg-dark-header:    #222222;
 
 // Light Background Colors
 $color-bg-light-primary:   #F5F5F5;
 $color-bg-light-secondary: #E8E8E8;
 $color-bg-light-tertiary:  #DADADA;
-$color-bg-light-header:    #FFFFFF; // Color sólido para el header (claro)
+$color-bg-light-header:    #FFFFFF;
 
 // Text Colors
 $color-text-light:    #dddddd;
 $color-text-muted:    #929292;
 $color-text-dark:     #272727;
 
-// Variables para ambos temas
+// Theme variables
 :root {
-  // Variables para tema oscuro
-  --color-accent-primary-dark: #{$color-yellow};
-  --color-accent-primary-hover-dark: #{lighten($color-yellow, 10%)};
-  --color-accent-secondary-dark: #{$color-red};
-  --color-accent-secondary-hover-dark: #{lighten($color-red, 10%)};
-  --color-accent-tertiary-dark: #{$color-orange};
-  --color-accent-tertiary-hover-dark: #{lighten($color-orange, 10%)};
+  // Establish the dark theme as the root default
+  --color-accent-primary: #{$color-yellow};
+  --color-accent-primary-hover: #{lighten($color-yellow, 10%)};
+  --color-accent-secondary: #{$color-red};
+  --color-accent-secondary-hover: #{lighten($color-red, 10%)};
+  --color-accent-tertiary: #{$color-orange};
+  --color-accent-tertiary-hover: #{lighten($color-orange, 10%)};
   
-  --color-background-dark: #{$color-bg-dark-primary};
-  --color-card-bg-dark: #{$color-bg-dark-secondary};
-  --color-card-border-dark: #{$color-bg-dark-tertiary};
-  --color-header-bg-dark: #{$color-bg-dark-header};
+  --color-background: #{$color-bg-dark-primary};
+  --color-card-bg: #{$color-bg-dark-secondary};
+  --color-card-border: #{$color-bg-dark-tertiary};
+  --color-header-bg: #{$color-bg-dark-header};
   
-  --color-text-primary-dark: #{$color-text-light};
-  --color-text-secondary-dark: #{$color-text-muted};
-  --color-link-dark: #{$color-yellow};
-  --color-link-hover-dark: #{lighten($color-yellow, 10%)};
-  
-  // Variables para tema claro
-  --color-accent-primary-light: #{$color-yellow};
-  --color-accent-primary-hover-light: #{darken($color-yellow, 15%)};
-  --color-accent-secondary-light: #{$color-red};
-  --color-accent-secondary-hover-light: #{darken($color-red, 15%)};
-  --color-accent-tertiary-light: #{$color-orange};
-  --color-accent-tertiary-hover-light: #{darken($color-orange, 15%)};
-  
-  --color-background-light: #{$color-bg-light-primary};
-  --color-card-bg-light: #{$color-bg-light-secondary};
-  --color-card-border-light: #{$color-bg-light-tertiary};
-  --color-header-bg-light: #{$color-bg-light-header};
-  
-  --color-text-primary-light: #{$color-text-dark};
-  --color-text-secondary-light: #{darken($color-text-muted, 20%)};
-  --color-link-light: #{darken($color-yellow, 25%)};
-  --color-link-hover-light: #{darken($color-yellow, 35%)};
-  
-  // Por defecto usar tema oscuro
-  --color-accent-primary: var(--color-accent-primary-dark);
-  --color-accent-primary-hover: var(--color-accent-primary-hover-dark);
-  --color-accent-secondary: var(--color-accent-secondary-dark);
-  --color-accent-secondary-hover: var(--color-accent-secondary-hover-dark);
-  --color-accent-tertiary: var(--color-accent-tertiary-dark);
-  --color-accent-tertiary-hover: var(--color-accent-tertiary-hover-dark);
-  
-  --color-background: var(--color-background-dark);
-  --color-card-bg: var(--color-card-bg-dark);
-  --color-card-border: var(--color-card-border-dark);
-  --color-header-bg: var(--color-header-bg-dark);
-  
-  --color-text-primary: var(--color-text-primary-dark);
-  --color-text-secondary: var(--color-text-secondary-dark);
-  --color-link: var(--color-link-dark);
-  --color-link-hover: var(--color-link-hover-dark);
+  --color-text-primary: #{$color-text-light};
+  --color-text-secondary: #{$color-text-muted};
+  --color-link: #{$color-yellow};
+  --color-link-hover: #{lighten($color-yellow, 10%)};
 }
 
-// Usar preferencia del sistema para tema claro
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --color-accent-primary: var(--color-accent-primary-light);
-    --color-accent-primary-hover: var(--color-accent-primary-hover-light);
-    --color-accent-secondary: var(--color-accent-secondary-light);
-    --color-accent-secondary-hover: var(--color-accent-secondary-hover-light);
-    --color-accent-tertiary: var(--color-accent-tertiary-light);
-    --color-accent-tertiary-hover: var(--color-accent-tertiary-hover-light);
-    
-    --color-background: var(--color-background-light);
-    --color-card-bg: var(--color-card-bg-light);
-    --color-card-border: var(--color-card-border-light);
-    --color-header-bg: var(--color-header-bg-light);
-    
-    --color-text-primary: var(--color-text-primary-light);
-    --color-text-secondary: var(--color-text-secondary-light);
-    --color-link: var(--color-link-light);
-    --color-link-hover: var(--color-link-hover-light);
-  }
-}
-
-// Estilos explícitos para el tema oscuro
-[data-theme="dark"] {
-  --color-accent-primary: var(--color-accent-primary-dark);
-  --color-accent-primary-hover: var(--color-accent-primary-hover-dark);
-  --color-accent-secondary: var(--color-accent-secondary-dark);
-  --color-accent-secondary-hover: var(--color-accent-secondary-hover-dark);
-  --color-accent-tertiary: var(--color-accent-tertiary-dark);
-  --color-accent-tertiary-hover: var(--color-accent-tertiary-hover-dark);
-  
-  --color-background: var(--color-background-dark);
-  --color-card-bg: var(--color-card-bg-dark);
-  --color-card-border: var(--color-card-border-dark);
-  --color-header-bg: var(--color-header-bg-dark);
-  
-  --color-text-primary: var(--color-text-primary-dark);
-  --color-text-secondary: var(--color-text-secondary-dark);
-  --color-link: var(--color-link-dark);
-  --color-link-hover: var(--color-link-hover-dark);
-}
-
-// Estilos explícitos para el tema claro
+// Light theme variables
 [data-theme="light"] {
-  --color-accent-primary: var(--color-accent-primary-light);
-  --color-accent-primary-hover: var(--color-accent-primary-hover-light);
-  --color-accent-secondary: var(--color-accent-secondary-light);
-  --color-accent-secondary-hover: var(--color-accent-secondary-hover-light);
-  --color-accent-tertiary: var(--color-accent-tertiary-light);
-  --color-accent-tertiary-hover: var(--color-accent-tertiary-hover-light);
+  --color-accent-primary: #{$color-yellow};
+  --color-accent-primary-hover: #{darken($color-yellow, 15%)};
+  --color-accent-secondary: #{$color-red};
+  --color-accent-secondary-hover: #{darken($color-red, 15%)};
+  --color-accent-tertiary: #{$color-orange};
+  --color-accent-tertiary-hover: #{darken($color-orange, 15%)};
   
-  --color-background: var(--color-background-light);
-  --color-card-bg: var(--color-card-bg-light);
-  --color-card-border: var(--color-card-border-light);
-  --color-header-bg: var(--color-header-bg-light);
+  --color-background: #{$color-bg-light-primary};
+  --color-card-bg: #{$color-bg-light-secondary};
+  --color-card-border: #{$color-bg-light-tertiary};
+  --color-header-bg: #{$color-bg-light-header};
   
-  --color-text-primary: var(--color-text-primary-light);
-  --color-text-secondary: var(--color-text-secondary-light);
-  --color-link: var(--color-link-light);
-  --color-link-hover: var(--color-link-hover-light);
+  --color-text-primary: #{$color-text-dark};
+  --color-text-secondary: #{darken($color-text-muted, 20%)};
+  --color-link: #{darken($color-yellow, 25%)};
+  --color-link-hover: #{darken($color-yellow, 35%)};
+}
+
+// Dark theme variables (explicit, for clarity)
+[data-theme="dark"] {
+  --color-accent-primary: #{$color-yellow};
+  --color-accent-primary-hover: #{lighten($color-yellow, 10%)};
+  --color-accent-secondary: #{$color-red};
+  --color-accent-secondary-hover: #{lighten($color-red, 10%)};
+  --color-accent-tertiary: #{$color-orange};
+  --color-accent-tertiary-hover: #{lighten($color-orange, 10%)};
+  
+  --color-background: #{$color-bg-dark-primary};
+  --color-card-bg: #{$color-bg-dark-secondary};
+  --color-card-border: #{$color-bg-dark-tertiary};
+  --color-header-bg: #{$color-bg-dark-header};
+  
+  --color-text-primary: #{$color-text-light};
+  --color-text-secondary: #{$color-text-muted};
+  --color-link: #{$color-yellow};
+  --color-link-hover: #{lighten($color-yellow, 10%)};
 }

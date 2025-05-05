@@ -3,22 +3,8 @@ export default function initThemeSwitcher() {
   
   if (!themeToggleBtn) return;
   
-  // Check for saved theme preference
-  const getThemePreference = () => {
-    if (localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
-    }
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  };
-  
-  // Apply theme to document
-  const applyTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  };
-  
-  // Apply initial theme
-  applyTheme(getThemePreference());
+  // Theme has already been applied by the theme-detector script,
+  // so we don't need to apply it again on initialization
   
   // Toggle theme on button click
   themeToggleBtn.addEventListener('click', () => {
@@ -26,15 +12,16 @@ export default function initThemeSwitcher() {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
     // Apply the new theme
-    applyTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
   });
   
   // Listen for OS theme changes
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-    // Solo cambia el tema si no hay una preferencia guardada
+    // Only change theme if there's no saved preference
     if (!localStorage.getItem('theme')) {
       const newTheme = e.matches ? 'light' : 'dark';
-      applyTheme(newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
     }
   });
 }
