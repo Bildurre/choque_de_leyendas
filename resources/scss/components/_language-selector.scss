@@ -1,0 +1,33 @@
+@use '../abstracts/all' as *;
+
+// En resources/scss/layout/_public-header.scss
+
+.language-selector {
+  display: flex;
+  gap: $spacing-xs;
+  
+  .language-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: $color-text-muted;
+    text-decoration: none;
+    font-weight: 600;
+    min-width: 32px;
+    transition: all $transition-fast;
+    
+    &:hover {
+      border-color: $color-text-light;
+      color: $color-text-light;
+    }
+    
+    &.is-active {
+      color: $color-accent-yellow;
+      
+      &:hover {
+        color: lighten($color-accent-yellow, 10%);
+      }
+    }
+  }
+}
