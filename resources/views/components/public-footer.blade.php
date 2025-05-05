@@ -1,7 +1,9 @@
 <footer class="public-footer">
   <div class="footer-container">
     <div class="footer-logo">
-      LOGO
+      <a href="{{ route('welcome') }}" class="logo-link">
+        <x-logo />
+      </a>
     </div>
     
     <div class="footer-nav">

@@ -1,18 +1,9 @@
-<header x-data="{ 
-  showHeader: true, 
-  lastScrollY: 0,
-  handleScroll() {
-    const currentScrollY = window.scrollY;
-    this.showHeader = (currentScrollY <= 0) || (currentScrollY < this.lastScrollY);
-    this.lastScrollY = currentScrollY;
-  }
-}" 
-@scroll.window="handleScroll()"
-:class="{ 'header--hidden': !showHeader }" 
-class="public-header">
+<header class="public-header">
   <div class="header-container">
     <div class="header-logo">
-      <a href="{{ route('welcome') }}" class="logo-link">LOGO</a>
+      <a href="{{ route('welcome') }}" class="logo-link">
+        <x-logo />
+      </a>
     </div>
     
     <nav class="header-nav">
