@@ -1,0 +1,14 @@
+@use '../../abstracts/all' as *;
+
+.form-label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-text-primary);
+  
+  &__required {
+    color: var(--color-game-red);
+    margin-left: $spacing-xs;
+  }
+}

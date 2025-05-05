@@ -1,46 +1,52 @@
-<x-guest-layout>
-  <auth.x-auth-session-status :status="session('status')" />
+<x-public-layout>
+  <x-auth.session-status :status="session('status')" />
 
   <form 
-    action="{{ route('login') }}"" 
+    action="{{ route('login') }}" 
     method="POST" 
-    enctype="multipart/form-data" 
     class="login-form"
   >
     @csrf
     
     <x-form.card 
-      submit_label="Login"
+      submit_label="{{ __('auth.login') }}"
       cancel_route="{{ route('welcome') }}"
-      cancel_label="⬅ Volver"
+      cancel_label="{{ __('auth.back') }}"
     >
-      <h2>Login</h2>
-      <x-form.field 
+      <x-slot:header>
+        <h2>{{ __('auth.login_title') }}</h2>
+      </x-slot:header>
+      
+      <x-form.input 
+        type="email" 
         name="email" 
-        label="email" 
+        label="{{ __('auth.email') }}" 
         :value="old('email')" 
-        required
+        required 
+        autofocus
+        autocomplete="username"
       />
 
-      <x-form.field 
+      <x-form.input 
+        type="password" 
         name="password" 
-        label="password"
-        type="password"
+        label="{{ __('auth.password') }}"
         required
+        autocomplete="current-password"
       />
 
       <div class="form-row">
         <x-form.checkbox 
           name="remember" 
-          label="remember me"
+          label="{{ __('auth.remember_me') }}"
         />
         
         @if (Route::has('password.request'))
           <a href="{{ route('password.request') }}" class="pswd-forgot">
-            {{ __('Forgot your password?') }}
+            {{ __('auth.forgot_password') }}
           </a>
         @endif
       </div>
     </x-form.card>
   </form>
-</x-guest-layout>
+</x-public-layout>

@@ -1,4 +1,5 @@
 // base
+@use 'base/normalize';
 @use 'base/base';
 
 // Layout
@@ -12,3 +13,10 @@
 @use 'components/logo';
 @use 'components/theme-switcher';
 @use 'components/button';
+
+// Form Components
+@use 'components/form/input';
+@use 'components/form/label';
+@use 'components/form/error';
+@use 'components/form/checkbox';
+@use 'components/form/card';

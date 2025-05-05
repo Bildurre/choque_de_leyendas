@@ -1,5 +1,6 @@
+// resources/views/layouts/public.blade.php
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +24,7 @@
   <!-- Scripts and Styles -->
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
-<body class="public-layout">
+<body>
   <x-public-header />
 
   <main class="content-container">

@@ -1,0 +1,7 @@
+@use '../../abstracts/all' as *;
+
+.form-error {
+  font-size: 0.875rem;
+  color: var(--color-game-red);
+  margin-top: $spacing-xs;
+}

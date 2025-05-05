@@ -1,0 +1,46 @@
+@use '../../abstracts/all' as *;
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-md;
+  
+  &__input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 0.0625rem solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    background-color: var(--color-background);
+    display: grid;
+    place-content: center;
+    margin-right: $spacing-sm;
+    cursor: pointer;
+    
+    &:checked {
+      background-color: var(--random-accent-color);
+      border-color: var(--random-accent-color);
+      
+      &::before {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: white;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        transform: scale(1.5);
+      }
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: var(--random-accent-color);
+      box-shadow: 0 0 0 0.125rem var(--random-accent-color-bg);
+    }
+  }
+  
+  &__label {
+    font-size: 0.9375rem;
+    cursor: pointer;
+  }
+}

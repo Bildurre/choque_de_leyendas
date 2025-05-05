@@ -1,0 +1,64 @@
+@use '../../abstracts/all' as *;
+
+.form-card {
+  max-width: 30rem;
+  margin: 0 auto;
+  background-color: var(--color-card-bg);
+  border-radius: $border-radius-md;
+  box-shadow: 0 0.125rem 0.5rem var(--color-shadow);
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  
+  &__content {
+    padding: $spacing-lg;
+  }
+  
+  &__header {
+    margin-bottom: $spacing-lg;
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+  }
+  
+  &__body {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+    
+    @include responsive(mobile) {
+      grid-template-columns: auto auto;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.login-form {
+  .form-card {
+    margin-top: $spacing-xl;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-md;
+  }
+  
+  .pswd-forgot {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--random-accent-color);
+    }
+  }
+}

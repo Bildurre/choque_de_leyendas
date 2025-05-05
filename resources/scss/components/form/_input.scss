@@ -1,0 +1,29 @@
+@use '../../abstracts/all' as *;
+
+.form-field {
+  margin-bottom: $spacing-md;
+  width: 100%;
+  
+  .form-input {
+    display: block;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 0.0625rem solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+    font-size: 1rem;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--random-accent-color);
+      box-shadow: 0 0 0 0.125rem var(--random-accent-color-bg);
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
