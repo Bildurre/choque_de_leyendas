@@ -3,7 +3,9 @@
 .content-container {
   max-width: 75rem;
   margin: 0 auto;
-  padding: $spacing-xl $spacing-md $spacing-xl;
+  padding: $spacing-md $spacing-md $spacing-xl;
   transition: background-color 0.3s ease, color 0.3s ease;
-   padding-top: calc(var(--header-height, #{$header-height}) + #{$spacing-md});
+  
+  padding-top: calc(4rem + #{$spacing-md});
+  padding-top: calc(#{$header-height} + #{$spacing-xxl});
 }

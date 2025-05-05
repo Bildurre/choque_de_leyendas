@@ -1,3 +1,4 @@
+// resources/scss/layout/_public-header.scss
 @use '../abstracts/all' as *;
 
 .public-header {
@@ -5,8 +6,9 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: $header-height;
   background-color: var(--color-header-bg);
-  box-shadow: 0 0.125rem 0.5rem var(--color-shadow);
+  box-shadow: 0 0.125rem 0.25rem var(--random-accent-color);
   z-index: $z-index-header;
   transition: transform $transition-medium ease-in-out, 
               background-color 0.3s ease, 
@@ -20,25 +22,25 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
+    height: 100%;
     max-width: 75rem;
     margin: 0 auto;
-    padding: $spacing-md;
+    padding: 0 $spacing-md;
     
     @include responsive(tablet) {
-      padding: $spacing-md $spacing-lg;
+      padding: 0 $spacing-lg;
     }
   }
 
   .header-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    
-    .logo-link {
-      color: var(--random-accent-color);
-      text-decoration: none;
-      
-      &:hover {
-        color: var(--random-accent-color-hover);
+    height: 100%;
+    padding: $spacing-xs 0;
+    .logo-path {
+      transition: fill $transition-fast ease-in-out
+    }
+    &:hover {
+      .logo-path {
+        fill: var(--random-accent-color-hover)
       }
     }
   }

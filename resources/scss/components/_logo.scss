@@ -2,10 +2,11 @@
 
 .logo {
   display: inline-block;
+  height: 100%;
   
   svg {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
     display: block;
     stroke-width: .5%;
     stroke: transparent;

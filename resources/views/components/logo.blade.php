@@ -1,6 +1,8 @@
 <div {{ $attributes->merge(['class' => 'logo ' . ($class ?? '')]) }} style="{{ $style ?? '' }}">
   <svg xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1465 489">
+    viewBox="0 0 1465 489" 
+    height="100%" 
+    width="auto">
 
     <path
       class="logo-path"
