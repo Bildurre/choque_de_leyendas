@@ -1,6 +1,7 @@
 @use '../abstracts/all' as *;
 
 .content-container {
+  width: 100%;
   max-width: 75rem;
   margin: 0 auto;
   padding: $spacing-md $spacing-md $spacing-xl;

@@ -1,0 +1,11 @@
+@use '../abstracts/all' as *;
+
+.page-login {
+  .login-form {
+    width: 100%;
+    margin: auto;
+    @include responsive(mobile) {
+      max-width: 30rem;
+    }
+  }
+}

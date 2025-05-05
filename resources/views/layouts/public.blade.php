@@ -23,7 +23,7 @@
   <!-- Scripts and Styles -->
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body class="page-{{ str_replace('.', '-', Route::currentRouteName()) }}">
   <x-public-header />
 
   <main class="content-container">
