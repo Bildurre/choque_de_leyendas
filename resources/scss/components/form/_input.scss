@@ -27,3 +27,25 @@
     }
   }
 }
+
+/* Estilo para los inputs con autocompletado */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* Cambia el color de fondo y el color del texto */
+  -webkit-box-shadow: 0 0 0 30px var(--color-background) inset !important;
+  -webkit-text-fill-color: var(--color-text-primary) !important;
+  /* La transición con delay largo ayuda a mantener nuestros estilos */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Firefox y otros navegadores */
+@-moz-document url-prefix() {
+  input.form-input {
+    &:focus {
+      background-color: var(--color-background);
+      color: var(--color-text-primary);
+    }
+  }
+}
