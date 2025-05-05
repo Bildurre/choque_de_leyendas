@@ -29,7 +29,8 @@
     text-decoration: none;
     
     .logo {
-      height: 2rem;
+      height: $header-height;
+      padding: $spacing-sm;
     }
   }
   
@@ -55,8 +56,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 1.5rem;
-  height: 1.125rem;
+  width: 2.25rem;
+  height: 1.6875rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -71,7 +72,7 @@
   &__bar {
     display: block;
     width: 100%;
-    height: 0.125rem;
+    height: 0.1875rem;
     background-color: var(--random-accent-color);
     border-radius: $border-radius-sm;
     transition: all $transition-fast;
@@ -86,7 +87,7 @@
   // Animación cuando el sidebar está abierto
   .sidebar-visible & {
     .sidebar-toggle__bar:nth-child(1) {
-      transform: translateY(0.5rem) rotate(45deg);
+      transform: translateY(0.75rem) rotate(45deg);
     }
     
     .sidebar-toggle__bar:nth-child(2) {
@@ -94,7 +95,7 @@
     }
     
     .sidebar-toggle__bar:nth-child(3) {
-      transform: translateY(-0.5rem) rotate(-45deg);
+      transform: translateY(-0.75rem) rotate(-45deg);
     }
   }
 }

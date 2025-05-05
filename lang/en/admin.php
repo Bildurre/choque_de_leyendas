@@ -5,6 +5,7 @@ return [
   'dashboard' => 'Dashboard',
   'welcome' => 'Welcome to the administration panel',
   'toggle_sidebar' => 'Toggle sidebar',
+  'home' => 'Home',
   
   // Sections
   'general' => 'General',

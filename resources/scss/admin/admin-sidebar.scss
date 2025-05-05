@@ -14,7 +14,102 @@
   }
   
   &__inner {
-    padding: $spacing-md;
+    padding: $spacing-md 0;
     min-height: 100%;
+  }
+  
+  &__nav {
+    width: 100%;
+  }
+  
+  &__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  &__item {
+    margin: 0;
+    padding: 0;
+  }
+  
+  &__link {
+    display: flex;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: background-color $transition-fast, color $transition-fast;
+    border-left: 0.25rem solid transparent;
+    
+    &:hover {
+      background-color: var(--random-accent-color-bg);
+      color: var(--random-accent-color);
+    }
+    
+    &--active {
+      background-color: var(--random-accent-color-bg);
+      color: var(--random-accent-color);
+      border-left: 0.25rem solid var(--random-accent-color);
+    }
+  }
+  
+  &__text {
+    margin-left: $spacing-sm;
+  }
+  
+  // Estilos para las secciones
+  &__section {
+    margin: $spacing-md 0;
+  }
+  
+  &__section-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: var(--random-accent-color);
+    }
+  }
+  
+  &__section-title {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+  }
+  
+  &__section-icon {
+    transition: transform $transition-fast;
+    
+    .is-expanded & {
+      transform: rotate(180deg);
+    }
+  }
+  
+  &__submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height $transition-medium ease-in-out;
+    
+    .is-expanded & {
+      max-height: 31.25rem; // Height large enough to accommodate any submenu
+    }
+  }
+  
+  &__submenu &__link {
+    padding-left: $spacing-lg;
   }
 }

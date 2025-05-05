@@ -5,6 +5,7 @@ return [
   'dashboard' => 'Panel principal',
   'welcome' => 'Bienvenido al panel de administración',
   'toggle_sidebar' => 'Alternar menú lateral',
+  'home' => 'Inicio',
   
   // Sections
   'general' => 'General',
