@@ -1,0 +1,24 @@
+@use '../abstracts/all' as *;
+
+.admin-sidebar {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: var(--color-card-bg);
+  border-right: 0.0625rem solid var(--color-card-border);
+  overflow-y: auto;
+  z-index: $z-index-dropdown;
+  transition: transform $transition-medium ease, background-color 0.3s ease;
+  
+  // Oculto por defecto en móvil
+  transform: translateX(-100%);
+  
+  @include responsive(tablet) {
+    transform: translateX(0); // Visible por defecto en tablet
+    grid-row: unset; // Remueve la superposición
+  }
+  
+  &__inner {
+    padding: $spacing-md;
+    min-height: 100%;
+  }
+}

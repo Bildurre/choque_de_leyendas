@@ -2,10 +2,15 @@
 @use 'base/normalize';
 @use 'base/base';
 
-// Layout
-@use 'layout/public-header';
-@use 'layout/public-footer';
-@use 'layout/public-main';
+// Public Layout
+@use 'public/public-header';
+@use 'public/public-footer';
+@use 'public/public-main';
+
+// Admin layout
+@use 'admin/admin-layout';
+@use 'admin/admin-header';
+@use 'admin/admin-sidebar';
 
 // Components
 @use 'components/icons';
