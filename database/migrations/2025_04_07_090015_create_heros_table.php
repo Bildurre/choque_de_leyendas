@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('heroes', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->string('slug')->unique();
+            $table->json('slug');
             $table->json('lore_text')->nullable();
             $table->json('passive_name')->nullable();
             $table->json('passive_description')->nullable();

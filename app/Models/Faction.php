@@ -20,7 +20,8 @@ class Faction extends Model
 
   public $translatable = [
     'name',
-    'lore_text'
+    'lore_text',
+    'slug'
   ];
 
   protected $fillable = [

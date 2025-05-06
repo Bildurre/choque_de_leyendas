@@ -14,9 +14,6 @@ use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
-use App\Http\Controllers\Content\Admin\ContentPageController;
-use App\Http\Controllers\Content\Admin\ContentBlockController;
-use App\Http\Controllers\Content\Admin\ContentImageController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
@@ -64,32 +61,4 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Cards
   Route::resource('cards', CardController::class);
-
-  // Content Management
-  Route::prefix('content')->name('content.')->group(function () {
-    // Content Pages
-    Route::resource('pages', ContentPageController::class);
-    
-    // Content Blocks
-    Route::get('pages/{page}/sections/{section}/blocks/create', [ContentBlockController::class, 'create'])
-      ->name('blocks.create');
-    Route::post('pages/{page}/sections/{section}/blocks', [ContentBlockController::class, 'store'])
-      ->name('blocks.store');
-    Route::get('pages/{page}/sections/{section}/blocks/{block}/edit', [ContentBlockController::class, 'edit'])
-      ->name('blocks.edit');
-    Route::put('pages/{page}/sections/{section}/blocks/{block}', [ContentBlockController::class, 'update'])
-      ->name('blocks.update');
-    Route::delete('pages/{page}/sections/{section}/blocks/{block}', [ContentBlockController::class, 'destroy'])
-      ->name('blocks.destroy');
-    Route::post('pages/{page}/sections/{section}/blocks/reorder', [ContentBlockController::class, 'reorder'])
-      ->name('blocks.reorder');
-    
-    // Content Images
-    Route::get('images', [ContentImageController::class, 'index'])
-      ->name('images.index');
-    Route::post('images', [ContentImageController::class, 'store'])
-      ->name('images.store');
-    Route::delete('images', [ContentImageController::class, 'destroy'])
-      ->name('images.destroy');
-  });
 });

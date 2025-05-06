@@ -49,7 +49,8 @@ class Hero extends Model
         'name',
         'lore_text',
         'passive_name',
-        'passive_description'
+        'passive_description',
+        'slug'
     ];
 
     /**

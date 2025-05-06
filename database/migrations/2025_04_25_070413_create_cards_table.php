@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('cards', function (Blueprint $table) {
       $table->id();
       $table->json('name'); // Cambiado a json para traducciones
-      $table->string('slug')->unique();
+      $table->json('slug');
       $table->string('image')->nullable();
       $table->json('lore_text')->nullable(); // Cambiado a json
       $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');

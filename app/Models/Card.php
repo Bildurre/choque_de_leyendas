@@ -63,6 +63,7 @@ class Card extends Model
     'lore_text',
     'effect',
     'restriction',
+    'slug'
   ];
 
   /**

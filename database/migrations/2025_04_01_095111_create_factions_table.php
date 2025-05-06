@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('factions', function (Blueprint $table) {
       $table->id();
       $table->json('name');
-      $table->string('slug')->unique();
+      $table->json('slug');
       $table->json('lore_text')->nullable();
       $table->string('color', 7);
       $table->string('icon')->nullable();
