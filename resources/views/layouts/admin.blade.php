@@ -31,6 +31,7 @@
       
       <main class="admin-content">
         <div class="admin-content-inner">
+          <x-notifications />
           {{ $slot }}
         </div>
       </main>

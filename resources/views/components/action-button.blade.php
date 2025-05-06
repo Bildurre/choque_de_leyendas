@@ -5,8 +5,7 @@
   'icon' => null,
   'variant' => 'primary',
   'size' => 'md',
-  'confirmMessage' => null,
-  'title' => ''
+  'confirmMessage' => null
 ])
 
 @php
@@ -25,23 +24,25 @@
     <button 
       type="submit" 
       id="{{ $buttonId }}"
-      title="{{ $title }}"
       {{ $attributes->merge(['class' => "$baseClass $variantClass $sizeClass"]) }}
       @if($confirmMessage) data-confirm-message="{{ $confirmMessage }}" @endif
     >
       @if($icon)
         <x-icon :name="$icon" size="sm" class="action-button__icon" />
       @endif
+      
+      <span class="action-button__text">{{ $slot }}</span>
     </button>
   </form>
 @else
   <a 
-    href="{{ $href ?? $route ?? '#' }}"
-    title="{{ $title }}" 
+    href="{{ $href ?? $route ?? '#' }}" 
     {{ $attributes->merge(['class' => "$baseClass $variantClass $sizeClass"]) }}
   >
     @if($icon)
       <x-icon :name="$icon" size="sm" class="action-button__icon" />
     @endif
+    
+    <span class="action-button__text">{{ $slot }}</span>
   </a>
 @endif

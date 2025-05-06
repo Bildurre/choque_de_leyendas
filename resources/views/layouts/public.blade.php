@@ -27,6 +27,7 @@
   <x-public.header />
 
   <main class="content-container">
+    <x-notifications />
     {{ $slot }}
   </main>
 

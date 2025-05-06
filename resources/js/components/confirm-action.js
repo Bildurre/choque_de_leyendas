@@ -12,10 +12,11 @@ export default function initConfirmActions() {
       const confirmMessage = this.getAttribute('data-confirm-message');
       
       // Mostrar diálogo de confirmación
-      if (confirm(confirmMessage)) {
+      if (window.confirm(confirmMessage)) {
         // Si se confirma, enviar el formulario
-        if (this.closest('form')) {
-          this.closest('form').submit();
+        const form = this.closest('form');
+        if (form) {
+          form.submit();
         }
       }
     });

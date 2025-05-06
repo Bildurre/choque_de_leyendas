@@ -35,29 +35,30 @@
   
   // Variants
   &--view {
-    background-color: rgba($color-blue, 0.1);
-    color: $color-blue;
-    
+    svg {
+      stroke: $color-blue;
+    }
     &:hover {
-      background-color: rgba($color-blue, 0.2);
+      background-color: $color-blue-transparent;
     }
   }
   
   &--edit {
-    background-color: rgba($color-green, 0.1);
-    color: $color-green;
-    
+    svg {
+      stroke: $color-green;
+    }
     &:hover {
-      background-color: rgba($color-green, 0.2);
+      background-color: $color-green-transparent;
     }
   }
   
   &--delete {
-    background-color: rgba($color-red, 0.1);
-    color: $color-red;
-    
+    background-color: transparent;
+    svg {
+      stroke: $color-red;
+    }
     &:hover {
-      background-color: rgba($color-red, 0.2);
+      background-color: $color-red-transparent;
     }
   }
   

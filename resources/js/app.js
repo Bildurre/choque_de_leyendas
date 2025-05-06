@@ -5,6 +5,7 @@ import initThemeSwitcher from './components/theme-switcher';
 import initRandomAccentColor from './components/random-accent-color';
 import initSidebar from './components/admin-sidebar';
 import initConfirmActions from './components/confirm-action';
+import initNotifications from './components/notifications';
 
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.public-header');
@@ -18,4 +19,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeSwitcher();
   initRandomAccentColor();
   initConfirmActions();
+  initNotifications();
 });

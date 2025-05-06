@@ -1,4 +1,7 @@
 <x-admin-layout>
+
+
+
   <x-entity.list 
     title="{{ __('hero_classes.plural') }}"
     :create-route="route('admin.hero-classes.create')"
@@ -26,14 +29,9 @@
         
         @if($heroClass->passive)
           <div class="hero-class-passive">
-            <p class="hero-class-passive__title">{{ __('hero_classes.passive') }}:</p>
             <div class="hero-class-passive__text">
               {!! $heroClass->passive !!}
             </div>
-          </div>
-        @else
-          <div class="hero-class-passive">
-            <p class="hero-class-passive__text">{{ __('hero_classes.no_passive') }}</p>
           </div>
         @endif
       </x-entity.list-card>
