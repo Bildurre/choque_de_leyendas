@@ -21,6 +21,7 @@
 @use 'components/badge';
 @use 'components/action-button';
 @use 'components/notification';
+@use 'components/image-picker-dialog';
 
 // Entity Components
 @use 'components/entity/list';
@@ -32,6 +33,9 @@
 @use 'components/form/error';
 @use 'components/form/checkbox';
 @use 'components/form/card';
+@use 'components/form/select';
+@use 'components/form/wysiwyg';
+@use 'components/form/language-tabs';
 
 // Pages
 @use 'pages/login';

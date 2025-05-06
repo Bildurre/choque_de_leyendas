@@ -1,0 +1,46 @@
+@use '../../abstracts/all' as *;
+
+.language-tabs {
+  width: 100%;
+  
+  &__header {
+    display: flex;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+    border-bottom: 0.0625rem solid var(--color-card-border);
+  }
+  
+  &__tab {
+    padding: $spacing-xs $spacing-sm;
+    background: none;
+    border: none;
+    border-bottom: 0.1875rem solid transparent;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all $transition-fast;
+    
+    &:hover {
+      color: var(--color-text-primary);
+    }
+    
+    &--active {
+      color: var(--random-accent-color);
+      border-bottom-color: var(--random-accent-color);
+    }
+  }
+  
+  &__content {
+    width: 100%;
+  }
+  
+  &__panel {
+    display: none;
+    width: 100%;
+    
+    &--active {
+      display: block;
+    }
+  }
+}

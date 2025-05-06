@@ -1,0 +1,50 @@
+@use '../../abstracts/all' as *;
+
+.tox-tinymce {
+  border-radius: $border-radius-sm !important;
+  border-color: var(--color-card-border) !important;
+}
+
+.tox-editor-container {
+  background-color: var(--color-background) !important;
+}
+
+.tox-editor-header {
+  background-color: var(--color-card-bg) !important;
+}
+
+.tox-toolbar__primary {
+  background-color: var(--color-card-bg) !important;
+  border-bottom-color: var(--color-card-border) !important;
+}
+
+.tox-statusbar {
+  background-color: var(--color-card-bg) !important;
+  border-top-color: var(--color-card-border) !important;
+}
+
+// Para el tema oscuro
+[data-theme="dark"] {
+  .tox .tox-toolbar__primary {
+    background-color: var(--color-card-bg) !important;
+  }
+  
+  .tox .tox-toolbar__group {
+    border-color: var(--color-card-border) !important;
+  }
+  
+  .tox .tox-tbtn {
+    color: var(--color-text-primary) !important;
+  }
+  
+  .tox .tox-tbtn--enabled, 
+  .tox .tox-tbtn:hover,
+  .tox .tox-tbtn:focus {
+    background-color: var(--random-accent-color-bg) !important;
+    color: var(--random-accent-color) !important;
+  }
+  
+  .tox .tox-edit-area__iframe {
+    background-color: var(--color-background) !important;
+  }
+}
