@@ -3,7 +3,7 @@
 namespace App\Services\Content;
 
 use App\Models\ContentBlock;
-use App\Models\ContentSection;
+use App\Models\ContentPage;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use App\Services\Traits\HandlesTranslations;
@@ -26,23 +26,23 @@ class ContentBlockService
   }
 
   /**
-   * Get all blocks for a section
+   * Get all blocks for a page
    */
-  public function getBlocks(ContentSection $section): Collection
+  public function getBlocksByPage(ContentPage $page): Collection
   {
-    return $section->blocks;
+    return $page->blocks;
   }
 
   /**
    * Create a new block
    */
-  public function create(ContentSection $section, array $data): ContentBlock
+  public function create(ContentPage $page, array $data): ContentBlock
   {
     // Process translatable fields
     $data = $this->processTranslatableFields($data, $this->translatableFields);
     
     $block = new ContentBlock();
-    $block->content_section_id = $section->id;
+    $block->content_page_id = $page->id;
     $block->type = $data['type'];
     
     // Apply translations
@@ -50,6 +50,8 @@ class ContentBlockService
     
     // Set other fields
     $block->order = $data['order'] ?? 0;
+    $block->anchor_id = $data['anchor_id'] ?? null;
+    $block->background_color = $data['background_color'] ?? null;
     $block->include_in_index = $data['include_in_index'] ?? false;
     $block->image_position = $data['image_position'] ?? 'none';
     
@@ -90,6 +92,14 @@ class ContentBlockService
     
     if (isset($data['order'])) {
       $block->order = $data['order'];
+    }
+    
+    if (isset($data['anchor_id'])) {
+      $block->anchor_id = $data['anchor_id'];
+    }
+    
+    if (isset($data['background_color'])) {
+      $block->background_color = $data['background_color'];
     }
     
     if (isset($data['include_in_index'])) {
@@ -150,14 +160,14 @@ class ContentBlockService
   /**
    * Reorder blocks
    */
-  public function reorder(ContentSection $section, array $blockIds): bool
+  public function reorder(ContentPage $page, array $blockIds): bool
   {
     $order = 0;
     
     foreach ($blockIds as $blockId) {
       $block = ContentBlock::find($blockId);
       
-      if ($block && $block->content_section_id === $section->id) {
+      if ($block && $block->content_page_id === $page->id) {
         $block->order = $order++;
         $block->save();
       }

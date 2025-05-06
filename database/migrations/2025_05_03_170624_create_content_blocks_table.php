@@ -9,7 +9,9 @@ return new class extends Migration
   {
     Schema::create('content_blocks', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('content_section_id')->constrained()->onDelete('cascade');
+      $table->string('anchor_id')->nullable();
+      $table->string('background_color', 7)->nullable();
+      $table->foreignId('content_page_id')->constrained()->onDelete('cascade');
       $table->string('type');
       $table->json('content')->nullable();
       $table->string('image')->nullable();

@@ -31,11 +31,11 @@ class ContentPage extends Model
   ];
 
   /**
-   * Get the sections for this page
+   * Get the blocks for this page
    */
-  public function sections(): HasMany
+  public function blocks(): HasMany
   {
-    return $this->hasMany(ContentSection::class)->orderBy('order');
+    return $this->hasMany(ContentBlock::class, 'content_page_id')->orderBy('order');
   }
 
   /**

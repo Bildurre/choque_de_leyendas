@@ -17,7 +17,6 @@ use App\Http\Controllers\Game\HeroSuperclassController;
 use App\Http\Controllers\Content\Admin\ContentPageController;
 use App\Http\Controllers\Content\Admin\ContentBlockController;
 use App\Http\Controllers\Content\Admin\ContentImageController;
-use App\Http\Controllers\Content\Admin\ContentSectionController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
@@ -70,20 +69,6 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::prefix('content')->name('content.')->group(function () {
     // Content Pages
     Route::resource('pages', ContentPageController::class);
-    
-    // Content Sections
-    Route::get('pages/{page}/sections/create', [ContentSectionController::class, 'create'])
-      ->name('sections.create');
-    Route::post('pages/{page}/sections', [ContentSectionController::class, 'store'])
-      ->name('sections.store');
-    Route::get('pages/{page}/sections/{section}/edit', [ContentSectionController::class, 'edit'])
-      ->name('sections.edit');
-    Route::put('pages/{page}/sections/{section}', [ContentSectionController::class, 'update'])
-      ->name('sections.update');
-    Route::delete('pages/{page}/sections/{section}', [ContentSectionController::class, 'destroy'])
-      ->name('sections.destroy');
-    Route::post('pages/{page}/sections/reorder', [ContentSectionController::class, 'reorder'])
-      ->name('sections.reorder');
     
     // Content Blocks
     Route::get('pages/{page}/sections/{section}/blocks/create', [ContentBlockController::class, 'create'])

@@ -13,7 +13,7 @@ class ContentBlock extends Model
   use HasTranslations;
 
   protected $fillable = [
-    'content_section_id',
+    'content_page_id',
     'type',
     'content',
     'image',
@@ -22,7 +22,9 @@ class ContentBlock extends Model
     'include_in_index',
     'model_type',
     'model_filters',
-    'style_settings'
+    'style_settings',
+    'anchor_id',
+    'background_color'
   ];
 
   public $translatable = [
@@ -35,11 +37,11 @@ class ContentBlock extends Model
   ];
 
   /**
-   * Get the section that owns the block
+   * Get the page that owns the block
    */
-  public function section(): BelongsTo
+  public function page(): BelongsTo
   {
-    return $this->belongsTo(ContentSection::class, 'content_section_id');
+    return $this->belongsTo(ContentPage::class, 'content_page_id');
   }
 
   /**
@@ -84,5 +86,23 @@ class ContentBlock extends Model
     }
     
     return null;
+  }
+  
+  /**
+   * Get a cleaned version of the anchor ID
+   */
+  public function getCleanAnchorIdAttribute(): string
+  {
+    if ($this->anchor_id) {
+      return $this->anchor_id;
+    }
+    
+    // Generar un anchor ID desde el contenido si es un título
+    if ($this->type === 'title' || $this->type === 'subtitle' || $this->type === 'header') {
+      return str_slug($this->getTranslation('content', app()->getLocale()));
+    }
+    
+    // Si no es un título, usar el ID
+    return 'block-' . $this->id;
   }
 }

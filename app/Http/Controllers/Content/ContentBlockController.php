@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Content;
+namespace App\Http\Controllers\Content\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Content\ContentBlockRequest;
 use App\Models\ContentBlock;
 use App\Models\ContentPage;
-use App\Models\ContentSection;
 use App\Services\Content\ContentBlockService;
 use Illuminate\Http\Request;
 
@@ -22,131 +22,100 @@ class ContentBlockController extends Controller
   }
 
   /**
-   * Display a specific content block.
+   * Show the form for creating a new block.
    */
-  public function show(string $pageSlug, string $sectionAnchor, int $blockId)
+  public function create(ContentPage $page)
   {
-    $page = ContentPage::where('slug', $pageSlug)
-      ->where('is_published', true)
-      ->first();
+    $blockTypes = ContentBlock::getTypes();
+    $modelTypes = ContentBlock::getModelTypes();
     
-    if (!$page) {
-      abort(404);
-    }
-    
-    $section = ContentSection::where('content_page_id', $page->id)
-      ->where('anchor_id', $sectionAnchor)
-      ->first();
-    
-    if (!$section) {
-      abort(404);
-    }
-    
-    $block = ContentBlock::where('content_section_id', $section->id)
-      ->where('id', $blockId)
-      ->first();
-    
-    if (!$block) {
-      abort(404);
-    }
-    
-    return view('content.block', compact('page', 'section', 'block'));
+    return view('admin.content.blocks.create', compact('page', 'blockTypes', 'modelTypes'));
   }
 
   /**
-   * Get filtered model list data for model_list block type.
+   * Store a newly created block in storage.
    */
-  public function getModelListData(Request $request, int $blockId)
+  public function store(ContentBlockRequest $request, ContentPage $page)
   {
-    $block = ContentBlock::find($blockId);
-    
-    if (!$block || $block->type !== 'model_list') {
-      return response()->json(['error' => 'Invalid block'], 404);
+    $validated = $request->validated();
+
+    try {
+      $block = $this->contentBlockService->create($page, $validated);
+      return redirect()->route('admin.content.pages.edit', $page)
+        ->with('success', 'Bloque creado correctamente.');
+    } catch (\Exception $e) {
+      return back()->with('error', 'Ha ocurrido un error al crear el bloque: ' . $e->getMessage())->withInput();
     }
-    
-    // Validate that the block's section's page is published
-    $section = $block->section;
-    $page = $section->page;
-    
-    if (!$page->is_published) {
-      return response()->json(['error' => 'Page not published'], 403);
-    }
-    
-    $modelType = $block->model_type;
-    $filters = $block->model_filters ?? [];
-    
-    // Apply any additional filters from the request
-    $requestFilters = $request->input('filters', []);
-    $mergedFilters = array_merge($filters, $requestFilters);
-    
-    // Get the model data based on the model type and filters
-    $data = $this->getModelData($modelType, $mergedFilters);
-    
-    return response()->json($data);
   }
 
   /**
-   * Get model data based on model type and filters.
+   * Show the form for editing the specified block.
    */
-  private function getModelData(string $modelType, array $filters)
+  public function edit(ContentPage $page, ContentBlock $block)
   {
-    // Default response
-    $data = [
-      'items' => [],
-      'total' => 0
-    ];
-    
-    // Get the model based on the model type
-    switch ($modelType) {
-      case 'heroes':
-        $query = \App\Models\Hero::with(['faction', 'race', 'heroClass']);
-        break;
-      
-      case 'cards':
-        $query = \App\Models\Card::with(['faction', 'cardType', 'equipmentType']);
-        break;
-      
-      case 'factions':
-        $query = \App\Models\Faction::withCount(['heroes', 'cards']);
-        break;
-      
-      case 'hero_classes':
-        $query = \App\Models\HeroClass::with('heroSuperclass');
-        break;
-      
-      case 'hero_races':
-        $query = \App\Models\HeroRace::withCount('heroes');
-        break;
-      
-      default:
-        return $data;
+    if ($block->content_page_id !== $page->id) {
+      abort(404);
     }
     
-    // Apply filters
-    foreach ($filters as $key => $value) {
-      if ($value !== null && $value !== '') {
-        // Handle special filters
-        if ($key === 'search' && !empty($value)) {
-          $query->where('name', 'like', "%{$value}%");
-        } elseif (is_array($value)) {
-          $query->whereIn($key, $value);
-        } else {
-          $query->where($key, $value);
-        }
-      }
+    $blockTypes = ContentBlock::getTypes();
+    $modelTypes = ContentBlock::getModelTypes();
+    
+    return view('admin.content.blocks.edit', compact('page', 'block', 'blockTypes', 'modelTypes'));
+  }
+
+  /**
+   * Update the specified block in storage.
+   */
+  public function update(ContentBlockRequest $request, ContentPage $page, ContentBlock $block)
+  {
+    if ($block->content_page_id !== $page->id) {
+      abort(404);
     }
     
-    // Get paginated results
-    $perPage = $filters['per_page'] ?? 10;
-    $page = $filters['page'] ?? 1;
-    $results = $query->paginate($perPage, ['*'], 'page', $page);
+    $validated = $request->validated();
+
+    try {
+      $this->contentBlockService->update($block, $validated);
+      return redirect()->route('admin.content.pages.edit', $page)
+        ->with('success', 'Bloque actualizado correctamente.');
+    } catch (\Exception $e) {
+      return back()->with('error', 'Ha ocurrido un error al actualizar el bloque: ' . $e->getMessage())->withInput();
+    }
+  }
+
+  /**
+   * Remove the specified block from storage.
+   */
+  public function destroy(ContentPage $page, ContentBlock $block)
+  {
+    if ($block->content_page_id !== $page->id) {
+      abort(404);
+    }
     
-    $data['items'] = $results->items();
-    $data['total'] = $results->total();
-    $data['per_page'] = $results->perPage();
-    $data['current_page'] = $results->currentPage();
-    $data['last_page'] = $results->lastPage();
+    try {
+      $this->contentBlockService->delete($block);
+      return redirect()->route('admin.content.pages.edit', $page)
+        ->with('success', 'Bloque eliminado correctamente.');
+    } catch (\Exception $e) {
+      return back()->with('error', 'Ha ocurrido un error al eliminar el bloque: ' . $e->getMessage());
+    }
+  }
+
+  /**
+   * Reorder blocks.
+   */
+  public function reorder(Request $request, ContentPage $page)
+  {
+    $validated = $request->validate([
+      'ids' => 'required|array',
+      'ids.*' => 'integer|exists:content_blocks,id'
+    ]);
     
-    return $data;
+    try {
+      $this->contentBlockService->reorder($page, $validated['ids']);
+      return response()->json(['success' => true]);
+    } catch (\Exception $e) {
+      return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+    }
   }
 }
