@@ -13,13 +13,20 @@ class HeroClassService
   protected $translatableFields = ['name', 'passive'];
 
   /**
-   * Get all hero classes with related superclass
-   *
-   * @return Collection
-   */
-  public function getAllHeroClasses(): Collection
+ * Get hero classes with optional pagination
+ *
+ * @param int|null $perPage Number of items per page, or null for all items
+ * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+ */
+  public function getAllHeroClasses(int $perPage = null): mixed
   {
-    return HeroClass::with('heroSuperclass')->get();
+    $query = HeroClass::with('heroSuperclass')->withCount('heroes');
+    
+    if ($perPage) {
+      return $query->paginate($perPage);
+    }
+    
+    return $query->get();
   }
 
   /**

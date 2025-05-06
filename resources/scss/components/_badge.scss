@@ -1,0 +1,48 @@
+@use '../abstracts/all' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: $border-radius-sm;
+  font-size: 0.75rem;
+  font-weight: 600;
+  
+  // Sizes
+  &--sm {
+    padding: 0.125rem 0.375rem;
+  }
+  
+  &--md {
+    padding: 0.25rem 0.5rem;
+  }
+  
+  &--lg {
+    padding: 0.375rem 0.75rem;
+  }
+  
+  // Variants
+  &--primary {
+    background-color: var(--random-accent-color-bg);
+    color: var(--random-accent-color);
+  }
+  
+  &--secondary {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+  }
+  
+  &--success {
+    background-color: rgba($color-green, 0.1);
+    color: $color-green;
+  }
+  
+  &--danger {
+    background-color: rgba($color-red, 0.1);
+    color: $color-red;
+  }
+  
+  &--info {
+    background-color: rgba($color-blue, 0.1);
+    color: $color-blue;
+  }
+}

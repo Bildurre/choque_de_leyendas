@@ -1,4 +1,4 @@
-// base
+// Base
 @use 'base/normalize';
 @use 'base/base';
 
@@ -18,6 +18,12 @@
 @use 'components/logo';
 @use 'components/theme-switcher';
 @use 'components/button';
+@use 'components/badge';
+@use 'components/action-button';
+
+// Entity Components
+@use 'components/entity/list';
+@use 'components/entity/list-card';
 
 // Form Components
 @use 'components/form/input';

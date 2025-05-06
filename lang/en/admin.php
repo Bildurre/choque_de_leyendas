@@ -20,4 +20,17 @@ return [
   'edit' => 'Edit',
   'delete' => 'Delete',
   'back' => 'Back',
+
+  // Entity Management
+  'no_records' => 'No records available',
+  'confirm_delete' => 'Are you sure you want to delete this item?',
+  'actions' => 'Actions',
+  'details' => 'Details',
+  'view' => 'View',
+  'search' => 'Search',
+  'filter' => 'Filter',
+  'apply_filters' => 'Apply Filters',
+  'reset_filters' => 'Reset Filters',
+  'sort_by' => 'Sort by',
+  'per_page' => 'Per page',
 ];

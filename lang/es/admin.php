@@ -20,4 +20,17 @@ return [
   'edit' => 'Editar',
   'delete' => 'Eliminar',
   'back' => 'Volver',
+
+  // Entity Management
+  'no_records' => 'No hay registros disponibles',
+  'confirm_delete' => '¿Estás seguro de que deseas eliminar este elemento?',
+  'actions' => 'Acciones',
+  'details' => 'Detalles',
+  'view' => 'Ver',
+  'search' => 'Buscar',
+  'filter' => 'Filtrar',
+  'apply_filters' => 'Aplicar Filtros',
+  'reset_filters' => 'Restablecer Filtros',
+  'sort_by' => 'Ordenar por',
+  'per_page' => 'Por página',
 ];

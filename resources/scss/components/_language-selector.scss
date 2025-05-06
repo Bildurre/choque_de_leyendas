@@ -2,7 +2,7 @@
 
 .language-selector {
   display: flex;
-  gap: $spacing-xs;
+  gap: $spacing-sm;
   
   .language-button {
     display: flex;
@@ -12,7 +12,6 @@
     color: var(--color-text-secondary);
     text-decoration: none;
     font-weight: 600;
-    min-width: 2rem;
     transition: all $transition-fast;
     
     &:hover {

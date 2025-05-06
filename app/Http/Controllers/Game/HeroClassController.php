@@ -27,13 +27,7 @@ class HeroClassController extends Controller
    */
   public function index()
   {
-    $heroClasses = $this->heroClassService->getAllHeroClasses();
-    
-    // Obtenemos el conteo de héroes por cada clase
-    // Asumiendo que tienes una relación heroes() en el modelo HeroClass
-    $heroClasses->each(function($heroClass) {
-      $heroClass->heroCount = $heroClass->heroes()->count();
-    });
+    $heroClasses = $this->heroClassService->getAllHeroClasses(12);
     
     return view('admin.hero-classes.index', compact('heroClasses'));
   }

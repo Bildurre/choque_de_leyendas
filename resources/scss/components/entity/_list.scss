@@ -1,0 +1,57 @@
+@use '../../abstracts/all' as *;
+
+.entity-list {
+  width: 100%;
+  
+  &__header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing-md;
+    
+    @include responsive(tablet) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  &__title {
+    margin: 0 0 $spacing-md;
+    
+    @include responsive(tablet) {
+      margin: 0;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    
+    @include responsive(tablet) {
+      margin-bottom: 0;
+    }
+  }
+  
+  &__filters {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+  
+  &__pagination {
+    margin-top: $spacing-lg;
+  }
+  
+  &__empty {
+    text-align: center;
+    padding: $spacing-lg;
+    color: var(--color-text-secondary);
+    background-color: var(--color-card-bg);
+    border-radius: $border-radius-md;
+  }
+}

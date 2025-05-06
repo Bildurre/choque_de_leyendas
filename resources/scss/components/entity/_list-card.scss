@@ -1,0 +1,79 @@
+@use '../../abstracts/all' as *;
+
+.entity-list-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-card-bg);
+  border-radius: $border-radius-md;
+  box-shadow: 0 0.125rem 0.25rem var(--color-shadow);
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md;
+    border-bottom: 0.0625rem solid var(--color-card-border);
+  }
+  
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+  }
+  
+  &__content {
+    padding: $spacing-md;
+    flex-grow: 1;
+  }
+  
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__meta {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: $spacing-sm;
+  }
+  
+  // Estilos para contenido HTML en pasivas u otros campos
+  .hero-class-passive {
+    margin-top: $spacing-md;
+    
+    &__title {
+      font-weight: 600;
+      margin-bottom: $spacing-xs;
+    }
+    
+    &__text {
+      color: var(--color-text-secondary);
+      
+      // Estilos para asegurar que el HTML se muestra correctamente
+      a {
+        color: var(--random-accent-color);
+        text-decoration: underline;
+      }
+      
+      ul, ol {
+        margin-left: $spacing-md;
+        margin-top: $spacing-xs;
+        margin-bottom: $spacing-xs;
+      }
+      
+      p {
+        margin-bottom: $spacing-xs;
+      }
+    }
+  }
+}
