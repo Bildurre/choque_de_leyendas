@@ -8,11 +8,39 @@
   transition: background-color 0.3s ease;
   
   &__container {
+    // Cambiamos flex por grid para tener más control
+    display: grid;
+    grid-template-rows: auto auto;
+    width: 100%;
+    
+    @include responsive(mobile) {
+      grid-template-rows: $header-height-base;
+      grid-template-columns: 1fr auto;
+    }
+  }
+  
+  &__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
     padding: 0 $spacing-md;
+    height: $header-height-base;
+    
+    @include responsive(mobile) {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 $spacing-md $spacing-sm $spacing-md;
+    gap: $spacing-md;
+    
+    @include responsive(mobile) {
+      display: none;
+    }
   }
   
   &__left {
@@ -29,8 +57,8 @@
     text-decoration: none;
     
     .logo {
-      height: $header-height;
-      padding: $spacing-sm;
+      height: calc(#{$header-height-base} - #{$spacing-sm} * 2);
+      padding: $spacing-xs;
     }
   }
   
@@ -48,6 +76,10 @@
     display: flex;
     align-items: center;
     gap: $spacing-md;
+    
+    @include responsive(mobile) {
+      display: none;
+    }
   }
 }
 

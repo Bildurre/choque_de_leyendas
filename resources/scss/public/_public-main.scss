@@ -7,6 +7,10 @@
   padding: $spacing-md $spacing-md $spacing-xl;
   transition: background-color 0.3s ease, color 0.3s ease;
   
-  padding-top: calc(4rem + #{$spacing-md});
-  padding-top: calc(#{$header-height} + #{$spacing-xxl});
+  // Ajustamos el padding-top para el nuevo header
+  padding-top: calc(#{$header-height-base} + #{$spacing-xl});
+  
+  @include responsive(tablet) {
+    padding-top: calc(#{$header-height-big} + #{$spacing-xxl});
+  }
 }

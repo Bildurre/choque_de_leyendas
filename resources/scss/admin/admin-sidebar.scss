@@ -8,9 +8,33 @@
   transition: transform $transition-medium ease, background-color 0.3s ease;
   width: 100%;
   box-shadow: 0 .125rem 0.25rem 0.0125rem var(--random-accent-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateX(-100%);
+  z-index: $z-index-dropdown;
 
   @include responsive(small) {
-    width: $sidebar-width;
+    width: $sidebar-width-base;
+  }
+  
+  @include responsive(tablet) {
+    position: relative;
+    transform: translateX(0);
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  @include responsive(wide) {
+    width: $sidebar-width-big;
+  }
+
+  // Cuando el sidebar está visible en móvil
+  .sidebar-visible {
+    .admin-sidebar {
+      transform: translateX(0);
+    }
   }
   
   &__inner {

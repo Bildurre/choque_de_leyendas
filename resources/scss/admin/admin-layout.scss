@@ -2,14 +2,18 @@
 
 .admin-layout {
   display: grid;
-  grid-template-rows: $header-height 1fr;
+  grid-template-rows: $header-height-base 1fr;
   grid-template-columns: 1fr;
   height: 100vh;
   width: 100%;
   overflow: hidden;
   
   @include responsive(tablet) {
-    grid-template-columns: $sidebar-width 1fr;
+    grid-template-columns: $sidebar-width-base 1fr;
+  }
+
+  @include responsive(wide) {
+    grid-template-columns: $sidebar-width-big 1fr;
   }
 }
 
@@ -22,7 +26,11 @@
   position: relative;
   
   @include responsive(tablet) {
-    grid-template-columns: $sidebar-width 1fr;
+    grid-template-columns: $sidebar-width-base 1fr;
+  }
+
+  @include responsive(wide) {
+    grid-template-columns: $sidebar-width-big 1fr;
   }
 }
 
@@ -32,35 +40,10 @@
   background-color: var(--color-background);
   transition: background-color 0.3s ease;
   padding: $spacing-xl $spacing-md;
-  height: calc(100vh - #{$header-height});
+  height: calc(100vh - #{$header-height-base});
   
   @include responsive(tablet) {
     grid-column: 2;
     padding: $spacing-xxl;
-  }
-}
-
-// Ajustamos el sidebar
-.admin-sidebar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: $sidebar-width;
-  transform: translateX(-100%);
-  z-index: $z-index-dropdown;
-  
-  @include responsive(tablet) {
-    position: relative;
-    transform: translateX(0);
-    grid-column: 1;
-    grid-row: 1;
-  }
-}
-
-// Cuando el sidebar está visible en móvil
-.sidebar-visible {
-  .admin-sidebar {
-    transform: translateX(0);
   }
 }
