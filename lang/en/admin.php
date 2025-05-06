@@ -33,4 +33,7 @@ return [
   'reset_filters' => 'Reset Filters',
   'sort_by' => 'Sort by',
   'per_page' => 'Per page',
+
+  'select_option' => 'Select an option',
+  'form_title' => 'Form Details',
 ];

@@ -9,9 +9,7 @@ export default function initWysiwygEditor() {
   // Encontrar todos los editores WYSIWYG en la página
   const editors = document.querySelectorAll('.wysiwyg-editor');
   if (!editors.length) return;
-  
-  console.log('Initializing WYSIWYG editors:', editors.length);
-  
+    
   // Inicializar cada editor
   editors.forEach(editor => {
     const uploadUrl = editor.dataset.uploadUrl || '';
@@ -52,13 +50,8 @@ export default function initWysiwygEditor() {
       // Configuración para el tema oscuro/claro
       skin: localStorage.getItem('theme') === 'dark' ? 'oxide-dark' : 'oxide',
       content_css: localStorage.getItem('theme') === 'dark' ? 'dark' : 'default',
-      
-      // Función de inicialización, para depuración
-      setup: function(editor) {
-        editor.on('init', function() {
-          console.log('Editor initialized:', editor.id);
-        });
-      }
+
+      license_key: 'gpl'
     });
   });
   

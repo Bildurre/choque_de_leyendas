@@ -33,4 +33,7 @@ return [
   'reset_filters' => 'Restablecer Filtros',
   'sort_by' => 'Ordenar por',
   'per_page' => 'Por página',
+
+  'select_option' => 'Selecciona una opción',
+  'form_title' => 'Detalles del Formulario',
 ];

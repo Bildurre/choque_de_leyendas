@@ -10,7 +10,7 @@
 
 <div class="form-field form-field--multilingual">
   @if($label)
-    <x-form.label :for="$name" :required="$required">{{ $label }}</x-form.label>
+    <x-form.label :for="$name.'_'.$defaultLocale" :required="$required">{{ $label }}</x-form.label>
   @endif
   
   <x-form.language-tabs :locales="$locales" :default-locale="$defaultLocale" :field-name="$name">
