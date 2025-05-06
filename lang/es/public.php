@@ -4,7 +4,8 @@ return [
   'menu' => [
     'explore' => 'Explorar',
     'rules' => 'Reglas',
-    'gallery' => 'Galería'
+    'gallery' => 'Galería',
+    'admin_panel' => 'Administración',
   ],
   'footer' => [
     'explore' => 'Explorar',

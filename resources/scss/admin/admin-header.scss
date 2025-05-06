@@ -2,45 +2,39 @@
 
 .admin-header {
   grid-column: 1 / -1;
-  background-color: var(--color-header-bg);
-  box-shadow: 0 0 0.25rem 0.0125rem var(--random-accent-color);
   z-index: $z-index-header;
-  transition: background-color 0.3s ease;
+  transition: transform $transition-medium ease-in-out;
   
   &__container {
-    // Cambiamos flex por grid para tener más control
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: calc(#{$header-height-base} * 2 / 3) calc(#{$header-height-base} / 3);
     width: 100%;
-    
-    @include responsive(mobile) {
-      grid-template-rows: $header-height-base;
-      grid-template-columns: 1fr auto;
-    }
+  }
+  
+  &__top-container {
+    background-color: var(--color-header-bg);
+    box-shadow: 0 0 0.25rem 0.0125rem var(--random-accent-color);
+    transition: background-color 0.3s ease;
   }
   
   &__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     padding: 0 $spacing-md;
-    height: $header-height-base;
-    
-    @include responsive(mobile) {
-      grid-column: 1 / -1;
-    }
+  }
+  
+  &__bottom-container {
+    background-color: var(--color-header-bg);
+    box-shadow: 0 0 0.25rem 0.0125rem var(--random-accent-color);
+    transition: background-color 0.3s ease;
   }
   
   &__bottom {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 $spacing-md $spacing-sm $spacing-md;
-    gap: $spacing-md;
-    
-    @include responsive(mobile) {
-      display: none;
-    }
+    height: 100%;
+    padding: 0 $spacing-md;
+    // Esta sección queda vacía por ahora
   }
   
   &__left {
@@ -57,7 +51,7 @@
     text-decoration: none;
     
     .logo {
-      height: calc(#{$header-height-base} - #{$spacing-sm} * 2);
+      height: calc(#{$header-height-base} * 0.5);
       padding: $spacing-xs;
     }
   }
@@ -75,10 +69,10 @@
   &__right {
     display: flex;
     align-items: center;
-    gap: $spacing-md;
+    gap: $spacing-sm;
     
-    @include responsive(mobile) {
-      display: none;
+    @include responsive(tablet) {
+      gap: $spacing-md;
     }
   }
 }

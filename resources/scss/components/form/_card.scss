@@ -5,9 +5,8 @@
   margin: 0 auto;
   background-color: var(--color-card-bg);
   border-radius: $border-radius-md;
-  box-shadow: 0 0.125rem 0.5rem var(--color-shadow);
   overflow: hidden;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease;
   
   &__content {
     padding: $spacing-lg;

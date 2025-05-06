@@ -3,7 +3,6 @@
 .admin-sidebar {
   background-color: var(--color-card-bg);
   border-right: 0.0625rem solid var(--color-card-border);
-  box-shadow: 0.125rem 0 0.25rem rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   transition: transform $transition-medium ease, background-color 0.3s ease;
   width: 100%;
@@ -28,14 +27,7 @@
 
   @include responsive(wide) {
     width: $sidebar-width-big;
-  }
-
-  // Cuando el sidebar está visible en móvil
-  .sidebar-visible {
-    .admin-sidebar {
-      transform: translateX(0);
-    }
-  }
+  }  
   
   &__inner {
     padding: $spacing-md 0;
@@ -135,5 +127,11 @@
   
   &__submenu &__link {
     padding-left: $spacing-lg;
+  }
+}
+
+.sidebar-visible {
+  .admin-sidebar {
+    transform: translateX(0);
   }
 }
