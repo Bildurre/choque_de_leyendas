@@ -37,7 +37,7 @@
       </main>
     </div>
   </div>
-
+  <script src="{{ asset('build/tinymce/tinymce.min.js') }}"></script>
   @stack('scripts')
 </body>
 </html>

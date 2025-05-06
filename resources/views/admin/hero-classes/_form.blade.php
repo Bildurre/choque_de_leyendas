@@ -13,16 +13,18 @@
     @method('PUT')
   @endif
   
-  <div class="form-grid">
-    {{-- Campo para el nombre (multilingüe) --}}
+  <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-classes.index')">
+    <x-slot:header>
+      <h2>{{ __('hero_classes.form_title') }}</h2>
+    </x-slot:header>
+    
     <x-form.multilingual-input
       name="name"
       :label="__('hero_classes.name')"
-      :values="$heroClass ? $heroClass->getTranslations('name') : []"
+      :values="isset($heroClass) ? $heroClass->getTranslations('name') : []"
       required
     />
     
-    {{-- Selector para superclase usando nuestro nuevo componente --}}
     <x-form.select
       name="hero_superclass_id"
       :label="__('hero_superclasses.singular')"
@@ -32,18 +34,12 @@
       required
     />
     
-    {{-- Campo para pasiva (multilingüe con WYSIWYG) --}}
     <x-form.multilingual-wysiwyg
       name="passive"
       :label="__('hero_classes.passive')"
-      :values="$heroClass ? $heroClass->getTranslations('passive') : []"
+      :values="isset($heroClass) ? $heroClass->getTranslations('passive') : []"
       :upload-url="route('admin.content.images.store')"
       :images-url="route('admin.content.images.index')"
     />
-  </div>
-  
-  <div class="form-buttons">
-    <x-button type="submit" variant="primary">{{ $submitLabel }}</x-button>
-    <x-button-link :href="route('admin.hero-classes.index')" variant="secondary">{{ __('admin.cancel') }}</x-button-link>
-  </div>
+  </x-form.card>
 </form>

@@ -1,5 +1,6 @@
 @use '../../abstracts/all' as *;
 
+// Estilos base
 .tox-tinymce {
   border-radius: $border-radius-sm !important;
   border-color: var(--color-card-border) !important;
@@ -45,6 +46,12 @@
   }
   
   .tox .tox-edit-area__iframe {
+    background-color: var(--color-background) !important;
+  }
+  
+  // Estilos para el contenido del editor
+  .mce-content-body {
+    color: var(--color-text-primary) !important;
     background-color: var(--color-background) !important;
   }
 }

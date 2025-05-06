@@ -4,12 +4,8 @@
   </div>
   
   <div class="page-content">
-    <div class="card">
-      <div class="card-body">
-        @include('admin.hero-classes._form', [
-          'heroSuperclasses' => $heroSuperclasses
-        ])
-      </div>
-    </div>
+    @include('admin.hero-classes._form', [
+      'heroSuperclasses' => $heroSuperclasses
+    ])
   </div>
 </x-admin-layout>

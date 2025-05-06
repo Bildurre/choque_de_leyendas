@@ -2,10 +2,31 @@
 
 .page-login {
   .login-form {
-    width: 100%;
-    margin: auto;
-    @include responsive(mobile) {
-      max-width: 30rem;
+    .form-card {
+      margin-top: $spacing-xl;
+      width: 100%;
+      margin: auto;
+      @include responsive(mobile) {
+        max-width: 30rem;
+      }
+    }
+    
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-md;
+      flex-wrap: wrap;
+    }
+    
+    .pswd-forgot {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      
+      &:hover {
+        color: var(--random-accent-color);
+      }
     }
   }
 }

@@ -1,11 +1,18 @@
+// resources/js/components/wysiwyg-editor.js
 export default function initWysiwygEditor() {
+  // Verificar si el script de TinyMCE está cargado
   if (typeof tinymce === 'undefined') {
+    console.error('TinyMCE not loaded');
     return;
   }
   
+  // Encontrar todos los editores WYSIWYG en la página
   const editors = document.querySelectorAll('.wysiwyg-editor');
   if (!editors.length) return;
   
+  console.log('Initializing WYSIWYG editors:', editors.length);
+  
+  // Inicializar cada editor
   editors.forEach(editor => {
     const uploadUrl = editor.dataset.uploadUrl || '';
     const imagesUrl = editor.dataset.imagesUrl || '';
@@ -16,18 +23,15 @@ export default function initWysiwygEditor() {
       height: 300,
       menubar: false,
       plugins: [
-        'advlist autolink lists link image charmap preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table paste code help'
+        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'anchor',
+        'searchreplace', 'visualblocks', 'code', 'fullscreen',
+        'insertdatetime', 'media', 'table', 'help'
       ],
       toolbar: 'undo redo | formatselect | ' +
         'bold italic underline | alignleft aligncenter ' +
         'alignright alignjustify | bullist numlist outdent indent | ' +
         'link image | removeformat code',
-      content_css: [
-        // Opcional: Incluir CSS personalizado para el editor
-        // '/path/to/custom-editor-style.css'
-      ],
+      content_css: [],
       // Configuración para subir imágenes
       images_upload_url: uploadUrl,
       automatic_uploads: true,
@@ -45,9 +49,16 @@ export default function initWysiwygEditor() {
             .catch(error => console.error('Error loading images:', error));
         }
       },
-      // Configuración para el tema oscuro
+      // Configuración para el tema oscuro/claro
       skin: localStorage.getItem('theme') === 'dark' ? 'oxide-dark' : 'oxide',
       content_css: localStorage.getItem('theme') === 'dark' ? 'dark' : 'default',
+      
+      // Función de inicialización, para depuración
+      setup: function(editor) {
+        editor.on('init', function() {
+          console.log('Editor initialized:', editor.id);
+        });
+      }
     });
   });
   
@@ -110,11 +121,14 @@ export default function initWysiwygEditor() {
       const formData = new FormData();
       formData.append('image', file);
       
-      fetch(editors[0].dataset.uploadUrl, {
+      // Obtener el token CSRF
+      const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      
+      fetch(uploadUrl, {
         method: 'POST',
         body: formData,
         headers: {
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          'X-CSRF-TOKEN': token
         }
       })
         .then(response => response.json())
