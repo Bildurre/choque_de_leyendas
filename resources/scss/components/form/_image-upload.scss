@@ -1,0 +1,93 @@
+@use '../../abstracts/all' as *;
+
+.form-field--image {
+  margin-bottom: $spacing-lg;
+}
+
+.image-upload {
+  &__preview {
+    margin-bottom: $spacing-sm;
+    position: relative;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    max-width: 20rem;
+    border: 0.0625rem solid var(--color-card-border);
+  }
+  
+  &__img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  &__remove {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: $spacing-xs $spacing-sm;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  &__remove-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: white;
+  }
+  
+  &__remove-input {
+    margin-right: $spacing-xs;
+  }
+  
+  &__input {
+    margin-top: $spacing-sm;
+  }
+  
+  &__help {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: $spacing-xs;
+  }
+}
+
+.form-input-file {
+  display: block;
+  width: 100%;
+  padding: $spacing-sm 0;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  
+  &::-webkit-file-upload-button {
+    background-color: var(--color-card-bg);
+    border: 0.0625rem solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    color: var(--color-text-primary);
+    padding: $spacing-xs $spacing-sm;
+    margin-right: $spacing-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    
+    &:hover {
+      background-color: var(--random-accent-color-bg);
+      color: var(--random-accent-color);
+      border-color: var(--random-accent-color);
+    }
+  }
+}
+
+.form-fieldset {
+  border: 0.0625rem solid var(--color-card-border);
+  border-radius: $border-radius-sm;
+  padding: $spacing-md;
+  margin-bottom: $spacing-lg;
+  
+  legend {
+    padding: 0 $spacing-xs;
+    font-weight: 600;
+  }
+}

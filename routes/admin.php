@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Game\CardController;
 use App\Http\Controllers\Game\HeroController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Game\FactionController;
 use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\HeroRaceController;
@@ -61,4 +62,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Cards
   Route::resource('cards', CardController::class);
+
+  // Pages
+  Route::resource('pages', PageController::class);
 });

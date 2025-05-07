@@ -19,9 +19,8 @@ use App\Services\Game\EquipmentTypeService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
 use App\Services\Game\HeroSuperclassService;
+use App\Services\Content\PageService;
 use App\Services\Game\HeroAttributesConfigurationService;
-
-
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -83,6 +82,13 @@ class AppServiceProvider extends ServiceProvider
         return new CardService(
           $app->make(ImageService::class),
           $app->make(CostTranslatorService::class)
+        );
+      });
+
+      // Content services
+      $this->app->singleton(PageService::class, function ($app) {
+        return new PageService(
+          $app->make(ImageService::class)
         );
       });
     }

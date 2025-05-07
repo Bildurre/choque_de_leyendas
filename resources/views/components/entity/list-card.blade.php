@@ -12,35 +12,30 @@
     
     <div class="entity-list-card__actions">
       @if($viewRoute)
-        <x-action-button 
-          :href="$viewRoute" 
-          icon="eye" 
-          variant="view" 
-          size="sm"
-          title="{{ __('admin.view') }}"
-        />
+        <a href="{{ $viewRoute }}" class="action-button action-button--view" title="{{ __('admin.view') }}" target="_blank">
+          <x-icon name="eye" size="sm" class="action-button__icon" />
+        </a>
       @endif
       
       @if($editRoute)
-        <x-action-button 
-          :href="$editRoute" 
-          icon="edit" 
-          variant="edit" 
-          size="sm"
-          title="{{ __('admin.edit') }}"
-        />
+        <a href="{{ $editRoute }}" class="action-button action-button--edit" title="{{ __('admin.edit') }}">
+          <x-icon name="edit" size="sm" class="action-button__icon" />
+        </a>
       @endif
       
       @if($deleteRoute)
-        <x-action-button 
-          :route="$deleteRoute" 
-          icon="trash" 
-          variant="delete" 
-          size="sm"
-          :confirm-message="$confirmMessage"
-          method="DELETE"
-          title="{{ __('admin.delete') }}"
-        />
+        <form action="{{ $deleteRoute }}" method="POST" class="action-button-form">
+          @csrf
+          @method('DELETE')
+          <button 
+            type="submit" 
+            class="action-button action-button--delete"
+            data-confirm-message="{{ $confirmMessage }}"
+            title="{{ __('admin.delete') }}"
+          >
+            <x-icon name="trash" size="sm" class="action-button__icon" />
+          </button>
+        </form>
       @endif
       
       {{ $actions ?? '' }}

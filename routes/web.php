@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Content\PageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,8 +17,8 @@ Route::middleware('auth')->group(function () {
 
 // Content routes
 Route::prefix('content')->name('content.')->group(function () {
-  Route::get('/', [\App\Http\Controllers\Content\PageController::class, 'index'])->name('index');
-  Route::get('/{slug}', [\App\Http\Controllers\Content\PageController::class, 'show'])->name('page.show');
+  Route::get('/', [PageController::class, 'index'])->name('index');
+  Route::get('/{slug}', [PageController::class, 'show'])->name('page');
 });
 
 Route::get('/language/{locale}', [LanguageController::class, 'change'])->name('language.change');
