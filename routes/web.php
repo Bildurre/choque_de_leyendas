@@ -14,6 +14,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Content routes
+Route::prefix('content')->name('content.')->group(function () {
+  Route::get('/', [\App\Http\Controllers\Content\PageController::class, 'index'])->name('index');
+  Route::get('/{slug}', [\App\Http\Controllers\Content\PageController::class, 'show'])->name('page.show');
+});
+
 Route::get('/language/{locale}', [LanguageController::class, 'change'])->name('language.change');
 
 

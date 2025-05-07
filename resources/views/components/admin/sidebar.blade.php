@@ -121,7 +121,7 @@
           
           <ul class="admin-sidebar__submenu" id="section-content">
             <li class="admin-sidebar__item">
-              <a href="{{ route('admin.content.pages.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.content.pages.*') ? 'admin-sidebar__link--active' : '' }}">
+              <a href="#" class="admin-sidebar__link {{ request()->routeIs('admin.content.pages.*') ? 'admin-sidebar__link--active' : '' }}">
                 <span class="admin-sidebar__text">{{ __('pages.plural') }}</span>
               </a>
             </li>
