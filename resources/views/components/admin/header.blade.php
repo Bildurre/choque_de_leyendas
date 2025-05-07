@@ -15,7 +15,6 @@
         </div>
 
         <div class="admin-header__right">
-          <x-language-selector />
           <x-theme-switcher />
         </div>
       </div>

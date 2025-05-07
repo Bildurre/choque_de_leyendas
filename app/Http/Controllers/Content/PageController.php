@@ -11,27 +11,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class PageController extends Controller
 {
     /**
-     * Display the content home page.
-     */
-    public function index(): View
-    {
-        $locale = app()->getLocale();
-        
-        // Try to find a home page
-        $homePage = Page::published()
-            ->whereJsonContains("slug->{$locale}", 'home')
-            ->first();
-        
-        if ($homePage) {
-            return $this->show($homePage);
-        }
-        
-        // Otherwise, show a list of root pages
-        $pages = Page::published()->root()->orderBy('order')->get();
-        return view('content.index', compact('pages'));
-    }
-
-    /**
      * Display a specific page.
      */
     public function show(Page $page): View

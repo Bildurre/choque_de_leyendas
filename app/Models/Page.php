@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
@@ -14,7 +14,7 @@ class Page extends Model implements LocalizedUrlRoutable
 {
     use HasFactory;
     use SoftDeletes;
-    use HasSlug;
+    use HasTranslatableSlug;
     use HasTranslations;
 
     /**
@@ -92,7 +92,7 @@ class Page extends Model implements LocalizedUrlRoutable
         $locale = app()->getLocale();
         return $this->where(function ($query) use ($value, $locale) {
             $query->whereJsonContains("slug->{$locale}", $value);
-        })->first() ?? abort(404);
+        })->firstOrFail();
     }
 
     /**

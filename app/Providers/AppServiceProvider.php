@@ -2,25 +2,15 @@
 
 namespace App\Providers;
 
-use App\Services\Game\CardService;
-use App\Services\Game\HeroService;
 use App\Services\Media\ImageService;
 use Illuminate\Pagination\Paginator;
-use App\Services\Game\FactionService;
-use App\Services\Game\CardTypeService;
-use App\Services\Game\HeroRaceService;
 use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use App\Services\Game\AttackRangeService;
-use App\Services\Game\HeroAbilityService;
-use App\Services\Game\AttackSubtypeService;
-use App\Services\Game\EquipmentTypeService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
-use App\Services\Game\HeroSuperclassService;
 use App\Services\Content\PageService;
-use App\Services\Game\HeroAttributesConfigurationService;
+use App\Services\LocalizedRoutingService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         HeroClassService::class,
         CostTranslatorService::class,
         WysiwygImageService::class,
+        LocalizedRoutingService::class,
       ];
       
       foreach ($services as $service) {

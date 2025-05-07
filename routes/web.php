@@ -23,11 +23,10 @@ Route::group([
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    // Content routes - using translated route
-    Route::get(LaravelLocalization::transRoute('routes.content') . '/{page}', [PageController::class, 'show'])->name('content.page');
-    Route::get(LaravelLocalization::transRoute('routes.content'), [PageController::class, 'index'])->name('content.index');
+    // Rutas de contenido
+    Route::get('/{page}', [PageController::class, 'show'])->name('content.page')
+      ->where('page', '(?!admin|api|login|register|profile|pages).*');
 });
 
-// Include admin routes - these are separate and not localized in the same way
 require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';
