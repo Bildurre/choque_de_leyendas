@@ -23,13 +23,6 @@
           :values="isset($page) ? $page->getTranslations('title') : []"
           required
         />
-
-        <x-form.multilingual-input
-          name="slug"
-          :label="__('pages.slug')"
-          :values="isset($page) ? $page->getTranslations('slug') : []"
-          required
-        />
         
         <x-form.multilingual-wysiwyg
           name="description"

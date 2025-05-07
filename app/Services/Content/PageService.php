@@ -13,7 +13,7 @@ class PageService
   use HandlesTranslations;
   
   protected $imageService;
-  protected $translatableFields = ['title', 'description', 'meta_title', 'meta_description', 'slug'];
+  protected $translatableFields = ['title', 'description', 'meta_title', 'meta_description'];
 
   /**
    * Create a new service instance.

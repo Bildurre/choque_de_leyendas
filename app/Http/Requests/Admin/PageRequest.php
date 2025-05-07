@@ -29,14 +29,6 @@ class PageRequest extends FormRequest
     $rules = [
       'title' => 'required|array',
       'title.es' => 'required|string|max:255',
-      'slug' => 'required|array',
-      'slug.es' => [
-        'required',
-        'string',
-        'max:255',
-        'alpha_dash',
-        Rule::unique('pages')->ignore($pageId),
-      ],
       'description' => 'nullable|array',
       'meta_title' => 'nullable|array',
       'meta_description' => 'nullable|array',
@@ -53,20 +45,8 @@ class PageRequest extends FormRequest
     foreach ($locales as $locale) {
       if ($locale !== 'es') {
         $rules["title.{$locale}"] = 'nullable|string|max:255';
-        $rules["slug.{$locale}"] = [
-          'nullable',
-          'string',
-          'max:255',
-          'alpha_dash',
-          Rule::unique('pages')->ignore($pageId),
-        ];
       }
     }
-
-    $rules = array_merge(
-      $rules, 
-      $this->uniqueTranslatableRules('pages', 'slug', $pageId, $locales)
-    );
     
     return $rules;
   }
@@ -79,8 +59,6 @@ class PageRequest extends FormRequest
     return [
       'title.required' => 'The page title is required.',
       'title.es.required' => 'The page title in Spanish is required.',
-      'slug.required' => 'The page slug is required.',
-      'slug.unique' => 'This slug is already in use.',
       'parent_id.exists' => 'The selected parent page does not exist.',
     ];
   }

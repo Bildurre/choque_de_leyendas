@@ -17,6 +17,11 @@ class Page extends Model
   use HasImageAttribute;
   use HasTranslations;
 
+   /**
+   * Define the source field for slug generation
+   */
+  const SLUG_SOURCE = 'title';
+
   /**
    * The attributes that are mass assignable.
    *
@@ -24,7 +29,6 @@ class Page extends Model
    */
   protected $fillable = [
     'title',
-    'slug',
     'description',
     'image',
     'is_published',
