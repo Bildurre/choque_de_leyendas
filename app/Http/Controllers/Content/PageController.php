@@ -6,55 +6,48 @@ use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PageController extends Controller
 {
-  /**
-   * Display the content home page.
-   */
-  public function index(): View
-  {
-    // This could be a dedicated home page or a list of root pages
-    $homePage = Page::published()->where('slug', 'home')->first();
-    
-    if ($homePage) {
-      return $this->show($homePage->slug);
+    /**
+     * Display the content home page.
+     */
+    public function index(): View
+    {
+        $locale = app()->getLocale();
+        
+        // Try to find a home page
+        $homePage = Page::published()
+            ->whereJsonContains("slug->{$locale}", 'home')
+            ->first();
+        
+        if ($homePage) {
+            return $this->show($homePage);
+        }
+        
+        // Otherwise, show a list of root pages
+        $pages = Page::published()->root()->orderBy('order')->get();
+        return view('content.index', compact('pages'));
     }
-    
-    $pages = Page::published()->root()->orderBy('order')->get();
-    return view('content.index', compact('pages'));
-  }
 
-  /**
-   * Display a specific page by slug.
-   */
-  public function show(string $slug): View
-  {
-    $locale = app()->getLocale();
-    
-    // Esta consulta puede ser complicada con JSON, intentemos un enfoque diferente
-    $pages = Page::published()->get();
-    $page = null;
-    
-    foreach ($pages as $p) {
-      if ($p->getTranslation('slug', $locale, false) === $slug) {
-        $page = $p;
-        break;
-      }
+    /**
+     * Display a specific page.
+     */
+    public function show(Page $page): View
+    {
+        if (!$page->isPublished()) {
+            abort(404, 'Page not found');
+        }
+        
+        // Verify if the template exists, use default if not
+        $template = $page->template ?: 'default';
+        $view = "content.templates.{$template}";
+        
+        if (!view()->exists($view)) {
+            $view = 'content.templates.default';
+        }
+        
+        return view($view, compact('page'));
     }
-    
-    if (!$page) {
-      abort(404, 'Página no encontrada');
-    }
-    
-    // Verificar si existe la plantilla, usar default si no
-    $template = $page->template ?: 'default';
-    $view = "content.templates.{$template}";
-    
-    if (!view()->exists($view)) {
-      $view = 'content.templates.default';
-    }
-    
-    return view($view, compact('page'));
-  }
 }

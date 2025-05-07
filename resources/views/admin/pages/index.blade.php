@@ -10,7 +10,7 @@
         :title="$page->title"
         :edit-route="route('admin.pages.edit', $page)"
         :delete-route="route('admin.pages.destroy', $page)"
-        :view-route="$page->getTranslation('slug', app()->getLocale()) ? url('content/' . $page->getTranslation('slug', app()->getLocale())) : null"
+        :view-route="localized_route('content.page', $page, app()->getLocale())"
         :confirm-message="__('pages.confirm_delete')"
       >
         <x-slot:badges>

@@ -1,7 +1,4 @@
 <x-admin-layout>
-
-
-
   <x-entity.list 
     title="{{ __('hero_classes.plural') }}"
     :create-route="route('admin.hero-classes.create')"
