@@ -16,10 +16,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Content routes
-Route::prefix('content')->name('content.')->group(function () {
-  Route::get('/', [PageController::class, 'index'])->name('index');
-  Route::get('/{slug}', [PageController::class, 'show'])->name('page');
-});
+Route::get('/{slug}', [PageController::class, 'show'])->name('page');
 
 require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';

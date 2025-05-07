@@ -27,7 +27,7 @@
               @endif
             @endauth
             <li class="nav-item">
-              <a href="{{ route('content.index') }}" class="nav-link">{{ __('public.menu.explore') }}</a>
+              <a href="#" class="nav-link">{{ __('public.menu.explore') }}</a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">{{ __('public.menu.rules') }}</a>
