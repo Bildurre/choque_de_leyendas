@@ -21,8 +21,5 @@ Route::prefix('content')->name('content.')->group(function () {
   Route::get('/{slug}', [PageController::class, 'show'])->name('page');
 });
 
-Route::get('/language/{locale}', [LanguageController::class, 'change'])->name('language.change');
-
-
 require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';

@@ -44,16 +44,8 @@ class AppServiceProvider extends ServiceProvider
       $services = [
         ImageService::class,
         HeroClassService::class,
-        HeroSuperclassService::class,
-        HeroAttributesConfigurationService::class,
         CostTranslatorService::class,
-        AttackSubtypeService::class,
-        AttackRangeService::class,
-        HeroAbilityService::class,
         WysiwygImageService::class,
-        HeroRaceService::class,
-        EquipmentTypeService::class,
-        CardTypeService::class,
       ];
       
       foreach ($services as $service) {
@@ -66,26 +58,6 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerDependentServices(): void
     {
-      // Game services
-      $this->app->singleton(FactionService::class, function ($app) {
-        return new FactionService($app->make(ImageService::class));
-      });
-      
-      $this->app->singleton(HeroService::class, function ($app) {
-        return new HeroService(
-          $app->make(ImageService::class),
-          $app->make(HeroAttributesConfigurationService::class)
-        );
-      });
-      
-      $this->app->singleton(CardService::class, function ($app) {
-        return new CardService(
-          $app->make(ImageService::class),
-          $app->make(CostTranslatorService::class)
-        );
-      });
-
-      // Content services
       $this->app->singleton(PageService::class, function ($app) {
         return new PageService(
           $app->make(ImageService::class)
