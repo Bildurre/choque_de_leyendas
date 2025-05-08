@@ -38,4 +38,9 @@ return [
 
   'select_option' => 'Select an option',
   'form_title' => 'Form Details',
+
+
+  'drag_image_here' => 'Drag image here',
+  'or_click_to_browse' => 'or click to browse',
+  'remove_image' => 'Remove image',
 ];

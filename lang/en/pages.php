@@ -29,4 +29,5 @@ return [
   'no_pages' => 'No pages available.',
   'no_blocks' => 'This page does not have any content blocks yet.',
   'edit_details' => 'Page Details',
+  'remove_parent' => 'Eliminar página padre',
 ];

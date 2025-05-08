@@ -24,9 +24,9 @@
     {{ $attributes }}
   >
     @if($placeholder)
-      <option value="" {{ is_null($selected) ? 'selected' : '' }} disabled>{{ $placeholder }}</option>
+      <option value="" {{ is_null($selected) ? 'selected' : '' }} {{ $required ? 'disabled' : '' }}>{{ $placeholder }}</option>
     @endif
-
+    
     @foreach($options as $value => $label)
       @php
         $isSelected = false;

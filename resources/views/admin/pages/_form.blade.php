@@ -47,14 +47,16 @@
           :selected="old('parent_id', isset($page) ? $page->parent_id : null)"
           :placeholder="__('pages.no_parent')"
         />
-        
-        <x-form.input
-          type="number"
-          name="order"
-          :label="__('pages.order')"
-          :value="old('order', isset($page) ? $page->order : 0)"
-          min="0"
-        />
+
+        <div id="order-field-container" style="{{ old('parent_id', isset($page) ? $page->parent_id : null) ? '' : 'display: none;' }}">
+          <x-form.input
+            type="number"
+            name="order"
+            :label="__('pages.order')"
+            :value="old('order', isset($page) ? $page->order : 0)"
+            min="0"
+          />
+        </div>
         
         <x-form.checkbox
           name="is_published"
@@ -77,17 +79,13 @@
             :values="isset($page) ? $page->getTranslations('meta_description') : []"
           />
         </fieldset>
-        
-        <fieldset class="form-fieldset">
-          <legend>{{ __('pages.images') }}</legend>
           
-          <x-form.image-upload
-            name="background_image"
-            :label="__('pages.background_image')"
-            :current-image="isset($page) && $page->background_image ? asset('storage/' . $page->background_image) : null"
-            :remove-name="'remove_background_image'"
-          />
-        </fieldset>
+        <x-form.image-upload
+          name="background_image"
+          :label="__('pages.background_image')"
+          :current-image="isset($page) && $page->background_image ? asset('storage/' . $page->background_image) : null"
+          :remove-name="'remove_background_image'"
+        />
       </div>
     </div>
   </x-form.card>

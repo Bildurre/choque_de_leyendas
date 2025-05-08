@@ -13,6 +13,8 @@ import initWysiwygEditor from './components/wysiwyg-editor';
 import initReorderableLists from './components/reorderable-list';
 import initCollapsibleSections from './components/collapsible-section';
 import initAccordions from './components/accordion';
+import initConditionalFields from './components/conditional-fields';
+import initImageUpload from './components/image-upload';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -23,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguageTabs();
   initWysiwygEditor();
   initReorderableLists();
+  initConditionalFields();
+  initImageUpload();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

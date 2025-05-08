@@ -38,4 +38,8 @@ return [
 
   'select_option' => 'Selecciona una opción',
   'form_title' => 'Detalles del Formulario',
+
+  'drag_image_here' => 'Arrastra una imagen aquí',
+  'or_click_to_browse' => 'o haz clic para buscar',
+  'remove_image' => 'Eliminar imagen',
 ];
