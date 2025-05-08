@@ -4,7 +4,7 @@ export default function initAccordions() {
   
   if (!accordions.length) return;
   
-  // Esperar a que la función updateCollapsibleState esté disponible (desde collapsible-section.js)
+  // Esperar a que la función updateCollapsibleState esté disponible
   const waitForUpdateFunction = () => {
     if (typeof window.updateCollapsibleState === 'undefined') {
       setTimeout(waitForUpdateFunction, 50);
@@ -39,10 +39,10 @@ export default function initAccordions() {
           localStorage.setItem(`accordion-${accordionId}-last-opened`, openedSectionId);
         }
         
-        // Cerrar todas las otras secciones
+        // Cerrar todas las otras secciones con animación
         sections.forEach(section => {
           if (section.id !== openedSectionId) {
-            window.updateCollapsibleState(section, true);
+            window.updateCollapsibleState(section, true, true);
           }
         });
       });
@@ -54,70 +54,49 @@ export default function initAccordions() {
     const accordionId = accordion.id;
     
     if (isSidebarAccordion) {
-      // Para acordeón de sidebar: expandir sección con enlace activo
+      // Para acordeón de sidebar: expandir sección con enlace activo sin animación
       let activeFound = false;
       
       sections.forEach(section => {
         const hasActiveLink = section.querySelector('.admin-sidebar__link--active');
         
         if (hasActiveLink) {
-          window.updateCollapsibleState(section, false); // Expandir
+          window.updateCollapsibleState(section, false, false); // Expandir sin animación
           activeFound = true;
-        } else {
-          window.updateCollapsibleState(section, true); // Colapsar
         }
+        // El resto ya está colapsado por defecto
       });
-      
-      // Si no se encontró sección activa, colapsar todas
-      if (!activeFound) {
-        sections.forEach(section => {
-          window.updateCollapsibleState(section, true);
-        });
-      }
     } else {
       // Para acordeones normales: 
       // 1. Usar la última sección abierta guardada
       // 2. Si no hay, usar localStorage individual 
-      // 3. Por defecto, todas colapsadas
-      const lastOpenedId = localStorage.getItem(`accordion-${accordionId}-last-opened`);
-      let anyExpanded = false;
+      // 3. Por defecto, todo queda colapsado
+      let sectionToExpand = null;
       
+      // Buscar la última sección abierta
+      const lastOpenedId = localStorage.getItem(`accordion-${accordionId}-last-opened`);
       if (lastOpenedId) {
-        // Buscar y expandir la última sección abierta
-        sections.forEach(section => {
-          if (section.id === lastOpenedId) {
-            window.updateCollapsibleState(section, false);
-            anyExpanded = true;
-          } else {
-            window.updateCollapsibleState(section, true);
-          }
-        });
+        sectionToExpand = document.getElementById(lastOpenedId);
       }
       
-      // Si no hay última abierta, revisar localStorage individual
-      if (!anyExpanded) {
-        sections.forEach(section => {
+      // Si no hay última abierta, buscar en localStorage individual
+      if (!sectionToExpand) {
+        for (const section of sections) {
           const savedState = localStorage.getItem(`section-${section.id}`);
           if (savedState === 'expanded') {
-            window.updateCollapsibleState(section, false);
+            sectionToExpand = section;
             // Marcar esta como última abierta
             localStorage.setItem(`accordion-${accordionId}-last-opened`, section.id);
-            anyExpanded = true;
-            
-            // Solo permitir una expandida
-            return; 
-          } else {
-            window.updateCollapsibleState(section, true);
+            break;
           }
-        });
+        }
       }
       
-      // Si ninguna está expandida, colapsar todas por defecto
-      if (!anyExpanded) {
-        sections.forEach(section => {
-          window.updateCollapsibleState(section, true);
-        });
+      // Si encontramos una sección para expandir, hacerlo sin animación
+      if (sectionToExpand) {
+        window.updateCollapsibleState(sectionToExpand, false, false);
       }
+      // El resto ya está colapsado por defecto
     }
   }
   

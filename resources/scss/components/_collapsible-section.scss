@@ -3,6 +3,17 @@
 .collapsible-section {
   margin-bottom: $spacing-xl;
   
+  // Eliminar animaciones durante la carga inicial
+  &--no-animation {
+    .collapsible-section__content {
+      transition: none !important;
+    }
+    
+    .collapsible-section__icon {
+      transition: none !important;
+    }
+  }
+  
   &__header {
     display: flex;
     justify-content: space-between;
@@ -10,6 +21,7 @@
     margin-bottom: $spacing-md;
     padding-bottom: $spacing-sm;
     border-bottom: 1px solid var(--color-card-border);
+    cursor: pointer;
   }
   
   &__title {
