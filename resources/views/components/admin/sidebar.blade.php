@@ -17,12 +17,11 @@
           </a>
         </li>
 
-        <x-accordion id="admin-sidebar-accordion">
+        <x-accordion id="admin-sidebar-accordion" :is-sidebar="true">
           <!-- Sección Game Components -->
           <x-collapsible-section 
             id="game-components-section" 
             title="{{ __('admin.game') }}"
-            :collapsed="!request()->routeIs('admin.factions.*', 'admin.heroes.*', 'admin.cards.*')"
           >
             <ul class="admin-sidebar__submenu">
               <li class="admin-sidebar__item">
@@ -47,7 +46,6 @@
           <x-collapsible-section 
             id="hero-system-section" 
             title="{{ __('heroes.system') }}"
-            :collapsed="!request()->routeIs('admin.hero-races.*', 'admin.hero-superclasses.*', 'admin.hero-classes.*', 'admin.hero-abilities.*', 'admin.hero-attributes-configurations.*')"
           >
             <ul class="admin-sidebar__submenu">
               <li class="admin-sidebar__item">
@@ -82,7 +80,6 @@
           <x-collapsible-section 
             id="card-system-section" 
             title="{{ __('cards.system') }}"
-            :collapsed="!request()->routeIs('admin.card-types.*', 'admin.equipment-types.*', 'admin.attack-subtypes.*', 'admin.attack-ranges.*')"
           >
             <ul class="admin-sidebar__submenu">
               <li class="admin-sidebar__item">
@@ -112,7 +109,6 @@
           <x-collapsible-section 
             id="content-section" 
             title="{{ __('admin.content') }}"
-            :collapsed="!request()->routeIs('admin.pages.*')"
           >
             <ul class="admin-sidebar__submenu">
               <li class="admin-sidebar__item">

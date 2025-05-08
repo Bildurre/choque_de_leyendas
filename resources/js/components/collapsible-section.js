@@ -1,82 +1,88 @@
 export default function initCollapsibleSections() {
-  // Obtener todos los botones de toggle
-  const toggleButtons = document.querySelectorAll('.collapsible-section__toggle');
+  // Obtener todos los botones de toggle y secciones
+  const collapsibleSections = document.querySelectorAll('.collapsible-section');
+  
+  if (!collapsibleSections.length) return;
   
   // Función para actualizar el icono según el estado
-  function updateIcon(button, isCollapsed) {
-    const icon = button.querySelector('.collapsible-section__icon');
+  function updateIcon(section) {
+    const button = section.querySelector('.collapsible-section__toggle');
+    const icon = button?.querySelector('.collapsible-section__icon');
     if (!icon) return;
     
-    // Limpiar clases existentes
-    icon.classList.remove('icon--chevron-up', 'icon--chevron-down');
+    // Actualizar icon basado en el estado actual
+    const isCollapsed = section.classList.contains('is-collapsed');
     
-    // Agregar la clase correcta según el estado
+    icon.classList.remove('icon--chevron-up', 'icon--chevron-down');
     icon.classList.add(isCollapsed ? 'icon--chevron-down' : 'icon--chevron-up');
   }
   
-  // Agregar evento de clic a cada botón
-  toggleButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const targetId = this.getAttribute('data-target');
-      const section = document.getElementById(targetId);
-      
-      if (!section) return;
-      
-      // Toggle la clase collapsed
-      const wasCollapsed = section.classList.contains('is-collapsed');
-      section.classList.toggle('is-collapsed');
-      
-      // Actualizar el icono
-      updateIcon(this, !wasCollapsed);
-      
-      // Si la sección se acaba de expandir y está dentro de un acordeón,
-      // disparar evento para cerrar otras secciones
-      if (wasCollapsed) {
-        const accordion = section.closest('.accordion');
-        if (accordion) {
-          const event = new CustomEvent('section:opened', {
-            detail: { sectionId: section.id }
-          });
-          accordion.dispatchEvent(event);
-        }
-      }
-      
-      // Guardar estado en localStorage
-      localStorage.setItem(`section-${targetId}`, section.classList.contains('is-collapsed') ? 'collapsed' : 'expanded');
-    });
-  });
-  
-  // Inicializar estado de las secciones
-  document.querySelectorAll('.collapsible-section').forEach(section => {
-    const id = section.id;
-    const savedState = localStorage.getItem(`section-${id}`);
-    const toggleButton = section.querySelector('.collapsible-section__toggle');
+  // Función para actualizar el estado del collapsible
+  function updateCollapsibleState(section, collapsed = null) {
+    // Si collapsed es null, alternamos el estado
+    const newState = collapsed !== null ? collapsed : !section.classList.contains('is-collapsed');
     
-    // Verificar si la sección contiene un enlace activo
-    const hasActiveLink = section.querySelector('.admin-sidebar__link--active');
-    
-    let shouldBeCollapsed = false;
-    
-    // Determinar si la sección debe estar colapsada
-    if (savedState === 'collapsed' && !hasActiveLink) {
-      shouldBeCollapsed = true;
-    } else if (savedState === 'expanded' || hasActiveLink) {
-      shouldBeCollapsed = false;
-    } else {
-      // Si no hay estado guardado, usar el valor predeterminado del HTML
-      shouldBeCollapsed = section.classList.contains('is-collapsed');
-    }
-    
-    // Establecer el estado de colapso
-    if (shouldBeCollapsed) {
+    // Actualizar clase
+    if (newState) {
       section.classList.add('is-collapsed');
     } else {
       section.classList.remove('is-collapsed');
     }
     
-    // Actualizar el icono según el estado
-    if (toggleButton) {
-      updateIcon(toggleButton, shouldBeCollapsed);
-    }
+    // Actualizar icono
+    updateIcon(section);
+    
+    return newState;
+  }
+  
+  // Agregar event listeners a todos los botones
+  collapsibleSections.forEach(section => {
+    const button = section.querySelector('.collapsible-section__toggle');
+    const sectionId = section.id;
+    const accordion = section.closest('.accordion');
+    
+    if (!button || !sectionId) return;
+    
+    button.addEventListener('click', () => {
+      const isSidebarAccordion = accordion?.getAttribute('data-is-sidebar') === 'true';
+      
+      // Actualizar estado de este collapsible
+      const isNowCollapsed = updateCollapsibleState(section);
+      
+      // Si no es parte de un acordeón o no es el sidebar, guardar estado en localStorage
+      if (!accordion || !isSidebarAccordion) {
+        localStorage.setItem(`section-${sectionId}`, isNowCollapsed ? 'collapsed' : 'expanded');
+      }
+      
+      // Si está en un acordeón y se expandió, disparar evento
+      if (accordion && !isNowCollapsed) {
+        // Crear y disparar evento personalizado
+        const event = new CustomEvent('section:opened', {
+          detail: { 
+            sectionId: sectionId,
+            section: section
+          }
+        });
+        accordion.dispatchEvent(event);
+      }
+    });
   });
+  
+  // Inicializar el estado de las secciones que NO están en acordeones
+  collapsibleSections.forEach(section => {
+    const accordion = section.closest('.accordion');
+    const sectionId = section.id;
+    
+    if (!sectionId || accordion) return; // Ignorar las que están en acordeones
+    
+    // Fuera de acordeón: usar localStorage o expandido por defecto
+    const savedState = localStorage.getItem(`section-${sectionId}`);
+    const shouldBeCollapsed = savedState === 'collapsed';
+    
+    // Aplicar estado inicial
+    updateCollapsibleState(section, shouldBeCollapsed);
+  });
+  
+  // Función para uso externo
+  window.updateCollapsibleState = updateCollapsibleState;
 }
