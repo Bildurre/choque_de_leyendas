@@ -22,6 +22,9 @@
 @use 'components/action-button';
 @use 'components/notification';
 @use 'components/image-picker-dialog';
+@use 'components/collapsible-section';
+@use 'components/dropdown';
+@use 'components/dropdown-item';
 
 // Entity Components
 @use 'components/entity/list';
@@ -37,9 +40,6 @@
 @use 'components/form/wysiwyg';
 @use 'components/form/language-tabs';
 @use 'components/form/color-picker';
-
-// Admin COmponents
-@use 'components/admin/blocks-manager';
 
 // Pages
 @use 'pages/login';

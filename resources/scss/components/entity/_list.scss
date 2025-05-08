@@ -38,9 +38,25 @@
   }
   
   &__items {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: $spacing-md;
+    
+    @include responsive(tablet) {
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+
+    &--reorderable {
+      display: grid;
+      grid-template-columns: 1fr; // Forzar una columna para reordenamiento
+      gap: $spacing-md;
+    }
+  }
+  
+  &__reorder-buttons {
+    display: flex;
+    gap: $spacing-sm;
+    margin-right: $spacing-md;
   }
   
   &__pagination {
@@ -53,5 +69,23 @@
     color: var(--color-text-secondary);
     background-color: var(--color-card-bg);
     border-radius: $border-radius-md;
+  }
+}
+
+// Estilos para el botón de reordenamiento
+#save-reorder-button {
+  animation: pulse 1.5s infinite;
+}
+
+// Definición de la animación pulse
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--random-accent-color-rgb), 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(var(--random-accent-color-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--random-accent-color-rgb), 0);
   }
 }

@@ -1,0 +1,19 @@
+@use '../abstracts/all' as *;
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-md;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: var(--random-accent-color-bg);
+    color: var(--random-accent-color);
+  }
+  
+  &__icon {
+    margin-right: $spacing-sm;
+  }
+}

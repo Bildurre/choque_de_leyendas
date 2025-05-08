@@ -1,0 +1,51 @@
+@use '../abstracts/all' as *;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  
+  &__toggle {
+    cursor: pointer;
+    
+    .dropdown__caret {
+      margin-left: $spacing-xs;
+      transition: transform $transition-fast;
+    }
+  }
+  
+  &__menu {
+    position: absolute;
+    top: 100%;
+    z-index: $z-index-dropdown;
+    display: none;
+    min-width: 10rem;
+    padding: $spacing-xs 0;
+    margin-top: $spacing-xs;
+    background-color: var(--color-card-bg);
+    border-radius: $border-radius-sm;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+    
+    &--left {
+      left: 0;
+    }
+    
+    &--right {
+      right: 0;
+    }
+    
+    &--center {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  &:hover, &:focus-within {
+    .dropdown__menu {
+      display: block;
+    }
+    
+    .dropdown__toggle .dropdown__caret {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -8,7 +8,8 @@ import initConfirmActions from './components/confirm-action';
 import initNotifications from './components/notifications';
 import initLanguageTabs from './components/language-tabs';
 import initWysiwygEditor from './components/wysiwyg-editor';
-import initBlocksManager from './components/blocks-manager';
+import initReorderableLists from './components/reorderable-list';
+import initCollapsibleSections from './components/collapsible-section';
 
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.public-header');
@@ -19,10 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sidebar) {
     initSidebar();
   }
-  const blocksContainer = document.getElementById('blocks-container');
-  if (blocksContainer) {
-    initBlocksManager();
-  }
   
   initThemeSwitcher();
   initRandomAccentColor();
@@ -30,4 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNotifications();
   initLanguageTabs();
   initWysiwygEditor();
+  initReorderableLists();
+  initCollapsibleSections();
 });

@@ -28,4 +28,5 @@ return [
   'read_more' => 'Read more',
   'no_pages' => 'No pages available.',
   'no_blocks' => 'This page does not have any content blocks yet.',
+  'edit_details' => 'Page Details',
 ];

@@ -121,7 +121,7 @@ class BlockController extends Controller
     public function reorder(Request $request, Page $page): RedirectResponse
     {
         try {
-            $blockIds = $request->input('block_ids', []);
+            $blockIds = $request->input('item_ids', []);
             
             // Si es una cadena JSON, decodificarla
             if (is_string($blockIds)) {

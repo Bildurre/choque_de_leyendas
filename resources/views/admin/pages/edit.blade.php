@@ -4,11 +4,13 @@
   </div>
   
   <div class="page-content">
-    @include('admin.pages._form', [
-      'page' => $page,
-      'templates' => $templates,
-      'pages' => $pages
-    ])
+    <x-collapsible-section id="page-form-section" title="{{ __('pages.edit_details') }}">
+      @include('admin.pages._form', [
+        'page' => $page,
+        'templates' => $templates,
+        'pages' => $pages
+      ])
+    </x-collapsible-section>
     
     <!-- Blocks Section -->
     @include('admin.pages._blocks-manager', ['page' => $page])

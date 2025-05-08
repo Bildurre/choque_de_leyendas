@@ -20,6 +20,7 @@ return [
   'edit' => 'Edit',
   'delete' => 'Delete',
   'back' => 'Back',
+  'save-order' => 'Save Order',
 
   // Entity Management
   'no_records' => 'No records available',

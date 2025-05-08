@@ -14,6 +14,11 @@
     align-items: center;
     padding: $spacing-md;
     border-bottom: 0.0625rem solid var(--color-card-border);
+    cursor: grab;
+    
+    &:active {
+      cursor: grabbing;
+    }
   }
   
   &__title {
@@ -74,5 +79,19 @@
         margin-bottom: $spacing-xs;
       }
     }
+  }
+
+  &--ghost {
+    opacity: 0.5;
+    background-color: var(--random-accent-color-bg);
+    border: 1px dashed var(--random-accent-color);
+  }
+  
+  &--chosen {
+    background-color: var(--random-accent-color-bg);
+  }
+  
+  &--drag {
+    opacity: 0.8;
   }
 }
