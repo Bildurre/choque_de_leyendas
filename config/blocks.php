@@ -35,18 +35,7 @@ return [
                         'center' => 'Center',
                         'right' => 'Right',
                     ],
-                ],
-                'overlay_opacity' => [
-                    'type' => 'select',
-                    'default' => '0.5',
-                    'options' => [
-                        '0' => 'None',
-                        '0.3' => 'Light',
-                        '0.5' => 'Medium',
-                        '0.7' => 'Strong',
-                        '0.9' => 'Very Strong',
-                    ],
-                ],
+                  ],
             ],
         ],
         // Podemos añadir más tipos después

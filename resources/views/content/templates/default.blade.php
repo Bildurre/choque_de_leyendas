@@ -1,15 +1,9 @@
 <x-public-layout>
+  @if($page->background_image)
+    <x-page-background :image="asset('storage/' . $page->background_image)" />
+  @endif
+
   <div class="page-container">
-    <div class="page-header" @if($page->background_image) style="background-image: url('{{ asset('storage/' . $page->background_image) }}');" @endif>
-      <h1 class="page-title">{{ $page->title }}</h1>
-      
-      @if($page->description)
-        <div class="page-description">
-          {!! $page->description !!}
-        </div>
-      @endif
-    </div>
-    
     <div class="page-content">
       @if($page->blocks->isNotEmpty())
         @foreach($page->blocks as $block)

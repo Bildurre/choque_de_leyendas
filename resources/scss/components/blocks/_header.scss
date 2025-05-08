@@ -5,19 +5,6 @@
   padding: $spacing-xxl 0;
   background-size: cover;
   background-position: center;
-  color: white;
-  
-  // Overlay with configurable opacity
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, var(--overlay-opacity, 0.5));
-    z-index: 1;
-  }
   
   .block__inner {
     position: relative;
@@ -32,8 +19,7 @@
   .header-block__title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    color: var(--color-text-primary);
     margin-bottom: $spacing-md;
     
     @include responsive(tablet) {
@@ -44,8 +30,7 @@
   .header-block__subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: var(--color-text-secondary);
     margin-bottom: $spacing-lg;
     
     @include responsive(tablet) {
