@@ -126,7 +126,19 @@ class Page extends Model implements LocalizedUrlRoutable
      */
     public function getImageDirectory(): string
     {
-        return 'images/uploads/pages';
+        return 'images/pages';
+    }
+
+    /**
+     * Get the image URL
+     */
+    public function getBackgroundImageUrl(): ?string
+    {
+        if (!$this->background_image) {
+            return null;
+        }
+        
+        return asset('storage/' . $this->background_image);
     }
 
     /**

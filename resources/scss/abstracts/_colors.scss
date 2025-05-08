@@ -84,6 +84,13 @@ $color-text-dark-dim: #4a4a4a;
   --color-game-red: #{$color-red};
   --color-game-blue: #{$color-blue};
   --color-game-green: #{$color-green};
+
+  // Background colors para bloques
+  --color-bg-primary: #{$color-bg-dark-primary};
+  --color-bg-secondary: #{$color-bg-dark-secondary};
+  --color-bg-tertiary: #{$color-bg-dark-tertiary};
+  --color-bg-light: #{lighten($color-bg-dark-primary, 10%)};
+  --color-bg-dark: #{darken($color-bg-dark-primary, 5%)};
 }
 
 // Light theme variables
@@ -100,6 +107,13 @@ $color-text-dark-dim: #4a4a4a;
   
   --color-text-primary: #{$color-text-dark};
   --color-text-secondary: #{$color-text-dark-dim};
+
+  // Background colors para bloques
+  --color-bg-primary: #{$color-bg-light-primary};
+  --color-bg-secondary: #{$color-bg-light-secondary};
+  --color-bg-tertiary: #{$color-bg-light-tertiary};
+  --color-bg-light: #{lighten($color-bg-light-primary, 10%)};
+  --color-bg-dark: #{darken($color-bg-light-primary, 10%)};
 }
 
 // Dark theme variables
@@ -116,4 +130,11 @@ $color-text-dark-dim: #4a4a4a;
   
   --color-text-primary: #{$color-text-light};
   --color-text-secondary: #{$color-text-muted};
+
+  // Background colors para bloques
+  --color-bg-primary: #{$color-bg-dark-primary};
+  --color-bg-secondary: #{$color-bg-dark-secondary};
+  --color-bg-tertiary: #{$color-bg-dark-tertiary};
+  --color-bg-light: #{lighten($color-bg-dark-primary, 10%)};
+  --color-bg-dark: #{darken($color-bg-dark-primary, 5%)};
 }

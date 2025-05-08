@@ -1,65 +1,105 @@
+// resources/scss/components/form/_image-upload.scss
 @use '../../abstracts/all' as *;
 
 .image-upload {
-  position: relative;
   margin-bottom: $spacing-md;
   
+  // Contenedor principal para arrastrar y soltar
+  &__dropzone {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    border: 2px dashed var(--color-card-border);
+    border-radius: $border-radius-md;
+    background-color: var(--color-bg-transparent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  // Esconder input real
   &__input {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-  
-  &__dropzone {
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: 12rem;
-    border: 0.15rem dashed var(--color-card-border);
-    border-radius: $border-radius-md;
-    background-color: rgba(var(--random-accent-color-rgb), 0.03);
+    height: 100%;
+    opacity: 0;
     cursor: pointer;
-    transition: border-color $transition-fast, background-color $transition-fast;
-    display: grid;
-    place-items: center;
-    position: relative;
-    overflow: hidden;
-    outline: none;
-    
-    &:hover, &:focus {
-      border-color: var(--random-accent-color);
-      background-color: rgba(var(--random-accent-color-rgb), 0.05);
-    }
-    
-    &.is-dragover {
-      border-color: var(--random-accent-color);
-      background-color: rgba(var(--random-accent-color-rgb), 0.1);
-    }
+    z-index: 2; // Mayor z-index para estar encima de todo
   }
   
-  &__placeholder {
+  // Contenedor de vista previa (superpuesto)
+  &__preview-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-card-bg);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: $spacing-lg;
-    color: var(--color-text-secondary);
-    text-align: center;
-    transition: opacity $transition-fast;
+    padding: $spacing-md;
+    z-index: 1; // Por encima del placeholder
   }
   
-  &__icon {
-    margin-bottom: $spacing-sm;
+  // Imagen de vista previa
+  &__preview {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: $border-radius-sm;
+  }
+  
+  // Botón para eliminar imagen
+  &__remove-btn {
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+    z-index: 3; // Encima de todo
     
-    .icon {
-      color: var(--random-accent-color);
+    &:hover {
+      background-color: var(--color-red);
+      
+      .icon {
+        color: white;
+      }
     }
   }
   
+  // Placeholder con texto (debajo de la vista previa)
+  &__placeholder {
+    text-align: center;
+    padding: $spacing-md;
+    z-index: 0;
+    
+    // Ocultar placeholder cuando hay imagen
+    .has-image & {
+      display: none;
+    }
+  }
+  
+  // Icono
+  &__icon {
+    margin-bottom: $spacing-sm;
+    color: var(--random-accent-color);
+  }
+  
+  // Texto
   &__text {
+    color: var(--color-text-secondary);
+    
     p {
       margin: 0 0 $spacing-xs;
       
@@ -69,54 +109,26 @@
     }
   }
   
+  // Estilo para el texto de "browse"
   &__browse-text {
-    font-size: 0.875rem;
     color: var(--random-accent-color);
-    text-decoration: underline;
+    font-weight: 600;
   }
   
-  &__preview {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-card-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  &__image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  &__remove {
-    position: absolute;
-    top: $spacing-xs;
-    right: $spacing-xs;
-    z-index: 10;
-    background-color: var(--color-bg-transparent-hard);
-    border-radius: 50%;
-
-    &:hover {
-      background-color: $color-red-transparent-hard;
-      svg, svg * {
-        stroke: var(--color-text-primary);
-      }
-    }
-  }
-  
+  // Estilos cuando hay imagen
   &.has-image {
+    .image-upload__preview-container {
+      display: flex !important;
+    }
+    
     .image-upload__dropzone {
       cursor: default;
-      
-      &:hover, &:focus {
-        border-color: var(--color-card-border);
-        background-color: rgba(var(--random-accent-color-rgb), 0.03);
-      }
+    }
+    
+    .image-upload__input {
+      // Desactivar el input cuando hay imagen
+      // para que solo se pueda eliminar con el botón
+      pointer-events: none;
     }
   }
 }

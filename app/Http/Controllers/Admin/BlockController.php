@@ -34,8 +34,9 @@ class BlockController extends Controller
         }
         
         $blockConfig = $blockTypes[$type];
+        $allowsImage = $blockConfig['allows_image'] ?? true;
         
-        return view('admin.blocks.create', compact('page', 'type', 'blockConfig'));
+        return view('admin.blocks.create', compact('page', 'type', 'blockConfig', 'allowsImage'));
     }
 
     /**
@@ -80,8 +81,9 @@ class BlockController extends Controller
         }
         
         $blockConfig = $blockTypes[$block->type];
+        $allowsImage = $blockConfig['allows_image'] ?? true;
         
-        return view('admin.blocks.edit', compact('page', 'block', 'blockConfig'));
+        return view('admin.blocks.edit', compact('page', 'block', 'blockConfig', 'allowsImage'));
     }
 
     /**

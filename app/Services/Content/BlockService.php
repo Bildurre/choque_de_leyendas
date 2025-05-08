@@ -47,8 +47,8 @@ class BlockService
         }
         
         // Handle background image upload
-        if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-            $block->background_image = $this->imageService->store($data['background_image'], $block->getImageDirectory());
+        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+          $block->image = $this->imageService->store($data['image'], $block->getImageDirectory());
         }
         
         $block->save();
@@ -82,13 +82,13 @@ class BlockService
         }
         
         // Handle background image updates
-        if (isset($data['remove_background_image']) && $data['remove_background_image']) {
-            $this->imageService->delete($block->background_image);
-            $block->background_image = null;
-        } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-            $block->background_image = $this->imageService->update(
-                $data['background_image'], 
-                $block->background_image, 
+        if (isset($data['remove_image']) && $data['remove_image']) {
+          $this->imageService->delete($block->image);
+          $block->image = null;
+        } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+            $block->image = $this->imageService->update(
+                $data['image'], 
+                $block->image, 
                 $block->getImageDirectory()
             );
         }
@@ -104,8 +104,8 @@ class BlockService
     public function delete(Block $block): bool
     {
         // Delete any associated images
-        if ($block->background_image) {
-            $this->imageService->delete($block->background_image);
+        if ($block->image) {
+          $this->imageService->delete($block->image);
         }
         
         return $block->delete();

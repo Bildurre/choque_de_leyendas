@@ -48,7 +48,7 @@ class PageService
         
         // Handle background image upload
         if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-            $page->background_image = $this->imageService->store($data['background_image'], $page->getImageDirectory());
+          $page->background_image = $this->imageService->store($data['background_image'], $page->getImageDirectory());
         }
         
         $page->save();
@@ -78,8 +78,8 @@ class PageService
         
         // Handle background image updates
         if (isset($data['remove_background_image']) && $data['remove_background_image']) {
-            $this->imageService->delete($page->background_image);
-            $page->background_image = null;
+          $this->imageService->delete($page->background_image);
+          $page->background_image = null;
         } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
             $page->background_image = $this->imageService->update(
                 $data['background_image'], 

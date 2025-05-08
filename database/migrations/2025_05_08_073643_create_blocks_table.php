@@ -20,7 +20,7 @@ return new class extends Migration
       $table->json('content')->nullable();
       $table->integer('order')->default(0);
       $table->string('background_color')->nullable();
-      $table->string('background_image')->nullable();
+      $table->string('image')->nullable();
       $table->json('settings')->nullable();
       $table->timestamps();
       $table->softDeletes();

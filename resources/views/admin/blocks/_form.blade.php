@@ -51,18 +51,36 @@
         <fieldset class="form-fieldset">
           <legend>{{ __('blocks.appearance') }}</legend>
           
-          <x-form.color-picker
+          <x-form.select
             name="background_color"
             :label="__('blocks.background_color')"
-            :value="old('background_color', isset($block) ? $block->background_color : null)"
+            :options="config('blocks.background_colors')"
+            :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
           />
           
-          <x-form.image-upload
-            name="background_image"
-            :label="__('blocks.background_image')"
-            :current-image="isset($block) && $block->background_image ? $block->getBackgroundImageUrl() : null"
-            :remove-name="isset($block) ? 'remove_background_image' : null"
-          />
+          @if($allowsImage ?? true)
+            <x-form.image-upload
+              name="image"
+              :label="__('blocks.image')"
+              :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
+              :remove-name="isset($block) ? 'remove_image' : null"
+            />
+            
+            @if(isset($blockConfig['settings']['image_position']))
+              <x-form.select
+                name="settings[image_position]"
+                :label="__('blocks.settings.image_position')"
+                :options="collect($blockConfig['settings']['image_position']['options'])->mapWithKeys(function($option) {
+                  return [$option => __('blocks.settings.image_position_options.' . $option)];
+                })->toArray()"
+                :selected="old('settings.image_position', 
+                  isset($block) && isset($block->settings['image_position']) 
+                    ? $block->settings['image_position'] 
+                    : ($blockConfig['settings']['image_position']['default'] ?? 'top')
+                )"
+              />
+            @endif
+          @endif
           
           @if(isset($blockConfig['settings']))
             @foreach($blockConfig['settings'] as $settingKey => $setting)

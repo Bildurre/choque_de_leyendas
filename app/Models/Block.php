@@ -22,7 +22,7 @@ class Block extends Model
         'content',
         'order',
         'background_color',
-        'background_image',
+        'image',
         'settings',
     ];
 
@@ -65,19 +65,19 @@ class Block extends Model
      */
     public function getImageDirectory(): string
     {
-        return 'images/uploads/blocks';
+        return 'images/blocks';
     }
 
     /**
-     * Get the background image URL
+     * Get the image URL
      */
-    public function getBackgroundImageUrl(): ?string
+    public function getImageUrl(): ?string
     {
-        if (!$this->background_image) {
+        if (!$this->image) {
             return null;
         }
         
-        return asset('storage/' . $this->background_image);
+        return asset('storage/' . $this->image);
     }
 
     /**
