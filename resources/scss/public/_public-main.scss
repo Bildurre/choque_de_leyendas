@@ -2,9 +2,7 @@
 
 .content-container {
   width: 100%;
-  max-width: 75rem;
   margin: 0 auto;
-  padding: $spacing-md $spacing-md $spacing-xl;
   transition: background-color 0.3s ease, color 0.3s ease;
   
   // Ajustamos el padding-top para el nuevo header

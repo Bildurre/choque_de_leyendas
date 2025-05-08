@@ -8,7 +8,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
   
   .footer-container {
-    max-width: 75rem;
+    max-width: $max-width;
     margin: 0 auto;
     padding: 0 $spacing-md;
     
