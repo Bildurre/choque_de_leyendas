@@ -4,9 +4,7 @@
   'values' => [],
   'required' => false,
   'locales' => config('app.available_locales', ['es']),
-  'defaultLocale' => app()->getLocale(),
-  'uploadUrl' => null,
-  'imagesUrl' => null
+  'defaultLocale' => app()->getLocale()
 ])
 
 <div class="form-field form-field--multilingual form-field--wysiwyg">
@@ -21,8 +19,7 @@
           name="{{ $name }}[{{ $locale }}]"
           id="{{ $name }}_{{ $locale }}"
           class="wysiwyg-editor"
-          data-upload-url="{{ $uploadUrl }}"
-          data-images-url="{{ $imagesUrl }}"
+          data-images-only="true"
           {{ $locale === $defaultLocale && $required ? 'required' : '' }}
         >{{ $values[$locale] ?? old($name.'.'.$locale, '') }}</textarea>
       </div>

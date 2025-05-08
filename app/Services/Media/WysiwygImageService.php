@@ -65,4 +65,24 @@ class WysiwygImageService
     $baseName = str_replace(['-', '_'], ' ', $baseName);
     return ucwords($baseName);
   }
+  
+  /**
+   * Get the URL for uploading images
+   * 
+   * @return string
+   */
+  public function getUploadUrl(): string
+  {
+    return '/admin/content/images';
+  }
+  
+  /**
+   * Get the URL for listing images
+   * 
+   * @return string
+   */
+  public function getImagesUrl(): string
+  {
+    return '/admin/content/images';
+  }
 }
