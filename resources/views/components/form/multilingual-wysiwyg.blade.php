@@ -20,7 +20,6 @@
           id="{{ $name }}_{{ $locale }}"
           class="wysiwyg-editor"
           data-images-only="true"
-          {{ $locale === $defaultLocale && $required ? 'required' : '' }}
         >{{ $values[$locale] ?? old($name.'.'.$locale, '') }}</textarea>
       </div>
     @endforeach

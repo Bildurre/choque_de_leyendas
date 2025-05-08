@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlockRequest;
 use App\Models\Block;
 use App\Models\Page;
 use App\Services\Content\BlockService;
@@ -42,7 +43,7 @@ class BlockController extends Controller
     /**
      * Store a newly created block.
      */
-    public function store(Request $request, Page $page): RedirectResponse
+    public function store(BlockRequest $request, Page $page): RedirectResponse
     {
         $type = $request->input('type');
         $blockTypes = $this->blockService->getBlockTypes();
@@ -51,7 +52,8 @@ class BlockController extends Controller
             abort(404, 'Block type not found');
         }
         
-        $data = $request->all();
+        // Los datos ya están validados por BlockRequest
+        $data = $request->validated();
         $data['page_id'] = $page->id;
         
         // Get the highest order value for this page and increment it
@@ -89,10 +91,13 @@ class BlockController extends Controller
     /**
      * Update the specified block.
      */
-    public function update(Request $request, Page $page, Block $block): RedirectResponse
+    public function update(BlockRequest $request, Page $page, Block $block): RedirectResponse
     {
         try {
-            $this->blockService->update($block, $request->all());
+            // Los datos ya están validados por BlockRequest
+            $data = $request->validated();
+            
+            $this->blockService->update($block, $data);
             
             return redirect()->route('admin.pages.edit', $page)
                 ->with('success', __('blocks.updated_successfully'));
