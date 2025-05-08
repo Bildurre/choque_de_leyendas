@@ -1,2 +1,122 @@
 @use '../../abstracts/all' as *;
 
+.image-upload {
+  position: relative;
+  margin-bottom: $spacing-md;
+  
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  
+  &__dropzone {
+    width: 100%;
+    min-height: 12rem;
+    border: 0.15rem dashed var(--color-card-border);
+    border-radius: $border-radius-md;
+    background-color: rgba(var(--random-accent-color-rgb), 0.03);
+    cursor: pointer;
+    transition: border-color $transition-fast, background-color $transition-fast;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    
+    &:hover, &:focus {
+      border-color: var(--random-accent-color);
+      background-color: rgba(var(--random-accent-color-rgb), 0.05);
+    }
+    
+    &.is-dragover {
+      border-color: var(--random-accent-color);
+      background-color: rgba(var(--random-accent-color-rgb), 0.1);
+    }
+  }
+  
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-lg;
+    color: var(--color-text-secondary);
+    text-align: center;
+    transition: opacity $transition-fast;
+  }
+  
+  &__icon {
+    margin-bottom: $spacing-sm;
+    
+    .icon {
+      color: var(--random-accent-color);
+    }
+  }
+  
+  &__text {
+    p {
+      margin: 0 0 $spacing-xs;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  &__browse-text {
+    font-size: 0.875rem;
+    color: var(--random-accent-color);
+    text-decoration: underline;
+  }
+  
+  &__preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  &__remove {
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+    z-index: 10;
+    background-color: var(--color-bg-transparent-hard);
+    border-radius: 50%;
+
+    &:hover {
+      background-color: $color-red-transparent-hard;
+      svg, svg * {
+        stroke: var(--color-text-primary);
+      }
+    }
+  }
+  
+  &.has-image {
+    .image-upload__dropzone {
+      cursor: default;
+      
+      &:hover, &:focus {
+        border-color: var(--color-card-border);
+        background-color: rgba(var(--random-accent-color-rgb), 0.03);
+      }
+    }
+  }
+}

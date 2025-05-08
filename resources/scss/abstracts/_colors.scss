@@ -1,30 +1,45 @@
-// Color Palette for Alanda: Choque de Leyendas
+// Opacity values
+$opacity-hard: 0.8;
+$opacity-semi: 0.5;
+$opacity-light: 0.2;
 
 // Primary Game Colors - Simplified
 $color-green-light: #5fcb8a;
 $color-green: #29ab5f;
 $color-green-dark: #1a7440;
-$color-green-transparent: rgba(41, 171, 95, 0.1);
+$color-green-transparent-light: rgba($color-green, $opacity-light);
+$color-green-transparent-semi: rgba($color-green, $opacity-semi);
+$color-green-transparent-hard: rgba($color-green, $opacity-hard);
 
 $color-blue-light: #6fadfe;
 $color-blue: #408cfd;
 $color-blue-dark: #195ec0;
-$color-blue-transparent: rgba(64, 140, 253, 0.1);
+$color-blue-transparent-light: rgba($color-blue, $opacity-light);
+$color-blue-transparent-semi: rgba($color-blue, $opacity-semi);
+$color-blue-transparent-hard: rgba($color-blue, $opacity-hard);
 
 $color-red-light: #f58080;
 $color-red: #f15959;
 $color-red-dark: #c62121;
-$color-red-transparent: rgba(241, 89, 89, 0.1);
+$color-red-transparent-light: rgba($color-red, $opacity-light);
+$color-red-transparent-semi: rgba($color-red, $opacity-semi);
+$color-red-transparent-hard: rgba($color-red, $opacity-hard);
 
 // Dark Background Colors
 $color-bg-dark-primary: #1A1A1A;
 $color-bg-dark-secondary: #262626;
 $color-bg-dark-tertiary: #333333;
+$color-bg-dark-transparent-light: rgba($color-bg-dark-primary, $opacity-light);
+$color-bg-dark-transparent-semi: rgba($color-bg-dark-primary, $opacity-semi);
+$color-bg-dark-transparent-hard: rgba($color-bg-dark-primary, $opacity-hard);
 
 // Light Background Colors
 $color-bg-light-primary: #E8E8E8;
 $color-bg-light-secondary: #DADADA;
 $color-bg-light-tertiary: #CCCCCC;
+$color-bg-light-transparent-light: rgba($color-bg-light-primary, $opacity-light);
+$color-bg-light-transparent-semi: rgba($color-bg-light-primary, $opacity-semi);
+$color-bg-light-transparent-hard: rgba($color-bg-light-primary, $opacity-hard);
 
 // Text Colors
 $color-text-light: #dddddd;
@@ -33,21 +48,35 @@ $color-text-muted: #929292;
 $color-text-dark: #272727;
 $color-text-dark-dim: #4a4a4a;
 
-
 // Theme variables
 :root {
   // Random accent color (inicializado en azul)
   --random-accent-color: #{$color-blue};
   --random-accent-color-hover: #{$color-blue-light};
   --random-accent-color-dark: #{$color-blue-dark};
-  --random-accent-color-bg: #{$color-blue-transparent};
+  
+  // Variables de transparencia para el color de acento
+  --random-accent-color-bg-light: #{$color-blue-transparent-light};
+  --random-accent-color-bg-semi: #{$color-blue-transparent-semi};
+  --random-accent-color-bg-hard: #{$color-blue-transparent-hard};
+  
+  // Para compatibilidad con código existente
+  --random-accent-color-bg: #{$color-blue-transparent-light};
+  
   --random-accent-color-rgb: 64, 140, 253;
   
+  // Background colors
   --color-background: #{$color-bg-dark-primary};
   --color-card-bg: #{$color-bg-dark-secondary};
   --color-card-border: #{$color-bg-dark-tertiary};
   --color-header-bg: #{$color-bg-dark-secondary};
   
+  // Variables de transparencia para los fondos
+  --color-bg-transparent-light: #{$color-bg-dark-transparent-light};
+  --color-bg-transparent-semi: #{$color-bg-dark-transparent-semi};
+  --color-bg-transparent-hard: #{$color-bg-dark-transparent-hard};
+  
+  // Text colors
   --color-text-primary: #{$color-text-light};
   --color-text-secondary: #{$color-text-muted};
 
@@ -64,6 +93,11 @@ $color-text-dark-dim: #4a4a4a;
   --color-card-border: #{$color-bg-light-tertiary};
   --color-header-bg: #{$color-bg-light-secondary};
   
+  // Variables de transparencia para los fondos (tema claro)
+  --color-bg-transparent-light: #{$color-bg-light-transparent-light};
+  --color-bg-transparent-semi: #{$color-bg-light-transparent-semi};
+  --color-bg-transparent-hard: #{$color-bg-light-transparent-hard};
+  
   --color-text-primary: #{$color-text-dark};
   --color-text-secondary: #{$color-text-dark-dim};
 }
@@ -74,6 +108,11 @@ $color-text-dark-dim: #4a4a4a;
   --color-card-bg: #{$color-bg-dark-secondary};
   --color-card-border: #{$color-bg-dark-tertiary};
   --color-header-bg: #{$color-bg-dark-secondary};
+  
+  // Variables de transparencia para los fondos (tema oscuro)
+  --color-bg-transparent-light: #{$color-bg-dark-transparent-light};
+  --color-bg-transparent-semi: #{$color-bg-dark-transparent-semi};
+  --color-bg-transparent-hard: #{$color-bg-dark-transparent-hard};
   
   --color-text-primary: #{$color-text-light};
   --color-text-secondary: #{$color-text-muted};
