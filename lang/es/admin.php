@@ -21,6 +21,7 @@ return [
   'delete' => 'Eliminar',
   'back' => 'Volver',
   'save-order' => 'Guardar Orden',
+  'update' => "Actualizar",
 
   // Entity Management
   'no_records' => 'No hay registros disponibles',

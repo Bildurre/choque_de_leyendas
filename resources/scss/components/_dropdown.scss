@@ -20,7 +20,7 @@
     display: none;
     min-width: 10rem;
     padding: $spacing-xs 0;
-    margin-top: $spacing-xs;
+    margin-top: 0;
     background-color: var(--color-card-bg);
     border-radius: $border-radius-sm;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
@@ -47,5 +47,15 @@
     .dropdown__toggle .dropdown__caret {
       transform: rotate(180deg);
     }
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 8px;
+    z-index: $z-index-dropdown - 1;
   }
 }

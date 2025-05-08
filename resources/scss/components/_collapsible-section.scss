@@ -28,12 +28,20 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background-color $transition-fast;
+    transition: background-color $transition-fast, color $transition-fast;
     
     &:hover {
       background-color: var(--random-accent-color-bg);
       color: var(--random-accent-color);
     }
+  }
+  
+  &__icon {
+    transition: transform $transition-medium ease;
+  }
+  
+  &.is-collapsed &__icon {
+    transform: rotate(180deg);
   }
   
   &__content {

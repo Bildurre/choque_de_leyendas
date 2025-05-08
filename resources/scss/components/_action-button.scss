@@ -17,6 +17,11 @@
   width: 2rem;
   height: 2rem;
   
+  // Asegurémonos de que el color no se hereda
+  &, & * {
+    box-sizing: border-box;
+  }
+  
   // Sizes
   &--sm {
     width: 1.75rem;
@@ -33,20 +38,40 @@
     height: 2.5rem;
   }
   
-  // Variants
+  // Variants - usando selectores más específicos
   &--view {
-    svg {
-      stroke: $color-blue;
+    color: $color-blue;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-blue;
     }
+    
+    & svg,
+    & svg * {
+      stroke: $color-blue;
+      fill: none;
+    }
+    
     &:hover {
       background-color: $color-blue-transparent;
     }
   }
   
   &--edit {
-    svg {
-      stroke: $color-green;
+    color: $color-green;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-green;
     }
+    
+    & svg,
+    & svg * {
+      stroke: $color-green;
+      fill: none;
+    }
+    
     &:hover {
       background-color: $color-green-transparent;
     }
@@ -54,9 +79,19 @@
   
   &--delete {
     background-color: transparent;
-    svg {
-      stroke: $color-red;
+    color: $color-red;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-red;
     }
+    
+    & svg,
+    & svg * {
+      stroke: $color-red;
+      fill: none;
+    }
+    
     &:hover {
       background-color: $color-red-transparent;
     }

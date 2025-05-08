@@ -21,6 +21,7 @@ return [
   'delete' => 'Delete',
   'back' => 'Back',
   'save-order' => 'Save Order',
+  'update' => 'Update',
 
   // Entity Management
   'no_records' => 'No records available',

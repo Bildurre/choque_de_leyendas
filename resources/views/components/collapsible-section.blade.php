@@ -9,7 +9,7 @@
     <h2 class="collapsible-section__title">{{ $title }}</h2>
     
     <button type="button" class="collapsible-section__toggle" data-target="{{ $id }}">
-      <x-icon name="{{ $collapsed ? 'chevron-down' : 'chevron-up' }}" />
+      <x-icon name="{{ $collapsed ? 'chevron-down' : 'chevron-up' }}" class="collapsible-section__icon" />
     </button>
   </div>
   

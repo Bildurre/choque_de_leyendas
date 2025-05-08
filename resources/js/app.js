@@ -10,6 +10,7 @@ import initLanguageTabs from './components/language-tabs';
 import initWysiwygEditor from './components/wysiwyg-editor';
 import initReorderableLists from './components/reorderable-list';
 import initCollapsibleSections from './components/collapsible-section';
+import initAccordions from './components/accordion';
 
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.public-header');
@@ -29,4 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initWysiwygEditor();
   initReorderableLists();
   initCollapsibleSections();
+  initAccordions();
 });

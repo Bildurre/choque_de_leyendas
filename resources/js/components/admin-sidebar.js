@@ -1,7 +1,6 @@
 export default function initSidebar() {
   const sidebarToggle = document.getElementById('sidebar-toggle');
   const layout = document.querySelector('.admin-layout');
-  const sectionToggles = document.querySelectorAll('.admin-sidebar__section-toggle');
   
   if (!sidebarToggle || !layout) return;
   
@@ -56,57 +55,4 @@ export default function initSidebar() {
       localStorage.setItem('sidebarVisible', 'false');
     }
   });
-  
-  // Manejar las secciones colapsables
-  function handleSectionToggle() {
-    const sectionId = this.getAttribute('data-section');
-    const sectionElement = this.closest('.admin-sidebar__section');
-    
-    // Toggle expanded state
-    sectionElement.classList.toggle('is-expanded');
-    
-    // Save expanded state to localStorage
-    const expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '{}');
-    expandedSections[sectionId] = sectionElement.classList.contains('is-expanded');
-    localStorage.setItem('expandedSections', JSON.stringify(expandedSections));
-  }
-  
-  // Add click event to all section toggles
-  sectionToggles.forEach(toggle => {
-    toggle.addEventListener('click', handleSectionToggle);
-  });
-  
-  // Initialize expanded sections from localStorage
-  function initExpandedSections() {
-    const expandedSections = JSON.parse(localStorage.getItem('expandedSections') || '{}');
-    const currentRoute = window.location.pathname;
-    
-    sectionToggles.forEach(toggle => {
-      const sectionId = toggle.getAttribute('data-section');
-      const sectionElement = toggle.closest('.admin-sidebar__section');
-      const submenu = document.getElementById(`section-${sectionId}`);
-      
-      // Check if section is expanded in localStorage
-      if (expandedSections[sectionId]) {
-        sectionElement.classList.add('is-expanded');
-      } else {
-        // Auto-expand section if current route matches any submenu link
-        if (submenu) {
-          const links = submenu.querySelectorAll('.admin-sidebar__link');
-          
-          for (const link of links) {
-            if (link.classList.contains('admin-sidebar__link--active')) {
-              sectionElement.classList.add('is-expanded');
-              expandedSections[sectionId] = true;
-              localStorage.setItem('expandedSections', JSON.stringify(expandedSections));
-              break;
-            }
-          }
-        }
-      }
-    });
-  }
-  
-  // Initialize sections
-  initExpandedSections();
 }
