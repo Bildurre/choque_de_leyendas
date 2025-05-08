@@ -1,33 +1,19 @@
 <footer class="public-footer">
   <div class="footer-container">
-    <div class="footer-logo">
-      <a href="{{ route('welcome') }}" class="logo-link">
-        <x-logo />
-      </a>
-    </div>
-    
-    <div class="footer-nav">
-      <div class="footer-section">
-        <h3 class="footer-title">{{ __('public.footer.explore') }}</h3>
-        <ul class="footer-links">
-          <li><a href="#">{{ __('public.footer.factions') }}</a></li>
-          <li><a href="#">{{ __('public.footer.heroes') }}</a></li>
-          <li><a href="#">{{ __('public.footer.cards') }}</a></li>
-        </ul>
+    <div class="footer-license">
+      <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+        <a property="dct:title" rel="cc:attributionURL" href="https://choquedeleyendas.universoalandaalanda.com" class="alanda">Alanda: Choque de Leyendas</a>
+        <span>por</span>
+        <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://bildurre.net">Bildurre</a>
+        <span>esta bajo licencia</span>
+        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" class="license-cc-link">
+          <span>CC BY-NC-SA 4.0</span>
+          <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
+          <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
+          <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1">
+          <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1">
+        </a>
       </div>
-      
-      <div class="footer-section">
-        <h3 class="footer-title">{{ __('public.footer.rules') }}</h3>
-        <ul class="footer-links">
-          <li><a href="#">{{ __('public.footer.basics') }}</a></li>
-          <li><a href="#">{{ __('public.footer.advanced') }}</a></li>
-          <li><a href="#">{{ __('public.footer.download') }}</a></li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="footer-copyright">
-      &copy; {{ date('Y') }} Alanda - Choque de Leyendas
     </div>
   </div>
 </footer>

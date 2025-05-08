@@ -3,80 +3,43 @@
 .public-footer {
   background-color: var(--color-card-bg);
   color: var(--color-text-primary);
-  padding: $spacing-lg 0;
+  padding: $spacing-lg $spacing-md;
   margin-top: $spacing-xl;
   transition: background-color 0.3s ease, color 0.3s ease;
-  
+  max-height: $footer-height-base;
+
   .footer-container {
     max-width: $max-width;
     margin: 0 auto;
-    padding: 0 $spacing-md;
-    
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-lg;
-    
-    @include responsive(tablet) {
-      grid-template-columns: 1fr 2fr;
-      gap: $spacing-xl;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
-  .footer-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-accent-primary);
-    margin-bottom: $spacing-md;
-  }
-  
-  .footer-nav {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-lg;
-    
-    @include responsive(tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @include responsive(desktop) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
-  .footer-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: $spacing-md;
-    color: var(--color-accent-primary);
-  }
-  
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    
-    li {
-      margin-bottom: $spacing-sm;
-    }
-    
-    a {
-      color: var(--color-text-primary);
-      text-decoration: none;
-      transition: color $transition-fast;
-      
-      &:hover {
-        color: var(--color-accent-tertiary);
-      }
-    }
-  }
-  
-  .footer-copyright {
-    grid-column: 1 / -1;
+
+  .footer-license {
     text-align: center;
-    margin-top: $spacing-lg;
-    padding-top: $spacing-md;
-    border-top: 0.0625rem solid var(--color-card-border);
     color: var(--color-text-secondary);
     font-size: 0.9rem;
+  
+    a {
+      text-decoration: none;
+    }
+    
+    .license-cc-link {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      
+      span {
+        margin-right: 0.25rem;
+      }
+      
+      img {
+        height: 1rem;
+        width: 1rem;
+        margin-left: 0.25rem;
+        vertical-align: middle;
+      }
+    }
   }
 }
