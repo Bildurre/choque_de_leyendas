@@ -62,18 +62,17 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-bg-transparent-hard);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all $transition-fast;
-    z-index: 3; // Encima de todo
+    z-index: 3;
     
     &:hover {
-      background-color: var(--color-red);
-      
-      .icon {
-        color: white;
+      background-color: $color-red-transparent-hard;
+      svg, svg * {
+        stroke: var(--color-background)
       }
     }
   }

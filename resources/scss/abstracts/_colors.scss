@@ -1,7 +1,7 @@
 // Opacity values
 $opacity-hard: 0.8;
 $opacity-semi: 0.5;
-$opacity-light: 0.2;
+$opacity-light: 0.1;
 
 // Primary Game Colors - Simplified
 $color-green-light: #5fcb8a;
@@ -24,6 +24,51 @@ $color-red-dark: #c62121;
 $color-red-transparent-light: rgba($color-red, $opacity-light);
 $color-red-transparent-semi: rgba($color-red, $opacity-semi);
 $color-red-transparent-hard: rgba($color-red, $opacity-hard);
+
+// Colores intermedios (Verde-Azul)
+$color-teal-light: #59b290;
+$color-teal: #31a28e;
+$color-teal-dark: #1a7464;
+$color-teal-transparent-light: rgba($color-teal, $opacity-light);
+$color-teal-transparent-semi: rgba($color-teal, $opacity-semi);
+$color-teal-transparent-hard: rgba($color-teal, $opacity-hard);
+
+$color-cyan-light: #59b8e6;
+$color-cyan: #3999cd;
+$color-cyan-dark: #1f6d96;
+$color-cyan-transparent-light: rgba($color-cyan, $opacity-light);
+$color-cyan-transparent-semi: rgba($color-cyan, $opacity-semi);
+$color-cyan-transparent-hard: rgba($color-cyan, $opacity-hard);
+
+// Colores intermedios (Azul-Rojo)
+$color-purple-light: #9a81e6;
+$color-purple: #7a64c8;
+$color-purple-dark: #534994;
+$color-purple-transparent-light: rgba($color-purple, $opacity-light);
+$color-purple-transparent-semi: rgba($color-purple, $opacity-semi);
+$color-purple-transparent-hard: rgba($color-purple, $opacity-hard);
+
+$color-magenta-light: #c76cc0;
+$color-magenta: #a75da5;
+$color-magenta-dark: #773d75;
+$color-magenta-transparent-light: rgba($color-magenta, $opacity-light);
+$color-magenta-transparent-semi: rgba($color-magenta, $opacity-semi);
+$color-magenta-transparent-hard: rgba($color-magenta, $opacity-hard);
+
+// Colores intermedios (Rojo-Verde)
+$color-orange-light: #f58a5c;
+$color-orange: #f1753a;
+$color-orange-dark: #c65623;
+$color-orange-transparent-light: rgba($color-orange, $opacity-light);
+$color-orange-transparent-semi: rgba($color-orange, $opacity-semi);
+$color-orange-transparent-hard: rgba($color-orange, $opacity-hard);
+
+$color-lime-light: #a5c84a;
+$color-lime: #88b033;
+$color-lime-dark: #647f1e;
+$color-lime-transparent-light: rgba($color-lime, $opacity-light);
+$color-lime-transparent-semi: rgba($color-lime, $opacity-semi);
+$color-lime-transparent-hard: rgba($color-lime, $opacity-hard);
 
 // Dark Background Colors
 $color-bg-dark-primary: #1A1A1A;
@@ -86,11 +131,15 @@ $color-text-dark-dim: #4a4a4a;
   --color-game-green: #{$color-green};
 
   // Background colors para bloques
-  --color-bg-primary: #{$color-bg-dark-primary};
-  --color-bg-secondary: #{$color-bg-dark-secondary};
-  --color-bg-tertiary: #{$color-bg-dark-tertiary};
-  --color-bg-light: #{lighten($color-bg-dark-primary, 10%)};
-  --color-bg-dark: #{darken($color-bg-dark-primary, 5%)};
+  --color-block-bg-green: #{$color-green-transparent-light};
+  --color-block-bg-teal: #{$color-teal-transparent-light};
+  --color-block-bg-cyan: #{$color-cyan-transparent-light};
+  --color-block-bg-blue: #{$color-blue-transparent-light};
+  --color-block-bg-purple: #{$color-purple-transparent-light};
+  --color-block-bg-magenta: #{$color-magenta-transparent-light};
+  --color-block-bg-red: #{$color-red-transparent-light};
+  --color-block-bg-orange: #{$color-orange-transparent-light};
+  --color-block-bg-lime: #{$color-lime-transparent-light};
 }
 
 // Light theme variables
@@ -107,13 +156,6 @@ $color-text-dark-dim: #4a4a4a;
   
   --color-text-primary: #{$color-text-dark};
   --color-text-secondary: #{$color-text-dark-dim};
-
-  // Background colors para bloques
-  --color-bg-primary: #{$color-bg-light-primary};
-  --color-bg-secondary: #{$color-bg-light-secondary};
-  --color-bg-tertiary: #{$color-bg-light-tertiary};
-  --color-bg-light: #{lighten($color-bg-light-primary, 10%)};
-  --color-bg-dark: #{darken($color-bg-light-primary, 10%)};
 }
 
 // Dark theme variables
@@ -130,11 +172,4 @@ $color-text-dark-dim: #4a4a4a;
   
   --color-text-primary: #{$color-text-light};
   --color-text-secondary: #{$color-text-muted};
-
-  // Background colors para bloques
-  --color-bg-primary: #{$color-bg-dark-primary};
-  --color-bg-secondary: #{$color-bg-dark-secondary};
-  --color-bg-tertiary: #{$color-bg-dark-tertiary};
-  --color-bg-light: #{lighten($color-bg-dark-primary, 10%)};
-  --color-bg-dark: #{darken($color-bg-dark-primary, 5%)};
 }

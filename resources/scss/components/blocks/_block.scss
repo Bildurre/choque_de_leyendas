@@ -147,27 +147,43 @@
 }
 
 .block {
-  &[data-background="primary"] {
-    background-color: var(--color-bg-primary);
+  &[data-background="none"] {
+    background-color: transparent;
   }
   
-  &[data-background="secondary"] {
-    background-color: var(--color-bg-secondary);
+  &[data-background="red"] {
+    background-color: var(--color-block-bg-red);
   }
   
-  &[data-background="tertiary"] {
-    background-color: var(--color-bg-tertiary);
+  &[data-background="orange"] {
+    background-color: var(--color-block-bg-orange);
   }
   
-  &[data-background="light"] {
-    background-color: var(--color-bg-light);
+  &[data-background="lime"] {
+    background-color: var(--color-block-bg-lime);
   }
   
-  &[data-background="dark"] {
-    background-color: var(--color-bg-dark);
+  &[data-background="green"] {
+    background-color: var(--color-block-bg-green);
   }
   
-  &[data-background="accent"] {
-    background-color: var(--random-accent-color-bg);
+  &[data-background="teal"] {
+    background-color: var(--color-block-bg-teal);
+  }
+  
+  &[data-background="cyan"] {
+    background-color: var(--color-block-bg-cyan);
+  }
+  
+  &[data-background="blue"] {
+    background-color: var(--color-block-bg-blue);
+  }
+  
+  &[data-background="purple"] {
+    background-color: var(--color-block-bg-purple);
+  }
+  
+  &[data-background="magenta"] {
+    background-color: var(--color-block-bg-magenta);
   }
 }

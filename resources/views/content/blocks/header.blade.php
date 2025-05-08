@@ -1,8 +1,6 @@
 <section class="block block--header" 
-  @if($block->background_image) 
-    style="background-image: url('{{ $block->getBackgroundImageUrl() }}');"
-  @elseif($block->background_color) 
-    style="background-color: {{ $block->background_color }};"
+  @if($block->background_color) 
+    data-background="{{ $block->background_color }}"
   @endif
 >
   <div class="block__inner">

@@ -50,11 +50,14 @@ return [
 
   'background_colors' => [
     'none' => 'Sin color de fondo',
-    'primary' => 'Color primario',
-    'secondary' => 'Color secundario',
-    'tertiary' => 'Color terciario',
-    'light' => 'Claro',
-    'dark' => 'Oscuro',
-    'accent' => 'Acento'
+    'red' => 'Rojo',
+    'orange' => 'Naranja',
+    'lime' => 'Lima',
+    'green' => 'Verde',
+    'teal' => 'Turquesa',
+    'cyan' => 'Cian',
+    'blue' => 'Azul',
+    'purple' => 'Morado',
+    'magenta' => 'Magenta'
   ]
 ];
