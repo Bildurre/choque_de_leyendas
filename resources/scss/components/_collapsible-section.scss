@@ -5,10 +5,7 @@
   
   // Eliminar animaciones durante la carga inicial
   &--no-animation {
-    .collapsible-section__content {
-      transition: none !important;
-    }
-    
+    .collapsible-section__content,
     .collapsible-section__icon {
       transition: none !important;
     }

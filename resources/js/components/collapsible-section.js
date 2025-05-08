@@ -39,8 +39,8 @@ export default function initCollapsibleSections() {
     return newState;
   }
   
-  // Agregar event listeners a los headers
-  collapsibleSections.forEach(section => {
+  // Configurar el event listener para cada sección
+  function setupSectionListeners(section) {
     const header = section.querySelector('.collapsible-section__header');
     const sectionId = section.id;
     const accordion = section.closest('.accordion');
@@ -78,10 +78,32 @@ export default function initCollapsibleSections() {
         accordion.dispatchEvent(event);
       }
     });
-  });
+  }
   
-  // Prevenir la propagación del evento cuando se hace clic en el botón de toggle
+  // Inicializar secciones independientes (fuera de acordeones)
+  function initializeIndependentSections() {
+    collapsibleSections.forEach(section => {
+      const accordion = section.closest('.accordion');
+      const sectionId = section.id;
+      
+      if (!sectionId || accordion) return; // Ignorar las que están en acordeones
+      
+      // Fuera de acordeón: usar localStorage o colapsado por defecto
+      const savedState = localStorage.getItem(`section-${sectionId}`);
+      
+      // Si debe estar expandido según localStorage, expandirlo sin animación
+      if (savedState === 'expanded') {
+        updateCollapsibleState(section, false, false);
+      }
+      // Si no, ya está colapsado por defecto, no hacemos nada
+    });
+  }
+  
+  // Configurar todos los listeners de los collapsibles
   collapsibleSections.forEach(section => {
+    setupSectionListeners(section);
+    
+    // Prevenir la propagación del evento cuando se hace clic en el botón de toggle
     const toggleButton = section.querySelector('.collapsible-section__toggle');
     if (toggleButton) {
       toggleButton.addEventListener('click', (e) => {
@@ -91,23 +113,9 @@ export default function initCollapsibleSections() {
     }
   });
   
-  // Inicializar el estado de las secciones que NO están en acordeones
-  collapsibleSections.forEach(section => {
-    const accordion = section.closest('.accordion');
-    const sectionId = section.id;
-    
-    if (!sectionId || accordion) return; // Ignorar las que están en acordeones
-    
-    // Fuera de acordeón: usar localStorage o colapsado por defecto
-    const savedState = localStorage.getItem(`section-${sectionId}`);
-    
-    // Si debe estar expandido según localStorage, expandirlo sin animación
-    if (savedState === 'expanded') {
-      updateCollapsibleState(section, false, false);
-    }
-    // Si no, ya está colapsado por defecto, no hacemos nada
-  });
+  // Inicializar el estado de las secciones independientes
+  initializeIndependentSections();
   
-  // Función para uso externo
+  // Exponer función para uso externo
   window.updateCollapsibleState = updateCollapsibleState;
 }
