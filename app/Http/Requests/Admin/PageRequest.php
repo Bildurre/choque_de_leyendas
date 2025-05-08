@@ -31,13 +31,11 @@ class PageRequest extends FormRequest
             'description' => ['nullable', 'array'],
             'meta_title' => ['nullable', 'array'],
             'meta_description' => ['nullable', 'array'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'background_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'is_published' => ['nullable', 'boolean'],
             'parent_id' => ['nullable', 'exists:pages,id'],
             'template' => ['nullable', 'string'],
             'order' => ['nullable', 'integer', 'min:0'],
-            'remove_image' => ['nullable', 'boolean'],
             'remove_background_image' => ['nullable', 'boolean'],
         ];
 

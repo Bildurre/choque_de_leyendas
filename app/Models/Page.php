@@ -25,7 +25,6 @@ class Page extends Model implements LocalizedUrlRoutable
     protected $fillable = [
         'title',
         'description',
-        'image',
         'is_published',
         'meta_title',
         'meta_description',

@@ -46,11 +46,7 @@ class PageService
         $page->template = $data['template'] ?? 'default';
         $page->order = $data['order'] ?? 0;
         
-        // Handle image uploads
-        if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-            $page->image = $this->imageService->store($data['image'], $page->getImageDirectory());
-        }
-        
+        // Handle background image upload
         if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
             $page->background_image = $this->imageService->store($data['background_image'], $page->getImageDirectory());
         }
@@ -80,14 +76,7 @@ class PageService
         $page->template = $data['template'] ?? $page->template;
         $page->order = $data['order'] ?? $page->order;
         
-        // Handle image updates
-        if (isset($data['remove_image']) && $data['remove_image']) {
-            $this->imageService->delete($page->image);
-            $page->image = null;
-        } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-            $page->image = $this->imageService->update($data['image'], $page->image, $page->getImageDirectory());
-        }
-        
+        // Handle background image updates
         if (isset($data['remove_background_image']) && $data['remove_background_image']) {
             $this->imageService->delete($page->background_image);
             $page->background_image = null;
@@ -109,11 +98,7 @@ class PageService
      */
     public function delete(Page $page): bool
     {
-        // Delete related images
-        if ($page->image) {
-            $this->imageService->delete($page->image);
-        }
-        
+        // Delete background image if exists
         if ($page->background_image) {
             $this->imageService->delete($page->background_image);
         }

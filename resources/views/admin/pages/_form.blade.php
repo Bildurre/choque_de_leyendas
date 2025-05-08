@@ -82,16 +82,9 @@
           <legend>{{ __('pages.images') }}</legend>
           
           <x-form.image-upload
-            name="image"
-            :label="__('pages.image')"
-            :current-image="isset($page) && $page->image ? $page->image_url : null"
-            :remove-name="'remove_image'"
-          />
-          
-          <x-form.image-upload
             name="background_image"
             :label="__('pages.background_image')"
-            :current-image="isset($page) && $page->background_image ? $page->getBackgroundImageUrl() : null"
+            :current-image="isset($page) && $page->background_image ? asset('storage/' . $page->background_image) : null"
             :remove-name="'remove_background_image'"
           />
         </fieldset>
