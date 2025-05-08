@@ -1,4 +1,3 @@
-// resources/js/app.js
 import './bootstrap';
 import '../scss/app.scss';
 import initHeaderScroll from './components/public-header';
@@ -9,6 +8,7 @@ import initConfirmActions from './components/confirm-action';
 import initNotifications from './components/notifications';
 import initLanguageTabs from './components/language-tabs';
 import initWysiwygEditor from './components/wysiwyg-editor';
+import initBlocksManager from './components/blocks-manager';
 
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.public-header');
@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sidebar) {
     initSidebar();
   }
+  const blocksContainer = document.getElementById('blocks-container');
+  if (blocksContainer) {
+    initBlocksManager();
+  }
+  
   initThemeSwitcher();
   initRandomAccentColor();
   initConfirmActions();

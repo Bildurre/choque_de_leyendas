@@ -36,6 +36,15 @@
 @use 'components/form/select';
 @use 'components/form/wysiwyg';
 @use 'components/form/language-tabs';
+@use 'components/form/color-picker';
+
+// Admin COmponents
+@use 'components/admin/blocks-manager';
 
 // Pages
 @use 'pages/login';
+
+// Bloques
+@use 'components/blocks/block';
+@use 'components/blocks/header';
+@use 'components/blocks/text';

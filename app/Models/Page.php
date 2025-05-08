@@ -59,6 +59,14 @@ class Page extends Model implements LocalizedUrlRoutable
     ];
 
     /**
+     * Get the blocks for the page.
+     */
+    public function blocks()
+    {
+      return $this->hasMany(Block::class)->orderBy('order', 'asc');
+    }
+
+    /**
      * Get the options for generating the slug.
      */
     public function getSlugOptions(): SlugOptions

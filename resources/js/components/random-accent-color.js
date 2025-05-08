@@ -1,4 +1,3 @@
-// resources/js/components/random-accent-color.js
 export default function initRandomAccentColor() {
   // Colores base disponibles (simplificados)
   const baseColors = [

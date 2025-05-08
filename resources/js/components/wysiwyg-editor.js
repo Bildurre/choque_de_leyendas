@@ -1,4 +1,3 @@
-// resources/js/components/wysiwyg-editor.js
 export default function initWysiwygEditor() {
   // Verificar si el script de TinyMCE está cargado
   if (typeof tinymce === 'undefined') {

@@ -9,5 +9,8 @@
       'templates' => $templates,
       'pages' => $pages
     ])
+    
+    <!-- Blocks Section -->
+    @include('admin.pages._blocks-manager', ['page' => $page])
   </div>
 </x-admin-layout>

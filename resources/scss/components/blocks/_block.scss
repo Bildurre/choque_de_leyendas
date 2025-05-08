@@ -1,0 +1,98 @@
+@use '../../abstracts/all' as *;
+
+.block {
+  padding: $spacing-xl 0;
+  transition: background-color 0.3s ease;
+  
+  &__inner {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+    
+    &--full-width {
+      max-width: none;
+    }
+  }
+  
+  &__title {
+    margin-bottom: $spacing-md;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    
+    @include responsive(tablet) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  &__subtitle {
+    margin-bottom: $spacing-lg;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    
+    @include responsive(tablet) {
+      font-size: 1.5rem;
+    }
+  }
+  
+  &__content {
+    color: var(--color-text-primary);
+    
+    p {
+      margin-bottom: $spacing-md;
+      line-height: 1.6;
+    }
+    
+    ul, ol {
+      margin-bottom: $spacing-md;
+      margin-left: $spacing-lg;
+      
+      li {
+        margin-bottom: $spacing-xs;
+      }
+    }
+    
+    a {
+      color: var(--random-accent-color);
+      text-decoration: none;
+      
+      &:hover {
+        color: var(--random-accent-color-hover);
+        text-decoration: underline;
+      }
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: $spacing-md 0;
+    }
+    
+    blockquote {
+      margin: $spacing-md 0;
+      padding: $spacing-sm $spacing-md;
+      border-left: 4px solid var(--random-accent-color);
+      background-color: var(--color-card-bg);
+      font-style: italic;
+    }
+    
+    h2, h3, h4, h5, h6 {
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-sm;
+    }
+  }
+}
+
+// Text alignment helpers
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}

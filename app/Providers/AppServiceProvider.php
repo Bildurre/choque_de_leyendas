@@ -4,13 +4,14 @@ namespace App\Providers;
 
 use App\Services\Media\ImageService;
 use Illuminate\Pagination\Paginator;
+use App\Services\Content\PageService;
+use App\Services\Content\BlockService;
 use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use App\Services\LocalizedRoutingService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
-use App\Services\Content\PageService;
-use App\Services\LocalizedRoutingService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
     {
       $this->app->singleton(PageService::class, function ($app) {
         return new PageService(
+          $app->make(ImageService::class)
+        );
+      });
+      $this->app->singleton(BlockService::class, function ($app) {
+        return new BlockService(
           $app->make(ImageService::class)
         );
       });

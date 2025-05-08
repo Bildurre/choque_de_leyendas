@@ -11,10 +11,15 @@
     </div>
     
     <div class="page-content">
-      <!-- Aquí irán los bloques en el futuro -->
-      <div class="page-placeholder">
-        {{ __('pages.no_blocks') }}
-      </div>
+      @if($page->blocks->isNotEmpty())
+        @foreach($page->blocks as $block)
+          {!! $block->render() !!}
+        @endforeach
+      @else
+        <div class="page-placeholder">
+          {{ __('pages.no_blocks') }}
+        </div>
+      @endif
     </div>
   </div>
 </x-public-layout>

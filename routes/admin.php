@@ -2,20 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
-use App\Http\Controllers\Game\CardController;
-use App\Http\Controllers\Game\HeroController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Game\FactionController;
-use App\Http\Controllers\Game\CardTypeController;
-use App\Http\Controllers\Game\HeroRaceController;
+use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Game\AttackRangeController;
-use App\Http\Controllers\Game\HeroAbilityController;
-use App\Http\Controllers\Game\AttackSubtypeController;
-use App\Http\Controllers\Game\EquipmentTypeController;
-use App\Http\Controllers\Game\HeroSuperclassController;
-use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
@@ -27,4 +17,13 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
 
   // Pages
   Route::resource('pages', PageController::class);
+
+  Route::prefix('pages/{page}/blocks')->name('pages.blocks.')->group(function () {
+    Route::get('/create/{type}', [BlockController::class, 'create'])->name('create');
+    Route::post('/', [BlockController::class, 'store'])->name('store');
+    Route::get('/{block}/edit', [BlockController::class, 'edit'])->name('edit');
+    Route::put('/{block}', [BlockController::class, 'update'])->name('update');
+    Route::delete('/{block}', [BlockController::class, 'destroy'])->name('destroy');
+    Route::post('/reorder', [BlockController::class, 'reorder'])->name('reorder');
+  });
 });
