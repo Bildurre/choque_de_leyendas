@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('strength')->default(2);
             $table->integer('armor')->default(2);
             $table->datetimes();
+            $table->softDeletes();
         });
     }
 

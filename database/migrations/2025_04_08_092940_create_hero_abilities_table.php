@@ -20,6 +20,7 @@ return new class extends Migration
       $table->boolean('area')->default(false);
       $table->string('cost', 5); // Formato: RGBRG, RGB, etc.
       $table->datetimes();
+      $table->softDeletes();
     });
 
     // Tabla pivot para la relación muchos a muchos entre héroes y habilidades

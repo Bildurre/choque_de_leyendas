@@ -29,6 +29,7 @@ return new class extends Migration
       $table->json('restriction')->nullable(); // Cambiado a json
       $table->boolean('area')->default(false);
       $table->datetimes();
+      $table->softDeletes();
     });
   }
 

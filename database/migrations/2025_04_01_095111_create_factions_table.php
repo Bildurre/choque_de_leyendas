@@ -20,6 +20,7 @@ return new class extends Migration
       $table->string('icon')->nullable();
       $table->boolean('text_is_dark')->default(false);
       $table->datetimes();
+      $table->softDeletes();
     });
   }
 

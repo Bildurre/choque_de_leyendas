@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\PageRequest;
 use App\Models\Page;
 use App\Services\Content\PageService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -24,14 +25,20 @@ class PageController extends Controller
     /**
      * Display a listing of pages.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $pages = Page::with('parent')
-            ->withCount('children')
-            ->orderBy('order')
-            ->paginate(20);
+        $trashed = $request->has('trashed');
         
-        return view('admin.pages.index', compact('pages'));
+        $query = Page::with('parent')
+            ->withCount('children');
+        
+        if ($trashed) {
+            $query->onlyTrashed();
+        }
+        
+        $pages = $query->orderBy('order')->paginate(20);
+        
+        return view('admin.pages.index', compact('pages', 'trashed'));
     }
 
     /**
@@ -102,6 +109,45 @@ class PageController extends Controller
                 ->with('success', __('pages.deleted_successfully', ['title' => $title]));
         } catch (\Exception $e) {
             return back()->with('error', __('pages.delete_error', ['message' => $e->getMessage()]));
+        }
+    }
+    
+    /**
+     * Restore the specified page from trash.
+     */
+    public function restore($id): RedirectResponse
+    {
+        try {
+            $page = Page::onlyTrashed()->findOrFail($id);
+            $page->restore();
+            
+            return redirect()->route('admin.pages.index', ['trashed' => 1])
+                ->with('success', __('pages.restored_successfully', ['title' => $page->title]));
+        } catch (\Exception $e) {
+            return back()->with('error', __('pages.restore_error', ['message' => $e->getMessage()]));
+        }
+    }
+    
+    /**
+     * Force delete the specified page.
+     */
+    public function forceDelete($id): RedirectResponse
+    {
+        try {
+            $page = Page::onlyTrashed()->findOrFail($id);
+            $title = $page->title;
+            
+            // Primero forzar eliminar bloques asociados
+            foreach ($page->blocks()->withTrashed()->get() as $block) {
+                $block->forceDelete();
+            }
+            
+            $page->forceDelete();
+            
+            return redirect()->route('admin.pages.index', ['trashed' => 1])
+                ->with('success', __('pages.force_deleted_successfully', ['title' => $title]));
+        } catch (\Exception $e) {
+            return back()->with('error', __('pages.force_delete_error', ['message' => $e->getMessage()]));
         }
     }
 }

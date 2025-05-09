@@ -16,6 +16,7 @@ return new class extends Migration
       $table->json('name');
       $table->enum('type', ['physical', 'magical'])->default('physical');
       $table->datetimes();
+      $table->softDeletes();
     });
   }
 

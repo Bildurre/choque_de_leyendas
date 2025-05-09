@@ -16,6 +16,7 @@ return new class extends Migration
       $table->json('name'); // Cambiado de string a json
       $table->enum('category', ['weapon', 'armor']);
       $table->datetimes();
+      $table->softDeletes();
     });
   }
 

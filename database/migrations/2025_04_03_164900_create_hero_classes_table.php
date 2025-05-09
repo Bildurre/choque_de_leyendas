@@ -16,8 +16,8 @@ return new class extends Migration
       $table->json('name');
       $table->json('passive')->nullable();
       $table->foreignId('hero_superclass_id')->nullable()->constrained()->onDelete('set null');
-      
       $table->datetimes();
+      $table->softDeletes();
     });
   }
 

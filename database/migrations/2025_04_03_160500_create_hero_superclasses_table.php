@@ -16,6 +16,7 @@ return new class extends Migration
       $table->json('name');
       $table->string('icon')->nullable();
       $table->datetimes();
+      $table->softDeletes();
     });
   }
 

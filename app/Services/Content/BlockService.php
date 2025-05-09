@@ -124,7 +124,6 @@ class BlockService
                 ->first();
                 
             if ($block) {
-                
                 $block->order = $order;
                 $block->save();
                 $order++;

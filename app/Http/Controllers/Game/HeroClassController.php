@@ -7,6 +7,7 @@ use App\Models\HeroSuperclass;
 use App\Services\Game\HeroClassService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\HeroClassRequest;
+use Illuminate\Http\Request;
 
 class HeroClassController extends Controller
 {
@@ -25,11 +26,12 @@ class HeroClassController extends Controller
   /**
    * Display a listing of hero classes.
    */
-  public function index()
+  public function index(Request $request)
   {
-    $heroClasses = $this->heroClassService->getAllHeroClasses(12);
+    $trashed = $request->has('trashed');
+    $heroClasses = $this->heroClassService->getAllHeroClasses(12, false, $trashed);
     
-    return view('admin.hero-classes.index', compact('heroClasses'));
+    return view('admin.hero-classes.index', compact('heroClasses', 'trashed'));
   }
 
   /**
@@ -51,9 +53,9 @@ class HeroClassController extends Controller
     try {
       $heroClass = $this->heroClassService->create($validated);
       return redirect()->route('admin.hero-classes.index')
-        ->with('success', "La clase {$heroClass->name} ha sido creada correctamente.");
+        ->with('success', __('hero_classes.created_successfully', ['name' => $heroClass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al crear la Clase');
+      return back()->with('error', 'Ha ocurrido un error al crear la Clase: ' . $e->getMessage());
     }
   }
 
@@ -76,25 +78,59 @@ class HeroClassController extends Controller
     try {
       $this->heroClassService->update($heroClass, $validated);
       return redirect()->route('admin.hero-classes.index')
-        ->with('success', "La clase {$heroClass->name} ha sido actualizada correctamente.");
+        ->with('success', __('hero_classes.updated_successfully', ['name' => $heroClass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar la Clase');
+      return back()->with('error', 'Ha ocurrido un error al actualizar la Clase: ' . $e->getMessage());
     }
   }
 
-    /**
-     * Remove the specified hero class from storage.
-     */
-    public function destroy(HeroClass $heroClass)
-    {
-      try {
-        $heroName = $heroClass->name;
-        $this->heroClassService->delete($heroClass);
-        
-        return redirect()->route('admin.hero-classes.index')
-          ->with('success', "La clase {$heroName} ha sido eliminada correctamente.");
-      } catch (\Exception $e) {
-        return back()->with('error', 'Ha ocurrido un error al eliminar la Clase');
-      }
+  /**
+   * Remove the specified hero class from storage.
+   */
+  public function destroy(HeroClass $heroClass)
+  {
+    try {
+      $heroName = $heroClass->name;
+      $this->heroClassService->delete($heroClass);
+      
+      return redirect()->route('admin.hero-classes.index')
+        ->with('success', __('hero_classes.deleted_successfully', ['name' => $heroName]));
+    } catch (\Exception $e) {
+      return back()->with('error', 'Ha ocurrido un error al eliminar la Clase: ' . $e->getMessage());
     }
+  }
+
+  /**
+   * Restore the specified hero class from trash.
+   */
+  public function restore($id)
+  {
+    try {
+      $this->heroClassService->restore($id);
+      $heroClass = HeroClass::find($id);
+      
+      return redirect()->route('admin.hero-classes.index', ['trashed' => 1])
+        ->with('success', __('hero_classes.restored_successfully', ['name' => $heroClass->name]));
+    } catch (\Exception $e) {
+      return back()->with('error', 'Ha ocurrido un error al restaurar la Clase: ' . $e->getMessage());
+    }
+  }
+
+  /**
+   * Force delete the specified hero class from storage.
+   */
+  public function forceDelete($id)
+  {
+    try {
+      $heroClass = HeroClass::onlyTrashed()->findOrFail($id);
+      $name = $heroClass->name;
+      
+      $this->heroClassService->forceDelete($id);
+      
+      return redirect()->route('admin.hero-classes.index', ['trashed' => 1])
+        ->with('success', __('hero_classes.force_deleted_successfully', ['name' => $name]));
+    } catch (\Exception $e) {
+      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Clase: ' . $e->getMessage());
+    }
+  }
 }

@@ -13,14 +13,23 @@ class HeroClassService
   protected $translatableFields = ['name', 'passive'];
 
   /**
- * Get hero classes with optional pagination
- *
- * @param int|null $perPage Number of items per page, or null for all items
- * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
- */
-  public function getAllHeroClasses(int $perPage = null): mixed
+   * Get hero classes with optional pagination
+   *
+   * @param int|null $perPage Number of items per page, or null for all items
+   * @param bool $withTrashed Include trashed items
+   * @param bool $onlyTrashed Only trashed items
+   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getAllHeroClasses(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
   {
     $query = HeroClass::with('heroSuperclass')->withCount('heroes');
+    
+    // Aplicar filtros de elementos eliminados
+    if ($onlyTrashed) {
+      $query->onlyTrashed();
+    } elseif ($withTrashed) {
+      $query->withTrashed();
+    }
     
     if ($perPage) {
       return $query->paginate($perPage);
@@ -83,10 +92,11 @@ class HeroClassService
   }
 
   /**
-   * Delete a hero class
+   * Delete a hero class (soft delete)
    *
    * @param HeroClass $heroClass
    * @return bool
+   * @throws \Exception
    */
   public function delete(HeroClass $heroClass): bool
   {
@@ -95,6 +105,38 @@ class HeroClassService
       throw new \Exception("No se puede eliminar la clase porque tiene héroes asociados.");
     }
     
-    return $heroClass->delete();
+    return $heroClass->delete(); // Ahora esto realizará un soft delete
+  }
+
+  /**
+   * Restore a deleted hero class
+   *
+   * @param int $id
+   * @return bool
+   * @throws \Exception
+   */
+  public function restore(int $id): bool
+  {
+    $heroClass = HeroClass::onlyTrashed()->findOrFail($id);
+    return $heroClass->restore();
+  }
+
+  /**
+   * Force delete a hero class permanently
+   *
+   * @param int $id
+   * @return bool
+   * @throws \Exception
+   */
+  public function forceDelete(int $id): bool
+  {
+    $heroClass = HeroClass::onlyTrashed()->findOrFail($id);
+    
+    // Check for related heroes (incluso para los eliminados)
+    if ($heroClass->heroes()->withTrashed()->count() > 0) {
+      throw new \Exception("No se puede eliminar permanentemente la clase porque tiene héroes asociados.");
+    }
+    
+    return $heroClass->forceDelete();
   }
 }

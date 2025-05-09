@@ -62,7 +62,7 @@ class Page extends Model implements LocalizedUrlRoutable
      */
     public function blocks()
     {
-      return $this->hasMany(Block::class)->orderBy('order', 'asc');
+        return $this->hasMany(Block::class)->orderBy('order', 'asc');
     }
 
     /**
