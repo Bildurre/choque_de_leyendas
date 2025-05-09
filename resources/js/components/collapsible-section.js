@@ -9,11 +9,7 @@ export default function initCollapsibleSections() {
     const icon = section.querySelector('.collapsible-section__icon');
     if (!icon) return;
     
-    // Actualizar icon basado en el estado actual
-    const isCollapsed = section.classList.contains('is-collapsed');
-    
-    icon.classList.remove('icon--chevron-up', 'icon--chevron-down');
-    icon.classList.add(isCollapsed ? 'icon--chevron-down' : 'icon--chevron-up');
+    // El icono ya será manejado por CSS - no necesitamos cambiar clases aquí
   }
   
   // Función para actualizar el estado del collapsible
@@ -49,7 +45,7 @@ export default function initCollapsibleSections() {
     
     header.addEventListener('click', (event) => {
       // Asegurarnos de que el clic no fue en un enlace u otro elemento interactivo
-      if (event.target.closest('a, button:not(.collapsible-section__toggle), input, textarea, select')) {
+      if (event.target.closest('a, input, textarea, select')) {
         return;
       }
       
@@ -102,15 +98,6 @@ export default function initCollapsibleSections() {
   // Configurar todos los listeners de los collapsibles
   collapsibleSections.forEach(section => {
     setupSectionListeners(section);
-    
-    // Prevenir la propagación del evento cuando se hace clic en el botón de toggle
-    const toggleButton = section.querySelector('.collapsible-section__toggle');
-    if (toggleButton) {
-      toggleButton.addEventListener('click', (e) => {
-        // Prevenir que el clic llegue al header
-        e.stopPropagation();
-      });
-    }
   });
   
   // Inicializar el estado de las secciones independientes

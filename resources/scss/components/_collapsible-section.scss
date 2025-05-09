@@ -26,16 +26,13 @@
     font-size: 1.5rem;
   }
   
-  &__toggle {
-    background: none;
-    border: none;
-    color: var(--color-text-primary);
-    cursor: pointer;
-    width: 2rem;
-    height: 2rem;
+  &__icon-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-text-primary);
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     transition: background-color $transition-fast, color $transition-fast;
     
@@ -47,9 +44,11 @@
   
   &__icon {
     transition: transform $transition-medium ease;
+    // Estado inicial: flecha apuntando hacia abajo (cerrado)
   }
   
-  &.is-collapsed &__icon {
+  // Cuando está abierto, la flecha apunta hacia arriba
+  &:not(.is-collapsed) &__icon {
     transform: rotate(180deg);
   }
   

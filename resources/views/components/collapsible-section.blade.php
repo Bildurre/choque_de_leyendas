@@ -1,7 +1,7 @@
 @props([
   'id',
   'title',
-  'collapsed' => true,  // Cambiado a true por defecto
+  'collapsed' => true,
   'inAccordion' => false
 ])
 
@@ -11,9 +11,9 @@
   <div class="collapsible-section__header">
     <h2 class="collapsible-section__title">{{ $title }}</h2>
     
-    <button type="button" class="collapsible-section__toggle" aria-label="{{ __('Toggle section') }}">
-      <x-icon name="chevron-down" class="collapsible-section__icon" />
-    </button>
+    <div class="collapsible-section__icon-container">
+      <x-icon name="chevron-up" class="collapsible-section__icon" />
+    </div>
   </div>
   
   <div class="collapsible-section__content">
