@@ -64,24 +64,25 @@
               :remove-name="isset($block) ? 'remove_image' : null"
             />
             
-            @if(isset($blockConfig['settings']['image_position']))
-              <x-form.select
-                name="settings[image_position]"
-                :label="__('blocks.settings.image_position')"
-                :options="collect($blockConfig['settings']['image_position']['options'])->mapWithKeys(function($option) {
-                  return [$option => __('blocks.settings.image_position_options.' . $option)];
-                })->toArray()"
-                :selected="old('settings.image_position', 
-                  isset($block) && isset($block->settings['image_position']) 
-                    ? $block->settings['image_position'] 
-                    : ($blockConfig['settings']['image_position']['default'] ?? 'top')
-                )"
-              />
-            @endif
+            <!-- Siempre mostrar selección de posición cuando se permite imagen -->
+            <x-form.select
+              name="settings[image_position]"
+              :label="__('blocks.image_position')"
+              :options="[
+                'left' => __('blocks.image_position_options.left'),
+                'right' => __('blocks.image_position_options.right')
+              ]"
+              :selected="old('settings.image_position', 
+                isset($block) && isset($block->settings['image_position']) 
+                  ? $block->settings['image_position'] 
+                  : 'left'
+              )"
+            />
           @endif
           
           @if(isset($blockConfig['settings']))
             @foreach($blockConfig['settings'] as $settingKey => $setting)
+              <!-- No necesitamos excluir image_position aquí porque lo eliminaremos de la configuración -->
               @if($setting['type'] === 'boolean')
                 <x-form.checkbox
                   name="settings[{{ $settingKey }}]"

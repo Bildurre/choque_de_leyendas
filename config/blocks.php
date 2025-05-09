@@ -21,11 +21,6 @@ return [
             'right' => 'Right',
           ],
         ],
-        'image_position' => [
-          'type' => 'select',
-          'options' => ['top', 'left', 'right'],
-          'default' => 'top'
-        ],
       ],
     ],
     'header' => [
