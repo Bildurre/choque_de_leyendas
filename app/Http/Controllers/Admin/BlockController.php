@@ -91,18 +91,17 @@ class BlockController extends Controller
     /**
      * Update the specified block.
      */
-    public function update(BlockRequest $request, Page $page, Block $block): RedirectResponse
+    public function update(Request $request, Page $page, Block $block): RedirectResponse
     {
         try {
-            // Los datos ya están validados por BlockRequest
-            $data = $request->validated();
-            
+            $data = $request->all();
+
             $this->blockService->update($block, $data);
             
             return redirect()->route('admin.pages.edit', $page)
                 ->with('success', __('blocks.updated_successfully'));
         } catch (\Exception $e) {
-            return back()->with('error', __('blocks.update_error', ['message' => $e->getMessage()]))
+            return back()->with('error', 'Error: ' . $e->getMessage())
                 ->withInput();
         }
     }

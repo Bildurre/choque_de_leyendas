@@ -1,10 +1,4 @@
 export default function initWysiwygEditor() {
-  // Verificar si el script de TinyMCE está cargado
-  if (typeof tinymce === 'undefined') {
-    console.error('TinyMCE not loaded');
-    return;
-  }
-  
   // Definir las imágenes de dados predefinidas (hardcodeadas)
   const predefinedDiceImages = [
     {
@@ -48,18 +42,23 @@ export default function initWysiwygEditor() {
       selector: `#${editor.id}`,
       height: 300,
       menubar: false,
-      // Eliminar el plugin de imagen estándar y añadir nuestro plugin personalizado
+      // Plugins y configuración existente
       plugins: ['autolink', 'lists', 'link', 'visualblocks', 'code'],
-      // Cambiamos 'image' por 'dice_image' en la barra de herramientas
       toolbar: 'bold italic underline | bullist numlist outdent indent | link dice_image | removeformat code',
-      content_css: [],
       
-      // Configuración para el tema oscuro/claro
-      skin: localStorage.getItem('theme') === 'dark' ? 'oxide-dark' : 'oxide',
-      content_css: localStorage.getItem('theme') === 'dark' ? 'dark' : 'default',
-
-      // Registrar nuestro botón personalizado
+      // Importante: asegurar la sincronización automática con el textarea
+      auto_focus: editor.id,
       setup: function(editor) {
+        // Registrar un evento para actualizar el textarea cuando el contenido cambia
+        editor.on('change', function() {
+          editor.save(); // Guardar contenido en el textarea
+        });
+        
+        // También sincronizar al perder el foco
+        editor.on('blur', function() {
+          editor.save();
+        });
+        
         // Añadir un botón personalizado para dados
         editor.ui.registry.addButton('dice_image', {
           icon: 'image',
@@ -70,7 +69,21 @@ export default function initWysiwygEditor() {
         });
       },
 
+      // Configuración para el tema oscuro/claro
+      skin: localStorage.getItem('theme') === 'dark' ? 'oxide-dark' : 'oxide',
+      content_css: localStorage.getItem('theme') === 'dark' ? 'dark' : 'default',
       license_key: 'gpl'
+    });
+  });
+  
+  // Sincronizar todos los editores antes del envío del formulario
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', function(e) {
+      // Asegurarse de que todos los editores TinyMCE sincronicen su contenido
+      if (typeof tinymce !== 'undefined') {
+        tinymce.triggerSave();
+      }
     });
   });
   
@@ -120,6 +133,9 @@ export default function initWysiwygEditor() {
       item.addEventListener('click', () => {
         editor.insertContent(`<img src="${item.dataset.url}" alt="${item.querySelector('span').textContent}" style="width: 24px; height: 24px;">`);
         document.body.removeChild(dialog);
+        
+        // Asegurarse de guardar el contenido después de insertar la imagen
+        editor.save();
       });
     });
   }
