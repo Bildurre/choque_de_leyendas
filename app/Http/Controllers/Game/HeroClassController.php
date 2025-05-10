@@ -28,10 +28,15 @@ class HeroClassController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
-    $heroClasses = $this->heroClassService->getAllHeroClasses(12, false, $trashed);
-    
-    return view('admin.hero-classes.index', compact('heroClasses', 'trashed'));
+      $trashed = $request->has('trashed');
+      
+      // Obtener contadores para las pestañas
+      $activeCount = HeroClass::count();
+      $trashedCount = HeroClass::onlyTrashed()->count();
+      
+      $heroClasses = $this->heroClassService->getAllHeroClasses(12, false, $trashed);
+      
+      return view('admin.hero-classes.index', compact('heroClasses', 'trashed', 'activeCount', 'trashedCount'));
   }
 
   /**

@@ -32,13 +32,17 @@ class PageController extends Controller
         $query = Page::with('parent')
             ->withCount('children');
         
+        // Obtener contadores para las pestañas
+        $activeCount = Page::count();
+        $trashedCount = Page::onlyTrashed()->count();
+        
         if ($trashed) {
             $query->onlyTrashed();
         }
         
         $pages = $query->orderBy('order')->paginate(20);
         
-        return view('admin.pages.index', compact('pages', 'trashed'));
+        return view('admin.pages.index', compact('pages', 'trashed', 'activeCount', 'trashedCount'));
     }
 
     /**
@@ -135,12 +139,8 @@ class PageController extends Controller
     {
         try {
             $page = Page::onlyTrashed()->findOrFail($id);
+
             $title = $page->title;
-            
-            // Primero forzar eliminar bloques asociados
-            foreach ($page->blocks()->withTrashed()->get() as $block) {
-                $block->forceDelete();
-            }
             
             $page->forceDelete();
             

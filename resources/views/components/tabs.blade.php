@@ -9,6 +9,6 @@
   </div>
   
   <div class="tabs__content">
-    {{ $content }}
+    {{ $content ?? $slot }}
   </div>
 </div>

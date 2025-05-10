@@ -1,3 +1,4 @@
+// resources/scss/components/_tabs.scss
 @use '../abstracts/all' as *;
 
 .tabs {
@@ -26,6 +27,7 @@
   
   &__item {
     padding: $spacing-sm $spacing-md;
+    margin-right: $spacing-sm; // Aumentamos la separación entre pestañas
     color: var(--color-text-secondary);
     text-decoration: none;
     position: relative;
@@ -33,6 +35,8 @@
     align-items: center;
     gap: $spacing-xs;
     white-space: nowrap;
+    border-radius: $border-radius-sm $border-radius-sm 0 0;
+    transition: background-color $transition-fast, color $transition-fast;
     
     &::after {
       content: '';
@@ -47,11 +51,13 @@
     
     &:hover {
       color: var(--color-text-primary);
+      background-color: var(--color-bg-transparent-light); // Añadimos efecto hover
     }
     
     &--active {
       color: var(--random-accent-color);
       font-weight: 600;
+      background-color: var(--random-accent-color-bg-light); // Fondo para la pestaña activa
       
       &::after {
         background-color: var(--random-accent-color);
@@ -67,6 +73,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  
+  &__text {
+    display: flex;
+    align-items: center;
+  }
+
+  &__count {
+    margin-left: $spacing-xs;
+    font-size: 0.85em;
+    opacity: 0.8;
   }
   
   &__content {

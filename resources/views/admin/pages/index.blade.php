@@ -13,6 +13,7 @@
             :active="!$trashed" 
             :href="route('admin.pages.index')"
             icon="list"
+            :count="$activeCount ?? null"
           >
             {{ __('admin.active_items') }}
           </x-tab-item>
@@ -22,6 +23,7 @@
             :active="$trashed" 
             :href="route('admin.pages.index', ['trashed' => 1])"
             icon="trash"
+            :count="$trashedCount ?? null"
           >
             {{ __('admin.trashed_items') }}
           </x-tab-item>
