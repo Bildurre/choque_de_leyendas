@@ -8,6 +8,7 @@ use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
@@ -45,7 +46,12 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('equipment-types', EquipmentTypeController::class);
   Route::post('equipment-types/{id}/restore', [EquipmentTypeController::class, 'restore'])->name('equipment-types.restore');
   Route::delete('equipment-types/{id}/force-delete', [EquipmentTypeController::class, 'forceDelete'])->name('equipment-types.force-delete');
-    
+
+  // Attack Subtypes
+  Route::resource('attack-subtypes', AttackSubtypeController::class);
+  Route::post('attack-subtypes/{id}/restore', [AttackSubtypeController::class, 'restore'])->name('attack-subtypes.restore');
+  Route::delete('attack-subtypes/{id}/force-delete', [AttackSubtypeController::class, 'forceDelete'])->name('attack-subtypes.force-delete');
+      
   // Pages
   Route::resource('pages', PageController::class);
   Route::post('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
