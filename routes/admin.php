@@ -8,6 +8,7 @@ use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
@@ -39,6 +40,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('card-types', CardTypeController::class);
   Route::post('card-types/{id}/restore', [CardTypeController::class, 'restore'])->name('card-types.restore');
   Route::delete('card-types/{id}/force-delete', [CardTypeController::class, 'forceDelete'])->name('card-types.force-delete');
+
+  // Equipment Types
+  Route::resource('equipment-types', EquipmentTypeController::class);
+  Route::post('equipment-types/{id}/restore', [EquipmentTypeController::class, 'restore'])->name('equipment-types.restore');
+  Route::delete('equipment-types/{id}/force-delete', [EquipmentTypeController::class, 'forceDelete'])->name('equipment-types.force-delete');
     
   // Pages
   Route::resource('pages', PageController::class);

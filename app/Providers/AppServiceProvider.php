@@ -12,6 +12,7 @@ use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use App\Services\LocalizedRoutingService;
+use App\Services\Game\EquipmentTypeService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
 use App\Services\Game\HeroSuperclassService;
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         HeroRaceService::class,
         HeroAttributesConfigurationService::class,
         CardTypeService::class,
+        EquipmentTypeService::class,
       ];
       
       foreach ($services as $service) {
