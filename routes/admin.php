@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
+use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -33,7 +34,12 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('hero-races', HeroRaceController::class);
   Route::post('hero-races/{id}/restore', [HeroRaceController::class, 'restore'])->name('hero-races.restore');
   Route::delete('hero-races/{id}/force-delete', [HeroRaceController::class, 'forceDelete'])->name('hero-races.force-delete');
-  
+
+  // Card Types
+  Route::resource('card-types', CardTypeController::class);
+  Route::post('card-types/{id}/restore', [CardTypeController::class, 'restore'])->name('card-types.restore');
+  Route::delete('card-types/{id}/force-delete', [CardTypeController::class, 'forceDelete'])->name('card-types.force-delete');
+    
   // Pages
   Route::resource('pages', PageController::class);
   Route::post('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');

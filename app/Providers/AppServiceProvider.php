@@ -6,6 +6,7 @@ use App\Services\Media\ImageService;
 use Illuminate\Pagination\Paginator;
 use App\Services\Content\PageService;
 use App\Services\Content\BlockService;
+use App\Services\Game\CardTypeService;
 use App\Services\Game\HeroRaceService;
 use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ use App\Services\LocalizedRoutingService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
 use App\Services\Game\HeroSuperclassService;
+use App\Services\Game\HeroAttributesConfigurationService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         HeroSuperclassService::class,
         HeroRaceService::class,
         HeroAttributesConfigurationService::class,
+        CardTypeService::class,
       ];
       
       foreach ($services as $service) {
