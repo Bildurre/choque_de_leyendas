@@ -67,7 +67,7 @@ class AttackRangeService
     
     // Handle icon upload
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $attackRange->icon = $this->imageService->store($data['icon'], $attackRange->getImageDirectory());
+      $attackRange->storeImage($data['icon']);
     }
     
     $attackRange->save();
@@ -93,14 +93,9 @@ class AttackRangeService
     
     // Handle icon updates
     if (isset($data['remove_icon']) && $data['remove_icon']) {
-      $this->imageService->delete($attackRange->icon);
-      $attackRange->icon = null;
+      $attackRange->deleteImage();
     } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $attackRange->icon = $this->imageService->update(
-        $data['icon'], 
-        $attackRange->icon, 
-        $attackRange->getImageDirectory()
-      );
+      $attackRange->storeImage($data['icon']);
     }
     
     $attackRange->save();
@@ -165,8 +160,8 @@ class AttackRangeService
     }
     
     // Delete icon if exists
-    if ($attackRange->icon) {
-      $this->imageService->delete($attackRange->icon);
+    if ($attackRange->hasImage()) {
+      $attackRange->deleteImage();
     }
     
     return $attackRange->forceDelete();

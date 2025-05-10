@@ -67,7 +67,7 @@ class HeroSuperclassService
     
     // Handle icon upload
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $heroSuperclass->icon = $this->imageService->store($data['icon'], $heroSuperclass->getImageDirectory());
+      $heroSuperclass->storeImage($data['icon']);
     }
     
     $heroSuperclass->save();
@@ -93,14 +93,9 @@ class HeroSuperclassService
     
     // Handle icon updates
     if (isset($data['remove_icon']) && $data['remove_icon']) {
-      $this->imageService->delete($heroSuperclass->icon);
-      $heroSuperclass->icon = null;
+      $heroSuperclass->deleteImage();
     } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $heroSuperclass->icon = $this->imageService->update(
-        $data['icon'], 
-        $heroSuperclass->icon, 
-        $heroSuperclass->getImageDirectory()
-      );
+      $heroSuperclass->storeImage($data['icon']);
     }
     
     $heroSuperclass->save();
@@ -165,8 +160,8 @@ class HeroSuperclassService
     }
     
     // Delete icon if exists
-    if ($heroSuperclass->icon) {
-      $this->imageService->delete($heroSuperclass->icon);
+    if ($heroSuperclass->hasImage()) {
+      $heroSuperclass->deleteImage();
     }
     
     return $heroSuperclass->forceDelete();

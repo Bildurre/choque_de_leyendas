@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,7 @@ class Page extends Model implements LocalizedUrlRoutable
     use SoftDeletes;
     use HasTranslatableSlug;
     use HasTranslations;
+    use HasImageAttribute;
 
     /**
      * The attributes that are mass assignable.
@@ -127,18 +129,6 @@ class Page extends Model implements LocalizedUrlRoutable
     public function getImageDirectory(): string
     {
         return 'images/pages';
-    }
-
-    /**
-     * Get the image URL
-     */
-    public function getBackgroundImageUrl(): ?string
-    {
-        if (!$this->background_image) {
-            return null;
-        }
-        
-        return asset('storage/' . $this->background_image);
     }
 
     /**

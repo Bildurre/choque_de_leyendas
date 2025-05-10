@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +13,7 @@ class AttackRange extends Model
   use HasFactory;
   use HasTranslations;
   use SoftDeletes;
+  use HasImageAttribute;
 
   /**
    * The table associated with the model.
@@ -65,24 +67,12 @@ class AttackRange extends Model
   }
 
   /**
-   * Get the directory for storing icons for this model
+   * Get the directory for storing images for this model
    * 
    * @return string
    */
   public function getImageDirectory(): string
   {
     return 'images/attack-ranges';
-  }
-
-  /**
-   * Get the icon URL
-   */
-  public function getIconUrl(): ?string
-  {
-    if (!$this->icon) {
-      return null;
-    }
-    
-    return asset('storage/' . $this->icon);
   }
 }

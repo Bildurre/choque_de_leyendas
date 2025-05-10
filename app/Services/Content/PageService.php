@@ -7,7 +7,6 @@ use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class PageService
 {
@@ -36,10 +35,7 @@ class PageService
         
         // Apply translations
         $this->applyTranslations($page, $data, $this->translatableFields);
-        
-        // Generate slugs for all locales if not provided
-        $this->generateSlugsForAllLocales($page, $data);
-        
+                
         // Set non-translatable fields
         $page->is_published = $data['is_published'] ?? false;
         $page->parent_id = $data['parent_id'] ?? null;
@@ -48,7 +44,7 @@ class PageService
         
         // Handle background image upload
         if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-          $page->background_image = $this->imageService->store($data['background_image'], $page->getImageDirectory());
+          $page->storeImage($data['background_image']);
         }
         
         $page->save();
@@ -78,14 +74,9 @@ class PageService
         
         // Handle background image updates
         if (isset($data['remove_background_image']) && $data['remove_background_image']) {
-          $this->imageService->delete($page->background_image);
-          $page->background_image = null;
+          $page->deleteImage();
         } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-            $page->background_image = $this->imageService->update(
-                $data['background_image'], 
-                $page->background_image, 
-                $page->getImageDirectory()
-            );
+          $page->storeImage($data['background_image']);
         }
         
         $page->save();
@@ -99,8 +90,8 @@ class PageService
     public function delete(Page $page): bool
     {
         // Delete background image if exists
-        if ($page->background_image) {
-            $this->imageService->delete($page->background_image);
+        if ($page->hasImage()) {
+          $page->deleteImage();
         }
         
         // Update any child pages to have no parent
@@ -131,54 +122,5 @@ class PageService
         }
         
         return $templates;
-    }
-
-    /**
-     * Generate slugs for all available locales.
-     */
-    protected function generateSlugsForAllLocales(Page $page, array $data): void
-    {
-        $locales = config('app.available_locales', ['es', 'en']);
-        
-        foreach ($locales as $locale) {
-            // Skip if slug is already provided for this locale
-            if (isset($data['slug'][$locale]) && !empty($data['slug'][$locale])) {
-                continue;
-            }
-            
-            // Skip if there is no title to generate slug from
-            if (!$page->hasTranslation('title', $locale)) {
-                continue;
-            }
-            
-            // Generate slug from title
-            $title = $page->getTranslation('title', $locale);
-            $slug = Str::slug($title);
-            
-            // Ensure slug uniqueness
-            $suffix = 1;
-            $originalSlug = $slug;
-            
-            while ($this->slugExists($slug, $locale, $page->id)) {
-                $slug = $originalSlug . '-' . $suffix;
-                $suffix++;
-            }
-            
-            $page->setTranslation('slug', $locale, $slug);
-        }
-    }
-
-    /**
-     * Check if a slug exists for a locale.
-     */
-    protected function slugExists(string $slug, string $locale, ?int $exceptId = null): bool
-    {
-        $query = Page::whereJsonContains("slug->{$locale}", $slug);
-        
-        if ($exceptId) {
-            $query->where('id', '!=', $exceptId);
-        }
-        
-        return $query->exists();
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Block extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, HasImageAttribute;
 
     /**
      * The attributes that are mass assignable.
@@ -65,18 +66,6 @@ class Block extends Model
     public function getImageDirectory(): string
     {
         return 'images/blocks';
-    }
-
-    /**
-     * Get the image URL
-     */
-    public function getImageUrl(): ?string
-    {
-        if (!$this->image) {
-            return null;
-        }
-        
-        return asset('storage/' . $this->image);
     }
 
     /**

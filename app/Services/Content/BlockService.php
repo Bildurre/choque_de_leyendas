@@ -48,7 +48,7 @@ class BlockService
         
         // Handle background image upload
         if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-          $block->image = $this->imageService->store($data['image'], $block->getImageDirectory());
+          $block->storeImage($data['image']);
         }
         
         $block->save();
@@ -83,14 +83,9 @@ class BlockService
         
         // Handle background image updates
         if (isset($data['remove_image']) && $data['remove_image']) {
-          $this->imageService->delete($block->image);
-          $block->image = null;
+          $block->deleteImage();
         } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-            $block->image = $this->imageService->update(
-                $data['image'], 
-                $block->image, 
-                $block->getImageDirectory()
-            );
+          $block->storeImage($data['image']);
         }
         
         $block->save();
@@ -104,8 +99,8 @@ class BlockService
     public function delete(Block $block): bool
     {
         // Delete any associated images
-        if ($block->image) {
-          $this->imageService->delete($block->image);
+        if ($block->hasImage()) {
+          $block->deleteImage();
         }
         
         return $block->delete();
