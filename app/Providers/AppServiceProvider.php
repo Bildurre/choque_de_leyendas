@@ -12,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Services\LocalizedRoutingService;
 use App\Services\Media\WysiwygImageService;
 use App\Services\Game\CostTranslatorService;
+use App\Services\Game\HeroSuperclassService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         CostTranslatorService::class,
         WysiwygImageService::class,
         LocalizedRoutingService::class,
+        HeroSuperclassService::class
       ];
       
       foreach ($services as $service) {

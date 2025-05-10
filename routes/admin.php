@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Game\HeroSuperclassController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
@@ -16,6 +17,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('hero-classes', HeroClassController::class);
   Route::post('hero-classes/{id}/restore', [HeroClassController::class, 'restore'])->name('hero-classes.restore');
   Route::delete('hero-classes/{id}/force-delete', [HeroClassController::class, 'forceDelete'])->name('hero-classes.force-delete');
+
+  // Hero Superclasses
+  Route::resource('hero-superclasses', HeroSuperclassController::class);
+  Route::post('hero-superclasses/{id}/restore', [HeroSuperclassController::class, 'restore'])->name('hero-superclasses.restore');
+  Route::delete('hero-superclasses/{id}/force-delete', [HeroSuperclassController::class, 'forceDelete'])->name('hero-superclasses.force-delete');
   
   // Pages
   Route::resource('pages', PageController::class);

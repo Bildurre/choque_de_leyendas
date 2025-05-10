@@ -12,7 +12,7 @@
     <h2 class="collapsible-section__title">{{ $title }}</h2>
     
     <div class="collapsible-section__icon-container">
-      <x-icon name="chevron-up" class="collapsible-section__icon" />
+      <x-icon name="chevron-down" class="collapsible-section__icon" />
     </div>
   </div>
   
