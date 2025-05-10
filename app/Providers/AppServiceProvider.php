@@ -7,10 +7,12 @@ use Illuminate\Pagination\Paginator;
 use App\Services\Content\PageService;
 use App\Services\Content\BlockService;
 use App\Services\Game\CardTypeService;
+use App\Services\Game\FactionService;
 use App\Services\Game\HeroRaceService;
 use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use App\Services\Game\AttackRangeService;
 use App\Services\LocalizedRoutingService;
 use App\Services\Game\AttackSubtypeService;
 use App\Services\Game\EquipmentTypeService;
@@ -40,17 +42,9 @@ class AppServiceProvider extends ServiceProvider
     {
       $services = [
         ImageService::class,
-        HeroClassService::class,
         CostTranslatorService::class,
         WysiwygImageService::class,
         LocalizedRoutingService::class,
-        HeroSuperclassService::class,
-        HeroRaceService::class,
-        HeroAttributesConfigurationService::class,
-        CardTypeService::class,
-        EquipmentTypeService::class,
-        AttackSubtypeService::class,
-        AttackRangeService::class,
       ];
       
       foreach ($services as $service) {
@@ -63,16 +57,34 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerDependentServices(): void
     {
-      $this->app->singleton(PageService::class, function ($app) {
-        return new PageService(
-          $app->make(ImageService::class)
-        );
-      });
-      $this->app->singleton(BlockService::class, function ($app) {
-        return new BlockService(
-          $app->make(ImageService::class)
-        );
-      });
+      // Services that depend on ImageService
+      $imageServiceDependents = [
+        PageService::class,
+        BlockService::class,
+        HeroSuperclassService::class,
+        AttackRangeService::class,
+        FactionService::class,
+      ];
+      
+      foreach ($imageServiceDependents as $service) {
+        $this->app->singleton($service, function ($app) use ($service) {
+          return new $service($app->make(ImageService::class));
+        });
+      }
+      
+      // Register services without external dependencies but that should be registered after basic services
+      $otherServices = [
+        HeroClassService::class,
+        HeroRaceService::class,
+        HeroAttributesConfigurationService::class,
+        CardTypeService::class,
+        EquipmentTypeService::class,
+        AttackSubtypeService::class,
+      ];
+      
+      foreach ($otherServices as $service) {
+        $this->app->singleton($service);
+      }
     }
 
     /**
