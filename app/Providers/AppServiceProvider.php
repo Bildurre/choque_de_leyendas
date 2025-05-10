@@ -6,6 +6,7 @@ use App\Services\Media\ImageService;
 use Illuminate\Pagination\Paginator;
 use App\Services\Content\PageService;
 use App\Services\Content\BlockService;
+use App\Services\Game\HeroRaceService;
 use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
@@ -39,7 +40,8 @@ class AppServiceProvider extends ServiceProvider
         CostTranslatorService::class,
         WysiwygImageService::class,
         LocalizedRoutingService::class,
-        HeroSuperclassService::class
+        HeroSuperclassService::class,
+        HeroRaceService::class
       ];
       
       foreach ($services as $service) {

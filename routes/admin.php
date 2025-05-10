@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
+use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Game\HeroSuperclassController;
@@ -22,6 +23,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('hero-superclasses', HeroSuperclassController::class);
   Route::post('hero-superclasses/{id}/restore', [HeroSuperclassController::class, 'restore'])->name('hero-superclasses.restore');
   Route::delete('hero-superclasses/{id}/force-delete', [HeroSuperclassController::class, 'forceDelete'])->name('hero-superclasses.force-delete');
+
+  // Hero Races
+  Route::resource('hero-races', HeroRaceController::class);
+  Route::post('hero-races/{id}/restore', [HeroRaceController::class, 'restore'])->name('hero-races.restore');
+  Route::delete('hero-races/{id}/force-delete', [HeroRaceController::class, 'forceDelete'])->name('hero-races.force-delete');
   
   // Pages
   Route::resource('pages', PageController::class);
