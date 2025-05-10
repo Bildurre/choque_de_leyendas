@@ -8,6 +8,7 @@ use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Game\AttackRangeController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
@@ -51,6 +52,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('attack-subtypes', AttackSubtypeController::class);
   Route::post('attack-subtypes/{id}/restore', [AttackSubtypeController::class, 'restore'])->name('attack-subtypes.restore');
   Route::delete('attack-subtypes/{id}/force-delete', [AttackSubtypeController::class, 'forceDelete'])->name('attack-subtypes.force-delete');
+
+  // Attack Ranges
+  Route::resource('attack-ranges', AttackRangeController::class);
+  Route::post('attack-ranges/{id}/restore', [AttackRangeController::class, 'restore'])->name('attack-ranges.restore');
+  Route::delete('attack-ranges/{id}/force-delete', [AttackRangeController::class, 'forceDelete'])->name('attack-ranges.force-delete');
       
   // Pages
   Route::resource('pages', PageController::class);

@@ -50,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         CardTypeService::class,
         EquipmentTypeService::class,
         AttackSubtypeService::class,
+        AttackRangeService::class,
       ];
       
       foreach ($services as $service) {
