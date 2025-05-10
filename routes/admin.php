@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
+use App\Http\Controllers\Game\FactionController;
 use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
@@ -57,6 +58,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('attack-ranges', AttackRangeController::class);
   Route::post('attack-ranges/{id}/restore', [AttackRangeController::class, 'restore'])->name('attack-ranges.restore');
   Route::delete('attack-ranges/{id}/force-delete', [AttackRangeController::class, 'forceDelete'])->name('attack-ranges.force-delete');
+
+  // Factions
+  Route::resource('factions', FactionController::class);
+  Route::post('factions/{id}/restore', [FactionController::class, 'restore'])->name('factions.restore');
+  Route::delete('factions/{id}/force-delete', [FactionController::class, 'forceDelete'])->name('factions.force-delete');
       
   // Pages
   Route::resource('pages', PageController::class);
