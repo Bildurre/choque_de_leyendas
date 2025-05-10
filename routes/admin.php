@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
+use App\Http\Controllers\Game\CardController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Game\FactionController;
@@ -63,6 +64,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('factions', FactionController::class);
   Route::post('factions/{id}/restore', [FactionController::class, 'restore'])->name('factions.restore');
   Route::delete('factions/{id}/force-delete', [FactionController::class, 'forceDelete'])->name('factions.force-delete');
+
+  // Cards
+  Route::resource('cards', CardController::class);
+  Route::post('cards/{id}/restore', [CardController::class, 'restore'])->name('cards.restore');
+  Route::delete('cards/{id}/force-delete', [CardController::class, 'forceDelete'])->name('cards.force-delete');
       
   // Pages
   Route::resource('pages', PageController::class);

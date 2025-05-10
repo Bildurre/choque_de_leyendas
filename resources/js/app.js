@@ -16,6 +16,9 @@ import initAccordions from './components/accordion';
 import initConditionalFields from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
+import initCostInput from './components/cost-input';
+import initCardForm from './components/card-form';
+import initCardFilters from './components/card-filters';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -29,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initConditionalFields();
   initImageUpload();
   initAttributeConfigForm(); 
+  initCostInput();
+  initCardForm();
+  initCardFilters();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();
