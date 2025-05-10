@@ -1,5 +1,3 @@
-// En resources/js/app.js
-
 import './bootstrap';
 import '../scss/app.scss';
 import initHeaderScroll from './components/public-header';
@@ -19,6 +17,7 @@ import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
 import initCardForm from './components/card-form';
 import initCardFilters from './components/card-filters';
+import initHeroAbilityForm from './components/hero-ability-form';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -35,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCostInput();
   initCardForm();
   initCardFilters();
+  initHeroAbilityForm();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

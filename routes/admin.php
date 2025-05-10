@@ -11,6 +11,7 @@ use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Game\AttackRangeController;
+use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
@@ -39,6 +40,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('hero-races', HeroRaceController::class);
   Route::post('hero-races/{id}/restore', [HeroRaceController::class, 'restore'])->name('hero-races.restore');
   Route::delete('hero-races/{id}/force-delete', [HeroRaceController::class, 'forceDelete'])->name('hero-races.force-delete');
+
+  // Hero Abilities
+  Route::resource('hero-abilities', HeroAbilityController::class);
+  Route::post('hero-abilities/{id}/restore', [HeroAbilityController::class, 'restore'])->name('hero-abilities.restore');
+  Route::delete('hero-abilities/{id}/force-delete', [HeroAbilityController::class, 'forceDelete'])->name('hero-abilities.force-delete');
 
   // Card Types
   Route::resource('card-types', CardTypeController::class);

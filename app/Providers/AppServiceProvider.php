@@ -14,6 +14,7 @@ use App\Services\Game\HeroClassService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Game\AttackRangeService;
+use App\Services\Game\HeroAbilityService;
 use App\Services\LocalizedRoutingService;
 use App\Services\Game\AttackSubtypeService;
 use App\Services\Game\EquipmentTypeService;
@@ -81,6 +82,7 @@ class AppServiceProvider extends ServiceProvider
         CardTypeService::class,
         EquipmentTypeService::class,
         AttackSubtypeService::class,
+        HeroAbilityService::class,
       ];
       
       foreach ($otherServices as $service) {
