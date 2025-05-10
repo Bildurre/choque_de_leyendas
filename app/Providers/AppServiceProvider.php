@@ -41,7 +41,8 @@ class AppServiceProvider extends ServiceProvider
         WysiwygImageService::class,
         LocalizedRoutingService::class,
         HeroSuperclassService::class,
-        HeroRaceService::class
+        HeroRaceService::class,
+        HeroAttributesConfigurationService::class,
       ];
       
       foreach ($services as $service) {

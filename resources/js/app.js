@@ -15,6 +15,7 @@ import initCollapsibleSections from './components/collapsible-section';
 import initAccordions from './components/accordion';
 import initConditionalFields from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
+import initAttributeConfigForm from './components/attribute-config-form';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReorderableLists();
   initConditionalFields();
   initImageUpload();
+  initAttributeConfigForm(); 
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

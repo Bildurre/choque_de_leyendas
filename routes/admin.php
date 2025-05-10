@@ -8,11 +8,16 @@ use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Game\HeroSuperclassController;
+use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
   Route::get('/', [DashboardController::class, 'view'])->name('dashboard');
   Route::get('/dashboard', [DashboardController::class, 'view'])->name('dashboard');
+
+  // Hero Attributes Configuration
+  Route::get('hero-attributes-configurations/edit', [HeroAttributesConfigurationController::class, 'edit'])->name('hero-attributes-configurations.edit');
+  Route::put('hero-attributes-configurations', [HeroAttributesConfigurationController::class, 'update'])->name('hero-attributes-configurations.update');
 
   // Hero Classes
   Route::resource('hero-classes', HeroClassController::class);
