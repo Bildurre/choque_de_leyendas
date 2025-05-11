@@ -73,7 +73,7 @@ class FactionService
     
     // Handle icon upload
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $faction->storeImage($data['icon']);
+      $faction->storeImage($data['icon'], 'icon');
     }
     
     $faction->save();
@@ -107,7 +107,7 @@ class FactionService
     if (isset($data['remove_icon']) && $data['remove_icon']) {
       $faction->deleteImage();
     } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $faction->storeImage($data['icon']);
+      $faction->storeImage($data['icon'], 'icon');
     }
     
     $faction->save();

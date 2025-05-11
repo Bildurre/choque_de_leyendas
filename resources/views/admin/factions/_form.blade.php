@@ -44,7 +44,7 @@
         <x-form.image-upload
           name="icon"
           :label="__('factions.icon')"
-          :current-image="isset($faction) && $faction->icon ? $faction->getIconUrl() : null"
+          :current-image="isset($faction) && $faction->icon ? $faction->getImageUrl() : null"
           :remove-name="isset($faction) ? 'remove_icon' : null"
         />
       </div>

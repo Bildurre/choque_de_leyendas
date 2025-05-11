@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Storage;
 trait HasImageAttribute
 {
   /**
+   * Get the field name for storing images for this model
+   * Defaults to 'image' if not overridden
+   * 
+   * @return string
+   */
+  public function getImageField(): string
+  {
+    return 'image';
+  }
+
+  /**
    * Get the directory for storing images for this model
    * 
    * @return string
@@ -17,43 +28,53 @@ trait HasImageAttribute
   /**
    * Get the full URL to the image
    * 
+   * @param string|null $field Custom field name (optional)
    * @return string|null
    */
-  public function getImageUrlAttribute(): ?string
+  public function getImageUrl(?string $field = null): ?string
   {
-    if (!$this->image) {
+    $field = $field ?? $this->getImageField();
+    
+    if (!$this->{$field}) {
       return null;
     }
     
-    return Storage::disk('public')->url($this->image);
+    // Usar asset() en lugar de URL directa del storage
+    return asset('storage/' . $this->{$field});
   }
   
   /**
    * Determines if model has an image
    * 
+   * @param string|null $field Custom field name (optional)
    * @return bool
    */
-  public function hasImage(): bool
+  public function hasImage(?string $field = null): bool
   {
-    return !empty($this->image) && Storage::disk('public')->exists($this->image);
+    $field = $field ?? $this->getImageField();
+    
+    return !empty($this->{$field}) && Storage::disk('public')->exists($this->{$field});
   }
   
   /**
    * Store an image for this model
    * 
    * @param UploadedFile $file
+   * @param string|null $field Custom field name (optional)
    * @return string Path to the stored image
    */
-  public function storeImage(UploadedFile $file): string
+  public function storeImage(UploadedFile $file, ?string $field = null): string
   {
+    $field = $field ?? $this->getImageField();
+    
     // Delete old image if exists
-    $this->deleteImage();
+    $this->deleteImage($field);
     
     // Store new image
     $path = $file->store($this->getImageDirectory(), 'public');
     
     // Update model
-    $this->image = $path;
+    $this->{$field} = $path;
     $this->save();
     
     return $path;
@@ -62,15 +83,18 @@ trait HasImageAttribute
   /**
    * Delete the image for this model
    * 
+   * @param string|null $field Custom field name (optional)
    * @return bool
    */
-  public function deleteImage(): bool
+  public function deleteImage(?string $field = null): bool
   {
-    if ($this->hasImage()) {
-      $deleted = Storage::disk('public')->delete($this->image);
+    $field = $field ?? $this->getImageField();
+    
+    if ($this->hasImage($field)) {
+      $deleted = Storage::disk('public')->delete($this->{$field});
       
       if ($deleted) {
-        $this->image = null;
+        $this->{$field} = null;
         $this->save();
       }
       

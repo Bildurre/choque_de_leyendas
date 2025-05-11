@@ -81,7 +81,7 @@
                 
                 @if($faction->icon)
                   <div class="faction-icon">
-                    <img src="{{ $faction->getIconUrl() }}" alt="{{ $faction->name }}" class="faction-icon__image">
+                    <img src="{{ $faction->getImageUrl() }}" alt="{{ $faction->name }}" class="faction-icon__image">
                   </div>
                 @endif
                 
@@ -123,7 +123,7 @@
                 
                 @if($faction->icon)
                   <div class="faction-icon">
-                    <img src="{{ $faction->getIconUrl() }}" alt="{{ $faction->name }}" class="faction-icon__image">
+                    <img src="{{ $faction->getImageUrl() }}" alt="{{ $faction->name }}" class="faction-icon__image">
                   </div>
                 @endif
                 
