@@ -3,7 +3,6 @@
 namespace App\Services\Game;
 
 use App\Models\Card;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 
@@ -11,16 +10,7 @@ class CardService
 {
   use HandlesTranslations;
   
-  protected $imageService;
   protected $translatableFields = ['name', 'lore_text', 'effect', 'restriction'];
-
-  /**
-   * Create a new service instance.
-   */
-  public function __construct(ImageService $imageService)
-  {
-    $this->imageService = $imageService;
-  }
 
   /**
    * Get all cards with optional pagination and filters
@@ -233,5 +223,42 @@ class CardService
     }
     
     return $card->forceDelete();
+  }
+  
+  /**
+   * Get counts by faction
+   * 
+   * @return array
+   */
+  public function getCountsByFaction(): array
+  {
+    $counts = [];
+    $factions = \App\Models\Faction::all();
+    
+    foreach ($factions as $faction) {
+      $counts[$faction->id] = Card::where('faction_id', $faction->id)->count();
+    }
+    
+    // Add count for cards without faction
+    $counts['no_faction'] = Card::whereNull('faction_id')->count();
+    
+    return $counts;
+  }
+  
+  /**
+   * Get counts by card type
+   * 
+   * @return array
+   */
+  public function getCountsByCardType(): array
+  {
+    $counts = [];
+    $cardTypes = \App\Models\CardType::all();
+    
+    foreach ($cardTypes as $cardType) {
+      $counts[$cardType->id] = Card::where('card_type_id', $cardType->id)->count();
+    }
+    
+    return $counts;
   }
 }

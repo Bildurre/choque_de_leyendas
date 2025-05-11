@@ -3,7 +3,6 @@
 namespace App\Services\Game;
 
 use App\Models\HeroSuperclass;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 
@@ -11,16 +10,7 @@ class HeroSuperclassService
 {
   use HandlesTranslations;
   
-  protected $imageService;
   protected $translatableFields = ['name'];
-
-  /**
-   * Create a new service instance.
-   */
-  public function __construct(ImageService $imageService)
-  {
-    $this->imageService = $imageService;
-  }
 
   /**
    * Get all hero superclasses with optional pagination

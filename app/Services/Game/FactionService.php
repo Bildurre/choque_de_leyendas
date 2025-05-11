@@ -3,7 +3,6 @@
 namespace App\Services\Game;
 
 use App\Models\Faction;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 
@@ -11,16 +10,7 @@ class FactionService
 {
   use HandlesTranslations;
   
-  protected $imageService;
   protected $translatableFields = ['name', 'lore_text'];
-
-  /**
-   * Create a new service instance.
-   */
-  public function __construct(ImageService $imageService)
-  {
-    $this->imageService = $imageService;
-  }
 
   /**
    * Get all factions with optional pagination

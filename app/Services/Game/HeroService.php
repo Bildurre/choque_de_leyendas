@@ -4,7 +4,6 @@ namespace App\Services\Game;
 
 use App\Models\Hero;
 use App\Models\HeroAbility;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -13,16 +12,7 @@ class HeroService
 {
   use HandlesTranslations;
   
-  protected $imageService;
   protected $translatableFields = ['name', 'lore_text', 'passive_name', 'passive_description'];
-
-  /**
-   * Create a new service instance.
-   */
-  public function __construct(ImageService $imageService)
-  {
-    $this->imageService = $imageService;
-  }
 
   /**
    * Get all heroes with optional pagination and filters
