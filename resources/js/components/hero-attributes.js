@@ -1,163 +1,201 @@
 /**
- * Initialize the hero attributes component
+ * Hero attributes component
+ * 
+ * Manages hero attribute controls and calculations
  */
-const initHeroAttributes = () => {
+export default function initHeroAttributes() {
   const attributesFieldset = document.getElementById('attributes-fieldset');
+  
   if (!attributesFieldset) return;
-
-  // Elements
+  
+  // Get attribute inputs
+  const agilityInput = document.getElementById('agility');
+  const mentalInput = document.getElementById('mental');
+  const willInput = document.getElementById('will');
+  const strengthInput = document.getElementById('strength');
+  const armorInput = document.getElementById('armor');
+  
+  // Get summary elements
   const totalAttributesElement = document.getElementById('total-attributes');
-  const pointsAvailableElement = document.getElementById('points-available');
   const calculatedHealthElement = document.getElementById('calculated-health');
-  const attributeInputs = attributesFieldset.querySelectorAll('.attribute-control__number');
-  const minusButtons = attributesFieldset.querySelectorAll('.attribute-control__button--minus');
+  const pointsAvailableElement = document.getElementById('points-available');
+  
+  // Instead of fetching, extract config from data attributes we'll add to the fieldset
+  const config = {
+    minAttributeValue: parseInt(attributesFieldset.dataset.minValue || 1, 10),
+    maxAttributeValue: parseInt(attributesFieldset.dataset.maxValue || 5, 10),
+    minTotalAttributes: parseInt(attributesFieldset.dataset.minTotal || 12, 10),
+    maxTotalAttributes: parseInt(attributesFieldset.dataset.maxTotal || 18, 10),
+    baseHealth: parseInt(attributesFieldset.dataset.baseHealth || 30, 10),
+    multipliers: {
+      agility: parseInt(attributesFieldset.dataset.agilityMult || -1, 10),
+      mental: parseInt(attributesFieldset.dataset.mentalMult || -1, 10),
+      will: parseInt(attributesFieldset.dataset.willMult || 1, 10),
+      strength: parseInt(attributesFieldset.dataset.strengthMult || -1, 10),
+      armor: parseInt(attributesFieldset.dataset.armorMult || 1, 10)
+    }
+  };
+  
+  // Get all attribute plus and minus buttons
   const plusButtons = attributesFieldset.querySelectorAll('.attribute-control__button--plus');
+  const minusButtons = attributesFieldset.querySelectorAll('.attribute-control__button--minus');
   
-  // Configuration
-  const minValue = parseInt(attributeInputs[0].min);
-  const maxValue = parseInt(attributeInputs[0].max);
-  const maxTotal = parseInt(pointsAvailableElement.textContent) + calculateTotalAttributes();
-  const minTotal = 0; // We'll always allow lowering the total, since there's a minimum per attribute
-  
-  // Health calculation multipliers (from hidden inputs or data attributes)
-  const agilityMultiplier = parseInt(attributesFieldset.dataset.agilityMultiplier || '-1');
-  const mentalMultiplier = parseInt(attributesFieldset.dataset.mentalMultiplier || '-1');
-  const willMultiplier = parseInt(attributesFieldset.dataset.willMultiplier || '1');
-  const strengthMultiplier = parseInt(attributesFieldset.dataset.strengthMultiplier || '-1');
-  const armorMultiplier = parseInt(attributesFieldset.dataset.armorMultiplier || '1');
-  const healthBase = parseInt(attributesFieldset.dataset.healthBase || '30');
-  
-  // Calculate total attributes
-  function calculateTotalAttributes() {
-    let total = 0;
-    attributeInputs.forEach(input => {
-      total += parseInt(input.value);
+  // Add event listeners to buttons
+  plusButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const attribute = button.dataset.attribute;
+      incrementAttribute(attribute);
     });
-    return total;
+  });
+  
+  minusButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const attribute = button.dataset.attribute;
+      decrementAttribute(attribute);
+    });
+  });
+  
+  // Initialize the form
+  updateSummary();
+  
+  /**
+   * Increment attribute value
+   * 
+   * @param {string} attribute 
+   */
+  function incrementAttribute(attribute) {
+    const input = document.getElementById(attribute);
+    if (!input) return;
+    
+    const currentValue = parseInt(input.value, 10);
+    const maxValue = config.maxAttributeValue;
+    
+    // Check if we have available points
+    const currentTotal = calculateTotalAttributes();
+    if (currentTotal >= config.maxTotalAttributes) {
+      // No more points available
+      return;
+    }
+    
+    // Check if the attribute is already at max
+    if (currentValue >= maxValue) {
+      return;
+    }
+    
+    // Increment the attribute
+    input.value = currentValue + 1;
+    
+    // Update summary
+    updateSummary();
   }
   
-  // Calculate health based on attributes
+  /**
+   * Decrement attribute value
+   * 
+   * @param {string} attribute 
+   */
+  function decrementAttribute(attribute) {
+    const input = document.getElementById(attribute);
+    if (!input) return;
+    
+    const currentValue = parseInt(input.value, 10);
+    const minValue = config.minAttributeValue;
+    
+    // Check if the attribute is already at min
+    if (currentValue <= minValue) {
+      return;
+    }
+    
+    // Check if total would go below minimum
+    const currentTotal = calculateTotalAttributes();
+    if (currentTotal <= config.minTotalAttributes) {
+      return;
+    }
+    
+    // Decrement the attribute
+    input.value = currentValue - 1;
+    
+    // Update summary
+    updateSummary();
+  }
+  
+  /**
+   * Calculate total attributes
+   * 
+   * @returns {number}
+   */
+  function calculateTotalAttributes() {
+    return parseInt(agilityInput.value, 10) +
+      parseInt(mentalInput.value, 10) +
+      parseInt(willInput.value, 10) +
+      parseInt(strengthInput.value, 10) +
+      parseInt(armorInput.value, 10);
+  }
+  
+  /**
+   * Calculate health based on attributes and configuration
+   * 
+   * @returns {number}
+   */
   function calculateHealth() {
-    const agility = parseInt(document.getElementById('agility').value);
-    const mental = parseInt(document.getElementById('mental').value);
-    const will = parseInt(document.getElementById('will').value);
-    const strength = parseInt(document.getElementById('strength').value);
-    const armor = parseInt(document.getElementById('armor').value);
+    const agility = parseInt(agilityInput.value, 10);
+    const mental = parseInt(mentalInput.value, 10);
+    const will = parseInt(willInput.value, 10);
+    const strength = parseInt(strengthInput.value, 10);
+    const armor = parseInt(armorInput.value, 10);
     
-    let health = healthBase;
-    health += agility * agilityMultiplier;
-    health += mental * mentalMultiplier;
-    health += will * willMultiplier;
-    health += strength * strengthMultiplier;
-    health += armor * armorMultiplier;
+    let health = config.baseHealth;
     
-    return Math.max(1, health); // Ensure health is at least 1
+    health += agility * config.multipliers.agility;
+    health += mental * config.multipliers.mental;
+    health += will * config.multipliers.will;
+    health += strength * config.multipliers.strength;
+    health += armor * config.multipliers.armor;
+    
+    // Ensure health is at least 1
+    return Math.max(1, health);
   }
   
-  // Update summary displays
+  /**
+   * Update summary information
+   */
   function updateSummary() {
     const totalAttributes = calculateTotalAttributes();
-    const pointsAvailable = maxTotal - totalAttributes;
     const health = calculateHealth();
+    const pointsAvailable = config.maxTotalAttributes - totalAttributes;
     
     totalAttributesElement.textContent = totalAttributes;
-    pointsAvailableElement.textContent = pointsAvailable;
     calculatedHealthElement.textContent = health;
+    pointsAvailableElement.textContent = pointsAvailable;
     
     // Update button states
     updateButtonStates();
   }
   
-  // Update plus/minus button states based on constraints
+  /**
+   * Update button states based on constraints
+   */
   function updateButtonStates() {
     const totalAttributes = calculateTotalAttributes();
-    const pointsAvailable = maxTotal - totalAttributes;
+    const noMorePoints = totalAttributes >= config.maxTotalAttributes;
+    const noLessPoints = totalAttributes <= config.minTotalAttributes;
     
-    // Update each attribute's buttons
-    attributeInputs.forEach(input => {
-      const attributeName = input.id;
-      const value = parseInt(input.value);
-      const minusButton = attributesFieldset.querySelector(`.attribute-control__button--minus[data-attribute="${attributeName}"]`);
-      const plusButton = attributesFieldset.querySelector(`.attribute-control__button--plus[data-attribute="${attributeName}"]`);
+    // Update plus buttons
+    plusButtons.forEach(button => {
+      const attribute = button.dataset.attribute;
+      const input = document.getElementById(attribute);
+      const currentValue = parseInt(input.value, 10);
       
-      // Disable minus button if at minimum value
-      if (value <= minValue) {
-        minusButton.setAttribute('disabled', 'disabled');
-      } else {
-        minusButton.removeAttribute('disabled');
-      }
+      button.disabled = noMorePoints || currentValue >= config.maxAttributeValue;
+    });
+    
+    // Update minus buttons
+    minusButtons.forEach(button => {
+      const attribute = button.dataset.attribute;
+      const input = document.getElementById(attribute);
+      const currentValue = parseInt(input.value, 10);
       
-      // Disable plus button if at maximum value or no points available
-      if (value >= maxValue || pointsAvailable <= 0) {
-        plusButton.setAttribute('disabled', 'disabled');
-      } else {
-        plusButton.removeAttribute('disabled');
-      }
+      button.disabled = noLessPoints || currentValue <= config.minAttributeValue;
     });
   }
-  
-  // Handle attribute decrease
-  function decreaseAttribute(attributeName) {
-    const input = document.getElementById(attributeName);
-    const currentValue = parseInt(input.value);
-    
-    if (currentValue > minValue) {
-      input.value = currentValue - 1;
-      updateSummary();
-    }
-  }
-  
-  // Handle attribute increase
-  function increaseAttribute(attributeName) {
-    const input = document.getElementById(attributeName);
-    const currentValue = parseInt(input.value);
-    const totalAttributes = calculateTotalAttributes();
-    
-    if (currentValue < maxValue && totalAttributes < maxTotal) {
-      input.value = currentValue + 1;
-      updateSummary();
-    }
-  }
-  
-  // Add event listeners to minus buttons
-  minusButtons.forEach(button => {
-    const attributeName = button.dataset.attribute;
-    button.addEventListener('click', () => {
-      decreaseAttribute(attributeName);
-    });
-  });
-  
-  // Add event listeners to plus buttons
-  plusButtons.forEach(button => {
-    const attributeName = button.dataset.attribute;
-    button.addEventListener('click', () => {
-      increaseAttribute(attributeName);
-    });
-  });
-  
-  // Add multipliers data attributes if they don't exist yet
-  if (!attributesFieldset.dataset.agilityMultiplier) {
-    // Use a hidden form with the values or fetch from an API
-    fetch('/api/hero-attributes-configuration')
-      .then(response => response.json())
-      .then(data => {
-        attributesFieldset.dataset.agilityMultiplier = data.agility_multiplier;
-        attributesFieldset.dataset.mentalMultiplier = data.mental_multiplier;
-        attributesFieldset.dataset.willMultiplier = data.will_multiplier;
-        attributesFieldset.dataset.strengthMultiplier = data.strength_multiplier;
-        attributesFieldset.dataset.armorMultiplier = data.armor_multiplier;
-        attributesFieldset.dataset.healthBase = data.total_health_base;
-        
-        // Calculate initial health with new multipliers
-        calculatedHealthElement.textContent = calculateHealth();
-      })
-      .catch(error => {
-        console.error('Error fetching attribute configuration:', error);
-      });
-  }
-  
-  // Initialize summary
-  updateSummary();
-};
-
-export default initHeroAttributes;
+}

@@ -93,7 +93,18 @@
           required
         />
         
-        <fieldset class="form-fieldset" id="attributes-fieldset">
+        <fieldset class="form-fieldset" id="attributes-fieldset"
+          data-min-value="{{ $attributesConfig->min_attribute_value }}"
+          data-max-value="{{ $attributesConfig->max_attribute_value }}"
+          data-min-total="{{ $attributesConfig->min_total_attributes }}"
+          data-max-total="{{ $attributesConfig->max_total_attributes }}"
+          data-base-health="{{ $attributesConfig->total_health_base }}"
+          data-agility-mult="{{ $attributesConfig->agility_multiplier }}"
+          data-mental-mult="{{ $attributesConfig->mental_multiplier }}"
+          data-will-mult="{{ $attributesConfig->will_multiplier }}"
+          data-strength-mult="{{ $attributesConfig->strength_multiplier }}"
+          data-armor-mult="{{ $attributesConfig->armor_multiplier }}"
+        >
           <legend>{{ __('heroes.attributes') }}</legend>
           
           <div class="attributes-grid">

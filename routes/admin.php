@@ -97,7 +97,4 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
     Route::post('/{id}/restore', [BlockController::class, 'restore'])->name('restore');
     Route::delete('/{id}/force-delete', [BlockController::class, 'forceDelete'])->name('force-delete');
   });
-
-  // Hero Attributes Configuration API
-  Route::get('/api/hero-attributes-configuration', [HeroAttributesConfigurationController::class, 'getConfig'])->name('api.hero-attributes-configuration');
 });
