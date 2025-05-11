@@ -155,21 +155,4 @@ class AttackSubtypeService
     
     return $attackSubtype->forceDelete();
   }
-
-  /**
-   * Get counts by type
-   * 
-   * @return array
-   */
-  public function getCountsByType(): array
-  {
-    $counts = [];
-    $types = AttackSubtype::getTypes();
-    
-    foreach ($types as $key => $name) {
-      $counts[$key] = AttackSubtype::where('type', $key)->count();
-    }
-    
-    return $counts;
-  }
 }

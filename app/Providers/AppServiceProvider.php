@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Services\Game\CardService;
-use App\Services\Media\ImageService;
 use Illuminate\Pagination\Paginator;
 use App\Services\Content\PageService;
 use App\Services\Game\FactionService;
@@ -41,7 +40,6 @@ class AppServiceProvider extends ServiceProvider
     private function registerBasicServices(): void
     {
       $services = [
-        ImageService::class,
         LocalizedRoutingService::class,
       ];
       
@@ -54,23 +52,7 @@ class AppServiceProvider extends ServiceProvider
      * Register services with dependencies
      */
     private function registerDependentServices(): void
-    {
-      // Services that depend on ImageService
-      $imageServiceDependents = [
-        PageService::class,
-        BlockService::class,
-        HeroSuperclassService::class,
-        AttackRangeService::class,
-        FactionService::class,
-        CardService::class,
-      ];
-      
-      foreach ($imageServiceDependents as $service) {
-        $this->app->singleton($service, function ($app) use ($service) {
-          return new $service($app->make(ImageService::class));
-        });
-      }
-      
+    { 
       // Register services without external dependencies but that should be registered after basic services
       $otherServices = [
         HeroClassService::class,
@@ -80,6 +62,12 @@ class AppServiceProvider extends ServiceProvider
         EquipmentTypeService::class,
         AttackSubtypeService::class,
         HeroAbilityService::class,
+        PageService::class,
+        BlockService::class,
+        HeroSuperclassService::class,
+        AttackRangeService::class,
+        FactionService::class,
+        CardService::class,
       ];
       
       foreach ($otherServices as $service) {
