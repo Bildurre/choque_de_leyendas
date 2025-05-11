@@ -2,6 +2,7 @@
   'title',
   'editRoute' => null,
   'deleteRoute' => null,
+  'restoreRoute' => null,
   'viewRoute' => null,
   'confirmMessage' => __('admin.confirm_delete')
 ])
@@ -21,6 +22,19 @@
         <a href="{{ $editRoute }}" class="action-button action-button--edit" title="{{ __('admin.edit') }}">
           <x-icon name="edit" size="sm" class="action-button__icon" />
         </a>
+      @endif
+      
+      @if($restoreRoute)
+        <form action="{{ $restoreRoute }}" method="POST" class="action-button-form">
+          @csrf
+          <button 
+            type="submit" 
+            class="action-button action-button--restore"
+            title="{{ __('admin.restore') }}"
+          >
+            <x-icon name="refresh" size="sm" class="action-button__icon" />
+          </button>
+        </form>
       @endif
       
       @if($deleteRoute)
