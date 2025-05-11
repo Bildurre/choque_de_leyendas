@@ -45,24 +45,18 @@
           name="lore_text"
           :label="__('cards.lore_text')"
           :values="isset($card) ? $card->getTranslations('lore_text') : []"
-          :upload-url="route('admin.content.images.store')"
-          :images-url="route('admin.content.images.index')"
         />
         
         <x-form.multilingual-wysiwyg
           name="effect"
           :label="__('cards.effect')"
           :values="isset($card) ? $card->getTranslations('effect') : []"
-          :upload-url="route('admin.content.images.store')"
-          :images-url="route('admin.content.images.index')"
         />
         
         <x-form.multilingual-wysiwyg
           name="restriction"
           :label="__('cards.restriction')"
           :values="isset($card) ? $card->getTranslations('restriction') : []"
-          :upload-url="route('admin.content.images.store')"
-          :images-url="route('admin.content.images.index')"
         />
       </div>
       

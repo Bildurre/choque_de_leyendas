@@ -30,8 +30,6 @@
           name="description"
           :label="__('hero_abilities.description')"
           :values="isset($heroAbility) ? $heroAbility->getTranslations('description') : []"
-          :upload-url="route('admin.content.images.store')"
-          :images-url="route('admin.content.images.index')"
         />
       </div>
       

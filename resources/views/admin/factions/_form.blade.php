@@ -30,8 +30,6 @@
           name="lore_text"
           :label="__('factions.lore_text')"
           :values="isset($faction) ? $faction->getTranslations('lore_text') : []"
-          :upload-url="route('admin.content.images.store')"
-          :images-url="route('admin.content.images.index')"
         />
       </div>
       

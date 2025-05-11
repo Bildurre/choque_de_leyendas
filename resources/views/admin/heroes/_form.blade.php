@@ -33,8 +33,6 @@
           name="lore_text"
           :label="__('heroes.lore_text')"
           :values="isset($hero) ? $hero->getTranslations('lore_text') : []"
-          :upload-url="route('admin.content.images.store')"
-          :images-url="route('admin.content.images.index')"
         />
         
         <fieldset class="form-fieldset">
@@ -50,8 +48,6 @@
             name="passive_description"
             :label="__('heroes.passive_description')"
             :values="isset($hero) ? $hero->getTranslations('passive_description') : []"
-            :upload-url="route('admin.content.images.store')"
-            :images-url="route('admin.content.images.index')"
           />
         </fieldset>
       </div>

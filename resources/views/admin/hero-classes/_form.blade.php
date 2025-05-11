@@ -38,8 +38,6 @@
       name="passive"
       :label="__('hero_classes.passive')"
       :values="isset($heroClass) ? $heroClass->getTranslations('passive') : []"
-      :upload-url="route('admin.content.images.store')"
-      :images-url="route('admin.content.images.index')"
     />
   </x-form.card>
 </form>
