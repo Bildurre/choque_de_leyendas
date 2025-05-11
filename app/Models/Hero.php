@@ -154,21 +154,4 @@ class Hero extends Model
   {
     return $this->agility + $this->mental + $this->will + $this->strength + $this->armor;
   }
-
-  /**
-   * Check if hero attributes are valid according to configuration
-   * 
-   * @return bool
-   */
-  public function hasValidAttributes(): bool
-  {
-    $configService = app(HeroAttributesConfigurationService::class);
-    return $configService->validateAttributes(
-      $this->agility,
-      $this->mental,
-      $this->will,
-      $this->strength,
-      $this->armor
-    );
-  }
 }

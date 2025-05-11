@@ -234,41 +234,4 @@ class CardService
     
     return $card->forceDelete();
   }
-
-  /**
-   * Get cards count by faction
-   * 
-   * @return array
-   */
-  public function getCountsByFaction(): array
-  {
-    $counts = [];
-    $factions = \App\Models\Faction::all();
-    
-    foreach ($factions as $faction) {
-      $counts[$faction->id] = Card::where('faction_id', $faction->id)->count();
-    }
-    
-    // Add count for cards without faction
-    $counts['no_faction'] = Card::whereNull('faction_id')->count();
-    
-    return $counts;
-  }
-
-  /**
-   * Get cards count by card type
-   * 
-   * @return array
-   */
-  public function getCountsByCardType(): array
-  {
-    $counts = [];
-    $cardTypes = \App\Models\CardType::all();
-    
-    foreach ($cardTypes as $cardType) {
-      $counts[$cardType->id] = Card::where('card_type_id', $cardType->id)->count();
-    }
-    
-    return $counts;
-  }
 }

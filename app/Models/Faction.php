@@ -100,18 +100,4 @@ class Faction extends Model
   {
     return $this->hasMany(Card::class);
   }
-
-  /**
-   * Get the icon URL attribute
-   * 
-   * @return string|null
-   */
-  public function getIconUrlAttribute(): ?string
-  {
-    if (!$this->icon) {
-      return null;
-    }
-    
-    return asset('storage/' . $this->icon);
-  }
 }

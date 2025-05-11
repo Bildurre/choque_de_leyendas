@@ -80,24 +80,4 @@ class HeroAbility extends Model
   {
     return $this->hasMany(Card::class);
   }
-
-  /**
-   * Check if this ability is an attack
-   * 
-   * @return bool
-   */
-  public function isAttack(): bool
-  {
-    return $this->attackSubtype !== null && $this->attackRange !== null;
-  }
-
-  /**
-   * Check if this ability is an area attack
-   * 
-   * @return bool
-   */
-  public function isAreaAttack(): bool
-  {
-    return $this->isAttack() && $this->area;
-  }
 }

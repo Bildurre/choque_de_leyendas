@@ -98,31 +98,6 @@ trait HasCostAttribute
   }
 
   /**
-   * Get a formatted representation of the card's cost
-   * 
-   * @return string
-   */
-  public function getFormattedCostAttribute(): string
-  {
-    $parsedCost = $this->parsed_cost;
-    $formatted = '';
-    
-    if ($parsedCost['red'] > 0) {
-      $formatted .= $parsedCost['red'] . ' ' . __('game.cost.red') . ' ';
-    }
-    
-    if ($parsedCost['green'] > 0) {
-      $formatted .= $parsedCost['green'] . ' ' . __('game.cost.green') . ' ';
-    }
-    
-    if ($parsedCost['blue'] > 0) {
-      $formatted .= $parsedCost['blue'] . ' ' . __('game.cost.blue') . ' ';
-    }
-    
-    return trim($formatted) ?: __('game.cost.free');
-  }
-
-  /**
    * Get HTML representation of cost with dice icons
    * 
    * @return string
@@ -149,35 +124,6 @@ trait HasCostAttribute
     }
 
     return $html;
-  }
-  
-  /**
-   * Get an array of SVG icons for the cost
-   * 
-   * @return array
-   */
-  public function getCostIconsArrayAttribute(): array
-  {
-    $orderedCost = $this->getOrderedCost();
-    
-    if (empty($orderedCost)) {
-      return [];
-    }
-
-    $icons = [];
-    $costArray = str_split(strtoupper($orderedCost));
-    
-    foreach ($costArray as $dice) {
-      if ($dice === 'R') {
-        $icons[] = $this->getDiceIcon('#f15959');
-      } elseif ($dice === 'G') {
-        $icons[] = $this->getDiceIcon('#29ab5f');
-      } elseif ($dice === 'B') {
-        $icons[] = $this->getDiceIcon('#408cfd');
-      }
-    }
-
-    return $icons;
   }
 
   /**
@@ -208,28 +154,5 @@ trait HasCostAttribute
         stroke-width="2"
       />
     </svg>';
-  }
-
-  /**
-   * Validate if a cost string is valid
-   * 
-   * @param string|null $cost
-   * @return bool
-   */
-  public function isValidCost(?string $cost = null): bool
-  {
-    $costToValidate = $cost ?? $this->cost;
-    
-    if (empty($costToValidate)) {
-      return true; // Empty cost is valid
-    }
-
-    // Must be between 0 and 5 characters
-    if (strlen($costToValidate) > 5) {
-      return false;
-    }
-
-    // Must only contain R, G, B (case insensitive)
-    return preg_match('/^[RGBrgb]*$/', $costToValidate) === 1;
   }
 }

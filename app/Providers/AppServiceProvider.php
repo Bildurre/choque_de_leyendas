@@ -18,8 +18,6 @@ use App\Services\Game\HeroAbilityService;
 use App\Services\LocalizedRoutingService;
 use App\Services\Game\AttackSubtypeService;
 use App\Services\Game\EquipmentTypeService;
-use App\Services\Media\WysiwygImageService;
-use App\Services\Game\CostTranslatorService;
 use App\Services\Game\HeroSuperclassService;
 use App\Services\Game\HeroAttributesConfigurationService;
 
@@ -44,7 +42,6 @@ class AppServiceProvider extends ServiceProvider
     {
       $services = [
         ImageService::class,
-        WysiwygImageService::class,
         LocalizedRoutingService::class,
       ];
       
