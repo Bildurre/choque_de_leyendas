@@ -13,43 +13,47 @@
     
     <div class="entity-list-card__actions">
       @if($viewRoute)
-        <a href="{{ $viewRoute }}" class="action-button action-button--view" title="{{ __('admin.view') }}" target="_blank">
-          <x-icon name="eye" size="sm" class="action-button__icon" />
-        </a>
+        <x-action-button
+          :href="$viewRoute"
+          icon="eye"
+          variant="view"
+          size="sm"
+          :title="__('admin.view')"
+          target="_blank"
+        />
       @endif
       
       @if($editRoute)
-        <a href="{{ $editRoute }}" class="action-button action-button--edit" title="{{ __('admin.edit') }}">
-          <x-icon name="edit" size="sm" class="action-button__icon" />
-        </a>
+        <x-action-button
+          :href="$editRoute"
+          icon="edit"
+          variant="edit"
+          size="sm"
+          :title="__('admin.edit')"
+        />
       @endif
       
       @if($restoreRoute)
-        <form action="{{ $restoreRoute }}" method="POST" class="action-button-form">
-          @csrf
-          <button 
-            type="submit" 
-            class="action-button action-button--restore"
-            title="{{ __('admin.restore') }}"
-          >
-            <x-icon name="refresh" size="sm" class="action-button__icon" />
-          </button>
-        </form>
+        <x-action-button
+          :route="$restoreRoute"
+          icon="refresh"
+          variant="restore"
+          size="sm"
+          method="POST"
+          :title="__('admin.restore')"
+        />
       @endif
       
       @if($deleteRoute)
-        <form action="{{ $deleteRoute }}" method="POST" class="action-button-form">
-          @csrf
-          @method('DELETE')
-          <button 
-            type="submit" 
-            class="action-button action-button--delete"
-            data-confirm-message="{{ $confirmMessage }}"
-            title="{{ __('admin.delete') }}"
-          >
-            <x-icon name="trash" size="sm" class="action-button__icon" />
-          </button>
-        </form>
+        <x-action-button
+          :route="$deleteRoute"
+          icon="trash"
+          variant="delete"
+          size="sm"
+          method="DELETE"
+          :confirm-message="$confirmMessage"
+          :title="__('admin.delete')"
+        />
       @endif
       
       {{ $actions ?? '' }}

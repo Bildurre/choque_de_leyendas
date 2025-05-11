@@ -51,7 +51,6 @@
     margin-bottom: $spacing-sm;
   }
   
-  // Estilos para contenido HTML en pasivas u otros campos
   .hero-class-passive {
     margin-top: $spacing-md;
     
@@ -63,7 +62,6 @@
     &__text {
       color: var(--color-text-secondary);
       
-      // Estilos para asegurar que el HTML se muestra correctamente
       a {
         color: var(--random-accent-color);
         text-decoration: underline;
