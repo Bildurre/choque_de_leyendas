@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Controllers\Game\CardController;
+use App\Http\Controllers\Game\HeroController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Game\FactionController;
@@ -66,6 +67,11 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::post('attack-ranges/{id}/restore', [AttackRangeController::class, 'restore'])->name('attack-ranges.restore');
   Route::delete('attack-ranges/{id}/force-delete', [AttackRangeController::class, 'forceDelete'])->name('attack-ranges.force-delete');
 
+  // Heroes
+  Route::resource('heroes', HeroController::class);
+  Route::post('heroes/{id}/restore', [HeroController::class, 'restore'])->name('heroes.restore');
+  Route::delete('heroes/{id}/force-delete', [HeroController::class, 'forceDelete'])->name('heroes.force-delete');
+
   // Factions
   Route::resource('factions', FactionController::class);
   Route::post('factions/{id}/restore', [FactionController::class, 'restore'])->name('factions.restore');
@@ -90,5 +96,8 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
     Route::post('/reorder', [BlockController::class, 'reorder'])->name('reorder');    
     Route::post('/{id}/restore', [BlockController::class, 'restore'])->name('restore');
     Route::delete('/{id}/force-delete', [BlockController::class, 'forceDelete'])->name('force-delete');
-});
+  });
+
+  // Hero Attributes Configuration API
+  Route::get('/api/hero-attributes-configuration', [HeroAttributesConfigurationController::class, 'getConfig'])->name('api.hero-attributes-configuration');
 });
