@@ -20,31 +20,26 @@ class AttackSubtypeService
    * @param string|null $type Filter by type
    * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
    */
-  public function getAllAttackSubtypes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false, ?string $type = null): mixed
+  public function getAllAttackSubtypes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
   {
     $query = AttackSubtype::withCount(['heroAbilities', 'cards']);
     
     // Aplicar filtros de elementos eliminados
     if ($onlyTrashed) {
-        $query->onlyTrashed();
+      $query->onlyTrashed();
     } elseif ($withTrashed) {
-        $query->withTrashed();
-    }
-    
-    // Filtrar por tipo si se especifica
-    if ($type) {
-        $query->where('type', $type);
+      $query->withTrashed();
     }
     
     // Ordenar por tipo y nombre
     $query->orderBy('type')->orderBy('id');
     
     if ($perPage) {
-        return $query->paginate($perPage)->withQueryString();
+      return $query->paginate($perPage);
     }
     
     return $query->get();
-  }
+}
 
   /**
    * Create a new attack subtype

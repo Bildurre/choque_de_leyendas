@@ -20,27 +20,22 @@ class EquipmentTypeService
    * @param string|null $category Filter by category
    * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
    */
-  public function getAllEquipmentTypes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false, ?string $category = null): mixed
+  public function getAllEquipmentTypes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
   {
     $query = EquipmentType::withCount('cards');
     
     // Aplicar filtros de elementos eliminados
     if ($onlyTrashed) {
-      $query->onlyTrashed();
+        $query->onlyTrashed();
     } elseif ($withTrashed) {
-      $query->withTrashed();
-    }
-    
-    // Filtrar por categoría si se especifica
-    if ($category) {
-      $query->where('category', $category);
+        $query->withTrashed();
     }
     
     // Ordenar por categoría y nombre
     $query->orderBy('category')->orderBy('id');
     
     if ($perPage) {
-      return $query->paginate($perPage)->withQueryString();
+        return $query->paginate($perPage);
     }
     
     return $query->get();

@@ -26,43 +26,23 @@ class AttackSubtypeController extends Controller
    * Display a listing of attack subtypes.
    */
   public function index(Request $request)
-{
+  {
     $trashed = $request->has('trashed');
-    $type = $request->input('type');
     
-    // Obtener contadores para las pestañas usando Eloquent
+    // Obtener contadores para las pestañas
     $activeCount = AttackSubtype::count();
     $trashedCount = AttackSubtype::onlyTrashed()->count();
     
-    // Obtener conteos por tipo usando Eloquent
-    $typeCountsQuery = AttackSubtype::query();
-    
-    if ($trashed) {
-        $typeCountsQuery->onlyTrashed();
-    }
-    
-    $typeCounts = $typeCountsQuery->select('type')
-        ->selectRaw('COUNT(*) as count')
-        ->groupBy('type')
-        ->pluck('count', 'type')
-        ->toArray();
-    
-    // Obtener attack subtypes con conteos incorporados
-    $attackSubtypes = $this->attackSubtypeService->getAllAttackSubtypes(12, false, $trashed, $type);
-    
-    // Obtener tipos para el filtro
-    $types = AttackSubtype::getTypes();
+    // Obtener attack subtypes
+    $attackSubtypes = $this->attackSubtypeService->getAllAttackSubtypes(12, false, $trashed);
     
     return view('admin.attack-subtypes.index', compact(
-        'attackSubtypes', 
-        'trashed', 
-        'activeCount', 
-        'trashedCount', 
-        'types', 
-        'type',
-        'typeCounts'
+      'attackSubtypes', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount'
     ));
-}
+  }
 
   /**
    * Show the form for creating a new attack subtype.
