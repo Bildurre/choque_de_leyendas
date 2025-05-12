@@ -4,6 +4,7 @@
   :is-reorderable="true"
   :reorder-url="route('admin.pages.blocks.reorder', $page)"
   reorder-item-id-field="block-id"
+  :showHeader="true"
 >
   <x-slot:actions>
     <x-dropdown label="{{ __('blocks.add_block') }}" icon="plus">

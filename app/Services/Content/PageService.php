@@ -3,7 +3,6 @@
 namespace App\Services\Content;
 
 use App\Models\Page;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -12,15 +11,14 @@ class PageService
 {
     use HandlesTranslations;
     
-    protected $imageService;
     protected $translatableFields = ['title', 'description', 'meta_title', 'meta_description', 'slug'];
 
     /**
      * Create a new service instance.
      */
-    public function __construct(ImageService $imageService)
+    public function __construct()
     {
-        $this->imageService = $imageService;
+        // Sin dependencia de ImageService
     }
 
     /**
@@ -42,9 +40,9 @@ class PageService
         $page->template = $data['template'] ?? 'default';
         $page->order = $data['order'] ?? 0;
         
-        // Handle background image upload
+        // Handle background image upload using HasImageAttribute trait
         if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-          $page->storeImage($data['background_image']);
+            $page->storeImage($data['background_image']);
         }
         
         $page->save();
@@ -72,11 +70,11 @@ class PageService
         $page->template = $data['template'] ?? $page->template;
         $page->order = $data['order'] ?? $page->order;
         
-        // Handle background image updates
+        // Handle background image updates using HasImageAttribute trait
         if (isset($data['remove_background_image']) && $data['remove_background_image']) {
-          $page->deleteImage();
+            $page->deleteImage();
         } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-          $page->storeImage($data['background_image']);
+            $page->storeImage($data['background_image']);
         }
         
         $page->save();
@@ -89,9 +87,9 @@ class PageService
      */
     public function delete(Page $page): bool
     {
-        // Delete background image if exists
+        // Delete background image if exists using HasImageAttribute trait
         if ($page->hasImage()) {
-          $page->deleteImage();
+            $page->deleteImage();
         }
         
         // Update any child pages to have no parent

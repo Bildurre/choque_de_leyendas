@@ -3,7 +3,6 @@
 namespace App\Services\Content;
 
 use App\Models\Block;
-use App\Services\Media\ImageService;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 
@@ -11,15 +10,14 @@ class BlockService
 {
     use HandlesTranslations;
     
-    protected $imageService;
     protected $translatableFields = ['title', 'subtitle', 'content'];
 
     /**
      * Create a new service instance.
      */
-    public function __construct(ImageService $imageService)
+    public function __construct()
     {
-        $this->imageService = $imageService;
+        // Sin dependencia de ImageService
     }
 
     /**
@@ -46,9 +44,9 @@ class BlockService
             $block->settings = $data['settings'];
         }
         
-        // Handle background image upload
+        // Handle image upload using HasImageAttribute trait
         if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-          $block->storeImage($data['image']);
+            $block->storeImage($data['image']);
         }
         
         $block->save();
@@ -81,11 +79,11 @@ class BlockService
             $block->settings = $data['settings'];
         }
         
-        // Handle background image updates
+        // Handle image updates using HasImageAttribute trait
         if (isset($data['remove_image']) && $data['remove_image']) {
-          $block->deleteImage();
+            $block->deleteImage();
         } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-          $block->storeImage($data['image']);
+            $block->storeImage($data['image']);
         }
         
         $block->save();
@@ -98,9 +96,9 @@ class BlockService
      */
     public function delete(Block $block): bool
     {
-        // Delete any associated images
+        // Delete any associated images using HasImageAttribute trait
         if ($block->hasImage()) {
-          $block->deleteImage();
+            $block->deleteImage();
         }
         
         return $block->delete();

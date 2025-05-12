@@ -29,12 +29,12 @@ class PageController extends Controller
     {
         $trashed = $request->has('trashed');
         
-        $query = Page::with('parent')
-            ->withCount('children');
-        
-        // Obtener contadores para las pestañas
+        // Obtener contadores para las pestañas directamente con Eloquent
         $activeCount = Page::count();
         $trashedCount = Page::onlyTrashed()->count();
+        
+        $query = Page::with('parent')
+            ->withCount('children');
         
         if ($trashed) {
             $query->onlyTrashed();
@@ -139,7 +139,6 @@ class PageController extends Controller
     {
         try {
             $page = Page::onlyTrashed()->findOrFail($id);
-
             $title = $page->title;
             
             $page->forceDelete();
