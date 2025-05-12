@@ -22,14 +22,17 @@ class HeroSuperclassService
    */
   public function getAllHeroSuperclasses(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
   {
-    $query = HeroSuperclass::withCount(['heroClasses', 'cardType']);
+    $query = HeroSuperclass::withCount(['heroClasses']);
     
-    // Aplicar filtros de elementos eliminados
+    // Apply trash filters
     if ($onlyTrashed) {
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
     }
+    
+    // Default ordering
+    $query->orderBy('id');
     
     if ($perPage) {
       return $query->paginate($perPage);
@@ -139,12 +142,12 @@ class HeroSuperclassService
   {
     $heroSuperclass = HeroSuperclass::onlyTrashed()->findOrFail($id);
     
-    // Check for related hero classes (incluso para los eliminados)
+    // Check for related hero classes (including trashed)
     if ($heroSuperclass->heroClasses()->withTrashed()->count() > 0) {
       throw new \Exception("No se puede eliminar permanentemente la superclase porque tiene clases asociadas.");
     }
     
-    // Check for related card type (incluso para los eliminados)
+    // Check for related card type (including trashed)
     if ($heroSuperclass->cardType()->withTrashed()->exists()) {
       throw new \Exception("No se puede eliminar permanentemente la superclase porque tiene un tipo de carta asociado.");
     }

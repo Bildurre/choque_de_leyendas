@@ -29,10 +29,11 @@ class HeroSuperclassController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Obtener contadores para las pestañas
+    // Get counters for tabs directly using Eloquent
     $activeCount = HeroSuperclass::count();
     $trashedCount = HeroSuperclass::onlyTrashed()->count();
     
+    // Get hero superclasses with related counts
     $heroSuperclasses = $this->heroSuperclassService->getAllHeroSuperclasses(12, false, $trashed);
     
     return view('admin.hero-superclasses.index', compact('heroSuperclasses', 'trashed', 'activeCount', 'trashedCount'));
