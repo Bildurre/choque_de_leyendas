@@ -1,7 +1,7 @@
 @props(['name'])
 
-@error($name)
+@if(isset($errors) && $errors->has($name))
   <div {{ $attributes->merge(['class' => 'form-error']) }}>
-    {{ $message }}
+    {{ $errors->first($name) }}
   </div>
-@enderror
+@endif

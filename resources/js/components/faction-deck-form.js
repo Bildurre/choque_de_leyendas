@@ -73,120 +73,110 @@ const initFactionDeckForm = () => {
   };
 
   /**
-   * Load cards for the selected faction
-   * @param {string} factionId 
-   */
-  const loadCards = async (factionId) => {
-    if (!factionId) {
-      cardsContainer.innerHTML = `
-        <div class="faction-deck-empty-message" id="cards-placeholder">
-          <p>${cardsContainer.dataset.emptyMessage || 'Please select a faction first'}</p>
-        </div>
-      `;
-      return;
+ * Load cards for the selected faction
+ * @param {string} factionId 
+ */
+const loadCards = async (factionId) => {
+  if (!factionId) {
+    cardsContainer.innerHTML = `
+      <div class="faction-deck-empty-message" id="cards-placeholder">
+        <p>${cardsContainer.dataset.emptyMessage || 'Please select a faction first'}</p>
+      </div>
+    `;
+    return;
+  }
+  
+  try {
+    // Show loading state
+    cardsContainer.innerHTML = '<div class="loader-container"><div class="loader"></div></div>';
+    
+    // Cambiar de POST a GET
+    const url = `${window.location.origin}/api/components/cards-selector?faction_id=${factionId}&max_copies=${deckConfig?.max_copies_per_card || 2}`;
+    console.log(`Fetching cards selector: ${url}`);
+    
+    // Usar método GET
+    const response = await fetch(url, {
+      method: 'GET', // Cambiado de POST a GET
+      headers: {
+        'Accept': 'text/html',
+      }
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Server response error: ${response.status} ${response.statusText}`, errorText);
+      throw new Error(`Failed to load cards selector component`);
     }
     
-    try {
-      const response = await fetch(`/api/factions/${factionId}/cards`);
-      if (!response.ok) {
-        throw new Error('Failed to load faction cards');
-      }
-      
-      const data = await response.json();
-      
-      // Show loading state
-      cardsContainer.innerHTML = '<div class="loader-container"><div class="loader"></div></div>';
-      
-      // Fetch the cards selector component with the loaded cards
-      const componentResponse = await fetch(`/api/components/cards-selector?faction_id=${factionId}&max_copies=${deckConfig?.max_copies_per_card || 2}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({
-          cards: data,
-          selected: []
-        })
-      });
-      
-      if (!componentResponse.ok) {
-        throw new Error('Failed to load cards selector component');
-      }
-      
-      const html = await componentResponse.text();
-      cardsContainer.innerHTML = html;
-      
-      // Initialize card selector functionalities
-      initCardsSelectorComponent();
-      
-    } catch (error) {
-      console.error('Error loading faction cards:', error);
-      cardsContainer.innerHTML = `
-        <div class="faction-deck-empty-message error-message">
-          <p>Error loading cards. Please try again.</p>
-        </div>
-      `;
-    }
-  };
+    // Obtener el HTML del componente
+    const html = await response.text();
+    cardsContainer.innerHTML = html;
+    
+    // Inicializar el componente
+    initCardsSelectorComponent();
+    
+  } catch (error) {
+    console.error('Error loading faction cards:', error);
+    cardsContainer.innerHTML = `
+      <div class="faction-deck-empty-message error-message">
+        <p>Error loading cards. Please try again.</p>
+      </div>
+    `;
+  }
+};
 
   /**
-   * Load heroes for the selected faction
-   * @param {string} factionId 
-   */
-  const loadHeroes = async (factionId) => {
-    if (!factionId) {
-      heroesContainer.innerHTML = `
-        <div class="faction-deck-empty-message" id="heroes-placeholder">
-          <p>${heroesContainer.dataset.emptyMessage || 'Please select a faction first'}</p>
-        </div>
-      `;
-      return;
+ * Load heroes for the selected faction
+ * @param {string} factionId 
+ */
+const loadHeroes = async (factionId) => {
+  if (!factionId) {
+    heroesContainer.innerHTML = `
+      <div class="faction-deck-empty-message" id="heroes-placeholder">
+        <p>${heroesContainer.dataset.emptyMessage || 'Please select a faction first'}</p>
+      </div>
+    `;
+    return;
+  }
+  
+  try {
+    // Show loading state
+    heroesContainer.innerHTML = '<div class="loader-container"><div class="loader"></div></div>';
+    
+    // Cambiar de POST a GET
+    const url = `${window.location.origin}/api/components/heroes-selector?faction_id=${factionId}&max_copies=${deckConfig?.max_copies_per_hero || 1}`;
+    console.log(`Fetching heroes selector: ${url}`);
+    
+    // Usar método GET
+    const response = await fetch(url, {
+      method: 'GET', // Cambiado de POST a GET
+      headers: {
+        'Accept': 'text/html',
+      }
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Server response error: ${response.status} ${response.statusText}`, errorText);
+      throw new Error(`Failed to load heroes selector component`);
     }
     
-    try {
-      const response = await fetch(`/api/factions/${factionId}/heroes`);
-      if (!response.ok) {
-        throw new Error('Failed to load faction heroes');
-      }
-      
-      const data = await response.json();
-      
-      // Show loading state
-      heroesContainer.innerHTML = '<div class="loader-container"><div class="loader"></div></div>';
-      
-      // Fetch the heroes selector component with the loaded heroes
-      const componentResponse = await fetch(`/api/components/heroes-selector?faction_id=${factionId}&max_copies=${deckConfig?.max_copies_per_hero || 1}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({
-          heroes: data,
-          selected: []
-        })
-      });
-      
-      if (!componentResponse.ok) {
-        throw new Error('Failed to load heroes selector component');
-      }
-      
-      const html = await componentResponse.text();
-      heroesContainer.innerHTML = html;
-      
-      // Initialize heroes selector functionalities
-      initHeroesSelectorComponent();
-      
-    } catch (error) {
-      console.error('Error loading faction heroes:', error);
-      heroesContainer.innerHTML = `
-        <div class="faction-deck-empty-message error-message">
-          <p>Error loading heroes. Please try again.</p>
-        </div>
-      `;
-    }
-  };
+    // Obtener el HTML del componente
+    const html = await response.text();
+    heroesContainer.innerHTML = html;
+    
+    // Inicializar el componente
+    initHeroesSelectorComponent();
+    
+  } catch (error) {
+    console.error('Error loading faction heroes:', error);
+    heroesContainer.innerHTML = `
+      <div class="faction-deck-empty-message error-message">
+        <p>Error loading heroes. Please try again.</p>
+      </div>
+    `;
+  }
+};
 
   /**
    * Initialize card selector component
