@@ -13,15 +13,14 @@ class CardService
   protected $translatableFields = ['name', 'lore_text', 'effect', 'restriction'];
 
   /**
-   * Get all cards with optional pagination and filters
+   * Get all cards with optional pagination
    *
    * @param int|null $perPage Number of items per page, or null for all items
    * @param bool $withTrashed Include trashed items
    * @param bool $onlyTrashed Only trashed items
-   * @param array $filters Additional filters
    * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
    */
-  public function getAllCards(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false, array $filters = []): mixed
+  public function getAllCards(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
   {
     $query = Card::with([
       'faction', 
@@ -37,54 +36,6 @@ class CardService
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
-    }
-    
-    // Apply additional filters
-    if (!empty($filters)) {
-      // Filter by faction
-      if (isset($filters['faction_id'])) {
-        $query->where('faction_id', $filters['faction_id']);
-      }
-      
-      // Filter by card type
-      if (isset($filters['card_type_id'])) {
-        $query->where('card_type_id', $filters['card_type_id']);
-      }
-      
-      // Filter by equipment type
-      if (isset($filters['equipment_type_id'])) {
-        $query->where('equipment_type_id', $filters['equipment_type_id']);
-      }
-      
-      // Filter by attack subtype
-      if (isset($filters['attack_subtype_id'])) {
-        $query->where('attack_subtype_id', $filters['attack_subtype_id']);
-      }
-      
-      // Filter by cost
-      if (isset($filters['cost'])) {
-        $costValue = $filters['cost'];
-        if ($costValue === 'free') {
-          $query->whereNull('cost')->orWhere('cost', '');
-        } else {
-          $query->where('cost', 'like', "%$costValue%");
-        }
-      }
-      
-      // Filter by area attacks
-      if (isset($filters['area']) && $filters['area']) {
-        $query->where('area', true);
-      }
-      
-      // Filter by name search
-      if (isset($filters['search']) && !empty($filters['search'])) {
-        $search = $filters['search'];
-        $query->where(function($q) use ($search) {
-          $q->whereRaw("JSON_CONTAINS(LOWER(name), LOWER(?), '$')", [json_encode($search)])
-            ->orWhereRaw("JSON_CONTAINS(LOWER(effect), LOWER(?), '$')", [json_encode($search)])
-            ->orWhereRaw("JSON_CONTAINS(LOWER(restriction), LOWER(?), '$')", [json_encode($search)]);
-        });
-      }
     }
     
     // Default ordering by card type and name
@@ -223,42 +174,5 @@ class CardService
     }
     
     return $card->forceDelete();
-  }
-  
-  /**
-   * Get counts by faction
-   * 
-   * @return array
-   */
-  public function getCountsByFaction(): array
-  {
-    $counts = [];
-    $factions = \App\Models\Faction::all();
-    
-    foreach ($factions as $faction) {
-      $counts[$faction->id] = Card::where('faction_id', $faction->id)->count();
-    }
-    
-    // Add count for cards without faction
-    $counts['no_faction'] = Card::whereNull('faction_id')->count();
-    
-    return $counts;
-  }
-  
-  /**
-   * Get counts by card type
-   * 
-   * @return array
-   */
-  public function getCountsByCardType(): array
-  {
-    $counts = [];
-    $cardTypes = \App\Models\CardType::all();
-    
-    foreach ($cardTypes as $cardType) {
-      $counts[$cardType->id] = Card::where('card_type_id', $cardType->id)->count();
-    }
-    
-    return $counts;
   }
 }

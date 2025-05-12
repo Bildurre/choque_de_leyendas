@@ -35,38 +35,18 @@ class CardController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Get filters from request
-    $filters = $this->getFiltersFromRequest($request);
-    
-    // Get counters for tabs
+    // Get counters for tabs directly using Eloquent
     $activeCount = Card::count();
     $trashedCount = Card::onlyTrashed()->count();
     
-    // Get counts for filter options
-    $factionCounts = $this->cardService->getCountsByFaction();
-    $cardTypeCounts = $this->cardService->getCountsByCardType();
-    
     // Get cards with pagination
-    $cards = $this->cardService->getAllCards(12, false, $trashed, $filters);
-    
-    // Load related data for filter dropdowns
-    $factions = Faction::orderBy('id')->get();
-    $cardTypes = CardType::orderBy('id')->get();
-    $equipmentTypes = EquipmentType::orderBy('category')->orderBy('id')->get();
-    $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
+    $cards = $this->cardService->getAllCards(12, false, $trashed);
     
     return view('admin.cards.index', compact(
       'cards', 
       'trashed', 
       'activeCount', 
-      'trashedCount',
-      'filters',
-      'factions',
-      'cardTypes',
-      'equipmentTypes',
-      'attackSubtypes',
-      'factionCounts',
-      'cardTypeCounts'
+      'trashedCount'
     ));
   }
 
@@ -199,35 +179,5 @@ class CardController extends Controller
     } catch (\Exception $e) {
       return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Carta: ' . $e->getMessage());
     }
-  }
-
-  /**
-   * Extract filters from request
-   * 
-   * @param Request $request
-   * @return array
-   */
-  private function getFiltersFromRequest(Request $request): array
-  {
-    $filters = [];
-    
-    // Extract filter values
-    $filterKeys = [
-      'faction_id', 
-      'card_type_id', 
-      'equipment_type_id', 
-      'attack_subtype_id',
-      'cost',
-      'area',
-      'search'
-    ];
-    
-    foreach ($filterKeys as $key) {
-      if ($request->has($key) && $request->input($key) !== '') {
-        $filters[$key] = $request->input($key);
-      }
-    }
-    
-    return $filters;
   }
 }

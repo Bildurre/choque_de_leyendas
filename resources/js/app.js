@@ -15,12 +15,6 @@ import initConditionalFields from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
-import initCardForm from './components/card-form';
-import initCardFilters from './components/card-filters';
-import initHeroAbilityForm from './components/hero-ability-form';
-import initHeroAbilitiesSelector from './components/hero-abilities-selector';
-import initHeroAttributes from './components/hero-attributes';
-import initHeroForm from './components/hero-form';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -35,12 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initImageUpload();
   initAttributeConfigForm(); 
   initCostInput();
-  initCardForm();
-  initCardFilters();
-  initHeroAbilityForm();
-  initHeroAbilitiesSelector();
-  initHeroAttributes();
-  initHeroForm();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();
