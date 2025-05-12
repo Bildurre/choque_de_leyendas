@@ -15,6 +15,7 @@ import initConditionalFields from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
+import initColorPicker from './components/color-picker';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initImageUpload();
   initAttributeConfigForm(); 
   initCostInput();
+  initColorPicker();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();
