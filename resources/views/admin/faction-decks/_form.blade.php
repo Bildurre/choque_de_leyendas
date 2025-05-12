@@ -8,10 +8,6 @@
   // Set default selections
   $selectedCards = $selectedCards ?? [];
   $selectedHeroes = $selectedHeroes ?? [];
-  
-  // Default values for max copies (will be updated via JS)
-  $maxCardCopies = 2;
-  $maxHeroCopies = 1;
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form" id="faction-deck-form">
@@ -29,6 +25,24 @@
         required
       />
       
+      <!-- En modo edición, el modo de juego no se puede cambiar -->
+      @if(!isset($factionDeck))
+        <x-form.select
+          name="game_mode_id"
+          :label="__('game_modes.singular')"
+          :options="$gameModes->pluck('name', 'id')->toArray()"
+          :selected="old('game_mode_id', '')"
+          required
+          id="game-mode-selector"
+        />
+      @else
+        <div class="form-field">
+          <label class="form-label">{{ __('game_modes.singular') }}</label>
+          <div class="form-static-value">{{ $factionDeck->gameMode->name }}</div>
+          <input type="hidden" name="game_mode_id" value="{{ $factionDeck->game_mode_id }}" id="game-mode-selector" />
+        </div>
+      @endif
+      
       <x-form.select
         name="faction_id"
         :label="__('factions.singular')"
@@ -38,15 +52,6 @@
         id="faction-selector"
       />
       
-      <x-form.select
-        name="game_mode_id"
-        :label="__('game_modes.singular')"
-        :options="$gameModes->pluck('name', 'id')->toArray()"
-        :selected="old('game_mode_id', isset($factionDeck) ? $factionDeck->game_mode_id : '')"
-        required
-        id="game-mode-selector"
-      />
-      
       <x-form.image-upload
         name="icon"
         :label="__('faction_decks.icon')"
@@ -54,6 +59,7 @@
         :remove-name="isset($factionDeck) ? 'remove_icon' : null"
       />
       
+      <!-- Información de configuración del mazo -->
       <div class="deck-configuration-info" id="deck-configuration-info" style="display: none;">
         <h3>{{ __('faction_decks.deck_configuration') }}</h3>
         <div class="deck-config-item">
@@ -74,13 +80,14 @@
         </div>
       </div>
     
-      <div id="cards-container">
+      <!-- Contenedor para los selectores de cartas -->
+      <div id="cards-container" data-empty-message="{{ __('faction_decks.select_faction_first') }}">
         @if(isset($availableCards) && count($availableCards) > 0)
           <x-form.cards-selector
             :label="__('faction_decks.add_cards')"
             :cards="$availableCards"
             :selected="$selectedCards"
-            :max-copies="$maxCardCopies"
+            :max-copies="isset($deckConfig) ? $deckConfig->max_copies_per_card : 2"
           />
         @else
           <div class="faction-deck-empty-message" id="cards-placeholder">
@@ -89,13 +96,14 @@
         @endif
       </div>
     
-      <div id="heroes-container">
+      <!-- Contenedor para los selectores de héroes -->
+      <div id="heroes-container" data-empty-message="{{ __('faction_decks.select_faction_first') }}">
         @if(isset($availableHeroes) && count($availableHeroes) > 0)
           <x-form.heroes-selector
             :label="__('faction_decks.add_heroes')"
             :heroes="$availableHeroes"
             :selected="$selectedHeroes"
-            :max-copies="$maxHeroCopies"
+            :max-copies="isset($deckConfig) ? $deckConfig->max_copies_per_hero : 1"
           />
         @else
           <div class="faction-deck-empty-message" id="heroes-placeholder">

@@ -1,4 +1,3 @@
-<!-- resources/views/components/form/heroes-selector.blade.php -->
 @props([
   'name' => 'heroes',
   'label' => null,
@@ -20,20 +19,31 @@
     
     <div class="heroes-selector__container">
       <div class="heroes-selector__list">
-        @foreach($heroes as $hero)
+        @forelse($heroes as $hero)
           @php
             $isSelected = false;
             $copies = 0;
-            foreach($selected as $selectedHero) {
-              if($selectedHero['id'] == $hero->id) {
-                $isSelected = true;
-                $copies = $selectedHero['copies'];
-                break;
+            
+            // Determinar si el héroe está seleccionado
+            if (is_array($selected)) {
+              foreach($selected as $selectedHero) {
+                if(isset($selectedHero['id']) && $selectedHero['id'] == $hero->id) {
+                  $isSelected = true;
+                  $copies = $selectedHero['copies'] ?? 1;
+                  break;
+                }
               }
             }
-            $heroClassClass = strtolower(str_replace(' ', '-', $hero->heroClass->name));
+            
+            // Si el héroe tiene una clase, usar su nombre. Si no, usar un valor por defecto
+            $heroClassName = $hero->heroClass->name ?? 'Unknown';
+            $heroClassClass = strtolower(str_replace(' ', '-', $heroClassName));
           @endphp
-          <div class="heroes-selector__item {{ $isSelected ? 'is-selected' : '' }}" data-hero-id="{{ $hero->id }}" data-hero-name="{{ $hero->name }}" data-hero-class="{{ $hero->heroClass->name }}">
+          
+          <div class="heroes-selector__item {{ $isSelected ? 'is-selected' : '' }}" 
+               data-hero-id="{{ $hero->id }}" 
+               data-hero-name="{{ $hero->name }}" 
+               data-hero-class="{{ $heroClassName }}">
             <div class="heroes-selector__hero">
               <div class="heroes-selector__hero-header">
                 <div class="heroes-selector__hero-title">
@@ -49,41 +59,41 @@
                   <span class="heroes-selector__hero-name">{{ $hero->name }}</span>
                 </div>
                 <div class="heroes-selector__hero-class hero-class--{{ $heroClassClass }}">
-                  {{ $hero->heroClass->name }}
+                  {{ $heroClassName }}
                 </div>
               </div>
               
               <div class="heroes-selector__hero-attributes">
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('attributes.agility') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.agility') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->agility }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('attributes.mental') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.mental') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->mental }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('attributes.will') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.will') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->will }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('attributes.strength') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.strength') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->strength }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('attributes.armor') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.armor') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->armor }}</span>
                 </div>
                 <div class="heroes-selector__attribute heroes-selector__attribute--total">
-                  <span class="heroes-selector__attribute-label">{{ __('attributes.health') }}:</span>
-                  <span class="heroes-selector__attribute-value">{{ $hero->health }}</span>
+                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.health') }}:</span>
+                  <span class="heroes-selector__attribute-value">{{ $hero->health ?? '-' }}</span>
                 </div>
               </div>
               
               <div class="heroes-selector__copies">
                 <label class="heroes-selector__copies-label">{{ __('faction_decks.copies') }}:</label>
                 <div class="heroes-selector__copies-controls">
-                  <button type="button" class="heroes-selector__copies-btn heroes-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }}>-</button>
+                  <button type="button" class="heroes-selector__copies-btn heroes-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
                   <input 
                     type="number" 
                     name="{{ $name }}[{{ $hero->id }}][copies]" 
@@ -93,13 +103,17 @@
                     max="{{ $maxCopies }}" 
                     {{ !$isSelected ? 'disabled' : '' }}
                   >
-                  <button type="button" class="heroes-selector__copies-btn heroes-selector__copies-btn--increase" {{ $copies >= $maxCopies ? 'disabled' : '' }}>+</button>
+                  <button type="button" class="heroes-selector__copies-btn heroes-selector__copies-btn--increase" {{ $copies >= $maxCopies ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">+</button>
                   <input type="hidden" name="{{ $name }}[{{ $hero->id }}][id]" value="{{ $hero->id }}" {{ !$isSelected ? 'disabled' : '' }}>
                 </div>
               </div>
             </div>
           </div>
-        @endforeach
+        @empty
+          <div class="heroes-selector__empty">
+            <p>{{ __('faction_decks.no_heroes_available') }}</p>
+          </div>
+        @endforelse
       </div>
       
       <div class="heroes-selector__preview">

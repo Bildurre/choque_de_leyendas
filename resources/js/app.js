@@ -16,6 +16,7 @@ import initImageUpload from './components/image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
 import initColorPicker from './components/color-picker';
+import initFactionDeckForm from './components/faction-deck-form';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAttributeConfigForm(); 
   initCostInput();
   initColorPicker();
+  initFactionDeckForm();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

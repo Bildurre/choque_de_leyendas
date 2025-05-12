@@ -75,25 +75,15 @@ class FactionDeckController extends Controller
    */
   public function create(Request $request)
   {
-    // Game mode es requerido ahora
-    $gameModeId = $request->get('game_mode_id');
-    if (!$gameModeId) {
-      return redirect()->route('admin.faction-decks.index')
-        ->with('error', __('faction_decks.game_mode_required'));
-    }
-    
-    $gameMode = GameMode::findOrFail($gameModeId);
-    
-    // Obtenemos la configuración para este modo de juego
-    $deckConfig = $this->deckAttributesConfigurationService->getConfiguration($gameModeId);
-    
     // Obtenemos todas las facciones disponibles
     $factions = Faction::orderBy('name')->get();
     
+    // Obtenemos todos los modos de juego disponibles
+    $gameModes = GameMode::orderBy('name')->get();
+        
     return view('admin.faction-decks.create', compact(
       'factions',
-      'gameMode',
-      'deckConfig'
+      'gameModes'
     ));
   }
 
@@ -139,7 +129,10 @@ class FactionDeckController extends Controller
     // Obtenemos todas las facciones disponibles
     $factions = Faction::orderBy('name')->get();
     
-    // Obtenemos las cartas disponibles para la facción actual
+    // Obtenemos todos los modos de juego
+    $gameModes = GameMode::orderBy('name')->get();
+    
+    // Obtenemos las cartas y héroes para la vista inicial
     $availableCards = $this->factionDeckService->getAvailableCards($factionDeck->faction_id);
     $availableHeroes = $this->factionDeckService->getAvailableHeroes($factionDeck->faction_id);
     
@@ -161,6 +154,7 @@ class FactionDeckController extends Controller
     return view('admin.faction-decks.edit', compact(
       'factionDeck',
       'factions',
+      'gameModes',
       'deckConfig',
       'availableCards',
       'availableHeroes',

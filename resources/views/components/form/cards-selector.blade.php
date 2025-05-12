@@ -19,20 +19,31 @@
     
     <div class="cards-selector__container">
       <div class="cards-selector__list">
-        @foreach($cards as $card)
+        @forelse($cards as $card)
           @php
             $isSelected = false;
             $copies = 0;
-            foreach($selected as $selectedCard) {
-              if($selectedCard['id'] == $card->id) {
-                $isSelected = true;
-                $copies = $selectedCard['copies'];
-                break;
+            
+            // Determinar si la carta está seleccionada
+            if (is_array($selected)) {
+              foreach($selected as $selectedCard) {
+                if(isset($selectedCard['id']) && $selectedCard['id'] == $card->id) {
+                  $isSelected = true;
+                  $copies = $selectedCard['copies'] ?? 1;
+                  break;
+                }
               }
             }
-            $cardTypeClass = strtolower(str_replace(' ', '-', $card->cardType->name));
+            
+            // Si la carta tiene un tipo, usar su nombre. Si no, usar un valor por defecto
+            $cardTypeName = $card->cardType->name ?? 'Unknown';
+            $cardTypeClass = strtolower(str_replace(' ', '-', $cardTypeName));
           @endphp
-          <div class="cards-selector__item {{ $isSelected ? 'is-selected' : '' }}" data-card-id="{{ $card->id }}" data-card-name="{{ $card->name }}" data-card-type="{{ $card->cardType->name }}">
+          
+          <div class="cards-selector__item {{ $isSelected ? 'is-selected' : '' }}" 
+               data-card-id="{{ $card->id }}" 
+               data-card-name="{{ $card->name }}" 
+               data-card-type="{{ $cardTypeName }}">
             <div class="cards-selector__card">
               <div class="cards-selector__card-header">
                 <div class="cards-selector__card-title">
@@ -48,14 +59,14 @@
                   <span class="cards-selector__card-name">{{ $card->name }}</span>
                 </div>
                 <div class="cards-selector__card-type card-type--{{ $cardTypeClass }}">
-                  {{ $card->cardType->name }}
+                  {{ $cardTypeName }}
                 </div>
               </div>
               
               <div class="cards-selector__copies">
                 <label class="cards-selector__copies-label">{{ __('faction_decks.copies') }}:</label>
                 <div class="cards-selector__copies-controls">
-                  <button type="button" class="cards-selector__copies-btn cards-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }}>-</button>
+                  <button type="button" class="cards-selector__copies-btn cards-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
                   <input 
                     type="number" 
                     name="{{ $name }}[{{ $card->id }}][copies]" 
@@ -65,19 +76,27 @@
                     max="{{ $maxCopies }}" 
                     {{ !$isSelected ? 'disabled' : '' }}
                   >
-                  <button type="button" class="cards-selector__copies-btn cards-selector__copies-btn--increase" {{ $copies >= $maxCopies ? 'disabled' : '' }}>+</button>
+                  <button type="button" class="cards-selector__copies-btn cards-selector__copies-btn--increase" {{ $copies >= $maxCopies ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">+</button>
                   <input type="hidden" name="{{ $name }}[{{ $card->id }}][id]" value="{{ $card->id }}" {{ !$isSelected ? 'disabled' : '' }}>
                 </div>
               </div>
               
-              @if($card->cost)
+              @if(isset($card->cost) && $card->cost)
                 <div class="cards-selector__cost">
-                  {!! $card->icon_html !!}
+                  @if(method_exists($card, 'getIconHtmlAttribute'))
+                    {!! $card->icon_html !!}
+                  @else
+                    {{ $card->cost }}
+                  @endif
                 </div>
               @endif
             </div>
           </div>
-        @endforeach
+        @empty
+          <div class="cards-selector__empty">
+            <p>{{ __('faction_decks.no_cards_available') }}</p>
+          </div>
+        @endforelse
       </div>
       
       <div class="cards-selector__preview">

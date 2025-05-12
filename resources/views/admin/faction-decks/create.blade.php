@@ -7,7 +7,6 @@
     @include('admin.faction-decks._form', [
       'factions' => $factions,
       'gameModes' => $gameModes,
-      'selectedFactionId' => $selectedFactionId,
       'availableCards' => $availableCards ?? [],
       'availableHeroes' => $availableHeroes ?? []
     ])
