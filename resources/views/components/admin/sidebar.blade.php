@@ -76,6 +76,30 @@
             </ul>
           </x-collapsible-section>
 
+          <!-- Sección Game Components -->
+          <x-collapsible-section
+            title="{{ __('admin.game') }}"
+            id="game-section" 
+          >
+            <ul class="admin-sidebar__submenu">
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.faction-decks.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.faction-decks.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('faction_deck.plural') }}</span>
+                </a>
+              </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.game-modes.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.game-modes.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('game-modes.plural') }}</span>
+                </a>
+              </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.deck-attributes-configurations.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.deck-attributes-configurations.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('deck-attributes-configurations.plural') }}</span>
+                </a>
+              </li>
+            </ul>
+          </x-collapsible-section>
+
           <!-- Sección Card System -->
           <x-collapsible-section 
             id="card-system-section" 

@@ -97,8 +97,8 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::get('faction-decks/available-items', [FactionDeckController::class, 'getAvailableItems'])->name('faction-decks.available-items');
 
 // Deck Attributes Configuration
-  Route::get('deck-attributes-configurations/edit', [DeckAttributesConfigurationController::class, 'edit'])->name('deck-attributes-configurations.edit');
-  Route::put('deck-attributes-configurations', [DeckAttributesConfigurationController::class, 'update'])->name('deck-attributes-configurations.update');
+  Route::resource('deck-attributes-configurations', DeckAttributesConfigurationController::class);
+
       
   // Pages
   Route::resource('pages', PageController::class);

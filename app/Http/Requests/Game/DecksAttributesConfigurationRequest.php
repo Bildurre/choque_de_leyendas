@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Game;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DeckAttributesConfigurationRequest extends FormRequest
 {
@@ -19,7 +20,14 @@ class DeckAttributesConfigurationRequest extends FormRequest
    */
   public function rules(): array
   {
+    $configId = $this->route('deck_attributes_configuration')?->id;
+    
     return [
+      'game_mode_id' => [
+        'required',
+        'exists:game_modes,id',
+        Rule::unique('deck_attributes_configurations')->ignore($configId)
+      ],
       'min_cards' => ['required', 'integer', 'min:1', 'max:100', 'lte:max_cards'],
       'max_cards' => ['required', 'integer', 'min:1', 'max:200', 'gte:min_cards'],
       'max_copies_per_card' => ['required', 'integer', 'min:1', 'max:10'],
@@ -35,27 +43,31 @@ class DeckAttributesConfigurationRequest extends FormRequest
   public function messages(): array
   {
     return [
-      'min_cards.required' => 'El número mínimo de cartas es obligatorio.',
-      'min_cards.integer' => 'El número mínimo de cartas debe ser un número entero.',
-      'min_cards.min' => 'El número mínimo de cartas debe ser al menos 1.',
-      'min_cards.max' => 'El número mínimo de cartas no puede ser mayor que 100.',
-      'min_cards.lte' => 'El número mínimo de cartas debe ser menor o igual que el número máximo.',
+      'game_mode_id.required' => __('deck_attributes.validation.game_mode_required'),
+      'game_mode_id.exists' => __('game_modes.not_exists'),
+      'game_mode_id.unique' => __('deck_attributes.validation.game_mode_exists'),
       
-      'max_cards.required' => 'El número máximo de cartas es obligatorio.',
-      'max_cards.integer' => 'El número máximo de cartas debe ser un número entero.',
-      'max_cards.min' => 'El número máximo de cartas debe ser al menos 1.',
-      'max_cards.max' => 'El número máximo de cartas no puede ser mayor que 200.',
-      'max_cards.gte' => 'El número máximo de cartas debe ser mayor o igual que el número mínimo.',
+      'min_cards.required' => __('deck_attributes.validation.min_cards_required'),
+      'min_cards.integer' => __('deck_attributes.validation.min_cards_integer'),
+      'min_cards.min' => __('deck_attributes.validation.min_cards_range', ['min' => 1, 'max' => 100]),
+      'min_cards.max' => __('deck_attributes.validation.min_cards_range', ['min' => 1, 'max' => 100]),
+      'min_cards.lte' => __('deck_attributes.validation.max_cards_min_relation'),
       
-      'max_copies_per_card.required' => 'El número máximo de copias por carta es obligatorio.',
-      'max_copies_per_card.integer' => 'El número máximo de copias por carta debe ser un número entero.',
-      'max_copies_per_card.min' => 'El número máximo de copias por carta debe ser al menos 1.',
-      'max_copies_per_card.max' => 'El número máximo de copias por carta no puede ser mayor que 10.',
+      'max_cards.required' => __('deck_attributes.validation.max_cards_required'),
+      'max_cards.integer' => __('deck_attributes.validation.max_cards_integer'),
+      'max_cards.min' => __('deck_attributes.validation.max_cards_range', ['min' => 1, 'max' => 200]),
+      'max_cards.max' => __('deck_attributes.validation.max_cards_range', ['min' => 1, 'max' => 200]),
+      'max_cards.gte' => __('deck_attributes.validation.max_cards_min_relation'),
       
-      'max_copies_per_hero.required' => 'El número máximo de copias por héroe es obligatorio.',
-      'max_copies_per_hero.integer' => 'El número máximo de copias por héroe debe ser un número entero.',
-      'max_copies_per_hero.min' => 'El número máximo de copias por héroe debe ser al menos 1.',
-      'max_copies_per_hero.max' => 'El número máximo de copias por héroe no puede ser mayor que 5.',
+      'max_copies_per_card.required' => __('deck_attributes.validation.max_copies_per_card_required'),
+      'max_copies_per_card.integer' => __('deck_attributes.validation.max_copies_per_card_integer'),
+      'max_copies_per_card.min' => __('deck_attributes.validation.max_copies_per_card_range', ['min' => 1, 'max' => 10]),
+      'max_copies_per_card.max' => __('deck_attributes.validation.max_copies_per_card_range', ['min' => 1, 'max' => 10]),
+      
+      'max_copies_per_hero.required' => __('deck_attributes.validation.max_copies_per_hero_required'),
+      'max_copies_per_hero.integer' => __('deck_attributes.validation.max_copies_per_hero_integer'),
+      'max_copies_per_hero.min' => __('deck_attributes.validation.max_copies_per_hero_range', ['min' => 1, 'max' => 5]),
+      'max_copies_per_hero.max' => __('deck_attributes.validation.max_copies_per_hero_range', ['min' => 1, 'max' => 5]),
     ];
   }
 }
