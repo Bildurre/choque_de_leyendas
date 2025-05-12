@@ -29,11 +29,19 @@ class FactionController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Get counters for tabs
+    // Get counters for tabs directly using Eloquent
     $activeCount = Faction::count();
     $trashedCount = Faction::onlyTrashed()->count();
     
-    $factions = $this->factionService->getAllFactions(12, false, $trashed);
+    // Get factions with related counts directly with Eloquent
+    $query = Faction::withCount(['heroes', 'cards']);
+    
+    // Apply trash filter only
+    if ($trashed) {
+      $query->onlyTrashed();
+    }
+    
+    $factions = $query->paginate(12);
     
     return view('admin.factions.index', compact('factions', 'trashed', 'activeCount', 'trashedCount'));
   }
@@ -70,6 +78,18 @@ class FactionController extends Controller
   public function edit(Faction $faction)
   {
     return view('admin.factions.edit', compact('faction'));
+  }
+
+  /**
+   * Show the specified faction.
+   */
+  public function show(Faction $faction)
+  {
+    // Eager load related models with counts
+    $faction->loadCount(['heroes', 'cards']);
+    $faction->load(['heroes', 'cards']);
+    
+    return view('admin.factions.show', compact('faction'));
   }
 
   /**
