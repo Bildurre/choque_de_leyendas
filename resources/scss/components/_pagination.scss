@@ -1,0 +1,99 @@
+// resources/scss/components/_pagination.scss
+
+@use '../abstracts/all' as *;
+
+.pagination-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: $spacing-sm;
+  margin: $spacing-md 0;
+  
+  @include responsive(tablet) {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+  }
+}
+
+.pagination-info {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  text-align: center;
+  
+  @include responsive(tablet) {
+    text-align: left;
+  }
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  @include responsive(tablet) {
+    justify-content: flex-end;
+  }
+}
+
+.pagination-item {
+  display: inline-block;
+  
+  &--active {
+    .pagination-link {
+      background-color: var(--random-accent-color);
+      color: var(--color-background);
+      
+      &:hover {
+        background-color: var(--random-accent-color-hover);
+      }
+    }
+  }
+  
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  &--separator {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-secondary);
+  }
+}
+
+.pagination-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 $spacing-xs;
+  border-radius: $border-radius-sm;
+  background-color: var(--color-card-bg);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: all $transition-fast;
+  
+  &:hover {
+    background-color: var(--random-accent-color-bg);
+    color: var(--random-accent-color);
+  }
+  
+  &--active {
+    background-color: var(--random-accent-color);
+    color: var(--color-background);
+    
+    &:hover {
+      background-color: var(--random-accent-color-hover);
+    }
+  }
+  
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
