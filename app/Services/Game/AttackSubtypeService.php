@@ -26,21 +26,21 @@ class AttackSubtypeService
     
     // Aplicar filtros de elementos eliminados
     if ($onlyTrashed) {
-      $query->onlyTrashed();
+        $query->onlyTrashed();
     } elseif ($withTrashed) {
-      $query->withTrashed();
+        $query->withTrashed();
     }
     
     // Filtrar por tipo si se especifica
     if ($type) {
-      $query->where('type', $type);
+        $query->where('type', $type);
     }
     
     // Ordenar por tipo y nombre
     $query->orderBy('type')->orderBy('id');
     
     if ($perPage) {
-      return $query->paginate($perPage);
+        return $query->paginate($perPage)->withQueryString();
     }
     
     return $query->get();
