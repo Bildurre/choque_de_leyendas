@@ -6,7 +6,8 @@
   
   <div class="page-content">
     <x-entity.list 
-      :create-route="false"
+      :create-route="!$trashed ? route('admin.faction-decks.create') : null"
+      :create-label="__('faction_decks.create')"
       :items="$factionDecks"
       :withTabs="true"
       :trashed="$trashed"
@@ -14,24 +15,6 @@
       :trashedCount="$trashedCount ?? null"
       baseRoute="admin.faction-decks.index"
     >
-      <x-slot:actions>
-        @if(!$trashed)
-          <div class="dropdown-create-button">
-            <x-dropdown
-              label="{{ __('faction_decks.create') }}"
-              icon="plus"
-              variant="primary"
-            >
-              @foreach($gameModes as $gameMode)
-                <x-dropdown-item :href="route('admin.faction-decks.create', ['game_mode_id' => $gameMode->id])">
-                  {{ $gameMode->name }}
-                </x-dropdown-item>
-              @endforeach
-            </x-dropdown>
-          </div>
-        @endif
-      </x-slot:actions>
-
       @foreach($factionDecks as $factionDeck)
         <x-entity.list-card 
           :title="$factionDeck->name"

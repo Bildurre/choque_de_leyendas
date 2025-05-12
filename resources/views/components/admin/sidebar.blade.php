@@ -142,68 +142,6 @@
               </li>
             </ul>
           </x-collapsible-section>
-          
-          <!-- Sección Statistics & Analysis -->
-          <x-collapsible-section 
-            id="statistics-section" 
-            title="{{ __('admin.statistics') }}"
-          >
-            <ul class="admin-sidebar__submenu">
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#factions-stats" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('statistics.factions') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#cards-stats" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('statistics.cards') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#balance-analysis" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('statistics.balance_analysis') }}</span>
-                </a>
-              </li>
-            </ul>
-          </x-collapsible-section>
-          
-          <!-- Sección Export -->
-          <x-collapsible-section 
-            id="export-section" 
-            title="{{ __('admin.export') }}"
-          >
-            <ul class="admin-sidebar__submenu">
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#export-cards" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('export.cards') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#export-heroes" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('export.heroes') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#export-rules" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('export.rules') }}</span>
-                </a>
-              </li>
-            </ul>
-          </x-collapsible-section>
-          
-          <!-- Sección Admin Users -->
-          <x-collapsible-section 
-            id="users-section" 
-            title="{{ __('admin.users') }}"
-          >
-            <ul class="admin-sidebar__submenu">
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.dashboard') }}#admin-users" class="admin-sidebar__link">
-                  <span class="admin-sidebar__text">{{ __('users.admins') }}</span>
-                </a>
-              </li>
-            </ul>
-          </x-collapsible-section>
         </x-accordion>
       </ul>
     </nav>
