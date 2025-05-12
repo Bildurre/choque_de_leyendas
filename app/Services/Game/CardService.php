@@ -118,17 +118,23 @@ class CardService
    */
   private function setCardFields(Card $card, array $data): void
   {
-    // Set relation IDs with null checks
-    $card->faction_id = $data['faction_id'] ?? null;
-    $card->card_type_id = $data['card_type_id'] ?? null;
-    $card->equipment_type_id = $data['equipment_type_id'] ?? null;
-    $card->attack_range_id = $data['attack_range_id'] ?? null;
-    $card->attack_subtype_id = $data['attack_subtype_id'] ?? null;
-    $card->hero_ability_id = $data['hero_ability_id'] ?? null;
+    $fields = [
+      'faction_id', 'card_type_id', 'equipment_type_id',
+      'attack_range_id', 'attack_subtype_id', 'hero_ability_id',
+      'hands', 'cost'
+    ];
     
-    // Set other fields with null checks
-    $card->hands = $data['hands'] ?? null;
-    $card->cost = $data['cost'] ?? null;
+    $fillable = [];
+    
+    foreach ($fields as $field) {
+      if (isset($data[$field])) {
+        $fillable[$field] = $data[$field];
+      }
+    }
+    
+    $card->fill($fillable);
+    
+    // Area needs special handling for boolean conversion
     $card->area = isset($data['area']) ? (bool)$data['area'] : false;
   }
 

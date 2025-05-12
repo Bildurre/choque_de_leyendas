@@ -13,6 +13,29 @@ class FactionService
   protected $translatableFields = ['name', 'lore_text'];
 
   /**
+   * Get all factions with optional pagination
+   *
+   * @param int|null $perPage Number of items per page, or null for all items
+   * @param bool $onlyTrashed Only trashed items
+   * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
+   */
+  public function getAllFactions(int $perPage = null, bool $onlyTrashed = false)
+  {
+    $query = Faction::withCount(['heroes', 'cards']);
+    
+    // Apply trash filter
+    if ($onlyTrashed) {
+      $query->onlyTrashed();
+    }
+    
+    if ($perPage) {
+      return $query->paginate($perPage);
+    }
+    
+    return $query->get();
+  }
+  
+  /**
    * Create a new faction
    *
    * @param array $data

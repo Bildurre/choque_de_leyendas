@@ -117,18 +117,19 @@ class HeroService
    */
   private function setHeroFields(Hero $hero, array $data): void
   {
-    // Set relation IDs
-    $hero->faction_id = $data['faction_id'] ?? null;
-    $hero->hero_race_id = $data['hero_race_id'] ?? null;
-    $hero->hero_class_id = $data['hero_class_id'] ?? null;
+    $fillable = [
+      'faction_id' => $data['faction_id'] ?? null,
+      'hero_race_id' => $data['hero_race_id'] ?? null,
+      'hero_class_id' => $data['hero_class_id'] ?? null,
+      'gender' => $data['gender'] ?? 'male',
+      'agility' => $data['agility'] ?? 2,
+      'mental' => $data['mental'] ?? 2,
+      'will' => $data['will'] ?? 2,
+      'strength' => $data['strength'] ?? 2,
+      'armor' => $data['armor'] ?? 2,
+    ];
     
-    // Set attributes
-    $hero->gender = $data['gender'] ?? 'male';
-    $hero->agility = $data['agility'] ?? 2;
-    $hero->mental = $data['mental'] ?? 2;
-    $hero->will = $data['will'] ?? 2;
-    $hero->strength = $data['strength'] ?? 2;
-    $hero->armor = $data['armor'] ?? 2;
+    $hero->fill($fillable);
   }
 
   /**

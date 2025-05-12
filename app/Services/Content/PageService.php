@@ -99,6 +99,36 @@ class PageService
     }
 
     /**
+     * Restore a deleted page from trash.
+     *
+     * @param int $id
+     * @return Page
+     */
+    public function restore(int $id): Page
+    {
+        $page = Page::onlyTrashed()->findOrFail($id);
+        $page->restore();
+        return $page;
+    }
+
+    /**
+     * Force delete a page from trash.
+     *
+     * @param int $id
+     * @return string The title of the deleted page
+     */
+    public function forceDelete(int $id): string
+    {
+      $page = Page::onlyTrashed()->findOrFail($id);
+      
+      if ($page->hasImage()) {
+          $page->deleteImage();
+      }
+      
+      return $page->forceDelete();
+    }
+
+    /**
      * Get available templates for pages.
      */
     public function getAvailableTemplates(): array

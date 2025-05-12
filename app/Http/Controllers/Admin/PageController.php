@@ -121,15 +121,14 @@ class PageController extends Controller
      */
     public function restore($id): RedirectResponse
     {
-        try {
-            $page = Page::onlyTrashed()->findOrFail($id);
-            $page->restore();
-            
-            return redirect()->route('admin.pages.index', ['trashed' => 1])
-                ->with('success', __('pages.restored_successfully', ['title' => $page->title]));
-        } catch (\Exception $e) {
-            return back()->with('error', __('pages.restore_error', ['message' => $e->getMessage()]));
-        }
+      try {
+        $page = $this->pageService->restore($id);
+        
+        return redirect()->route('admin.pages.index', ['trashed' => 1])
+          ->with('success', __('pages.restored_successfully', ['title' => $page->title]));
+      } catch (\Exception $e) {
+        return back()->with('error', __('pages.restore_error', ['message' => $e->getMessage()]));
+      }
     }
     
     /**
@@ -137,16 +136,13 @@ class PageController extends Controller
      */
     public function forceDelete($id): RedirectResponse
     {
-        try {
-            $page = Page::onlyTrashed()->findOrFail($id);
-            $title = $page->title;
-            
-            $page->forceDelete();
-            
-            return redirect()->route('admin.pages.index', ['trashed' => 1])
-                ->with('success', __('pages.force_deleted_successfully', ['title' => $title]));
-        } catch (\Exception $e) {
-            return back()->with('error', __('pages.force_delete_error', ['message' => $e->getMessage()]));
-        }
+      try {
+        $title = $this->pageService->forceDelete($id);
+        
+        return redirect()->route('admin.pages.index', ['trashed' => 1])
+          ->with('success', __('pages.force_deleted_successfully', ['title' => $title]));
+      } catch (\Exception $e) {
+        return back()->with('error', __('pages.force_delete_error', ['message' => $e->getMessage()]));
+      }
     }
 }
