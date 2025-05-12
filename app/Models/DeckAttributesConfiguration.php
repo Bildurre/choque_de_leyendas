@@ -34,18 +34,11 @@ class DeckAttributesConfiguration extends Model
   ];
 
   /**
-   * Get the default configuration
-   * 
-   * @return \App\Models\DeckAttributesConfiguration
+   * Get the game mode associated with this faction deck.
    */
-  public static function getDefault(): self
+  public function gameMode()
   {
-    return self::firstOrCreate([], [
-      'min_cards' => 30,
-      'max_cards' => 40,
-      'max_copies_per_card' => 2,
-      'max_copies_per_hero' => 1,
-    ]);
+    return $this->belongsTo(GameMode::class);
   }
 
   /**

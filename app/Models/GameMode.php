@@ -49,4 +49,12 @@ class GameMode extends Model
   {
     return $this->hasMany(FactionDeck::class);
   }
+
+  /**
+   * Get the deck configurations associated with this game mode.
+   */
+  public function deckConfiguration()
+  {
+    return $this->hasOne(DeckAttributesConfiguration::class);
+  }
 }
