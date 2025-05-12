@@ -14,23 +14,19 @@
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.attack-ranges.index')">
     <div class="form-grid">
-      <div>
-        <x-form.multilingual-input
-          name="name"
-          :label="__('attack_ranges.name')"
-          :values="isset($attackRange) ? $attackRange->getTranslations('name') : []"
-          required
-        />
-      </div>
-      
-      <div>
-        <x-form.image-upload
-          name="icon"
-          :label="__('attack_ranges.icon')"
-          :current-image="isset($attackRange) && $attackRange->icon ? $attackRange->getIconUrl() : null"
-          :remove-name="isset($attackRange) ? 'remove_icon' : null"
-        />
-      </div>
+      <x-form.multilingual-input
+        name="name"
+        :label="__('attack_ranges.name')"
+        :values="isset($attackRange) ? $attackRange->getTranslations('name') : []"
+        required
+      />
+
+      <x-form.image-upload
+        name="icon"
+        :label="__('attack_ranges.icon')"
+        :current-image="isset($attackRange) && $attackRange->icon ? $attackRange->getIconUrl() : null"
+        :remove-name="isset($attackRange) ? 'remove_icon' : null"
+      />
     </div>
   </x-form.card>
 </form>

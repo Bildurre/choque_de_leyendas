@@ -14,24 +14,20 @@
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.equipment-types.index')">
     <div class="form-grid">
-      <div>
-        <x-form.multilingual-input
-          name="name"
-          :label="__('equipment_types.name')"
-          :values="isset($equipmentType) ? $equipmentType->getTranslations('name') : []"
-          required
-        />
-      </div>
+      <x-form.multilingual-input
+        name="name"
+        :label="__('equipment_types.name')"
+        :values="isset($equipmentType) ? $equipmentType->getTranslations('name') : []"
+        required
+      />
       
-      <div>
-        <x-form.select
-          name="category"
-          :label="__('equipment_types.category')"
-          :options="$categories"
-          :selected="old('category', isset($equipmentType) ? $equipmentType->category : '')"
-          required
-        />
-      </div>
+      <x-form.select
+        name="category"
+        :label="__('equipment_types.category')"
+        :options="$categories"
+        :selected="old('category', isset($equipmentType) ? $equipmentType->category : '')"
+        required
+      />
     </div>
   </x-form.card>
 </form>

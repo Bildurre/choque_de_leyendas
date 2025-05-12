@@ -18,31 +18,20 @@
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.card-types.index')">
     <div class="form-grid">
-      <div>
-        <x-form.multilingual-input
-          name="name"
-          :label="__('card_types.name')"
-          :values="isset($cardType) ? $cardType->getTranslations('name') : []"
-          required
-        />
-      </div>
+      <x-form.multilingual-input
+        name="name"
+        :label="__('card_types.name')"
+        :values="isset($cardType) ? $cardType->getTranslations('name') : []"
+        required
+      />
       
-      <div>
-        <x-form.select
-          name="hero_superclass_id"
-          :label="__('card_types.hero_superclass')"
-          :options="$superclassOptions"
-          :selected="old('hero_superclass_id', isset($cardType) ? $cardType->hero_superclass_id : '')"
-          :placeholder="__('card_types.select_superclass')"
-        />
-        
-        <div class="form-help">
-          <p>{{ __('card_types.superclass_help') }}</p>
-          @if($availableSuperclasses->isEmpty() && !isset($cardType))
-            <p class="form-help__warning">{{ __('card_types.no_available_superclasses') }}</p>
-          @endif
-        </div>
-      </div>
+      <x-form.select
+        name="hero_superclass_id"
+        :label="__('card_types.hero_superclass')"
+        :options="$superclassOptions"
+        :selected="old('hero_superclass_id', isset($cardType) ? $cardType->hero_superclass_id : '')"
+        :placeholder="__('card_types.select_superclass')"
+      />
     </div>
   </x-form.card>
 </form>
