@@ -26,45 +26,43 @@ class AttackSubtypeController extends Controller
    * Display a listing of attack subtypes.
    */
   public function index(Request $request)
-  {
-      $trashed = $request->has('trashed');
-      $type = $request->input('type');
-      
-      // Obtener contadores para las pestañas
-      $activeCount = AttackSubtype::count();
-      $trashedCount = AttackSubtype::onlyTrashed()->count();
-      
-      // Obtener conteos por tipo directamente con consultas
-      $typesQuery = AttackSubtype::selectRaw('type, count(*) as count')
-          ->groupBy('type');
-      
-      if ($trashed) {
-          $typesQuery->onlyTrashed();
-      }
-      
-      $typeCountsCollection = $typesQuery->get();
-      
-      $typeCounts = [];
-      foreach ($typeCountsCollection as $typeCount) {
-          $typeCounts[$typeCount->type] = $typeCount->count;
-      }
-      
-      // Obtener attack subtypes con conteos incorporados
-      $attackSubtypes = $this->attackSubtypeService->getAllAttackSubtypes(12, false, $trashed, $type);
-      
-      // Obtener tipos para el filtro
-      $types = AttackSubtype::getTypes();
-      
-      return view('admin.attack-subtypes.index', compact(
-          'attackSubtypes', 
-          'trashed', 
-          'activeCount', 
-          'trashedCount', 
-          'types', 
-          'type',
-          'typeCounts'
-      ));
-  }
+{
+    $trashed = $request->has('trashed');
+    $type = $request->input('type');
+    
+    // Obtener contadores para las pestañas usando Eloquent
+    $activeCount = AttackSubtype::count();
+    $trashedCount = AttackSubtype::onlyTrashed()->count();
+    
+    // Obtener conteos por tipo usando Eloquent
+    $typeCountsQuery = AttackSubtype::query();
+    
+    if ($trashed) {
+        $typeCountsQuery->onlyTrashed();
+    }
+    
+    $typeCounts = $typeCountsQuery->select('type')
+        ->selectRaw('COUNT(*) as count')
+        ->groupBy('type')
+        ->pluck('count', 'type')
+        ->toArray();
+    
+    // Obtener attack subtypes con conteos incorporados
+    $attackSubtypes = $this->attackSubtypeService->getAllAttackSubtypes(12, false, $trashed, $type);
+    
+    // Obtener tipos para el filtro
+    $types = AttackSubtype::getTypes();
+    
+    return view('admin.attack-subtypes.index', compact(
+        'attackSubtypes', 
+        'trashed', 
+        'activeCount', 
+        'trashedCount', 
+        'types', 
+        'type',
+        'typeCounts'
+    ));
+}
 
   /**
    * Show the form for creating a new attack subtype.
