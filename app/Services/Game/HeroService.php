@@ -3,7 +3,6 @@
 namespace App\Services\Game;
 
 use App\Models\Hero;
-use App\Models\HeroAbility;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -13,86 +12,6 @@ class HeroService
   use HandlesTranslations;
   
   protected $translatableFields = ['name', 'lore_text', 'passive_name', 'passive_description'];
-
-  /**
-   * Get all heroes with optional pagination and filters
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
-   * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @param array $filters Additional filters
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
-   */
-  public function getAllHeroes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false, array $filters = []): mixed
-  {
-    $query = Hero::with([
-      'faction', 
-      'heroRace', 
-      'heroClass', 
-      'heroAbilities'
-    ]);
-    
-    // Apply trash filters
-    if ($onlyTrashed) {
-      $query->onlyTrashed();
-    } elseif ($withTrashed) {
-      $query->withTrashed();
-    }
-    
-    // Apply additional filters
-    if (!empty($filters)) {
-      // Filter by faction
-      if (isset($filters['faction_id']) && $filters['faction_id'] !== '') {
-        if ($filters['faction_id'] === 'no_faction') {
-          $query->whereNull('faction_id');
-        } else {
-          $query->where('faction_id', $filters['faction_id']);
-        }
-      }
-      
-      // Filter by race
-      if (isset($filters['hero_race_id']) && $filters['hero_race_id'] !== '') {
-        $query->where('hero_race_id', $filters['hero_race_id']);
-      }
-      
-      // Filter by class
-      if (isset($filters['hero_class_id']) && $filters['hero_class_id'] !== '') {
-        $query->where('hero_class_id', $filters['hero_class_id']);
-      }
-      
-      // Filter by gender
-      if (isset($filters['gender']) && $filters['gender'] !== '') {
-        $query->where('gender', $filters['gender']);
-      }
-      
-      // Filter by ability
-      if (isset($filters['hero_ability_id']) && $filters['hero_ability_id'] !== '') {
-        $query->whereHas('heroAbilities', function ($q) use ($filters) {
-          $q->where('hero_ability_id', $filters['hero_ability_id']);
-        });
-      }
-      
-      // Filter by search term
-      if (isset($filters['search']) && !empty($filters['search'])) {
-        $search = $filters['search'];
-        $query->where(function($q) use ($search) {
-          $q->whereRaw("JSON_CONTAINS(LOWER(name), LOWER(?), '$')", [json_encode($search)])
-            ->orWhereRaw("JSON_CONTAINS(LOWER(lore_text), LOWER(?), '$')", [json_encode($search)])
-            ->orWhereRaw("JSON_CONTAINS(LOWER(passive_name), LOWER(?), '$')", [json_encode($search)])
-            ->orWhereRaw("JSON_CONTAINS(LOWER(passive_description), LOWER(?), '$')", [json_encode($search)]);
-        });
-      }
-    }
-    
-    // Default ordering
-    $query->orderBy('faction_id')->orderBy('id');
-    
-    if ($perPage) {
-      return $query->paginate($perPage)->withQueryString();
-    }
-    
-    return $query->get();
-  }
 
   /**
    * Create a new hero
@@ -257,59 +176,5 @@ class HeroService
     $hero->heroAbilities()->detach();
     
     return $hero->forceDelete();
-  }
-
-  /**
-   * Get heroes count by faction
-   * 
-   * @return array
-   */
-  public function getCountsByFaction(): array
-  {
-    $counts = [];
-    $factions = \App\Models\Faction::all();
-    
-    foreach ($factions as $faction) {
-      $counts[$faction->id] = Hero::where('faction_id', $faction->id)->count();
-    }
-    
-    // Add count for heroes without faction
-    $counts['no_faction'] = Hero::whereNull('faction_id')->count();
-    
-    return $counts;
-  }
-
-  /**
-   * Get heroes count by race
-   * 
-   * @return array
-   */
-  public function getCountsByRace(): array
-  {
-    $counts = [];
-    $races = \App\Models\HeroRace::all();
-    
-    foreach ($races as $race) {
-      $counts[$race->id] = Hero::where('hero_race_id', $race->id)->count();
-    }
-    
-    return $counts;
-  }
-
-  /**
-   * Get heroes count by class
-   * 
-   * @return array
-   */
-  public function getCountsByClass(): array
-  {
-    $counts = [];
-    $classes = \App\Models\HeroClass::all();
-    
-    foreach ($classes as $class) {
-      $counts[$class->id] = Hero::where('hero_class_id', $class->id)->count();
-    }
-    
-    return $counts;
   }
 }

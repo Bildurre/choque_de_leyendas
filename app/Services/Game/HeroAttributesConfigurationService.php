@@ -36,4 +36,20 @@ class HeroAttributesConfigurationService
       throw new Exception("Error al actualizar la configuración de atributos: " . $e->getMessage());
     }
   }
+
+  /**
+   * Calculate health for a hero based on the configuration
+   *
+   * @param int $agility
+   * @param int $mental
+   * @param int $will
+   * @param int $strength
+   * @param int $armor
+   * @return int
+   */
+  public function calculateHealth(int $agility, int $mental, int $will, int $strength, int $armor): int
+  {
+    $config = $this->getConfiguration();
+    return $config->calculateHealth($agility, $mental, $will, $strength, $armor);
+  }
 }

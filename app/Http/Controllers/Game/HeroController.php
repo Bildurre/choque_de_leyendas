@@ -39,41 +39,30 @@ class HeroController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Get filters from request
-    $filters = $this->getFiltersFromRequest($request);
-    
-    // Get counters for tabs
+    // Get counters for tabs directly using Eloquent
     $activeCount = Hero::count();
     $trashedCount = Hero::onlyTrashed()->count();
     
-    // Get counts for filter options
-    $factionCounts = $this->heroService->getCountsByFaction();
-    $raceCounts = $this->heroService->getCountsByRace();
-    $classCounts = $this->heroService->getCountsByClass();
+    // Get heroes with pagination and eager loaded relationships
+    $query = Hero::with([
+      'faction', 
+      'heroRace', 
+      'heroClass', 
+      'heroAbilities.attackRange', 
+      'heroAbilities.attackSubtype'
+    ]);
     
-    // Get heroes with pagination
-    $heroes = $this->heroService->getAllHeroes(12, false, $trashed, $filters);
+    // Apply trash filter
+    if ($trashed) {
+      $query->onlyTrashed();
+    }
     
-    // Load related data for filter dropdowns
-    $factions = Faction::orderBy('id')->get();
-    $heroRaces = HeroRace::orderBy('id')->get();
-    $heroClasses = HeroClass::orderBy('id')->get();
-    $heroAbilities = HeroAbility::orderBy('id')->get();
+    // Apply default ordering
+    $query->orderBy('faction_id')->orderBy('id');
     
-    return view('admin.heroes.index', compact(
-      'heroes', 
-      'trashed', 
-      'activeCount', 
-      'trashedCount',
-      'filters',
-      'factions',
-      'heroRaces',
-      'heroClasses',
-      'heroAbilities',
-      'factionCounts',
-      'raceCounts',
-      'classCounts'
-    ));
+    $heroes = $query->paginate(12)->withQueryString();
+    
+    return view('admin.heroes.index', compact('heroes', 'trashed', 'activeCount', 'trashedCount'));
   }
 
   /**
@@ -84,7 +73,7 @@ class HeroController extends Controller
     $factions = Faction::orderBy('id')->get();
     $heroRaces = HeroRace::orderBy('id')->get();
     $heroClasses = HeroClass::orderBy('id')->get();
-    $heroAbilities = HeroAbility::orderBy('id')->get();
+    $heroAbilities = HeroAbility::with(['attackRange', 'attackSubtype'])->orderBy('id')->get();
     $attributesConfig = $this->attributesService->getConfiguration();
     
     return view('admin.heroes.create', compact(
@@ -115,6 +104,23 @@ class HeroController extends Controller
   }
 
   /**
+   * Display the specified hero.
+   */
+  public function show(Hero $hero)
+  {
+    // Load relationships with all necessary child relationships
+    $hero->load([
+      'faction', 
+      'heroRace', 
+      'heroClass', 
+      'heroAbilities.attackRange', 
+      'heroAbilities.attackSubtype'
+    ]);
+    
+    return view('admin.heroes.show', compact('hero'));
+  }
+
+  /**
    * Show the form for editing the specified hero.
    */
   public function edit(Hero $hero)
@@ -122,8 +128,11 @@ class HeroController extends Controller
     $factions = Faction::orderBy('id')->get();
     $heroRaces = HeroRace::orderBy('id')->get();
     $heroClasses = HeroClass::orderBy('id')->get();
-    $heroAbilities = HeroAbility::orderBy('id')->get();
+    $heroAbilities = HeroAbility::with(['attackRange', 'attackSubtype'])->orderBy('id')->get();
     $attributesConfig = $this->attributesService->getConfiguration();
+    
+    // Asegúrate de cargar las relaciones necesarias para el héroe
+    $hero->load('heroAbilities.attackRange', 'heroAbilities.attackSubtype');
     
     // Get IDs of selected abilities
     $selectedAbilities = $hero->heroAbilities->pluck('id')->toArray();
@@ -205,34 +214,5 @@ class HeroController extends Controller
     } catch (\Exception $e) {
       return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente el Héroe: ' . $e->getMessage());
     }
-  }
-
-  /**
-   * Extract filters from request
-   * 
-   * @param Request $request
-   * @return array
-   */
-  private function getFiltersFromRequest(Request $request): array
-  {
-    $filters = [];
-    
-    // Extract filter values
-    $filterKeys = [
-      'faction_id', 
-      'hero_race_id', 
-      'hero_class_id', 
-      'gender',
-      'hero_ability_id',
-      'search'
-    ];
-    
-    foreach ($filterKeys as $key) {
-      if ($request->has($key) && $request->input($key) !== '') {
-        $filters[$key] = $request->input($key);
-      }
-    }
-    
-    return $filters;
   }
 }
