@@ -31,17 +31,14 @@
               {{ $attackSubtype->type_name }}
             </x-badge>
             
-            @if($attackSubtype->hero_abilities_count > 0)
               <x-badge variant="info">
                 {{ __('attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count]) }}
               </x-badge>
-            @endif
+            @
             
-            @if($attackSubtype->cards_count > 0)
               <x-badge variant="primary">
                 {{ __('attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count]) }}
               </x-badge>
-            @endif
             
             @if($trashed)
               <x-badge variant="danger">
