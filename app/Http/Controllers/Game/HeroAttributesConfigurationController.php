@@ -29,26 +29,7 @@ class HeroAttributesConfigurationController extends Controller
   {
     $configuration = $this->heroAttributesConfigurationService->getConfiguration();
     
-    // Calcular ejemplos de salud
-    $healthExamples = [
-      'min' => $this->heroAttributesConfigurationService->calculateHealth(
-        $configuration->min_attribute_value,
-        $configuration->min_attribute_value,
-        $configuration->min_attribute_value,
-        $configuration->min_attribute_value,
-        $configuration->min_attribute_value
-      ),
-      'max' => $this->heroAttributesConfigurationService->calculateHealth(
-        $configuration->max_attribute_value,
-        $configuration->max_attribute_value,
-        $configuration->max_attribute_value,
-        $configuration->max_attribute_value,
-        $configuration->max_attribute_value
-      ),
-      'balance' => $this->heroAttributesConfigurationService->calculateHealth(3, 3, 3, 3, 3),
-    ];
-    
-    return view('admin.hero-attributes-configurations.edit', compact('configuration', 'healthExamples'));
+    return view('admin.hero-attributes-configurations.edit', compact('configuration'));
   }
 
   /**
