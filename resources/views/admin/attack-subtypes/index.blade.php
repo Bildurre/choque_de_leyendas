@@ -31,14 +31,13 @@
               {{ $attackSubtype->type_name }}
             </x-badge>
             
-              <x-badge variant="info">
-                {{ __('attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count]) }}
-              </x-badge>
-            @
-            
-              <x-badge variant="primary">
-                {{ __('attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count]) }}
-              </x-badge>
+            <x-badge variant="info">
+              {{ __('attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count]) }}
+            </x-badge>
+          
+            <x-badge variant="primary">
+              {{ __('attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count]) }}
+            </x-badge>
             
             @if($trashed)
               <x-badge variant="danger">

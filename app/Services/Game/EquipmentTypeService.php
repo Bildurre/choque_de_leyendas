@@ -40,12 +40,11 @@ class EquipmentTypeService
     $query->orderBy('category')->orderBy('id');
     
     if ($perPage) {
-      return $query->paginate($perPage);
+      return $query->paginate($perPage)->withQueryString();
     }
     
     return $query->get();
   }
-
   /**
    * Create a new equipment type
    *
@@ -144,22 +143,5 @@ class EquipmentTypeService
     }
     
     return $equipmentType->forceDelete();
-  }
-
-  /**
-   * Get counts by category
-   * 
-   * @return array
-   */
-  public function getCountsByCategory(): array
-  {
-    $counts = [];
-    $categories = EquipmentType::getCategories();
-    
-    foreach ($categories as $key => $name) {
-      $counts[$key] = EquipmentType::where('category', $key)->count();
-    }
-    
-    return $counts;
   }
 }

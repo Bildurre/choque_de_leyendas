@@ -27,13 +27,13 @@
             : __('attack_ranges.confirm_delete')"
         >
           <x-slot:badges>
-              <x-badge variant="info">
-                {{ __('attack_ranges.hero_abilities_count', ['count' => $attackRange->hero_abilities_count]) }}
-              </x-badge>
-            
-              <x-badge variant="primary">
-                {{ __('attack_ranges.cards_count', ['count' => $attackRange->cards_count]) }}
-              </x-badge>
+            <x-badge variant="info">
+              {{ __('attack_ranges.hero_abilities_count', ['count' => $attackRange->hero_abilities_count]) }}
+            </x-badge>
+          
+            <x-badge variant="primary">
+              {{ __('attack_ranges.cards_count', ['count' => $attackRange->cards_count]) }}
+            </x-badge>
             
             @if($trashed)
               <x-badge variant="danger">

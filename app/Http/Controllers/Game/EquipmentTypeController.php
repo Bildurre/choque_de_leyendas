@@ -33,9 +33,26 @@ class EquipmentTypeController extends Controller
     // Obtener contadores para las pestañas
     $activeCount = EquipmentType::count();
     $trashedCount = EquipmentType::onlyTrashed()->count();
-    $categoryCounts = $this->equipmentTypeService->getCountsByCategory();
     
+    // Obtener conteos por categoría usando Eloquent
+    $categoriesQuery = EquipmentType::selectRaw('category, count(*) as count')
+      ->groupBy('category');
+      
+    if ($trashed) {
+      $categoriesQuery->onlyTrashed();
+    }
+    
+    $categoriesCollection = $categoriesQuery->get();
+    
+    $categoryCounts = [];
+    foreach ($categoriesCollection as $categoryItem) {
+      $categoryCounts[$categoryItem->category] = $categoryItem->count;
+    }
+    
+    // Obtener equipment types con conteos incorporados
     $equipmentTypes = $this->equipmentTypeService->getAllEquipmentTypes(12, false, $trashed, $category);
+    
+    // Obtener categorías para el filtro
     $categories = EquipmentType::getCategories();
     
     return view('admin.equipment-types.index', compact(
