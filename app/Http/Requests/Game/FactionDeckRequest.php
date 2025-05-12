@@ -4,6 +4,7 @@ namespace App\Http\Requests\Game;
 
 use App\Http\Requests\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FactionDeckRequest extends FormRequest
 {
@@ -29,7 +30,6 @@ class FactionDeckRequest extends FormRequest
       'name' => ['required', 'array'],
       'name.es' => ['required', 'string', 'max:255'],
       'faction_id' => ['required', 'exists:factions,id'],
-      'game_mode_id' => ['required', 'exists:game_modes,id'],
       'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_icon' => ['nullable', 'boolean'],
       'cards' => ['nullable', 'array'],
@@ -39,6 +39,11 @@ class FactionDeckRequest extends FormRequest
       'heroes.*.id' => ['exists:heroes,id'],
       'heroes.*.copies' => ['required', 'integer', 'min:1'],
     ];
+
+    // Solo añadir la regla de game_mode_id si es una nueva creación
+    if (!$factionDeckId) {
+      $rules['game_mode_id'] = ['required', 'exists:game_modes,id'];
+    }
 
     // Add uniqueness rules for each locale within the same faction
     foreach ($locales as $locale) {
@@ -60,6 +65,19 @@ class FactionDeckRequest extends FormRequest
     }
 
     return $rules;
+  }
+
+  /**
+   * Prepare the data for validation.
+   */
+  protected function prepareForValidation()
+  {
+    // Si estamos editando, obtener el game_mode_id existente
+    if ($this->route('faction_deck')) {
+      $this->merge([
+        'game_mode_id' => $this->route('faction_deck')->game_mode_id,
+      ]);
+    }
   }
 
   /**

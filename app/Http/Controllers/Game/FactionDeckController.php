@@ -6,6 +6,7 @@ use App\Models\FactionDeck;
 use App\Models\Faction;
 use App\Models\GameMode;
 use App\Services\Game\FactionDeckService;
+use App\Services\Game\DeckAttributesConfigurationService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\FactionDeckRequest;
 use Illuminate\Http\Request;
@@ -13,15 +14,20 @@ use Illuminate\Http\Request;
 class FactionDeckController extends Controller
 {
   protected $factionDeckService;
+  protected $deckAttributesConfigurationService;
 
   /**
    * Create a new controller instance.
    *
    * @param FactionDeckService $factionDeckService
+   * @param DeckAttributesConfigurationService $deckAttributesConfigurationService
    */
-  public function __construct(FactionDeckService $factionDeckService)
-  {
+  public function __construct(
+    FactionDeckService $factionDeckService,
+    DeckAttributesConfigurationService $deckAttributesConfigurationService
+  ) {
     $this->factionDeckService = $factionDeckService;
+    $this->deckAttributesConfigurationService = $deckAttributesConfigurationService;
   }
 
   /**
@@ -46,9 +52,11 @@ class FactionDeckController extends Controller
       $gameModeId
     );
     
-    // Get all factions and game modes for filters
-    $factions = Faction::orderBy('id')->get();
-    $gameModes = GameMode::orderBy('id')->get();
+    // Get all game modes for the dropdown
+    $gameModes = GameMode::orderBy('name')->get();
+    
+    // Get all factions for filters
+    $factions = Faction::orderBy('name')->get();
     
     return view('admin.faction-decks.index', compact(
       'factionDecks', 
@@ -67,26 +75,25 @@ class FactionDeckController extends Controller
    */
   public function create(Request $request)
   {
-    $factions = Faction::orderBy('id')->get();
-    $gameModes = GameMode::orderBy('id')->get();
-    
-    // Optional faction preselected from request
-    $selectedFactionId = $request->get('faction_id');
-    $availableCards = [];
-    $availableHeroes = [];
-    
-    // If faction is preselected, get available cards and heroes
-    if ($selectedFactionId) {
-      $availableCards = $this->factionDeckService->getAvailableCards($selectedFactionId);
-      $availableHeroes = $this->factionDeckService->getAvailableHeroes($selectedFactionId);
+    // Game mode es requerido ahora
+    $gameModeId = $request->get('game_mode_id');
+    if (!$gameModeId) {
+      return redirect()->route('admin.faction-decks.index')
+        ->with('error', __('faction_decks.game_mode_required'));
     }
+    
+    $gameMode = GameMode::findOrFail($gameModeId);
+    
+    // Obtenemos la configuración para este modo de juego
+    $deckConfig = $this->deckAttributesConfigurationService->getConfiguration($gameModeId);
+    
+    // Obtenemos todas las facciones disponibles
+    $factions = Faction::orderBy('name')->get();
     
     return view('admin.faction-decks.create', compact(
       'factions',
-      'gameModes',
-      'selectedFactionId',
-      'availableCards',
-      'availableHeroes'
+      'gameMode',
+      'deckConfig'
     ));
   }
 
@@ -98,6 +105,9 @@ class FactionDeckController extends Controller
     $validated = $request->validated();
 
     try {
+      // Verificamos que la facción de todas las cartas coincida con la facción del mazo
+      $this->validateCardsFaction($validated);
+      
       $factionDeck = $this->factionDeckService->create($validated);
       return redirect()->route('admin.faction-decks.show', $factionDeck)
         ->with('success', __('faction_decks.created_successfully', ['name' => $factionDeck->name]));
@@ -123,17 +133,17 @@ class FactionDeckController extends Controller
    */
   public function edit(FactionDeck $factionDeck)
   {
-    $factions = Faction::orderBy('id')->get();
-    $gameModes = GameMode::orderBy('id')->get();
+    // Obtenemos la configuración para el modo de juego de este mazo
+    $deckConfig = $this->deckAttributesConfigurationService->getConfiguration($factionDeck->game_mode_id);
     
-    // Get available cards and heroes for the faction
+    // Obtenemos todas las facciones disponibles
+    $factions = Faction::orderBy('name')->get();
+    
+    // Obtenemos las cartas disponibles para la facción actual
     $availableCards = $this->factionDeckService->getAvailableCards($factionDeck->faction_id);
     $availableHeroes = $this->factionDeckService->getAvailableHeroes($factionDeck->faction_id);
     
-    // Load current cards and heroes with pivot
-    $factionDeck->load(['cards', 'heroes']);
-    
-    // Format cards and heroes for the form
+    // Format current cards and heroes for the form
     $selectedCards = $factionDeck->cards->map(function ($card) {
       return [
         'id' => $card->id,
@@ -151,7 +161,7 @@ class FactionDeckController extends Controller
     return view('admin.faction-decks.edit', compact(
       'factionDeck',
       'factions',
-      'gameModes',
+      'deckConfig',
       'availableCards',
       'availableHeroes',
       'selectedCards',
@@ -167,6 +177,9 @@ class FactionDeckController extends Controller
     $validated = $request->validated();
 
     try {
+      // Verificamos que la facción de todas las cartas coincida con la facción del mazo
+      $this->validateCardsFaction($validated);
+      
       $this->factionDeckService->update($factionDeck, $validated);
       return redirect()->route('admin.faction-decks.show', $factionDeck)
         ->with('success', __('faction_decks.updated_successfully', ['name' => $factionDeck->name]));
@@ -174,6 +187,48 @@ class FactionDeckController extends Controller
       return back()
         ->with('error', 'Ha ocurrido un error al actualizar el Mazo de Facción: ' . $e->getMessage())
         ->withInput();
+    }
+  }
+
+  /**
+   * Validate that all cards belong to the selected faction.
+   */
+  private function validateCardsFaction(array $data)
+  {
+    $factionId = $data['faction_id'];
+    
+    // Verificar cartas
+    if (isset($data['cards']) && is_array($data['cards'])) {
+      foreach ($data['cards'] as $cardData) {
+        if (!isset($cardData['id'])) continue;
+        
+        $card = \App\Models\Card::find($cardData['id']);
+        if ($card && $card->faction_id != $factionId) {
+          throw new \Exception(
+            __('faction_decks.card_faction_mismatch', [
+              'card' => $card->name,
+              'faction' => \App\Models\Faction::find($factionId)->name
+            ])
+          );
+        }
+      }
+    }
+    
+    // Verificar héroes
+    if (isset($data['heroes']) && is_array($data['heroes'])) {
+      foreach ($data['heroes'] as $heroData) {
+        if (!isset($heroData['id'])) continue;
+        
+        $hero = \App\Models\Hero::find($heroData['id']);
+        if ($hero && $hero->faction_id != $factionId) {
+          throw new \Exception(
+            __('faction_decks.hero_faction_mismatch', [
+              'hero' => $hero->name,
+              'faction' => \App\Models\Faction::find($factionId)->name
+            ])
+          );
+        }
+      }
     }
   }
 
@@ -224,34 +279,6 @@ class FactionDeckController extends Controller
         ->with('success', __('faction_decks.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
       return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente el Mazo de Facción: ' . $e->getMessage());
-    }
-  }
-
-  /**
-   * Get available cards and heroes for a faction (AJAX)
-   */
-  public function getAvailableItems(Request $request)
-  {
-    $factionId = $request->get('faction_id');
-    
-    if (!$factionId) {
-      return response()->json([
-        'error' => 'Faction ID is required'
-      ], 400);
-    }
-    
-    try {
-      $availableCards = $this->factionDeckService->getAvailableCards($factionId);
-      $availableHeroes = $this->factionDeckService->getAvailableHeroes($factionId);
-      
-      return response()->json([
-        'cards' => $availableCards,
-        'heroes' => $availableHeroes
-      ]);
-    } catch (\Exception $e) {
-      return response()->json([
-        'error' => $e->getMessage()
-      ], 500);
     }
   }
 }
