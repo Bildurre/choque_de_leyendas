@@ -46,7 +46,7 @@
       
       @if(method_exists($equipmentTypes, 'links'))
         <x-slot:pagination>
-          {{ $equipmentTypes->appends(['trashed' => $trashed ? 1 : null, 'category' => $category])->links() }}
+          {{ $equipmentTypes->appends(['trashed' => $trashed ? 1 : null])->links() }}
         </x-slot:pagination>
       @endif
     </x-entity.list>

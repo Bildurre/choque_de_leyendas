@@ -13,11 +13,7 @@
     @method('PUT')
   @endif
   
-  <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-classes.index')">
-    <x-slot:header>
-      <h2>{{ __('hero_classes.form_title') }}</h2>
-    </x-slot:header>
-    
+  <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-classes.index')">    
     <x-form.multilingual-input
       name="name"
       :label="__('hero_classes.name')"

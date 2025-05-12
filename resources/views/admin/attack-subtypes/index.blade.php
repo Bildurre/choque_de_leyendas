@@ -50,7 +50,7 @@
       
       @if(method_exists($attackSubtypes, 'links'))
         <x-slot:pagination>
-          {{ $attackSubtypes->appends(['trashed' => $trashed ? 1 : null, 'type' => $type])->links() }}
+          {{ $attackSubtypes->appends(['trashed' => $trashed ? 1 : null])->links() }}
         </x-slot:pagination>
       @endif
     </x-entity.list>
