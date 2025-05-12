@@ -17,14 +17,20 @@
     </div>
 
     <div class="form-card__footer">
-      <button type="submit" class="btn btn--primary">
+      <x-button 
+        type="submit" 
+        variant="primary"
+      >
         {{ $submit_label }}
-      </button>
+      </x-button>
       
       @if($cancel_route)
-        <a href="{{ $cancel_route }}" class="btn btn--secondary">
+        <x-button-link 
+          :href="$cancel_route" 
+          variant="secondary"
+        >
           {{ $cancel_label }}
-        </a>
+        </x-button-link>
       @endif
       
       @if(isset($buttons))

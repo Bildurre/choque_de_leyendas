@@ -17,10 +17,6 @@
   @endif
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.card-types.index')">
-    <x-slot:header>
-      <h2>{{ __('card_types.form_title') }}</h2>
-    </x-slot:header>
-    
     <div class="form-grid">
       <div>
         <x-form.multilingual-input
