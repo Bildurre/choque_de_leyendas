@@ -12,60 +12,48 @@
     @method('PUT')
   @endif
   
-  <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-abilities.index')">
-    <x-slot:header>
-      <h2>{{ __('hero_abilities.form_title') }}</h2>
-    </x-slot:header>
-    
+  <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-abilities.index')">    
     <div class="form-grid">
-      <div>
-        <x-form.multilingual-input
-          name="name"
-          :label="__('hero_abilities.name')"
-          :values="isset($heroAbility) ? $heroAbility->getTranslations('name') : []"
-          required
-        />
+      <x-form.multilingual-input
+        name="name"
+        :label="__('hero_abilities.name')"
+        :values="isset($heroAbility) ? $heroAbility->getTranslations('name') : []"
+        required
+      />
         
-        <x-form.multilingual-wysiwyg
-          name="description"
-          :label="__('hero_abilities.description')"
-          :values="isset($heroAbility) ? $heroAbility->getTranslations('description') : []"
-        />
-      </div>
+      <x-form.multilingual-wysiwyg
+        name="description"
+        :label="__('hero_abilities.description')"
+        :values="isset($heroAbility) ? $heroAbility->getTranslations('description') : []"
+      />
       
-      <div>
-        <x-form.cost-input
-          name="cost"
-          :label="__('hero_abilities.cost')"
-          :value="old('cost', isset($heroAbility) ? $heroAbility->cost : '')"
-          :help="__('hero_abilities.cost_help')"
-          required
-        />
+      <x-form.cost-input
+        name="cost"
+        :label="__('hero_abilities.cost')"
+        :value="old('cost', isset($heroAbility) ? $heroAbility->cost : '')"
+        :help="__('hero_abilities.cost_help')"
+        required
+      />
         
-        <div class="attack-container" id="attack-container">
-          <x-form.select
-            name="attack_range_id"
-            :label="__('attack_ranges.singular')"
-            :options="['' => __('hero_abilities.no_attack_range')] + $attackRanges->pluck('name', 'id')->toArray()"
-            :selected="old('attack_range_id', isset($heroAbility) ? $heroAbility->attack_range_id : '')"
-          />
+      <x-form.select
+        name="attack_range_id"
+        :label="__('attack_ranges.singular')"
+        :options="['' => __('hero_abilities.no_attack_range')] + $attackRanges->pluck('name', 'id')->toArray()"
+        :selected="old('attack_range_id', isset($heroAbility) ? $heroAbility->attack_range_id : '')"
+      />
           
-          <x-form.select
-            name="attack_subtype_id"
-            :label="__('attack_subtypes.singular')"
-            :options="['' => __('hero_abilities.no_attack_subtype')] + $attackSubtypes->pluck('name', 'id')->toArray()"
-            :selected="old('attack_subtype_id', isset($heroAbility) ? $heroAbility->attack_subtype_id : '')"
-          />
-          
-          <div id="area-container" style="display: none;">
-            <x-form.checkbox
-              name="area"
-              :label="__('hero_abilities.is_area_attack')"
-              :checked="old('area', isset($heroAbility) ? $heroAbility->area : false)"
-            />
-          </div>
-        </div>
-      </div>
+      <x-form.select
+        name="attack_subtype_id"
+        :label="__('attack_subtypes.singular')"
+        :options="['' => __('hero_abilities.no_attack_subtype')] + $attackSubtypes->pluck('name', 'id')->toArray()"
+        :selected="old('attack_subtype_id', isset($heroAbility) ? $heroAbility->attack_subtype_id : '')"
+      />
+
+      <x-form.checkbox
+        name="area"
+        :label="__('hero_abilities.is_area_attack')"
+        :checked="old('area', isset($heroAbility) ? $heroAbility->area : false)"
+      />
     </div>
   </x-form.card>
 </form>

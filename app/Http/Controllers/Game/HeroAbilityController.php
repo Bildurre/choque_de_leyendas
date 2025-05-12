@@ -31,30 +31,18 @@ class HeroAbilityController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Get filters from request
-    $filters = $this->getFiltersFromRequest($request);
-    
     // Get counters for tabs
     $activeCount = HeroAbility::count();
     $trashedCount = HeroAbility::onlyTrashed()->count();
     
-    // Get counts for filter options
-    $attackSubtypeCounts = $this->heroAbilityService->getCountsByAttackSubtype();
-    
     // Get hero abilities with pagination
-    $heroAbilities = $this->heroAbilityService->getAllHeroAbilities(12, false, $trashed, $filters);
-    
-    // Load related data for filter dropdowns
-    $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
+    $heroAbilities = $this->heroAbilityService->getAllHeroAbilities(12, false, $trashed);
     
     return view('admin.hero-abilities.index', compact(
       'heroAbilities', 
       'trashed', 
       'activeCount', 
-      'trashedCount',
-      'filters',
-      'attackSubtypes',
-      'attackSubtypeCounts'
+      'trashedCount'
     ));
   }
 
@@ -171,32 +159,5 @@ class HeroAbilityController extends Controller
     } catch (\Exception $e) {
       return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Habilidad: ' . $e->getMessage());
     }
-  }
-
-  /**
-   * Extract filters from request
-   * 
-   * @param Request $request
-   * @return array
-   */
-  private function getFiltersFromRequest(Request $request): array
-  {
-    $filters = [];
-    
-    // Extract filter values
-    $filterKeys = [
-      'attack_subtype_id',
-      'cost',
-      'area',
-      'search'
-    ];
-    
-    foreach ($filterKeys as $key) {
-      if ($request->has($key) && $request->input($key) !== '') {
-        $filters[$key] = $request->input($key);
-      }
-    }
-    
-    return $filters;
   }
 }
