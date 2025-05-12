@@ -91,6 +91,26 @@ class CardController extends Controller
   }
 
   /**
+   * Display the specified card.
+   */
+  public function show(Card $card)
+  {
+    // Carga las relaciones necesarias en caso de que no estén cargadas
+    if (!$card->relationLoaded('faction')) {
+      $card->load([
+        'faction', 
+        'cardType', 
+        'equipmentType', 
+        'attackRange', 
+        'attackSubtype',
+        'heroAbility'
+      ]);
+    }
+    
+    return view('admin.cards.show', compact('card'));
+  }
+
+  /**
    * Show the form for editing the specified card.
    */
   public function edit(Card $card)

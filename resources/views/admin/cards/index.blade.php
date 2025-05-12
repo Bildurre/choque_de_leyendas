@@ -17,6 +17,7 @@
       @foreach($cards as $card)
         <x-entity.list-card 
           :title="$card->name"
+          :view-route="!$trashed ? route('admin.cards.show', $card) : null"
           :edit-route="!$trashed ? route('admin.cards.edit', $card) : null"
           :delete-route="$trashed 
             ? route('admin.cards.force-delete', $card->id) 
