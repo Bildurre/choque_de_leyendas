@@ -13,8 +13,10 @@
   
   <span class="tabs__text">
     {{ $slot }}
-    @if(!is_null($count))
-      <span class="tabs__count">({{ $count }})</span>
-    @endif
   </span>
+
+
+  @if(!is_null($count))
+  <span class="tabs__count">({{ $count }})</span>
+  @endif
 </a>

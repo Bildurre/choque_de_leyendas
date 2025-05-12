@@ -1,5 +1,4 @@
 @props([
-  'title',
   'createRoute' => null,
   'createLabel' => __('admin.create'),
   'emptyMessage' => __('admin.no_records'),
@@ -47,25 +46,37 @@
         
         <x-slot:content>
           @if($showHeader)
-            <div class="entity-list__header">
-              <h1 class="entity-list__title">{{ $title }}</h1>
-              
+            <div class="entity-list__header">              
               <div class="entity-list__actions">
                 @if($isReorderable)
                   <div id="reorder-buttons" style="display: none;" class="entity-list__reorder-buttons">
-                    <button type="button" id="save-reorder-button" class="btn btn--primary">
+                    <x-button
+                      type="button"
+                      id="save-reorder-button"
+                      variant="primary"
+                      icon="save"
+                    >
                       {{ __('admin.save_order') }}
-                    </button>
-                    <button type="button" id="cancel-reorder-button" class="btn btn--secondary">
+                    </x-button>
+                    <x-button
+                      type="button"
+                      id="cancel-reorder-button"
+                      variant="secondary"
+                      icon="x"
+                    >
                       {{ __('admin.cancel') }}
-                    </button>
+                    </x-button>
                   </div>
                 @endif
                 
                 @if($createRoute && !$trashed)
-                  <a href="{{ $createRoute }}" class="btn btn--primary">
+                  <x-button-link
+                    :href="$createRoute"
+                    variant="primary"
+                    icon="plus"
+                  >
                     {{ $createLabel }}
-                  </a>
+                  </x-button-link>
                 @endif
                 
                 {{ $actions ?? '' }}
@@ -110,24 +121,36 @@
   @else
     @if($showHeader)
       <div class="entity-list__header">
-        <h1 class="entity-list__title">{{ $title }}</h1>
-        
         <div class="entity-list__actions">
           @if($isReorderable)
             <div id="reorder-buttons" style="display: none;" class="entity-list__reorder-buttons">
-              <button type="button" id="save-reorder-button" class="btn btn--primary">
+              <x-button
+                type="button"
+                id="save-reorder-button"
+                variant="primary"
+                icon="save"
+              >
                 {{ __('admin.save_order') }}
-              </button>
-              <button type="button" id="cancel-reorder-button" class="btn btn--secondary">
+              </x-button>
+              <x-button
+                type="button"
+                id="cancel-reorder-button"
+                variant="secondary"
+                icon="x"
+              >
                 {{ __('admin.cancel') }}
-              </button>
+              </x-button>
             </div>
           @endif
           
           @if($createRoute)
-            <a href="{{ $createRoute }}" class="btn btn--primary">
+            <x-button-link
+              :href="$createRoute"
+              variant="primary"
+              icon="plus"
+            >
               {{ $createLabel }}
-            </a>
+            </x-buttton-link>
           @endif
           
           {{ $actions ?? '' }}

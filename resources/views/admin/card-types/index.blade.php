@@ -1,7 +1,10 @@
 <x-admin-layout>
+  <div class="page-header">
+    <h1 class="page-title">{{ __('card_types.plural') }}</h1>
+  </div>
+  
   <div class="page-content">
     <x-entity.list 
-      title="{{ $trashed ? __('card_types.trashed') : __('card_types.plural') }}"
       :create-route="!$trashed ? route('admin.card-types.create') : null"
       :create-label="__('card_types.create')"
       :items="$cardTypes"
