@@ -23,12 +23,15 @@ class HeroRaceService
   {
     $query = HeroRace::withCount('heroes');
     
-    // Aplicar filtros de elementos eliminados
+    // Apply trash filters
     if ($onlyTrashed) {
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
     }
+    
+    // Default ordering
+    $query->orderBy('id');
     
     if ($perPage) {
       return $query->paginate($perPage);
@@ -121,7 +124,7 @@ class HeroRaceService
   {
     $heroRace = HeroRace::onlyTrashed()->findOrFail($id);
     
-    // Check for related heroes (incluso para los eliminados)
+    // Check for related heroes (including trashed)
     if ($heroRace->heroes()->withTrashed()->count() > 0) {
       throw new \Exception("No se puede eliminar permanentemente la raza porque tiene héroes asociados.");
     }

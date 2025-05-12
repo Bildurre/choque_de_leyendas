@@ -13,10 +13,6 @@
   @endif
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-races.index')">
-    <x-slot:header>
-      <h2>{{ __('hero_races.form_title') }}</h2>
-    </x-slot:header>
-    
     <x-form.multilingual-input
       name="name"
       :label="__('hero_races.name')"

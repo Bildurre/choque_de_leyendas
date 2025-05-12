@@ -29,10 +29,11 @@ class HeroRaceController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Obtener contadores para las pestañas
+    // Get counters for tabs directly using Eloquent
     $activeCount = HeroRace::count();
     $trashedCount = HeroRace::onlyTrashed()->count();
     
+    // Get hero races with hero counts
     $heroRaces = $this->heroRaceService->getAllHeroRaces(12, false, $trashed);
     
     return view('admin.hero-races.index', compact('heroRaces', 'trashed', 'activeCount', 'trashedCount'));
