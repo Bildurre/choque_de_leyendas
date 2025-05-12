@@ -8,14 +8,17 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Game\FactionController;
 use App\Http\Controllers\Game\CardTypeController;
+use App\Http\Controllers\Game\GameModeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Game\AttackRangeController;
+use App\Http\Controllers\Game\FactionDeckController;
 use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
+use App\Http\Controllers\Game\DeckAttributesConfigurationController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
@@ -81,12 +84,28 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('cards', CardController::class);
   Route::post('cards/{id}/restore', [CardController::class, 'restore'])->name('cards.restore');
   Route::delete('cards/{id}/force-delete', [CardController::class, 'forceDelete'])->name('cards.force-delete');
+
+  // Game Modes
+  Route::resource('game-modes', GameModeController::class);
+  Route::post('game-modes/{id}/restore', [GameModeController::class, 'restore'])->name('game-modes.restore');
+  Route::delete('game-modes/{id}/force-delete', [GameModeController::class, 'forceDelete'])->name('game-modes.force-delete');
+
+// Faction Decks
+  Route::resource('faction-decks', FactionDeckController::class);
+  Route::post('faction-decks/{id}/restore', [FactionDeckController::class, 'restore'])->name('faction-decks.restore');
+  Route::delete('faction-decks/{id}/force-delete', [FactionDeckController::class, 'forceDelete'])->name('faction-decks.force-delete');
+  Route::get('faction-decks/available-items', [FactionDeckController::class, 'getAvailableItems'])->name('faction-decks.available-items');
+
+// Deck Attributes Configuration
+  Route::get('deck-attributes-configurations/edit', [DeckAttributesConfigurationController::class, 'edit'])->name('deck-attributes-configurations.edit');
+  Route::put('deck-attributes-configurations', [DeckAttributesConfigurationController::class, 'update'])->name('deck-attributes-configurations.update');
       
   // Pages
   Route::resource('pages', PageController::class);
   Route::post('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
   Route::delete('pages/{id}/force-delete', [PageController::class, 'forceDelete'])->name('pages.force-delete');
 
+  // Blocks
   Route::prefix('pages/{page}/blocks')->name('pages.blocks.')->group(function () {
     Route::get('/create/{type}', [BlockController::class, 'create'])->name('create');
     Route::post('/', [BlockController::class, 'store'])->name('store');
