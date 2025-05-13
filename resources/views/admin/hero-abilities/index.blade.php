@@ -47,7 +47,9 @@
             
             @if($heroAbility->cost)
               <div class="badge-with-icons">
-                <span class="badge-with-icons__cost">{!! $heroAbility->icon_html !!}</span>
+                <span class="badge-with-icons__cost">
+                  <x-cost-display :cost="$heroAbility->cost" />
+                </span>
               </div>
             @endif
             

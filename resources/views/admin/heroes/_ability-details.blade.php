@@ -26,7 +26,7 @@
   
   @if($entity->cost)
     <div class="ability-details__cost">
-      {!! $entity->icon_html !!}
+      <x-cost-display :cost="$entity->cost" />
     </div>
   @endif
 </div>

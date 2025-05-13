@@ -30,7 +30,7 @@
             
             @if($card->cost)
               <div class="card-item__cost">
-                {!! $card->icon_html !!}
+                <x-cost-display :cost="$card->cost" />
               </div>
             @endif
           </div>

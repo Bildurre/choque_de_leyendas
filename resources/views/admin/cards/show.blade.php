@@ -45,7 +45,9 @@
             
             @if($card->cost)
               <div class="badge-with-icons">
-                <span class="badge-with-icons__cost">{!! $card->icon_html !!}</span>
+                <span class="badge-with-icons__cost">
+                  <x-cost-display :cost="$card->cost" />
+                </span>
               </div>
             @endif
           </div>
@@ -142,7 +144,9 @@
                     <span class="card-view__info-label">{{ __('cards.cost') }}:</span>
                     <span class="card-view__info-value">
                       @if($card->cost)
-                        <div class="card-view__dice-cost">{!! $card->icon_html !!}</div>
+                        <div class="card-view__dice-cost">
+                          <x-cost-display :cost="$card->cost" />
+                        </div>
                       @else
                         {{ __('admin.none') }}
                       @endif

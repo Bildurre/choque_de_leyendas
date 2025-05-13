@@ -8,7 +8,7 @@
   <div class="card-details__meta">
     @if($entity->cost)
       <div class="card-details__cost">
-        {!! $entity->icon_html !!}
+        <x-cost-display :cost="$entity->cost" />
       </div>
     @endif
     

@@ -83,11 +83,7 @@
               
               @if(isset($card->cost) && $card->cost)
                 <div class="cards-selector__cost">
-                  @if(method_exists($card, 'getIconHtmlAttribute'))
-                    {!! $card->icon_html !!}
-                  @else
-                    {{ $card->cost }}
-                  @endif
+                  <x-cost-display :cost="$card->cost" size="sm" />
                 </div>
               @endif
             </div>

@@ -59,7 +59,9 @@
             
             @if($card->cost)
               <div class="badge-with-icons">
-                <span class="badge-with-icons__cost">{!! $card->icon_html !!}</span>
+                <span class="badge-with-icons__cost">
+                  <x-cost-display :cost="$card->cost" />
+                </span>
               </div>
             @endif
             

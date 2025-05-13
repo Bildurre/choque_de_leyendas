@@ -153,7 +153,9 @@
                   
                   <div class="hero-ability-card__cost">
                     @if($ability->cost)
-                      <div class="hero-ability-card__cost-icons">{!! $ability->icon_html !!}</div>
+                      <div class="hero-ability-card__cost-icons">
+                        <x-cost-display :cost="$ability->cost" />
+                      </div>
                     @endif
                   </div>
                 </div>

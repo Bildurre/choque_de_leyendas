@@ -91,7 +91,9 @@
                       <li class="hero-abilities-list__item">
                         <span class="hero-abilities-list__name">{{ $ability->name }}</span>
                         @if($ability->cost)
-                          <span class="hero-abilities-list__cost">{!! $ability->icon_html !!}</span>
+                          <span class="hero-abilities-list__cost">
+                            <x-cost-display :cost="$ability->cost" size="sm" />
+                          </span>
                         @endif
                       </li>
                     @endforeach
