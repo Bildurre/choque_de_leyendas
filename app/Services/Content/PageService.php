@@ -61,9 +61,6 @@ class PageService
         // Apply translations
         $this->applyTranslations($page, $data, $this->translatableFields);
         
-        // Generate slugs for all locales if not provided
-        $this->generateSlugsForAllLocales($page, $data);
-        
         // Update non-translatable fields
         $page->is_published = $data['is_published'] ?? $page->is_published;
         $page->parent_id = $data['parent_id'] ?? $page->parent_id;
@@ -72,6 +69,7 @@ class PageService
         
         // Handle background image updates using HasImageAttribute trait
         if (isset($data['remove_background_image']) && $data['remove_background_image']) {
+          dd('remove');
             $page->deleteImage();
         } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
             $page->storeImage($data['background_image']);

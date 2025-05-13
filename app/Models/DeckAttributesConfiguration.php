@@ -15,6 +15,7 @@ class DeckAttributesConfiguration extends Model
    * @var array<int, string>
    */
   protected $fillable = [
+    'game_mode_id',
     'min_cards',
     'max_cards',
     'max_copies_per_card',

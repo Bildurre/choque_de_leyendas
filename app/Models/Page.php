@@ -132,6 +132,16 @@ class Page extends Model implements LocalizedUrlRoutable
     }
 
     /**
+     * Get the field name for storing images for this model
+     * 
+     * @return string
+     */
+    public function getImageField(): string
+    {
+      return 'background_image';
+    }
+
+    /**
      * Check if the page is published
      */
     public function isPublished(): bool
