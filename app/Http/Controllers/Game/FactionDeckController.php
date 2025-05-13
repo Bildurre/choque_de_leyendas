@@ -1,4 +1,5 @@
 <?php
+// app/Http/Controllers/Game/FactionDeckController.php
 
 namespace App\Http\Controllers\Game;
 
@@ -36,27 +37,30 @@ class FactionDeckController extends Controller
   public function index(Request $request)
   {
     $trashed = $request->has('trashed');
-    $factionId = $request->get('faction_id');
-    $gameModeId = $request->get('game_mode_id');
     
-    // Get counters for tabs
-    $activeCount = FactionDeck::count();
-    $trashedCount = FactionDeck::onlyTrashed()->count();
+    // Extraer filtros de la request
+    $filters = [
+      'faction_id' => $request->get('faction_id'),
+      'game_mode_id' => $request->get('game_mode_id'),
+      'search' => $request->get('search')
+    ];
     
-    // Get faction decks with pagination
+    // Obtener contadores para tabs
+    $counts = $this->factionDeckService->getFactionDecksCount();
+    $activeCount = $counts['active'];
+    $trashedCount = $counts['trashed'];
+    
+    // Obtener los faction decks con paginación y filtrado
     $factionDecks = $this->factionDeckService->getAllFactionDecks(
+      $filters, 
       12, 
       false, 
-      $trashed,
-      $factionId,
-      $gameModeId
+      $trashed
     );
     
-    // Get all game modes for the dropdown
-    $gameModes = GameMode::orderBy('name')->get();
-    
-    // Get all factions for filters
+    // Obtener datos para filtros
     $factions = Faction::orderBy('name')->get();
+    $gameModes = GameMode::orderBy('name')->get();
     
     return view('admin.faction-decks.index', compact(
       'factionDecks', 
@@ -65,8 +69,7 @@ class FactionDeckController extends Controller
       'trashedCount',
       'factions',
       'gameModes',
-      'factionId',
-      'gameModeId'
+      'filters'
     ));
   }
 
@@ -75,15 +78,43 @@ class FactionDeckController extends Controller
    */
   public function create(Request $request)
   {
-    // Obtenemos todas las facciones disponibles
-    $factions = Faction::orderBy('name')->get();
+    // Verificar que se proporciona un game_mode_id
+    $gameModeId = $request->input('game_mode_id');
+    if (!$gameModeId) {
+      return redirect()->route('admin.faction-decks.index')
+        ->with('warning', __('faction_decks.select_game_mode'));
+    }
     
-    // Obtenemos todos los modos de juego disponibles
+    // Obtener facción si se proporciona
+    $factionId = $request->input('faction_id');
+    $selectedFaction = null;
+    
+    if ($factionId) {
+      $selectedFaction = Faction::findOrFail($factionId);
+    }
+    
+    // Obtener la configuración para el modo de juego seleccionado
+    $gameMode = GameMode::findOrFail($gameModeId);
+    $deckConfig = $this->deckAttributesConfigurationService->getConfiguration($gameModeId);
+    
+    // Obtener datos para el formulario
+    $factions = Faction::orderBy('name')->get();
     $gameModes = GameMode::orderBy('name')->get();
+    
+    // Obtener cartas y héroes usando el servicio
+    $allCards = $this->factionDeckService->getAllCards();
+    $allHeroes = $this->factionDeckService->getAllHeroes();
         
     return view('admin.faction-decks.create', compact(
       'factions',
-      'gameModes'
+      'gameModes',
+      'gameMode',
+      'deckConfig',
+      'gameModeId',
+      'allCards',
+      'allHeroes',
+      'selectedFaction',
+      'factionId'
     ));
   }
 
@@ -95,15 +126,14 @@ class FactionDeckController extends Controller
     $validated = $request->validated();
 
     try {
-      // Verificamos que la facción de todas las cartas coincida con la facción del mazo
-      $this->validateCardsFaction($validated);
-      
+      // Crear el mazo usando el servicio
       $factionDeck = $this->factionDeckService->create($validated);
+      
       return redirect()->route('admin.faction-decks.show', $factionDeck)
         ->with('success', __('faction_decks.created_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', 'Ha ocurrido un error al crear el Mazo de Facción: ' . $e->getMessage())
+        ->with('error', __('faction_decks.creation_error', ['error' => $e->getMessage()]))
         ->withInput();
     }
   }
@@ -113,6 +143,7 @@ class FactionDeckController extends Controller
    */
   public function show(FactionDeck $factionDeck)
   {
+    // Cargar el mazo con todas sus relaciones
     $factionDeck = $this->factionDeckService->getFactionDeckWithRelations($factionDeck);
     
     return view('admin.faction-decks.show', compact('factionDeck'));
@@ -123,43 +154,36 @@ class FactionDeckController extends Controller
    */
   public function edit(FactionDeck $factionDeck)
   {
-    // Obtenemos la configuración para el modo de juego de este mazo
+    // Obtener la configuración para el modo de juego
     $deckConfig = $this->deckAttributesConfigurationService->getConfiguration($factionDeck->game_mode_id);
     
-    // Obtenemos todas las facciones disponibles
+    // Obtener datos para el formulario
     $factions = Faction::orderBy('name')->get();
-    
-    // Obtenemos todos los modos de juego
     $gameModes = GameMode::orderBy('name')->get();
     
-    // Obtenemos las cartas y héroes para la vista inicial
-    $availableCards = $this->factionDeckService->getAvailableCards($factionDeck->faction_id);
-    $availableHeroes = $this->factionDeckService->getAvailableHeroes($factionDeck->faction_id);
+    // Obtener cartas y héroes usando el servicio
+    $allCards = $this->factionDeckService->getAllCards();
+    $allHeroes = $this->factionDeckService->getAllHeroes();
     
-    // Format current cards and heroes for the form
-    $selectedCards = $factionDeck->cards->map(function ($card) {
-      return [
-        'id' => $card->id,
-        'copies' => $card->pivot->copies
-      ];
-    })->toArray();
+    // Obtener entidades seleccionadas
+    $selectedEntities = $this->factionDeckService->getSelectedEntities($factionDeck);
+    $selectedCards = $selectedEntities['cards'];
+    $selectedHeroes = $selectedEntities['heroes'];
     
-    $selectedHeroes = $factionDeck->heroes->map(function ($hero) {
-      return [
-        'id' => $hero->id,
-        'copies' => $hero->pivot->copies
-      ];
-    })->toArray();
+    $gameMode = $factionDeck->gameMode;
+    $gameModeId = $factionDeck->game_mode_id;
     
     return view('admin.faction-decks.edit', compact(
       'factionDeck',
       'factions',
       'gameModes',
       'deckConfig',
-      'availableCards',
-      'availableHeroes',
+      'allCards',
+      'allHeroes',
       'selectedCards',
-      'selectedHeroes'
+      'selectedHeroes',
+      'gameMode',
+      'gameModeId'
     ));
   }
 
@@ -171,58 +195,15 @@ class FactionDeckController extends Controller
     $validated = $request->validated();
 
     try {
-      // Verificamos que la facción de todas las cartas coincida con la facción del mazo
-      $this->validateCardsFaction($validated);
-      
+      // Actualizar el mazo usando el servicio
       $this->factionDeckService->update($factionDeck, $validated);
+      
       return redirect()->route('admin.faction-decks.show', $factionDeck)
         ->with('success', __('faction_decks.updated_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', 'Ha ocurrido un error al actualizar el Mazo de Facción: ' . $e->getMessage())
+        ->with('error', __('faction_decks.update_error', ['error' => $e->getMessage()]))
         ->withInput();
-    }
-  }
-
-  /**
-   * Validate that all cards belong to the selected faction.
-   */
-  private function validateCardsFaction(array $data)
-  {
-    $factionId = $data['faction_id'];
-    
-    // Verificar cartas
-    if (isset($data['cards']) && is_array($data['cards'])) {
-      foreach ($data['cards'] as $cardData) {
-        if (!isset($cardData['id'])) continue;
-        
-        $card = \App\Models\Card::find($cardData['id']);
-        if ($card && $card->faction_id != $factionId) {
-          throw new \Exception(
-            __('faction_decks.card_faction_mismatch', [
-              'card' => $card->name,
-              'faction' => \App\Models\Faction::find($factionId)->name
-            ])
-          );
-        }
-      }
-    }
-    
-    // Verificar héroes
-    if (isset($data['heroes']) && is_array($data['heroes'])) {
-      foreach ($data['heroes'] as $heroData) {
-        if (!isset($heroData['id'])) continue;
-        
-        $hero = \App\Models\Hero::find($heroData['id']);
-        if ($hero && $hero->faction_id != $factionId) {
-          throw new \Exception(
-            __('faction_decks.hero_faction_mismatch', [
-              'hero' => $hero->name,
-              'faction' => \App\Models\Faction::find($factionId)->name
-            ])
-          );
-        }
-      }
     }
   }
 
@@ -238,7 +219,8 @@ class FactionDeckController extends Controller
       return redirect()->route('admin.faction-decks.index')
         ->with('success', __('faction_decks.deleted_successfully', ['name' => $factionDeckName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar el Mazo de Facción: ' . $e->getMessage());
+      return back()
+        ->with('error', __('faction_decks.delete_error', ['error' => $e->getMessage()]));
     }
   }
 
@@ -254,7 +236,8 @@ class FactionDeckController extends Controller
       return redirect()->route('admin.faction-decks.index', ['trashed' => 1])
         ->with('success', __('faction_decks.restored_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar el Mazo de Facción: ' . $e->getMessage());
+      return back()
+        ->with('error', __('faction_decks.restore_error', ['error' => $e->getMessage()]));
     }
   }
 
@@ -272,7 +255,8 @@ class FactionDeckController extends Controller
       return redirect()->route('admin.faction-decks.index', ['trashed' => 1])
         ->with('success', __('faction_decks.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente el Mazo de Facción: ' . $e->getMessage());
+      return back()
+        ->with('error', __('faction_decks.force_delete_error', ['error' => $e->getMessage()]));
     }
   }
 }

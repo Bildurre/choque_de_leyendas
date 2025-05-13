@@ -32,6 +32,7 @@ class DeckAttributesConfigurationRequest extends FormRequest
       'max_cards' => ['required', 'integer', 'min:1', 'max:200', 'gte:min_cards'],
       'max_copies_per_card' => ['required', 'integer', 'min:1', 'max:10'],
       'max_copies_per_hero' => ['required', 'integer', 'min:1', 'max:5'],
+      'required_heroes' => ['required', 'integer', 'min:0', 'max:20'],
     ];
   }
 
@@ -68,6 +69,12 @@ class DeckAttributesConfigurationRequest extends FormRequest
       'max_copies_per_hero.integer' => __('deck_attributes.validation.max_copies_per_hero_integer'),
       'max_copies_per_hero.min' => __('deck_attributes.validation.max_copies_per_hero_range', ['min' => 1, 'max' => 5]),
       'max_copies_per_hero.max' => __('deck_attributes.validation.max_copies_per_hero_range', ['min' => 1, 'max' => 5]),
+
+      'required_heroes.required' => __('deck_attributes.validation.required_heroes'),
+      'required_heroes.integer' => __('deck_attributes.validation.required_heroes'),
+      'required_heroes.min' => __('deck_attributes.validation.required_heroes_range', ['min' => 0, 'max' => 20]),
+      'required_heroes.max' => __('deck_attributes.validation.required_heroes_range', ['min' => 0, 'max' => 20]),
+      
     ];
   }
 }

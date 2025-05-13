@@ -137,10 +137,14 @@
     <fieldset class="form-fieldset">
       <legend>{{ __('hero_abilities.plural') }}</legend>
       
-      <x-form.hero-abilities-selector
+      <x-form.entity-selector
+        name="hero_abilities"
         :label="__('heroes.select_abilities')"
-        :abilities="$heroAbilities"
+        :entities="$heroAbilities"
         :selected="$selectedAbilities"
+        entityType="ability"
+        secondaryField="attackRange.name"
+        :detailsView="'admin.heroes._ability-details'"
       />
     </fieldset>
   </x-form.card>

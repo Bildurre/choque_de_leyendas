@@ -1,9 +1,12 @@
 <?php
+// app/Services/Game/FactionDeckService.php
 
 namespace App\Services\Game;
 
 use App\Models\FactionDeck;
 use App\Models\DeckAttributesConfiguration;
+use App\Models\Card;
+use App\Models\Hero;
 use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -26,21 +29,19 @@ class FactionDeckService
   }
 
   /**
-   * Get all faction decks with optional pagination
+   * Get all faction decks with optional filtering and pagination
    *
+   * @param array $filters Array of filter parameters
    * @param int|null $perPage Number of items per page, or null for all items
    * @param bool $withTrashed Include trashed items
    * @param bool $onlyTrashed Only trashed items
-   * @param int|null $factionId Filter by faction ID
-   * @param int|null $gameModeId Filter by game mode ID
    * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
    */
   public function getAllFactionDecks(
+    array $filters = [],
     int $perPage = null, 
     bool $withTrashed = false, 
-    bool $onlyTrashed = false,
-    ?int $factionId = null,
-    ?int $gameModeId = null
+    bool $onlyTrashed = false
   ): mixed
   {
     $query = FactionDeck::with(['faction', 'gameMode'])
@@ -54,13 +55,22 @@ class FactionDeckService
     }
     
     // Apply faction filter
-    if ($factionId) {
-      $query->where('faction_id', $factionId);
+    if (isset($filters['faction_id']) && $filters['faction_id']) {
+      $query->where('faction_id', $filters['faction_id']);
     }
     
     // Apply game mode filter
-    if ($gameModeId) {
-      $query->where('game_mode_id', $gameModeId);
+    if (isset($filters['game_mode_id']) && $filters['game_mode_id']) {
+      $query->where('game_mode_id', $filters['game_mode_id']);
+    }
+    
+    // Apply search filter if provided
+    if (isset($filters['search']) && $filters['search']) {
+      $search = $filters['search'];
+      $query->where(function($q) use ($search) {
+        $q->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%']);
+        // Add additional search criteria if needed
+      });
     }
     
     // Default ordering
@@ -74,7 +84,20 @@ class FactionDeckService
   }
 
   /**
-   * Get a faction deck with its related cards and heroes
+   * Get counts for active and trashed faction decks
+   * 
+   * @return array
+   */
+  public function getFactionDecksCount(): array
+  {
+    return [
+      'active' => FactionDeck::count(),
+      'trashed' => FactionDeck::onlyTrashed()->count()
+    ];
+  }
+
+  /**
+   * Get a faction deck with all its related entities
    * 
    * @param FactionDeck $factionDeck
    * @return FactionDeck
@@ -85,10 +108,73 @@ class FactionDeckService
       'faction',
       'gameMode',
       'cards.cardType',
+      'cards.attackRange',
+      'cards.attackSubtype',
+      'cards.equipmentType',
       'heroes.heroClass',
       'heroes.heroRace',
       'heroes.faction'
     ]);
+  }
+  
+  /**
+   * Get all available cards with relationships loaded
+   * 
+   * @return \Illuminate\Database\Eloquent\Collection
+   */
+  public function getAllCards()
+  {
+    return Card::with([
+      'cardType', 
+      'faction',
+      'attackRange',
+      'attackSubtype',
+      'equipmentType'
+    ])->get();
+  }
+  
+  /**
+   * Get all available heroes with relationships loaded
+   * 
+   * @return \Illuminate\Database\Eloquent\Collection
+   */
+  public function getAllHeroes()
+  {
+    return Hero::with([
+      'heroClass', 
+      'faction',
+      'heroRace'
+    ])->get();
+  }
+  
+  /**
+   * Get the currently selected entities for a faction deck
+   * 
+   * @param FactionDeck $factionDeck
+   * @return array
+   */
+  public function getSelectedEntities(FactionDeck $factionDeck): array
+  {
+    // Format current cards for the form
+    $selectedCards = $factionDeck->cards->map(function ($card) {
+      return [
+        'id' => $card->id,
+        'copies' => $card->pivot->copies
+      ];
+    })->toArray();
+    
+    // Format current heroes for the form
+    $selectedHeroes = $factionDeck->heroes->map(function ($hero) {
+      return [
+        'id' => $hero->id,
+        'copies' => $hero->pivot->copies
+      ];
+    })->toArray();
+    
+    return [
+      'cards' => $selectedCards,
+      'heroes' => $selectedHeroes
+    ];
   }
 
   /**
@@ -239,11 +325,12 @@ class FactionDeckService
    */
   protected function validateDeck(FactionDeck $factionDeck): void
   {
-    // Get the current configuration
-    $config = $this->deckAttributesConfigurationService->getConfiguration();
+    // Get the appropriate configuration for this game mode
+    $config = $this->deckAttributesConfigurationService->getConfiguration($factionDeck->game_mode_id);
     
-    // Count total cards
+    // Calculate metrics needed for validation
     $totalCards = $factionDeck->totalCards;
+    $totalHeroes = $factionDeck->totalHeroes;
     
     // Check if any card exceeds the max copies
     $hasExceededCardCopies = $factionDeck->cards()
@@ -255,14 +342,15 @@ class FactionDeckService
       ->wherePivot('copies', '>', $config->max_copies_per_hero)
       ->exists();
     
-    // Validate the deck
+    // Delegate the actual validation to the configuration model
     $validationResult = $config->validateDeck(
       $totalCards,
       $hasExceededCardCopies,
-      $hasExceededHeroCopies
+      $hasExceededHeroCopies,
+      $totalHeroes
     );
     
-    // If not valid, throw an exception with the errors
+    // Handle validation result
     if (!$validationResult['isValid']) {
       throw new \Exception(implode("\n", $validationResult['errors']));
     }
@@ -314,32 +402,5 @@ class FactionDeckService
     $factionDeck->heroes()->detach();
     
     return $factionDeck->forceDelete();
-  }
-
-  /**
-   * Get cards available for a faction deck
-   * 
-   * @param int $factionId
-   * @return \Illuminate\Database\Eloquent\Collection
-   */
-  public function getAvailableCards(int $factionId)
-  {
-    return \App\Models\Card::where('faction_id', $factionId)
-      ->orderBy('card_type_id')
-      ->orderBy('id')
-      ->get();
-  }
-
-  /**
-   * Get heroes available for a faction deck
-   * 
-   * @param int $factionId
-   * @return \Illuminate\Database\Eloquent\Collection
-   */
-  public function getAvailableHeroes(int $factionId)
-  {
-    return \App\Models\Hero::where('faction_id', $factionId)
-      ->orderBy('id')
-      ->get();
   }
 }

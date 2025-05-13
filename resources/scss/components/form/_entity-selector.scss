@@ -1,7 +1,6 @@
-// resources/scss/components/form/_hero-abilities-selector.scss
 @use '../../abstracts/all' as *;
 
-.hero-abilities-selector {
+.entity-selector {
   width: 100%;
   
   &__controls {
@@ -132,29 +131,28 @@
     padding: $spacing-md;
     text-align: center;
   }
-}
-
-// Estilado para los elementos individuales de habilidad
-.hero-ability-item {
-  position: relative;
-  margin-bottom: $spacing-sm;
-  border: 1px solid var(--color-card-border);
-  border-radius: $border-radius-sm;
-  background-color: var(--color-background);
-  transition: all $transition-fast;
-  cursor: pointer;
   
-  &__checkbox {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  &__content {
-    padding: $spacing-sm;
-
-    .in-selected-list & {
-      padding-right: 2.5rem;
+  &__item {
+    position: relative;
+    margin-bottom: $spacing-sm;
+    border: 1px solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    background-color: var(--color-background);
+    transition: all $transition-fast;
+    cursor: pointer;
+    
+    .entity-selector__checkbox {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .entity-selector__content {
+      padding: $spacing-sm;
+      
+      .in-selected-list & {
+        padding-right: 2.5rem;
+      }
     }
   }
   
@@ -170,72 +168,96 @@
     color: var(--color-text-primary);
   }
   
-  &__cost {
+  &__type {
+    font-size: 0.875rem;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    background-color: var(--color-bg-secondary);
+  }
+  
+  &__details {
+    margin-top: $spacing-xs;
+    font-size: 0.875rem;
+  }
+  
+  &__copies {
+    margin-top: $spacing-md;
     display: flex;
-    gap: $spacing-xs;
+    align-items: center;
+    gap: $spacing-md;
     
-    &-icons {
+    &-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+    
+    &-controls {
       display: flex;
-      gap: 2px;
+      align-items: center;
+      gap: $spacing-xs;
+    }
+    
+    &-input {
+      width: 3rem;
+      text-align: center;
+      border: 1px solid var(--color-border);
+      border-radius: $border-radius-sm;
+      padding: $spacing-xs;
+      background-color: var(--color-input-bg);
+      color: var(--color-text-primary);
+    }
+    
+    &-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: $border-radius-sm;
+      background-color: var(--color-bg-secondary);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: all $transition-fast;
       
-      svg {
-        width: 16px;
-        height: 16px;
+      &:hover:not(:disabled) {
+        background-color: var(--random-accent-color);
+        color: white;
+        border-color: var(--random-accent-color);
+      }
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
       }
     }
   }
   
-  &__details {
-    display: flex;
-    align-items: center;
-    gap: $spacing-md;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-  }
-  
-  &__range, 
-  &__subtype {
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  &__subtype {
-    &.physical {
-      color: $color-red;
-    }
-    
-    &.magical {
-      color: $color-blue;
-    }
-  }
-  
-  &__area {
-    margin-left: $spacing-xs;
-    font-size: 0.8125rem;
-  }
-  
   // Estados
-  &:hover {
-    border-color: var(--random-accent-color);
-    box-shadow: 0 0 0 1px var(--random-accent-color-bg);
-  }
-  
-  &.is-selected {
-    background-color: var(--random-accent-color-bg);
-    border-color: var(--random-accent-color);
-    
+  &__item {
     &:hover {
-      background-color: var(--random-accent-color-bg-semi);
+      border-color: var(--random-accent-color);
+      box-shadow: 0 0 0 1px var(--random-accent-color-bg);
     }
     
-    &:not(.in-selected-list) {
-      display: none; // Ocultar de la lista original si está seleccionado
+    &.is-selected {
+      background-color: var(--random-accent-color-bg);
+      border-color: var(--random-accent-color);
+      
+      &:hover {
+        background-color: var(--random-accent-color-bg-semi);
+      }
+      
+      &:not(.in-selected-list) {
+        display: none; // Ocultar de la lista original si está seleccionado
+      }
     }
-  }
-  
-  &.in-selected-list {
-    .hero-ability-item__remove {
-      display: flex;
+    
+    &.in-selected-list {
+      .entity-selector__remove {
+        display: flex;
+      }
     }
   }
   
@@ -246,7 +268,7 @@
     display: none;
     background: none;
     border: none;
-    color: var(--color-red);
+    color: var(--color-danger);
     padding: 0.25rem;
     cursor: pointer;
     border-radius: 50%;
@@ -255,7 +277,29 @@
     justify-content: center;
     
     &:hover {
-      background-color: var(--color-red-transparent-light);
+      background-color: var(--color-danger-bg);
+    }
+  }
+  
+  // Modificaciones para diferentes tipos de entidades
+  &[data-entity-type="hero"] {
+    .entity-selector__type {
+      color: var(--color-primary);
+      background-color: var(--color-primary-bg);
+    }
+  }
+  
+  &[data-entity-type="card"] {
+    .entity-selector__type {
+      color: var(--color-warning);
+      background-color: var(--color-warning-bg);
+    }
+  }
+  
+  &[data-entity-type="ability"] {
+    .entity-selector__type {
+      color: var(--color-info);
+      background-color: var(--color-info-bg);
     }
   }
 }

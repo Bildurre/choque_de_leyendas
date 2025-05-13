@@ -17,7 +17,7 @@ import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
 import initColorPicker from './components/color-picker';
 import initFactionDeckForm from './components/faction-deck-form';
-import initHeroAbilitiesSelector from './components/hero-abilities-selector';
+import initEntitySelector from './components/entity-selector';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCostInput();
   initColorPicker();
   initFactionDeckForm();
-  initHeroAbilitiesSelector();
+  initEntitySelector();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

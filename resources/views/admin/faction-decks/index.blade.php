@@ -1,4 +1,3 @@
-<!-- resources/views/admin/faction-decks/index.blade.php -->
 <x-admin-layout>
   <div class="page-header">
     <h1 class="page-title">{{ __('faction_decks.plural') }}</h1>
@@ -6,7 +5,7 @@
   
   <div class="page-content">
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.faction-decks.create') : null"
+      :create-route="null"
       :create-label="__('faction_decks.create')"
       :items="$factionDecks"
       :withTabs="true"
@@ -15,6 +14,22 @@
       :trashedCount="$trashedCount ?? null"
       baseRoute="admin.faction-decks.index"
     >
+      <x-slot:actions>
+        @if(!$trashed)
+          <x-dropdown 
+            :label="__('faction_decks.create')" 
+            icon="plus"
+            variant="primary"
+          >
+            @foreach($gameModes as $gameMode)
+              <x-dropdown-item :href="route('admin.faction-decks.create', ['game_mode_id' => $gameMode->id])">
+                {{ $gameMode->name }}
+              </x-dropdown-item>
+            @endforeach
+          </x-dropdown>
+        @endif
+      </x-slot:actions>
+
       @foreach($factionDecks as $factionDeck)
         <x-entity.list-card 
           :title="$factionDeck->name"
