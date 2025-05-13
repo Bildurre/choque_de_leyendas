@@ -44,7 +44,7 @@
           
           @if($attackRange->icon)
             <div class="attack-range-icon">
-              <img src="{{ $attackRange->getIconUrl() }}" alt="{{ $attackRange->name }}" class="attack-range-icon__image">
+              <img src="{{ $attackRange->getImageUrl() }}" alt="{{ $attackRange->name }}" class="attack-range-icon__image">
             </div>
           @endif
         </x-entity.list-card>

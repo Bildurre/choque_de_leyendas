@@ -58,7 +58,7 @@
           <div class="faction-deck-details">
             <div class="faction-deck-details__icon">
               @if($factionDeck->icon)
-                <img src="{{ $factionDeck->getIconUrl() }}" alt="{{ $factionDeck->name }}" class="faction-deck-details__image">
+                <img src="{{ $factionDeck->getImageUrl() }}" alt="{{ $factionDeck->name }}" class="faction-deck-details__image">
               @else
                 <div class="faction-deck-details__placeholder">
                   <x-icon name="box" size="lg" />

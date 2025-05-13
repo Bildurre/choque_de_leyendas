@@ -75,4 +75,14 @@ class HeroSuperclass extends Model
   {
     return 'images/hero-superclasses';
   }
+
+  /**
+   * Get the field name for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageField(): string
+  {
+    return 'icon';
+  }
 }

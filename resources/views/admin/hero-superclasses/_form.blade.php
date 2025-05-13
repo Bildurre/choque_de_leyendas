@@ -24,7 +24,7 @@
       <x-form.image-upload
         name="icon"
         :label="__('hero_superclasses.icon')"
-        :current-image="isset($heroSuperclass) && $heroSuperclass->icon ? $heroSuperclass->getIconUrl() : null"
+        :current-image="isset($heroSuperclass) && $heroSuperclass->icon ? $heroSuperclass->getImageUrl() : null"
         :remove-name="isset($heroSuperclass) ? 'remove_icon' : null"
       />
     </div>

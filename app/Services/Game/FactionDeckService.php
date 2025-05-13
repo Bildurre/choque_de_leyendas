@@ -82,10 +82,12 @@ class FactionDeckService
   public function getFactionDeckWithRelations(FactionDeck $factionDeck): FactionDeck
   {
     return $factionDeck->load([
-      'faction', 
-      'gameMode', 
-      'cards', 
-      'heroes'
+      'faction',
+      'gameMode',
+      'cards.cardType',
+      'heroes.heroClass',
+      'heroes.heroRace',
+      'heroes.faction'
     ]);
   }
 

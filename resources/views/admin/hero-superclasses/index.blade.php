@@ -40,7 +40,7 @@
           
           @if($heroSuperclass->icon)
             <div class="hero-superclass-icon">
-              <img src="{{ $heroSuperclass->getIconUrl() }}" alt="{{ $heroSuperclass->name }}" class="hero-superclass-icon__image">
+              <img src="{{ $heroSuperclass->getImageUrl() }}" alt="{{ $heroSuperclass->name }}" class="hero-superclass-icon__image">
             </div>
           @endif
         </x-entity.list-card>

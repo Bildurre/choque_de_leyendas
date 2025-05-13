@@ -24,7 +24,7 @@
       <x-form.image-upload
         name="icon"
         :label="__('attack_ranges.icon')"
-        :current-image="isset($attackRange) && $attackRange->icon ? $attackRange->getIconUrl() : null"
+        :current-image="isset($attackRange) && $attackRange->icon ? $attackRange->getImageUrl() : null"
         :remove-name="isset($attackRange) ? 'remove_icon' : null"
       />
     </div>
