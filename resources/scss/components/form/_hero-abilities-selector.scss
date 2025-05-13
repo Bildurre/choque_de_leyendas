@@ -1,0 +1,261 @@
+// resources/scss/components/form/_hero-abilities-selector.scss
+@use '../../abstracts/all' as *;
+
+.hero-abilities-selector {
+  width: 100%;
+  
+  &__controls {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__search {
+    position: relative;
+    width: 100%;
+    
+    &-input {
+      padding-right: 2.5rem;
+    }
+    
+    &-clear {
+      position: absolute;
+      top: 50%;
+      right: $spacing-sm;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--color-text-secondary);
+      padding: $spacing-xs;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color $transition-fast, background-color $transition-fast;
+      
+      &:hover {
+        color: var(--random-accent-color);
+        background-color: var(--random-accent-color-bg);
+      }
+      
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--random-accent-color-bg);
+      }
+    }
+  }
+  
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+    
+    @include responsive(tablet) {
+      grid-template-columns: 1fr 1fr; // Ambas cajas con la misma anchura
+      gap: $spacing-lg;
+    }
+  }
+  
+  &__available,
+  &__selected {
+    border: 1px solid var(--color-card-border);
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    background-color: var(--color-card-bg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: $spacing-md;
+    color: var(--color-text-primary);
+    padding-bottom: $spacing-xs;
+    border-bottom: 1px solid var(--color-card-border);
+  }
+  
+  &__list {
+    overflow-y: auto;
+    max-height: 20rem;
+    padding-right: $spacing-xs;
+    flex: 1;
+    
+    &::-webkit-scrollbar {
+      width: 0.375rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--color-bg-transparent-light);
+      border-radius: $border-radius-sm;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-text-secondary);
+      border-radius: $border-radius-sm;
+      
+      &:hover {
+        background-color: var(--random-accent-color);
+      }
+    }
+  }
+  
+  &__selected-list {
+    overflow-y: auto;
+    max-height: 20rem;
+    flex: 1;
+    padding-right: $spacing-xs;
+    
+    &::-webkit-scrollbar {
+      width: 0.375rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--color-bg-transparent-light);
+      border-radius: $border-radius-sm;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-text-secondary);
+      border-radius: $border-radius-sm;
+      
+      &:hover {
+        background-color: var(--random-accent-color);
+      }
+    }
+  }
+  
+  &__placeholder {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    padding: $spacing-md;
+    text-align: center;
+  }
+}
+
+// Estilado para los elementos individuales de habilidad
+.hero-ability-item {
+  position: relative;
+  margin-bottom: $spacing-sm;
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-sm;
+  background-color: var(--color-background);
+  transition: all $transition-fast;
+  cursor: pointer;
+  
+  &__checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  &__content {
+    padding: $spacing-sm;
+
+    .in-selected-list & {
+      padding-right: 2.5rem;
+    }
+  }
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__name {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  &__cost {
+    display: flex;
+    gap: $spacing-xs;
+    
+    &-icons {
+      display: flex;
+      gap: 2px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  
+  &__details {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  
+  &__range, 
+  &__subtype {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  &__subtype {
+    &.physical {
+      color: $color-red;
+    }
+    
+    &.magical {
+      color: $color-blue;
+    }
+  }
+  
+  &__area {
+    margin-left: $spacing-xs;
+    font-size: 0.8125rem;
+  }
+  
+  // Estados
+  &:hover {
+    border-color: var(--random-accent-color);
+    box-shadow: 0 0 0 1px var(--random-accent-color-bg);
+  }
+  
+  &.is-selected {
+    background-color: var(--random-accent-color-bg);
+    border-color: var(--random-accent-color);
+    
+    &:hover {
+      background-color: var(--random-accent-color-bg-semi);
+    }
+    
+    &:not(.in-selected-list) {
+      display: none; // Ocultar de la lista original si está seleccionado
+    }
+  }
+  
+  &.in-selected-list {
+    .hero-ability-item__remove {
+      display: flex;
+    }
+  }
+  
+  &__remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-red);
+    padding: 0.25rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all $transition-fast;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background-color: var(--color-red-transparent-light);
+    }
+  }
+}

@@ -82,7 +82,7 @@
         type="number" 
         name="agility" 
         :label="__('attributes.agility')"
-        value="{{ old('agility', isset($hero) ? $hero->agility : 2) }}" 
+        value="{{ old('agility', isset($hero) ? $hero->agility : 3) }}" 
         min="{{ $attributesConfig->min_attribute_value }}"
         max="{{ $attributesConfig->max_attribute_value }}"
         required
@@ -91,7 +91,7 @@
         type="number" 
         name="mental" 
         :label="__('attributes.mental')"
-        value="{{ old('mental', isset($hero) ? $hero->mental : 2) }}" 
+        value="{{ old('mental', isset($hero) ? $hero->mental : 3) }}" 
         min="{{ $attributesConfig->min_attribute_value }}"
         max="{{ $attributesConfig->max_attribute_value }}"
         required
@@ -100,7 +100,7 @@
         type="number" 
         name="will" 
         :label="__('attributes.will')"
-        value="{{ old('will', isset($hero) ? $hero->will : 2) }}" 
+        value="{{ old('will', isset($hero) ? $hero->will : 3) }}" 
         min="{{ $attributesConfig->min_attribute_value }}"
         max="{{ $attributesConfig->max_attribute_value }}"
         required
@@ -110,7 +110,7 @@
         type="number" 
         name="strength" 
         :label="__('attributes.strength')"
-        value="{{ old('strength', isset($hero) ? $hero->strength : 2) }}" 
+        value="{{ old('strength', isset($hero) ? $hero->strength : 3) }}" 
         min="{{ $attributesConfig->min_attribute_value }}"
         max="{{ $attributesConfig->max_attribute_value }}"
         required
@@ -120,7 +120,7 @@
         type="number" 
         name="armor" 
         :label="__('attributes.armor')"
-        value="{{ old('armor', isset($hero) ? $hero->armor : 2) }}" 
+        value="{{ old('armor', isset($hero) ? $hero->armor : 3) }}" 
         min="{{ $attributesConfig->min_attribute_value }}"
         max="{{ $attributesConfig->max_attribute_value }}"
         required
