@@ -6,6 +6,7 @@ use App\Http\Controllers\Game\CardController;
 use App\Http\Controllers\Game\HeroController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
+use App\Http\Controllers\Game\CounterController;
 use App\Http\Controllers\Game\FactionController;
 use App\Http\Controllers\Game\CardTypeController;
 use App\Http\Controllers\Game\GameModeController;
@@ -90,15 +91,14 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::post('game-modes/{id}/restore', [GameModeController::class, 'restore'])->name('game-modes.restore');
   Route::delete('game-modes/{id}/force-delete', [GameModeController::class, 'forceDelete'])->name('game-modes.force-delete');
 
-// Faction Decks
+  // Faction Decks
   Route::resource('faction-decks', FactionDeckController::class);
   Route::post('faction-decks/{id}/restore', [FactionDeckController::class, 'restore'])->name('faction-decks.restore');
   Route::delete('faction-decks/{id}/force-delete', [FactionDeckController::class, 'forceDelete'])->name('faction-decks.force-delete');
   Route::get('faction-decks/available-items', [FactionDeckController::class, 'getAvailableItems'])->name('faction-decks.available-items');
 
-// Deck Attributes Configuration
+  // Deck Attributes Configuration
   Route::resource('deck-attributes-configurations', DeckAttributesConfigurationController::class);
-
       
   // Pages
   Route::resource('pages', PageController::class);
@@ -116,4 +116,9 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
     Route::post('/{id}/restore', [BlockController::class, 'restore'])->name('restore');
     Route::delete('/{id}/force-delete', [BlockController::class, 'forceDelete'])->name('force-delete');
   });
+
+  // Counters
+  Route::resource('counters', CounterController::class);
+  Route::post('counters/{id}/restore', [CounterController::class, 'restore'])->name('counters.restore');
+  Route::delete('counters/{id}/force-delete', [CounterController::class, 'forceDelete'])->name('counters.force-delete');
 });

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Traits\HasCostAttribute;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\HasCostAttribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;

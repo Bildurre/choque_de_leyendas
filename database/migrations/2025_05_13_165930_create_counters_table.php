@@ -6,22 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('counters', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('counters', function (Blueprint $table) {
+      $table->id();
+      $table->json('name');
+      $table->json('effect')->nullable();
+      $table->enum('type', ['boon', 'bane']);
+      $table->string('icon')->nullable();
+      $table->datetimes();
+      $table->softDeletes();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('counters');
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('counters');
+  }
 };

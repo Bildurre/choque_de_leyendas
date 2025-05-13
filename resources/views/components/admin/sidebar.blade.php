@@ -97,6 +97,11 @@
                   <span class="admin-sidebar__text">{{ __('deck-attributes-configurations.plural') }}</span>
                 </a>
               </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.counters.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.counters.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('counters.plural') }}</span>
+                </a>
+              </li>
             </ul>
           </x-collapsible-section>
 
