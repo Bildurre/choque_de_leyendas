@@ -53,7 +53,7 @@ class CardController extends Controller
   /**
    * Show the form for creating a new card.
    */
-  public function create()
+  public function create(Request $request)
   {
     $factions = Faction::orderBy('id')->get();
     $cardTypes = CardType::orderBy('id')->get();
@@ -62,13 +62,16 @@ class CardController extends Controller
     $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
     $heroAbilities = HeroAbility::orderBy('id')->get();
     
+    $selectedFactionId = $request->query('faction_id');
+    
     return view('admin.cards.create', compact(
       'factions',
       'cardTypes',
       'equipmentTypes',
       'attackRanges',
       'attackSubtypes',
-      'heroAbilities'
+      'heroAbilities',
+      'selectedFactionId'
     ));
   }
 

@@ -33,7 +33,8 @@
         name="faction_id"
         :label="__('factions.singular')"
         :options="['' => __('cards.no_faction')] + $factions->pluck('name', 'id')->toArray()"
-        :selected="old('faction_id', isset($card) ? $card->faction_id : '')"
+        :selected="old('faction_id', $selectedFactionId ?? (isset($card) ? $card->faction_id : ''))"
+        required
       />
         
       <x-form.multilingual-wysiwyg

@@ -100,4 +100,12 @@ class Faction extends Model
   {
     return $this->hasMany(Card::class);
   }
+
+  /**
+   * Get the faction decks associated with the faction.
+   */
+  public function factionDecks()
+  {
+      return $this->hasMany(FactionDeck::class);
+  }
 }

@@ -3,8 +3,9 @@
 namespace App\Services\Game;
 
 use App\Models\Faction;
-use App\Services\Traits\HandlesTranslations;
+use App\Models\GameMode;
 use Illuminate\Http\UploadedFile;
+use App\Services\Traits\HandlesTranslations;
 
 class FactionService
 {
@@ -33,6 +34,93 @@ class FactionService
     }
     
     return $query->get();
+  }
+
+  /**
+   * Get faction details with related data for the specified tab
+   *
+   * @param Faction $faction
+   * @param string $tab
+   * @return array
+   */
+  public function getFactionWithTabData(Faction $faction, string $tab = 'details'): array
+  {
+    // Base data that's needed for all tabs
+    $data = [
+      'faction' => $faction,
+      'tab' => $tab
+    ];
+    
+    // For all tabs, we need the counts
+    $faction->loadCount(['heroes', 'cards', 'factionDecks']);
+    
+    // Load specific data based on selected tab
+    switch ($tab) {
+      case 'heroes':
+        // Load heroes with pagination
+        $data['heroes'] = $this->getFactionHeroes($faction);
+        break;
+      
+      case 'cards':
+        // Load cards with pagination
+        $data['cards'] = $this->getFactionCards($faction);
+        break;
+        
+      case 'decks':
+        // Load faction decks with pagination
+        $data['decks'] = $this->getFactionDecks($faction);
+        $data['gameModes'] = GameMode::orderBy('name')->get();
+        break;
+        
+      case 'details':
+      default:
+        // For details tab, we already have the counts
+        break;
+    }
+    
+    return $data;
+  }
+
+  /**
+   * Get faction heroes with pagination
+   *
+   * @param Faction $faction
+   * @param int $perPage
+   * @return \Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getFactionHeroes(Faction $faction, int $perPage = 12)
+  {
+    return $faction->heroes()
+      ->with(['heroRace', 'heroClass'])
+      ->paginate($perPage);
+  }
+
+  /**
+   * Get faction cards with pagination
+   *
+   * @param Faction $faction
+   * @param int $perPage
+   * @return \Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getFactionCards(Faction $faction, int $perPage = 16)
+  {
+    return $faction->cards()
+      ->with(['cardType'])
+      ->paginate($perPage);
+  }
+
+  /**
+   * Get faction decks with pagination
+   *
+   * @param Faction $faction
+   * @param int $perPage
+   * @return \Illuminate\Pagination\LengthAwarePaginator
+   */
+  public function getFactionDecks(Faction $faction, int $perPage = 8)
+  {
+    return $faction->factionDecks()
+      ->with(['gameMode'])
+      ->paginate($perPage);
   }
   
   /**

@@ -74,15 +74,15 @@ class FactionController extends Controller
   }
 
   /**
-   * Show the specified faction.
+   * Display the specified faction with tab support.
    */
-  public function show(Faction $faction)
+  public function show(Faction $faction, Request $request)
   {
-    // Eager load related models with counts
-    $faction->loadCount(['heroes', 'cards']);
-    $faction->load(['heroes', 'cards']);
+    $tab = $request->query('tab', 'details'); // Default to 'details' tab
     
-    return view('admin.factions.show', compact('faction'));
+    $data = $this->factionService->getFactionWithTabData($faction, $tab);
+    
+    return view('admin.factions.show', $data);
   }
 
   /**

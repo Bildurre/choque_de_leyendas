@@ -63,7 +63,7 @@
           name="faction_id"
           :label="__('factions.singular')"
           :options="$factions->pluck('name', 'id')->toArray()"
-          :selected="old('faction_id', isset($factionDeck) ? $factionDeck->faction_id : '')"
+          :selected="old('faction_id', $factionId ?? (isset($factionDeck) ? $factionDeck->faction_id : ''))"
           required
         />
         

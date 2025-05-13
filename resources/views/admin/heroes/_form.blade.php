@@ -46,7 +46,8 @@
         name="faction_id"
         :label="__('factions.singular')"
         :options="['' => __('heroes.no_faction')] + $factions->pluck('name', 'id')->toArray()"
-        :selected="old('faction_id', isset($hero) ? $hero->faction_id : '')"
+        :selected="old('faction_id', $selectedFactionId ?? (isset($hero) ? $hero->faction_id : ''))"
+        required
       />
         
 

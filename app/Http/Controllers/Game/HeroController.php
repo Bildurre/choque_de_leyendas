@@ -68,22 +68,25 @@ class HeroController extends Controller
   /**
    * Show the form for creating a new hero.
    */
-  public function create()
-  {
-    $factions = Faction::orderBy('id')->get();
-    $heroRaces = HeroRace::orderBy('id')->get();
-    $heroClasses = HeroClass::orderBy('id')->get();
-    $heroAbilities = HeroAbility::with(['attackRange', 'attackSubtype'])->orderBy('id')->get();
-    $attributesConfig = $this->attributesService->getConfiguration();
-    
-    return view('admin.heroes.create', compact(
-      'factions',
-      'heroRaces',
-      'heroClasses',
-      'heroAbilities',
-      'attributesConfig'
-    ));
-  }
+  public function create(Request $request)
+{
+  $factions = Faction::orderBy('id')->get();
+  $heroRaces = HeroRace::orderBy('id')->get();
+  $heroClasses = HeroClass::orderBy('id')->get();
+  $heroAbilities = HeroAbility::with(['attackRange', 'attackSubtype'])->orderBy('id')->get();
+  $attributesConfig = $this->attributesService->getConfiguration();
+  
+  $selectedFactionId = $request->query('faction_id');
+  
+  return view('admin.heroes.create', compact(
+    'factions',
+    'heroRaces',
+    'heroClasses',
+    'heroAbilities',
+    'attributesConfig',
+    'selectedFactionId'
+  ));
+}
 
   /**
    * Store a newly created hero in storage.
