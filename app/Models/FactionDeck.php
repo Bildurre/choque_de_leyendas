@@ -71,16 +71,6 @@ class FactionDeck extends Model
   }
 
   /**
-   * Get the field name for storing images for this model
-   * 
-   * @return string
-   */
-  public function getImageField(): string
-  {
-    return 'icon';
-  }
-
-  /**
    * Get the faction that owns the faction deck.
    */
   public function faction()

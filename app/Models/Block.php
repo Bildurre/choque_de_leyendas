@@ -69,6 +69,16 @@ class Block extends Model
     }
 
     /**
+     * Get the field name for storing images for this model
+     * 
+     * @return string
+     */
+    public function getImageField(): string
+    {
+      return 'image';
+    }
+
+    /**
      * Render the block using the appropriate view
      */
     public function render()

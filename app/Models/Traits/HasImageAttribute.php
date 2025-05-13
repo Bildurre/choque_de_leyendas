@@ -15,7 +15,7 @@ trait HasImageAttribute
    */
   public function getImageField(): string
   {
-    return 'image';
+    return 'icon';
   }
 
   /**

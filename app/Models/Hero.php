@@ -97,6 +97,16 @@ class Hero extends Model
   }
 
   /**
+   * Get the field name for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageField(): string
+  {
+    return 'image';
+  }
+
+  /**
    * Get the faction that owns the hero.
    */
   public function faction()

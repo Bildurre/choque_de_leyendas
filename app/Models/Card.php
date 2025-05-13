@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasImageAttribute;
-use App\Models\Traits\HasCostAttribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasTranslatableSlug;
+use App\Traits\HasCostAttribute;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Card extends Model
 {
@@ -85,6 +85,16 @@ class Card extends Model
   public function getImageDirectory(): string
   {
     return 'images/cards';
+  }
+
+  /**
+   * Get the field name for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageField(): string
+  {
+    return 'image';
   }
 
   /**

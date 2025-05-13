@@ -75,14 +75,4 @@ class AttackRange extends Model
   {
     return 'images/attack-ranges';
   }
-
-  /**
-   * Get the field name for storing images for this model
-   * 
-   * @return string
-   */
-  public function getImageField(): string
-  {
-    return 'icon';
-  }
 }
