@@ -1,0 +1,136 @@
+@use '../../abstracts/all' as *;
+
+.cost-input {
+  width: 100%;
+  
+  // Contenedor principal para input y preview
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-sm;
+  }
+  
+  // Contenedor del input
+  &__input-container {
+    flex: 1;
+  }
+  
+  &__field {
+    width: 100%;
+    font-family: monospace;
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
+  }
+  
+  // Vista previa a la derecha del input
+  &__preview {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    min-width: 8rem; // Ancho mínimo para que se vea bien
+  }
+  
+  &__preview-label {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+  
+  &__dice-container {
+    display: flex;
+    gap: $spacing-xs;
+    align-items: center;
+    min-height: 1.5rem;
+  }
+  
+  // Botones debajo del input y preview
+  &__buttons {
+    display: flex;
+    gap: $spacing-xs;
+    margin-top: $spacing-xs;
+  }
+  
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 0.0625rem solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    background-color: var(--color-background);
+    transition: all $transition-fast;
+    cursor: pointer;
+    
+    &:hover:not(:disabled) {
+      border-color: var(--random-accent-color);
+      background-color: var(--random-accent-color-bg);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    &--red {
+      svg polygon {
+        fill: $color-red;
+      }
+      
+      &:hover:not(:disabled) {
+        background-color: $color-red-transparent-light;
+        border-color: $color-red;
+      }
+    }
+    
+    &--green {
+      svg polygon {
+        fill: $color-green;
+      }
+      
+      &:hover:not(:disabled) {
+        background-color: $color-green-transparent-light;
+        border-color: $color-green;
+      }
+    }
+    
+    &--blue {
+      svg polygon {
+        fill: $color-blue;
+      }
+      
+      &:hover:not(:disabled) {
+        background-color: $color-blue-transparent-light;
+        border-color: $color-blue;
+      }
+    }
+    
+    &--clear {
+      &:hover:not(:disabled) {
+        background-color: $color-red-transparent-light;
+        border-color: $color-red;
+        
+        svg {
+          stroke: $color-red;
+        }
+      }
+    }
+  }
+  
+  &__dice {
+    width: 1.5rem;
+    height: 1.5rem;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+  &__empty-preview {
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+}

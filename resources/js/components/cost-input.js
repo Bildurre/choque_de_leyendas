@@ -90,6 +90,8 @@ function orderCost(cost) {
  * @param {string} cost - The cost string
  * @param {HTMLElement} container - The container for the preview
  */
+// En la función updatePreview de resources/js/components/cost-input.js
+
 function updatePreview(cost, container) {
   // Clear existing preview
   container.innerHTML = '';
@@ -101,23 +103,41 @@ function updatePreview(cost, container) {
   }
   
   // Add dice icons
-  for (const char of cost.toUpperCase()) {
-    if (char === 'R' || char === 'G' || char === 'B') {
-      const diceElement = document.createElement('div');
-      diceElement.className = `cost-input__dice cost-input__dice--${char === 'R' ? 'red' : char === 'G' ? 'green' : 'blue'}`;
-      
-      // Color for the SVG
-      const color = char === 'R' ? '#f15959' : char === 'G' ? '#29ab5f' : '#408cfd';
-      
-      diceElement.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" stroke-linejoin="round" width="24px" height="24px">
-          <polygon points="100,180 30,140 30,60 100,100" fill="${color}" stroke="black" stroke-width="2"/>
-          <polygon points="100,180 100,100 170,60 170,140" fill="${color}" stroke="black" stroke-width="2"/>
-          <polygon points="100,100 30,60 100,20 170,60" fill="${color}" stroke="black" stroke-width="2"/>
+  for (const char of cost) {
+    const diceType = char === 'R' ? 'red' : char === 'G' ? 'green' : 'blue';
+    
+    // Crear un div para contener el dado
+    const diceElement = document.createElement('div');
+    diceElement.className = 'cost-input__dice';
+    
+    // Crear el contenido del dado con el viewBox ajustado
+    diceElement.innerHTML = `
+      <span class="icon-dice icon-dice--${diceType} icon-dice--sm">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 180 180" stroke-linejoin="round">
+          <polygon 
+            points="100,180 30,140 30,60 100,100" 
+            class="icon-dice__face"
+            stroke="black" 
+            stroke-width="2"
+          />
+          
+          <polygon 
+            points="100,180 100,100 170,60 170,140" 
+            class="icon-dice__face"
+            stroke="black" 
+            stroke-width="2"
+          />
+          
+          <polygon 
+            points="100,100 30,60 100,20 170,60" 
+            class="icon-dice__face"
+            stroke="black" 
+            stroke-width="2"
+          />
         </svg>
-      `;
-      
-      container.appendChild(diceElement);
-    }
+      </span>
+    `;
+    
+    container.appendChild(diceElement);
   }
 }
