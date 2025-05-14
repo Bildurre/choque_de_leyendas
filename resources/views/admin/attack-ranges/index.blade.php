@@ -41,12 +41,6 @@
               </x-badge>
             @endif
           </x-slot:badges>
-          
-          @if($attackRange->icon)
-            <div class="attack-range-icon">
-              <img src="{{ $attackRange->getImageUrl() }}" alt="{{ $attackRange->name }}" class="attack-range-icon__image">
-            </div>
-          @endif
         </x-entity.list-card>
       @endforeach
       

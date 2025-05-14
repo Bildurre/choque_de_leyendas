@@ -14,7 +14,6 @@ return new class extends Migration
     Schema::create('hero_superclasses', function (Blueprint $table) {
       $table->id();
       $table->json('name');
-      $table->string('icon')->nullable();
       $table->datetimes();
       $table->softDeletes();
     });

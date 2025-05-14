@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +12,6 @@ class HeroSuperclass extends Model
   use HasFactory;
   use HasTranslations;
   use SoftDeletes;
-  use HasImageAttribute;
 
   /**
    * The table associated with the model.
@@ -29,7 +27,6 @@ class HeroSuperclass extends Model
    */
   protected $fillable = [
     'name',
-    'icon',
   ];
 
   /**
@@ -64,15 +61,5 @@ class HeroSuperclass extends Model
   public function cardType()
   {
     return $this->hasOne(CardType::class);
-  }
-
-  /**
-   * Get the directory for storing images for this model
-   * 
-   * @return string
-   */
-  public function getImageDirectory(): string
-  {
-    return 'images/hero-superclasses';
   }
 }

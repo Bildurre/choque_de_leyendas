@@ -6,7 +6,7 @@
   $submitLabel = isset($attackRange) ? __('admin.update') : __('attack_ranges.create');
 @endphp
 
-<form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
+<form action="{{ $submitRoute }}" method="POST" class="form">
   @csrf
   @if($submitMethod === 'PUT')
     @method('PUT')
@@ -19,13 +19,6 @@
         :label="__('attack_ranges.name')"
         :values="isset($attackRange) ? $attackRange->getTranslations('name') : []"
         required
-      />
-
-      <x-form.image-upload
-        name="icon"
-        :label="__('attack_ranges.icon')"
-        :current-image="isset($attackRange) && $attackRange->icon ? $attackRange->getImageUrl() : null"
-        :remove-name="isset($attackRange) ? 'remove_icon' : null"
       />
     </div>
   </x-form.card>

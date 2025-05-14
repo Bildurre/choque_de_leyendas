@@ -6,7 +6,7 @@
   $submitLabel = isset($heroSuperclass) ? __('admin.update') : __('hero_superclasses.create');
 @endphp
 
-<form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
+<form action="{{ $submitRoute }}" method="POST" class="form">
   @csrf
   @if($submitMethod === 'PUT')
     @method('PUT')
@@ -19,13 +19,6 @@
         :label="__('hero_superclasses.name')"
         :values="isset($heroSuperclass) ? $heroSuperclass->getTranslations('name') : []"
         required
-      />
-
-      <x-form.image-upload
-        name="icon"
-        :label="__('hero_superclasses.icon')"
-        :current-image="isset($heroSuperclass) && $heroSuperclass->icon ? $heroSuperclass->getImageUrl() : null"
-        :remove-name="isset($heroSuperclass) ? 'remove_icon' : null"
       />
     </div>
   </x-form.card>

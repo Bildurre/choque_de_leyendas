@@ -28,8 +28,6 @@ class AttackRangeRequest extends FormRequest
     $rules = [
       'name' => ['required', 'array'],
       'name.es' => ['required', 'string', 'max:255'],
-      'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-      'remove_icon' => ['nullable', 'boolean'],
     ];
 
     // Agregar reglas de unicidad para cada idioma
@@ -50,9 +48,6 @@ class AttackRangeRequest extends FormRequest
       'name.required' => 'El nombre del rango de ataque es obligatorio.',
       'name.array' => 'El nombre debe ser un array con traducciones.',
       'name.es.required' => 'El nombre en español es obligatorio.',
-      'icon.image' => 'El archivo debe ser una imagen válida.',
-      'icon.mimes' => 'El archivo debe ser de tipo: jpeg, png, jpg, gif, svg.',
-      'icon.max' => 'La imagen no debe ser mayor de 2MB.',
     ];
 
     // Mensajes para la unicidad en cada idioma

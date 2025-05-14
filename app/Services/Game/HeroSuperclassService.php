@@ -4,7 +4,6 @@ namespace App\Services\Game;
 
 use App\Models\HeroSuperclass;
 use App\Services\Traits\HandlesTranslations;
-use Illuminate\Http\UploadedFile;
 
 class HeroSuperclassService
 {
@@ -58,11 +57,6 @@ class HeroSuperclassService
     // Apply translations
     $this->applyTranslations($heroSuperclass, $data, $this->translatableFields);
     
-    // Handle icon upload
-    if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $heroSuperclass->storeImage($data['icon']);
-    }
-    
     $heroSuperclass->save();
     
     return $heroSuperclass;
@@ -83,13 +77,6 @@ class HeroSuperclassService
     
     // Apply translations
     $this->applyTranslations($heroSuperclass, $data, $this->translatableFields);
-    
-    // Handle icon updates
-    if (isset($data['remove_icon']) && $data['remove_icon']) {
-      $heroSuperclass->deleteImage();
-    } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $heroSuperclass->storeImage($data['icon']);
-    }
     
     $heroSuperclass->save();
     
@@ -150,11 +137,6 @@ class HeroSuperclassService
     // Check for related card type (including trashed)
     if ($heroSuperclass->cardType()->withTrashed()->exists()) {
       throw new \Exception("No se puede eliminar permanentemente la superclase porque tiene un tipo de carta asociado.");
-    }
-    
-    // Delete icon if exists
-    if ($heroSuperclass->hasImage()) {
-      $heroSuperclass->deleteImage();
     }
     
     return $heroSuperclass->forceDelete();

@@ -37,12 +37,6 @@
               </x-badge>
             @endif
           </x-slot:badges>
-          
-          @if($heroSuperclass->icon)
-            <div class="hero-superclass-icon">
-              <img src="{{ $heroSuperclass->getImageUrl() }}" alt="{{ $heroSuperclass->name }}" class="hero-superclass-icon__image">
-            </div>
-          @endif
         </x-entity.list-card>
       @endforeach
       
