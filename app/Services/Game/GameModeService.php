@@ -94,7 +94,7 @@ class GameModeService
   {
     // Check for related faction decks
     if ($gameMode->factionDecks()->count() > 0) {
-      throw new \Exception("No se puede eliminar el modo de juego porque tiene mazos de facción asociados.");
+      throw new \Exception("__('entities.game_modes.errors.has_faction_decks')");
     }
     
     return $gameMode->delete();
@@ -126,7 +126,7 @@ class GameModeService
     
     // Check for related faction decks (including trashed)
     if ($gameMode->factionDecks()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el modo de juego porque tiene mazos de facción asociados.");
+      throw new \Exception("__('entities.game_modes.errors.force_delete_has_faction_decks')");
     }
     
     return $gameMode->forceDelete();

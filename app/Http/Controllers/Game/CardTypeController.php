@@ -59,7 +59,7 @@ class CardTypeController extends Controller
       return redirect()->route('admin.card-types.index')
         ->with('success', __('card_types.created_successfully', ['name' => $cardType->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al crear el Tipo de Carta: ' . $e->getMessage())
+      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.card_types.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -94,7 +94,7 @@ class CardTypeController extends Controller
       return redirect()->route('admin.card-types.index')
         ->with('success', __('card_types.updated_successfully', ['name' => $cardType->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar el Tipo de Carta: ' . $e->getMessage())
+      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.card_types.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -111,7 +111,7 @@ class CardTypeController extends Controller
       return redirect()->route('admin.card-types.index')
         ->with('success', __('card_types.deleted_successfully', ['name' => $cardTypeName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar el Tipo de Carta: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.card_types.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -127,7 +127,7 @@ class CardTypeController extends Controller
       return redirect()->route('admin.card-types.index', ['trashed' => 1])
         ->with('success', __('card_types.restored_successfully', ['name' => $cardType->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar el Tipo de Carta: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.card_types.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -145,7 +145,7 @@ class CardTypeController extends Controller
       return redirect()->route('admin.card-types.index', ['trashed' => 1])
         ->with('success', __('card_types.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente el Tipo de Carta: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.card_types.singular')]) + ' '' . $e->getMessage());
     }
   }
 }

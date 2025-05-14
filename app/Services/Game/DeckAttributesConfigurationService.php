@@ -68,7 +68,7 @@ class DeckAttributesConfigurationService
       
       return $config;
     } catch (Exception $e) {
-      throw new Exception("Error al crear la configuración de mazos: " . $e->getMessage());
+      throw new Exception("__('entities.deck_attributes.errors.create') + ' '" . $e->getMessage());
     }
   }
 
@@ -88,7 +88,7 @@ class DeckAttributesConfigurationService
       
       return $config;
     } catch (Exception $e) {
-      throw new Exception("Error al actualizar la configuración de mazos: " . $e->getMessage());
+      throw new Exception("__('entities.deck_attributes.errors.update') + ' '" . $e->getMessage());
     }
   }
 
@@ -104,7 +104,7 @@ class DeckAttributesConfigurationService
     try {
       return $config->delete();
     } catch (Exception $e) {
-      throw new Exception("Error al eliminar la configuración de mazos: " . $e->getMessage());
+      throw new Exception("__('entities.deck_attributes.errors.delete') + ' '" . $e->getMessage());
     }
   }
 

@@ -60,7 +60,7 @@ class HeroClassController extends Controller
       return redirect()->route('admin.hero-classes.index')
         ->with('success', __('hero_classes.created_successfully', ['name' => $heroClass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al crear la Clase: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.hero_classes.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -85,7 +85,7 @@ class HeroClassController extends Controller
       return redirect()->route('admin.hero-classes.index')
         ->with('success', __('hero_classes.updated_successfully', ['name' => $heroClass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar la Clase: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.hero_classes.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -101,7 +101,7 @@ class HeroClassController extends Controller
       return redirect()->route('admin.hero-classes.index')
         ->with('success', __('hero_classes.deleted_successfully', ['name' => $heroName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar la Clase: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.hero_classes.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -117,7 +117,7 @@ class HeroClassController extends Controller
       return redirect()->route('admin.hero-classes.index', ['trashed' => 1])
         ->with('success', __('hero_classes.restored_successfully', ['name' => $heroClass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar la Clase: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.hero_classes.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -135,7 +135,7 @@ class HeroClassController extends Controller
       return redirect()->route('admin.hero-classes.index', ['trashed' => 1])
         ->with('success', __('hero_classes.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Clase: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.hero_classes.singular')]) + ' '' . $e->getMessage());
     }
   }
 }

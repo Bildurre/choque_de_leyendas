@@ -26,6 +26,12 @@ return [
             'cards' => 'Cards',
             'decks' => 'Decks',
         ],
+        'errors' => [
+            'has_heroes' => 'Cannot delete the faction because it has associated heroes.',
+            'has_cards' => 'Cannot delete the faction because it has associated cards.',
+            'force_delete_has_heroes' => 'Cannot permanently delete the faction because it has associated heroes.',
+            'force_delete_has_cards' => 'Cannot permanently delete the faction because it has associated cards.',
+        ],
     ],
     
     // Heroes
@@ -60,6 +66,10 @@ return [
             'health' => 'Health',
         ],
         'select_abilities' => 'Select Abilities',
+        'validation' => [
+            'min_total_attributes' => 'The total attributes must be at least :min.',
+            'max_total_attributes' => 'The total attributes cannot be more than :max.',
+        ],
     ],
     
     // Cards
@@ -101,6 +111,10 @@ return [
         'name' => 'Class Name',
         'passive' => 'Class Passive',
         'heroes_count' => ':count heroes',
+        'errors' => [
+        'has_heroes' => 'Cannot delete the class because it has associated heroes.',
+        'force_delete_has_heroes' => 'Cannot permanently delete the class because it has associated heroes.',
+      ],
     ],
     
     // Hero Superclasses
@@ -111,6 +125,12 @@ return [
         'edit' => 'Edit Hero Superclass',
         'name' => 'Superclass Name',
         'classes_count' => ':count classes',
+        'errors' => [
+            'has_classes' => 'Cannot delete the superclass because it has associated classes.',
+            'has_card_type' => 'Cannot delete the superclass because it has an associated card type.',
+            'force_delete_has_classes' => 'Cannot permanently delete the superclass because it has associated classes.',
+            'force_delete_has_card_type' => 'Cannot permanently delete the superclass because it has an associated card type.',
+        ],
     ],
     
     // Hero Races
@@ -121,6 +141,10 @@ return [
         'edit' => 'Edit Hero Race',
         'name' => 'Race Name',
         'heroes_count' => ':count heroes',
+        'errors' => [
+            'has_heroes' => 'Cannot delete the race because it has associated heroes.',
+            'force_delete_has_heroes' => 'Cannot permanently delete the race because it has associated heroes.',
+        ],
     ],
     
     // Hero Abilities
@@ -138,6 +162,12 @@ return [
         'type' => 'Type',
         'no_attack_range' => 'No Attack Range',
         'no_attack_subtype' => 'No Attack Subtype',
+        'errors' => [
+            'has_heroes' => 'Cannot delete the ability because it is assigned to heroes.',
+            'has_cards' => 'Cannot delete the ability because there are cards based on it.',
+            'force_delete_has_heroes' => 'Cannot permanently delete the ability because it is assigned to heroes.',
+            'force_delete_has_cards' => 'Cannot permanently delete the ability because there are cards based on it.',
+        ],
     ],
     
     // Card Types
@@ -151,6 +181,10 @@ return [
         'hero_superclass' => 'Hero Superclass',
         'select_superclass' => 'Select a Superclass',
         'no_superclass' => 'No Superclass',
+        'errors' => [
+            'has_cards' => 'Cannot delete the card type because it has associated cards.',
+            'force_delete_has_cards' => 'Cannot permanently delete the card type because it has associated cards.',
+        ],
     ],
     
     // Equipment Types
@@ -162,6 +196,10 @@ return [
         'name' => 'Type Name',
         'category' => 'Category',
         'cards_count' => ':count cards',
+        'errors' => [
+            'has_cards' => 'Cannot delete the equipment type because it has associated cards.',
+            'force_delete_has_cards' => 'Cannot permanently delete the equipment type because it has associated cards.',
+        ],
     ],
     
     // Attack Subtypes
@@ -174,6 +212,12 @@ return [
         'type' => 'Type',
         'hero_abilities_count' => ':count hero abilities',
         'cards_count' => ':count cards',
+        'errors' => [
+            'has_cards' => 'Cannot delete the attack subtype because it has associated cards.',
+            'has_abilities' => 'Cannot delete the attack subtype because it has associated hero abilities.',
+            'force_delete_has_cards' => 'Cannot permanently delete the attack subtype because it has associated cards.',
+            'force_delete_has_abilities' => 'Cannot permanently delete the attack subtype because it has associated hero abilities.',
+        ],
     ],
     
     // Attack Ranges
@@ -185,6 +229,12 @@ return [
         'name' => 'Range Name',
         'hero_abilities_count' => ':count hero abilities',
         'cards_count' => ':count cards',
+        'errors' => [
+            'has_abilities' => 'Cannot delete the attack range because it has associated hero abilities.',
+            'has_cards' => 'Cannot delete the attack range because it has associated cards.',
+            'force_delete_has_abilities' => 'Cannot permanently delete the attack range because it has associated hero abilities.',
+            'force_delete_has_cards' => 'Cannot permanently delete the attack range because it has associated cards.',
+        ],
     ],
     
     // Faction Decks
@@ -226,6 +276,13 @@ return [
         'no_cards_available' => 'No cards available',
         'no_heroes_available' => 'No heroes available',
         'copies' => 'Copies',
+        'validation' => [
+            'min_cards' => 'The deck must have at least :min cards.',
+            'max_cards' => 'The deck cannot have more than :max cards.',
+            'max_copies_per_card' => 'The deck cannot have more than :max copies of the same card.',
+            'max_copies_per_hero' => 'The deck cannot have more than :max copies of the same hero.',
+            'required_heroes' => 'The deck must have exactly :number heroes.',
+        ],
     ],
     
     // Game Modes
@@ -237,6 +294,10 @@ return [
         'name' => 'Mode Name',
         'description' => 'Description',
         'faction_decks_count' => ':count faction decks',
+        'errors' => [
+            'has_faction_decks' => 'Cannot delete the game mode because it has associated faction decks.',
+            'force_delete_has_faction_decks' => 'Cannot permanently delete the game mode because it has associated faction decks.',
+        ],
     ],
     
     // Counters
@@ -285,5 +346,10 @@ return [
         'required_heroes' => 'Required Heroes',
         'select_game_mode' => 'Select Game Mode',
         'no_configurations' => 'No deck configurations available',
+        'errors' => [
+            'create' => 'Error creating deck configuration: ',
+            'update' => 'Error updating deck configuration: ',
+            'delete' => 'Error deleting deck configuration: ',
+        ],
     ],
 ];

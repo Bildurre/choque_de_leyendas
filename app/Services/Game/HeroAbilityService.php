@@ -119,12 +119,12 @@ class HeroAbilityService
   {
     // Check for related heroes
     if ($heroAbility->heroes()->count() > 0) {
-      throw new \Exception("No se puede eliminar la habilidad porque está asignada a héroes.");
+      throw new \Exception("__('entities.hero_abilities.errors.has_heroes')");
     }
     
     // Check for related cards
     if ($heroAbility->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar la habilidad porque hay cartas basadas en ella.");
+      throw new \Exception("__('entities.hero_abilities.errors.has_cards')");
     }
     
     return $heroAbility->delete();
@@ -156,12 +156,12 @@ class HeroAbilityService
     
     // Check for related heroes (including trashed)
     if ($heroAbility->heroes()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la habilidad porque está asignada a héroes.");
+      throw new \Exception("__('entities.hero_abilities.errors.force_delete_has_heroes')");
     }
     
     // Check for related cards (including trashed)
     if ($heroAbility->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la habilidad porque hay cartas basadas en ella.");
+      throw new \Exception("__('entities.hero_abilities.errors.force_delete_has_cards')");
     }
     
     return $heroAbility->forceDelete();

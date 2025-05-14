@@ -73,7 +73,7 @@ class HeroAbilityController extends Controller
         ->with('success', __('hero_abilities.created_successfully', ['name' => $heroAbility->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', 'Ha ocurrido un error al crear la Habilidad: ' . $e->getMessage())
+        ->with('error', '__('common.errors.create', ['entity' => __('entities.hero_abilities.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -106,7 +106,7 @@ class HeroAbilityController extends Controller
         ->with('success', __('hero_abilities.updated_successfully', ['name' => $heroAbility->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', 'Ha ocurrido un error al actualizar la Habilidad: ' . $e->getMessage())
+        ->with('error', '__('common.errors.update', ['entity' => __('entities.hero_abilities.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -123,7 +123,7 @@ class HeroAbilityController extends Controller
       return redirect()->route('admin.hero-abilities.index')
         ->with('success', __('hero_abilities.deleted_successfully', ['name' => $heroAbilityName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar la Habilidad: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.hero_abilities.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -139,7 +139,7 @@ class HeroAbilityController extends Controller
       return redirect()->route('admin.hero-abilities.index', ['trashed' => 1])
         ->with('success', __('hero_abilities.restored_successfully', ['name' => $heroAbility->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar la Habilidad: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.hero_abilities.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -157,7 +157,7 @@ class HeroAbilityController extends Controller
       return redirect()->route('admin.hero-abilities.index', ['trashed' => 1])
         ->with('success', __('hero_abilities.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Habilidad: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.hero_abilities.singular')]) + ' '' . $e->getMessage());
     }
   }
 }

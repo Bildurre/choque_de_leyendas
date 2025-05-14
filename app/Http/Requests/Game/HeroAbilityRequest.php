@@ -61,8 +61,8 @@ class HeroAbilityRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre de la habilidad es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
       'attack_range_id.exists' => 'El rango de ataque seleccionado no existe.',
       'attack_subtype_id.exists' => 'El subtipo de ataque seleccionado no existe.',
       'area.boolean' => 'El campo de área debe ser verdadero o falso.',

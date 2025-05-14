@@ -37,4 +37,21 @@ return [
     'error' => 'Ha ocurrido un error.',
     'warning' => 'Advertencia',
     'info' => 'Información',
+
+    // Common errors
+    'errors' => [
+      'create' => 'Ha ocurrido un error al crear el/la :entity: ',
+      'update' => 'Ha ocurrido un error al actualizar el/la :entity: ',
+      'delete' => 'Ha ocurrido un error al eliminar el/la :entity: ',
+      'restore' => 'Ha ocurrido un error al restaurar el/la :entity: ',
+      'force_delete' => 'Ha ocurrido un error al eliminar permanentemente el/la :entity: ',
+    ],
+    // Common successes
+    'success' => [
+      'created' => ':entity creado/a correctamente.',
+      'updated' => ':entity actualizado/a correctamente.',
+      'deleted' => ':entity eliminado/a correctamente.',
+      'restored' => ':entity restaurado/a correctamente.',
+      'force_deleted' => ':entity eliminado/a permanentemente con éxito.',
+    ],
 ];

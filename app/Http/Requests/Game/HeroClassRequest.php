@@ -38,11 +38,11 @@ class HeroClassRequest extends FormRequest
   public function messages(): array
   {
     $messages = [
-      'name.required' => 'El nombre de la clase es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
-      'hero_superclass_id.required' => 'La superclase es obligatoria.',
-      'hero_superclass_id.exists' => 'La superclase seleccionada no existe.',
+      'name.required' => '__('validation.required', ['attribute' => __('entities.hero_classes.name')])',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'hero_superclass_id.required' => '__('validation.required', ['attribute' => __('entities.hero_superclasses.singular')])',
+      'hero_superclass_id.exists' => '__('validation.exists', ['attribute' => __('entities.hero_superclasses.singular')])',
     ];
 
     // Mensajes para la unicidad en cada idioma

@@ -50,8 +50,8 @@ class FactionRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre de la facción es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
       'color.required' => 'El color es obligatorio.',
       'color.string' => 'El color debe ser una cadena de texto.',
       'color.regex' => 'El color debe tener un formato hexadecimal válido (p. ej. #FF5500).',

@@ -101,7 +101,7 @@ class BlockController extends Controller
             return redirect()->route('admin.pages.edit', $page)
                 ->with('success', __('blocks.updated_successfully'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error: ' . $e->getMessage())
+            return back()->with('error', Error:  . $e->getMessage())
                 ->withInput();
         }
     }

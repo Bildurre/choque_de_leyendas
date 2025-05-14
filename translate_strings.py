@@ -3,427 +3,201 @@ import os
 import re
 import sys
 
-# Diccionario de sustituciones
+# Diccionario de sustituciones organizadas por servicio/controlador
 translations = {
-    "__('Update Password')": "__('auth.update_password')",
-    "__('Ensure your account is using a long, random password to stay secure.')": "__('auth.password_advice')",
-    "__('Current Password')": "__('auth.current_password')",
-    "__('New Password')": "__('auth.new_password')",
-    "__('Save')": "__('admin.save')",
-    "__('Saved.')": "__('auth.saved')",
-    "__('Profile')": "__('auth.profile')",
-    "__('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\\'t receive the email, we will gladly send you another.')": "__('auth.check_email_verify_link')",
-    "__('A new verification link has been sent to the email address you provided during registration.')": "__('auth.verification_link_sent')",
-    "__('Resend Verification Email')": "__('auth.verify_email_sent')",
-    "__('Log Out')": "__('auth.logout')",
-    "__('Name')": "__('common.name')",
-    "__('Email')": "__('auth.email')",
-    "__('Password')": "__('auth.password')",
-    "__('Confirm Password')": "__('auth.confirm_password')",
-    "__('Already registered?')": "__('auth.already_registered')",
-    "__('Register')": "__('auth.register')",
-    "__('Profile Information')": "__('auth.profile_information')",
-    "__('\"Update your account\\'s profile information and email address.\"')": "__('auth.update_profile_info')",
-    "__('Your email address is unverified.')": "__('auth.email_unverified')",
-    "__('Click here to re-send the verification email.')": "__('auth.resend_verification')",
-    "__('A new verification link has been sent to your email address.')": "__('auth.verification_link_sent')",
-    "__('This is a secure area of the application. Please confirm your password before continuing.')": "__('auth.confirm_password_area')",
-    "__('Confirm')": "__('admin.confirm')",
-    "__('Delete Account')": "__('auth.delete_account')",
-    "__('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.')": "__('auth.delete_account_warning')",
-    "__('Are you sure you want to delete your account?')": "__('auth.confirm_delete_account')",
-    "__('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.')": "__('auth.delete_account_confirm_password')",
-    "__('Cancel')": "__('admin.cancel')",
-    "__('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.')": "__('auth.password_reset_message')",
-    "__('Email Password Reset Link')": "__('auth.email_password_reset_link')",
-    "__('Reset Password')": "__('auth.reset_password')",
-    "__('Toggle theme')": "__('common.toggle_theme')",
-    "__('admin.dashboard')": "__('admin.dashboard')",
-    "__('hero_classes.create')": "__('entities.hero_classes.create')",
-    "__('hero_classes.edit')": "__('entities.hero_classes.edit')",
-    "__('hero_races.create')": "__('entities.hero_races.create')",
-    "__('hero_races.edit')": "__('entities.hero_races.edit')",
-    "__('card_types.create')": "__('entities.card_types.create')",
-    "__('card_types.edit')": "__('entities.card_types.edit')",
-    "__('equipment_types.create')": "__('entities.equipment_types.create')",
-    "__('equipment_types.edit')": "__('entities.equipment_types.edit')",
-    "__('attack_subtypes.create')": "__('entities.attack_subtypes.create')",
-    "__('attack_subtypes.edit')": "__('entities.attack_subtypes.edit')",
-    "__('attack_ranges.create')": "__('entities.attack_ranges.create')",
-    "__('attack_ranges.edit')": "__('entities.attack_ranges.edit')",
-    "__('factions.create')": "__('entities.factions.create')",
-    "__('factions.edit')": "__('entities.factions.edit')",
-    "__('hero_abilities.edit')": "__('entities.hero_abilities.edit')",
-    "__('cards.edit')": "__('entities.cards.edit')",
-    "__('hero_abilities.create')": "__('entities.hero_abilities.create')",
-    "__('cards.create')": "__('entities.cards.create')",
-    "__('heroes.create')": "__('entities.heroes.create')",
-    "__('heroes.edit')": "__('entities.heroes.edit')",
-    "__('card_types.plural')": "__('entities.card_types.plural')",
-    "__('card_types.confirm_force_delete')": "__('entities.card_types.confirm_force_delete')",
-    "__('card_types.confirm_delete')": "__('entities.card_types.confirm_delete')",
-    "__('hero_superclasses.singular')": "__('entities.hero_superclasses.singular')",
-    "__('admin.active_items')": "__('admin.active_items')",
-    "__('admin.trashed_items')": "__('admin.trashed_items')",
-    "__('admin.view')": "__('admin.view')",
-    "__('admin.edit')": "__('admin.edit')",
-    "__('admin.restore')": "__('admin.restore')",
-    "__('admin.delete')": "__('admin.delete')",
-    "__('admin.no_records')": "__('admin.no_records')",
-    "__('admin.save_order')": "__('admin.save_order')",
-    "__('admin.create')": "__('admin.create')",
-    "__('admin.update')": "__('admin.update')",
-    "__('admin.remove_image')": "__('admin.remove_image')",
-    "__('admin.drag_image_here')": "__('admin.drag_image_here')",
-    "__('admin.or_click_to_browse')": "__('admin.or_click_to_browse')",
-    "__('hero_classes.plural')": "__('entities.hero_classes.plural')",
-    "__('hero_classes.confirm_force_delete')": "__('entities.hero_classes.confirm_force_delete')",
-    "__('hero_classes.confirm_delete')": "__('entities.hero_classes.confirm_delete')",
-    "__('equipment_types.plural')": "__('entities.equipment_types.plural')",
-    "__('equipment_types.confirm_force_delete')": "__('entities.equipment_types.confirm_force_delete')",
-    "__('equipment_types.confirm_delete')": "__('entities.equipment_types.confirm_delete')",
-    "__('hero_classes.name')": "__('entities.hero_classes.name')",
-    "__('hero_classes.passive')": "__('entities.hero_classes.passive')",
-    "__('hero_races.name')": "__('entities.hero_races.name')",
-    "__('attack_subtypes.plural')": "__('entities.attack_subtypes.plural')",
-    "__('attack_subtypes.confirm_force_delete')": "__('entities.attack_subtypes.confirm_force_delete')",
-    "__('attack_subtypes.confirm_delete')": "__('entities.attack_subtypes.confirm_delete')",
-    "__('attack_subtypes.name')": "__('entities.attack_subtypes.name')",
-    "__('attack_subtypes.type')": "__('entities.attack_subtypes.type')",
-    "__('card_types.name')": "__('entities.card_types.name')",
-    "__('card_types.hero_superclass')": "__('entities.card_types.hero_superclass')",
-    "__('card_types.select_superclass')": "__('entities.card_types.select_superclass')",
-    "__('card_types.no_superclass')": "__('entities.card_types.no_superclass')",
-    "__('equipment_types.name')": "__('entities.equipment_types.name')",
-    "__('equipment_types.category')": "__('entities.equipment_types.category')",
-    "__('hero_races.plural')": "__('entities.hero_races.plural')",
-    "__('hero_races.confirm_force_delete')": "__('entities.hero_races.confirm_force_delete')",
-    "__('hero_races.confirm_delete')": "__('entities.hero_races.confirm_delete')",
-    "__('factions.plural')": "__('entities.factions.plural')",
-    "__('factions.confirm_force_delete')": "__('entities.factions.confirm_force_delete')",
-    "__('factions.confirm_delete')": "__('entities.factions.confirm_delete')",
-    "__('factions.name')": "__('entities.factions.name')",
-    "__('factions.lore_text')": "__('entities.factions.lore_text')",
-    "__('factions.color')": "__('entities.factions.color')",
-    "__('factions.icon')": "__('entities.factions.icon')",
-    "__('pages.plural')": "__('pages.plural')",
-    "__('pages.create')": "__('pages.create')",
-    "__('pages.confirm_force_delete')": "__('pages.confirm_force_delete')",
-    "__('pages.confirm_delete')": "__('pages.confirm_delete')",
-    "__('pages.published')": "__('pages.published')",
-    "__('pages.draft')": "__('pages.draft')",
-    "__('pages.slug')": "__('pages.slug')",
-    "__('pages.parent')": "__('pages.parent')",
-    "__('blocks.add_block')": "__('pages.blocks.add_block')",
-    "__('blocks.confirm_delete')": "__('pages.blocks.confirm_delete')",
-    "__('hero_abilities.plural')": "__('entities.hero_abilities.plural')",
-    "__('hero_abilities.confirm_force_delete')": "__('entities.hero_abilities.confirm_force_delete')",
-    "__('hero_abilities.confirm_delete')": "__('entities.hero_abilities.confirm_delete')",
-    "__('hero_abilities.area')": "__('entities.hero_abilities.area')",
-    "__('hero_abilities.name')": "__('entities.hero_abilities.name')",
-    "__('hero_abilities.description')": "__('entities.hero_abilities.description')",
-    "__('hero_abilities.cost')": "__('entities.hero_abilities.cost')",
-    "__('hero_abilities.cost_help')": "__('entities.hero_abilities.cost_help')",
-    "__('hero_abilities.is_area_attack')": "__('entities.hero_abilities.is_area_attack')",
-    "__('attack_ranges.singular')": "__('entities.attack_ranges.singular')",
-    "__('hero_abilities.no_attack_range')": "__('entities.hero_abilities.no_attack_range')",
-    "__('attack_subtypes.singular')": "__('entities.attack_subtypes.singular')",
-    "__('hero_abilities.no_attack_subtype')": "__('entities.hero_abilities.no_attack_subtype')",
-    "__('deck_attributes.configurations')": "__('entities.deck_attributes.configurations')",
-    "__('deck_attributes.create')": "__('entities.deck_attributes.create')",
-    "__('deck_attributes.no_configurations')": "__('entities.deck_attributes.no_configurations')",
-    "__('deck_attributes.min_cards')": "__('entities.deck_attributes.min_cards')",
-    "__('deck_attributes.max_cards')": "__('entities.deck_attributes.max_cards')",
-    "__('deck_attributes.max_copies_per_card')": "__('entities.deck_attributes.max_copies_per_card')",
-    "__('deck_attributes.max_copies_per_hero')": "__('entities.deck_attributes.max_copies_per_hero')",
-    "__('deck_attributes.required_heroes')": "__('entities.deck_attributes.required_heroes')",
-    "__('deck_attributes.confirm_delete')": "__('entities.deck_attributes.confirm_delete')",
-    "__('game_modes.plural')": "__('entities.game_modes.plural')",
-    "__('game_modes.create')": "__('entities.game_modes.create')",
-    "__('game_modes.confirm_force_delete')": "__('entities.game_modes.confirm_force_delete')",
-    "__('game_modes.confirm_delete')": "__('entities.game_modes.confirm_delete')",
-    "__('game_modes.name')": "__('entities.game_modes.name')",
-    "__('game_modes.description')": "__('entities.game_modes.description')",
-    "__('deck_attributes.singular')": "__('entities.deck_attributes.singular')",
-    "__('deck_attributes.edit')": "__('entities.deck_attributes.edit')",
-    "__('deck_attributes.game_mode_id')": "__('entities.deck_attributes.game_mode_id')",
-    "__('deck_attributes.select_game_mode')": "__('entities.deck_attributes.select_game_mode')",
-    "__('faction_decks.edit')": "__('entities.faction_decks.edit')",
-    "__('faction_decks.create')": "__('entities.faction_decks.create')",
-    "__('counters.plural')": "__('entities.counters.plural')",
-    "__('counters.types.boon')": "__('entities.counters.types.boon')",
-    "__('counters.types.bane')": "__('entities.counters.types.bane')",
-    "__('admin.trashed')": "__('admin.trashed')",
-    "__('counters.create')": "__('entities.counters.create')",
-    "__('counters.confirm_force_delete')": "__('entities.counters.confirm_force_delete')",
-    "__('counters.confirm_delete')": "__('entities.counters.confirm_delete')",
-    "__('counters.name')": "__('entities.counters.name')",
-    "__('counters.type')": "__('entities.counters.type')",
-    "__('counters.effect')": "__('entities.counters.effect')",
-    "__('counters.icon')": "__('entities.counters.icon')",
-    "__('attack_ranges.plural')": "__('entities.attack_ranges.plural')",
-    "__('attack_ranges.confirm_force_delete')": "__('entities.attack_ranges.confirm_force_delete')",
-    "__('attack_ranges.confirm_delete')": "__('entities.attack_ranges.confirm_delete')",
-    "__('attack_ranges.name')": "__('entities.attack_ranges.name')",
-    "__('hero_superclasses.plural')": "__('entities.hero_superclasses.plural')",
-    "__('hero_superclasses.create')": "__('entities.hero_superclasses.create')",
-    "__('hero_superclasses.confirm_force_delete')": "__('entities.hero_superclasses.confirm_force_delete')",
-    "__('hero_superclasses.confirm_delete')": "__('entities.hero_superclasses.confirm_delete')",
-    "__('hero_superclasses.name')": "__('entities.hero_superclasses.name')",
-    "__('faction_decks.plural')": "__('entities.faction_decks.plural')",
-    "__('faction_decks.confirm_force_delete')": "__('entities.faction_decks.confirm_force_delete')",
-    "__('faction_decks.confirm_delete')": "__('entities.faction_decks.confirm_delete')",
-    "__('admin.home')": "__('admin.home')",
-    "__('admin.game')": "__('admin.game')",
-    "__('heroes.system')": "__('entities.heroes.system')",
-    "__('hero_attributes.config')": "__('entities.hero_attributes.config')",
-    "__('faction_deck.plural')": "__('entities.faction_decks.plural')",
-    "__('game-modes.plural')": "__('entities.game_modes.plural')",
-    "__('deck-attributes-configurations.plural')": "__('entities.deck_attributes.plural')",
-    "__('cards.system')": "__('entities.cards.system')",
-    "__('admin.content')": "__('admin.content')",
-    "__('admin.toggle_sidebar')": "__('admin.toggle_sidebar')",
-    "__('heroes.plural')": "__('entities.heroes.plural')",
-    "__('heroes.confirm_force_delete')": "__('entities.heroes.confirm_force_delete')",
-    "__('heroes.confirm_delete')": "__('entities.heroes.confirm_delete')",
-    "__('heroes.attributes.agility')": "__('entities.heroes.attributes.agility')",
-    "__('heroes.attributes.mental')": "__('entities.heroes.attributes.mental')",
-    "__('heroes.attributes.will')": "__('entities.heroes.attributes.will')",
-    "__('heroes.attributes.strength')": "__('entities.heroes.attributes.strength')",
-    "__('heroes.attributes.armor')": "__('entities.heroes.attributes.armor')",
-    "__('heroes.attributes.health')": "__('entities.heroes.attributes.health')",
-    "__('heroes.passive')": "__('entities.heroes.passive')",
-    "__('cards.plural')": "__('entities.cards.plural')",
-    "__('cards.confirm_force_delete')": "__('entities.cards.confirm_force_delete')",
-    "__('cards.confirm_delete')": "__('entities.cards.confirm_delete')",
-    "__('cards.area')": "__('entities.cards.area')",
-    "__('factions.tabs.details')": "__('entities.factions.tabs.details')",
-    "__('admin.back_to_list')": "__('admin.back_to_list')",
-    "__('factions.details')": "__('entities.factions.details')",
-    "__('factions.text_color')": "__('entities.factions.text_color')",
-    "__('factions.text_dark')": "__('entities.factions.text_dark')",
-    "__('factions.text_light')": "__('entities.factions.text_light')",
-    "__('factions.no_heroes')": "__('entities.factions.no_heroes')",
-    "__('factions.no_cards')": "__('entities.factions.no_cards')",
-    "__('factions.no_decks')": "__('entities.factions.no_decks')",
-    "__('hero_attributes.min_attribute_value')": "__('entities.hero_attributes.min_attribute_value')",
-    "__('hero_attributes.max_attribute_value')": "__('entities.hero_attributes.max_attribute_value')",
-    "__('hero_attributes.min_total_attributes')": "__('entities.hero_attributes.min_total_attributes')",
-    "__('hero_attributes.max_total_attributes')": "__('entities.hero_attributes.max_total_attributes')",
-    "__('hero_attributes.total_health_base')": "__('entities.hero_attributes.total_health_base')",
-    "__('hero_attributes.agility_multiplier')": "__('entities.hero_attributes.agility_multiplier')",
-    "__('hero_attributes.mental_multiplier')": "__('entities.hero_attributes.mental_multiplier')",
-    "__('hero_attributes.will_multiplier')": "__('entities.hero_attributes.will_multiplier')",
-    "__('hero_attributes.strength_multiplier')": "__('entities.hero_attributes.strength_multiplier')",
-    "__('hero_attributes.armor_multiplier')": "__('entities.hero_attributes.armor_multiplier')",
-    "__('heroes.name')": "__('entities.heroes.name')",
-    "__('heroes.lore_text')": "__('entities.heroes.lore_text')",
-    "__('heroes.passive_name')": "__('entities.heroes.passive_name')",
-    "__('heroes.passive_description')": "__('entities.heroes.passive_description')",
-    "__('factions.singular')": "__('entities.factions.singular')",
-    "__('heroes.no_faction')": "__('entities.heroes.no_faction')",
-    "__('hero_races.singular')": "__('entities.hero_races.singular')",
-    "__('hero_classes.singular')": "__('entities.hero_classes.singular')",
-    "__('heroes.gender')": "__('entities.heroes.gender')",
-    "__('heroes.genders.male')": "__('entities.heroes.genders.male')",
-    "__('heroes.genders.female')": "__('entities.heroes.genders.female')",
-    "__('attributes.agility')": "__('game.attributes.agility')",
-    "__('attributes.mental')": "__('game.attributes.mental')",
-    "__('attributes.will')": "__('game.attributes.will')",
-    "__('attributes.strength')": "__('game.attributes.strength')",
-    "__('attributes.armor')": "__('game.attributes.armor')",
-    "__('heroes.image')": "__('entities.heroes.image')",
-    "__('heroes.select_abilities')": "__('entities.heroes.select_abilities')",
-    "__('faction_decks.deck_config_info')": "__('entities.faction_decks.deck_config_info')",
-    "__('faction_decks.selected_game_mode')": "__('entities.faction_decks.selected_game_mode')",
-    "__('faction_decks.deck_config_details')": "__('entities.faction_decks.deck_config_details')",
-    "__('faction_decks.min_cards')": "__('entities.faction_decks.min_cards')",
-    "__('faction_decks.max_cards')": "__('entities.faction_decks.max_cards')",
-    "__('faction_decks.max_copies_per_card')": "__('entities.faction_decks.max_copies_per_card')",
-    "__('faction_decks.max_copies_per_hero')": "__('entities.faction_decks.max_copies_per_hero')",
-    "__('faction_decks.required_heroes')": "__('entities.faction_decks.required_heroes')",
-    "__('faction_decks.no_deck_config')": "__('entities.faction_decks.no_deck_config')",
-    "__('faction_decks.basic_info')": "__('entities.faction_decks.basic_info')",
-    "__('faction_decks.name')": "__('entities.faction_decks.name')",
-    "__('faction_decks.icon')": "__('entities.faction_decks.icon')",
-    "__('faction_decks.deck_stats')": "__('entities.faction_decks.deck_stats')",
-    "__('faction_decks.cards')": "__('entities.faction_decks.cards')",
-    "__('faction_decks.heroes')": "__('entities.faction_decks.heroes')",
-    "__('faction_decks.select_cards')": "__('entities.faction_decks.select_cards')",
-    "__('faction_decks.select_heroes')": "__('entities.faction_decks.select_heroes')",
-    "__('game.cost.preview')": "__('game.cost.preview')",
-    "__('game.cost.add_red')": "__('game.cost.add_red')",
-    "__('game.cost.add_green')": "__('game.cost.add_green')",
-    "__('game.cost.add_blue')": "__('game.cost.add_blue')",
-    "__('game.cost.clear')": "__('game.cost.clear')",
-    "__('cards.name')": "__('entities.cards.name')",
-    "__('card_types.singular')": "__('entities.card_types.singular')",
-    "__('cards.no_faction')": "__('entities.cards.no_faction')",
-    "__('cards.lore_text')": "__('entities.cards.lore_text')",
-    "__('cards.effect')": "__('entities.cards.effect')",
-    "__('cards.restriction')": "__('entities.cards.restriction')",
-    "__('cards.cost')": "__('entities.cards.cost')",
-    "__('cards.cost_help')": "__('entities.cards.cost_help')",
-    "__('equipment_types.singular')": "__('entities.equipment_types.singular')",
-    "__('cards.no_equipment_type')": "__('entities.cards.no_equipment_type')",
-    "__('cards.hands')": "__('entities.cards.hands')",
-    "__('cards.one_hand')": "__('entities.cards.one_hand')",
-    "__('cards.two_hands')": "__('entities.cards.two_hands')",
-    "__('cards.no_attack_range')": "__('entities.cards.no_attack_range')",
-    "__('cards.no_attack_subtype')": "__('entities.cards.no_attack_subtype')",
-    "__('cards.is_area_attack')": "__('entities.cards.is_area_attack')",
-    "__('hero_abilities.singular')": "__('entities.hero_abilities.singular')",
-    "__('cards.no_hero_ability')": "__('entities.cards.no_hero_ability')",
-    "__('cards.image')": "__('entities.cards.image')",
-    "__('faction_decks.copies')": "__('entities.faction_decks.copies')",
-    "__('cards.details')": "__('entities.cards.details')",
-    "__('admin.none')": "__('admin.none')",
-    "__('cards.no_image')": "__('entities.cards.no_image')",
-    "__('faction_decks.total_cards')": "__('entities.faction_decks.total_cards')",
-    "__('faction_decks.unique_cards')": "__('entities.faction_decks.unique_cards')",
-    "__('faction_decks.total_heroes')": "__('entities.faction_decks.total_heroes')",
-    "__('faction_decks.unique_heroes')": "__('entities.faction_decks.unique_heroes')",
-    "__('faction_decks.no_cards')": "__('entities.faction_decks.no_cards')",
-    "__('faction_decks.no_heroes')": "__('entities.faction_decks.no_heroes')",
-    "__('heroes.attributes')": "__('entities.heroes.attributes')",
-    "__('heroes.total_attributes')": "__('entities.heroes.total_attributes')",
-    "__('heroes.passive_ability')": "__('entities.heroes.passive_ability')",
-    "__('hero_abilities.type')": "__('entities.hero_abilities.type')",
-    "__('heroes.no_image')": "__('entities.heroes.no_image')",
-    "__('form.entity_selector.search_cards')": "__('components.form.entity_selector.search_cards')",
-    "__('form.entity_selector.search_heroes')": "__('components.form.entity_selector.search_heroes')",
-    "__('form.entity_selector.copies')": "__('components.form.entity_selector.copies')",
-    "__('form.entity_selector.no_cards_available')": "__('components.form.entity_selector.no_cards_available')",
-    "__('form.entity_selector.no_cards_selected')": "__('components.form.entity_selector.no_cards_selected')",
-    "__('form.entity_selector.no_heroes_available')": "__('components.form.entity_selector.no_heroes_available')",
-    "__('form.entity_selector.no_heroes_selected')": "__('components.form.entity_selector.no_heroes_selected')",
-    "__('form.entity_selector.selected_cards')": "__('components.form.entity_selector.selected_cards')",
-    "__('form.entity_selector.selected_heroes')": "__('components.form.entity_selector.selected_heroes')",
-    "__('form.entity_selector.available_cards')": "__('components.form.entity_selector.available_cards')",
-    "__('form.entity_selector.available_heroes')": "__('components.form.entity_selector.available_heroes')",
-    "__('form.entity_selector.card_type_distribution')": "__('components.form.entity_selector.card_type_distribution')",
-    "__('form.entity_selector.total_cards')": "__('components.form.entity_selector.total_cards')",
-    "__('form.entity_selector.unique_cards')": "__('components.form.entity_selector.unique_cards')",
-    "__('form.entity_selector.total_heroes')": "__('components.form.entity_selector.total_heroes')",
-    "__('form.entity_selector.unique_heroes')": "__('components.form.entity_selector.unique_heroes')",
-    "__('form.color_selector')": "__('components.form.color_selector')",
-    "__('admin.select_option')": "__('admin.select_option')",
-    "__('pages.edit')": "__('pages.edit')",
-    "__('pages.edit_details')": "__('pages.edit_details')",
-    "__('blocks.page_blocks')": "__('pages.blocks.page_blocks')",
-    "__('pages.form_title')": "__('pages.form_title')",
-    "__('pages.title')": "__('pages.title')",
-    "__('pages.description')": "__('pages.description')",
-    "__('pages.template')": "__('pages.template')",
-    "__('pages.no_parent')": "__('pages.no_parent')",
-    "__('pages.order')": "__('pages.order')",
-    "__('pages.is_published')": "__('pages.is_published')",
-    "__('pages.meta_info')": "__('pages.meta_info')",
-    "__('pages.meta_title')": "__('pages.meta_title')",
-    "__('pages.meta_description')": "__('pages.meta_description')",
-    "__('pages.background_image')": "__('pages.background_image')",
-    "__('blocks.form_title')": "__('pages.blocks.form_title')",
-    "__('blocks.title')": "__('pages.blocks.title')",
-    "__('blocks.subtitle')": "__('pages.blocks.subtitle')",
-    "__('blocks.content')": "__('pages.blocks.content')",
-    "__('blocks.appearance')": "__('pages.blocks.appearance')",
-    "__('blocks.background_color')": "__('pages.blocks.background_color')",
-    "__('blocks.image')": "__('pages.blocks.image')",
-    "__('blocks.image_position')": "__('pages.blocks.image_position')",
-    "__('blocks.image_position_options.left')": "__('pages.blocks.image_position_options.left')",
-    "__('blocks.image_position_options.right')": "__('pages.blocks.image_position_options.right')",
-    "__('blocks.settings.text_alignment')": "__('pages.blocks.settings.text_alignment')",
-    "__('blocks.settings.text_alignment_options.left')": "__('pages.blocks.settings.text_alignment_options.left')",
-    "__('blocks.settings.text_alignment_options.right')": "__('pages.blocks.settings.text_alignment_options.right')",
-    "__('blocks.settings.text_alignment_options.center')": "__('pages.blocks.settings.text_alignment_options.center')",
-    "__('blocks.settings.full_width')": "__('pages.blocks.settings.full_width')",
-    "__('welcome.subtitle')": "__('public.welcome.subtitle')",
-    "__('welcome.description')": "__('public.welcome.description')",
-    "__('welcome.login')": "__('public.welcome.login')",
-    "__('welcome.game_art')": "__('public.welcome.game_art')",
-    "__('welcome.section_title_1')": "__('public.welcome.section_title_1')",
-    "__('welcome.section_title_2')": "__('public.welcome.section_title_2')",
-    "__('welcome.section_title_3')": "__('public.welcome.section_title_3')",
-    "__('welcome.section_title_4')": "__('public.welcome.section_title_4')",
-    "__('welcome.faction_image')": "__('public.welcome.faction_image')",
-    "__('welcome.faction_name')": "__('public.welcome.faction_name')",
-    "__('welcome.feature_icon')": "__('public.welcome.feature_icon')",
-    "__('welcome.feature_title_1')": "__('public.welcome.feature_title_1')",
-    "__('welcome.feature_title_2')": "__('public.welcome.feature_title_2')",
-    "__('welcome.feature_title_3')": "__('public.welcome.feature_title_3')",
-    "__('welcome.feature_title_4')": "__('public.welcome.feature_title_4')",
-    "__('welcome.cta_title')": "__('public.welcome.cta_title')",
-    "__('welcome.cta_description')": "__('public.welcome.cta_description')",
-    "__('public.menu.explore')": "__('public.menu.explore')",
-    "__('public.menu.rules')": "__('public.menu.rules')",
-    "__('public.menu.gallery')": "__('public.menu.gallery')",
-    "__('public.menu.admin_panel')": "__('public.menu.admin_panel')",
-    "__('pages.all_pages')": "__('pages.all_pages')",
-    "__('pages.read_more')": "__('pages.read_more')",
-    "__('pages.no_pages')": "__('pages.no_pages')",
-    "__('pages.no_blocks')": "__('pages.no_blocks')",
-    "__('auth.login_title')": "__('auth.login_title')",
-    "__('auth.remember_me')": "__('auth.remember_me')",
-    "__('auth.forgot_password')": "__('auth.forgot_password')",
-    "__('auth.login')": "__('auth.login')",
-    "__('auth.back')": "__('auth.back')",
-    # Dynamic replacements (con placeholders)
-    "__('card_types.cards_count', ['count' => $cardType->cards_count])": "__('entities.card_types.cards_count', ['count' => $cardType->cards_count])",
-    "__('admin.deleted_at', ['date' => $cardType->deleted_at->format('d/m/Y H:i')])": "__('admin.deleted_at', ['date' => $cardType->deleted_at->format('d/m/Y H:i')])",
-    "__('hero_classes.heroes_count', ['count' => $heroClass->heroes_count])": "__('entities.hero_classes.heroes_count', ['count' => $heroClass->heroes_count])",
-    "__('equipment_types.cards_count', ['count' => $equipmentType->cards_count])": "__('entities.equipment_types.cards_count', ['count' => $equipmentType->cards_count])",
-    "__('attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count])": "__('entities.attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count])",
-    "__('attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count])": "__('entities.attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count])",
-    "__('hero_races.heroes_count', ['count' => $heroRace->heroes_count])": "__('entities.hero_races.heroes_count', ['count' => $heroRace->heroes_count])",
-    "__('factions.heroes_count', ['count' => $faction->heroes_count])": "__('entities.factions.heroes_count', ['count' => $faction->heroes_count])",
-    "__('factions.cards_count', ['count' => $faction->cards_count])": "__('entities.factions.cards_count', ['count' => $faction->cards_count])",
-    "__('pages.children_count', ['count' => $page->children_count])": "__('pages.children_count', ['count' => $page->children_count])",
-    "__('game_modes.faction_decks_count', ['count' => $gameMode->faction_decks_count])": "__('entities.game_modes.faction_decks_count', ['count' => $gameMode->faction_decks_count])",
-    "__('counters.create_with_type', ['type' => __('counters.types.' . $type)])": "__('entities.counters.create_with_type', ['type' => __('entities.counters.types.' . $type)])",
-    "__('counters.edit', ['name' => $counter->name])": "__('entities.counters.edit', ['name' => $counter->name])",
-    "__('attack_ranges.hero_abilities_count', ['count' => $attackRange->hero_abilities_count])": "__('entities.attack_ranges.hero_abilities_count', ['count' => $attackRange->hero_abilities_count])",
-    "__('attack_ranges.cards_count', ['count' => $attackRange->cards_count])": "__('entities.attack_ranges.cards_count', ['count' => $attackRange->cards_count])",
-    "__('hero_superclasses.classes_count', ['count' => $heroSuperclass->hero_classes_count])": "__('entities.hero_superclasses.classes_count', ['count' => $heroSuperclass->hero_classes_count])",
-    "__('faction_decks.cards_count', ['count' => $factionDeck->cards_count])": "__('entities.faction_decks.cards_count', ['count' => $factionDeck->cards_count])",
-    "__('faction_decks.heroes_count', ['count' => $factionDeck->heroes_count])": "__('entities.faction_decks.heroes_count', ['count' => $factionDeck->heroes_count])",
-    "trans_choice('cards.hands_count', $card->hands)": "trans_choice('entities.cards.hands_count', $card->hands)",
+    # HeroClassService
+    "No se puede eliminar la clase porque tiene héroes asociados.": "__('entities.hero_classes.errors.has_heroes')",
+    "No se puede eliminar permanentemente la clase porque tiene héroes asociados.": "__('entities.hero_classes.errors.force_delete_has_heroes')",
+    
+    # HeroRaceService
+    "No se puede eliminar la raza porque tiene héroes asociados.": "__('entities.hero_races.errors.has_heroes')",
+    "No se puede eliminar permanentemente la raza porque tiene héroes asociados.": "__('entities.hero_races.errors.force_delete_has_heroes')",
+    
+    # HeroSuperclassService
+    "No se puede eliminar la superclase porque tiene clases asociadas.": "__('entities.hero_superclasses.errors.has_classes')",
+    "No se puede eliminar la superclase porque tiene un tipo de carta asociado.": "__('entities.hero_superclasses.errors.has_card_type')",
+    "No se puede eliminar permanentemente la superclase porque tiene clases asociadas.": "__('entities.hero_superclasses.errors.force_delete_has_classes')",
+    "No se puede eliminar permanentemente la superclase porque tiene un tipo de carta asociado.": "__('entities.hero_superclasses.errors.force_delete_has_card_type')",
+    
+    # CardTypeService
+    "No se puede eliminar el tipo de carta porque tiene cartas asociadas.": "__('entities.card_types.errors.has_cards')",
+    "No se puede eliminar permanentemente el tipo de carta porque tiene cartas asociadas.": "__('entities.card_types.errors.force_delete_has_cards')",
+    
+    # EquipmentTypeService
+    "No se puede eliminar el tipo de equipo porque tiene cartas asociadas.": "__('entities.equipment_types.errors.has_cards')",
+    "No se puede eliminar permanentemente el tipo de equipo porque tiene cartas asociadas.": "__('entities.equipment_types.errors.force_delete_has_cards')",
+    
+    # AttackRangeService
+    "No se puede eliminar el rango de ataque porque tiene habilidades de héroe asociadas.": "__('entities.attack_ranges.errors.has_abilities')",
+    "No se puede eliminar el rango de ataque porque tiene cartas asociadas.": "__('entities.attack_ranges.errors.has_cards')",
+    "No se puede eliminar permanentemente el rango de ataque porque tiene habilidades de héroe asociadas.": "__('entities.attack_ranges.errors.force_delete_has_abilities')",
+    "No se puede eliminar permanentemente el rango de ataque porque tiene cartas asociadas.": "__('entities.attack_ranges.errors.force_delete_has_cards')",
+    
+    # AttackSubtypeService
+    "No se puede eliminar el subtipo de ataque porque tiene cartas asociadas.": "__('entities.attack_subtypes.errors.has_cards')",
+    "No se puede eliminar el subtipo de ataque porque tiene habilidades de héroe asociadas.": "__('entities.attack_subtypes.errors.has_abilities')",
+    "No se puede eliminar permanentemente el subtipo de ataque porque tiene cartas asociadas.": "__('entities.attack_subtypes.errors.force_delete_has_cards')",
+    "No se puede eliminar permanentemente el subtipo de ataque porque tiene habilidades de héroe asociadas.": "__('entities.attack_subtypes.errors.force_delete_has_abilities')",
+    
+    # FactionService
+    "No se puede eliminar la facción porque tiene héroes asociados.": "__('entities.factions.errors.has_heroes')",
+    "No se puede eliminar la facción porque tiene cartas asociadas.": "__('entities.factions.errors.has_cards')",
+    "No se puede eliminar permanentemente la facción porque tiene héroes asociados.": "__('entities.factions.errors.force_delete_has_heroes')",
+    "No se puede eliminar permanentemente la facción porque tiene cartas asociadas.": "__('entities.factions.errors.force_delete_has_cards')",
+    
+    # HeroAbilityService
+    "No se puede eliminar la habilidad porque está asignada a héroes.": "__('entities.hero_abilities.errors.has_heroes')",
+    "No se puede eliminar la habilidad porque hay cartas basadas en ella.": "__('entities.hero_abilities.errors.has_cards')",
+    "No se puede eliminar permanentemente la habilidad porque está asignada a héroes.": "__('entities.hero_abilities.errors.force_delete_has_heroes')",
+    "No se puede eliminar permanentemente la habilidad porque hay cartas basadas en ella.": "__('entities.hero_abilities.errors.force_delete_has_cards')",
+    
+    # GameModeService
+    "No se puede eliminar el modo de juego porque tiene mazos de facción asociados.": "__('entities.game_modes.errors.has_faction_decks')",
+    "No se puede eliminar permanentemente el modo de juego porque tiene mazos de facción asociados.": "__('entities.game_modes.errors.force_delete_has_faction_decks')",
+    
+    # DeckAttributesConfigurationService
+    "Error al crear la configuración de mazos: ": "__('entities.deck_attributes.errors.create') + ' '",
+    "Error al actualizar la configuración de mazos: ": "__('entities.deck_attributes.errors.update') + ' '",
+    "Error al eliminar la configuración de mazos: ": "__('entities.deck_attributes.errors.delete') + ' '",
+    
+    # Mensajes en DeckAttributesConfiguration.php
+    "El mazo debe tener al menos {$this->min_cards} cartas.": "__('entities.faction_decks.validation.min_cards', ['min' => $this->min_cards])",
+    "El mazo no puede tener más de {$this->max_cards} cartas.": "__('entities.faction_decks.validation.max_cards', ['max' => $this->max_cards])",
+    "El mazo no puede tener más de {$this->max_copies_per_card} copias de una misma carta.": "__('entities.faction_decks.validation.max_copies_per_card', ['max' => $this->max_copies_per_card])",
+    "El mazo no puede tener más de {$this->max_copies_per_hero} copias de un mismo héroe.": "__('entities.faction_decks.validation.max_copies_per_hero', ['max' => $this->max_copies_per_hero])",
+    "El mazo debe tener exactamente {$this->required_heroes} héroes.": "__('entities.faction_decks.validation.required_heroes', ['number' => $this->required_heroes])",
+    
+    # Mensajes de error en controladores (patrones comunes)
+    "Ha ocurrido un error al crear la Clase: ": "__('common.errors.create', ['entity' => __('entities.hero_classes.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar la Clase: ": "__('common.errors.update', ['entity' => __('entities.hero_classes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar la Clase: ": "__('common.errors.delete', ['entity' => __('entities.hero_classes.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar la Clase: ": "__('common.errors.restore', ['entity' => __('entities.hero_classes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente la Clase: ": "__('common.errors.force_delete', ['entity' => __('entities.hero_classes.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear la Raza: ": "__('common.errors.create', ['entity' => __('entities.hero_races.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar la Raza: ": "__('common.errors.update', ['entity' => __('entities.hero_races.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar la Raza: ": "__('common.errors.delete', ['entity' => __('entities.hero_races.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar la Raza: ": "__('common.errors.restore', ['entity' => __('entities.hero_races.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente la Raza: ": "__('common.errors.force_delete', ['entity' => __('entities.hero_races.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear la Superclase: ": "__('common.errors.create', ['entity' => __('entities.hero_superclasses.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar la Superclase: ": "__('common.errors.update', ['entity' => __('entities.hero_superclasses.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar la Superclase: ": "__('common.errors.delete', ['entity' => __('entities.hero_superclasses.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar la Superclase: ": "__('common.errors.restore', ['entity' => __('entities.hero_superclasses.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente la Superclase: ": "__('common.errors.force_delete', ['entity' => __('entities.hero_superclasses.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Tipo de Carta: ": "__('common.errors.create', ['entity' => __('entities.card_types.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Tipo de Carta: ": "__('common.errors.update', ['entity' => __('entities.card_types.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Tipo de Carta: ": "__('common.errors.delete', ['entity' => __('entities.card_types.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Tipo de Carta: ": "__('common.errors.restore', ['entity' => __('entities.card_types.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Tipo de Carta: ": "__('common.errors.force_delete', ['entity' => __('entities.card_types.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Tipo de Equipo: ": "__('common.errors.create', ['entity' => __('entities.equipment_types.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Tipo de Equipo: ": "__('common.errors.update', ['entity' => __('entities.equipment_types.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Tipo de Equipo: ": "__('common.errors.delete', ['entity' => __('entities.equipment_types.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Tipo de Equipo: ": "__('common.errors.restore', ['entity' => __('entities.equipment_types.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Tipo de Equipo: ": "__('common.errors.force_delete', ['entity' => __('entities.equipment_types.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Rango de Ataque: ": "__('common.errors.create', ['entity' => __('entities.attack_ranges.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Rango de Ataque: ": "__('common.errors.update', ['entity' => __('entities.attack_ranges.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Rango de Ataque: ": "__('common.errors.delete', ['entity' => __('entities.attack_ranges.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Rango de Ataque: ": "__('common.errors.restore', ['entity' => __('entities.attack_ranges.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Rango de Ataque: ": "__('common.errors.force_delete', ['entity' => __('entities.attack_ranges.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Subtipo de Ataque: ": "__('common.errors.create', ['entity' => __('entities.attack_subtypes.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Subtipo de Ataque: ": "__('common.errors.update', ['entity' => __('entities.attack_subtypes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Subtipo de Ataque: ": "__('common.errors.delete', ['entity' => __('entities.attack_subtypes.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Subtipo de Ataque: ": "__('common.errors.restore', ['entity' => __('entities.attack_subtypes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Subtipo de Ataque: ": "__('common.errors.force_delete', ['entity' => __('entities.attack_subtypes.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear la Facción: ": "__('common.errors.create', ['entity' => __('entities.factions.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar la Facción: ": "__('common.errors.update', ['entity' => __('entities.factions.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar la Facción: ": "__('common.errors.delete', ['entity' => __('entities.factions.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar la Facción: ": "__('common.errors.restore', ['entity' => __('entities.factions.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente la Facción: ": "__('common.errors.force_delete', ['entity' => __('entities.factions.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear la Habilidad: ": "__('common.errors.create', ['entity' => __('entities.hero_abilities.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar la Habilidad: ": "__('common.errors.update', ['entity' => __('entities.hero_abilities.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar la Habilidad: ": "__('common.errors.delete', ['entity' => __('entities.hero_abilities.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar la Habilidad: ": "__('common.errors.restore', ['entity' => __('entities.hero_abilities.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente la Habilidad: ": "__('common.errors.force_delete', ['entity' => __('entities.hero_abilities.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Modo de Juego: ": "__('common.errors.create', ['entity' => __('entities.game_modes.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Modo de Juego: ": "__('common.errors.update', ['entity' => __('entities.game_modes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Modo de Juego: ": "__('common.errors.delete', ['entity' => __('entities.game_modes.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Modo de Juego: ": "__('common.errors.restore', ['entity' => __('entities.game_modes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Modo de Juego: ": "__('common.errors.force_delete', ['entity' => __('entities.game_modes.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Héroe: ": "__('common.errors.create', ['entity' => __('entities.heroes.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Héroe: ": "__('common.errors.update', ['entity' => __('entities.heroes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Héroe: ": "__('common.errors.delete', ['entity' => __('entities.heroes.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Héroe: ": "__('common.errors.restore', ['entity' => __('entities.heroes.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Héroe: ": "__('common.errors.force_delete', ['entity' => __('entities.heroes.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear la Carta: ": "__('common.errors.create', ['entity' => __('entities.cards.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar la Carta: ": "__('common.errors.update', ['entity' => __('entities.cards.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar la Carta: ": "__('common.errors.delete', ['entity' => __('entities.cards.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar la Carta: ": "__('common.errors.restore', ['entity' => __('entities.cards.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente la Carta: ": "__('common.errors.force_delete', ['entity' => __('entities.cards.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Contador: ": "__('common.errors.create', ['entity' => __('entities.counters.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Contador: ": "__('common.errors.update', ['entity' => __('entities.counters.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Contador: ": "__('common.errors.delete', ['entity' => __('entities.counters.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Contador: ": "__('common.errors.restore', ['entity' => __('entities.counters.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Contador: ": "__('common.errors.force_delete', ['entity' => __('entities.counters.singular')]) + ' '",
+    
+    "Ha ocurrido un error al crear el Mazo de Facción: ": "__('common.errors.create', ['entity' => __('entities.faction_decks.singular')]) + ' '",
+    "Ha ocurrido un error al actualizar el Mazo de Facción: ": "__('common.errors.update', ['entity' => __('entities.faction_decks.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar el Mazo de Facción: ": "__('common.errors.delete', ['entity' => __('entities.faction_decks.singular')]) + ' '",
+    "Ha ocurrido un error al restaurar el Mazo de Facción: ": "__('common.errors.restore', ['entity' => __('entities.faction_decks.singular')]) + ' '",
+    "Ha ocurrido un error al eliminar permanentemente el Mazo de Facción: ": "__('common.errors.force_delete', ['entity' => __('entities.faction_decks.singular')]) + ' '",
+    
+    # Mensajes de validación en Requests
+    'El nombre de la clase es obligatorio.': "__('validation.required', ['attribute' => __('entities.hero_classes.name')])",
+    'El nombre debe ser un array con traducciones.': "__('validation.array', ['attribute' => __('common.name')])",
+    'El nombre en español es obligatorio.': "__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])",
+    'La superclase es obligatoria.': "__('validation.required', ['attribute' => __('entities.hero_superclasses.singular')])",
+    'La superclase seleccionada no existe.': "__('validation.exists', ['attribute' => __('entities.hero_superclasses.singular')])",
 }
 
-# Patrones de sustitución para archivos que contienen "->types."
-types_patterns = {
-    "__('blocks.types.' + ([^)]+))": "__('pages.blocks.types.' + \\1)",
-    "__\\('blocks.types\\.' \\. (.*?)\\)": "__('pages.blocks.types.' . \\1)",
-    "__\\('counters.types\\.' \\. (.*?)\\)": "__('entities.counters.types.' . \\1)",
-}
+# Patrones para encontrar cadenas en excepciones (throw new Exception("..."))
+exception_pattern = r'throw new \\Exception\("([^"]+)"\);'
+exception_pattern_with_vars = r'throw new \\Exception\("([^"]+)" \. (.*?)\);'
 
-# Patrones de sustitución para archivos que contienen "->genders."
-genders_patterns = {
-    "__('heroes.genders.' + ([^)]+))": "__('entities.heroes.genders.' + \\1)",
-    "__\\('heroes.genders\\.' \\. (.*?)\\)": "__('entities.heroes.genders.' . \\1)",
-}
+# Patrones para encontrar mensajes de error en los controladores
+controller_error_pattern = r'->with\(\'error\', \'([^\']+)\' \. (.*?)\)'
+
+# Patrón para encontrar mensajes de validación en los Requests
+validation_message_pattern = r'\'([^\']+)\' => \'([^\']+)\','
 
 def process_file(filepath):
     """Procesa un archivo y reemplaza todas las cadenas según el diccionario."""
     with open(filepath, 'r', encoding='utf-8') as file:
         content = file.read()
     
-    # Primero manejamos los patrones específicos
-    if "types." in content:
-        for pattern, replacement in types_patterns.items():
-            content = re.sub(pattern, replacement, content)
+    original_content = content
     
-    if "genders." in content:
-        for pattern, replacement in genders_patterns.items():
-            content = re.sub(pattern, replacement, content)
-    
-    # Aplicamos todas las sustituciones del diccionario
-    modified = False
+    # Primero reemplazamos las cadenas literales
     for old, new in translations.items():
-        if old in content:
-            content = content.replace(old, new)
-            modified = True
+        content = content.replace(old, new)
     
-    if modified:
+    # Procesamos patrones de excepción con variables
+    content = re.sub(exception_pattern_with_vars, lambda m: f'throw new \\Exception({m.group(1).replace(m.group(1), translations.get(m.group(1), m.group(1)))} . {m.group(2)});', content)
+    
+    # Procesamos patrones de excepción simples
+    matches = re.findall(exception_pattern, content)
+    for match in matches:
+        if match in translations:
+            content = content.replace(f'throw new \\Exception("{match}");', f'throw new \\Exception({translations[match]});')
+    
+    # Procesamos patrones de error en controladores
+    content = re.sub(controller_error_pattern, lambda m: f'->with(\'error\', {translations.get(m.group(1) + " ", m.group(1))} . {m.group(2)})', content)
+    
+    # Procesamos patrones de mensajes de validación
+    # Esto es más complejo y podría requerir una implementación específica 
+    # si los formatos de los mensajes varían significativamente
+    
+    if content != original_content:
         with open(filepath, 'w', encoding='utf-8') as file:
             file.write(content)
         return True
@@ -433,39 +207,23 @@ def main():
     """Función principal que recorre todos los archivos y aplica las sustituciones."""
     # Directorios a examinar
     directories = [
-        'resources/views', 
-        'resources/views/admin',
-        'resources/views/auth',
-        'resources/views/components',
-        'resources/views/layouts',
-        'resources/views/content',
-        'resources/views/admin/blocks',
-        'resources/views/admin/cards',
-        'resources/views/admin/factions',
-        'resources/views/admin/hero-abilities',
-        'resources/views/admin/hero-classes',
-        'resources/views/admin/hero-races',
-        'resources/views/admin/hero-superclasses',
-        'resources/views/admin/attack-ranges',
-        'resources/views/admin/attack-subtypes',
-        'resources/views/admin/card-types',
-        'resources/views/admin/counters',
-        'resources/views/admin/dashboard',
-        'resources/views/admin/deck-attributes-configurations',
-        'resources/views/admin/equipment-types',
-        'resources/views/admin/faction-decks',
-        'resources/views/admin/game-modes',
-        'resources/views/admin/heroes',
-        'resources/views/admin/pages',
-        'resources/views/components/admin',
-        'resources/views/components/auth',
-        'resources/views/components/form',
-        'resources/views/components/entity',
-        'resources/views/components/public',
+        'app/Http/Controllers',
+        'app/Http/Controllers/Admin',
+        'app/Http/Controllers/Auth',
+        'app/Http/Controllers/Game',
+        'app/Http/Controllers/Content',
+        'app/Http/Requests',
+        'app/Http/Requests/Admin',
+        'app/Http/Requests/Auth',
+        'app/Http/Requests/Game',
+        'app/Http/Requests/Content',
+        'app/Services',
+        'app/Services/Game',
+        'app/Services/Content',
     ]
     
     # Extensiones de archivo a procesar
-    extensions = ['.blade.php', '.php']
+    extensions = ['.php']
     
     total_files = 0
     modified_files = 0
@@ -481,9 +239,12 @@ def main():
                     filepath = os.path.join(root, file)
                     total_files += 1
                     
-                    if process_file(filepath):
-                        modified_files += 1
-                        print(f"Procesado: {filepath}")
+                    try:
+                        if process_file(filepath):
+                            modified_files += 1
+                            print(f"Procesado: {filepath}")
+                    except Exception as e:
+                        print(f"Error al procesar {filepath}: {e}")
     
     print(f"\nTotal de archivos examinados: {total_files}")
     print(f"Archivos modificados: {modified_files}")

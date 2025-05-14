@@ -101,7 +101,7 @@ class CardTypeService
   {
     // Check for related cards
     if ($cardType->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar el tipo de carta porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.card_types.errors.has_cards')");
     }
     
     return $cardType->delete();
@@ -133,7 +133,7 @@ class CardTypeService
     
     // Check for related cards (incluso para los eliminados)
     if ($cardType->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el tipo de carta porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.card_types.errors.force_delete_has_cards')");
     }
     
     return $cardType->forceDelete();

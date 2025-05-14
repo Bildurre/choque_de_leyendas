@@ -59,7 +59,7 @@ class HeroRaceController extends Controller
       return redirect()->route('admin.hero-races.index')
         ->with('success', __('hero_races.created_successfully', ['name' => $heroRace->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al crear la Raza: ' . $e->getMessage())
+      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.hero_races.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -84,7 +84,7 @@ class HeroRaceController extends Controller
       return redirect()->route('admin.hero-races.index')
         ->with('success', __('hero_races.updated_successfully', ['name' => $heroRace->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar la Raza: ' . $e->getMessage())
+      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.hero_races.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -101,7 +101,7 @@ class HeroRaceController extends Controller
       return redirect()->route('admin.hero-races.index')
         ->with('success', __('hero_races.deleted_successfully', ['name' => $heroRaceName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar la Raza: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.hero_races.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -117,7 +117,7 @@ class HeroRaceController extends Controller
       return redirect()->route('admin.hero-races.index', ['trashed' => 1])
         ->with('success', __('hero_races.restored_successfully', ['name' => $heroRace->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar la Raza: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.hero_races.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -135,7 +135,7 @@ class HeroRaceController extends Controller
       return redirect()->route('admin.hero-races.index', ['trashed' => 1])
         ->with('success', __('hero_races.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Raza: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.hero_races.singular')]) + ' '' . $e->getMessage());
     }
   }
 }

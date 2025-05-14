@@ -87,8 +87,8 @@ class FactionDeckRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre del mazo es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
       'faction_id.required' => 'La facción es obligatoria.',
       'faction_id.exists' => 'La facción seleccionada no existe.',
       'game_mode_id.required' => 'El modo de juego es obligatorio.',

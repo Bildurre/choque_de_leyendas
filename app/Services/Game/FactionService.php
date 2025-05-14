@@ -201,12 +201,12 @@ class FactionService
   {
     // Check for related heroes
     if ($faction->heroes()->count() > 0) {
-      throw new \Exception("No se puede eliminar la facción porque tiene héroes asociados.");
+      throw new \Exception("__('entities.factions.errors.has_heroes')");
     }
     
     // Check for related cards
     if ($faction->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar la facción porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.factions.errors.has_cards')");
     }
     
     return $faction->delete();
@@ -238,12 +238,12 @@ class FactionService
     
     // Check for related heroes (even deleted ones)
     if ($faction->heroes()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la facción porque tiene héroes asociados.");
+      throw new \Exception("__('entities.factions.errors.force_delete_has_heroes')");
     }
     
     // Check for related cards (even deleted ones)
     if ($faction->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la facción porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.factions.errors.force_delete_has_cards')");
     }
     
     // Delete icon if exists

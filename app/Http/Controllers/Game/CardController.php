@@ -88,7 +88,7 @@ class CardController extends Controller
         ->with('success', __('cards.created_successfully', ['name' => $card->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', 'Ha ocurrido un error al crear la Carta: ' . $e->getMessage())
+        ->with('error', '__('common.errors.create', ['entity' => __('entities.cards.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -149,7 +149,7 @@ class CardController extends Controller
         ->with('success', __('cards.updated_successfully', ['name' => $card->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', 'Ha ocurrido un error al actualizar la Carta: ' . $e->getMessage())
+        ->with('error', '__('common.errors.update', ['entity' => __('entities.cards.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -166,7 +166,7 @@ class CardController extends Controller
       return redirect()->route('admin.cards.index')
         ->with('success', __('cards.deleted_successfully', ['name' => $cardName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar la Carta: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.cards.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -182,7 +182,7 @@ class CardController extends Controller
       return redirect()->route('admin.cards.index', ['trashed' => 1])
         ->with('success', __('cards.restored_successfully', ['name' => $card->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar la Carta: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.cards.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -200,7 +200,7 @@ class CardController extends Controller
       return redirect()->route('admin.cards.index', ['trashed' => 1])
         ->with('success', __('cards.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente la Carta: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.cards.singular')]) + ' '' . $e->getMessage());
     }
   }
 }

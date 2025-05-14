@@ -37,4 +37,22 @@ return [
     'error' => 'An error occurred.',
     'warning' => 'Warning',
     'info' => 'Information',
+
+    // Common Errors
+    'errors' => [
+    'create' => 'An error occurred while creating the :entity: ',
+    'update' => 'An error occurred while updating the :entity: ',
+    'delete' => 'An error occurred while deleting the :entity: ',
+    'restore' => 'An error occurred while restoring the :entity: ',
+    'force_delete' => 'An error occurred while permanently deleting the :entity: ',
+    ],
+
+    // Common successes
+    'success' => [
+        'created' => ':entity created successfully.',
+        'updated' => ':entity updated successfully.',
+        'deleted' => ':entity deleted successfully.',
+        'restored' => ':entity restored successfully.',
+        'force_deleted' => ':entity permanently deleted successfully.',
+    ],
 ];

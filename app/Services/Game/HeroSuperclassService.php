@@ -94,12 +94,12 @@ class HeroSuperclassService
   {
     // Check for related hero classes
     if ($heroSuperclass->heroClasses()->count() > 0) {
-      throw new \Exception("No se puede eliminar la superclase porque tiene clases asociadas.");
+      throw new \Exception("__('entities.hero_superclasses.errors.has_classes')");
     }
     
     // Check for related card type
     if ($heroSuperclass->cardType()->exists()) {
-      throw new \Exception("No se puede eliminar la superclase porque tiene un tipo de carta asociado.");
+      throw new \Exception("__('entities.hero_superclasses.errors.has_card_type')");
     }
     
     return $heroSuperclass->delete();
@@ -131,12 +131,12 @@ class HeroSuperclassService
     
     // Check for related hero classes (including trashed)
     if ($heroSuperclass->heroClasses()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la superclase porque tiene clases asociadas.");
+      throw new \Exception("__('entities.hero_superclasses.errors.force_delete_has_classes')");
     }
     
     // Check for related card type (including trashed)
     if ($heroSuperclass->cardType()->withTrashed()->exists()) {
-      throw new \Exception("No se puede eliminar permanentemente la superclase porque tiene un tipo de carta asociado.");
+      throw new \Exception("__('entities.hero_superclasses.errors.force_delete_has_card_type')");
     }
     
     return $heroSuperclass->forceDelete();

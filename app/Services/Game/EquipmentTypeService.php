@@ -102,7 +102,7 @@ class EquipmentTypeService
   {
     // Check for related cards
     if ($equipmentType->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar el tipo de equipo porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.equipment_types.errors.has_cards')");
     }
     
     return $equipmentType->delete();
@@ -134,7 +134,7 @@ class EquipmentTypeService
     
     // Check for related cards (incluso para los eliminados)
     if ($equipmentType->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el tipo de equipo porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.equipment_types.errors.force_delete_has_cards')");
     }
     
     return $equipmentType->forceDelete();

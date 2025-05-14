@@ -102,7 +102,7 @@ class HeroClassService
   {
     // Check for related heroes
     if ($heroClass->heroes()->count() > 0) {
-      throw new \Exception("No se puede eliminar la clase porque tiene héroes asociados.");
+      throw new \Exception("__('entities.hero_classes.errors.has_heroes')");
     }
     
     return $heroClass->delete(); // Ahora esto realizará un soft delete
@@ -134,7 +134,7 @@ class HeroClassService
     
     // Check for related heroes (incluso para los eliminados)
     if ($heroClass->heroes()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la clase porque tiene héroes asociados.");
+      throw new \Exception("__('entities.hero_classes.errors.force_delete_has_heroes')");
     }
     
     return $heroClass->forceDelete();

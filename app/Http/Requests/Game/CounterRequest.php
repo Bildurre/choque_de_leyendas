@@ -44,8 +44,8 @@ class CounterRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre del contador es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
       'type.required' => 'El tipo es obligatorio.',
       'type.string' => 'El tipo debe ser una cadena de texto.',
       'type.in' => 'El tipo seleccionado no es válido.',

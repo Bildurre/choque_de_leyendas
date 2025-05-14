@@ -103,12 +103,12 @@ class AttackSubtypeService
   {
     // Check for related cards
     if ($attackSubtype->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar el subtipo de ataque porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.attack_subtypes.errors.has_cards')");
     }
     
     // Check for related hero abilities
     if ($attackSubtype->heroAbilities()->count() > 0) {
-      throw new \Exception("No se puede eliminar el subtipo de ataque porque tiene habilidades de héroe asociadas.");
+      throw new \Exception("__('entities.attack_subtypes.errors.has_abilities')");
     }
     
     return $attackSubtype->delete();
@@ -140,12 +140,12 @@ class AttackSubtypeService
     
     // Check for related cards (incluso para los eliminados)
     if ($attackSubtype->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el subtipo de ataque porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.attack_subtypes.errors.force_delete_has_cards')");
     }
     
     // Check for related hero abilities (incluso para los eliminados)
     if ($attackSubtype->heroAbilities()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el subtipo de ataque porque tiene habilidades de héroe asociadas.");
+      throw new \Exception("__('entities.attack_subtypes.errors.force_delete_has_abilities')");
     }
     
     return $attackSubtype->forceDelete();

@@ -63,9 +63,9 @@ class CardTypeRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre del tipo de carta es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
-      'hero_superclass_id.exists' => 'La superclase seleccionada no existe.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'hero_superclass_id.exists' => '__('validation.exists', ['attribute' => __('entities.hero_superclasses.singular')])',
     ];
 
     // Mensajes para la unicidad en cada idioma

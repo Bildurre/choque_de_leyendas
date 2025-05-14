@@ -47,8 +47,8 @@ class EquipmentTypeRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre del tipo de equipo es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
       'category.required' => 'La categoría es obligatoria.',
       'category.string' => 'La categoría debe ser una cadena de texto.',
       'category.in' => 'La categoría seleccionada no es válida.',

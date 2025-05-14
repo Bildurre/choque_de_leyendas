@@ -26,6 +26,12 @@ return [
             'cards' => 'Cartas',
             'decks' => 'Mazos',
         ],
+        'errors' => [
+            'has_heroes' => 'No se puede eliminar la facción porque tiene héroes asociados.',
+            'has_cards' => 'No se puede eliminar la facción porque tiene cartas asociadas.',
+            'force_delete_has_heroes' => 'No se puede eliminar permanentemente la facción porque tiene héroes asociados.',
+            'force_delete_has_cards' => 'No se puede eliminar permanentemente la facción porque tiene cartas asociadas.',
+        ],
     ],
     
     // Heroes
@@ -60,6 +66,10 @@ return [
             'health' => 'Salud',
         ],
         'select_abilities' => 'Seleccionar Habilidades',
+        'validation' => [
+            'min_total_attributes' => 'El total de atributos debe ser al menos :min.',
+            'max_total_attributes' => 'El total de atributos no puede ser mayor que :max.',
+        ],
     ],
     
     // Cards
@@ -101,6 +111,10 @@ return [
         'name' => 'Nombre de Clase',
         'passive' => 'Pasiva de Clase',
         'heroes_count' => ':count héroes',
+        'errors' => [
+            'has_heroes' => 'No se puede eliminar la clase porque tiene héroes asociados.',
+            'force_delete_has_heroes' => 'No se puede eliminar permanentemente la clase porque tiene héroes asociados.',
+        ],
     ],
     
     // Hero Superclasses
@@ -111,6 +125,12 @@ return [
         'edit' => 'Editar Superclase de Héroe',
         'name' => 'Nombre de Superclase',
         'classes_count' => ':count clases',
+        'errors' => [
+            'has_classes' => 'No se puede eliminar la superclase porque tiene clases asociadas.',
+            'has_card_type' => 'No se puede eliminar la superclase porque tiene un tipo de carta asociado.',
+            'force_delete_has_classes' => 'No se puede eliminar permanentemente la superclase porque tiene clases asociadas.',
+            'force_delete_has_card_type' => 'No se puede eliminar permanentemente la superclase porque tiene un tipo de carta asociado.',
+        ],
     ],
     
     // Hero Races
@@ -121,6 +141,10 @@ return [
         'edit' => 'Editar Raza de Héroe',
         'name' => 'Nombre de Raza',
         'heroes_count' => ':count héroes',
+        'errors' => [
+            'has_heroes' => 'No se puede eliminar la raza porque tiene héroes asociados.',
+            'force_delete_has_heroes' => 'No se puede eliminar permanentemente la raza porque tiene héroes asociados.',
+        ],
     ],
     
     // Hero Abilities
@@ -138,6 +162,12 @@ return [
         'type' => 'Tipo',
         'no_attack_range' => 'Sin Alcance de Ataque',
         'no_attack_subtype' => 'Sin Subtipo de Ataque',
+        'errors' => [
+            'has_heroes' => 'No se puede eliminar la habilidad porque está asignada a héroes.',
+            'has_cards' => 'No se puede eliminar la habilidad porque hay cartas basadas en ella.',
+            'force_delete_has_heroes' => 'No se puede eliminar permanentemente la habilidad porque está asignada a héroes.',
+            'force_delete_has_cards' => 'No se puede eliminar permanentemente la habilidad porque hay cartas basadas en ella.',
+        ],
     ],
     
     // Card Types
@@ -151,6 +181,10 @@ return [
         'hero_superclass' => 'Superclase de Héroe',
         'select_superclass' => 'Seleccionar una Superclase',
         'no_superclass' => 'Sin Superclase',
+        'errors' => [
+            'has_cards' => 'No se puede eliminar el tipo de carta porque tiene cartas asociadas.',
+            'force_delete_has_cards' => 'No se puede eliminar permanentemente el tipo de carta porque tiene cartas asociadas.',
+        ],
     ],
     
     // Equipment Types
@@ -162,6 +196,10 @@ return [
         'name' => 'Nombre del Tipo',
         'category' => 'Categoría',
         'cards_count' => ':count cartas',
+        'errors' => [
+            'has_cards' => 'No se puede eliminar el tipo de equipamiento porque tiene cartas asociadas.',
+            'force_delete_has_cards' => 'No se puede eliminar permanentemente el tipo de equipamiento porque tiene cartas asociadas.',
+        ],
     ],
     
     // Attack Subtypes
@@ -174,6 +212,12 @@ return [
         'type' => 'Tipo',
         'hero_abilities_count' => ':count habilidades de héroe',
         'cards_count' => ':count cartas',
+        'errors' => [
+            'has_cards' => 'No se puede eliminar el subtipo de ataque porque tiene cartas asociadas.',
+            'has_abilities' => 'No se puede eliminar el subtipo de ataque porque tiene habilidades de héroe asociadas.',
+            'force_delete_has_cards' => 'No se puede eliminar permanentemente el subtipo de ataque porque tiene cartas asociadas.',
+            'force_delete_has_abilities' => 'No se puede eliminar permanentemente el subtipo de ataque porque tiene habilidades de héroe asociadas.',
+        ],
     ],
     
     // Attack Ranges
@@ -185,6 +229,12 @@ return [
         'name' => 'Nombre del Alcance',
         'hero_abilities_count' => ':count habilidades de héroe',
         'cards_count' => ':count cartas',
+        'errors' => [
+            'has_abilities' => 'No se puede eliminar el alcance de ataque porque tiene habilidades de héroe asociadas.',
+            'has_cards' => 'No se puede eliminar el alcance de ataque porque tiene cartas asociadas.',
+            'force_delete_has_abilities' => 'No se puede eliminar permanentemente el alcance de ataque porque tiene habilidades de héroe asociadas.',
+            'force_delete_has_cards' => 'No se puede eliminar permanentemente el alcance de ataque porque tiene cartas asociadas.',
+        ],
     ],
     
     // Faction Decks
@@ -226,6 +276,13 @@ return [
         'no_cards_available' => 'No hay cartas disponibles',
         'no_heroes_available' => 'No hay héroes disponibles',
         'copies' => 'Copias',
+        'validation' => [
+            'min_cards' => 'El mazo debe tener al menos :min cartas.',
+            'max_cards' => 'El mazo no puede tener más de :max cartas.',
+            'max_copies_per_card' => 'El mazo no puede tener más de :max copias de la misma carta.',
+            'max_copies_per_hero' => 'El mazo no puede tener más de :max copias del mismo héroe.',
+            'required_heroes' => 'El mazo debe tener exactamente :number héroes.',
+        ],
     ],
     
     // Game Modes
@@ -237,6 +294,10 @@ return [
         'name' => 'Nombre del Modo',
         'description' => 'Descripción',
         'faction_decks_count' => ':count mazos de facción',
+        'errors' => [
+            'has_faction_decks' => 'No se puede eliminar el modo de juego porque tiene mazos de facción asociados.',
+            'force_delete_has_faction_decks' => 'No se puede eliminar permanentemente el modo de juego porque tiene mazos de facción asociados.',
+        ],
     ],
     
     // Counters
@@ -285,5 +346,10 @@ return [
         'required_heroes' => 'Héroes Requeridos',
         'select_game_mode' => 'Seleccionar Modo de Juego',
         'no_configurations' => 'No hay configuraciones de mazo disponibles',
+        'errors' => [
+            'create' => 'Error al crear la configuración del mazo: ',
+            'update' => 'Error al actualizar la configuración del mazo: ',
+            'delete' => 'Error al eliminar la configuración del mazo: ',
+        ],
     ],
 ];

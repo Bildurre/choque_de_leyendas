@@ -86,8 +86,8 @@ class CardRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre de la carta es obligatorio.',
-      'name.array' => 'El nombre debe ser un array con traducciones.',
-      'name.es.required' => 'El nombre en español es obligatorio.',
+      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
+      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
       'card_type_id.required' => 'El tipo de carta es obligatorio.',
       'card_type_id.exists' => 'El tipo de carta seleccionado no existe.',
       'faction_id.exists' => 'La facción seleccionada no existe.',

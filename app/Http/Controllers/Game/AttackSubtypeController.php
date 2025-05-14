@@ -65,7 +65,7 @@ class AttackSubtypeController extends Controller
       return redirect()->route('admin.attack-subtypes.index')
         ->with('success', __('attack_subtypes.created_successfully', ['name' => $attackSubtype->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al crear el Subtipo de Ataque: ' . $e->getMessage())
+      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.attack_subtypes.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -91,7 +91,7 @@ class AttackSubtypeController extends Controller
       return redirect()->route('admin.attack-subtypes.index')
         ->with('success', __('attack_subtypes.updated_successfully', ['name' => $attackSubtype->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al actualizar el Subtipo de Ataque: ' . $e->getMessage())
+      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.attack_subtypes.singular')]) + ' '' . $e->getMessage())
         ->withInput();
     }
   }
@@ -108,7 +108,7 @@ class AttackSubtypeController extends Controller
       return redirect()->route('admin.attack-subtypes.index')
         ->with('success', __('attack_subtypes.deleted_successfully', ['name' => $attackSubtypeName]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar el Subtipo de Ataque: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.attack_subtypes.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -124,7 +124,7 @@ class AttackSubtypeController extends Controller
       return redirect()->route('admin.attack-subtypes.index', ['trashed' => 1])
         ->with('success', __('attack_subtypes.restored_successfully', ['name' => $attackSubtype->name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al restaurar el Subtipo de Ataque: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.attack_subtypes.singular')]) + ' '' . $e->getMessage());
     }
   }
 
@@ -142,7 +142,7 @@ class AttackSubtypeController extends Controller
       return redirect()->route('admin.attack-subtypes.index', ['trashed' => 1])
         ->with('success', __('attack_subtypes.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', 'Ha ocurrido un error al eliminar permanentemente el Subtipo de Ataque: ' . $e->getMessage());
+      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.attack_subtypes.singular')]) + ' '' . $e->getMessage());
     }
   }
 }

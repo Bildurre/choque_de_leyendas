@@ -91,12 +91,12 @@ class AttackRangeService
   {
     // Check for related hero abilities
     if ($attackRange->heroAbilities()->count() > 0) {
-      throw new \Exception("No se puede eliminar el rango de ataque porque tiene habilidades de héroe asociadas.");
+      throw new \Exception("__('entities.attack_ranges.errors.has_abilities')");
     }
     
     // Check for related cards
     if ($attackRange->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar el rango de ataque porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.attack_ranges.errors.has_cards')");
     }
     
     return $attackRange->delete();
@@ -128,12 +128,12 @@ class AttackRangeService
     
     // Check for related hero abilities (incluso para los eliminados)
     if ($attackRange->heroAbilities()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el rango de ataque porque tiene habilidades de héroe asociadas.");
+      throw new \Exception("__('entities.attack_ranges.errors.force_delete_has_abilities')");
     }
     
     // Check for related cards (incluso para los eliminados)
     if ($attackRange->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el rango de ataque porque tiene cartas asociadas.");
+      throw new \Exception("__('entities.attack_ranges.errors.force_delete_has_cards')");
     }
     
     return $attackRange->forceDelete();

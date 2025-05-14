@@ -94,7 +94,7 @@ class HeroRaceService
   {
     // Check for related heroes
     if ($heroRace->heroes()->count() > 0) {
-      throw new \Exception("No se puede eliminar la raza porque tiene héroes asociados.");
+      throw new \Exception("__('entities.hero_races.errors.has_heroes')");
     }
     
     return $heroRace->delete();
@@ -126,7 +126,7 @@ class HeroRaceService
     
     // Check for related heroes (including trashed)
     if ($heroRace->heroes()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente la raza porque tiene héroes asociados.");
+      throw new \Exception("__('entities.hero_races.errors.force_delete_has_heroes')");
     }
     
     return $heroRace->forceDelete();
