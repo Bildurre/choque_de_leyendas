@@ -49,6 +49,13 @@
 @use 'components/form/image-upload';
 @use 'components/form/entity-selector';
 
+// Filter Components
+@use 'components/filters/filters-card';
+@use 'components/filters/search';
+@use 'components/filters/filters-select';
+@use 'components/filters/sort';
+@use 'components/filters/tag';
+
 // Pages
 @use 'pages/login';
 

@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../scss/app.scss';
+
 import initHeaderScroll from './components/public-header';
 import initThemeSwitcher from './components/theme-switcher';
 import initRandomAccentColor from './components/random-accent-color';
@@ -18,6 +19,7 @@ import initCostInput from './components/cost-input';
 import initColorPicker from './components/color-picker';
 import initFactionDeckForm from './components/faction-deck-form';
 import initEntitySelector from './components/entity-selector';
+import initAdminFilters from './components/filters';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initColorPicker();
   initFactionDeckForm();
   initEntitySelector();
+  initAdminFilters();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\HasAdminFilters;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
@@ -18,6 +19,7 @@ class Hero extends Model
   use HasTranslatableSlug;
   use SoftDeletes;
   use HasImageAttribute;
+  use HasAdminFilters;
 
   /**
    * The table associated with the model.
@@ -75,6 +77,87 @@ class Hero extends Model
     'passive_name',
     'passive_description'
   ];
+
+  /**
+  * Get fields that can be searched
+  *
+  * @return array
+  */
+  public function getAdminSearchable(): array
+  {
+    return ['name', 'lore_text'];
+  }
+  
+  /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'field' => 'faction.id',
+        'label' => __('entities.factions.singular'),
+        'label_field' => 'name', // Campo a mostrar como etiqueta
+        'value_field' => 'id'    // Campo a usar como valor
+      ],
+      [
+        'field' => 'heroRace.id',
+        'label' => __('entities.hero_races.singular'),
+        'label_field' => 'name',
+        'value_field' => 'id'
+      ],
+      [
+        'field' => 'heroClass.id',
+        'label' => __('entities.hero_classes.singular'),
+        'label_field' => 'name',
+        'value_field' => 'id'
+      ],
+      [
+        'field' => 'heroClass.hero_superclass_id',
+        'label' => __('entities.hero_superclasses.singular'),
+        'label_field' => 'name',
+        'value_field' => 'id',
+        'relation_path' => 'heroClass.heroSuperclass' // Camino para llegar a la relación
+      ],
+      [
+        'field' => 'gender',
+        'label' => __('entities.heroes.gender'),
+        'options' => [
+          'male' => __('entities.heroes.genders.male'),
+          'female' => __('entities.heroes.genders.female')
+        ]
+      ]
+  ];
+  }
+  
+  /**
+    * Get fields that can be sorted
+    *
+    * @return array
+    */
+    public function getAdminSortable(): array
+    {
+      return [
+        [
+          'field' => 'name',
+          'label' => __('entities.heroes.name')
+        ],
+        [
+          'field' => 'faction.name',
+          'label' => __('entities.factions.singular')
+        ],
+        [
+          'field' => 'created_at',
+          'label' => __('common.created_at')
+        ],
+        [
+          'field' => 'updated_at',
+          'label' => __('common.updated_at')
+        ]
+      ];
+    }
 
   /**
    * Get the options for generating the slug.

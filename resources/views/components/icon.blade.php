@@ -177,12 +177,25 @@ $sizeClass = $sizes[$size] ?? $sizes['md'];
         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
       </svg>
       @break
-
     @case('layers')
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
         <polyline points="2 17 12 22 22 17"></polyline>
         <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      @break
+    @case('search')
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      @break
+    @case('arrow-down-up')
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 16l4 4 4-4"/>
+        <path d="M7 20V4"/>
+        <path d="M21 8l-4-4-4 4"/>
+        <path d="M17 4v16"/>
       </svg>
       @break
     @default

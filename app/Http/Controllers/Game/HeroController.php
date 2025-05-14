@@ -57,12 +57,21 @@ class HeroController extends Controller
       $query->onlyTrashed();
     }
     
-    // Apply default ordering
-    $query->orderBy('faction_id')->orderBy('id');
+    // Apply admin filters
+    $query->applyAdminFilters($request);
     
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request->has('sort')) {
+      $query->orderBy('faction_id')->orderBy('id');
+    }
+    
+    // Make sure to include all query parameters in pagination links
     $heroes = $query->paginate(12)->withQueryString();
     
-    return view('admin.heroes.index', compact('heroes', 'trashed', 'activeCount', 'trashedCount'));
+    // Create a Hero instance for filter component
+    $heroModel = new Hero();
+    
+    return view('admin.heroes.index', compact('heroes', 'trashed', 'activeCount', 'trashedCount', 'heroModel', 'request'));
   }
 
   /**
@@ -101,7 +110,7 @@ class HeroController extends Controller
         ->with('success', __('heroes.created_successfully', ['name' => $hero->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', '__('common.errors.create', ['entity' => __('entities.heroes.singular')]) + ' '' . $e->getMessage())
+        ->with('error', __('common.errors.create', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage())
         ->withInput();
     }
   }
@@ -164,7 +173,7 @@ class HeroController extends Controller
         ->with('success', __('heroes.updated_successfully', ['name' => $hero->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', '__('common.errors.update', ['entity' => __('entities.heroes.singular')]) + ' '' . $e->getMessage())
+        ->with('error', __('common.errors.update', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage())
         ->withInput();
     }
   }
@@ -181,7 +190,7 @@ class HeroController extends Controller
       return redirect()->route('admin.heroes.index')
         ->with('success', __('heroes.deleted_successfully', ['name' => $heroName]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.heroes.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.delete', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage());
     }
   }
 
@@ -197,7 +206,7 @@ class HeroController extends Controller
       return redirect()->route('admin.heroes.index', ['trashed' => 1])
         ->with('success', __('heroes.restored_successfully', ['name' => $hero->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.heroes.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.restore', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage());
     }
   }
 
@@ -215,7 +224,7 @@ class HeroController extends Controller
       return redirect()->route('admin.heroes.index', ['trashed' => 1])
         ->with('success', __('heroes.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.heroes.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage());
     }
   }
 }

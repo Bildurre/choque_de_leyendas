@@ -4,6 +4,9 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card :model="$heroModel" :request="$request" />
+
     <x-entity.list 
       :create-route="!$trashed ? route('admin.heroes.create') : null"
       :create-label="__('entities.heroes.create')"
