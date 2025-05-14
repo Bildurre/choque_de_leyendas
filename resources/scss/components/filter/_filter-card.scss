@@ -1,0 +1,31 @@
+@use '../../abstracts/all' as *;
+
+.filters-card {
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  background-color: var(--color-card-bg);
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  .collapsible-section {margin-bottom: 0;}
+}
+
+.filters-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+}
+
+.filters-search {
+  width: 100%;
+}
+
+.filters-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 0.0625rem solid var(--color-card-border);
+}

@@ -6,8 +6,8 @@
 ])
 
 <div class="collapsible-section is-collapsed collapsible-section--no-animation" 
-     id="{{ $id }}" 
-     data-in-accordion="{{ $inAccordion ? 'true' : 'false' }}">
+  id="{{ $id }}" 
+  data-in-accordion="{{ $inAccordion ? 'true' : 'false' }}">
   <div class="collapsible-section__header">
     <h2 class="collapsible-section__title">{{ $title }}</h2>
     

@@ -1,0 +1,80 @@
+// resources/scss/components/filters/_sort.scss
+@use '../../abstracts/all' as *;
+
+.filters-sort {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  margin-bottom: $spacing-sm;
+  
+  &__label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+  
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+  
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    border: 0.0625rem solid var(--color-card-border);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all $transition-fast;
+    
+    &:hover {
+      border-color: var(--random-accent-color);
+      background-color: var(--random-accent-color-bg);
+      color: var(--random-accent-color);
+    }
+    
+    &--active {
+      border-color: var(--random-accent-color);
+      background-color: var(--random-accent-color-bg);
+      color: var(--random-accent-color);
+      font-weight: 600;
+    }
+    
+    &-text {
+      position: relative;
+    }
+    
+    &-icon {
+      opacity: 1;
+      transition: transform $transition-fast, opacity $transition-fast;
+      
+      &--neutral {
+        opacity: 0.6;
+      }
+    }
+  }
+  
+  // Hover effect for the icon
+  &__button:hover .filters-sort__button-icon--neutral {
+    opacity: 1;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-mobile) {
+  .filters-sort {
+    flex-direction: column;
+    align-items: flex-start;
+    
+    &__buttons {
+      width: 100%;
+    }
+  }
+}

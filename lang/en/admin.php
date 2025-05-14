@@ -46,4 +46,15 @@ return [
     
     // Toggle sidebar
     'toggle_sidebar' => 'Toggle Sidebar',
+
+    // Filters
+    'filters' => [
+        'title' => 'Filters',
+        'search' => 'Search',
+        'search_placeholder' => 'Type to search...',
+        'apply' => 'Apply',
+        'reset' => 'Reset',
+        'sort_by' => 'Sort by',
+        'sort_by_field' => 'Sort by :field',
+    ],
 ];

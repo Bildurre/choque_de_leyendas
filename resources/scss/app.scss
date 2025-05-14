@@ -50,11 +50,8 @@
 @use 'components/form/entity-selector';
 
 // Filter Components
-@use 'components/filters/filters-card';
-@use 'components/filters/search';
-@use 'components/filters/filters-select';
-@use 'components/filters/sort';
-@use 'components/filters/tag';
+@use 'components/filter/filter-card';
+@use 'components/filter/sort';
 
 // Pages
 @use 'pages/login';
