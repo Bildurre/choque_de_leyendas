@@ -1,0 +1,26 @@
+
+@use '../../abstracts/all' as *;
+
+.choices {
+  &__inner {
+    background-color: var(--color-background) !important;
+    border-color: var(--color-card-border) !important;
+    .choices__item {
+      background-color: var(--random-accent-color-bg) !important;
+      border-color: var(--random-accent-color) !important;
+      color: var(--random-accent-color) !important;
+    }
+  }
+  &__input {
+    background-color: var(--color-background) !important;
+  }
+  &__list {
+    background-color: var(--color-background) !important;
+    border-color: var(--color-card-border) !important;
+  }
+
+  
+  .choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background-color: var(--random-accent-color-bg) !important;
+  }
+}

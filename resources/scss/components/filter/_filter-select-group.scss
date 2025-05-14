@@ -1,0 +1,28 @@
+@use '../../abstracts/all' as *;
+
+.filter-select {
+  margin-bottom: $spacing-md;
+  
+  &__label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+  
+  &__input {
+    width: 100%;
+    border: 0.0625rem solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    padding: $spacing-sm $spacing-md;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    
+    &:focus {
+      outline: none;
+      border-color: var(--random-accent-color);
+      box-shadow: 0 0 0 0.125rem var(--random-accent-color-bg);
+    }
+  }
+}

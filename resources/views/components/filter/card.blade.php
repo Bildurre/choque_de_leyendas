@@ -23,7 +23,10 @@
       </div>
 
       <!-- Sorting Buttons -->
-      <x-filter.sort :model="$model" :request="$request" />
+      <x-filter.sort-group :model="$model" :request="$request" />
+
+      <!-- Filters Select Group -->
+      <x-filter.filter-select-group :model="$model" :request="$request" />
       
       <!-- Form Actions -->
       <div class="filters-actions">

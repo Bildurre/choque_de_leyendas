@@ -17,16 +17,19 @@ trait HasAdminFilters
    */
   public function scopeApplyAdminFilters(Builder $query, Request $request): Builder
   {
-      // Apply search filters
-      $this->applySearchFilters($query, $request);
-      
-      // Apply sort filters
-      $this->applySortFilters($query, $request);
-      
-      // In the future, we'll add column filters here
-      // $this->applyColumnFilters($query, $request);
-      
-      return $query;
+    // Apply search filters
+    $this->applySearchFilters($query, $request);
+
+    // Apply column filters
+    $this->applyColumnFilters($query, $request);
+    
+    // Apply sort filters
+    $this->applySortFilters($query, $request);
+    
+    // In the future, we'll add column filters here
+    // $this->applyColumnFilters($query, $request);
+    
+    return $query;
   }
   
   /**
@@ -242,6 +245,105 @@ trait HasAdminFilters
     } else {
       // Regular field
       $query->orderBy("{$relationTable}.{$relationField}", $direction);
+    }
+  }
+
+  /**
+   * Apply column filters to the query
+   *
+   * @param Builder $query
+   * @param Request $request
+   * @return void
+   */
+  protected function applyColumnFilters(Builder $query, Request $request): void
+  {
+    // Check if model has filterable fields
+    if (!method_exists($this, 'getAdminFilterable')) {
+      return;
+    }
+    
+    $filterables = $this->getAdminFilterable();
+    $thisTable = $this->getTable();
+    
+    foreach ($filterables as $filter) {
+      // Skip if no field defined
+      if (!isset($filter['field'])) {
+        continue;
+      }
+      
+      $fieldName = $filter['field'];
+      $paramName = str_replace('.', '_', $fieldName);
+      
+      // Check if filter is applied
+      if (!$request->has($paramName) || empty($request->input($paramName))) {
+        continue;
+      }
+      
+      // Get filter values
+      $filterValues = $request->input($paramName);
+      if (!is_array($filterValues)) {
+        $filterValues = [$filterValues];
+      }
+      
+      // Skip if no values selected
+      if (empty($filterValues)) {
+        continue;
+      }
+      
+      // Apply filter based on type
+      switch ($filter['type']) {
+        case 'enum':
+          $query->whereIn($thisTable . '.' . $fieldName, $filterValues);
+          break;
+          
+        case 'relation':
+          $query->whereIn($thisTable . '.' . $filter['field'], $filterValues);
+          break;
+          
+        case 'nested_relation':
+          $fieldParts = explode('.', $fieldName);
+          if (count($fieldParts) >= 2) {
+            $relation = $fieldParts[0];
+            $relationField = $fieldParts[1];
+            
+            $query->whereHas($relation, function ($q) use ($relationField, $filterValues) {
+              $q->whereIn($relationField, $filterValues);
+            });
+          }
+          break;
+      }
+    }
+  }
+  
+  /**
+   * Apply filter on relation field
+   *
+   * @param Builder $query
+   * @param string $field
+   * @param array $values
+   * @return void
+   */
+  protected function applyRelationFilter(Builder $query, string $field, array $values): void
+  {
+    $parts = explode('.', $field);
+    
+    // Check if it's a nested relation
+    if (count($parts) > 2) {
+      // For nested relations like heroClass.heroSuperclass.id
+      $relation = $parts[0];
+      $nestedField = implode('.', array_slice($parts, 1));
+      
+      $query->whereHas($relation, function ($q) use ($nestedField, $values) {
+        $this->applyRelationFilter($q, $nestedField, $values);
+      });
+    } else {
+      // Simple relation like heroClass.id
+      $relation = $parts[0];
+      $relationField = $parts[1];
+      
+      $query->whereHas($relation, function ($q) use ($relationField, $values) {
+        $q->whereIn($relationField, $values);
+      });
     }
   }
 }

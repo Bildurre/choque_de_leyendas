@@ -52,6 +52,9 @@
 // Filter Components
 @use 'components/filter/filter-card';
 @use 'components/filter/sort';
+@use 'components/filter/filter-select-group';
+@use 'components/filter/filter-select';
+@use 'components/filter/choices';
 
 // Pages
 @use 'pages/login';

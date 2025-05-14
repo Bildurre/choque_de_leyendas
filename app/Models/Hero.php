@@ -96,32 +96,50 @@ class Hero extends Model
   public function getAdminFilterable(): array
   {
     return [
+      // Filtro para una relación directa
       [
-        'field' => 'faction.id',
-        'label' => __('entities.factions.singular'),
-        'label_field' => 'name', // Campo a mostrar como etiqueta
-        'value_field' => 'id'    // Campo a usar como valor
+        'type' => 'relation',                           // Tipo de filtro: relation, enum, boolean, etc.
+        'field' => 'faction_id',                        // Campo real en la tabla (para filtrar)
+        'relation' => 'faction',                        // Nombre de la relación
+        'label' => __('entities.factions.singular'),    // Etiqueta a mostrar
+        'option_label' => 'name',                       // Campo para mostrar como etiqueta
+        'option_value' => 'id'                          // Campo para usar como valor
       ],
+      
+      // Filtro para heroRace
       [
-        'field' => 'heroRace.id',
+        'type' => 'relation',
+        'field' => 'hero_race_id',
+        'relation' => 'heroRace',
         'label' => __('entities.hero_races.singular'),
-        'label_field' => 'name',
-        'value_field' => 'id'
+        'option_label' => 'name',
+        'option_value' => 'id'
       ],
+      
+      // Filtro para heroClass
       [
-        'field' => 'heroClass.id',
+        'type' => 'relation',
+        'field' => 'hero_class_id', 
+        'relation' => 'heroClass',
         'label' => __('entities.hero_classes.singular'),
-        'label_field' => 'name',
-        'value_field' => 'id'
+        'option_label' => 'name',
+        'option_value' => 'id'
       ],
+      
+      // Filtro para superclass a través de heroClass
       [
-        'field' => 'heroClass.hero_superclass_id',
+        'type' => 'nested_relation',
+        'field' => 'heroClass.hero_superclass_id',     // Campo a filtrar (incluyendo relación)
+        'through' => ['heroClass', 'heroSuperclass'],  // Ruta de relaciones
         'label' => __('entities.hero_superclasses.singular'),
-        'label_field' => 'name',
-        'value_field' => 'id',
-        'relation_path' => 'heroClass.heroSuperclass' // Camino para llegar a la relación
+        'option_model' => \App\Models\HeroSuperclass::class, // Modelo para obtener opciones directamente
+        'option_label' => 'name',
+        'option_value' => 'id'
       ],
+      
+      // Filtro para enum (género)
       [
+        'type' => 'enum',
         'field' => 'gender',
         'label' => __('entities.heroes.gender'),
         'options' => [
@@ -129,7 +147,7 @@ class Hero extends Model
           'female' => __('entities.heroes.genders.female')
         ]
       ]
-  ];
+    ];
   }
   
   /**
