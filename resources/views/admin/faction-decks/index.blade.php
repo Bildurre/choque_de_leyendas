@@ -86,7 +86,7 @@
       
       @if(method_exists($factionDecks, 'links'))
         <x-slot:pagination>
-          {{ $factionDecks->appends(['trashed' => $trashed ? 1 : null, 'faction_id' => $factionId, 'game_mode_id' => $gameModeId])->links() }}
+          {{ $factionDecks->appends(['trashed' => $trashed ? 1 : null])->links() }}
         </x-slot:pagination>
       @endif
     </x-entity.list>

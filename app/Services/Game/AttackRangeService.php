@@ -4,7 +4,6 @@ namespace App\Services\Game;
 
 use App\Models\AttackRange;
 use App\Services\Traits\HandlesTranslations;
-use Illuminate\Http\UploadedFile;
 
 class AttackRangeService
 {
@@ -55,11 +54,6 @@ class AttackRangeService
     // Apply translations
     $this->applyTranslations($attackRange, $data, $this->translatableFields);
     
-    // Handle icon upload
-    if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $attackRange->storeImage($data['icon']);
-    }
-    
     $attackRange->save();
     
     return $attackRange;
@@ -80,13 +74,6 @@ class AttackRangeService
     
     // Apply translations
     $this->applyTranslations($attackRange, $data, $this->translatableFields);
-    
-    // Handle icon updates
-    if (isset($data['remove_icon']) && $data['remove_icon']) {
-      $attackRange->deleteImage();
-    } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
-      $attackRange->storeImage($data['icon']);
-    }
     
     $attackRange->save();
     
@@ -147,11 +134,6 @@ class AttackRangeService
     // Check for related cards (incluso para los eliminados)
     if ($attackRange->cards()->withTrashed()->count() > 0) {
       throw new \Exception("No se puede eliminar permanentemente el rango de ataque porque tiene cartas asociadas.");
-    }
-    
-    // Delete icon if exists
-    if ($attackRange->hasImage()) {
-      $attackRange->deleteImage();
     }
     
     return $attackRange->forceDelete();

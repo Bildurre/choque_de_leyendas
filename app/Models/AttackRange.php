@@ -1,141 +1,65 @@
 <?php
 
-namespace App\Services\Game;
+namespace App\Models;
 
-use App\Models\AttackRange;
-use App\Services\Traits\HandlesTranslations;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
-class AttackRangeService
+class AttackRange extends Model
 {
-  use HandlesTranslations;
-  
-  protected $translatableFields = ['name'];
+  use HasFactory;
+  use HasTranslations;
+  use SoftDeletes;
 
   /**
-   * Get all attack ranges with optional pagination
+   * The table associated with the model.
    *
-   * @param int|null $perPage Number of items per page, or null for all items
-   * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   * @var string
    */
-  public function getAllAttackRanges(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
+  protected $table = 'attack_ranges';
+
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'name',
+  ];
+
+  /**
+   * The attributes that are translatable.
+   *
+   * @var array
+   */
+  public $translatable = [
+    'name',
+  ];
+
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array
+   */
+  protected $casts = [
+    'deleted_at' => 'datetime',
+  ];
+
+  /**
+   * Get the hero abilities associated with this attack range.
+   */
+  public function heroAbilities()
   {
-    $query = AttackRange::withCount(['heroAbilities', 'cards']);
-    
-    // Aplicar filtros de elementos eliminados
-    if ($onlyTrashed) {
-      $query->onlyTrashed();
-    } elseif ($withTrashed) {
-      $query->withTrashed();
-    }
-    
-    if ($perPage) {
-      return $query->paginate($perPage);
-    }
-    
-    return $query->get();
+    return $this->hasMany(HeroAbility::class);
   }
 
   /**
-   * Create a new attack range
-   *
-   * @param array $data
-   * @return AttackRange
-   * @throws \Exception
+   * Get the cards associated with this attack range.
    */
-  public function create(array $data): AttackRange
+  public function cards()
   {
-    $attackRange = new AttackRange();
-    
-    // Process translatable fields
-    $data = $this->processTranslatableFields($data, $this->translatableFields);
-    
-    // Apply translations
-    $this->applyTranslations($attackRange, $data, $this->translatableFields);
-    
-    $attackRange->save();
-    
-    return $attackRange;
-  }
-
-  /**
-   * Update an existing attack range
-   *
-   * @param AttackRange $attackRange
-   * @param array $data
-   * @return AttackRange
-   * @throws \Exception
-   */
-  public function update(AttackRange $attackRange, array $data): AttackRange
-  {
-    // Process translatable fields
-    $data = $this->processTranslatableFields($data, $this->translatableFields);
-    
-    // Apply translations
-    $this->applyTranslations($attackRange, $data, $this->translatableFields);
-    
-    $attackRange->save();
-    
-    return $attackRange;
-  }
-
-  /**
-   * Delete an attack range (soft delete)
-   *
-   * @param AttackRange $attackRange
-   * @return bool
-   * @throws \Exception
-   */
-  public function delete(AttackRange $attackRange): bool
-  {
-    // Check for related hero abilities
-    if ($attackRange->heroAbilities()->count() > 0) {
-      throw new \Exception("No se puede eliminar el rango de ataque porque tiene habilidades de héroe asociadas.");
-    }
-    
-    // Check for related cards
-    if ($attackRange->cards()->count() > 0) {
-      throw new \Exception("No se puede eliminar el rango de ataque porque tiene cartas asociadas.");
-    }
-    
-    return $attackRange->delete();
-  }
-
-  /**
-   * Restore a deleted attack range
-   *
-   * @param int $id
-   * @return bool
-   * @throws \Exception
-   */
-  public function restore(int $id): bool
-  {
-    $attackRange = AttackRange::onlyTrashed()->findOrFail($id);
-    return $attackRange->restore();
-  }
-
-  /**
-   * Force delete an attack range permanently
-   *
-   * @param int $id
-   * @return bool
-   * @throws \Exception
-   */
-  public function forceDelete(int $id): bool
-  {
-    $attackRange = AttackRange::onlyTrashed()->findOrFail($id);
-    
-    // Check for related hero abilities (incluso para los eliminados)
-    if ($attackRange->heroAbilities()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el rango de ataque porque tiene habilidades de héroe asociadas.");
-    }
-    
-    // Check for related cards (incluso para los eliminados)
-    if ($attackRange->cards()->withTrashed()->count() > 0) {
-      throw new \Exception("No se puede eliminar permanentemente el rango de ataque porque tiene cartas asociadas.");
-    }
-    
-    return $attackRange->forceDelete();
+    return $this->hasMany(Card::class);
   }
 }

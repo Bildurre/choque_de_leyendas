@@ -34,25 +34,6 @@ class CounterRequest extends FormRequest
       'remove_icon' => ['nullable', 'boolean'],
     ];
 
-    // Add uniqueness rules for each locale within the same type
-    foreach ($locales as $locale) {
-      $rules["name.{$locale}"] = [
-        'required',
-        function ($attribute, $value, $fail) use ($locale, $counterId) {
-          $query = \App\Models\Counter::whereRaw("JSON_EXTRACT(name, '$.\"{$locale}\"') = ?", [$value])
-            ->where('type', $this->type);
-          
-          if ($counterId) {
-            $query->where('id', '!=', $counterId);
-          }
-          
-          if ($query->exists()) {
-            $fail("Ya existe un contador con este nombre en " . locale_name($locale) . " para este tipo.");
-          }
-        }
-      ];
-    }
-
     return $rules;
   }
 
