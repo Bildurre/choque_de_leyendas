@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
       HeroRacesSeeder::class,
       CardTypesSeeder::class,
       EquipmentTypesSeeder::class,
-      HeroesSeeder::class
+      HeroesSeeder::class,
+      HeroHeroAbilitiesSeeder::class
     ]);
   }
 }

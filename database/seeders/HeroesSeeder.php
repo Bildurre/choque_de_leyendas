@@ -33,6 +33,7 @@ class HeroesSeeder extends Seeder
       $hero->will = $heroData['will'];
       $hero->strength = $heroData['strength'];
       $hero->armor = $heroData['armor'];
+      $hero->image = $heroData['image'] ?? '';
             
       $hero->save();
     }

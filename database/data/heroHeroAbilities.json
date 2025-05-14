@@ -1,0 +1,194 @@
+[
+  {
+    "hero_id": 1,
+    "hero_ability_id": 1
+  },
+  {
+    "hero_id": 1,
+    "hero_ability_id": 3
+  },
+  {
+    "hero_id": 2,
+    "hero_ability_id": 4
+  },
+  {
+    "hero_id": 2,
+    "hero_ability_id": 5
+  },
+  {
+    "hero_id": 3,
+    "hero_ability_id": 2
+  },
+  {
+    "hero_id": 3,
+    "hero_ability_id": 6
+  },
+  {
+    "hero_id": 4,
+    "hero_ability_id": 7
+  },
+  {
+    "hero_id": 4,
+    "hero_ability_id": 8
+  },
+  {
+    "hero_id": 5,
+    "hero_ability_id": 7
+  },
+  {
+    "hero_id": 5,
+    "hero_ability_id": 9
+  },
+  {
+    "hero_id": 6,
+    "hero_ability_id": 10
+  },
+  {
+    "hero_id": 6,
+    "hero_ability_id": 11
+  },
+  {
+    "hero_id": 7,
+    "hero_ability_id": 2
+  },
+  {
+    "hero_id": 7,
+    "hero_ability_id": 12
+  },
+  {
+    "hero_id": 8,
+    "hero_ability_id": 13
+  },
+  {
+    "hero_id": 8,
+    "hero_ability_id": 14
+  },
+  {
+    "hero_id": 9,
+    "hero_ability_id": 1
+  },
+  {
+    "hero_id": 9,
+    "hero_ability_id": 15
+  },
+  {
+    "hero_id": 10,
+    "hero_ability_id": 16
+  },
+  {
+    "hero_id": 10,
+    "hero_ability_id": 17
+  },
+  {
+    "hero_id": 11,
+    "hero_ability_id": 18
+  },
+  {
+    "hero_id": 11,
+    "hero_ability_id": 19
+  },
+  {
+    "hero_id": 12,
+    "hero_ability_id": 20
+  },
+  {
+    "hero_id": 12,
+    "hero_ability_id": 21
+  },
+  {
+    "hero_id": 13,
+    "hero_ability_id": 1
+  },
+  {
+    "hero_id": 13,
+    "hero_ability_id": 22
+  },
+  {
+    "hero_id": 14,
+    "hero_ability_id": 23
+  },
+  {
+    "hero_id": 14,
+    "hero_ability_id": 24
+  },
+  {
+    "hero_id": 15,
+    "hero_ability_id": 25
+  },
+  {
+    "hero_id": 15,
+    "hero_ability_id": 26
+  },
+  {
+    "hero_id": 16,
+    "hero_ability_id": 2
+  },
+  {
+    "hero_id": 16,
+    "hero_ability_id": 27
+  },
+  {
+    "hero_id": 17,
+    "hero_ability_id": 1
+  },
+  {
+    "hero_id": 17,
+    "hero_ability_id": 28
+  },
+  {
+    "hero_id": 18,
+    "hero_ability_id": 29
+  },
+  {
+    "hero_id": 18,
+    "hero_ability_id": 30
+  },
+  {
+    "hero_id": 19,
+    "hero_ability_id": 31
+  },
+  {
+    "hero_id": 19,
+    "hero_ability_id": 32
+  },
+  {
+    "hero_id": 20,
+    "hero_ability_id": 33
+  },
+  {
+    "hero_id": 20,
+    "hero_ability_id": 34
+  },
+  {
+    "hero_id": 21,
+    "hero_ability_id": 35
+  },
+  {
+    "hero_id": 21,
+    "hero_ability_id": 36
+  },
+  {
+    "hero_id": 22,
+    "hero_ability_id": 23
+  },
+  {
+    "hero_id": 22,
+    "hero_ability_id": 37
+  },
+  {
+    "hero_id": 23,
+    "hero_ability_id": 1
+  },
+  {
+    "hero_id": 23,
+    "hero_ability_id": 38
+  },
+  {
+    "hero_id": 24,
+    "hero_ability_id": 39
+  },
+  {
+    "hero_id": 24,
+    "hero_ability_id": 40
+  }
+ ]

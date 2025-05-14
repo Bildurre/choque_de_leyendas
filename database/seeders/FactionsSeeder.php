@@ -23,6 +23,7 @@ class FactionsSeeder extends Seeder
       $faction->name = $factionData['name'];
       $faction->lore_text = $factionData['lore_text'];
       $faction->color = $factionData['color'];
+      $faction->icon = $factionData['icon'];
       
       $faction->setTextColorBasedOnBackground();
       

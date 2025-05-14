@@ -24,6 +24,7 @@ class HeroAbilitiesSeeder extends Seeder
       $ability->description = $abilityData['description'];
       $ability->attack_range_id = $abilityData['attack_range_id'];
       $ability->attack_subtype_id = $abilityData['attack_subtype_id'];
+      $ability->area = $abilityData['area'];
       $ability->cost = $abilityData['cost'];
 
       $ability->save();

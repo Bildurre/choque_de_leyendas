@@ -430,5 +430,213 @@
     "attack_subtype_id": 1,
     "cost": "BB",
     "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Terrifying Strike",
+      "es": "Golpe Aterrador"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. Place 1 bane counter: Terrified on 1 random adjacent enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Coloca 1 contador de perjuicio: Aterrado sobre 1 héroe rival adyacente aleatorio.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "GG",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Swift Shot",
+      "es": "Tiro Fugaz"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero or to an enemy hero from subsequent pairings.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado o a un héroe rival de los emparejamientos posteriores.</p>"
+    },
+    "attack_range_id": 3,
+    "attack_subtype_id": 2,
+    "cost": "RG",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Black Arrow",
+      "es": "Saeta Negra"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. If the paired enemy hero has no boon counters on them, it deals +2 damage.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si el héroe rival emparejado no tiene ningun contador de beneficio sobre él, hace +2 de daño.</p>"
+    },
+    "attack_range_id": 3,
+    "attack_subtype_id": 2,
+    "cost": "GB",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Devastating Cut",
+      "es": "Corte Devastador"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. Deals +1 damage for each card the Opponent player has discarded in this Singular Combat.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Hace +1 de daño por cada carta que el jugador Rival haya descartado en este Combate Singular.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "RB",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Relentless Assault",
+      "es": "Ensañamiento"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and to each enemy hero from previous pairings.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a cada héroe rival de los emparejamientos anteriores.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "RRG",
+    "area": true
+  },
+  {
+    "name":
+    {
+      "en": "Dusk Blade",
+      "es": "Cuchillada del Ocaso"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero. If the Opponent player has 3 or fewer cards in hand, it deals +2 damage.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si el jugador Rival tiene 3 o menos cartas en la mano, hace +2 de daño.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "RG",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Lethal Slash",
+      "es": "Tajo Letal"
+    },
+    "description":
+    {
+      "en": "<p>Deals 4 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 4 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "GB",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Profane Shot",
+      "es": "Tiro Profano"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and removes 1 random boon counter from them.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y le remueve 1 contador de beneficio aleatorio.</p>"
+    },
+    "attack_range_id": 3,
+    "attack_subtype_id": 2,
+    "cost": "RR",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Treacherous Shot",
+      "es": "Tiro a Traición"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero or to an adjacent enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado o a un héroe rival adyacente.</p>"
+    },
+    "attack_range_id": 3,
+    "attack_subtype_id": 2,
+    "cost": "GB",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Double Shot",
+      "es": "TIro Doble"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and to 1 random adjacent enemy hero. Deals +1 damage to each hero damaged this way that has no boon counters on them.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a 1 heroe rival adyacente aleatorio. Hace +1 de daño a cada héroe dañado de esta manera que no tenga contadores de beneficio sobre él.</p>"
+    },
+    "attack_range_id": 3,
+    "attack_subtype_id": 2,
+    "cost": "BB",
+    "area": true
+  },
+  {
+    "name":
+    {
+      "en": "Voracious Cut",
+      "es": "Corte Voraz"
+    },
+    "description":
+    {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and places 1 bane counter: Exhausted on them.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al heroe rival emparejado y le coloca 1 contador de perjuidio: Exhausto.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 1,
+    "cost": "GG",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Swift Dagger",
+      "es": "Daga Veloz"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 2,
+    "cost": "RG",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Shadow Strike",
+      "es": "Golpe Sombrío"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. If this is the first Action this hero performs in the Singular Combat, Trick cards cannot be activated until this Ability resolves.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular no se pueden activar cartas de Ardid hasta que se resuelva esta Habilidad.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 2,
+    "cost": "RB",
+    "area": false
   }
 ]

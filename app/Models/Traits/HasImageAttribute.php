@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 trait HasImageAttribute
 {
@@ -57,7 +58,49 @@ trait HasImageAttribute
   }
   
   /**
-   * Store an image for this model
+   * Generate a filename based on the model's slug or name
+   * 
+   * @param UploadedFile $file Original file
+   * @return string
+   */
+  protected function generateImageFilename(UploadedFile $file): string
+  {
+    // Intenta usar el slug del modelo si está disponible
+    if (method_exists($this, 'getSlug')) {
+      $baseFilename = $this->getSlug();
+    } elseif (isset($this->slug)) {
+      // Si existe un atributo slug
+      $baseFilename = is_array($this->slug) ? ($this->slug['es'] ?? array_values($this->slug)[0]) : $this->slug;
+    } elseif (isset($this->name)) {
+      // Si existe un atributo name, crea un slug a partir de él
+      $name = is_array($this->name) ? ($this->name['es'] ?? array_values($this->name)[0]) : $this->name;
+      $baseFilename = Str::slug($name);
+    } else {
+      // Si todo lo anterior falla, usa el nombre original del archivo
+      $baseFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+      $baseFilename = Str::slug($baseFilename);
+    }
+    
+    // Obtener la extensión del archivo original
+    $extension = $file->getClientOriginalExtension();
+    
+    // Crear el nombre de archivo base
+    $filename = $baseFilename . '.' . $extension;
+    
+    // Verificar si ya existe un archivo con ese nombre y, si es así, añadir un sufijo numérico
+    $count = 1;
+    $newFilename = $filename;
+    
+    while (Storage::disk('public')->exists($this->getImageDirectory() . '/' . $newFilename)) {
+      $newFilename = $baseFilename . '-' . $count . '.' . $extension;
+      $count++;
+    }
+    
+    return $newFilename;
+  }
+  
+  /**
+   * Store an image for this model using the slug as filename
    * 
    * @param UploadedFile $file
    * @param string|null $field Custom field name (optional)
@@ -70,8 +113,15 @@ trait HasImageAttribute
     // Delete old image if exists
     $this->deleteImage($field);
     
-    // Store new image
-    $path = $file->store($this->getImageDirectory(), 'public');
+    // Generate a filename based on the model's slug or name
+    $filename = $this->generateImageFilename($file);
+    
+    // Store the image with the generated filename
+    $path = Storage::disk('public')->putFileAs(
+      $this->getImageDirectory(),
+      $file,
+      $filename
+    );
     
     // Update model
     $this->{$field} = $path;
