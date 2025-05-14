@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('attack_subtypes.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.attack_subtypes.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.attack-subtypes.create') : null"
-      :create-label="__('attack_subtypes.create')"
+      :create-label="__('entities.attack_subtypes.create')"
       :items="$attackSubtypes"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,8 +23,8 @@
             : route('admin.attack-subtypes.destroy', $attackSubtype)"
           :restore-route="$trashed ? route('admin.attack-subtypes.restore', $attackSubtype->id) : null"
           :confirm-message="$trashed 
-            ? __('attack_subtypes.confirm_force_delete') 
-            : __('attack_subtypes.confirm_delete')"
+            ? __('entities.attack_subtypes.confirm_force_delete') 
+            : __('entities.attack_subtypes.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="{{ $attackSubtype->type === 'physical' ? 'warning' : 'success' }}">
@@ -32,11 +32,11 @@
             </x-badge>
             
             <x-badge variant="info">
-              {{ __('attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count]) }}
+              {{ __('entities.attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count]) }}
             </x-badge>
           
             <x-badge variant="primary">
-              {{ __('attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count]) }}
+              {{ __('entities.attack_subtypes.cards_count', ['count' => $attackSubtype->cards_count]) }}
             </x-badge>
             
             @if($trashed)

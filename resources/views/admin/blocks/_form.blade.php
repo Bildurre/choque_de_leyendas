@@ -18,27 +18,27 @@
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.pages.edit', $page)">
     <x-slot:header>
-      <h2>{{ __('blocks.form_title') }}: {{ $page->title }}</h2>
+      <h2>{{ __('pages.blocks.form_title') }}: {{ $page->title }}</h2>
     </x-slot:header>
     
     <div class="form-grid">
       <div>
         <x-form.multilingual-input
           name="title"
-          :label="__('blocks.title')"
+          :label="__('pages.blocks.title')"
           :values="old('title', isset($block) ? $block->getTranslations('title') : [])"
         />
         
         <x-form.multilingual-input
           name="subtitle"
-          :label="__('blocks.subtitle')"
+          :label="__('pages.blocks.subtitle')"
           :values="old('subtitle', isset($block) ? $block->getTranslations('subtitle') : [])"
         />
         
         @if((!isset($block) && $type === 'text') || (isset($block) && $block->type === 'text'))
           <x-form.multilingual-wysiwyg
             name="content"
-            :label="__('blocks.content')"
+            :label="__('pages.blocks.content')"
             :values="old('content', isset($block) ? $block->getTranslations('content') : [])"
             required
           />
@@ -47,11 +47,11 @@
       
       <div>
         <fieldset class="form-fieldset">
-          <legend>{{ __('blocks.appearance') }}</legend>
+          <legend>{{ __('pages.blocks.appearance') }}</legend>
           
           <x-form.select
             name="background_color"
-            :label="__('blocks.background_color')"
+            :label="__('pages.blocks.background_color')"
             :options="config('blocks.background_colors')"
             :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
           />
@@ -59,7 +59,7 @@
           @if($allowsImage ?? true)
             <x-form.image-upload
               name="image"
-              :label="__('blocks.image')"
+              :label="__('pages.blocks.image')"
               :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
               :remove-name="isset($block) ? 'remove_image' : null"
             />
@@ -67,10 +67,10 @@
             <!-- Siempre mostrar selección de posición cuando se permite imagen -->
             <x-form.select
               name="settings[image_position]"
-              :label="__('blocks.image_position')"
+              :label="__('pages.blocks.image_position')"
               :options="[
-                'left' => __('blocks.image_position_options.left'),
-                'right' => __('blocks.image_position_options.right')
+                'left' => __('pages.blocks.image_position_options.left'),
+                'right' => __('pages.blocks.image_position_options.right')
               ]"
               :selected="old('settings.image_position', 
                 isset($block) && isset($block->settings['image_position']) 

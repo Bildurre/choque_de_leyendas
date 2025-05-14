@@ -1,6 +1,6 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('counters.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.counters.plural') }}</h1>
   </div>
   
   <div class="page-content">
@@ -13,7 +13,7 @@
           icon="plus-circle"
           :count="$boonsCount"
         >
-          {{ __('counters.types.boon') }}
+          {{ __('entities.counters.types.boon') }}
         </x-tab-item>
         
         <x-tab-item 
@@ -23,7 +23,7 @@
           icon="minus-circle"
           :count="$banesCount"
         >
-          {{ __('counters.types.bane') }}
+          {{ __('entities.counters.types.bane') }}
         </x-tab-item>
         
         <x-tab-item 
@@ -40,7 +40,7 @@
       <x-slot:content>
         <x-entity.list 
           :create-route="null"
-          :create-label="__('counters.create')"
+          :create-label="__('entities.counters.create')"
           :items="$counters"
           :withTabs="false"
           :showHeader="true"
@@ -48,15 +48,15 @@
           <x-slot:actions>
             @if($activeTab !== 'trashed')
               <x-dropdown 
-                :label="__('counters.create')" 
+                :label="__('entities.counters.create')" 
                 icon="plus"
                 variant="primary"
               >
                 <x-dropdown-item :href="route('admin.counters.create', ['type' => 'boon'])">
-                  {{ __('counters.types.boon') }}
+                  {{ __('entities.counters.types.boon') }}
                 </x-dropdown-item>
                 <x-dropdown-item :href="route('admin.counters.create', ['type' => 'bane'])">
-                  {{ __('counters.types.bane') }}
+                  {{ __('entities.counters.types.bane') }}
                 </x-dropdown-item>
               </x-dropdown>
             @endif
@@ -71,8 +71,8 @@
                 : route('admin.counters.destroy', $counter)"
               :restore-route="$activeTab === 'trashed' ? route('admin.counters.restore', $counter->id) : null"
               :confirm-message="$activeTab === 'trashed' 
-                ? __('counters.confirm_force_delete') 
-                : __('counters.confirm_delete')"
+                ? __('entities.counters.confirm_force_delete') 
+                : __('entities.counters.confirm_delete')"
             >
               <x-slot:badges>
                 <x-badge variant="{{ $counter->type === 'boon' ? 'success' : 'danger' }}">

@@ -1,6 +1,6 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('attack_subtypes.create') }}</h1>
+    <h1 class="page-title">{{ __('entities.attack_subtypes.create') }}</h1>
   </div>
   
   <div class="page-content">

@@ -24,33 +24,33 @@
       
       <div class="faction-view__info">
         <div class="faction-view__section">
-          <h2 class="faction-view__section-title">{{ __('factions.details') }}</h2>
+          <h2 class="faction-view__section-title">{{ __('entities.factions.details') }}</h2>
           
           <div class="faction-view__info-grid">
             <!-- Stats -->
             <div class="faction-view__info-item">
-              <span class="faction-view__info-label">{{ __('heroes.plural') }}:</span>
+              <span class="faction-view__info-label">{{ __('entities.heroes.plural') }}:</span>
               <span class="faction-view__info-value">
                 {{ $faction->heroes_count }}
               </span>
             </div>
             
             <div class="faction-view__info-item">
-              <span class="faction-view__info-label">{{ __('cards.plural') }}:</span>
+              <span class="faction-view__info-label">{{ __('entities.cards.plural') }}:</span>
               <span class="faction-view__info-value">
                 {{ $faction->cards_count }}
               </span>
             </div>
             
             <div class="faction-view__info-item">
-              <span class="faction-view__info-label">{{ __('faction_decks.plural') }}:</span>
+              <span class="faction-view__info-label">{{ __('entities.faction_decks.plural') }}:</span>
               <span class="faction-view__info-value">
                 {{ $faction->faction_decks_count }}
               </span>
             </div>
             
             <div class="faction-view__info-item">
-              <span class="faction-view__info-label">{{ __('factions.color') }}:</span>
+              <span class="faction-view__info-label">{{ __('entities.factions.color') }}:</span>
               <span class="faction-view__info-value">
                 <span class="faction-view__color-chip" style="background-color: {{ $faction->color }};"></span>
                 {{ $faction->color }}
@@ -58,9 +58,9 @@
             </div>
             
             <div class="faction-view__info-item">
-              <span class="faction-view__info-label">{{ __('factions.text_color') }}:</span>
+              <span class="faction-view__info-label">{{ __('entities.factions.text_color') }}:</span>
               <span class="faction-view__info-value">
-                {{ $faction->text_is_dark ? __('factions.text_dark') : __('factions.text_light') }}
+                {{ $faction->text_is_dark ? __('entities.factions.text_dark') : __('entities.factions.text_light') }}
               </span>
             </div>
           </div>
@@ -68,7 +68,7 @@
         
         @if($faction->lore_text)
           <div class="faction-view__section">
-            <h2 class="faction-view__section-title">{{ __('factions.lore_text') }}</h2>
+            <h2 class="faction-view__section-title">{{ __('entities.factions.lore_text') }}</h2>
             <div class="faction-view__text-content">
               {!! $faction->lore_text !!}
             </div>

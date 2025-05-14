@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('hero_abilities.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.hero_abilities.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.hero-abilities.create') : null"
-      :create-label="__('hero_abilities.create')"
+      :create-label="__('entities.hero_abilities.create')"
       :items="$heroAbilities"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,8 +23,8 @@
             : route('admin.hero-abilities.destroy', $heroAbility)"
           :restore-route="$trashed ? route('admin.hero-abilities.restore', $heroAbility->id) : null"
           :confirm-message="$trashed 
-            ? __('hero_abilities.confirm_force_delete') 
-            : __('hero_abilities.confirm_delete')"
+            ? __('entities.hero_abilities.confirm_force_delete') 
+            : __('entities.hero_abilities.confirm_delete')"
         >
           <x-slot:badges>
               <x-badge variant="primary">
@@ -41,7 +41,7 @@
 
               @if($heroAbility->area)
                 <x-badge variant="primary">
-                  ({{ __('hero_abilities.area') }})
+                  ({{ __('entities.hero_abilities.area') }})
                 </x-badge>
               @endif
             

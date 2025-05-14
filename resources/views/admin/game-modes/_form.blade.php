@@ -3,7 +3,7 @@
     ? route('admin.game-modes.update', $gameMode) 
     : route('admin.game-modes.store');
   $submitMethod = isset($gameMode) ? 'PUT' : 'POST';
-  $submitLabel = isset($gameMode) ? __('admin.update') : __('game_modes.create');
+  $submitLabel = isset($gameMode) ? __('admin.update') : __('entities.game_modes.create');
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" class="form">
@@ -16,14 +16,14 @@
     <div class="form-grid">
       <x-form.multilingual-input
         name="name"
-        :label="__('game_modes.name')"
+        :label="__('entities.game_modes.name')"
         :values="isset($gameMode) ? $gameMode->getTranslations('name') : []"
         required
       />
       
       <x-form.multilingual-wysiwyg
         name="description"
-        :label="__('game_modes.description')"
+        :label="__('entities.game_modes.description')"
         :values="isset($gameMode) ? $gameMode->getTranslations('description') : []"
       />
     </div>

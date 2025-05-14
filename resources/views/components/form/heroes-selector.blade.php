@@ -65,33 +65,33 @@
               
               <div class="heroes-selector__hero-attributes">
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.agility') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('entities.heroes.attributes.agility') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->agility }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.mental') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('entities.heroes.attributes.mental') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->mental }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.will') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('entities.heroes.attributes.will') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->will }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.strength') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('entities.heroes.attributes.strength') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->strength }}</span>
                 </div>
                 <div class="heroes-selector__attribute">
-                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.armor') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('entities.heroes.attributes.armor') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->armor }}</span>
                 </div>
                 <div class="heroes-selector__attribute heroes-selector__attribute--total">
-                  <span class="heroes-selector__attribute-label">{{ __('heroes.attributes.health') }}:</span>
+                  <span class="heroes-selector__attribute-label">{{ __('entities.heroes.attributes.health') }}:</span>
                   <span class="heroes-selector__attribute-value">{{ $hero->health ?? '-' }}</span>
                 </div>
               </div>
               
               <div class="heroes-selector__copies">
-                <label class="heroes-selector__copies-label">{{ __('faction_decks.copies') }}:</label>
+                <label class="heroes-selector__copies-label">{{ __('entities.faction_decks.copies') }}:</label>
                 <div class="heroes-selector__copies-controls">
                   <button type="button" class="heroes-selector__copies-btn heroes-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
                   <input 
@@ -119,11 +119,11 @@
       <div class="heroes-selector__preview">
         <div class="heroes-selector__stats">
           <div class="heroes-selector__stat">
-            <span class="heroes-selector__stat-label">{{ __('faction_decks.total_heroes') }}:</span>
+            <span class="heroes-selector__stat-label">{{ __('entities.faction_decks.total_heroes') }}:</span>
             <span class="heroes-selector__stat-value" id="total-heroes">0</span>
           </div>
           <div class="heroes-selector__stat">
-            <span class="heroes-selector__stat-label">{{ __('faction_decks.unique_heroes') }}:</span>
+            <span class="heroes-selector__stat-label">{{ __('entities.faction_decks.unique_heroes') }}:</span>
             <span class="heroes-selector__stat-value" id="unique-heroes">0</span>
           </div>
         </div>

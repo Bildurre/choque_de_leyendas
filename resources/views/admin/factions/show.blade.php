@@ -26,7 +26,7 @@
             variant="primary"
             icon="plus"
           >
-            {{ __('heroes.create') }}
+            {{ __('entities.heroes.create') }}
           </x-button-link>
         @elseif($tab === 'cards')
           <x-button-link
@@ -34,11 +34,11 @@
             variant="primary"
             icon="plus"
           >
-            {{ __('cards.create') }}
+            {{ __('entities.cards.create') }}
           </x-button-link>
         @elseif($tab === 'decks' && isset($gameModes) && $gameModes->count() > 0)
           <x-dropdown 
-            :label="__('faction_decks.create')" 
+            :label="__('entities.faction_decks.create')" 
             icon="plus"
             variant="primary"
           >
@@ -63,7 +63,7 @@
             :href="route('admin.factions.show', ['faction' => $faction, 'tab' => 'details'])"
             icon="info"
           >
-            {{ __('factions.tabs.details') }}
+            {{ __('entities.factions.tabs.details') }}
           </x-tab-item>
           
           <x-tab-item 
@@ -73,7 +73,7 @@
             icon="users"
             :count="$faction->heroes_count"
           >
-            {{ __('heroes.plural') }}
+            {{ __('entities.heroes.plural') }}
           </x-tab-item>
           
           <x-tab-item 
@@ -83,7 +83,7 @@
             icon="layers"
             :count="$faction->cards_count"
           >
-            {{ __('cards.plural') }}
+            {{ __('entities.cards.plural') }}
           </x-tab-item>
           
           <x-tab-item 
@@ -93,7 +93,7 @@
             icon="box"
             :count="$faction->faction_decks_count"
           >
-            {{ __('faction_decks.plural') }}
+            {{ __('entities.faction_decks.plural') }}
           </x-tab-item>
         </x-slot:header>
         

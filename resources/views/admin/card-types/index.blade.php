@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('card_types.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.card_types.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.card-types.create') : null"
-      :create-label="__('card_types.create')"
+      :create-label="__('entities.card_types.create')"
       :items="$cardTypes"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,17 +23,17 @@
             : route('admin.card-types.destroy', $cardType)"
           :restore-route="$trashed ? route('admin.card-types.restore', $cardType->id) : null"
           :confirm-message="$trashed 
-            ? __('card_types.confirm_force_delete') 
-            : __('card_types.confirm_delete')"
+            ? __('entities.card_types.confirm_force_delete') 
+            : __('entities.card_types.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="info">
-              {{ __('card_types.cards_count', ['count' => $cardType->cards_count]) }}
+              {{ __('entities.card_types.cards_count', ['count' => $cardType->cards_count]) }}
             </x-badge>
             
             @if($cardType->heroSuperclass)
               <x-badge variant="primary">
-                {{ __('hero_superclasses.singular') }}: {{ $cardType->heroSuperclass->name }}
+                {{ __('entities.hero_superclasses.singular') }}: {{ $cardType->heroSuperclass->name }}
               </x-badge>
             @endif
             

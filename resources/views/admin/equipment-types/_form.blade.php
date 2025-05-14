@@ -3,7 +3,7 @@
     ? route('admin.equipment-types.update', $equipmentType) 
     : route('admin.equipment-types.store');
   $submitMethod = isset($equipmentType) ? 'PUT' : 'POST';
-  $submitLabel = isset($equipmentType) ? __('admin.update') : __('equipment_types.create');
+  $submitLabel = isset($equipmentType) ? __('admin.update') : __('entities.equipment_types.create');
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" class="form">
@@ -16,14 +16,14 @@
     <div class="form-grid">
       <x-form.multilingual-input
         name="name"
-        :label="__('equipment_types.name')"
+        :label="__('entities.equipment_types.name')"
         :values="isset($equipmentType) ? $equipmentType->getTranslations('name') : []"
         required
       />
       
       <x-form.select
         name="category"
-        :label="__('equipment_types.category')"
+        :label="__('entities.equipment_types.category')"
         :options="$categories"
         :selected="old('category', isset($equipmentType) ? $equipmentType->category : '')"
         required

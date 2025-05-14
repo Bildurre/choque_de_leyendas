@@ -28,7 +28,7 @@
         id="{{ $name }}_picker"
         value="{{ $value ?: '#ffffff' }}"
         class="color-picker__selector"
-        aria-label="{{ $label ?: __('form.color_selector') }}"
+        aria-label="{{ $label ?: __('components.form.color_selector') }}"
       />
     </div>
   </div>

@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('cards.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.cards.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.cards.create') : null"
-      :create-label="__('cards.create')"
+      :create-label="__('entities.cards.create')"
       :items="$cards"
       :withTabs="true"
       :trashed="$trashed"
@@ -24,8 +24,8 @@
             : route('admin.cards.destroy', $card)"
           :restore-route="$trashed ? route('admin.cards.restore', $card->id) : null"
           :confirm-message="$trashed 
-            ? __('cards.confirm_force_delete') 
-            : __('cards.confirm_delete')"
+            ? __('entities.cards.confirm_force_delete') 
+            : __('entities.cards.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="primary">
@@ -43,7 +43,7 @@
               <x-badge variant="info">
                 {{ $card->equipmentType->name }} 
                 @if($card->hands)
-                  ({{ $card->hands }} {{ trans_choice('cards.hands_count', $card->hands) }})
+                  ({{ $card->hands }} {{ trans_choice('entities.cards.hands_count', $card->hands) }})
                 @endif
               </x-badge>
             @endif
@@ -52,7 +52,7 @@
               <x-badge variant="{{ $card->attackSubtype->type === 'physical' ? 'warning' : 'success' }}">
                 {{ $card->attackSubtype->name }}
                 @if($card->area)
-                  ({{ __('cards.area') }})
+                  ({{ __('entities.cards.area') }})
                 @endif
               </x-badge>
             @endif
@@ -76,7 +76,7 @@
             <div class="card-details__content">
               @if($card->restriction)
                 <div class="card-details__section">
-                  <h4 class="card-details__label">{{ __('cards.restriction') }}:</h4>
+                  <h4 class="card-details__label">{{ __('entities.cards.restriction') }}:</h4>
                   <div class="card-details__text">{{ strip_tags($card->restriction) }}</div>
                 </div>
               @endif

@@ -43,22 +43,22 @@
           
           <div class="faction-deck-view__stats">
             <div class="faction-deck-stat">
-              <span class="faction-deck-stat__label">{{ __('faction_decks.total_cards') }}:</span>
+              <span class="faction-deck-stat__label">{{ __('entities.faction_decks.total_cards') }}:</span>
               <span class="faction-deck-stat__value">{{ $factionDeck->totalCards }}</span>
             </div>
             
             <div class="faction-deck-stat">
-              <span class="faction-deck-stat__label">{{ __('faction_decks.unique_cards') }}:</span>
+              <span class="faction-deck-stat__label">{{ __('entities.faction_decks.unique_cards') }}:</span>
               <span class="faction-deck-stat__value">{{ $factionDeck->cards->count() }}</span>
             </div>
             
             <div class="faction-deck-stat">
-              <span class="faction-deck-stat__label">{{ __('faction_decks.total_heroes') }}:</span>
+              <span class="faction-deck-stat__label">{{ __('entities.faction_decks.total_heroes') }}:</span>
               <span class="faction-deck-stat__value">{{ $factionDeck->totalHeroes }}</span>
             </div>
             
             <div class="faction-deck-stat">
-              <span class="faction-deck-stat__label">{{ __('faction_decks.unique_heroes') }}:</span>
+              <span class="faction-deck-stat__label">{{ __('entities.faction_decks.unique_heroes') }}:</span>
               <span class="faction-deck-stat__value">{{ $factionDeck->heroes->count() }}</span>
             </div>
           </div>
@@ -77,7 +77,7 @@
       
       <div class="faction-deck-view__content">
         <div class="faction-deck-view__cards">
-          <h2 class="faction-deck-view__section-title">{{ __('cards.plural') }}</h2>
+          <h2 class="faction-deck-view__section-title">{{ __('entities.cards.plural') }}</h2>
           
           @if($factionDeck->cards->count() > 0)
             <div class="card-grid">
@@ -114,13 +114,13 @@
             </div>
           @else
             <div class="faction-deck-view__empty">
-              <p>{{ __('faction_decks.no_cards') }}</p>
+              <p>{{ __('entities.faction_decks.no_cards') }}</p>
             </div>
           @endif
         </div>
         
         <div class="faction-deck-view__heroes">
-          <h2 class="faction-deck-view__section-title">{{ __('heroes.plural') }}</h2>
+          <h2 class="faction-deck-view__section-title">{{ __('entities.heroes.plural') }}</h2>
           
           @if($factionDeck->heroes->count() > 0)
             <div class="hero-grid">
@@ -138,23 +138,23 @@
                     
                     <div class="hero-item__attributes">
                       <div class="hero-item__attribute">
-                        <span class="hero-item__attribute-label">{{ __('attributes.agility') }}:</span>
+                        <span class="hero-item__attribute-label">{{ __('game.attributes.agility') }}:</span>
                         <span class="hero-item__attribute-value">{{ $hero->agility }}</span>
                       </div>
                       <div class="hero-item__attribute">
-                        <span class="hero-item__attribute-label">{{ __('attributes.mental') }}:</span>
+                        <span class="hero-item__attribute-label">{{ __('game.attributes.mental') }}:</span>
                         <span class="hero-item__attribute-value">{{ $hero->mental }}</span>
                       </div>
                       <div class="hero-item__attribute">
-                        <span class="hero-item__attribute-label">{{ __('attributes.will') }}:</span>
+                        <span class="hero-item__attribute-label">{{ __('game.attributes.will') }}:</span>
                         <span class="hero-item__attribute-value">{{ $hero->will }}</span>
                       </div>
                       <div class="hero-item__attribute">
-                        <span class="hero-item__attribute-label">{{ __('attributes.strength') }}:</span>
+                        <span class="hero-item__attribute-label">{{ __('game.attributes.strength') }}:</span>
                         <span class="hero-item__attribute-value">{{ $hero->strength }}</span>
                       </div>
                       <div class="hero-item__attribute">
-                        <span class="hero-item__attribute-label">{{ __('attributes.armor') }}:</span>
+                        <span class="hero-item__attribute-label">{{ __('game.attributes.armor') }}:</span>
                         <span class="hero-item__attribute-value">{{ $hero->armor }}</span>
                       </div>
                       <div class="hero-item__attribute hero-item__attribute--total">
@@ -168,7 +168,7 @@
             </div>
           @else
             <div class="faction-deck-view__empty">
-              <p>{{ __('faction_decks.no_heroes') }}</p>
+              <p>{{ __('entities.faction_decks.no_heroes') }}</p>
             </div>
           @endif
         </div>

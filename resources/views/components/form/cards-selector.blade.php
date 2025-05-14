@@ -64,7 +64,7 @@
               </div>
               
               <div class="cards-selector__copies">
-                <label class="cards-selector__copies-label">{{ __('faction_decks.copies') }}:</label>
+                <label class="cards-selector__copies-label">{{ __('entities.faction_decks.copies') }}:</label>
                 <div class="cards-selector__copies-controls">
                   <button type="button" class="cards-selector__copies-btn cards-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
                   <input 
@@ -98,11 +98,11 @@
       <div class="cards-selector__preview">
         <div class="cards-selector__stats">
           <div class="cards-selector__stat">
-            <span class="cards-selector__stat-label">{{ __('faction_decks.total_cards') }}:</span>
+            <span class="cards-selector__stat-label">{{ __('entities.faction_decks.total_cards') }}:</span>
             <span class="cards-selector__stat-value" id="total-cards">0</span>
           </div>
           <div class="cards-selector__stat">
-            <span class="cards-selector__stat-label">{{ __('faction_decks.unique_cards') }}:</span>
+            <span class="cards-selector__stat-label">{{ __('entities.faction_decks.unique_cards') }}:</span>
             <span class="cards-selector__stat-value" id="unique-cards">0</span>
           </div>
         </div>

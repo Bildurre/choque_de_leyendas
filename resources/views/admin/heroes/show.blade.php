@@ -50,7 +50,7 @@
             @endif
             
             <x-badge variant="{{ $hero->gender === 'male' ? 'success' : 'warning' }}">
-              {{ __('heroes.genders.' . $hero->gender) }}
+              {{ __('entities.heroes.genders.' . $hero->gender) }}
             </x-badge>
           </div>
         </div>
@@ -65,48 +65,48 @@
                   <div class="hero-view__image-placeholder-icon">
                     <x-icon name="image" size="xl" />
                   </div>
-                  <p>{{ __('heroes.no_image') }}</p>
+                  <p>{{ __('entities.heroes.no_image') }}</p>
                 </div>
               @endif
             </div>
             
             <div class="hero-view__details">
               <div class="hero-view__section">
-                <h2 class="hero-view__section-title">{{ __('heroes.attributes') }}</h2>
+                <h2 class="hero-view__section-title">{{ __('entities.heroes.attributes') }}</h2>
                 
                 <div class="hero-view__attribute-grid">
                   <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('heroes.attributes.agility') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.agility') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->agility }}</span>
                   </div>
                   
                   <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('heroes.attributes.mental') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.mental') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->mental }}</span>
                   </div>
                   
                   <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('heroes.attributes.will') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.will') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->will }}</span>
                   </div>
                   
                   <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('heroes.attributes.strength') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.strength') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->strength }}</span>
                   </div>
                   
                   <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('heroes.attributes.armor') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.armor') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->armor }}</span>
                   </div>
                   
                   <div class="hero-view__attribute hero-view__attribute--total">
-                    <span class="hero-view__attribute-label">{{ __('heroes.attributes.health') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.health') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->health }}</span>
                   </div>
                   
                   <div class="hero-view__attribute hero-view__attribute--total">
-                    <span class="hero-view__attribute-label">{{ __('heroes.total_attributes') }}:</span>
+                    <span class="hero-view__attribute-label">{{ __('entities.heroes.total_attributes') }}:</span>
                     <span class="hero-view__attribute-value">{{ $hero->total_attributes }}</span>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
               
               @if($hero->passive_name)
                 <div class="hero-view__section">
-                  <h2 class="hero-view__section-title">{{ __('heroes.passive_ability') }}</h2>
+                  <h2 class="hero-view__section-title">{{ __('entities.heroes.passive_ability') }}</h2>
                   
                   <div class="hero-view__passive">
                     <h3 class="hero-view__passive-name">{{ $hero->passive_name }}</h3>
@@ -130,7 +130,7 @@
               
               @if($hero->lore_text)
                 <div class="hero-view__section">
-                  <h2 class="hero-view__section-title">{{ __('heroes.lore_text') }}</h2>
+                  <h2 class="hero-view__section-title">{{ __('entities.heroes.lore_text') }}</h2>
                   <div class="hero-view__text-content">
                     {!! $hero->lore_text !!}
                   </div>
@@ -143,7 +143,7 @@
 
       @if($hero->heroAbilities->count() > 0)
         <div class="hero-view__abilities">
-          <h2 class="hero-view__section-title">{{ __('hero_abilities.plural') }}</h2>
+          <h2 class="hero-view__section-title">{{ __('entities.hero_abilities.plural') }}</h2>
           
           <div class="hero-abilities-grid">
             @foreach($hero->heroAbilities as $ability)
@@ -163,14 +163,14 @@
                 <div class="hero-ability-card__details">
                   @if($ability->attackRange)
                     <div class="hero-ability-card__attribute">
-                      <span class="hero-ability-card__attribute-label">{{ __('attack_ranges.singular') }}:</span>
+                      <span class="hero-ability-card__attribute-label">{{ __('entities.attack_ranges.singular') }}:</span>
                       <span class="hero-ability-card__attribute-value">{{ $ability->attackRange->name }}</span>
                     </div>
                   @endif
                   
                   @if($ability->attackSubtype)
                     <div class="hero-ability-card__attribute">
-                      <span class="hero-ability-card__attribute-label">{{ __('attack_subtypes.singular') }}:</span>
+                      <span class="hero-ability-card__attribute-label">{{ __('entities.attack_subtypes.singular') }}:</span>
                       <span class="hero-ability-card__attribute-value {{ $ability->attackSubtype->type }}">
                         {{ $ability->attackSubtype->name }}
                       </span>
@@ -179,9 +179,9 @@
                   
                   @if($ability->area)
                     <div class="hero-ability-card__attribute">
-                      <span class="hero-ability-card__attribute-label">{{ __('hero_abilities.type') }}:</span>
+                      <span class="hero-ability-card__attribute-label">{{ __('entities.hero_abilities.type') }}:</span>
                       <span class="hero-ability-card__attribute-value">
-                        {{ __('hero_abilities.area') }}
+                        {{ __('entities.hero_abilities.area') }}
                       </span>
                     </div>
                   @endif

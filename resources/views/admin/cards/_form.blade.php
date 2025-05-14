@@ -3,7 +3,7 @@
     ? route('admin.cards.update', $card) 
     : route('admin.cards.store');
   $submitMethod = isset($card) ? 'PUT' : 'POST';
-  $submitLabel = isset($card) ? __('admin.update') : __('cards.create');
+  $submitLabel = isset($card) ? __('admin.update') : __('entities.cards.create');
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
@@ -16,14 +16,14 @@
     <div class="form-grid">
       <x-form.multilingual-input
         name="name"
-        :label="__('cards.name')"
+        :label="__('entities.cards.name')"
         :values="isset($card) ? $card->getTranslations('name') : []"
         required
       />
         
       <x-form.select
         name="card_type_id"
-        :label="__('card_types.singular')"
+        :label="__('entities.card_types.singular')"
         :options="$cardTypes->pluck('name', 'id')->toArray()"
         :selected="old('card_type_id', isset($card) ? $card->card_type_id : '')"
         required
@@ -31,81 +31,81 @@
         
       <x-form.select
         name="faction_id"
-        :label="__('factions.singular')"
-        :options="['' => __('cards.no_faction')] + $factions->pluck('name', 'id')->toArray()"
+        :label="__('entities.factions.singular')"
+        :options="['' => __('entities.cards.no_faction')] + $factions->pluck('name', 'id')->toArray()"
         :selected="old('faction_id', $selectedFactionId ?? (isset($card) ? $card->faction_id : ''))"
         required
       />
         
       <x-form.multilingual-wysiwyg
         name="lore_text"
-        :label="__('cards.lore_text')"
+        :label="__('entities.cards.lore_text')"
         :values="isset($card) ? $card->getTranslations('lore_text') : []"
         />
         
       <x-form.multilingual-wysiwyg
         name="effect"
-        :label="__('cards.effect')"
+        :label="__('entities.cards.effect')"
         :values="isset($card) ? $card->getTranslations('effect') : []"
       />
         
       <x-form.multilingual-wysiwyg
         name="restriction"
-        :label="__('cards.restriction')"
+        :label="__('entities.cards.restriction')"
         :values="isset($card) ? $card->getTranslations('restriction') : []"
       />
 
       <x-form.cost-input
         name="cost"
-        :label="__('cards.cost')"
+        :label="__('entities.cards.cost')"
         :value="old('cost', isset($card) ? $card->cost : '')"
-        :help="__('cards.cost_help')"
+        :help="__('entities.cards.cost_help')"
       />
         
       <x-form.select
         name="equipment_type_id"
-        :label="__('equipment_types.singular')"
-        :options="['' => __('cards.no_equipment_type')] + $equipmentTypes->pluck('name', 'id')->toArray()"
+        :label="__('entities.equipment_types.singular')"
+        :options="['' => __('entities.cards.no_equipment_type')] + $equipmentTypes->pluck('name', 'id')->toArray()"
         :selected="old('equipment_type_id', isset($card) ? $card->equipment_type_id : '')"
       />
 
       <x-form.select
         name="hands"
-        :label="__('cards.hands')"
-        :options="['' => __('cards.select_hands'), '1' => __('cards.one_hand'), '2' => __('cards.two_hands')]"
+        :label="__('entities.cards.hands')"
+        :options="['' => __('cards.select_hands'), '1' => __('entities.cards.one_hand'), '2' => __('entities.cards.two_hands')]"
         :selected="old('hands', isset($card) ? $card->hands : '')"
       />
 
       <x-form.select
         name="attack_range_id"
-        :label="__('attack_ranges.singular')"
-        :options="['' => __('cards.no_attack_range')] + $attackRanges->pluck('name', 'id')->toArray()"
+        :label="__('entities.attack_ranges.singular')"
+        :options="['' => __('entities.cards.no_attack_range')] + $attackRanges->pluck('name', 'id')->toArray()"
         :selected="old('attack_range_id', isset($card) ? $card->attack_range_id : '')"
       />
             
       <x-form.select
         name="attack_subtype_id"
-        :label="__('attack_subtypes.singular')"
-        :options="['' => __('cards.no_attack_subtype')] + $attackSubtypes->pluck('name', 'id')->toArray()"
+        :label="__('entities.attack_subtypes.singular')"
+        :options="['' => __('entities.cards.no_attack_subtype')] + $attackSubtypes->pluck('name', 'id')->toArray()"
         :selected="old('attack_subtype_id', isset($card) ? $card->attack_subtype_id : '')"
       />
             
       <x-form.checkbox
         name="area"
-        :label="__('cards.is_area_attack')"
+        :label="__('entities.cards.is_area_attack')"
         :checked="old('area', isset($card) ? $card->area : false)"
       />
 
       <x-form.select
         name="hero_ability_id"
-        :label="__('hero_abilities.singular')"
-        :options="['' => __('cards.no_hero_ability')] + $heroAbilities->pluck('name', 'id')->toArray()"
+        :label="__('entities.hero_abilities.singular')"
+        :options="['' => __('entities.cards.no_hero_ability')] + $heroAbilities->pluck('name', 'id')->toArray()"
         :selected="old('hero_ability_id', isset($card) ? $card->hero_ability_id : '')"
       />
         
       <x-form.image-upload
         name="image"
-        :label="__('cards.image')"
+        :label="__('entities.cards.image')"
         :current-image="isset($card) && $card->image ? $card->getImageUrl() : null"
         :remove-name="isset($card) ? 'remove_image' : null"
       />

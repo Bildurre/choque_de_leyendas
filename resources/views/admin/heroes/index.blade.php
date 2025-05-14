@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('heroes.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.heroes.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.heroes.create') : null"
-      :create-label="__('heroes.create')"
+      :create-label="__('entities.heroes.create')"
       :items="$heroes"
       :withTabs="true"
       :trashed="$trashed"
@@ -24,8 +24,8 @@
             : route('admin.heroes.destroy', $hero)"
           :restore-route="$trashed ? route('admin.heroes.restore', $hero->id) : null"
           :confirm-message="$trashed 
-            ? __('heroes.confirm_force_delete') 
-            : __('heroes.confirm_delete')"
+            ? __('entities.heroes.confirm_force_delete') 
+            : __('entities.heroes.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge 
@@ -44,7 +44,7 @@
             </x-badge>
             
             <x-badge variant="{{ $hero->gender === 'male' ? 'success' : 'warning' }}">
-              {{ __('heroes.genders.' . $hero->gender) }}
+              {{ __('entities.heroes.genders.' . $hero->gender) }}
             </x-badge>
             
             @if($trashed)
@@ -58,34 +58,34 @@
             <div class="hero-details__content">
               <div class="hero-details__attributes">
                 <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('heroes.attributes.agility') }}:</span>
+                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.agility') }}:</span>
                   <span class="hero-attribute__value">{{ $hero->agility }}</span>
                 </div>
                 <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('heroes.attributes.mental') }}:</span>
+                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.mental') }}:</span>
                   <span class="hero-attribute__value">{{ $hero->mental }}</span>
                 </div>
                 <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('heroes.attributes.will') }}:</span>
+                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.will') }}:</span>
                   <span class="hero-attribute__value">{{ $hero->will }}</span>
                 </div>
                 <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('heroes.attributes.strength') }}:</span>
+                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.strength') }}:</span>
                   <span class="hero-attribute__value">{{ $hero->strength }}</span>
                 </div>
                 <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('heroes.attributes.armor') }}:</span>
+                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.armor') }}:</span>
                   <span class="hero-attribute__value">{{ $hero->armor }}</span>
                 </div>
                 <div class="hero-attribute hero-attribute--total">
-                  <span class="hero-attribute__label">{{ __('heroes.attributes.health') }}:</span>
+                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.health') }}:</span>
                   <span class="hero-attribute__value">{{ $hero->health }}</span>
                 </div>
               </div>
               
               @if($hero->heroAbilities->count() > 0)
                 <div class="hero-details__abilities">
-                  <h4 class="hero-details__section-title">{{ __('hero_abilities.plural') }}:</h4>
+                  <h4 class="hero-details__section-title">{{ __('entities.hero_abilities.plural') }}:</h4>
                   <ul class="hero-abilities-list">
                     @foreach($hero->heroAbilities as $ability)
                       <li class="hero-abilities-list__item">
@@ -103,7 +103,7 @@
               
               @if($hero->passive_name)
                 <div class="hero-details__passive">
-                  <h4 class="hero-details__section-title">{{ __('heroes.passive') }}:</h4>
+                  <h4 class="hero-details__section-title">{{ __('entities.heroes.passive') }}:</h4>
                   <div class="hero-details__passive-name">{{ $hero->passive_name }}</div>
                   @if($hero->passive_description)
                     <div class="hero-details__passive-description">

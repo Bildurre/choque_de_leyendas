@@ -3,7 +3,7 @@
     ? route('admin.factions.update', $faction) 
     : route('admin.factions.store');
   $submitMethod = isset($faction) ? 'PUT' : 'POST';
-  $submitLabel = isset($faction) ? __('admin.update') : __('factions.create');
+  $submitLabel = isset($faction) ? __('admin.update') : __('entities.factions.create');
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
@@ -16,27 +16,27 @@
     <div class="form-grid">
       <x-form.multilingual-input
         name="name"
-        :label="__('factions.name')"
+        :label="__('entities.factions.name')"
         :values="isset($faction) ? $faction->getTranslations('name') : []"
         required
       />
       
       <x-form.multilingual-wysiwyg
         name="lore_text"
-        :label="__('factions.lore_text')"
+        :label="__('entities.factions.lore_text')"
         :values="isset($faction) ? $faction->getTranslations('lore_text') : []"
       />
     
       <x-form.color-picker
         name="color"
-        :label="__('factions.color')"
+        :label="__('entities.factions.color')"
         :value="old('color', isset($faction) ? $faction->color : '#000000')"
         required
       />
       
       <x-form.image-upload
         name="icon"
-        :label="__('factions.icon')"
+        :label="__('entities.factions.icon')"
         :current-image="isset($faction) && $faction->icon ? $faction->getImageUrl() : null"
         :remove-name="isset($faction) ? 'remove_icon' : null"
       />

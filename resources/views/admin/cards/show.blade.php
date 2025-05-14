@@ -63,19 +63,19 @@
                   <div class="card-view__image-placeholder-icon">
                     <x-icon name="image" size="xl" />
                   </div>
-                  <p>{{ __('cards.no_image') }}</p>
+                  <p>{{ __('entities.cards.no_image') }}</p>
                 </div>
               @endif
             </div>
             
             <div class="card-view__details">
               <div class="card-view__section">
-                <h2 class="card-view__section-title">{{ __('cards.details') }}</h2>
+                <h2 class="card-view__section-title">{{ __('entities.cards.details') }}</h2>
                 
                 <div class="card-view__info-grid">
                   <!-- Card Type -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('card_types.singular') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.card_types.singular') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->cardType ? $card->cardType->name : __('admin.none') }}
                     </span>
@@ -83,7 +83,7 @@
                   
                   <!-- Faction -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('factions.singular') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.factions.singular') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->faction ? $card->faction->name : __('admin.none') }}
                     </span>
@@ -91,7 +91,7 @@
                   
                   <!-- Equipment Type -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('equipment_types.singular') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.equipment_types.singular') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->equipmentType ? $card->equipmentType->name : __('admin.none') }}
                     </span>
@@ -100,16 +100,16 @@
                   <!-- Hands (if applicable) -->
                   @if($card->equipmentType && $card->equipmentType->category === 'weapon' && $card->hands)
                     <div class="card-view__info-item">
-                      <span class="card-view__info-label">{{ __('cards.hands') }}:</span>
+                      <span class="card-view__info-label">{{ __('entities.cards.hands') }}:</span>
                       <span class="card-view__info-value">
-                        {{ $card->hands }} {{ trans_choice('cards.hands_count', $card->hands) }}
+                        {{ $card->hands }} {{ trans_choice('entities.cards.hands_count', $card->hands) }}
                       </span>
                     </div>
                   @endif
                   
                   <!-- Attack Range -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('attack_ranges.singular') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.attack_ranges.singular') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->attackRange ? $card->attackRange->name : __('admin.none') }}
                     </span>
@@ -117,7 +117,7 @@
                   
                   <!-- Attack Subtype -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('attack_subtypes.singular') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.attack_subtypes.singular') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->attackSubtype ? $card->attackSubtype->name : __('admin.none') }}
                     </span>
@@ -125,7 +125,7 @@
                   
                   <!-- Area Attack -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('cards.area') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.cards.area') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->area ? __('admin.yes') : __('admin.no') }}
                     </span>
@@ -133,7 +133,7 @@
                   
                   <!-- Hero Ability -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('hero_abilities.singular') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.hero_abilities.singular') }}:</span>
                     <span class="card-view__info-value">
                       {{ $card->heroAbility ? $card->heroAbility->name : __('admin.none') }}
                     </span>
@@ -141,7 +141,7 @@
                   
                   <!-- Cost -->
                   <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('cards.cost') }}:</span>
+                    <span class="card-view__info-label">{{ __('entities.cards.cost') }}:</span>
                     <span class="card-view__info-value">
                       @if($card->cost)
                         <div class="card-view__dice-cost">
@@ -157,7 +157,7 @@
               
               @if($card->lore_text)
                 <div class="card-view__section">
-                  <h2 class="card-view__section-title">{{ __('cards.lore_text') }}</h2>
+                  <h2 class="card-view__section-title">{{ __('entities.cards.lore_text') }}</h2>
                   <div class="card-view__text-content">
                     {!! $card->lore_text !!}
                   </div>
@@ -166,7 +166,7 @@
               
               @if($card->effect)
                 <div class="card-view__section">
-                  <h2 class="card-view__section-title">{{ __('cards.effect') }}</h2>
+                  <h2 class="card-view__section-title">{{ __('entities.cards.effect') }}</h2>
                   <div class="card-view__text-content">
                     {!! $card->effect !!}
                   </div>
@@ -175,7 +175,7 @@
               
               @if($card->restriction)
                 <div class="card-view__section">
-                  <h2 class="card-view__section-title">{{ __('cards.restriction') }}</h2>
+                  <h2 class="card-view__section-title">{{ __('entities.cards.restriction') }}</h2>
                   <div class="card-view__text-content">
                     {!! $card->restriction !!}
                   </div>

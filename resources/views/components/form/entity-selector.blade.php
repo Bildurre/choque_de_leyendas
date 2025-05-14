@@ -128,7 +128,7 @@
                 
                 @if($showCopies)
                   <div class="entity-selector__copies">
-                    <label class="entity-selector__copies-label">{{ __('form.entity_selector.copies') }}:</label>
+                    <label class="entity-selector__copies-label">{{ __('components.form.entity_selector.copies') }}:</label>
                     <div class="entity-selector__copies-controls">
                       <button type="button" class="entity-selector__copies-btn entity-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
                       <input 

@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('faction_decks.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.faction_decks.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="null"
-      :create-label="__('faction_decks.create')"
+      :create-label="__('entities.faction_decks.create')"
       :items="$factionDecks"
       :withTabs="true"
       :trashed="$trashed"
@@ -17,7 +17,7 @@
       <x-slot:actions>
         @if(!$trashed)
           <x-dropdown 
-            :label="__('faction_decks.create')" 
+            :label="__('entities.faction_decks.create')" 
             icon="plus"
             variant="primary"
           >
@@ -40,8 +40,8 @@
             : route('admin.faction-decks.destroy', $factionDeck)"
           :restore-route="$trashed ? route('admin.faction-decks.restore', $factionDeck->id) : null"
           :confirm-message="$trashed 
-            ? __('faction_decks.confirm_force_delete') 
-            : __('faction_decks.confirm_delete')"
+            ? __('entities.faction_decks.confirm_force_delete') 
+            : __('entities.faction_decks.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge 
@@ -56,11 +56,11 @@
             </x-badge>
             
             <x-badge variant="primary">
-              {{ __('faction_decks.cards_count', ['count' => $factionDeck->cards_count]) }}
+              {{ __('entities.faction_decks.cards_count', ['count' => $factionDeck->cards_count]) }}
             </x-badge>
             
             <x-badge variant="success">
-              {{ __('faction_decks.heroes_count', ['count' => $factionDeck->heroes_count]) }}
+              {{ __('entities.faction_decks.heroes_count', ['count' => $factionDeck->heroes_count]) }}
             </x-badge>
             
             @if($trashed)

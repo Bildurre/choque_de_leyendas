@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('hero_classes.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.hero_classes.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.hero-classes.create') : null"
-      :create-label="__('hero_classes.create')"
+      :create-label="__('entities.hero_classes.create')"
       :items="$heroClasses"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,8 +23,8 @@
             : route('admin.hero-classes.destroy', $heroClass)"
           :restore-route="$trashed ? route('admin.hero-classes.restore', $heroClass->id) : null"
           :confirm-message="$trashed 
-            ? __('hero_classes.confirm_force_delete') 
-            : __('hero_classes.confirm_delete')"
+            ? __('entities.hero_classes.confirm_force_delete') 
+            : __('entities.hero_classes.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="primary">
@@ -32,7 +32,7 @@
             </x-badge>
             
             <x-badge variant="info">
-              {{ __('hero_classes.heroes_count', ['count' => $heroClass->heroes_count]) }}
+              {{ __('entities.hero_classes.heroes_count', ['count' => $heroClass->heroes_count]) }}
             </x-badge>
             
             @if($trashed)

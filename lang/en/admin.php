@@ -1,46 +1,49 @@
 <?php
 
 return [
-  // General
-  'dashboard' => 'Dashboard',
-  'welcome' => 'Welcome to the administration panel',
-  'toggle_sidebar' => 'Toggle sidebar',
-  'home' => 'Home',
-  
-  // Sections
-  'general' => 'General',
-  'game' => 'Game',
-  'content' => 'Content',
-  'system' => 'System',
-  
-  // Actions
-  'save' => 'Save',
-  'cancel' => 'Cancel',
-  'create' => 'Create',
-  'edit' => 'Edit',
-  'delete' => 'Delete',
-  'back' => 'Back',
-  'save-order' => 'Save Order',
-  'update' => 'Update',
-
-  // Entity Management
-  'no_records' => 'No records available',
-  'confirm_delete' => 'Are you sure you want to delete this item?',
-  'actions' => 'Actions',
-  'details' => 'Details',
-  'view' => 'View',
-  'search' => 'Search',
-  'filter' => 'Filter',
-  'apply_filters' => 'Apply Filters',
-  'reset_filters' => 'Reset Filters',
-  'sort_by' => 'Sort by',
-  'per_page' => 'Per page',
-
-  'select_option' => 'Select an option',
-  'form_title' => 'Form Details',
-
-
-  'drag_image_here' => 'Drag image here',
-  'or_click_to_browse' => 'or click to browse',
-  'remove_image' => 'Remove image',
+    // General
+    'dashboard' => 'Dashboard',
+    'administration' => 'Administration',
+    'game' => 'Game',
+    'content' => 'Content',
+    'settings' => 'Settings',
+    'configuration' => 'Configuration',
+    'home' => 'Home',
+    
+    // Actions
+    'create' => 'Create',
+    'edit' => 'Edit',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'back_to_list' => 'Back to list',
+    'confirm_delete' => 'Are you sure you want to delete this item?',
+    'restore' => 'Restore',
+    'force_delete' => 'Force Delete',
+    'confirm_force_delete' => 'Are you sure you want to permanently delete this item?',
+    'view' => 'View',
+    'save_order' => 'Save Order',
+    
+    // List view
+    'no_records' => 'No records found',
+    'active_items' => 'Active',
+    'trashed_items' => 'Trash',
+    'trashed' => 'Trash',
+    'deleted_at' => 'Deleted at: :date',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'none' => 'None',
+    
+    // Image upload
+    'drag_image_here' => 'Drag an image here',
+    'or_click_to_browse' => 'or click to browse',
+    'remove_image' => 'Remove image',
+    
+    // Form fields
+    'select_option' => 'Select an option',
+    'form_title' => 'Details',
+    
+    // Toggle sidebar
+    'toggle_sidebar' => 'Toggle Sidebar',
 ];

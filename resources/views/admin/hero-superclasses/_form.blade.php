@@ -3,7 +3,7 @@
     ? route('admin.hero-superclasses.update', $heroSuperclass) 
     : route('admin.hero-superclasses.store');
   $submitMethod = isset($heroSuperclass) ? 'PUT' : 'POST';
-  $submitLabel = isset($heroSuperclass) ? __('admin.update') : __('hero_superclasses.create');
+  $submitLabel = isset($heroSuperclass) ? __('admin.update') : __('entities.hero_superclasses.create');
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" class="form">
@@ -16,7 +16,7 @@
     <div class="form-grid">
       <x-form.multilingual-input
         name="name"
-        :label="__('hero_superclasses.name')"
+        :label="__('entities.hero_superclasses.name')"
         :values="isset($heroSuperclass) ? $heroSuperclass->getTranslations('name') : []"
         required
       />

@@ -60,14 +60,14 @@
     </div>
   @else
     <div class="faction-view__empty">
-      <p>{{ __('factions.no_cards') }}</p>
+      <p>{{ __('entities.factions.no_cards') }}</p>
       
       <x-button-link
         :href="route('admin.cards.create', ['faction_id' => $faction->id])"
         variant="primary"
         icon="plus"
       >
-        {{ __('cards.create') }}
+        {{ __('entities.cards.create') }}
       </x-button-link>
     </div>
   @endif

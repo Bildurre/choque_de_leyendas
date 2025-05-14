@@ -13,7 +13,7 @@
     </x-collapsible-section>
     
     <!-- Blocks Section -->
-    <x-collapsible-section id="page-blocks-section" title="{{ __('blocks.page_blocks') }}">
+    <x-collapsible-section id="page-blocks-section" title="{{ __('pages.blocks.page_blocks') }}">
       @include('admin.pages._blocks-manager', ['page' => $page])
     </x-collapsible-section>
   </div>

@@ -1,5 +1,5 @@
 <x-entity.list 
-  title="{{ __('blocks.page_blocks') }}"
+  title="{{ __('pages.blocks.page_blocks') }}"
   :items="$page->blocks"
   :is-reorderable="true"
   :reorder-url="route('admin.pages.blocks.reorder', $page)"
@@ -7,13 +7,13 @@
   :showHeader="true"
 >
   <x-slot:actions>
-    <x-dropdown label="{{ __('blocks.add_block') }}" icon="plus">
+    <x-dropdown label="{{ __('pages.blocks.add_block') }}" icon="plus">
       @foreach(config('blocks.types') as $blockType => $blockConfig)
         <x-dropdown-item 
           :href="route('admin.pages.blocks.create', [$page, 'type' => $blockType])"
           :icon="$blockConfig['icon'] ?? 'default'"
         >
-          {{ __('blocks.types.' . $blockType) }}
+          {{ __('pages.blocks.types.' . $blockType) }}
         </x-dropdown-item>
       @endforeach
     </x-dropdown>
@@ -21,10 +21,10 @@
   
   @foreach($page->blocks as $block)
     <x-entity.list-card 
-      :title="__('blocks.types.' . $block->type)"
+      :title="__('pages.blocks.types.' . $block->type)"
       :edit-route="route('admin.pages.blocks.edit', [$page, $block])"
       :delete-route="route('admin.pages.blocks.destroy', [$page, $block])"
-      :confirm-message="__('blocks.confirm_delete')"
+      :confirm-message="__('pages.blocks.confirm_delete')"
       data-block-id="{{ $block->id }}"
     >
       @if($block->title)

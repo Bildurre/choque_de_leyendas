@@ -1,6 +1,6 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('game_modes.create') }}</h1>
+    <h1 class="page-title">{{ __('entities.game_modes.create') }}</h1>
   </div>
   
   <div class="page-content">

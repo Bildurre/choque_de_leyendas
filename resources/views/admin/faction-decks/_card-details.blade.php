@@ -14,21 +14,21 @@
     
     @if($entity->equipmentType)
       <div class="card-details__item">
-        <span class="card-details__label">{{ __('equipment_types.singular') }}:</span>
+        <span class="card-details__label">{{ __('entities.equipment_types.singular') }}:</span>
         <span class="card-details__value">{{ $entity->equipmentType->name }}</span>
       </div>
     @endif
     
     @if($entity->attackRange)
       <div class="card-details__item">
-        <span class="card-details__label">{{ __('attack_ranges.singular') }}:</span>
+        <span class="card-details__label">{{ __('entities.attack_ranges.singular') }}:</span>
         <span class="card-details__value">{{ $entity->attackRange->name }}</span>
       </div>
     @endif
     
     @if($entity->attackSubtype)
       <div class="card-details__item">
-        <span class="card-details__label">{{ __('attack_subtypes.singular') }}:</span>
+        <span class="card-details__label">{{ __('entities.attack_subtypes.singular') }}:</span>
         <span class="card-details__value {{ $entity->attackSubtype->type }}">
           {{ $entity->attackSubtype->name }}
         </span>
@@ -39,7 +39,7 @@
       <div class="card-details__item">
         <span class="card-details__label">{{ __('cards.type') }}:</span>
         <span class="card-details__value">
-          {{ __('cards.area') }}
+          {{ __('entities.cards.area') }}
         </span>
       </div>
     @endif

@@ -1,6 +1,6 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('factions.edit') }}: {{ $faction->name }}</h1>
+    <h1 class="page-title">{{ __('entities.factions.edit') }}: {{ $faction->name }}</h1>
   </div>
   
   <div class="page-content">

@@ -60,11 +60,11 @@
     </div>
   @else
     <div class="faction-view__empty">
-      <p>{{ __('factions.no_decks') }}</p>
+      <p>{{ __('entities.factions.no_decks') }}</p>
       
       @if(isset($gameModes) && $gameModes->count() > 0)
         <x-dropdown 
-          :label="__('faction_decks.create')" 
+          :label="__('entities.faction_decks.create')" 
           icon="plus"
           variant="primary"
         >

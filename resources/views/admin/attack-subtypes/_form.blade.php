@@ -3,7 +3,7 @@
     ? route('admin.attack-subtypes.update', $attackSubtype) 
     : route('admin.attack-subtypes.store');
   $submitMethod = isset($attackSubtype) ? 'PUT' : 'POST';
-  $submitLabel = isset($attackSubtype) ? __('admin.update') : __('attack_subtypes.create');
+  $submitLabel = isset($attackSubtype) ? __('admin.update') : __('entities.attack_subtypes.create');
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" class="form">
@@ -16,14 +16,14 @@
     <div class="form-grid">
       <x-form.multilingual-input
         name="name"
-        :label="__('attack_subtypes.name')"
+        :label="__('entities.attack_subtypes.name')"
         :values="isset($attackSubtype) ? $attackSubtype->getTranslations('name') : []"
         required
       />
       
       <x-form.select
         name="type"
-        :label="__('attack_subtypes.type')"
+        :label="__('entities.attack_subtypes.type')"
         :options="$types"
         :selected="old('type', isset($attackSubtype) ? $attackSubtype->type : '')"
         required

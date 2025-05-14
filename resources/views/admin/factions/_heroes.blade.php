@@ -20,7 +20,7 @@
               @endif
               
               <x-badge variant="{{ $hero->gender === 'male' ? 'success' : 'warning' }}">
-                {{ __('heroes.genders.' . $hero->gender) }}
+                {{ __('entities.heroes.genders.' . $hero->gender) }}
               </x-badge>
             </div>
           </div>
@@ -38,27 +38,27 @@
             
             <div class="hero-card__attributes">
               <div class="hero-card__attribute">
-                <span class="hero-card__attribute-label">{{ __('heroes.attributes.agility') }}:</span>
+                <span class="hero-card__attribute-label">{{ __('entities.heroes.attributes.agility') }}:</span>
                 <span class="hero-card__attribute-value">{{ $hero->agility }}</span>
               </div>
               <div class="hero-card__attribute">
-                <span class="hero-card__attribute-label">{{ __('heroes.attributes.mental') }}:</span>
+                <span class="hero-card__attribute-label">{{ __('entities.heroes.attributes.mental') }}:</span>
                 <span class="hero-card__attribute-value">{{ $hero->mental }}</span>
               </div>
               <div class="hero-card__attribute">
-                <span class="hero-card__attribute-label">{{ __('heroes.attributes.will') }}:</span>
+                <span class="hero-card__attribute-label">{{ __('entities.heroes.attributes.will') }}:</span>
                 <span class="hero-card__attribute-value">{{ $hero->will }}</span>
               </div>
               <div class="hero-card__attribute">
-                <span class="hero-card__attribute-label">{{ __('heroes.attributes.strength') }}:</span>
+                <span class="hero-card__attribute-label">{{ __('entities.heroes.attributes.strength') }}:</span>
                 <span class="hero-card__attribute-value">{{ $hero->strength }}</span>
               </div>
               <div class="hero-card__attribute">
-                <span class="hero-card__attribute-label">{{ __('heroes.attributes.armor') }}:</span>
+                <span class="hero-card__attribute-label">{{ __('entities.heroes.attributes.armor') }}:</span>
                 <span class="hero-card__attribute-value">{{ $hero->armor }}</span>
               </div>
               <div class="hero-card__attribute hero-card__attribute--total">
-                <span class="hero-card__attribute-label">{{ __('heroes.attributes.health') }}:</span>
+                <span class="hero-card__attribute-label">{{ __('entities.heroes.attributes.health') }}:</span>
                 <span class="hero-card__attribute-value">{{ $hero->health }}</span>
               </div>
             </div>
@@ -89,14 +89,14 @@
     </div>
   @else
     <div class="faction-view__empty">
-      <p>{{ __('factions.no_heroes') }}</p>
+      <p>{{ __('entities.factions.no_heroes') }}</p>
       
       <x-button-link
         :href="route('admin.heroes.create', ['faction_id' => $faction->id])"
         variant="primary"
         icon="plus"
       >
-        {{ __('heroes.create') }}
+        {{ __('entities.heroes.create') }}
       </x-button-link>
     </div>
   @endif

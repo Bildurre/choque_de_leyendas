@@ -1,13 +1,13 @@
 <!-- resources/views/admin/hero-races/index.blade.php -->
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('hero_races.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.hero_races.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.hero-races.create') : null"
-      :create-label="__('hero_races.create')"
+      :create-label="__('entities.hero_races.create')"
       :items="$heroRaces"
       :withTabs="true"
       :trashed="$trashed"
@@ -24,12 +24,12 @@
             : route('admin.hero-races.destroy', $heroRace)"
           :restore-route="$trashed ? route('admin.hero-races.restore', $heroRace->id) : null"
           :confirm-message="$trashed 
-            ? __('hero_races.confirm_force_delete') 
-            : __('hero_races.confirm_delete')"
+            ? __('entities.hero_races.confirm_force_delete') 
+            : __('entities.hero_races.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="info">
-              {{ __('hero_races.heroes_count', ['count' => $heroRace->heroes_count]) }}
+              {{ __('entities.hero_races.heroes_count', ['count' => $heroRace->heroes_count]) }}
             </x-badge>
             
             @if($trashed)

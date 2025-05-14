@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('attack_ranges.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.attack_ranges.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.attack-ranges.create') : null"
-      :create-label="__('attack_ranges.create')"
+      :create-label="__('entities.attack_ranges.create')"
       :items="$attackRanges"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,16 +23,16 @@
             : route('admin.attack-ranges.destroy', $attackRange)"
           :restore-route="$trashed ? route('admin.attack-ranges.restore', $attackRange->id) : null"
           :confirm-message="$trashed 
-            ? __('attack_ranges.confirm_force_delete') 
-            : __('attack_ranges.confirm_delete')"
+            ? __('entities.attack_ranges.confirm_force_delete') 
+            : __('entities.attack_ranges.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="info">
-              {{ __('attack_ranges.hero_abilities_count', ['count' => $attackRange->hero_abilities_count]) }}
+              {{ __('entities.attack_ranges.hero_abilities_count', ['count' => $attackRange->hero_abilities_count]) }}
             </x-badge>
           
             <x-badge variant="primary">
-              {{ __('attack_ranges.cards_count', ['count' => $attackRange->cards_count]) }}
+              {{ __('entities.attack_ranges.cards_count', ['count' => $attackRange->cards_count]) }}
             </x-badge>
             
             @if($trashed)

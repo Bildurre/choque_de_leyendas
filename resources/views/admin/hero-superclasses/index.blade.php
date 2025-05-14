@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('hero_superclasses.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.hero_superclasses.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.hero-superclasses.create') : null"
-      :create-label="__('hero_superclasses.create')"
+      :create-label="__('entities.hero_superclasses.create')"
       :items="$heroSuperclasses"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,12 +23,12 @@
             : route('admin.hero-superclasses.destroy', $heroSuperclass)"
           :restore-route="$trashed ? route('admin.hero-superclasses.restore', $heroSuperclass->id) : null"
           :confirm-message="$trashed 
-            ? __('hero_superclasses.confirm_force_delete') 
-            : __('hero_superclasses.confirm_delete')"
+            ? __('entities.hero_superclasses.confirm_force_delete') 
+            : __('entities.hero_superclasses.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="info">
-              {{ __('hero_superclasses.classes_count', ['count' => $heroSuperclass->hero_classes_count]) }}
+              {{ __('entities.hero_superclasses.classes_count', ['count' => $heroSuperclass->hero_classes_count]) }}
             </x-badge>
             
             @if($trashed)

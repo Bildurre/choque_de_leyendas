@@ -1,12 +1,12 @@
 <x-admin-layout>
   <div class="page-header">
-    <h1 class="page-title">{{ __('game_modes.plural') }}</h1>
+    <h1 class="page-title">{{ __('entities.game_modes.plural') }}</h1>
   </div>
   
   <div class="page-content">
     <x-entity.list 
       :create-route="!$trashed ? route('admin.game-modes.create') : null"
-      :create-label="__('game_modes.create')"
+      :create-label="__('entities.game_modes.create')"
       :items="$gameModes"
       :withTabs="true"
       :trashed="$trashed"
@@ -23,12 +23,12 @@
             : route('admin.game-modes.destroy', $gameMode)"
           :restore-route="$trashed ? route('admin.game-modes.restore', $gameMode->id) : null"
           :confirm-message="$trashed 
-            ? __('game_modes.confirm_force_delete') 
-            : __('game_modes.confirm_delete')"
+            ? __('entities.game_modes.confirm_force_delete') 
+            : __('entities.game_modes.confirm_delete')"
         >
           <x-slot:badges>
             <x-badge variant="primary">
-              {{ __('game_modes.faction_decks_count', ['count' => $gameMode->faction_decks_count]) }}
+              {{ __('entities.game_modes.faction_decks_count', ['count' => $gameMode->faction_decks_count]) }}
             </x-badge>
             
             @if($trashed)
