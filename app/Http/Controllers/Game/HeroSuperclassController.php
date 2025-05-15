@@ -22,9 +22,6 @@ class HeroSuperclassController extends Controller
     $this->heroSuperclassService = $heroSuperclassService;
   }
 
-  /**
-   * Display a listing of hero superclasses.
-   */
   public function index(Request $request)
   {
     $trashed = $request->has('trashed');
@@ -33,10 +30,31 @@ class HeroSuperclassController extends Controller
     $activeCount = HeroSuperclass::count();
     $trashedCount = HeroSuperclass::onlyTrashed()->count();
     
-    // Get hero superclasses with related counts
-    $heroSuperclasses = $this->heroSuperclassService->getAllHeroSuperclasses(12, false, $trashed);
+    // Get hero superclasses with filtering and pagination
+    $heroSuperclasses = $this->heroSuperclassService->getAllHeroSuperclasses(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    return view('admin.hero-superclasses.index', compact('heroSuperclasses', 'trashed', 'activeCount', 'trashedCount'));
+    // Create a HeroSuperclass instance for filter component
+    $heroSuperclassModel = new HeroSuperclass();
+    
+    // Get counts from the paginated result
+    $totalCount = $heroSuperclasses->totalCount ?? 0;
+    $filteredCount = $heroSuperclasses->filteredCount ?? 0;
+    
+    return view('admin.hero-superclasses.index', compact(
+      'heroSuperclasses', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'heroSuperclassModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

@@ -3,8 +3,9 @@
 namespace App\Services\Game;
 
 use App\Models\Card;
-use App\Services\Traits\HandlesTranslations;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use App\Services\Traits\HandlesTranslations;
 
 class CardService
 {
@@ -13,15 +14,21 @@ class CardService
   protected $translatableFields = ['name', 'lore_text', 'effect', 'restriction'];
 
   /**
-   * Get all cards with optional pagination
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
+   * Get all cards with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
    * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
    */
-  public function getAllCards(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
-  {
+  public function getAllCards(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query with relationships
     $query = Card::with([
       'faction', 
       'cardType', 
@@ -38,13 +45,34 @@ class CardService
       $query->withTrashed();
     }
     
-    // Default ordering by card type and name
-    $query->orderBy('card_type_id')->orderBy('id');
+    // Count total records (before filtering)
+    $totalCount = $query->count();
     
-    if ($perPage) {
-      return $query->paginate($perPage)->withQueryString();
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
     }
     
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('card_type_id')->orderBy('id');
+    }
+    
+    // Paginate if needed
+    if ($perPage) {
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
+    }
+    
+    // Return collection if no pagination
     return $query->get();
   }
 

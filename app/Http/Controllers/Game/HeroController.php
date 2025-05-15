@@ -43,43 +43,20 @@ class HeroController extends Controller
     $activeCount = Hero::count();
     $trashedCount = Hero::onlyTrashed()->count();
     
-    // Create a query builder for total count (without pagination)
-    $totalQuery = Hero::query();
-    if ($trashed) {
-      $totalQuery->onlyTrashed();
-    }
-    $totalCount = $totalQuery->count();
-    
-    // Get heroes with pagination and eager loaded relationships
-    $query = Hero::with([
-      'faction', 
-      'heroRace', 
-      'heroClass', 
-      'heroAbilities.attackRange', 
-      'heroAbilities.attackSubtype'
-    ]);
-    
-    // Apply trash filter
-    if ($trashed) {
-      $query->onlyTrashed();
-    }
-    
-    // Apply admin filters
-    $query->applyAdminFilters($request);
-    
-    // Get filtered count before pagination
-    $filteredCount = $query->count();
-    
-    // Apply default ordering only if no sort parameter is provided
-    if (!$request->has('sort')) {
-      $query->orderBy('faction_id')->orderBy('id');
-    }
-    
-    // Make sure to include all query parameters in pagination links
-    $heroes = $query->paginate(12)->withQueryString();
+    // Get heroes with all filtering applied
+    $heroes = $this->heroService->getAllHeroes(
+      12,       // perPage
+      $request, // request para filtros
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
     // Create a Hero instance for filter component
     $heroModel = new Hero();
+    
+    // Get counts from the paginated result
+    $totalCount = $heroes->totalCount ?? 0;
+    $filteredCount = $heroes->filteredCount ?? 0;
     
     return view('admin.heroes.index', compact(
       'heroes', 
@@ -97,24 +74,24 @@ class HeroController extends Controller
    * Show the form for creating a new hero.
    */
   public function create(Request $request)
-{
-  $factions = Faction::orderBy('id')->get();
-  $heroRaces = HeroRace::orderBy('id')->get();
-  $heroClasses = HeroClass::orderBy('id')->get();
-  $heroAbilities = HeroAbility::with(['attackRange', 'attackSubtype'])->orderBy('id')->get();
-  $attributesConfig = $this->attributesService->getConfiguration();
-  
-  $selectedFactionId = $request->query('faction_id');
-  
-  return view('admin.heroes.create', compact(
-    'factions',
-    'heroRaces',
-    'heroClasses',
-    'heroAbilities',
-    'attributesConfig',
-    'selectedFactionId'
-  ));
-}
+  {
+    $factions = Faction::orderBy('id')->get();
+    $heroRaces = HeroRace::orderBy('id')->get();
+    $heroClasses = HeroClass::orderBy('id')->get();
+    $heroAbilities = HeroAbility::with(['attackRange', 'attackSubtype'])->orderBy('id')->get();
+    $attributesConfig = $this->attributesService->getConfiguration();
+    
+    $selectedFactionId = $request->query('faction_id');
+    
+    return view('admin.heroes.create', compact(
+      'factions',
+      'heroRaces',
+      'heroClasses',
+      'heroAbilities',
+      'attributesConfig',
+      'selectedFactionId'
+    ));
+  }
 
   /**
    * Store a newly created hero in storage.

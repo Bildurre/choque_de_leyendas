@@ -34,9 +34,31 @@ class HeroClassController extends Controller
     $activeCount = HeroClass::count();
     $trashedCount = HeroClass::onlyTrashed()->count();
     
-    $heroClasses = $this->heroClassService->getAllHeroClasses(12, false, $trashed);
+    // Obtener hero classes con filtrado y paginación
+    $heroClasses = $this->heroClassService->getAllHeroClasses(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    return view('admin.hero-classes.index', compact('heroClasses', 'trashed', 'activeCount', 'trashedCount'));
+    // Crear instancia de modelo para componente de filtros
+    $heroClassModel = new HeroClass();
+    
+    // Obtener conteos de la respuesta paginada
+    $totalCount = $heroClasses->totalCount ?? 0;
+    $filteredCount = $heroClasses->filteredCount ?? 0;
+    
+    return view('admin.hero-classes.index', compact(
+      'heroClasses', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'heroClassModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

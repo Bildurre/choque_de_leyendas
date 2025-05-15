@@ -4,6 +4,15 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card 
+      :model="$attackSubtypeModel" 
+      :request="$request" 
+      :itemsCount="$attackSubtypes->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
+
     <x-entity.list 
       :create-route="!$trashed ? route('admin.attack-subtypes.create') : null"
       :create-label="__('entities.attack_subtypes.create')"

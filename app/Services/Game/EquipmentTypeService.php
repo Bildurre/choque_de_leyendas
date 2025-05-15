@@ -2,6 +2,7 @@
 
 namespace App\Services\Game;
 
+use Illuminate\Http\Request;
 use App\Models\EquipmentType;
 use App\Services\Traits\HandlesTranslations;
 
@@ -12,34 +13,61 @@ class EquipmentTypeService
   protected $translatableFields = ['name'];
 
   /**
-   * Get all equipment types with optional pagination
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
+   * Get all equipment types with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
    * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @param string|null $category Filter by category
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
    */
-  public function getAllEquipmentTypes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
-  {
+  public function getAllEquipmentTypes(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query with counts
     $query = EquipmentType::withCount('cards');
     
-    // Aplicar filtros de elementos eliminados
+    // Apply trash filters
     if ($onlyTrashed) {
-        $query->onlyTrashed();
+      $query->onlyTrashed();
     } elseif ($withTrashed) {
-        $query->withTrashed();
+      $query->withTrashed();
     }
     
-    // Ordenar por categoría y nombre
-    $query->orderBy('category')->orderBy('id');
+    // Count total records (before filtering)
+    $totalCount = $query->count();
     
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
+    }
+    
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('category')->orderBy('id');
+    }
+    
+    // Paginate if needed
     if ($perPage) {
-        return $query->paginate($perPage);
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
     }
     
+    // Return collection if no pagination
     return $query->get();
   }
+
   /**
    * Create a new equipment type
    *

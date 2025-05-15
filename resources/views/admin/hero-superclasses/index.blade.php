@@ -4,6 +4,15 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card 
+      :model="$heroSuperclassModel" 
+      :request="$request" 
+      :itemsCount="$heroSuperclasses->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
+
     <x-entity.list 
       :create-route="!$trashed ? route('admin.hero-superclasses.create') : null"
       :create-label="__('entities.hero_superclasses.create')"

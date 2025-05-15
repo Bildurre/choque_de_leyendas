@@ -33,10 +33,31 @@ class FactionController extends Controller
     $activeCount = Faction::count();
     $trashedCount = Faction::onlyTrashed()->count();
     
-    // Get factions with related counts from service
-    $factions = $this->factionService->getAllFactions(12, $trashed);
+    // Get factions with related counts, filtering and pagination
+    $factions = $this->factionService->getAllFactions(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    return view('admin.factions.index', compact('factions', 'trashed', 'activeCount', 'trashedCount'));
+    // Create a Faction instance for filter component
+    $factionModel = new Faction();
+    
+    // Get counts from the paginated result
+    $totalCount = $factions->totalCount ?? 0;
+    $filteredCount = $factions->filteredCount ?? 0;
+    
+    return view('admin.factions.index', compact(
+      'factions', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'factionModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

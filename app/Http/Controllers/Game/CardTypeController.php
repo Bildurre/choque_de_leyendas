@@ -33,9 +33,31 @@ class CardTypeController extends Controller
     $activeCount = CardType::count();
     $trashedCount = CardType::onlyTrashed()->count();
     
-    $cardTypes = $this->cardTypeService->getAllCardTypes(12, false, $trashed);
+    // Obtener card types con filtrado y paginación
+    $cardTypes = $this->cardTypeService->getAllCardTypes(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    return view('admin.card-types.index', compact('cardTypes', 'trashed', 'activeCount', 'trashedCount'));
+    // Crear instancia de modelo para componente de filtros
+    $cardTypeModel = new CardType();
+    
+    // Obtener conteos de la respuesta paginada
+    $totalCount = $cardTypes->totalCount ?? 0;
+    $filteredCount = $cardTypes->filteredCount ?? 0;
+    
+    return view('admin.card-types.index', compact(
+      'cardTypes', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'cardTypeModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

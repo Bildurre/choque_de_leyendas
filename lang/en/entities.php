@@ -210,6 +210,10 @@ return [
         'edit' => 'Edit Attack Subtype',
         'name' => 'Subtype Name',
         'type' => 'Type',
+        'types' => [
+          'magical' => 'Magical',
+          'physical' => 'Physical'
+        ],
         'hero_abilities_count' => ':count hero abilities',
         'cards_count' => ':count cards',
         'errors' => [

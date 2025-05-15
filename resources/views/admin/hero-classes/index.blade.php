@@ -4,6 +4,15 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card 
+      :model="$heroClassModel" 
+      :request="$request" 
+      :itemsCount="$heroClasses->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
+
     <x-entity.list 
       :create-route="!$trashed ? route('admin.hero-classes.create') : null"
       :create-label="__('entities.hero_classes.create')"

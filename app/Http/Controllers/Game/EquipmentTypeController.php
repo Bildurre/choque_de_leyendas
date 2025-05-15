@@ -33,14 +33,30 @@ class EquipmentTypeController extends Controller
     $activeCount = EquipmentType::count();
     $trashedCount = EquipmentType::onlyTrashed()->count();
     
-    // Obtener equipment types
-    $equipmentTypes = $this->equipmentTypeService->getAllEquipmentTypes(12, false, $trashed);
+    // Obtener equipment types con filtrado y paginación
+    $equipmentTypes = $this->equipmentTypeService->getAllEquipmentTypes(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
+    
+    // Crear instancia de modelo para componente de filtros
+    $equipmentTypeModel = new EquipmentType();
+    
+    // Obtener conteos de la respuesta paginada
+    $totalCount = $equipmentTypes->totalCount ?? 0;
+    $filteredCount = $equipmentTypes->filteredCount ?? 0;
     
     return view('admin.equipment-types.index', compact(
       'equipmentTypes', 
       'trashed', 
       'activeCount', 
-      'trashedCount'
+      'trashedCount',
+      'equipmentTypeModel',
+      'request',
+      'totalCount',
+      'filteredCount'
     ));
   }
 

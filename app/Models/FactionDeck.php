@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,7 @@ class FactionDeck extends Model
   use HasTranslatableSlug;
   use SoftDeletes;
   use HasImageAttribute;
+  use HasAdminFilters;
 
   /**
    * The attributes that are mass assignable.

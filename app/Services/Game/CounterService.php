@@ -3,8 +3,9 @@
 namespace App\Services\Game;
 
 use App\Models\Counter;
-use App\Services\Traits\HandlesTranslations;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use App\Services\Traits\HandlesTranslations;
 
 class CounterService
 {
@@ -13,35 +14,58 @@ class CounterService
   protected $translatableFields = ['name', 'effect'];
 
   /**
-   * Get counters by tab with pagination
-   *
-   * @param string $tab The active tab (boons, banes, trashed)
-   * @param int|null $perPage Number of items per page, or null for all items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   * Get all counters with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
+   * @param bool $withTrashed Include trashed items
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
    */
-  public function getCountersByTab(string $tab, ?int $perPage = null)
-  {
+  public function getAllCounters(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query
     $query = Counter::query();
     
-    switch ($tab) {
-      case 'boons':
-        $query->where('type', 'boon');
-        break;
-      case 'banes':
-        $query->where('type', 'bane');
-        break;
-      case 'trashed':
-        $query->onlyTrashed();
-        break;
+    // Apply trash filters
+    if ($onlyTrashed) {
+      $query->onlyTrashed();
+    } elseif ($withTrashed) {
+      $query->withTrashed();
     }
     
-    // Default ordering by name
-    $query->orderBy('id');
+    // Count total records (before filtering)
+    $totalCount = $query->count();
     
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
+    }
+    
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('id');
+    }
+    
+    // Paginate if needed
     if ($perPage) {
-      return $query->paginate($perPage)->withQueryString();
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
     }
     
+    // Return collection if no pagination
     return $query->get();
   }
 

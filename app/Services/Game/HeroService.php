@@ -3,15 +3,78 @@
 namespace App\Services\Game;
 
 use App\Models\Hero;
-use App\Services\Traits\HandlesTranslations;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use App\Services\Traits\HandlesTranslations;
 
 class HeroService
 {
   use HandlesTranslations;
   
   protected $translatableFields = ['name', 'lore_text', 'passive_name', 'passive_description'];
+
+  /**
+   * Get all heroes with optional filtering and pagination
+   * 
+   * @param int|null $perPage Number of items per page (null for no pagination)
+   * @param Request $request Request object for filtering
+   * @param bool $withTrashed Include trashed items
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
+   */
+  public function getAllHeroes(
+    ?int $perPage = null, 
+    ?Request $request = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query with relationships
+    $query = Hero::with([
+      'faction', 
+      'heroRace', 
+      'heroClass', 
+      'heroAbilities.attackRange', 
+      'heroAbilities.attackSubtype'
+    ]);
+    
+    // Apply trash filters
+    if ($onlyTrashed) {
+      $query->onlyTrashed();
+    } elseif ($withTrashed) {
+      $query->withTrashed();
+    }
+    
+    // Count total records (before filtering)
+    $totalCount = $query->count();
+    
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
+    }
+    
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('faction_id')->orderBy('id');
+    }
+    
+    // Paginate if needed
+    if ($perPage) {
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
+    }
+    
+    // Return collection if no pagination
+    return $query->get();
+  }
 
   /**
    * Create a new hero

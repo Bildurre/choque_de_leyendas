@@ -4,6 +4,7 @@ namespace App\Services\Game;
 
 use App\Models\Faction;
 use App\Models\GameMode;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Services\Traits\HandlesTranslations;
 
@@ -14,25 +15,58 @@ class FactionService
   protected $translatableFields = ['name', 'lore_text'];
 
   /**
-   * Get all factions with optional pagination
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
+   * Get all factions with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
+   * @param bool $withTrashed Include trashed items
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
    */
-  public function getAllFactions(int $perPage = null, bool $onlyTrashed = false)
-  {
+  public function getAllFactions(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query with relationship counts
     $query = Faction::withCount(['heroes', 'cards']);
     
-    // Apply trash filter
+    // Apply trash filters
     if ($onlyTrashed) {
       $query->onlyTrashed();
+    } elseif ($withTrashed) {
+      $query->withTrashed();
     }
     
+    // Count total records (before filtering)
+    $totalCount = $query->count();
+    
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
+    }
+    
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('id');
+    }
+    
+    // Paginate if needed
     if ($perPage) {
-      return $query->paginate($perPage);
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
     }
     
+    // Return collection if no pagination
     return $query->get();
   }
 

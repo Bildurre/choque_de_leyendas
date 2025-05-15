@@ -38,13 +38,6 @@ class FactionDeckController extends Controller
   {
     $trashed = $request->has('trashed');
     
-    // Extraer filtros de la request
-    $filters = [
-      'faction_id' => $request->get('faction_id'),
-      'game_mode_id' => $request->get('game_mode_id'),
-      'search' => $request->get('search')
-    ];
-    
     // Obtener contadores para tabs
     $counts = $this->factionDeckService->getFactionDecksCount();
     $activeCount = $counts['active'];
@@ -52,14 +45,19 @@ class FactionDeckController extends Controller
     
     // Obtener los faction decks con paginación y filtrado
     $factionDecks = $this->factionDeckService->getAllFactionDecks(
-      $filters, 
-      12, 
-      false, 
-      $trashed
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
     );
     
-    // Obtener datos para filtros
-    $factions = Faction::orderBy('name')->get();
+    // Crear instancia de modelo para componente de filtros
+    $factionDeckModel = new FactionDeck();
+    
+    // Obtener conteos de la respuesta paginada
+    $totalCount = $factionDecks->totalCount ?? 0;
+    $filteredCount = $factionDecks->filteredCount ?? 0;
+
     $gameModes = GameMode::orderBy('name')->get();
     
     return view('admin.faction-decks.index', compact(
@@ -67,9 +65,11 @@ class FactionDeckController extends Controller
       'trashed', 
       'activeCount', 
       'trashedCount',
-      'factions',
-      'gameModes',
-      'filters'
+      'factionDeckModel',
+      'request',
+      'totalCount',
+      'filteredCount',
+      'gameModes'
     ));
   }
 

@@ -27,33 +27,36 @@ class CounterController extends Controller
    */
   public function index(Request $request)
   {
-    $activeTab = $request->query('tab', 'boons');
+    $trashed = $request->has('trashed');
     
-    // Determine what to display based on active tab
-    $trashed = $activeTab === 'trashed';
-    $type = null;
+    // Get counters for tabs directly using Eloquent
+    $activeCount = Counter::count();
+    $trashedCount = Counter::onlyTrashed()->count();
     
-    if ($activeTab === 'boons') {
-      $type = 'boon';
-    } elseif ($activeTab === 'banes') {
-      $type = 'bane';
-    }
+    // Get counters with filtering and pagination
+    $counters = $this->counterService->getAllCounters(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    // Get counters based on tab
-    $counters = $this->counterService->getCountersByTab($activeTab, 12);
+    // Create a Counter instance for filter component
+    $counterModel = new Counter();
     
-    // Get counts for tabs
-    $counts = $this->counterService->getCountsByCategoryAndTrash();
-    $boonsCount = $counts['boons'];
-    $banesCount = $counts['banes'];
-    $trashedCount = $counts['trashed'];
+    // Get counts from the paginated result
+    $totalCount = $counters->totalCount ?? 0;
+    $filteredCount = $counters->filteredCount ?? 0;
     
     return view('admin.counters.index', compact(
       'counters', 
-      'activeTab', 
-      'boonsCount', 
-      'banesCount', 
-      'trashedCount'
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'counterModel',
+      'request',
+      'totalCount',
+      'filteredCount'
     ));
   }
 

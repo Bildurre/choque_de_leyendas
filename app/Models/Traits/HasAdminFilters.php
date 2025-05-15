@@ -41,11 +41,24 @@ trait HasAdminFilters
    */
   protected function applySearchFilters(Builder $query, Request $request): void
   {
-    // Apply search filter if search term is provided and model has searchable fields
-    if ($request->has('search') && !empty($request->search) && method_exists($this, 'getAdminSearchable')) {
+    // Apply search filter if search term is provided
+    if ($request->has('search') && !empty($request->search)) {
       $searchTerm = '%' . trim($request->search) . '%';
-      $searchable = $this->getAdminSearchable();
       $thisTable = $this->getTable();
+      
+      // Always include 'name' field and any additional searchable fields if method exists
+      $searchable = ['name'];
+      
+      if (method_exists($this, 'getAdminSearchable')) {
+        $additionalFields = $this->getAdminSearchable();
+        // Remove 'name' if it's already in the additional fields to avoid duplicates
+        $additionalFields = array_filter($additionalFields, function($field) {
+          return $field !== 'name';
+        });
+        
+        // Merge the fields
+        $searchable = array_merge($searchable, $additionalFields);
+      }
       
       $query->where(function (Builder $query) use ($searchTerm, $searchable, $thisTable) {
         foreach ($searchable as $field) {

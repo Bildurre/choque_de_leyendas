@@ -4,6 +4,15 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card 
+      :model="$attackRangeModel" 
+      :request="$request" 
+      :itemsCount="$attackRanges->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
+
     <x-entity.list 
       :create-route="!$trashed ? route('admin.attack-ranges.create') : null"
       :create-label="__('entities.attack_ranges.create')"

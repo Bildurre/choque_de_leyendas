@@ -3,6 +3,7 @@
 namespace App\Services\Game;
 
 use App\Models\HeroAbility;
+use Illuminate\Http\Request;
 use App\Services\Traits\HandlesTranslations;
 
 class HeroAbilityService
@@ -12,15 +13,21 @@ class HeroAbilityService
   protected $translatableFields = ['name', 'description'];
 
   /**
-   * Get all hero abilities with optional pagination
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
+   * Get all hero abilities with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
    * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
    */
-  public function getAllHeroAbilities(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
-  {
+  public function getAllHeroAbilities(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query with relationships and counts
     $query = HeroAbility::with(['attackRange', 'attackSubtype'])
       ->withCount(['heroes', 'cards']);
     
@@ -31,13 +38,34 @@ class HeroAbilityService
       $query->withTrashed();
     }
     
-    // Default ordering
-    $query->orderBy('id');
+    // Count total records (before filtering)
+    $totalCount = $query->count();
     
-    if ($perPage) {
-      return $query->paginate($perPage)->withQueryString();
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
     }
     
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('id');
+    }
+    
+    // Paginate if needed
+    if ($perPage) {
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
+    }
+    
+    // Return collection if no pagination
     return $query->get();
   }
 

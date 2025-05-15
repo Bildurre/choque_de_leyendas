@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use App\Models\Traits\HasCostAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class HeroAbility extends Model
   use HasTranslations;
   use SoftDeletes;
   use HasCostAttribute;
+  use HasAdminFilters;
 
   /**
    * The attributes that are mass assignable.

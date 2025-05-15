@@ -39,14 +39,30 @@ class CardController extends Controller
     $activeCount = Card::count();
     $trashedCount = Card::onlyTrashed()->count();
     
-    // Get cards with pagination
-    $cards = $this->cardService->getAllCards(12, false, $trashed);
+    // Get cards with filtering and pagination
+    $cards = $this->cardService->getAllCards(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
+    
+    // Create a Card instance for filter component
+    $cardModel = new Card();
+    
+    // Get counts from the paginated result
+    $totalCount = $cards->totalCount ?? 0;
+    $filteredCount = $cards->filteredCount ?? 0;
     
     return view('admin.cards.index', compact(
       'cards', 
       'trashed', 
       'activeCount', 
-      'trashedCount'
+      'trashedCount',
+      'cardModel',
+      'request',
+      'totalCount',
+      'filteredCount'
     ));
   }
 

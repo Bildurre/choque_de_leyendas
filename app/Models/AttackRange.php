@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +13,7 @@ class AttackRange extends Model
   use HasFactory;
   use HasTranslations;
   use SoftDeletes;
+  use HasAdminFilters;
 
   /**
    * The table associated with the model.

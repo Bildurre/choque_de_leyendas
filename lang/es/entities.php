@@ -210,6 +210,10 @@ return [
         'edit' => 'Editar Subtipo de Ataque',
         'name' => 'Nombre del Subtipo',
         'type' => 'Tipo',
+        'types' => [
+          'magical' => 'Mágico',
+          'physical' => 'Físico'
+        ],
         'hero_abilities_count' => ':count habilidades de héroe',
         'cards_count' => ':count cartas',
         'errors' => [

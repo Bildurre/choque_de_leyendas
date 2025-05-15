@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use App\Models\Traits\HasColorAttribute;
 use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,7 @@ class Faction extends Model
   use SoftDeletes;
   use HasColorAttribute;
   use HasImageAttribute;
+  use HasAdminFilters;
 
   /**
    * The attributes that are mass assignable.

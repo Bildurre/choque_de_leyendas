@@ -4,6 +4,15 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card 
+      :model="$cardTypeModel" 
+      :request="$request" 
+      :itemsCount="$cardTypes->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
+
     <x-entity.list 
       :create-route="!$trashed ? route('admin.card-types.create') : null"
       :create-label="__('entities.card_types.create')"

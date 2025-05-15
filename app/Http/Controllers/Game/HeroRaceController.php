@@ -33,10 +33,31 @@ class HeroRaceController extends Controller
     $activeCount = HeroRace::count();
     $trashedCount = HeroRace::onlyTrashed()->count();
     
-    // Get hero races with hero counts
-    $heroRaces = $this->heroRaceService->getAllHeroRaces(12, false, $trashed);
+    // Get hero races with filtering and pagination
+    $heroRaces = $this->heroRaceService->getAllHeroRaces(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    return view('admin.hero-races.index', compact('heroRaces', 'trashed', 'activeCount', 'trashedCount'));
+    // Create a HeroRace instance for filter component
+    $heroRaceModel = new HeroRace();
+    
+    // Get counts from the paginated result
+    $totalCount = $heroRaces->totalCount ?? 0;
+    $filteredCount = $heroRaces->filteredCount ?? 0;
+    
+    return view('admin.hero-races.index', compact(
+      'heroRaces', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'heroRaceModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

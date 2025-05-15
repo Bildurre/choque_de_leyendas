@@ -3,6 +3,7 @@
 namespace App\Services\Game;
 
 use App\Models\AttackRange;
+use Illuminate\Http\Request;
 use App\Services\Traits\HandlesTranslations;
 
 class AttackRangeService
@@ -12,30 +13,60 @@ class AttackRangeService
   protected $translatableFields = ['name'];
 
   /**
-   * Get all attack ranges with optional pagination
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
-   * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
-   */
-  public function getAllAttackRanges(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
-  {
-    $query = AttackRange::withCount(['heroAbilities', 'cards']);
-    
-    // Aplicar filtros de elementos eliminados
-    if ($onlyTrashed) {
-      $query->onlyTrashed();
-    } elseif ($withTrashed) {
-      $query->withTrashed();
-    }
-    
-    if ($perPage) {
-      return $query->paginate($perPage);
-    }
-    
-    return $query->get();
+ * Get all attack ranges with optional filtering and pagination
+ * 
+ * @param Request|null $request Request object for filtering
+ * @param int|null $perPage Number of items per page (null for no pagination)
+ * @param bool $withTrashed Include trashed items
+ * @param bool $onlyTrashed Only show trashed items
+ * @return mixed Collection or LengthAwarePaginator
+ */
+public function getAllAttackRanges(
+  ?Request $request = null,
+  ?int $perPage = null, 
+  bool $withTrashed = false, 
+  bool $onlyTrashed = false
+): mixed {
+  // Base query with relationships and counts
+  $query = AttackRange::withCount(['heroAbilities', 'cards']);
+  
+  // Apply trash filters
+  if ($onlyTrashed) {
+    $query->onlyTrashed();
+  } elseif ($withTrashed) {
+    $query->withTrashed();
   }
+  
+  // Count total records (before filtering)
+  $totalCount = $query->count();
+  
+  // Apply admin filters if request is provided
+  if ($request) {
+    $query->applyAdminFilters($request);
+  }
+  
+  // Count filtered records
+  $filteredCount = $query->count();
+  
+  // Apply default ordering only if no sort parameter is provided
+  if (!$request || !$request->has('sort')) {
+    $query->orderBy('id');
+  }
+  
+  // Paginate if needed
+  if ($perPage) {
+    $result = $query->paginate($perPage)->withQueryString();
+    
+    // Add metadata to the pagination result
+    $result->totalCount = $totalCount;
+    $result->filteredCount = $filteredCount;
+    
+    return $result;
+  }
+  
+  // Return collection if no pagination
+  return $query->get();
+}
 
   /**
    * Create a new attack range

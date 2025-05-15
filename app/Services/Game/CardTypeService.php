@@ -3,6 +3,7 @@
 namespace App\Services\Game;
 
 use App\Models\CardType;
+use Illuminate\Http\Request;
 use App\Services\Traits\HandlesTranslations;
 
 class CardTypeService
@@ -12,28 +13,58 @@ class CardTypeService
   protected $translatableFields = ['name'];
 
   /**
-   * Get all card types with optional pagination
-   *
-   * @param int|null $perPage Number of items per page, or null for all items
+   * Get all card types with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
    * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
+   * @param bool $onlyTrashed Only show trashed items
+   * @return mixed Collection or LengthAwarePaginator
    */
-  public function getAllCardTypes(int $perPage = null, bool $withTrashed = false, bool $onlyTrashed = false): mixed
-  {
+  public function getAllCardTypes(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false
+  ): mixed {
+    // Base query with relationships and counts
     $query = CardType::with('heroSuperclass')->withCount('cards');
     
-    // Aplicar filtros de elementos eliminados
+    // Apply trash filters
     if ($onlyTrashed) {
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
     }
     
-    if ($perPage) {
-      return $query->paginate($perPage);
+    // Count total records (before filtering)
+    $totalCount = $query->count();
+    
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
     }
     
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('id');
+    }
+    
+    // Paginate if needed
+    if ($perPage) {
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
+    }
+    
+    // Return collection if no pagination
     return $query->get();
   }
 

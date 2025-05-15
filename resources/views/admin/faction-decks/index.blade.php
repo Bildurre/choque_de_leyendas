@@ -4,6 +4,15 @@
   </div>
   
   <div class="page-content">
+
+    <x-filters.card 
+      :model="$factionDeckModel" 
+      :request="$request" 
+      :itemsCount="$factionDecks->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
+
     <x-entity.list 
       :create-route="null"
       :create-label="__('entities.faction_decks.create')"

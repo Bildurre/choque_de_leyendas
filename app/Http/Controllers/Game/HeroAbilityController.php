@@ -35,14 +35,30 @@ class HeroAbilityController extends Controller
     $activeCount = HeroAbility::count();
     $trashedCount = HeroAbility::onlyTrashed()->count();
     
-    // Get hero abilities with pagination
-    $heroAbilities = $this->heroAbilityService->getAllHeroAbilities(12, false, $trashed);
+    // Get hero abilities with filtering and pagination
+    $heroAbilities = $this->heroAbilityService->getAllHeroAbilities(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
+    
+    // Create a HeroAbility instance for filter component
+    $heroAbilityModel = new HeroAbility();
+    
+    // Get counts from the paginated result
+    $totalCount = $heroAbilities->totalCount ?? 0;
+    $filteredCount = $heroAbilities->filteredCount ?? 0;
     
     return view('admin.hero-abilities.index', compact(
       'heroAbilities', 
       'trashed', 
       'activeCount', 
-      'trashedCount'
+      'trashedCount',
+      'heroAbilityModel',
+      'request',
+      'totalCount',
+      'filteredCount'
     ));
   }
 

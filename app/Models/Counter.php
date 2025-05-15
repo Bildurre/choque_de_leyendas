@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Counter extends Model
 {
-  use HasFactory, SoftDeletes, HasTranslations, HasImageAttribute;
+  use HasFactory, SoftDeletes, HasTranslations, HasImageAttribute, HasAdminFilters;
 
   /**
    * The attributes that are mass assignable.

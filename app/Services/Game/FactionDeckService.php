@@ -3,13 +3,14 @@
 
 namespace App\Services\Game;
 
-use App\Models\FactionDeck;
-use App\Models\DeckAttributesConfiguration;
 use App\Models\Card;
 use App\Models\Hero;
-use App\Services\Traits\HandlesTranslations;
+use App\Models\FactionDeck;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use App\Models\DeckAttributesConfiguration;
+use App\Services\Traits\HandlesTranslations;
 
 class FactionDeckService
 {
@@ -29,59 +30,61 @@ class FactionDeckService
   }
 
   /**
-   * Get all faction decks with optional filtering and pagination
-   *
-   * @param array $filters Array of filter parameters
-   * @param int|null $perPage Number of items per page, or null for all items
-   * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only trashed items
-   * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator
-   */
-  public function getAllFactionDecks(
-    array $filters = [],
-    int $perPage = null, 
-    bool $withTrashed = false, 
-    bool $onlyTrashed = false
-  ): mixed
-  {
-    $query = FactionDeck::with(['faction', 'gameMode'])
-      ->withCount(['cards', 'heroes']);
-    
-    // Apply trash filters
-    if ($onlyTrashed) {
-      $query->onlyTrashed();
-    } elseif ($withTrashed) {
-      $query->withTrashed();
-    }
-    
-    // Apply faction filter
-    if (isset($filters['faction_id']) && $filters['faction_id']) {
-      $query->where('faction_id', $filters['faction_id']);
-    }
-    
-    // Apply game mode filter
-    if (isset($filters['game_mode_id']) && $filters['game_mode_id']) {
-      $query->where('game_mode_id', $filters['game_mode_id']);
-    }
-    
-    // Apply search filter if provided
-    if (isset($filters['search']) && $filters['search']) {
-      $search = $filters['search'];
-      $query->where(function($q) use ($search) {
-        $q->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%']);
-        // Add additional search criteria if needed
-      });
-    }
-    
-    // Default ordering
-    $query->orderBy('faction_id')->orderBy('id');
-    
-    if ($perPage) {
-      return $query->paginate($perPage)->withQueryString();
-    }
-    
-    return $query->get();
+ * Get all faction decks with optional filtering and pagination
+ * 
+ * @param Request|null $request Request object for filtering
+ * @param int|null $perPage Number of items per page (null for no pagination)
+ * @param bool $withTrashed Include trashed items
+ * @param bool $onlyTrashed Only show trashed items
+ * @return mixed Collection or LengthAwarePaginator
+ */
+public function getAllFactionDecks(
+  ?Request $request = null,
+  ?int $perPage = null, 
+  bool $withTrashed = false, 
+  bool $onlyTrashed = false
+): mixed {
+  // Base query with relationships and counts
+  $query = FactionDeck::with(['faction', 'gameMode'])
+    ->withCount(['cards', 'heroes']);
+  
+  // Apply trash filters
+  if ($onlyTrashed) {
+    $query->onlyTrashed();
+  } elseif ($withTrashed) {
+    $query->withTrashed();
   }
+  
+  // Count total records (before filtering)
+  $totalCount = $query->count();
+  
+  // Apply admin filters if request is provided
+  if ($request) {
+    $query->applyAdminFilters($request);
+  }
+  
+  // Count filtered records
+  $filteredCount = $query->count();
+  
+  // Apply default ordering only if no sort parameter is provided
+  if (!$request || !$request->has('sort')) {
+    $query->orderBy('faction_id')->orderBy('id');
+  }
+  
+  // Paginate if needed
+  if ($perPage) {
+    $result = $query->paginate($perPage)->withQueryString();
+    
+    // Add metadata to the pagination result
+    $result->totalCount = $totalCount;
+    $result->filteredCount = $filteredCount;
+    
+    return $result;
+  }
+  
+  // Return collection if no pagination
+  return $query->get();
+}
 
   /**
    * Get counts for active and trashed faction decks

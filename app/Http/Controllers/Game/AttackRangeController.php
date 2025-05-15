@@ -33,9 +33,31 @@ class AttackRangeController extends Controller
     $activeCount = AttackRange::count();
     $trashedCount = AttackRange::onlyTrashed()->count();
     
-    $attackRanges = $this->attackRangeService->getAllAttackRanges(12, false, $trashed);
+    // Obtener attack ranges con todos los filtros aplicados
+    $attackRanges = $this->attackRangeService->getAllAttackRanges(
+      $request, // request para filtros
+      12,       // perPage
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
     
-    return view('admin.attack-ranges.index', compact('attackRanges', 'trashed', 'activeCount', 'trashedCount'));
+    // Crear instancia de modelo para componente de filtros
+    $attackRangeModel = new AttackRange();
+    
+    // Obtener conteos de la respuesta paginada
+    $totalCount = $attackRanges->totalCount ?? 0;
+    $filteredCount = $attackRanges->filteredCount ?? 0;
+    
+    return view('admin.attack-ranges.index', compact(
+      'attackRanges', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'attackRangeModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

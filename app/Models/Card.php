@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use Spatie\Sluggable\SlugOptions;
 use App\Models\Traits\HasCostAttribute;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Card extends Model
   use SoftDeletes;
   use HasImageAttribute;
   use HasCostAttribute;
+  use HasAdminFilters;
 
   /**
    * The attributes that are mass assignable.

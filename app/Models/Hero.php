@@ -85,7 +85,7 @@ class Hero extends Model
   */
   public function getAdminSearchable(): array
   {
-    return ['name', 'lore_text'];
+    return ['lore_text'];
   }
   
   /**

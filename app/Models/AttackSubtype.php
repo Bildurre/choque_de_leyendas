@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAdminFilters;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AttackSubtype extends Model
 {
   use HasFactory;
   use HasTranslations;
   use SoftDeletes;
+  use HasAdminFilters;
 
   /**
    * The table associated with the model.
@@ -49,6 +51,25 @@ class AttackSubtype extends Model
   ];
 
   /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.attack_subtypes.name')
+      ],
+      [
+        'field' => 'type',
+        'label' => __('entities.attack_subtypes.type')
+      ]
+    ];
+  }
+
+  /**
    * Get the hero abilities associated with this attack subtype.
    */
   public function heroAbilities()
@@ -72,8 +93,8 @@ class AttackSubtype extends Model
   public static function getTypes(): array
   {
     return [
-      'physical' => __('attack_subtypes.types.physical'),
-      'magical' => __('attack_subtypes.types.magical'),
+      'physical' => __('entities.attack_subtypes.types.physical'),
+      'magical' => __('entities.attack_subtypes.types.magical'),
     ];
   }
 
