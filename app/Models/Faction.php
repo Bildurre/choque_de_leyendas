@@ -58,6 +58,35 @@ class Faction extends Model
   ];
 
   /**
+  * Get fields that can be searched
+  *
+  * @return array
+  */
+  public function getAdminSearchable(): array
+  {
+    return ['lore_text'];
+  }
+
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.factions.name')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
+  /**
    * Get the options for generating the slug.
    */
   public function getSlugOptions(): SlugOptions

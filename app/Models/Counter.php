@@ -36,6 +36,59 @@ class Counter extends Model
   ];
 
   /**
+  * Get fields that can be searched
+  *
+  * @return array
+  */
+  public function getAdminSearchable(): array
+  {
+    return ['effect'];
+  }
+
+  /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+      'type' => 'enum',
+      'field' => 'type',
+      'label' => __('entities.counters.type'),
+      'options' => [
+        'boon' => __('entities.counters.types.boon'),
+        'bane' => __('entities.counters.types.bane')
+        ]
+      ]
+      ];
+  }
+
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.counters.singular')
+      ],
+      [
+        'field' => 'type',
+        'label' => __('entities.counters.type')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
+  /**
    * Get the directory for storing images for this model
    * 
    * @return string
@@ -63,8 +116,8 @@ class Counter extends Model
   public static function getTypes(): array
   {
     return [
-      'boon' => __('counters.types.boon'),
-      'bane' => __('counters.types.bane')
+      'boon' => __('entities.counters.types.boon'),
+      'bane' => __('entities.counters.types.bane')
     ];
   }
 }

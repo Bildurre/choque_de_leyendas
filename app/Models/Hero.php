@@ -145,27 +145,27 @@ class Hero extends Model
   }
   
   /**
-    * Get fields that can be sorted
-    *
-    * @return array
-    */
-    public function getAdminSortable(): array
-    {
-      return [
-        [
-          'field' => 'name',
-          'label' => __('entities.heroes.name')
-        ],
-        [
-          'field' => 'faction.name',
-          'label' => __('entities.factions.singular')
-        ],
-        [
-          'field' => 'created_at',
-          'label' => __('common.created_at')
-        ]
-      ];
-    }
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.heroes.name')
+      ],
+      [
+        'field' => 'faction.name',
+        'label' => __('entities.factions.singular')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
 
   /**
    * Get the options for generating the slug.

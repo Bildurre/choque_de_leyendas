@@ -50,6 +50,44 @@ class CardType extends Model
     'deleted_at' => 'datetime',
   ];
 
+   /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'hero_superclass_id',
+        'relation' => 'heroSuperclass',
+        'label' => __('entities.hero_superclasses.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+    ];
+  }
+
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.card_types.name')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
   /**
    * Get the hero superclass associated with this card type.
    */

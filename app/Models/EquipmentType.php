@@ -41,6 +41,49 @@ class EquipmentType extends Model
     'name',
   ];
 
+   /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'enum',
+        'field' => 'category',
+        'label' => __('entities.equipment_types.category'),
+        'options' => [
+          'weapon' => __('entities.equipment_types.categories.weapon'),
+          'armor' => __('entities.equipment_types.categories.armor')
+        ]
+      ]
+    ];
+  }
+
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.equipment_types.name')
+      ],
+      [
+        'field' => 'category',
+        'label' => __('entities.equipment_types.category')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
   /**
    * The attributes that should be cast.
    *
@@ -66,8 +109,8 @@ class EquipmentType extends Model
   public static function getCategories(): array
   {
     return [
-      'weapon' => __('equipment_types.categories.weapon'),
-      'armor' => __('equipment_types.categories.armor'),
+      'weapon' => __('entities.equipment_types.categories.weapon'),
+      'armor' => __('entities.equipment_types.categories.armor'),
     ];
   }
 

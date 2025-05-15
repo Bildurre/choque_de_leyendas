@@ -200,6 +200,10 @@ return [
             'has_cards' => 'No se puede eliminar el tipo de equipamiento porque tiene cartas asociadas.',
             'force_delete_has_cards' => 'No se puede eliminar permanentemente el tipo de equipamiento porque tiene cartas asociadas.',
         ],
+        'categories' => [
+          'weapon' => 'Arma',
+          'armor' => 'Armadura'
+        ] 
     ],
     
     // Attack Subtypes

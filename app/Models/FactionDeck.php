@@ -53,6 +53,60 @@ class FactionDeck extends Model
   ];
 
   /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'faction_id',
+        'relation' => 'faction',
+        'label' => __('entities.factions.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'game_mode_id',
+        'relation' => 'gameMode',
+        'label' => __('entities.game_modes.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+    ];
+  }
+
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.faction_decks.name')
+      ],
+      [
+        'field' => 'faction.name',
+        'label' => __('entities.factions.singular')
+      ],
+      [
+        'field' => 'gameMode.name',
+        'label' => __('entities.game_modes.singular')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
+  /**
    * Get the options for generating the slug.
    */
   public function getSlugOptions(): SlugOptions

@@ -50,6 +50,26 @@ class AttackSubtype extends Model
     'deleted_at' => 'datetime',
   ];
 
+    /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'enum',
+        'field' => 'type',
+        'label' => __('entities.attack_subtypes.type'),
+        'options' => [
+          'physical' => __('entities.attack_subtypes.types.physical'),
+          'magical' => __('entities.attack_subtypes.types.magical'),
+        ]
+      ]
+    ];
+  }
+
   /**
   * Get fields that can be sorted
   *
@@ -65,6 +85,10 @@ class AttackSubtype extends Model
       [
         'field' => 'type',
         'label' => __('entities.attack_subtypes.type')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
       ]
     ];
   }

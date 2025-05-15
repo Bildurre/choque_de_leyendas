@@ -200,6 +200,10 @@ return [
             'has_cards' => 'Cannot delete the equipment type because it has associated cards.',
             'force_delete_has_cards' => 'Cannot permanently delete the equipment type because it has associated cards.',
         ],
+        'categories' => [
+          'weapon' => 'Weapon',
+          'armor' => 'Armor'
+        ] 
     ],
     
     // Attack Subtypes

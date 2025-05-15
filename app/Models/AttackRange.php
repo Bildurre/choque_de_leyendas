@@ -50,6 +50,25 @@ class AttackRange extends Model
   ];
 
   /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.attack_ranges.name')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
+  /**
    * Get the hero abilities associated with this attack range.
    */
   public function heroAbilities()

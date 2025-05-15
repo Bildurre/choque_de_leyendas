@@ -70,6 +70,57 @@ class Card extends Model
   ];
 
   /**
+  * Get fields that can be searched
+  *
+  * @return array
+  */
+  public function getAdminSearchable(): array
+  {
+    return ['lore_text', 'effect', 'restriction'];
+  }
+  
+  // /**
+  // * Get fields that can be filtered
+  // *
+  // * @return array
+  // */
+  // public function getAdminFilterable(): array
+  // {
+  //   return [
+  //     [
+  //       'type' => 'relation',
+  //       'relation' => 'faction',
+  //       'label' => __('entities.factions.singular'),
+  //       'option_label' => 'name',
+  //       'option_value' => 'id'
+  //     ],
+  //   ];
+  // }
+  
+  // /**
+  // * Get fields that can be sorted
+  // *
+  // * @return array
+  // */
+  // public function getAdminSortable(): array
+  // {
+  //   return [
+  //     [
+  //       'field' => 'name',
+  //       'label' => __('entities.heroes.name')
+  //     ],
+  //     [
+  //       'field' => 'card_type.name',
+  //       'label' => __('entities.card_types.singular')
+  //     ],
+  //     [
+  //       'field' => 'created_at',
+  //       'label' => __('common.created_at')
+  //     ]
+  //   ];
+  // }
+
+  /**
    * Get the options for generating the slug.
    */
   public function getSlugOptions(): SlugOptions

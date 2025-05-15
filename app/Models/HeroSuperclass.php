@@ -48,6 +48,25 @@ class HeroSuperclass extends Model
   protected $casts = [
     'deleted_at' => 'datetime',
   ];
+  
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.hero_superclasses.name')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
 
   /**
    * Get the hero classes that belong to this superclass.

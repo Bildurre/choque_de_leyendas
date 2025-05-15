@@ -54,6 +54,58 @@ class HeroClass extends Model
   ];
 
   /**
+  * Get fields that can be searched
+  *
+  * @return array
+  */
+  public function getAdminSearchable(): array
+  {
+    return ['passive'];
+  }
+  
+  /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'hero_superclass_id',
+        'relation' => 'heroSuperclass',
+        'label' => __('entities.hero_superclasses.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+    ];
+  }
+  
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.hero_classes.name')
+      ],
+      [
+        'field' => 'heroSuperclass.name',
+        'label' => __('entities.hero_superclasses.singular')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ]
+    ];
+  }
+
+  /**
    * Get the superclass that owns the hero class.
    */
   public function heroSuperclass(): BelongsTo
