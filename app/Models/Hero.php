@@ -105,27 +105,6 @@ class Hero extends Model
         'option_label' => 'name',                       // Campo para mostrar como etiqueta
         'option_value' => 'id'                          // Campo para usar como valor
       ],
-      
-      // Filtro para heroRace
-      [
-        'type' => 'relation',
-        'field' => 'hero_race_id',
-        'relation' => 'heroRace',
-        'label' => __('entities.hero_races.singular'),
-        'option_label' => 'name',
-        'option_value' => 'id'
-      ],
-      
-      // Filtro para heroClass
-      [
-        'type' => 'relation',
-        'field' => 'hero_class_id', 
-        'relation' => 'heroClass',
-        'label' => __('entities.hero_classes.singular'),
-        'option_label' => 'name',
-        'option_value' => 'id'
-      ],
-      
       // Filtro para superclass a través de heroClass
       [
         'type' => 'nested_relation',
@@ -136,17 +115,32 @@ class Hero extends Model
         'option_label' => 'name',
         'option_value' => 'id'
       ],
-      
-      // Filtro para enum (género)
       [
-        'type' => 'enum',
-        'field' => 'gender',
-        'label' => __('entities.heroes.gender'),
-        'options' => [
-          'male' => __('entities.heroes.genders.male'),
-          'female' => __('entities.heroes.genders.female')
-        ]
-      ]
+        'type' => 'relation',
+        'field' => 'hero_class_id', 
+        'relation' => 'heroClass',
+        'label' => __('entities.hero_classes.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'hero_race_id',
+        'relation' => 'heroRace',
+        'label' => __('entities.hero_races.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      // Filtro para enum (género)
+      // [
+      //   'type' => 'enum',
+      //   'field' => 'gender',
+      //   'label' => __('entities.heroes.gender'),
+      //   'options' => [
+      //     'male' => __('entities.heroes.genders.male'),
+      //     'female' => __('entities.heroes.genders.female')
+      //   ]
+      // ]
     ];
   }
   
@@ -169,10 +163,6 @@ class Hero extends Model
         [
           'field' => 'created_at',
           'label' => __('common.created_at')
-        ],
-        [
-          'field' => 'updated_at',
-          'label' => __('common.updated_at')
         ]
       ];
     }

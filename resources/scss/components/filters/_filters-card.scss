@@ -1,7 +1,7 @@
 @use '../../abstracts/all' as *;
 
 .filters-card {
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-xxl;
   padding: $spacing-md;
   border-radius: $border-radius-md;
   background-color: var(--color-card-bg);
@@ -17,7 +17,7 @@
 .filters-form {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-md;
+  gap: $spacing-xl;
   position: relative; // Añadir posición relativa para el contexto de apilamiento
 }
 
@@ -26,7 +26,9 @@
   grid-template-columns: 1fr auto;
   gap: $spacing-md;
   align-items: flex-end;
-  margin-bottom: $spacing-md;
+  .form-field {
+    margin-bottom: 0;
+  }
 }
 
 .filters-search {

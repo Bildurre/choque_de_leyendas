@@ -47,9 +47,9 @@
           
           @if($isActive)
             @if($currentDirection === 'asc')
-              <x-icon name="chevron-up" class="filters-sort__button-icon" size="sm" />
+              <x-icon name="arrow-up" class="filters-sort__button-icon" size="sm" />
             @else
-              <x-icon name="chevron-down" class="filters-sort__button-icon" size="sm" />
+              <x-icon name="arrow-down" class="filters-sort__button-icon" size="sm" />
             @endif
           @else
             <x-icon name="arrow-down-up" class="filters-sort__button-icon filters-sort__button-icon--neutral" size="sm" />
