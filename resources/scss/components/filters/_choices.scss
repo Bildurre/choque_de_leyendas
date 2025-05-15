@@ -1,7 +1,8 @@
-
 @use '../../abstracts/all' as *;
 
 .choices {
+  position: relative;
+  
   &__inner {
     background-color: var(--color-background) !important;
     border-color: var(--color-card-border) !important;
@@ -11,18 +12,24 @@
       color: var(--random-accent-color) !important;
     }
   }
+  
   &__input {
     background-color: var(--color-background) !important;
   }
-  &__list {
+  
+  &__list--dropdown {
     background-color: var(--color-background) !important;
     border-color: var(--color-card-border) !important;
+    z-index: $z-index-dropdown !important; // Usar z-index para asegurar que esté por encima
+    overflow: visible !important;
   }
-  &.is--open  {
-    &__inner {
+  
+  &.is-open {
+    .choices__inner {
       border-color: var(--random-accent-color) !important;
     }
-    &__list {
+    
+    .choices__list--dropdown {
       border-color: var(--random-accent-color) !important;
     }
   }
@@ -32,7 +39,15 @@
   }
 }
 
-.choices, .choices * {
-  z-index: 1000 !important;
-  overflow: show !important;
+// Corregir la visualización de los desplegables
+.choices__list--dropdown {
+  position: absolute !important;
+  width: 100% !important;
+}
+
+// Eliminar cualquier overflow restrictivo en los contenedores
+.filters-card,
+.collapsible-section,
+.collapsible-section__content {
+  overflow: visible !important;
 }

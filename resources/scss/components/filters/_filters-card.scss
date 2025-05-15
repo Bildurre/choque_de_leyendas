@@ -6,15 +6,19 @@
   border-radius: $border-radius-md;
   background-color: var(--color-card-bg);
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
-  overflow: show;
+  overflow: visible; // Cambiado de 'show' a 'visible'
 
-  .collapsible-section {margin-bottom: 0;}
+  .collapsible-section {
+    margin-bottom: 0;
+    overflow: visible; // Asegurar que el contenedor colapsable no oculte los desplegables
+  }
 }
 
 .filters-form {
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-md;
+  position: relative; // Añadir posición relativa para el contexto de apilamiento
 }
 
 .filters-search-row {
@@ -33,7 +37,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  padding-bottom: $spacing-sm; // Para alinear con el input cuando hay label
+  margin: auto 0;
+  padding-top: $spacing-sm;
 }
 
 .filters-results {

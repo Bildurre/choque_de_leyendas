@@ -8,13 +8,13 @@ export default function initAdminFilters() {
   filterSelects.forEach(select => {
     const choices = new Choices(select, {
       removeItemButton: true,
-      searchEnabled: true,
-      searchPlaceholderValue: 'Buscar...',
+      // searchEnabled: true,
+      // searchPlaceholderValue: 'Buscar...',
       itemSelectText: '',
       noResultsText: 'No se encontraron resultados',
       noChoicesText: 'No hay opciones para elegir',
       placeholderValue: select.getAttribute('placeholder') || 'Seleccione opciones...',
-      position: 'auto', // 'auto' intentará posicionar el dropdown según el espacio disponible
+      // position: 'auto', // 'auto' intentará posicionar el dropdown según el espacio disponible
       renderChoiceLimit: -1, // Sin límite de opciones mostradas
     });
     
