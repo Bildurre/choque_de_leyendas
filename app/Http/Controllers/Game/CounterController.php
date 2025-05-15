@@ -91,7 +91,7 @@ class CounterController extends Controller
         ]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('counters.creation_error', ['error' => $e->getMessage()]))
+        ->with('error', __('counters.creation_error'))
         ->withInput();
     }
   }
@@ -126,7 +126,7 @@ class CounterController extends Controller
         ]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('counters.update_error', ['error' => $e->getMessage()]))
+        ->with('error', __('counters.update_error'))
         ->withInput();
     }
   }
@@ -150,7 +150,7 @@ class CounterController extends Controller
         ]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('counters.delete_error', ['error' => $e->getMessage()]));
+        ->with('error', __('counters.delete_error'));
     }
   }
 
@@ -171,7 +171,7 @@ class CounterController extends Controller
         ]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('counters.restore_error', ['error' => $e->getMessage()]));
+        ->with('error', __('counters.restore_error'));
     }
   }
 
@@ -194,7 +194,7 @@ class CounterController extends Controller
         ]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('counters.force_delete_error', ['error' => $e->getMessage()]));
+        ->with('error', __('counters.force_delete_error'));
     }
   }
 }

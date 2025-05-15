@@ -133,7 +133,7 @@ class FactionDeckController extends Controller
         ->with('success', __('faction_decks.created_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('faction_decks.creation_error', ['error' => $e->getMessage()]))
+        ->with('error', __('faction_decks.creation_error'))
         ->withInput();
     }
   }
@@ -202,7 +202,7 @@ class FactionDeckController extends Controller
         ->with('success', __('faction_decks.updated_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('faction_decks.update_error', ['error' => $e->getMessage()]))
+        ->with('error', __('faction_decks.update_error'))
         ->withInput();
     }
   }
@@ -220,7 +220,7 @@ class FactionDeckController extends Controller
         ->with('success', __('faction_decks.deleted_successfully', ['name' => $factionDeckName]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('faction_decks.delete_error', ['error' => $e->getMessage()]));
+        ->with('error', __('faction_decks.delete_error'));
     }
   }
 
@@ -237,7 +237,7 @@ class FactionDeckController extends Controller
         ->with('success', __('faction_decks.restored_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('faction_decks.restore_error', ['error' => $e->getMessage()]));
+        ->with('error', __('faction_decks.restore_error'));
     }
   }
 
@@ -256,7 +256,7 @@ class FactionDeckController extends Controller
         ->with('success', __('faction_decks.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', __('faction_decks.force_delete_error', ['error' => $e->getMessage()]));
+        ->with('error', __('faction_decks.force_delete_error'));
     }
   }
 }
