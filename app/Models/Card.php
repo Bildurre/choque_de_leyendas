@@ -79,46 +79,102 @@ class Card extends Model
     return ['lore_text', 'effect', 'restriction'];
   }
   
-  // /**
-  // * Get fields that can be filtered
-  // *
-  // * @return array
-  // */
-  // public function getAdminFilterable(): array
-  // {
-  //   return [
-  //     [
-  //       'type' => 'relation',
-  //       'relation' => 'faction',
-  //       'label' => __('entities.factions.singular'),
-  //       'option_label' => 'name',
-  //       'option_value' => 'id'
-  //     ],
-  //   ];
-  // }
+  /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'faction_id',
+        'relation' => 'faction',
+        'label' => __('entities.factions.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'card_type_id',
+        'relation' => 'cardType',
+        'label' => __('entities.card_types.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'equipment_type_id',
+        'relation' => 'equipmentType',
+        'label' => __('entities.equipment_types.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'cost_range',
+        'field' => 'cost_total',
+        'label' => __('common.total_cost'),
+        'options' => [
+          '0' => '0',
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'cost_colors',
+        'field' => 'cost_colors',
+        'label' => __('common.cost_contains'),
+        'options' => [
+          'R' => __('common.cost_colors.red'),
+          'G' => __('common.cost_colors.green'),
+          'B' => __('common.cost_colors.blue')
+        ]
+      ],
+      [
+        'type' => 'cost_exact',
+        'field' => 'cost_exact',
+        'label' => __('common.cost_exact'),
+        'options' => $this->getPredefinedCostOptions()
+      ]
+    ];
+  }
   
-  // /**
-  // * Get fields that can be sorted
-  // *
-  // * @return array
-  // */
-  // public function getAdminSortable(): array
-  // {
-  //   return [
-  //     [
-  //       'field' => 'name',
-  //       'label' => __('entities.heroes.name')
-  //     ],
-  //     [
-  //       'field' => 'card_type.name',
-  //       'label' => __('entities.card_types.singular')
-  //     ],
-  //     [
-  //       'field' => 'created_at',
-  //       'label' => __('common.created_at')
-  //     ]
-  //   ];
-  // }
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.cards.name')
+      ],
+      [
+        'field' => 'card_type.name',
+        'label' => __('entities.card_types.singular')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ],
+      [
+        'field' => 'cost_total',
+        'label' => __('common.total_cost'),
+        'custom_sort' => 'cost_total'
+      ],
+      [
+        'field' => 'cost_order',
+        'label' => __('common.cost_order'),
+        'custom_sort' => 'cost_order'
+      ]
+    ];
+  }
 
   /**
    * Get the options for generating the slug.

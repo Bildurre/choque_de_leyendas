@@ -14,6 +14,9 @@ return [
     'created_at' => 'Creado el',
     'updated_at' => 'Actualizado el',
     'color' => 'Color',
+    'yes' => 'Sí',
+    'no' => 'No',
+    'no_cost' => 'Sin Coste',
     
     // Common statuses
     'active' => 'Activo',
@@ -53,5 +56,19 @@ return [
       'deleted' => ':entity eliminado/a correctamente.',
       'restored' => ':entity restaurado/a correctamente.',
       'force_deleted' => ':entity eliminado/a permanentemente con éxito.',
+    ],
+
+    // Costs
+    'no_cost' => 'Sin Coste',
+    'cost_exact' => 'Coste Exacto',
+    'total_cost' => 'Coste Total',
+    'cost' => 'Coste',
+    'cost_contains' => 'El Coste Contiene',
+    'cost_order' => 'Colores en el Coste',
+    'cost_help' => 'Usa R para dados Rojos, G para dados Verdes y B para dados Azules',
+    'cost_colors' => [
+      'red' => 'Rojo',
+      'green' => 'Verde',
+      'blue' => 'Azul'
     ],
 ];

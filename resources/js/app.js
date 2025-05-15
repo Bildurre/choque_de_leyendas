@@ -20,6 +20,7 @@ import initColorPicker from './components/color-picker';
 import initFactionDeckForm from './components/faction-deck-form';
 import initEntitySelector from './components/entity-selector';
 import initAdminFilters from './components/filters';
+import initCostFilters from './components/filter-cost';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFactionDeckForm();
   initEntitySelector();
   initAdminFilters();
+  initCostFilters();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

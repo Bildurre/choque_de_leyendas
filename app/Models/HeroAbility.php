@@ -52,6 +52,110 @@ class HeroAbility extends Model
   ];
 
   /**
+  * Get fields that can be searched
+  *
+  * @return array
+  */
+  public function getAdminSearchable(): array
+  {
+    return ['description'];
+  }
+
+  /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'attack_range_id',
+        'relation' => 'attackRange',
+        'label' => __('entities.attack_ranges.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'attack_subtype_id',
+        'relation' => 'attackSubtype',
+        'label' => __('entities.attack_subtypes.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'enum',
+        'field' => 'area',
+        'label' => __('entities.hero_abilities.area'),
+        'options' => [
+          '1' => __('common.yes'),
+          '0' => __('common.no')
+        ]
+      ],
+      [
+        'type' => 'cost_range',
+        'field' => 'cost_total',
+        'label' => __('common.total_cost'),
+        'options' => [
+          '0' => '0',
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'cost_colors',
+        'field' => 'cost_colors',
+        'label' => __('common.cost_contains'),
+        'options' => [
+          'R' => __('common.cost_colors.red'),
+          'G' => __('common.cost_colors.green'),
+          'B' => __('common.cost_colors.blue')
+        ]
+      ],
+      [
+        'type' => 'cost_exact',
+        'field' => 'cost_exact',
+        'label' => __('common.cost_exact'),
+        'options' => $this->getPredefinedCostOptions()
+      ]
+    ];
+  }
+  
+  /**
+  * Get fields that can be sorted
+  *
+  * @return array
+  */
+  public function getAdminSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.hero_abilities.name')
+      ],
+      [
+        'field' => 'created_at',
+        'label' => __('common.created_at')
+      ],
+      [
+        'field' => 'cost_total',
+        'label' => __('common.total_cost'),
+        'custom_sort' => 'cost_total'
+      ],
+      [
+        'field' => 'cost_order',
+        'label' => __('common.cost_order'),
+        'custom_sort' => 'cost_order'
+      ]
+    ];
+  }
+
+  /**
    * Get the attack range that owns the hero ability.
    */
   public function attackRange()

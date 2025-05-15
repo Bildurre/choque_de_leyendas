@@ -25,6 +25,9 @@
         // Obtener opciones según el tipo de filtro
         switch ($filters['type']) {
           case 'enum':
+          case 'cost_range':
+          case 'cost_colors':
+          case 'cost_exact':
             $options = $filters['options'] ?? [];
             break;
             
@@ -84,13 +87,23 @@
         }
       @endphp
       
-      <x-filters.filters-select
-        :name="$paramName"
-        :label="$label"
-        :options="$options"
-        :selected="$selectedValues"
-        :multiple="true"
-      />
+      @if($filters['type'] === 'cost_exact')
+        <x-filters.cost-filter-select
+          :name="$paramName"
+          :label="$label"
+          :options="$options"
+          :selected="$selectedValues"
+          :multiple="true"
+        />
+      @else
+        <x-filters.filters-select
+          :name="$paramName"
+          :label="$label"
+          :options="$options"
+          :selected="$selectedValues"
+          :multiple="true"
+        />
+      @endif
     @endforeach
   </div>
 @endif

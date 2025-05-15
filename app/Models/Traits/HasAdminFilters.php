@@ -90,19 +90,33 @@ trait HasAdminFilters
    */
   protected function applySortFilters(Builder $query, Request $request): void
   {
-      // Apply sorting if sort field is provided and model has sortable fields
-      if (method_exists($this, 'getAdminSortable') && $request->has('sort')) {
-          $sortable = $this->getAdminSortable();
-          $sortField = $request->sort;
-          $sortDirection = $request->has('direction') && $request->direction === 'desc' ? 'desc' : 'asc';
-          
-          // Get actual field from either simple string or configuration
-          $fieldToSort = $this->getFieldToSort($sortable, $sortField);
-          
-          if ($fieldToSort) {
-              $this->applySortToField($query, $fieldToSort, $sortDirection);
-          }
+    // Apply sorting if sort field is provided and model has sortable fields
+    if (method_exists($this, 'getAdminSortable') && $request->has('sort')) {
+      $sortable = $this->getAdminSortable();
+      $sortField = $request->sort;
+      $sortDirection = $request->has('direction') && $request->direction === 'desc' ? 'desc' : 'asc';
+      
+      // Find the configuration for the requested sort field
+      $sortConfig = null;
+      foreach ($sortable as $config) {
+        if (is_array($config) && isset($config['field']) && $config['field'] === $sortField) {
+          $sortConfig = $config;
+          break;
+        } elseif (is_string($config) && $config === $sortField) {
+          $sortConfig = ['field' => $config];
+          break;
+        }
       }
+      
+      if ($sortConfig) {
+        // Check if this is a custom sort field
+        if (isset($sortConfig['custom_sort'])) {
+          $this->applyCustomSort($query, $sortConfig['custom_sort'], $sortDirection);
+        } else {
+          $this->applySortToField($query, $sortConfig['field'], $sortDirection);
+        }
+      }
+    }
   }
   
   /**
@@ -262,6 +276,45 @@ trait HasAdminFilters
   }
 
   /**
+   * Apply custom sorting to the query
+   *
+   * @param Builder $query
+   * @param string $sortType
+   * @param string $direction
+   * @return void
+   */
+  protected function applyCustomSort(Builder $query, string $sortType, string $direction): void
+  {
+    switch ($sortType) {
+      case 'cost_total':
+        // Sort by total cost (length of cost string)
+        $query->orderByRaw("LENGTH(cost) {$direction}");
+        break;
+        
+      case 'cost_order':
+        // Utilizamos una aproximación con múltiples campos de ordenación
+        
+        // Para ordenar por la cantidad de dados de cada color
+        // R primero, luego G, luego B cuando es ascendente
+        // B primero, luego G, luego R cuando es descendente
+        if ($direction === 'asc') {
+          $query->orderByRaw("
+            (LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'R', ''))) DESC,
+            (LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'G', ''))) DESC,
+            (LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'B', ''))) DESC
+          ");
+        } else {
+          $query->orderByRaw("
+            (LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'B', ''))) DESC,
+            (LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'G', ''))) DESC,
+            (LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'R', ''))) DESC
+          ");
+        }
+        break;
+    }
+  }
+
+  /**
    * Apply column filters to the query
    *
    * @param Builder $query
@@ -324,6 +377,18 @@ trait HasAdminFilters
             });
           }
           break;
+          
+        case 'cost_range':
+          $this->applyCostRangeFilter($query, $filterValues);
+          break;
+          
+        case 'cost_colors':
+          $this->applyCostColorsFilter($query, $filterValues);
+          break;
+
+        case 'cost_exact':
+          $this->applyCostExactFilter($query, $filterValues);
+          break;
       }
     }
   }
@@ -358,5 +423,85 @@ trait HasAdminFilters
         $q->whereIn($relationField, $values);
       });
     }
+  }
+
+  /**
+   * Apply cost range filter to the query
+   * 
+   * @param Builder $query
+   * @param array $values
+   * @return void
+   */
+  protected function applyCostRangeFilter(Builder $query, array $values): void
+  {
+    $query->where(function ($q) use ($values) {
+      foreach ($values as $value) {
+        if ($value === '5') {
+          // For "5+" range
+          $q->orWhereRaw('LENGTH(cost) >= 5');
+        } else {
+          // For specific cost number
+          $q->orWhereRaw('LENGTH(cost) = ?', [$value]);
+        }
+      }
+    });
+  }
+
+  /**
+   * Apply cost colors filter to the query
+   * 
+   * @param Builder $query
+   * @param array $values
+   * @return void
+   */
+  protected function applyCostColorsFilter(Builder $query, array $values): void
+  {
+    $query->where(function ($q) use ($values) {
+      foreach ($values as $color) {
+        $q->orWhere('cost', 'LIKE', '%' . $color . '%');
+      }
+    });
+  }
+
+  /**
+   * Apply cost exact filter to the query
+   * Filters for cards with the exact cost specified
+   * 
+   * @param Builder $query
+   * @param array $values
+   * @return void
+   */
+  protected function applyCostExactFilter(Builder $query, array $values): void
+  {
+    // Primero vamos a normalizar los valores de coste (ordenarlos según R, G, B)
+    $normalizedValues = array_map(function($cost) {
+      // Función para ordenar un coste (R antes que G antes que B)
+      $costArray = str_split(strtoupper($cost));
+      $red = '';
+      $green = '';
+      $blue = '';
+      
+      foreach ($costArray as $dice) {
+        if ($dice === 'R') $red .= 'R';
+        elseif ($dice === 'G') $green .= 'G';
+        elseif ($dice === 'B') $blue .= 'B';
+      }
+      
+      return $red . $green . $blue;
+    }, $values);
+    
+    // Ahora aplicamos el filtro usando una función SQL para ordenar el coste
+    $query->where(function($q) use ($normalizedValues) {
+      foreach ($normalizedValues as $normalizedCost) {
+        // Para cada coste normalizado, comparamos con el coste de la carta normalizado
+        $q->orWhereRaw("
+          CONCAT(
+            REPEAT('R', LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'R', ''))),
+            REPEAT('G', LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'G', ''))),
+            REPEAT('B', LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'B', '')))
+          ) = ?
+        ", [$normalizedCost]);
+      }
+    });
   }
 }
