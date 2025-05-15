@@ -56,5 +56,8 @@ return [
         'reset' => 'Restablecer',
         'sort_by' => 'Ordenar por',
         'sort_by_field' => 'Ordenar por :field',
+        'showing_all_results' => 'Mostrando todos los :count resultados',
+        'showing_filtered_results' => 'Mostrando :count de :total resultados',
+        'clear_filters' => 'Limpiar filtros',
     ],
 ];

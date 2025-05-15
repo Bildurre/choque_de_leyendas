@@ -9,12 +9,12 @@
 
 @if(count($filterables) > 0)
   <div class="filters-select-group">
-    @foreach($filterables as $filter)
+    @foreach($filterables as $filters)
       @php
         $options = [];
-        $fieldName = $filter['field'];
+        $fieldName = $filters['field'];
         $paramName = str_replace('.', '_', $fieldName);
-        $label = $filter['label'] ?? $fieldName;
+        $label = $filters['label'] ?? $fieldName;
         
         // Valores seleccionados actualmente
         $selectedValues = $request->input($paramName, []);
@@ -23,18 +23,18 @@
         }
         
         // Obtener opciones según el tipo de filtro
-        switch ($filter['type']) {
+        switch ($filters['type']) {
           case 'enum':
-            $options = $filter['options'] ?? [];
+            $options = $filters['options'] ?? [];
             break;
             
           case 'relation':
             try {
-              $relation = $filter['relation'];
+              $relation = $filters['relation'];
               if (method_exists($model, $relation)) {
                 $relatedModel = $model->{$relation}()->getRelated();
-                $labelField = $filter['option_label'] ?? 'name';
-                $valueField = $filter['option_value'] ?? 'id';
+                $labelField = $filters['option_label'] ?? 'name';
+                $valueField = $filters['option_value'] ?? 'id';
                 
                 if (property_exists($relatedModel, 'translatable') && in_array($labelField, $relatedModel->translatable)) {
                   // Para campos traducibles
@@ -55,11 +55,11 @@
             
           case 'nested_relation':
             try {
-              if (isset($filter['option_model'])) {
+              if (isset($filters['option_model'])) {
                 // Usar el modelo directamente si está especificado
-                $modelClass = $filter['option_model'];
-                $labelField = $filter['option_label'] ?? 'name';
-                $valueField = $filter['option_value'] ?? 'id';
+                $modelClass = $filters['option_model'];
+                $labelField = $filters['option_label'] ?? 'name';
+                $valueField = $filters['option_value'] ?? 'id';
                 
                 if (class_exists($modelClass)) {
                   $instance = new $modelClass;
@@ -84,7 +84,7 @@
         }
       @endphp
       
-      <x-filter.filter-select
+      <x-filters.filters-select
         :name="$paramName"
         :label="$label"
         :options="$options"

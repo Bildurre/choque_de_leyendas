@@ -43,6 +43,13 @@ class HeroController extends Controller
     $activeCount = Hero::count();
     $trashedCount = Hero::onlyTrashed()->count();
     
+    // Create a query builder for total count (without pagination)
+    $totalQuery = Hero::query();
+    if ($trashed) {
+      $totalQuery->onlyTrashed();
+    }
+    $totalCount = $totalQuery->count();
+    
     // Get heroes with pagination and eager loaded relationships
     $query = Hero::with([
       'faction', 
@@ -60,6 +67,9 @@ class HeroController extends Controller
     // Apply admin filters
     $query->applyAdminFilters($request);
     
+    // Get filtered count before pagination
+    $filteredCount = $query->count();
+    
     // Apply default ordering only if no sort parameter is provided
     if (!$request->has('sort')) {
       $query->orderBy('faction_id')->orderBy('id');
@@ -71,7 +81,16 @@ class HeroController extends Controller
     // Create a Hero instance for filter component
     $heroModel = new Hero();
     
-    return view('admin.heroes.index', compact('heroes', 'trashed', 'activeCount', 'trashedCount', 'heroModel', 'request'));
+    return view('admin.heroes.index', compact(
+      'heroes', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount', 
+      'heroModel', 
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
   }
 
   /**

@@ -12,7 +12,7 @@
   $selectedValues = is_array($selected) ? $selected : [$selected];
 @endphp
 
-<div class="filters-select">
+<div class="filter-select">
   <label for="{{ $id }}" class="filter-select__label">{{ $label }}</label>
   
   <select 

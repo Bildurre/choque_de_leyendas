@@ -18,9 +18,21 @@
     background-color: var(--color-background) !important;
     border-color: var(--color-card-border) !important;
   }
-
+  &.is--open  {
+    &__inner {
+      border-color: var(--random-accent-color) !important;
+    }
+    &__list {
+      border-color: var(--random-accent-color) !important;
+    }
+  }
   
   .choices__list--dropdown .choices__item--selectable.is-highlighted {
     background-color: var(--random-accent-color-bg) !important;
   }
+}
+
+.choices, .choices * {
+  z-index: 1000 !important;
+  overflow: show !important;
 }

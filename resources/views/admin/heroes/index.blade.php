@@ -5,7 +5,13 @@
   
   <div class="page-content">
 
-    <x-filter.card :model="$heroModel" :request="$request" />
+    <x-filters.card 
+      :model="$heroModel" 
+      :request="$request" 
+      :itemsCount="$heroes->count()"
+      :totalCount="$totalCount"
+      :filteredCount="$filteredCount"
+    />
 
     <x-entity.list 
       :create-route="!$trashed ? route('admin.heroes.create') : null"

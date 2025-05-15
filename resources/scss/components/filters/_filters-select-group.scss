@@ -1,6 +1,6 @@
 @use '../../abstracts/all' as *;
 
-.filter-select-group {
+.filters-select-group {
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-md;

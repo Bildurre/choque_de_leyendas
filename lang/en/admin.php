@@ -56,5 +56,8 @@ return [
         'reset' => 'Reset',
         'sort_by' => 'Sort by',
         'sort_by_field' => 'Sort by :field',
+        'showing_all_results' => 'Showing all :count results',
+        'showing_filtered_results' => 'Showing :count of :total results',
+        'clear_filters' => 'Clear filters',
     ],
 ];

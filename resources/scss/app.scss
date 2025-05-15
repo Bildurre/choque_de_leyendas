@@ -49,12 +49,12 @@
 @use 'components/form/image-upload';
 @use 'components/form/entity-selector';
 
-// Filter Components
-@use 'components/filter/filter-card';
-@use 'components/filter/sort';
-@use 'components/filter/filter-select-group';
-@use 'components/filter/filter-select';
-@use 'components/filter/choices';
+// filters Components
+@use 'components/filters/filters-card';
+@use 'components/filters/sort';
+@use 'components/filters/filters-select-group';
+@use 'components/filters/filters-select';
+@use 'components/filters/choices';
 
 // Pages
 @use 'pages/login';

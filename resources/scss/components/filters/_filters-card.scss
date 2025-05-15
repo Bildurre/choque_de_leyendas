@@ -1,0 +1,71 @@
+@use '../../abstracts/all' as *;
+
+.filters-card {
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  background-color: var(--color-card-bg);
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
+  overflow: show;
+
+  .collapsible-section {margin-bottom: 0;}
+}
+
+.filters-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+}
+
+.filters-search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $spacing-md;
+  align-items: flex-end;
+  margin-bottom: $spacing-md;
+}
+
+.filters-search {
+  width: 100%;
+}
+
+.filters-search-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: $spacing-sm; // Para alinear con el input cuando hay label
+}
+
+.filters-results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background-color: var(--color-bg-transparent-light);
+  border-radius: $border-radius-sm;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  
+  &__clear {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: var(--random-accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: var(--random-accent-color-hover);
+    }
+    
+    .icon {
+      transition: transform $transition-fast;
+    }
+    
+    &:hover .icon {
+      transform: scale(1.2);
+    }
+  }
+}
