@@ -58,7 +58,7 @@ class AttackRangeController extends Controller
       return redirect()->route('admin.attack-ranges.index')
         ->with('success', __('attack_ranges.created_successfully', ['name' => $attackRange->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.attack_ranges.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.create', ['entity' => __('entities.attack_ranges.singular')]))
         ->withInput();
     }
   }
@@ -83,7 +83,7 @@ class AttackRangeController extends Controller
       return redirect()->route('admin.attack-ranges.index')
         ->with('success', __('attack_ranges.updated_successfully', ['name' => $attackRange->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.attack_ranges.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.update', ['entity' => __('entities.attack_ranges.singular')]))
         ->withInput();
     }
   }
@@ -100,7 +100,7 @@ class AttackRangeController extends Controller
       return redirect()->route('admin.attack-ranges.index')
         ->with('success', __('attack_ranges.deleted_successfully', ['name' => $attackRangeName]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.attack_ranges.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.delete', ['entity' => __('entities.attack_ranges.singular')]));
     }
   }
 
@@ -116,7 +116,7 @@ class AttackRangeController extends Controller
       return redirect()->route('admin.attack-ranges.index', ['trashed' => 1])
         ->with('success', __('attack_ranges.restored_successfully', ['name' => $attackRange->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.attack_ranges.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.restore', ['entity' => __('entities.attack_ranges.singular')]));
     }
   }
 
@@ -134,7 +134,7 @@ class AttackRangeController extends Controller
       return redirect()->route('admin.attack-ranges.index', ['trashed' => 1])
         ->with('success', __('attack_ranges.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.attack_ranges.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error',__('common.errors.force_delete', ['entity' => __('entities.attack_ranges.singular')]));
     }
   }
 }

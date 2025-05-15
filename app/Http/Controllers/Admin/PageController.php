@@ -67,7 +67,7 @@ class PageController extends Controller
             return redirect()->route('admin.pages.index')
                 ->with('success', __('pages.created_successfully', ['title' => $page->title]));
         } catch (\Exception $e) {
-            return back()->with('error', __('pages.create_error', ['message' => $e->getMessage()]))
+            return back()->with('error', __('pages.create_error'))
                 ->withInput();
         }
     }
@@ -95,7 +95,7 @@ class PageController extends Controller
             return redirect()->route('admin.pages.index')
                 ->with('success', __('pages.updated_successfully', ['title' => $page->title]));
         } catch (\Exception $e) {
-            return back()->with('error', __('pages.update_error', ['message' => $e->getMessage()]))
+            return back()->with('error', __('pages.update_error'))
                 ->withInput();
         }
     }
@@ -112,7 +112,7 @@ class PageController extends Controller
             return redirect()->route('admin.pages.index')
                 ->with('success', __('pages.deleted_successfully', ['title' => $title]));
         } catch (\Exception $e) {
-            return back()->with('error', __('pages.delete_error', ['message' => $e->getMessage()]));
+            return back()->with('error', __('pages.delete_error'));
         }
     }
     
@@ -127,7 +127,7 @@ class PageController extends Controller
         return redirect()->route('admin.pages.index', ['trashed' => 1])
           ->with('success', __('pages.restored_successfully', ['title' => $page->title]));
       } catch (\Exception $e) {
-        return back()->with('error', __('pages.restore_error', ['message' => $e->getMessage()]));
+        return back()->with('error', __('pages.restore_error'));
       }
     }
     
@@ -142,7 +142,7 @@ class PageController extends Controller
         return redirect()->route('admin.pages.index', ['trashed' => 1])
           ->with('success', __('pages.force_deleted_successfully', ['title' => $title]));
       } catch (\Exception $e) {
-        return back()->with('error', __('pages.force_delete_error', ['message' => $e->getMessage()]));
+        return back()->with('error', __('pages.force_delete_error'));
       }
     }
 }

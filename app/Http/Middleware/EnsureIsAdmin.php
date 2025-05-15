@@ -18,7 +18,7 @@ class EnsureIsAdmin
   public function handle(Request $request, Closure $next)
   {
     if (!Auth::user() || !Auth::user()->isAdmin()) {
-      return redirect()->route('login')->with('error', 'Acceso denegado. Solo administradores pueden acceder a esta área.');
+      return redirect()->route('login')->with('error', Acceso denegado. Solo administradores pueden acceder a esta área.');
     }
 
     return $next($request);

@@ -59,7 +59,7 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index')
         ->with('success', __('hero_superclasses.created_successfully', ['name' => $heroSuperclass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.hero_superclasses.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.create', ['entity' => __('entities.hero_superclasses.singular')]))
         ->withInput();
     }
   }
@@ -84,7 +84,7 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index')
         ->with('success', __('hero_superclasses.updated_successfully', ['name' => $heroSuperclass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.hero_superclasses.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.update', ['entity' => __('entities.hero_superclasses.singular')]))
         ->withInput();
     }
   }
@@ -101,7 +101,7 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index')
         ->with('success', __('hero_superclasses.deleted_successfully', ['name' => $heroSuperclassName]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.hero_superclasses.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.delete', ['entity' => __('entities.hero_superclasses.singular')]));
     }
   }
 
@@ -117,7 +117,7 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index', ['trashed' => 1])
         ->with('success', __('hero_superclasses.restored_successfully', ['name' => $heroSuperclass->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.hero_superclasses.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.restore', ['entity' => __('entities.hero_superclasses.singular')]));
     }
   }
 
@@ -135,7 +135,7 @@ class HeroSuperclassController extends Controller
       return redirect()->route('admin.hero-superclasses.index', ['trashed' => 1])
         ->with('success', __('hero_superclasses.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.hero_superclasses.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.hero_superclasses.singular')]));
     }
   }
 }

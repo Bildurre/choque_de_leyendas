@@ -101,7 +101,7 @@ class BlockController extends Controller
             return redirect()->route('admin.pages.edit', $page)
                 ->with('success', __('blocks.updated_successfully'));
         } catch (\Exception $e) {
-            return back()->with('error', Error:  . $e->getMessage())
+            return back()->with('error', __('blocks.update_error'))
                 ->withInput();
         }
     }
@@ -117,7 +117,7 @@ class BlockController extends Controller
             return redirect()->route('admin.pages.edit', $page)
                 ->with('success', __('blocks.deleted_successfully'));
         } catch (\Exception $e) {
-            return back()->with('error', __('blocks.delete_error', ['message' => $e->getMessage()]));
+            return back()->with('error', __('blocks.delete_error'));
         }
     }
 
@@ -144,7 +144,7 @@ class BlockController extends Controller
             return redirect()->route('admin.pages.edit', $page)
                 ->with('success', __('blocks.reordered_successfully'));
         } catch (\Exception $e) {
-            return back()->with('error', __('blocks.reorder_error', ['message' => $e->getMessage()]));
+            return back()->with('error', __('blocks.reorder_error'));
         }
     }
 }

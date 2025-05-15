@@ -65,7 +65,7 @@ class EquipmentTypeController extends Controller
       return redirect()->route('admin.equipment-types.index')
         ->with('success', __('equipment_types.created_successfully', ['name' => $equipmentType->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.equipment_types.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.create', ['entity' => __('entities.equipment_types.singular')]))
         ->withInput();
     }
   }
@@ -91,7 +91,7 @@ class EquipmentTypeController extends Controller
       return redirect()->route('admin.equipment-types.index')
         ->with('success', __('equipment_types.updated_successfully', ['name' => $equipmentType->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.equipment_types.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.update', ['entity' => __('entities.equipment_types.singular')]))
         ->withInput();
     }
   }
@@ -108,7 +108,7 @@ class EquipmentTypeController extends Controller
       return redirect()->route('admin.equipment-types.index')
         ->with('success', __('equipment_types.deleted_successfully', ['name' => $equipmentTypeName]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.equipment_types.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.delete', ['entity' => __('entities.equipment_types.singular')]));
     }
   }
 
@@ -124,7 +124,7 @@ class EquipmentTypeController extends Controller
       return redirect()->route('admin.equipment-types.index', ['trashed' => 1])
         ->with('success', __('equipment_types.restored_successfully', ['name' => $equipmentType->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.equipment_types.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.restore', ['entity' => __('entities.equipment_types.singular')]));
     }
   }
 
@@ -142,7 +142,7 @@ class EquipmentTypeController extends Controller
       return redirect()->route('admin.equipment-types.index', ['trashed' => 1])
         ->with('success', __('equipment_types.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.equipment_types.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.equipment_types.singular')]));
     }
   }
 }

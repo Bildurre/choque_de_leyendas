@@ -58,7 +58,7 @@ class GameModeController extends Controller
       return redirect()->route('admin.game-modes.index')
         ->with('success', __('game_modes.created_successfully', ['name' => $gameMode->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.create', ['entity' => __('entities.game_modes.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.create', ['entity' => __('entities.game_modes.singular')]))
         ->withInput();
     }
   }
@@ -83,7 +83,7 @@ class GameModeController extends Controller
       return redirect()->route('admin.game-modes.index')
         ->with('success', __('game_modes.updated_successfully', ['name' => $gameMode->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.update', ['entity' => __('entities.game_modes.singular')]) + ' '' . $e->getMessage())
+      return back()->with('error', __('common.errors.update', ['entity' => __('entities.game_modes.singular')]))
         ->withInput();
     }
   }
@@ -100,7 +100,7 @@ class GameModeController extends Controller
       return redirect()->route('admin.game-modes.index')
         ->with('success', __('game_modes.deleted_successfully', ['name' => $gameModeName]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.game_modes.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.delete', ['entity' => __('entities.game_modes.singular')]));
     }
   }
 
@@ -116,7 +116,7 @@ class GameModeController extends Controller
       return redirect()->route('admin.game-modes.index', ['trashed' => 1])
         ->with('success', __('game_modes.restored_successfully', ['name' => $gameMode->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.game_modes.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.restore', ['entity' => __('entities.game_modes.singular')]));
     }
   }
 
@@ -134,7 +134,7 @@ class GameModeController extends Controller
       return redirect()->route('admin.game-modes.index', ['trashed' => 1])
         ->with('success', __('game_modes.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.game_modes.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.game_modes.singular')]));
     }
   }
 }

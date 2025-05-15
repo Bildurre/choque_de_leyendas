@@ -60,7 +60,7 @@ class FactionController extends Controller
         ->with('success', __('factions.created_successfully', ['name' => $faction->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', '__('common.errors.create', ['entity' => __('entities.factions.singular')]) + ' '' . $e->getMessage())
+        ->with('error', __('common.errors.create', ['entity' => __('entities.factions.singular')]))
         ->withInput();
     }
   }
@@ -98,7 +98,7 @@ class FactionController extends Controller
         ->with('success', __('factions.updated_successfully', ['name' => $faction->name]));
     } catch (\Exception $e) {
       return back()
-        ->with('error', '__('common.errors.update', ['entity' => __('entities.factions.singular')]) + ' '' . $e->getMessage())
+        ->with('error', __('common.errors.update', ['entity' => __('entities.factions.singular')]))
         ->withInput();
     }
   }
@@ -115,7 +115,7 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index')
         ->with('success', __('factions.deleted_successfully', ['name' => $factionName]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.delete', ['entity' => __('entities.factions.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.delete', ['entity' => __('entities.factions.singular')]));
     }
   }
 
@@ -131,7 +131,7 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index', ['trashed' => 1])
         ->with('success', __('factions.restored_successfully', ['name' => $faction->name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.restore', ['entity' => __('entities.factions.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.restore', ['entity' => __('entities.factions.singular')]));
     }
   }
 
@@ -149,7 +149,7 @@ class FactionController extends Controller
       return redirect()->route('admin.factions.index', ['trashed' => 1])
         ->with('success', __('factions.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
-      return back()->with('error', '__('common.errors.force_delete', ['entity' => __('entities.factions.singular')]) + ' '' . $e->getMessage());
+      return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.factions.singular')]));
     }
   }
 }
