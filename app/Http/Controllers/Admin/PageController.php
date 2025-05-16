@@ -145,4 +145,18 @@ class PageController extends Controller
         return back()->with('error', __('pages.force_delete_error'));
       }
     }
+
+    /**
+     * Toggle the published status of the specified page.
+     */
+    public function togglePublished(Page $page)
+    {
+      $page->togglePublished();
+
+      $statusMessage = $page->isPublished() 
+        ? __('page.published_successfully', ['name' => $page->title])
+        : __('page.unpublished_successfully', ['name' => $page->title]);
+
+      return back()->with('success', $statusMessage);
+    }
 }

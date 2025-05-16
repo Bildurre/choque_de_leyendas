@@ -41,6 +41,12 @@
         :current-image="isset($counter) && $counter->icon ? $counter->getImageUrl() : null"
         :remove-name="isset($counter) ? 'remove_icon' : null"
       />
+
+      <x-form.checkbox
+        name="is_published"
+        :label="__('admin.is_published')"
+        :checked="old('is_published', isset($counter) ? $counter->is_published : false)"
+      />
     </div>
   </x-form.card>
 </form>

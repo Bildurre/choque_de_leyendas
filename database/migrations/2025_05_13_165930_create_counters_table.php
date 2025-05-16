@@ -16,6 +16,7 @@ return new class extends Migration
       $table->json('name');
       $table->json('effect')->nullable();
       $table->enum('type', ['boon', 'bane']);
+      $table->boolean('is_published')->default(false);
       $table->string('icon')->nullable();
       $table->datetimes();
       $table->softDeletes();

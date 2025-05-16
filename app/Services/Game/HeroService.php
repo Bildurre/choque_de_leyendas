@@ -185,11 +185,12 @@ class HeroService
       'hero_race_id' => $data['hero_race_id'] ?? null,
       'hero_class_id' => $data['hero_class_id'] ?? null,
       'gender' => $data['gender'] ?? 'male',
-      'agility' => $data['agility'] ?? 2,
-      'mental' => $data['mental'] ?? 2,
-      'will' => $data['will'] ?? 2,
-      'strength' => $data['strength'] ?? 2,
-      'armor' => $data['armor'] ?? 2,
+      'agility' => $data['agility'] ?? 3,
+      'mental' => $data['mental'] ?? 3,
+      'will' => $data['will'] ?? 3,
+      'strength' => $data['strength'] ?? 3,
+      'armor' => $data['armor'] ?? 3,
+      'is_published' => isset($data['is_published']) ? (bool)$data['is_published'] : false,
     ];
     
     $hero->fill($fillable);

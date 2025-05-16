@@ -259,4 +259,18 @@ class FactionDeckController extends Controller
         ->with('error', __('faction_decks.force_delete_error'));
     }
   }
+
+  /**
+   * Toggle the published status of the specified faction deck.
+   */
+  public function togglePublished(FactionDeck $factionDeck)
+  {
+    $factionDeck->togglePublished();
+
+    $statusMessage = $factionDeck->isPublished() 
+      ? __('faction_decks.published_successfully', ['name' => $factionDeck->name])
+      : __('faction_decks.unpublished_successfully', ['name' => $factionDeck->name]);
+
+    return back()->with('success', $statusMessage);
+  }
 }

@@ -75,6 +75,12 @@
           :remove-name="isset($factionDeck) ? 'remove_icon' : null"
         />
       </div>
+
+      <x-form.checkbox
+        name="is_published"
+        :label="__('admin.is_published')"
+        :checked="old('is_published', isset($factionDeck) ? $factionDeck->is_published : false)"
+      />
     </div>
     
     <!-- Sección para las estadísticas del mazo (se usará en la validación en tiempo real) -->

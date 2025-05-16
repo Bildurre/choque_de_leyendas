@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasAdminFilters;
-use App\Models\Traits\HasImageAttribute;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\HasAdminFilters;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
+use App\Models\Traits\HasPublishedAttribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FactionDeck extends Model
 {
@@ -19,6 +20,7 @@ class FactionDeck extends Model
   use SoftDeletes;
   use HasImageAttribute;
   use HasAdminFilters;
+  use HasPublishedAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -31,6 +33,7 @@ class FactionDeck extends Model
     'icon',
     'faction_id',
     'game_mode_id',
+    'is_published',
   ];
 
   /**
@@ -40,6 +43,7 @@ class FactionDeck extends Model
    */
   protected $casts = [
     'deleted_at' => 'datetime',
+    'is_published' => 'boolean',
   ];
 
   /**

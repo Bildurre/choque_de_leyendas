@@ -223,4 +223,18 @@ class HeroController extends Controller
       return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage());
     }
   }
+
+  /**
+   * Toggle the published status of the specified hero.
+   */
+  public function togglePublished(Hero $hero)
+  {
+    $hero->togglePublished();
+
+    $statusMessage = $hero->isPublished() 
+      ? __('heroes.published_successfully', ['name' => $hero->name])
+      : __('heroes.unpublished_successfully', ['name' => $hero->name]);
+
+    return back()->with('success', $statusMessage);
+  }
 }

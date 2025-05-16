@@ -38,6 +38,7 @@ class FactionDeckRequest extends FormRequest
       'heroes' => ['nullable', 'array'],
       'heroes.*.id' => ['exists:heroes,id'],
       'heroes.*.copies' => ['required', 'integer', 'min:1'],
+      'is_published' => ['nullable', 'boolean'],
     ];
 
     // Solo añadir la regla de game_mode_id si es una nueva creación
@@ -87,8 +88,8 @@ class FactionDeckRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre del mazo es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
       'faction_id.required' => 'La facción es obligatoria.',
       'faction_id.exists' => 'La facción seleccionada no existe.',
       'game_mode_id.required' => 'El modo de juego es obligatorio.',

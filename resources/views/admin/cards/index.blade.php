@@ -32,6 +32,8 @@
             ? route('admin.cards.force-delete', $card->id) 
             : route('admin.cards.destroy', $card)"
           :restore-route="$trashed ? route('admin.cards.restore', $card->id) : null"
+          :toggle-published-route="!$trashed ? route('admin.cards.toggle-published', $card) : null"
+          :is-published="$card->isPublished()"
           :confirm-message="$trashed 
             ? __('entities.cards.confirm_force_delete') 
             : __('entities.cards.confirm_delete')"
@@ -72,6 +74,16 @@
                   <x-cost-display :cost="$card->cost" />
                 </span>
               </div>
+            @endif
+            
+            @if($card->isPublished())
+              <x-badge variant="success">
+                {{ __('admin.published') }}
+              </x-badge>
+            @else
+              <x-badge variant="warning">
+                {{ __('admin.draft') }}
+              </x-badge>
             @endif
             
             @if($trashed)

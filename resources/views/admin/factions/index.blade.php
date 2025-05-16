@@ -32,6 +32,8 @@
             ? route('admin.factions.force-delete', $faction->id) 
             : route('admin.factions.destroy', $faction)"
           :restore-route="$trashed ? route('admin.factions.restore', $faction->id) : null"
+          :toggle-published-route="!$trashed ? route('admin.factions.toggle-published', $faction) : null"
+          :is-published="$faction->isPublished()"
           :confirm-message="$trashed 
             ? __('entities.factions.confirm_force_delete') 
             : __('entities.factions.confirm_delete')"
@@ -51,6 +53,16 @@
             <x-badge variant="primary">
               {{ __('entities.factions.cards_count', ['count' => $faction->cards_count]) }}
             </x-badge>
+            
+            @if($faction->isPublished())
+              <x-badge variant="success">
+                {{ __('admin.published') }}
+              </x-badge>
+            @else
+              <x-badge variant="warning">
+                {{ __('admin.draft') }}
+              </x-badge>
+            @endif
             
             @if($trashed)
               <x-badge variant="danger">

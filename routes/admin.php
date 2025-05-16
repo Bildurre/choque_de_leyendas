@@ -75,16 +75,19 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('heroes', HeroController::class);
   Route::post('heroes/{id}/restore', [HeroController::class, 'restore'])->name('heroes.restore');
   Route::delete('heroes/{id}/force-delete', [HeroController::class, 'forceDelete'])->name('heroes.force-delete');
+  Route::post('heroes/{hero}/toggle-published', [HeroController::class, 'togglePublished'])->name('heroes.toggle-published');
 
   // Factions
   Route::resource('factions', FactionController::class);
   Route::post('factions/{id}/restore', [FactionController::class, 'restore'])->name('factions.restore');
   Route::delete('factions/{id}/force-delete', [FactionController::class, 'forceDelete'])->name('factions.force-delete');
+  Route::post('factions/{faction}/toggle-published', [FactionController::class, 'togglePublished'])->name('factions.toggle-published');
 
   // Cards
   Route::resource('cards', CardController::class);
   Route::post('cards/{id}/restore', [CardController::class, 'restore'])->name('cards.restore');
   Route::delete('cards/{id}/force-delete', [CardController::class, 'forceDelete'])->name('cards.force-delete');
+  Route::post('cards/{card}/toggle-published', [CardController::class, 'togglePublished'])->name('cards.toggle-published');
 
   // Game Modes
   Route::resource('game-modes', GameModeController::class);
@@ -96,6 +99,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::post('faction-decks/{id}/restore', [FactionDeckController::class, 'restore'])->name('faction-decks.restore');
   Route::delete('faction-decks/{id}/force-delete', [FactionDeckController::class, 'forceDelete'])->name('faction-decks.force-delete');
   Route::get('faction-decks/available-items', [FactionDeckController::class, 'getAvailableItems'])->name('faction-decks.available-items');
+  Route::post('faction-decks/{faction_deck}/toggle-published', [FactionDeckController::class, 'togglePublished'])->name('faction-decks.toggle-published');
 
   // Deck Attributes Configuration
   Route::resource('deck-attributes-configurations', DeckAttributesConfigurationController::class);
@@ -104,6 +108,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('pages', PageController::class);
   Route::post('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
   Route::delete('pages/{id}/force-delete', [PageController::class, 'forceDelete'])->name('pages.force-delete');
+  Route::post('pages/{page}/toggle-published', [PageController::class, 'togglePublished'])->name('pages.toggle-published');
 
   // Blocks
   Route::prefix('pages/{page}/blocks')->name('pages.blocks.')->group(function () {
@@ -121,4 +126,5 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::resource('counters', CounterController::class);
   Route::post('counters/{id}/restore', [CounterController::class, 'restore'])->name('counters.restore');
   Route::delete('counters/{id}/force-delete', [CounterController::class, 'forceDelete'])->name('counters.force-delete');
+  Route::post('counters/{counter}/toggle-published', [CounterController::class, 'togglePublished'])->name('counters.toggle-published');
 });

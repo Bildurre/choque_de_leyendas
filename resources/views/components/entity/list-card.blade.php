@@ -4,6 +4,8 @@
   'deleteRoute' => null,
   'restoreRoute' => null,
   'viewRoute' => null,
+  'togglePublishedRoute' => null,
+  'isPublished' => false,
   'confirmMessage' => __('admin.confirm_delete')
 ])
 
@@ -30,6 +32,17 @@
           variant="edit"
           size="sm"
           :title="__('admin.edit')"
+        />
+      @endif
+      
+      @if($togglePublishedRoute)
+        <x-action-button
+          :route="$togglePublishedRoute"
+          :icon="$isPublished ? 'eye-off' : 'eye'"
+          :variant="$isPublished ? 'unpublish' : 'publish'"
+          size="sm"
+          method="POST"
+          :title="$isPublished ? __('admin.unpublish') : __('admin.publish')"
         />
       @endif
       

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasTranslatableSlug;
+use App\Models\Traits\HasPublishedAttribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Services\Game\HeroAttributesConfigurationService;
@@ -20,6 +21,7 @@ class Hero extends Model
   use SoftDeletes;
   use HasImageAttribute;
   use HasAdminFilters;
+  use HasPublishedAttribute;
 
   /**
    * The table associated with the model.
@@ -49,6 +51,7 @@ class Hero extends Model
     'will',
     'strength',
     'armor',
+    'is_published',
   ];
 
   /**
@@ -63,6 +66,7 @@ class Hero extends Model
     'strength' => 'integer',
     'armor' => 'integer',
     'deleted_at' => 'datetime',
+    'is_published' => 'boolean',
   ];
 
   /**
@@ -131,16 +135,6 @@ class Hero extends Model
         'option_label' => 'name',
         'option_value' => 'id'
       ],
-      // Filtro para enum (género)
-      // [
-      //   'type' => 'enum',
-      //   'field' => 'gender',
-      //   'label' => __('entities.heroes.gender'),
-      //   'options' => [
-      //     'male' => __('entities.heroes.genders.male'),
-      //     'female' => __('entities.heroes.genders.female')
-      //   ]
-      // ]
     ];
   }
   

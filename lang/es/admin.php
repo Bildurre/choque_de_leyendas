@@ -34,6 +34,8 @@ return [
     'yes' => 'Sí',
     'no' => 'No',
     'none' => 'Ninguno',
+    'draft' => 'Borrador',
+    'published' => 'Publicado',
     
     // Image upload
     'drag_image_here' => 'Arrastra una imagen aquí',

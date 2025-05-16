@@ -133,6 +133,12 @@
         :current-image="isset($hero) && $hero->image ? $hero->getImageUrl() : null"
         :remove-name="isset($hero) ? 'remove_image' : null"
       />
+
+      <x-form.checkbox
+        name="is_published"
+        :label="__('admin.is_published')"
+        :checked="old('is_published', isset($hero) ? $hero->is_published : false)"
+      />
     </div>
     
     <fieldset class="form-fieldset">

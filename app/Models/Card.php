@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasAdminFilters;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\HasAdminFilters;
 use App\Models\Traits\HasCostAttribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasTranslatableSlug;
+use App\Models\Traits\HasPublishedAttribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,6 +22,7 @@ class Card extends Model
   use HasImageAttribute;
   use HasCostAttribute;
   use HasAdminFilters;
+  use HasPublishedAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -43,6 +45,7 @@ class Card extends Model
     'effect',
     'restriction',
     'area',
+    'is_published',
   ];
 
   /**
@@ -54,6 +57,7 @@ class Card extends Model
     'hands' => 'integer',
     'area' => 'boolean',
     'deleted_at' => 'datetime',
+    'is_published' => 'boolean',
   ];
 
   /**

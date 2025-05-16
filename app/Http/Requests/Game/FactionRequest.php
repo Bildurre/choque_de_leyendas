@@ -32,6 +32,7 @@ class FactionRequest extends FormRequest
       'color' => ['required', 'string', 'regex:/^#[a-fA-F0-9]{6}$/'],
       'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_icon' => ['nullable', 'boolean'],
+      'is_published' => ['nullable', 'boolean'],
     ];
 
     // Add uniqueness rules for each locale
@@ -50,8 +51,8 @@ class FactionRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre de la facción es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
       'color.required' => 'El color es obligatorio.',
       'color.string' => 'El color debe ser una cadena de texto.',
       'color.regex' => 'El color debe tener un formato hexadecimal válido (p. ej. #FF5500).',

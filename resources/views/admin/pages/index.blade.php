@@ -21,6 +21,8 @@
             ? route('admin.pages.force-delete', $page->id) 
             : route('admin.pages.destroy', $page)"
           :restore-route="$trashed ? route('admin.pages.restore', $page->id) : null"
+          :toggle-published-route="!$trashed ? route('admin.pages.toggle-published', $page) : null"
+          :is-published="$page->isPublished()"
           :confirm-message="$trashed 
             ? __('pages.confirm_force_delete') 
             : __('pages.confirm_delete')"

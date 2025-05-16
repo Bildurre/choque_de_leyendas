@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\SlugOptions;
 use App\Models\Traits\HasAdminFilters;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasColorAttribute;
 use App\Models\Traits\HasImageAttribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasTranslatableSlug;
-use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
+use App\Models\Traits\HasPublishedAttribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Faction extends Model
 {
@@ -21,6 +22,7 @@ class Faction extends Model
   use HasColorAttribute;
   use HasImageAttribute;
   use HasAdminFilters;
+  use HasPublishedAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -34,6 +36,7 @@ class Faction extends Model
     'color',
     'icon',
     'text_is_dark',
+    'is_published',
   ];
 
   /**
@@ -44,6 +47,7 @@ class Faction extends Model
   protected $casts = [
     'text_is_dark' => 'boolean',
     'deleted_at' => 'datetime',
+    'is_published' => 'boolean',
   ];
 
   /**

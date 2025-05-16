@@ -58,6 +58,7 @@ return [
         'passive_description' => 'Passive Description',
         'system' => 'Hero System',
         'attributes' => [
+          'title' => 'Attributes',
             'agility' => 'Agility',
             'mental' => 'Mental',
             'will' => 'Will',

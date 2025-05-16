@@ -219,4 +219,18 @@ class CardController extends Controller
       return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.cards.singular')]));
     }
   }
+
+  /**
+   * Toggle the published status of the specified card.
+   */
+  public function togglePublished(Card $card)
+  {
+    $card->togglePublished();
+
+    $statusMessage = $card->isPublished() 
+      ? __('cards.published_successfully', ['name' => $card->name])
+      : __('cards.unpublished_successfully', ['name' => $card->name]);
+
+    return back()->with('success', $statusMessage);
+  }
 }

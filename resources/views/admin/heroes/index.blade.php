@@ -32,6 +32,8 @@
             ? route('admin.heroes.force-delete', $hero->id) 
             : route('admin.heroes.destroy', $hero)"
           :restore-route="$trashed ? route('admin.heroes.restore', $hero->id) : null"
+          :toggle-published-route="!$trashed ? route('admin.heroes.toggle-published', $hero) : null"
+          :is-published="$hero->isPublished()"
           :confirm-message="$trashed 
             ? __('entities.heroes.confirm_force_delete') 
             : __('entities.heroes.confirm_delete')"
@@ -55,6 +57,16 @@
             <x-badge variant="{{ $hero->gender === 'male' ? 'success' : 'warning' }}">
               {{ __('entities.heroes.genders.' . $hero->gender) }}
             </x-badge>
+            
+            @if($hero->isPublished())
+              <x-badge variant="success">
+                {{ __('admin.published') }}
+              </x-badge>
+            @else
+              <x-badge variant="warning">
+                {{ __('admin.draft') }}
+              </x-badge>
+            @endif
             
             @if($trashed)
               <x-badge variant="danger">

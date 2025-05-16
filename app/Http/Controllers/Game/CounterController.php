@@ -200,4 +200,18 @@ class CounterController extends Controller
         ->with('error', __('counters.force_delete_error'));
     }
   }
+
+  /**
+   * Toggle the published status of the specified counter.
+   */
+  public function togglePublished(Counter $counter)
+  {
+    $counter->togglePublished();
+
+    $statusMessage = $counter->isPublished() 
+      ? __('counters.published_successfully', ['name' => $counter->name])
+      : __('counters.unpublished_successfully', ['name' => $counter->name]);
+
+    return back()->with('success', $statusMessage);
+  }
 }

@@ -209,6 +209,8 @@ public function getAllFactionDecks(
       if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
         $factionDeck->storeImage($data['icon'], 'icon');
       }
+
+      $factionDeck->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
       
       $factionDeck->save();
       
@@ -263,6 +265,10 @@ public function getAllFactionDecks(
         $factionDeck->deleteImage('icon');
       } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
         $factionDeck->storeImage($data['icon'], 'icon');
+      }
+
+      if (isset($data['is_published'])) {
+        $factionDeck->is_published = (bool)$data['is_published'];
       }
       
       $factionDeck->save();

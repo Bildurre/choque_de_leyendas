@@ -173,4 +173,18 @@ class FactionController extends Controller
       return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.factions.singular')]));
     }
   }
+
+  /**
+   * Toggle the published status of the specified faction.
+   */
+  public function togglePublished(Faction $faction)
+  {
+    $faction->togglePublished();
+
+    $statusMessage = $faction->isPublished() 
+      ? __('factions.published_successfully', ['name' => $faction->name])
+      : __('factions.unpublished_successfully', ['name' => $faction->name]);
+
+    return back()->with('success', $statusMessage);
+  }
 }

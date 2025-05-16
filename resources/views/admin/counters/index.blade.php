@@ -47,6 +47,8 @@
             ? route('admin.counters.force-delete', $counter->id) 
             : route('admin.counters.destroy', $counter)"
           :restore-route="$trashed ? route('admin.counters.restore', $counter->id) : null"
+          :toggle-published-route="!$trashed ? route('admin.counters.toggle-published', $counter) : null"
+          :is-published="$counter->isPublished()"
           :confirm-message="$trashed 
             ? __('entities.counters.confirm_force_delete') 
             : __('entities.counters.confirm_delete')"
@@ -55,6 +57,16 @@
             <x-badge variant="{{ $counter->type === 'boon' ? 'success' : 'danger' }}">
               {{ $counter->type_name }}
             </x-badge>
+            
+            @if($counter->isPublished())
+              <x-badge variant="success">
+                {{ __('admin.published') }}
+              </x-badge>
+            @else
+              <x-badge variant="warning">
+                {{ __('admin.draft') }}
+              </x-badge>
+            @endif
             
             @if($trashed)
               <x-badge variant="secondary">

@@ -19,6 +19,7 @@ return new class extends Migration
       $table->string('color', 7);
       $table->string('icon')->nullable();
       $table->boolean('text_is_dark')->default(false);
+      $table->boolean('is_published')->default(false);
       $table->datetimes();
       $table->softDeletes();
     });

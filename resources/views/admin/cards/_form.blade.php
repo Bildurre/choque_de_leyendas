@@ -109,6 +109,12 @@
         :current-image="isset($card) && $card->image ? $card->getImageUrl() : null"
         :remove-name="isset($card) ? 'remove_image' : null"
       />
+
+      <x-form.checkbox
+        name="is_published"
+        :label="__('admin.is_published')"
+        :checked="old('is_published', isset($card) ? $card->is_published : false)"
+      />
     </div>
   </x-form.card>
 </form>

@@ -46,8 +46,8 @@ class AttackRangeRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre del rango de ataque es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
     ];
 
     // Mensajes para la unicidad en cada idioma

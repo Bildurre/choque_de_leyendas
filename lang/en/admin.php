@@ -34,6 +34,8 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
     'none' => 'None',
+    'draft' => 'Borrador',
+    'published' => 'Publicado',
     
     // Image upload
     'drag_image_here' => 'Drag an image here',

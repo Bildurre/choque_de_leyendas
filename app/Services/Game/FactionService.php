@@ -184,6 +184,8 @@ class FactionService
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
       $faction->storeImage($data['icon'], 'icon');
     }
+
+    $faction->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
     
     $faction->save();
     
@@ -217,6 +219,10 @@ class FactionService
       $faction->deleteImage();
     } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
       $faction->storeImage($data['icon'], 'icon');
+    }
+
+    if (isset($data['is_published'])) {
+      $faction->is_published = (bool)$data['is_published'];
     }
     
     $faction->save();

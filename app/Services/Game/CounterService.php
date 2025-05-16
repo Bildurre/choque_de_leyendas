@@ -107,6 +107,8 @@ class CounterService
     if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
       $counter->storeImage($data['icon']);
     }
+
+    $counter->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
     
     $counter->save();
     
@@ -139,6 +141,10 @@ class CounterService
       $counter->deleteImage();
     } elseif (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
       $counter->storeImage($data['icon']);
+    }
+
+    if (isset($data['is_published'])) {
+      $counter->is_published = (bool)$data['is_published'];
     }
     
     $counter->save();

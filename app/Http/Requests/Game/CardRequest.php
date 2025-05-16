@@ -86,8 +86,8 @@ class CardRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre de la carta es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
       'card_type_id.required' => 'El tipo de carta es obligatorio.',
       'card_type_id.exists' => 'El tipo de carta seleccionado no existe.',
       'faction_id.exists' => 'La facción seleccionada no existe.',
@@ -104,6 +104,7 @@ class CardRequest extends FormRequest
       'image.image' => 'El archivo debe ser una imagen válida.',
       'image.mimes' => 'El archivo debe ser de tipo: jpeg, png, jpg, gif, svg.',
       'image.max' => 'La imagen no debe ser mayor de 2MB.',
+      'is_published' => ['nullable', 'boolean'],
     ];
 
     // Messages for uniqueness in each language

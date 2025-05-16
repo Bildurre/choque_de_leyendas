@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasImageAttribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Sluggable\HasTranslatableSlug;
+use App\Models\Traits\HasPublishedAttribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
 class Page extends Model implements LocalizedUrlRoutable
@@ -18,6 +19,7 @@ class Page extends Model implements LocalizedUrlRoutable
     use HasTranslatableSlug;
     use HasTranslations;
     use HasImageAttribute;
+    use HasPublishedAttribute;
 
     /**
      * The attributes that are mass assignable.
@@ -191,22 +193,6 @@ class Page extends Model implements LocalizedUrlRoutable
     public function getImageField(): string
     {
       return 'background_image';
-    }
-
-    /**
-     * Check if the page is published
-     */
-    public function isPublished(): bool
-    {
-        return $this->is_published;
-    }
-
-    /**
-     * Scope a query to only include published pages.
-     */
-    public function scopePublished($query)
-    {
-        return $query->where('is_published', true);
     }
 
     /**

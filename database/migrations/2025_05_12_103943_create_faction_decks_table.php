@@ -18,6 +18,7 @@ return new class extends Migration
       $table->json('slug');
       $table->text('icon')->nullable();
       $table->foreignId('faction_id')->constrained('factions');
+      $table->boolean('is_published')->default(false);
       $table->datetimes();
       $table->softDeletes();
     });

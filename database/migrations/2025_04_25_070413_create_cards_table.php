@@ -28,6 +28,7 @@ return new class extends Migration
       $table->json('effect')->nullable(); // Cambiado a json
       $table->json('restriction')->nullable(); // Cambiado a json
       $table->boolean('area')->default(false);
+      $table->boolean('is_published')->default(false);
       $table->datetimes();
       $table->softDeletes();
     });

@@ -40,6 +40,12 @@
         :current-image="isset($faction) && $faction->icon ? $faction->getImageUrl() : null"
         :remove-name="isset($faction) ? 'remove_icon' : null"
       />
+
+      <x-form.checkbox
+        name="is_published"
+        :label="__('admin.is_published')"
+        :checked="old('is_published', isset($faction) ? $faction->is_published : false)"
+      />
     </div>
   </x-form.card>
 </form>

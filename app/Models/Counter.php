@@ -3,15 +3,21 @@
 namespace App\Models;
 
 use App\Models\Traits\HasAdminFilters;
-use App\Models\Traits\HasImageAttribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
+use App\Models\Traits\HasPublishedAttribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Counter extends Model
 {
-  use HasFactory, SoftDeletes, HasTranslations, HasImageAttribute, HasAdminFilters;
+  use HasFactory;
+  use SoftDeletes;
+  use HasTranslations;
+  use HasImageAttribute;
+  use HasAdminFilters;
+  use HasPublishedAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -22,7 +28,8 @@ class Counter extends Model
     'name',
     'effect',
     'type',
-    'icon'
+    'icon',
+    'is_published',
   ];
 
   /**
@@ -33,6 +40,16 @@ class Counter extends Model
   public $translatable = [
     'name',
     'effect'
+  ];
+
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array<string, string>
+   */
+  protected $casts = [
+    'is_published' => 'boolean',
+    'deleted_at' => 'datetime',
   ];
 
   /**

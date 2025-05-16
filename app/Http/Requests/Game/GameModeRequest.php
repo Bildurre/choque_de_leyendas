@@ -47,8 +47,8 @@ class GameModeRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre del modo de juego es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
     ];
 
     // Messages for uniqueness in each language

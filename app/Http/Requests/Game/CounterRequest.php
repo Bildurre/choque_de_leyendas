@@ -32,6 +32,7 @@ class CounterRequest extends FormRequest
       'type' => ['required', 'string', 'in:boon,bane'],
       'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_icon' => ['nullable', 'boolean'],
+      'is_published' => ['nullable', 'boolean'],
     ];
 
     return $rules;
@@ -44,8 +45,8 @@ class CounterRequest extends FormRequest
   {
     return [
       'name.required' => 'El nombre del contador es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
       'type.required' => 'El tipo es obligatorio.',
       'type.string' => 'El tipo debe ser una cadena de texto.',
       'type.in' => 'El tipo seleccionado no es válido.',

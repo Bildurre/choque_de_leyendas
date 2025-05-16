@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('will')->default(2);
             $table->integer('strength')->default(2);
             $table->integer('armor')->default(2);
+            $table->boolean('is_published')->default(false);
             $table->datetimes();
             $table->softDeletes();
         });

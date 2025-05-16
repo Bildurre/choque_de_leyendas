@@ -46,6 +46,7 @@ class HeroRequest extends FormRequest
       'hero_abilities.*' => ['exists:hero_abilities,id'],
       'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_image' => ['nullable', 'boolean'],
+      'is_published' => ['nullable', 'boolean'],
     ];
 
     // Add total attributes validation
@@ -85,8 +86,8 @@ class HeroRequest extends FormRequest
   {
     $messages = [
       'name.required' => 'El nombre del héroe es obligatorio.',
-      'name.array' => '__('validation.array', ['attribute' => __('common.name')])',
-      'name.es.required' => '__('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')])',
+      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
+      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
       'hero_race_id.required' => 'La raza es obligatoria.',
       'hero_race_id.exists' => 'La raza seleccionada no existe.',
       'hero_class_id.required' => 'La clase es obligatoria.',
