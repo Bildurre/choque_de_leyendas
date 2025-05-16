@@ -23,8 +23,23 @@ class FactionController extends Controller
      */
     public function show(Faction $faction): View
     {
-        // Eager load related models to reduce database queries
-        $faction->load(['heroes', 'cards']);
+        // Verificar que la facción está publicada
+        if (!$faction->isPublished()) {
+            abort(404);
+        }
+        
+        // Eager load relacionados (solo publicados)
+        $faction->load([
+            'heroes' => function($query) {
+                $query->published();
+            },
+            'cards' => function($query) {
+                $query->published();
+            },
+            'factionDecks' => function($query) {
+                $query->published();
+            }
+        ]);
         
         return view('public.factions.show', compact('faction'));
     }

@@ -26,16 +26,22 @@ Route::group([
     });
 
     // Rutas de facciones
-    Route::get('/factions', [FactionController::class, 'index'])->name('public.factions.index');
-    Route::get('/factions/{faction:slug}', [FactionController::class, 'show'])->name('public.factions.show');
+    Route::get(LaravelLocalization::transRoute('routes.factions'), [FactionController::class, 'index'])
+        ->name('public.factions.index');
+    Route::get(LaravelLocalization::transRoute('routes.factions').'/{faction:slug}', [FactionController::class, 'show'])
+        ->name('public.factions.show');
 
     // Rutas de héroes
-    Route::get('/heroes', [HeroController::class, 'index'])->name('public.heroes.index');
-    Route::get('/heroes/{hero:slug}', [HeroController::class, 'show'])->name('public.heroes.show');
+    Route::get(LaravelLocalization::transRoute('routes.heroes'), [HeroController::class, 'index'])
+        ->name('public.heroes.index');
+    Route::get(LaravelLocalization::transRoute('routes.heroes').'/{hero:slug}', [HeroController::class, 'show'])
+        ->name('public.heroes.show');
 
     // Rutas de cartas
-    Route::get('/cards', [CardController::class, 'index'])->name('public.cards.index');
-    Route::get('/cards/{card:slug}', [CardController::class, 'show'])->name('public.cards.show');
+    Route::get(LaravelLocalization::transRoute('routes.cards'), [CardController::class, 'index'])
+        ->name('public.cards.index');
+    Route::get(LaravelLocalization::transRoute('routes.cards').'/{card:slug}', [CardController::class, 'show'])
+        ->name('public.cards.show');
 
     // Rutas de páginas de contenido
     Route::get('/{page}', [PageController::class, 'show'])
