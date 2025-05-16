@@ -12,8 +12,9 @@ use App\Models\Traits\HasPublishedAttribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Services\Game\HeroAttributesConfigurationService;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class Hero extends Model
+class Hero extends Model implements LocalizedUrlRoutable
 {
   use HasFactory;
   use HasTranslations;
@@ -182,6 +183,25 @@ class Hero extends Model
     return SlugOptions::create()
       ->generateSlugsFrom('name')
       ->saveSlugsTo('slug');
+  }
+
+  /**
+   * Get the route key for the model.
+   */
+  public function getRouteKeyName(): string
+  {
+    return 'slug';
+  }
+
+  /**
+   * Get the localized route key for a specific locale.
+   *
+   * @param string $locale
+   * @return string|null
+   */
+  public function getLocalizedRouteKey($locale)
+  {
+    return $this->getTranslation('slug', $locale, false);
   }
 
   /**

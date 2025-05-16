@@ -12,8 +12,9 @@ use Spatie\Sluggable\HasTranslatableSlug;
 use App\Models\Traits\HasPublishedAttribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class Faction extends Model
+class Faction extends Model implements LocalizedUrlRoutable
 {
   use HasFactory;
   use HasTranslations;
@@ -125,6 +126,25 @@ class Faction extends Model
   }
 
   /**
+   * Get the route key for the model.
+   */
+  public function getRouteKeyName(): string
+  {
+    return 'slug';
+  }
+
+  /**
+   * Get the localized route key for a specific locale.
+   *
+   * @param string $locale
+   * @return string|null
+   */
+  public function getLocalizedRouteKey($locale)
+  {
+    return $this->getTranslation('slug', $locale, false);
+  }
+
+  /**
    * Get the directory for storing images for this model
    * 
    * @return string
@@ -155,6 +175,6 @@ class Faction extends Model
    */
   public function factionDecks()
   {
-      return $this->hasMany(FactionDeck::class);
+    return $this->hasMany(FactionDeck::class);
   }
 }

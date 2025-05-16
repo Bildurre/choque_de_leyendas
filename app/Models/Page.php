@@ -89,73 +89,103 @@ class Page extends Model implements LocalizedUrlRoutable
 
     /**
      * Get the localized route key for a specific locale.
+     * 
+     * @param string $locale
+     * @return string|null
      */
     public function getLocalizedRouteKey($locale)
     {
-      $slug = $this->getTranslation('slug', $locale, false);
-      
-      // Si la página tiene un padre, incluir el slug del padre
-      if ($this->parent_id) {
-        // Cargar explícitamente la relación parent si no está cargada
-        if (!$this->relationLoaded('parent')) {
-          $this->load('parent');
+        // Primero intentamos obtener el slug en el idioma solicitado
+        $slug = $this->getTranslation('slug', $locale, false);
+        
+        // Si no hay traducción, intentamos el idioma por defecto
+        if (empty($slug)) {
+            $slug = $this->getTranslation('slug', config('app.fallback_locale'), false);
         }
         
-        if ($this->parent) {
-          $parentSlug = $this->parent->getTranslation('slug', $locale, false);
-          return $parentSlug . '/' . $slug;
+        // Si la página tiene un padre, incluir el slug del padre
+        if ($this->parent_id) {
+            // Cargar explícitamente la relación parent si no está cargada
+            if (!$this->relationLoaded('parent')) {
+                $this->load('parent');
+            }
+            
+            if ($this->parent) {
+                $parentSlug = $this->parent->getLocalizedRouteKey($locale);
+                return $parentSlug . '/' . $slug;
+            }
         }
-      }
-      
-      return $slug;
+        
+        return $slug;
     }
 
     /**
      * Resolve route binding by localized slug.
+     * 
+     * @param mixed $value
+     * @param string|null $field
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function resolveRouteBinding($value, $field = null)
     {
-      $isAdminRoute = request()->is('admin/*');
-      $locale = app()->getLocale();
-      
-      // Dividir la ruta completa en segmentos
-      $segments = explode('/', $value);
-      $lastSegment = end($segments);
-      
-      // Construir la consulta base
-      $query = self::where(function ($q) use ($lastSegment, $locale) {
-        $q->whereJsonContains("slug->{$locale}", $lastSegment);
-      });
-      
-      // Solo aplicar filtro de publicación para rutas públicas
-      if (!$isAdminRoute) {
-        $query->where('is_published', true);
-      }
-      
-      if (count($segments) > 1) {
-        // Ruta jerárquica: buscar primero la página padre por su slug
-        $parentSlug = $segments[0];
-        $parentQuery = self::where(function ($q) use ($parentSlug, $locale) {
-          $q->whereJsonContains("slug->{$locale}", $parentSlug);
+        // Si el valor es nulo o vacío, devolver null inmediatamente
+        if (!$value) {
+            return null;
+        }
+        
+        $isAdminRoute = request()->is('admin/*');
+        $locale = app()->getLocale();
+        
+        // Dividir la ruta completa en segmentos
+        $segments = explode('/', $value);
+        $lastSegment = end($segments);
+        
+        // Construir la consulta base - buscar en todos los idiomas si no se encuentra en el actual
+        $query = self::where(function ($q) use ($lastSegment, $locale) {
+            $q->whereJsonContains("slug->{$locale}", $lastSegment)
+              ->orWhere(function($subQ) use ($lastSegment) {
+                  // Buscar en cualquier idioma si no se encuentra en el idioma actual
+                  foreach (config('app.available_locales', ['es', 'en']) as $fallbackLocale) {
+                      $subQ->orWhereJsonContains("slug->{$fallbackLocale}", $lastSegment);
+                  }
+              });
         });
         
         // Solo aplicar filtro de publicación para rutas públicas
         if (!$isAdminRoute) {
-          $parentQuery->where('is_published', true);
+            $query->where('is_published', true);
         }
         
-        $parent = $parentQuery->first();
-        
-        if (!$parent) {
-          abort(404);
+        if (count($segments) > 1) {
+            // Ruta jerárquica: buscar primero la página padre por su slug
+            $parentSlug = $segments[0];
+            $parentQuery = self::where(function ($q) use ($parentSlug, $locale) {
+                $q->whereJsonContains("slug->{$locale}", $parentSlug)
+                  ->orWhere(function($subQ) use ($parentSlug) {
+                      // Buscar en cualquier idioma si no se encuentra en el idioma actual
+                      foreach (config('app.available_locales', ['es', 'en']) as $fallbackLocale) {
+                          $subQ->orWhereJsonContains("slug->{$fallbackLocale}", $parentSlug);
+                      }
+                  });
+            });
+            
+            // Solo aplicar filtro de publicación para rutas públicas
+            if (!$isAdminRoute) {
+                $parentQuery->where('is_published', true);
+            }
+            
+            $parent = $parentQuery->first();
+            
+            if (!$parent) {
+                return null;
+            }
+            
+            // Luego buscar la página hija por su slug y ID del padre
+            return $query->where('parent_id', $parent->id)->first();
+        } else {
+            // Ruta directa: buscar la página por su slug sin padre
+            return $query->whereNull('parent_id')->first();
         }
-        
-        // Luego buscar la página hija por su slug y ID del padre
-        return $query->where('parent_id', $parent->id)->firstOrFail();
-      } else {
-        // Ruta directa: buscar la página por su slug sin padre
-        return $query->firstOrFail();
-      }
     }
 
     /**
@@ -192,7 +222,7 @@ class Page extends Model implements LocalizedUrlRoutable
      */
     public function getImageField(): string
     {
-      return 'background_image';
+        return 'background_image';
     }
 
     /**

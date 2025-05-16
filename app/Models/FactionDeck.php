@@ -11,8 +11,9 @@ use Spatie\Sluggable\HasTranslatableSlug;
 use App\Models\Traits\HasPublishedAttribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class FactionDeck extends Model
+class FactionDeck extends Model implements LocalizedUrlRoutable
 {
   use HasFactory;
   use HasTranslations;
@@ -131,6 +132,25 @@ class FactionDeck extends Model
     return SlugOptions::create()
       ->generateSlugsFrom('name')
       ->saveSlugsTo('slug');
+  }
+
+  /**
+   * Get the route key for the model.
+   */
+  public function getRouteKeyName(): string
+  {
+    return 'slug';
+  }
+
+  /**
+   * Get the localized route key for a specific locale.
+   *
+   * @param string $locale
+   * @return string|null
+   */
+  public function getLocalizedRouteKey($locale)
+  {
+    return $this->getTranslation('slug', $locale, false);
   }
 
   /**
