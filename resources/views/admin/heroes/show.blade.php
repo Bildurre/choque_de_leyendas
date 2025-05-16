@@ -72,7 +72,7 @@
             
             <div class="hero-view__details">
               <div class="hero-view__section">
-                <h2 class="hero-view__section-title">{{ __('entities.heroes.attributes') }}</h2>
+                <h2 class="hero-view__section-title">{{ __('entities.heroes.attributes.title') }}</h2>
                 
                 <div class="hero-view__attribute-grid">
                   <div class="hero-view__attribute">

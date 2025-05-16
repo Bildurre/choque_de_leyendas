@@ -57,7 +57,6 @@ return [
         'passive_name' => 'Nombre de la Pasiva',
         'passive_description' => 'Descripción de la Pasiva',
         'system' => 'Sistema de Héroes',
-
         'attributes' => [
             'title' => 'Atributos',
             'agility' => 'Agilidad',
