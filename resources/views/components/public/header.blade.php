@@ -26,14 +26,23 @@
                 </li>
               @endif
             @endauth
+            
+            <x-public.page-menu />
+
             <li class="nav-item">
-              <a href="#" class="nav-link">{{ __('public.menu.explore') }}</a>
+              <a href="{{ route('public.factions.index') }}" class="nav-link {{ request()->routeIs('public.factions.*') ? 'nav-link--active' : '' }}">
+                {{ __('public.menu.factions') }}
+              </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">{{ __('public.menu.rules') }}</a>
+              <a href="{{ route('public.heroes.index') }}" class="nav-link {{ request()->routeIs('public.heroes.*') ? 'nav-link--active' : '' }}">
+                {{ __('public.menu.heroes') }}
+              </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">{{ __('public.menu.gallery') }}</a>
+              <a href="{{ route('public.cards.index') }}" class="nav-link {{ request()->routeIs('public.cards.*') ? 'nav-link--active' : '' }}">
+                {{ __('public.menu.cards') }}
+              </a>
             </li>
           </ul>
         </nav>

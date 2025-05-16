@@ -55,29 +55,28 @@ class PageService
      */
     public function update(Page $page, array $data): Page
     {
-        // Process translatable fields
-        $data = $this->processTranslatableFields($data, $this->translatableFields);
-        
-        // Apply translations
-        $this->applyTranslations($page, $data, $this->translatableFields);
-        
-        // Update non-translatable fields
-        $page->is_published = $data['is_published'] ?? $page->is_published;
-        $page->parent_id = $data['parent_id'] ?? $page->parent_id;
-        $page->template = $data['template'] ?? $page->template;
-        $page->order = $data['order'] ?? $page->order;
-        
-        // Handle background image updates using HasImageAttribute trait
-        if (isset($data['remove_background_image']) && $data['remove_background_image']) {
-          dd('remove');
-            $page->deleteImage();
-        } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
-            $page->storeImage($data['background_image']);
-        }
-        
-        $page->save();
-        
-        return $page;
+      // Process translatable fields
+      $data = $this->processTranslatableFields($data, $this->translatableFields);
+      
+      // Apply translations
+      $this->applyTranslations($page, $data, $this->translatableFields);
+      
+      // Update non-translatable fields
+      $page->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
+      $page->parent_id = $data['parent_id'] ?? $page->parent_id;
+      $page->template = $data['template'] ?? $page->template;
+      $page->order = $data['order'] ?? $page->order;
+      
+      // Handle background image updates using HasImageAttribute trait
+      if (isset($data['remove_background_image']) && $data['remove_background_image']) {
+        $page->deleteImage();
+      } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
+        $page->storeImage($data['background_image']);
+      }
+      
+      $page->save();
+      
+      return $page;
     }
 
     /**

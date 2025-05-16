@@ -94,9 +94,13 @@ class Page extends Model implements LocalizedUrlRoutable
       
       // Si la página tiene un padre, incluir el slug del padre
       if ($this->parent_id) {
-        $parent = $this->parent;
-        if ($parent) {
-          $parentSlug = $parent->getTranslation('slug', $locale, false);
+        // Cargar explícitamente la relación parent si no está cargada
+        if (!$this->relationLoaded('parent')) {
+          $this->load('parent');
+        }
+        
+        if ($this->parent) {
+          $parentSlug = $this->parent->getTranslation('slug', $locale, false);
           return $parentSlug . '/' . $slug;
         }
       }

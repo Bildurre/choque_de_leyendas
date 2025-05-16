@@ -1,0 +1,100 @@
+@use '../abstracts/all' as *;
+
+.nav-item {
+  position: relative;
+  
+  &--has-children {
+    &:hover, &:focus-within {
+      .nav-dropdown {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      
+      &__icon {
+        transition: transform $transition-fast;
+      }
+    }
+    
+    &:hover .nav-link__icon,
+    &:focus-within .nav-link__icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: $z-index-dropdown;
+  min-width: 200px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-sm;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 
+    visibility $transition-medium,
+    opacity $transition-medium,
+    transform $transition-medium;
+  
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: $spacing-xs 0;
+  }
+  
+  &__item {
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-card-border);
+    }
+  }
+  
+  &__link {
+    display: block;
+    padding: $spacing-sm $spacing-md;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 
+      background-color $transition-fast,
+      color $transition-fast;
+    
+    &:hover, &:focus {
+      background-color: var(--random-accent-color-bg-light);
+      color: var(--random-accent-color);
+    }
+    
+    &.nav-link--active {
+      background-color: var(--random-accent-color-bg-light);
+      color: var(--random-accent-color);
+      font-weight: 600;
+    }
+  }
+}
+
+.nav-item {
+  &--has-children {
+    // Estado activo para dispositivos táctiles
+    &.is-active {
+      .nav-dropdown {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .nav-link__icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
