@@ -143,7 +143,16 @@ class Card extends Model
         'field' => 'cost_exact',
         'label' => __('common.cost_exact'),
         'options' => $this->getPredefinedCostOptions()
-      ]
+      ],
+      [
+        'type' => 'enum',
+        'field' => 'is_published',
+        'label' => __('admin.publication_status'),
+        'options' => [
+          '1' => __('admin.published'),
+          '0' => __('admin.draft')
+        ]
+      ],
     ];
   }
   
@@ -176,7 +185,11 @@ class Card extends Model
         'field' => 'cost_order',
         'label' => __('common.cost_order'),
         'custom_sort' => 'cost_order'
-      ]
+      ],
+      [
+        'field' => 'is_published',
+        'label' => __('admin.publication_status')
+      ],
     ];
   }
 

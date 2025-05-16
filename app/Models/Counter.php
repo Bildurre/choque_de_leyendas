@@ -78,8 +78,17 @@ class Counter extends Model
         'boon' => __('entities.counters.types.boon'),
         'bane' => __('entities.counters.types.bane')
         ]
-      ]
-      ];
+      ],
+      [
+        'type' => 'enum',
+        'field' => 'is_published',
+        'label' => __('admin.publication_status'),
+        'options' => [
+          '1' => __('admin.published'),
+          '0' => __('admin.draft')
+        ]
+      ],
+    ];
   }
 
   /**
@@ -101,7 +110,11 @@ class Counter extends Model
       [
         'field' => 'created_at',
         'label' => __('common.created_at')
-      ]
+      ],
+      [
+        'field' => 'is_published',
+        'label' => __('admin.publication_status')
+      ],
     ];
   }
 

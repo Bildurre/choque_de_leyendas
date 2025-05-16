@@ -36,6 +36,9 @@ return [
     'none' => 'None',
     'draft' => 'Borrador',
     'published' => 'Publicado',
+    'publication_status' => 'Publication Status',
+    'unpublish' => 'Unpublish',
+    'publish' => 'Publish',
     
     // Image upload
     'drag_image_here' => 'Drag an image here',

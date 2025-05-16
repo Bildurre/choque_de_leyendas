@@ -72,6 +72,26 @@ class Faction extends Model
   }
 
   /**
+  * Get fields that can be filtered
+  *
+  * @return array
+  */
+  public function getAdminFilterable(): array
+  {
+    return [
+      [
+        'type' => 'enum',
+        'field' => 'is_published',
+        'label' => __('admin.publication_status'),
+        'options' => [
+          '1' => __('admin.published'),
+          '0' => __('admin.draft')
+        ]
+      ],
+    ];
+  }
+
+  /**
   * Get fields that can be sorted
   *
   * @return array
@@ -86,7 +106,11 @@ class Faction extends Model
       [
         'field' => 'created_at',
         'label' => __('common.created_at')
-      ]
+      ],
+      [
+        'field' => 'is_published',
+        'label' => __('admin.publication_status')
+      ],
     ];
   }
 

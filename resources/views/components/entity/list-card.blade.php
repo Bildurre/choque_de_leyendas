@@ -38,7 +38,7 @@
       @if($togglePublishedRoute)
         <x-action-button
           :route="$togglePublishedRoute"
-          :icon="$isPublished ? 'eye-off' : 'eye'"
+          :icon="$isPublished ? 'globe-slash' : 'globe'"
           :variant="$isPublished ? 'unpublish' : 'publish'"
           size="sm"
           method="POST"
