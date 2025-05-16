@@ -1,7 +1,5 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('pages.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('pages.plural')" />
   
   <div class="page-content">
     <x-entity.list 

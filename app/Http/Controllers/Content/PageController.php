@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class PageController extends Controller
 {
@@ -15,8 +14,9 @@ class PageController extends Controller
      */
     public function show(Page $page): View
     {
-        if (!$page->isPublished()) {
-            abort(404, 'Page not found');
+        // Verificar si la página está publicada
+        if (!$page->is_published) {
+            abort(404);
         }
         
         // Verify if the template exists, use default if not

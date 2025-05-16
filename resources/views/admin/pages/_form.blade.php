@@ -2,6 +2,7 @@
   $submitRoute = isset($page) ? route('admin.pages.update', $page) : route('admin.pages.store');
   $submitMethod = isset($page) ? 'PUT' : 'POST';
   $submitLabel = isset($page) ? __('admin.update') : __('pages.create');
+  $showCancelButton = $show_cancel_button ?? true;
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
@@ -10,7 +11,11 @@
     @method('PUT')
   @endif
   
-  <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.pages.index')">
+  <x-form.card
+    :submit_label="$submitLabel" 
+    :cancel_route="$showCancelButton ? route('admin.pages.index') : null"
+    :cancel_label="__('admin.cancel')"
+  >
     <x-slot:header>
       <h2>{{ __('pages.form_title') }}</h2>
     </x-slot:header>

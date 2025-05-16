@@ -1,0 +1,28 @@
+@use '../abstracts/all' as *;
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+  
+  @include responsive(tablet) {
+    margin-bottom: $spacing-lg;
+  }
+  
+  .page-title {
+    margin: 0;
+    font-size: 1.5rem;
+    flex: 1;
+    
+    @include responsive(tablet) {
+      font-size: 1.75rem;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: flex-end;
+  }
+}

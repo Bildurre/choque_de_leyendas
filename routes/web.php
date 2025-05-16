@@ -24,7 +24,8 @@ Route::group([
     });
 
     // Rutas de contenido
-    Route::get('/{page}', [PageController::class, 'show'])->name('content.page')
+    Route::get('/{page}', [PageController::class, 'show'])
+      ->name('content.page')
       ->where('page', '(?!admin|api|login|register|profile|pages).*');
 });
 

@@ -1,7 +1,15 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('pages.create') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('pages.create')">
+    <x-slot:actions>
+      <x-button-link 
+        :href="route('admin.pages.index')" 
+        icon="arrow-left" 
+        variant="secondary"
+      >
+        {{ __('pages.back_to_list') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
     @include('admin.pages._form', [

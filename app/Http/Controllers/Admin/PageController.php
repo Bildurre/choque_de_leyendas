@@ -61,15 +61,15 @@ class PageController extends Controller
      */
     public function store(PageRequest $request): RedirectResponse
     {
-        try {
-            $page = $this->pageService->create($request->validated());
-            
-            return redirect()->route('admin.pages.index')
-                ->with('success', __('pages.created_successfully', ['title' => $page->title]));
-        } catch (\Exception $e) {
-            return back()->with('error', __('pages.create_error'))
-                ->withInput();
-        }
+      try {
+        $page = $this->pageService->create($request->validated());
+        
+        return redirect()->route('admin.pages.edit', $page)
+          ->with('success', __('pages.created_successfully', ['title' => $page->title]));
+      } catch (\Exception $e) {
+        return back()->with('error', __('pages.create_error'))
+          ->withInput();
+      }
     }
 
     /**

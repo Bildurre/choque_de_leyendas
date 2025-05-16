@@ -90,7 +90,18 @@ class Page extends Model implements LocalizedUrlRoutable
      */
     public function getLocalizedRouteKey($locale)
     {
-        return $this->getTranslation('slug', $locale, false);
+      $slug = $this->getTranslation('slug', $locale, false);
+      
+      // Si la página tiene un padre, incluir el slug del padre
+      if ($this->parent_id) {
+        $parent = $this->parent;
+        if ($parent) {
+          $parentSlug = $parent->getTranslation('slug', $locale, false);
+          return $parentSlug . '/' . $slug;
+        }
+      }
+      
+      return $slug;
     }
 
     /**
@@ -98,10 +109,47 @@ class Page extends Model implements LocalizedUrlRoutable
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        $locale = app()->getLocale();
-        return $this->where(function ($query) use ($value, $locale) {
-            $query->whereJsonContains("slug->{$locale}", $value);
-        })->firstOrFail();
+      $isAdminRoute = request()->is('admin/*');
+      $locale = app()->getLocale();
+      
+      // Dividir la ruta completa en segmentos
+      $segments = explode('/', $value);
+      $lastSegment = end($segments);
+      
+      // Construir la consulta base
+      $query = self::where(function ($q) use ($lastSegment, $locale) {
+        $q->whereJsonContains("slug->{$locale}", $lastSegment);
+      });
+      
+      // Solo aplicar filtro de publicación para rutas públicas
+      if (!$isAdminRoute) {
+        $query->where('is_published', true);
+      }
+      
+      if (count($segments) > 1) {
+        // Ruta jerárquica: buscar primero la página padre por su slug
+        $parentSlug = $segments[0];
+        $parentQuery = self::where(function ($q) use ($parentSlug, $locale) {
+          $q->whereJsonContains("slug->{$locale}", $parentSlug);
+        });
+        
+        // Solo aplicar filtro de publicación para rutas públicas
+        if (!$isAdminRoute) {
+          $parentQuery->where('is_published', true);
+        }
+        
+        $parent = $parentQuery->first();
+        
+        if (!$parent) {
+          abort(404);
+        }
+        
+        // Luego buscar la página hija por su slug y ID del padre
+        return $query->where('parent_id', $parent->id)->firstOrFail();
+      } else {
+        // Ruta directa: buscar la página por su slug sin padre
+        return $query->firstOrFail();
+      }
     }
 
     /**
