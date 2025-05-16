@@ -37,6 +37,8 @@ return [
     'draft' => 'Borrador',
     'published' => 'Publicado',
     'publication_status' => 'Estado de la Publicación',
+    'unpublish' => 'Despublicar',
+    'publish' => 'Publicar',
     
     // Image upload
     'drag_image_here' => 'Arrastra una imagen aquí',
