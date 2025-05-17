@@ -8,39 +8,37 @@ use Illuminate\View\View;
 
 class FactionController extends Controller
 {
-    /**
-     * Display a listing of all factions.
-     */
-    public function index(): View
-    {
-        $factions = Faction::published()->orderBy('name')->get();
-        
-        return view('public.factions.index', compact('factions'));
-    }
+  /**
+   * Display a listing of all factions.
+   */
+  public function index(): View
+  {
+    $factions = Faction::published()->orderBy('name')->get();
+    
+    return view('public.factions.index', compact('factions'));
+  }
 
-    /**
-     * Display the specified faction.
-     */
-    public function show(Faction $faction): View
-    {
-        // Verificar que la facción está publicada
-        if (!$faction->isPublished()) {
-            abort(404);
-        }
-        
-        // Eager load relacionados (solo publicados)
-        $faction->load([
-            'heroes' => function($query) {
-                $query->published();
-            },
-            'cards' => function($query) {
-                $query->published();
-            },
-            'factionDecks' => function($query) {
-                $query->published();
-            }
-        ]);
-        
-        return view('public.factions.show', compact('faction'));
+  /**
+   * Display the specified faction.
+   */
+  public function show(Faction $faction): View
+  {
+    if (!$faction->isPublished()) {
+        abort(404);
     }
+    
+    $faction->load([
+      'heroes' => function($query) {
+        $query->published();
+      },
+      'cards' => function($query) {
+        $query->published();
+      },
+      'factionDecks' => function($query) {
+        $query->published();
+      }
+    ]);
+    
+    return view('public.factions.show', compact('faction'));
+  }
 }
