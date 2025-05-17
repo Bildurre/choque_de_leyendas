@@ -68,6 +68,12 @@
           :label="__('pages.is_published')"
           :checked="old('is_published', isset($page) ? $page->is_published : false)"
         />
+
+        <x-form.checkbox
+          name="show_in_nav"
+          :label="__('pages.show_in_nav')"
+          :checked="old('show_in_nav', isset($page) ? $page->show_in_nav : false)"
+        />
         
         <fieldset class="form-fieldset">
           <legend>{{ __('pages.meta_info') }}</legend>

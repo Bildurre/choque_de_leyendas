@@ -44,6 +44,8 @@ class PageService
         if (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
             $page->storeImage($data['background_image']);
         }
+
+        $page->show_in_nav = $data['show_in_nav'] ?? true;
         
         $page->save();
         
@@ -73,6 +75,8 @@ class PageService
       } elseif (isset($data['background_image']) && $data['background_image'] instanceof UploadedFile) {
         $page->storeImage($data['background_image']);
       }
+
+      $page->show_in_nav = isset($data['show_in_nav']) ? (bool)$data['show_in_nav'] : true;
       
       $page->save();
       

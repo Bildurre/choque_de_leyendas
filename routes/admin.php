@@ -109,6 +109,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::post('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
   Route::delete('pages/{id}/force-delete', [PageController::class, 'forceDelete'])->name('pages.force-delete');
   Route::post('pages/{page}/toggle-published', [PageController::class, 'togglePublished'])->name('pages.toggle-published');
+  Route::post('pages/reorder', [PageController::class, 'reorder'])->name('pages.reorder');
 
   // Blocks
   Route::prefix('pages/{page}/blocks')->name('pages.blocks.')->group(function () {

@@ -24,6 +24,7 @@ class FactionsSeeder extends Seeder
       $faction->lore_text = $factionData['lore_text'];
       $faction->color = $factionData['color'];
       $faction->icon = $factionData['icon'];
+      $faction->is_published = true;
       
       $faction->setTextColorBasedOnBackground();
       

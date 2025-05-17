@@ -1,9 +1,8 @@
-@props(['activeClass' => 'nav-link--active'])
-
 @php
-  // Obtenemos todas las páginas raíz publicadas ordenadas por orden
+  // Obtenemos todas las páginas raíz publicadas y visibles en el menú, ordenadas por orden
   $rootPages = \App\Models\Page::root()
     ->published()
+    ->where('show_in_nav', true)
     ->orderBy('order')
     ->get();
 @endphp
@@ -11,8 +10,11 @@
 @if($rootPages->isNotEmpty())
   @foreach($rootPages as $page)
     @php
-      // Verificamos si hay hijas publicadas, no solo hijas en general
-      $publishedChildren = $page->children()->published()->count();
+      // Verificamos si hay hijas publicadas y visibles en el menú
+      $publishedChildren = $page->children()
+        ->published()
+        ->where('show_in_nav', true)
+        ->count();
       $hasPublishedChildren = $publishedChildren > 0;
     @endphp
     
@@ -28,7 +30,11 @@
       @if($hasPublishedChildren)
         <div class="nav-dropdown">
           <ul class="nav-dropdown__list">
-            @foreach($page->children()->published()->orderBy('order')->get() as $childPage)
+            @foreach($page->children()
+              ->published()
+              ->where('show_in_nav', true)
+              ->orderBy('order')
+              ->get() as $childPage)
               <li class="nav-dropdown__item">
                 <a href="{{ localized_route('content.page', $childPage) }}" 
                    class="nav-dropdown__link {{ request()->url() == localized_route('content.page', $childPage) ? $activeClass : '' }}">

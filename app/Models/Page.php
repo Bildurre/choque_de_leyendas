@@ -30,6 +30,7 @@ class Page extends Model implements LocalizedUrlRoutable
         'title',
         'description',
         'is_published',
+        'show_in_nav',
         'meta_title',
         'meta_description',
         'background_image',
@@ -45,6 +46,7 @@ class Page extends Model implements LocalizedUrlRoutable
      */
     protected $casts = [
         'is_published' => 'boolean',
+        'show_in_nav' => 'boolean',
         'order' => 'integer',
     ];
 

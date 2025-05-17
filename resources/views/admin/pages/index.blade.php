@@ -11,11 +11,14 @@
       :activeCount="$activeCount ?? null"
       :trashedCount="$trashedCount ?? null"
       baseRoute="admin.pages.index"
+      :is-reorderable="!$trashed"
+      :reorder-url="route('admin.pages.reorder')"
+      reorder-item-id-field="id"
     >
-      @foreach($pages as $page)
+    @foreach($pages as $page)
         <x-entity.list-card 
-          :title="$page->title"
-          :view-route="!$trashed ? localized_route('content.page', $page, app()->getLocale()) : null"
+          :title="($page->parent ? '↳ ' : '') . $page->title"
+          :view-route="!$trashed ? route('content.page', $page) : null"
           :edit-route="!$trashed ? route('admin.pages.edit', $page) : null"
           :delete-route="$trashed 
             ? route('admin.pages.force-delete', $page->id) 
@@ -26,6 +29,7 @@
           :confirm-message="$trashed 
             ? __('pages.confirm_force_delete') 
             : __('pages.confirm_delete')"
+          data-id="{{ $page->id }}"
         >
           <x-slot:badges>
             @if($page->is_published)
@@ -35,6 +39,12 @@
             @else
               <x-badge variant="danger">
                 {{ __('pages.draft') }}
+              </x-badge>
+            @endif
+            
+            @if(!$page->show_in_nav)
+              <x-badge variant="info">
+                {{ __('pages.hidden_from_nav') }}
               </x-badge>
             @endif
             
@@ -79,7 +89,7 @@
             </div>
           @endif
         </x-entity.list-card>
-      @endforeach
+    @endforeach
       
       <x-slot:pagination>
         {{ $pages->appends(['trashed' => $trashed ? 1 : null])->links() }}

@@ -18,6 +18,7 @@ return new class extends Migration
       $table->json('description')->nullable();
       $table->string('background_image')->nullable();
       $table->boolean('is_published')->default(false);
+      $table->boolean('show_in_nav')->default(true);
       $table->json('meta_title')->nullable();
       $table->json('meta_description')->nullable();
       $table->foreignId('parent_id')->nullable()->references('id')->on('pages')->nullOnDelete();

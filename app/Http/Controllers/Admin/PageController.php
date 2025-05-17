@@ -33,16 +33,18 @@ class PageController extends Controller
         $activeCount = Page::count();
         $trashedCount = Page::onlyTrashed()->count();
         
-        $query = Page::with('parent')
+        $query = Page::with('parent', 'children')
             ->withCount('children');
         
         if ($trashed) {
             $query->onlyTrashed();
         }
         
-        $pages = $query->orderBy('order')->paginate(20);
+        $pages = $query->orderBy('parent_id', 'asc')
+          ->orderBy('order', 'asc')
+          ->paginate(20);
         
-        return view('admin.pages.index', compact('pages', 'trashed', 'activeCount', 'trashedCount'));
+        return view('admin.pages.index', compact('pages', 'trashed', 'activeCount', 'trashedCount', 'request'));
     }
 
     /**
@@ -158,5 +160,40 @@ class PageController extends Controller
         : __('page.unpublished_successfully', ['name' => $page->title]);
 
       return back()->with('success', $statusMessage);
+    }
+
+    public function reorder(Request $request)
+    {
+        try {
+            $pageIds = $request->input('item_ids', []);
+            
+            // Si es una cadena JSON, decodificarla
+            if (is_string($pageIds)) {
+                $pageIds = json_decode($pageIds, true);
+            }
+            
+            if (empty($pageIds)) {
+                return redirect()->route('admin.pages.index')
+                    ->with('warning', __('pages.no_pages_to_reorder'));
+            }
+            
+            $parentId = $request->input('parent_id');
+            
+            // Reordenar las páginas
+            $order = 0;
+            foreach ($pageIds as $pageId) {
+                $page = Page::find($pageId);
+                if ($page) {
+                    $page->order = $order;
+                    $page->save();
+                    $order++;
+                }
+            }
+            
+            return redirect()->route('admin.pages.index')
+                ->with('success', __('pages.reordered_successfully'));
+        } catch (\Exception $e) {
+            return back()->with('error', __('pages.reorder_error'));
+        }
     }
 }

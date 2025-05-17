@@ -33,6 +33,7 @@ class PageRequest extends FormRequest
             'meta_description' => ['nullable', 'array'],
             'background_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'is_published' => ['nullable', 'boolean'],
+            'show_in_nav' => ['nullable', 'boolean'],
             'parent_id' => ['nullable', 'exists:pages,id'],
             'template' => ['nullable', 'string'],
             'order' => ['nullable', 'integer', 'min:0'],
