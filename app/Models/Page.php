@@ -80,6 +80,14 @@ class Page extends Model implements LocalizedUrlRoutable
     }
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * Get the localized route key for a specific locale.
      * 
      * @param string $locale
@@ -88,42 +96,6 @@ class Page extends Model implements LocalizedUrlRoutable
     public function getLocalizedRouteKey($locale)
     {
       return $this->getTranslation('slug', $locale, false);
-    }
-
-    /**
-     * Resolve route binding by localized slug.
-     * 
-     * @param mixed $value
-     * @param string|null $field
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function resolveRouteBinding($value, $field = null)
-    {
-        // Si el valor es nulo o vacío, devolver null inmediatamente
-        if (!$value) {
-            return null;
-        }
-        
-        $isAdminRoute = request()->is('admin/*');
-        $locale = app()->getLocale();
-        
-        // Construir la consulta base - buscar directamente por el slug
-        $query = self::where(function ($q) use ($value, $locale) {
-            $q->whereJsonContains("slug->{$locale}", $value)
-              ->orWhere(function($subQ) use ($value) {
-                  // Buscar en cualquier idioma si no se encuentra en el idioma actual
-                  foreach (config('app.available_locales', ['es', 'en']) as $fallbackLocale) {
-                      $subQ->orWhereJsonContains("slug->{$fallbackLocale}", $value);
-                  }
-              });
-        });
-        
-        // Solo aplicar filtro de publicación para rutas públicas
-        if (!$isAdminRoute) {
-            $query->where('is_published', true);
-        }
-        
-        return $query->first();
     }
 
     /**

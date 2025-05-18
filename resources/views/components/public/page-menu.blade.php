@@ -17,8 +17,8 @@
     @endphp
     
     <li class="nav-item {{ $hasPublishedChildren ? 'nav-item--has-children' : '' }}">
-      <a href="{{ localized_route('content.page', $page) }}" 
-         class="nav-link {{ request()->url() == localized_route('content.page', $page) ? $activeClass : '' }}">
+      <a href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale(), route('content.page', $page, false)) }}" 
+         class="nav-link {{ request()->url() == LaravelLocalization::getLocalizedURL(app()->getLocale(), route('content.page', $page, false)) ? $activeClass : '' }}">
         {{ $page->title }}
         @if($hasPublishedChildren)
           <x-icon name="chevron-down" size="sm" class="nav-link__icon" />
@@ -30,8 +30,8 @@
           <ul class="nav-dropdown__list">
             @foreach($page->children()->published()->orderBy('order')->get() as $childPage)
               <li class="nav-dropdown__item">
-                <a href="{{ localized_route('content.page', $childPage) }}" 
-                   class="nav-dropdown__link {{ request()->url() == localized_route('content.page', $childPage) ? $activeClass : '' }}">
+                <a href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale(), route('content.page', $childPage, false)) }}" 
+                   class="nav-dropdown__link {{ request()->url() == LaravelLocalization::getLocalizedURL(app()->getLocale(), route('content.page', $childPage, false)) ? $activeClass : '' }}">
                   {{ $childPage->title }}
                 </a>
               </li>

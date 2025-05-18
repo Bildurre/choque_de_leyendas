@@ -205,6 +205,14 @@ class Card extends Model implements LocalizedUrlRoutable
   }
 
   /**
+   * Get the route key for the model.
+   */
+  public function getRouteKeyName(): string
+  {
+    return 'slug';
+  }
+
+  /**
    * Get the localized route key for a specific locale.
    *
    * @param string $locale
