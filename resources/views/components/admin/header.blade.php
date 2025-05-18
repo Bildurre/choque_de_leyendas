@@ -15,7 +15,7 @@
         </div>
 
         <div class="admin-header__right">
-          <x-language-selector />
+          <x-language-selector :changeLocaleOnly="true"/>
           <x-theme-switcher />
         </div>
       </div>

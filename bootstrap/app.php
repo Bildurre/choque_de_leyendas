@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\ApplySessionLocale;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -11,6 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
       health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+
+
+      $middleware->web(append: [
+        ApplySessionLocale::class,
+      ]);
+      
       $middleware->alias([
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

@@ -38,6 +38,8 @@ Route::group([
     
     
 });
+
+Route::post('/set-locale', [App\Http\Controllers\LocaleController::class, 'setLocale'])->name('set-locale');
     
 require __DIR__.'/auth.php';
   
