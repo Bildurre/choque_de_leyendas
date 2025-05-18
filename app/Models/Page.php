@@ -80,32 +80,15 @@ class Page extends Model implements LocalizedUrlRoutable
     }
 
     /**
-     * Get the route key for the model.
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
-    /**
      * Get the localized route key for a specific locale.
      * 
      * @param string $locale
      * @return string|null
      */
     public function getLocalizedRouteKey($locale)
-{
-    // Simplemente devolver el slug de la página en el idioma solicitado
-    // sin incluir el del padre
-    $slug = $this->getTranslation('slug', $locale, false);
-    
-    // Si no hay traducción, intentamos el idioma por defecto
-    if (empty($slug)) {
-        $slug = $this->getTranslation('slug', config('app.fallback_locale'), false);
+    {
+      return $this->getTranslation('slug', $locale, false);
     }
-    
-    return $slug;
-}
 
     /**
      * Resolve route binding by localized slug.

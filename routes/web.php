@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\CardController;
@@ -11,7 +10,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 // Grupo de rutas con localización
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localize', 'localizationRedirect', 'localeSessionRedirect', 'localeViewPath']
+    'middleware' => ['localize', 'localizationRedirect', 'localeSessionRedirect']
 ], function () {
     // Página de inicio
     Route::get('/', function () {
@@ -25,22 +24,20 @@ Route::group([
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    // Rutas de facciones
+    // Rutas traducibles con transRoute
     Route::get(LaravelLocalization::transRoute('routes.factions'), [FactionController::class, 'index'])
         ->name('public.factions.index');
-    Route::get(LaravelLocalization::transRoute('routes.factions').'/{faction:slug}', [FactionController::class, 'show'])
+    Route::get(LaravelLocalization::transRoute('routes.faction_show'), [FactionController::class, 'show'])
         ->name('public.factions.show');
 
-    // Rutas de héroes
     Route::get(LaravelLocalization::transRoute('routes.heroes'), [HeroController::class, 'index'])
         ->name('public.heroes.index');
-    Route::get(LaravelLocalization::transRoute('routes.heroes').'/{hero:slug}', [HeroController::class, 'show'])
+    Route::get(LaravelLocalization::transRoute('routes.hero_show'), [HeroController::class, 'show'])
         ->name('public.heroes.show');
 
-    // Rutas de cartas
     Route::get(LaravelLocalization::transRoute('routes.cards'), [CardController::class, 'index'])
         ->name('public.cards.index');
-    Route::get(LaravelLocalization::transRoute('routes.cards').'/{card:slug}', [CardController::class, 'show'])
+    Route::get(LaravelLocalization::transRoute('routes.card_show'), [CardController::class, 'show'])
         ->name('public.cards.show');
 
     // Rutas de páginas de contenido
@@ -49,6 +46,5 @@ Route::group([
         ->where('page', '(?!admin|api|login|register|profile|pages).*');
 });
 
-// Incluir rutas de administración y autenticación
 require __DIR__.'/admin.php';
 require __DIR__.'/auth.php';

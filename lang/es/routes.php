@@ -2,7 +2,9 @@
 
 return [
   'factions' => 'facciones',
+  'faction_show' => 'facciones/{faction}',
   'heroes' => 'heroes',
+  'hero_show' => 'heroes/{hero}',
   'cards' => 'cartas',
-  'faction-decks' => 'mazos-de-faccion'
+  'card_show' => 'cartas/{card}',
 ];
