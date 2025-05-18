@@ -33,7 +33,7 @@
       }
       elseif ($routeName === 'content.page') {
         $page = Route::current()->parameter('page');
-        $translatedSlug = $page->getTranslation('slug', $localeCode, false);
+        $translatedSlug = $page->getLocalizedRouteKey($localeCode);
         $url = url($localeCode . '/' . $translatedSlug);
       }
       // Para el resto de rutas, usamos el método estándar
