@@ -23,7 +23,7 @@ class CounterRequest extends FormRequest
   public function rules(): array
   {
     $counterId = $this->route('counter');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],

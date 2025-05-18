@@ -24,7 +24,7 @@ class FactionDeckRequest extends FormRequest
   public function rules(): array
   {
     $factionDeckId = $this->route('faction_deck');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],

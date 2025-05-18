@@ -23,7 +23,7 @@ class PageRequest extends FormRequest
     public function rules(): array
     {
         $pageId = $this->route('page') ? $this->route('page')->id : null;
-        $locales = config('app.available_locales', ['es', 'en']);
+        $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
         
         $rules = [
             'title' => ['required', 'array'],
@@ -62,7 +62,7 @@ class PageRequest extends FormRequest
      */
     public function messages(): array
     {
-        $locales = config('app.available_locales', ['es', 'en']);
+        $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
         
         $messages = [
             'title.required' => 'The page title is required.',

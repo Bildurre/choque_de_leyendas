@@ -15,7 +15,7 @@ trait HandlesTranslations
   protected function processTranslatableFields(array $data, array $translatableFields, string $defaultLocale = null): array
   {
     $defaultLocale = $defaultLocale ?? app()->getLocale();
-    $availableLocales = config('app.available_locales', ['es']);
+    $availableLocales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     $processedData = $data;
     
     foreach ($translatableFields as $field) {
@@ -55,7 +55,7 @@ trait HandlesTranslations
    */
   protected function applyTranslations($model, array $data, array $translatableFields): void
   {
-    $availableLocales = config('app.available_locales', ['es']);
+    $availableLocales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     foreach ($translatableFields as $field) {
       // Skip if field is not in the input data

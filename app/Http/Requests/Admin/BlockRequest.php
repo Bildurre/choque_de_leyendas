@@ -44,7 +44,7 @@ class BlockRequest extends FormRequest
             $rules['content.es'] = ['required', 'string']; // El contenido en español es obligatorio
             
             // Contenido en otros idiomas es opcional
-            foreach (config('app.available_locales', ['es']) as $locale) {
+            foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
                 if ($locale !== 'es') {
                     $rules["content.{$locale}"] = ['nullable', 'string'];
                 }

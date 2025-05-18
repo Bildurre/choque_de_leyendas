@@ -20,7 +20,7 @@ trait ValidatesTranslatableUniqueness
         $rules = [];
         
         // Use provided locales or fall back to config
-        $locales = !empty($locales) ? $locales : config('app.available_locales', ['es', 'en']);
+        $locales = !empty($locales) ? $locales : array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
         
         foreach ($locales as $locale) {
             // Using a JSON path expression for MySQL
@@ -82,7 +82,7 @@ trait ValidatesTranslatableUniqueness
         $messages = [];
         
         // Use provided locales or fall back to config
-        $locales = !empty($locales) ? $locales : config('app.available_locales', ['es', 'en']);
+        $locales = !empty($locales) ? $locales : array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
         
         foreach ($locales as $locale) {
             $localeName = function_exists('locale_name') 

@@ -1,6 +1,5 @@
 @props([
-  'locales' => config('app.available_locales', ['es']),
-  'defaultLocale' => app()->getLocale(),
+  'locales' => array_keys(config('laravellocalization.supportedLocales', ['es' => []])),
   'fieldName' => '',
 ])
 
@@ -9,7 +8,7 @@
     @foreach($locales as $locale)
       <button
         type="button"
-        class="language-tabs__tab {{ $locale === $defaultLocale ? 'language-tabs__tab--active' : '' }}" 
+        class="language-tabs__tab {{ $locale === app()->getLocale() ? 'language-tabs__tab--active' : '' }}" 
         data-locale="{{ $locale }}">
         {{ strtoupper($locale) }}
       </button>

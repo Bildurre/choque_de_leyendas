@@ -4,18 +4,22 @@
   'placeholder' => '',
   'values' => [],
   'required' => false,
-  'locales' => config('app.available_locales', ['es']),
-  'defaultLocale' => app()->getLocale()
+  'locales' => array_keys(config('laravellocalization.supportedLocales', ['es' => []])),
 ])
+
+@php
+  // Obtener el idioma actual de la aplicación
+  $currentLocale = app()->getLocale();
+@endphp
 
 <div class="form-field form-field--multilingual">
   @if($label)
-    <x-form.label :for="$name.'_'.$defaultLocale" :required="$required">{{ $label }}</x-form.label>
+    <x-form.label :for="$name.'_'.$currentLocale" :required="$required">{{ $label }}</x-form.label>
   @endif
   
-  <x-form.language-tabs :locales="$locales" :default-locale="$defaultLocale" :field-name="$name">
+  <x-form.language-tabs :locales="$locales" :field-name="$name">
     @foreach($locales as $locale)
-      <div class="language-tabs__panel {{ $locale === $defaultLocale ? 'language-tabs__panel--active' : '' }}" data-locale="{{ $locale }}">
+      <div class="language-tabs__panel {{ $locale === $currentLocale ? 'language-tabs__panel--active' : '' }}" data-locale="{{ $locale }}">
         <input 
           type="text"
           name="{{ $name }}[{{ $locale }}]"
@@ -23,7 +27,7 @@
           value="{{ $values[$locale] ?? old($name.'.'.$locale, '') }}"
           placeholder="{{ $placeholder }}"
           class="form-input"
-          {{ $locale === $defaultLocale && $required ? 'required' : '' }}
+          {{ $locale === $currentLocale && $required ? 'required' : '' }}
         />
       </div>
     @endforeach

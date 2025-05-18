@@ -17,7 +17,7 @@ class HeroClassRequest extends FormRequest
   public function rules(): array
   {
     $heroClassId = $this->route('hero_class');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],
@@ -46,7 +46,7 @@ class HeroClassRequest extends FormRequest
     ];
 
     // Mensajes para la unicidad en cada idioma
-    foreach (config('app.available_locales', ['es']) as $locale) {
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
       $localeName = locale_name($locale);
       $messages["name.{$locale}.unique"] = "Ya existe una clase con este nombre en {$localeName}.";
     }

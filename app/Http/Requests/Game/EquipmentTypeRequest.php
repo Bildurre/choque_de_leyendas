@@ -23,7 +23,7 @@ class EquipmentTypeRequest extends FormRequest
   public function rules(): array
   {
     $equipmentTypeId = $this->route('equipment_type');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],
@@ -55,7 +55,7 @@ class EquipmentTypeRequest extends FormRequest
     ];
 
     // Mensajes para la unicidad en cada idioma
-    foreach (config('app.available_locales', ['es']) as $locale) {
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
       $localeName = locale_name($locale);
       $messages["name.{$locale}.unique"] = "Ya existe un tipo de equipo con este nombre en {$localeName}.";
     }

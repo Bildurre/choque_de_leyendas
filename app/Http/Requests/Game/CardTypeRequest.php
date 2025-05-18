@@ -23,7 +23,7 @@ class CardTypeRequest extends FormRequest
   public function rules(): array
   {
     $cardTypeId = $this->route('card_type');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],
@@ -69,7 +69,7 @@ class CardTypeRequest extends FormRequest
     ];
 
     // Mensajes para la unicidad en cada idioma
-    foreach (config('app.available_locales', ['es']) as $locale) {
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
       $localeName = locale_name($locale);
       $messages["name.{$locale}.unique"] = "Ya existe un tipo de carta con este nombre en {$localeName}.";
     }

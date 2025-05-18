@@ -23,7 +23,7 @@ class FactionRequest extends FormRequest
   public function rules(): array
   {
     $factionId = $this->route('faction');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],
@@ -62,7 +62,7 @@ class FactionRequest extends FormRequest
     ];
 
     // Messages for uniqueness in each language
-    foreach (config('app.available_locales', ['es']) as $locale) {
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
       $localeName = locale_name($locale);
       $messages["name.{$locale}.unique"] = "Ya existe una facción con este nombre en {$localeName}.";
     }

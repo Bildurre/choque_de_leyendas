@@ -23,7 +23,7 @@ class HeroRaceRequest extends FormRequest
   public function rules(): array
   {
     $heroRaceId = $this->route('hero_race');
-    $locales = config('app.available_locales', ['es']);
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
       'name' => ['required', 'array'],
@@ -51,7 +51,7 @@ class HeroRaceRequest extends FormRequest
     ];
 
     // Mensajes para la unicidad en cada idioma
-    foreach (config('app.available_locales', ['es']) as $locale) {
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
       $localeName = locale_name($locale);
       $messages["name.{$locale}.unique"] = "Ya existe una raza con este nombre en {$localeName}.";
     }

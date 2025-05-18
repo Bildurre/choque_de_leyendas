@@ -17,10 +17,10 @@ Route::group([
         return view('welcome');
     })->name('welcome');
     
-    // Redirección de dashboard a home
-    Route::get('/dashboard', function () {
-        return redirect()->route('welcome');
-    });
+    // // Redirección de dashboard a home
+    // Route::get('/dashboard', function () {
+    //     return redirect()->route('welcome');
+    // });
     
     // Rutas específicas de contenido público
     Route::get(LaravelLocalization::transRoute('routes.factions'), [FactionController::class, 'index'])
