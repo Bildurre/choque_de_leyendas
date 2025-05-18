@@ -40,10 +40,13 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.card_show'), [CardController::class, 'show'])
         ->name('public.cards.show');
 
+    Route::get(LaravelLocalization::transRoute('routes.page_show'), [PageController::class, 'show'])
+      ->name('content.page');
+
     // Rutas de páginas de contenido
-    Route::get('/{page}', [PageController::class, 'show'])
-        ->name('content.page')
-        ->where('page', '(?!admin|api|login|register|profile|pages).*');
+    // Route::get('/{page}', [PageController::class, 'show'])
+    //     ->name('content.page')
+    //     ->where('page', '(?!admin|api|login|register|profile|pages).*');
 });
 
 require __DIR__.'/admin.php';

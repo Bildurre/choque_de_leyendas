@@ -7,4 +7,5 @@ return [
   'hero_show' => 'heroes/{hero}',
   'cards' => 'cartas',
   'card_show' => 'cartas/{card}',
+  'page_show' => '{page}',
 ];

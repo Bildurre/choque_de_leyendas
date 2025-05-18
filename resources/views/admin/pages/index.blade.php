@@ -15,7 +15,7 @@
       @foreach($pages as $page)
         <x-entity.list-card 
           :title="$page->title"
-          :view-route="!$trashed ? LaravelLocalization::getLocalizedURL( app()->getLocale(), route('content.page', $page, false)) : null"
+          :view-route="!$trashed ? route('admin.pages.edit', $page) : null"
           :edit-route="!$trashed ? route('admin.pages.edit', $page) : null"
           :delete-route="$trashed 
             ? route('admin.pages.force-delete', $page->id) 
