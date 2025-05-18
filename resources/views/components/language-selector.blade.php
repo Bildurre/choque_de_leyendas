@@ -5,6 +5,7 @@
        rel="alternate" 
        hreflang="{{ $localeCode }}">
         {{ strtoupper($localeCode) }}
+        {{ $properties['native'] }}
     </a>
   @endforeach
 </div>
