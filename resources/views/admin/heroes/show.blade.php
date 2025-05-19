@@ -69,6 +69,8 @@
                 </div>
               @endif
             </div>
+
+            <x-previews.hero :hero="$hero" />
             
             <div class="hero-view__details">
               <div class="hero-view__section">

@@ -76,7 +76,7 @@
           </x-slot:badges>
           
           <div class="hero-details">            
-            <div class="hero-details__content">
+            {{-- <div class="hero-details__content">
               <div class="hero-details__attributes">
                 <div class="hero-attribute">
                   <span class="hero-attribute__label">{{ __('entities.heroes.attributes.agility') }}:</span>
@@ -133,7 +133,8 @@
                   @endif
                 </div>
               @endif
-            </div>
+            </div> --}}
+            <x-previews.hero :hero="$hero" />
           </div>
         </x-entity.list-card>
       @endforeach

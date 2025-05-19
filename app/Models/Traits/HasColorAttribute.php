@@ -34,6 +34,21 @@ trait HasColorAttribute
     
     return "rgba($r, $g, $b, $opacity)";
   }
+  
+  /**
+   * Get RGB values separated by commas for CSS variables
+   * 
+   * @return string
+   */
+  public function getRgbValuesAttribute(): string
+  {
+    $hex = ltrim($this->color, '#');
+    $r = hexdec(substr($hex, 0, 2));
+    $g = hexdec(substr($hex, 2, 2));
+    $b = hexdec(substr($hex, 4, 2));
+    
+    return "$r, $g, $b";
+  }
 
   /**
    * Determine if text should be dark or light based on background color

@@ -1,4 +1,4 @@
-@props(['cost', 'size' => 'sm'])
+@props(['cost', 'size' => null])
 
 @if(!empty($cost))
   <div class="cost-display">

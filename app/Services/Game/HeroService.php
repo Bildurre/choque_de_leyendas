@@ -35,7 +35,8 @@ class HeroService
       'heroRace', 
       'heroClass', 
       'heroAbilities.attackRange', 
-      'heroAbilities.attackSubtype'
+      'heroAbilities.attackSubtype',
+      'heroClass.heroSuperclass'
     ]);
     
     // Apply trash filters

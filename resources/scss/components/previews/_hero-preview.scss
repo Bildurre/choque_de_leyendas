@@ -1,0 +1,220 @@
+@use '../../abstracts/all' as *;
+
+
+.hero-preview {
+  max-width: 20rem;
+  height: auto;
+  aspect-ratio: 5/7;
+  overflow: hidden;
+  position: relative;
+  border-radius: $border-radius-md;
+  border: 1px solid var(--faction-color);
+  display: flex;
+  flex-direction: column;
+  * {
+    color: #000000;
+    z-index: $z-index-preview;
+    margin: 0;
+  }
+
+  &__image-container {
+    position: absolute;
+    height: 93%;
+    width: 100%;
+    z-index: $z-index-base;
+    top: 7%;
+    img {
+      height: 100%;
+      width: auto;
+      object-position: center;
+      object-fit: cover;
+    }
+  }
+
+  &__header {
+    position: relative;
+    padding: 1% 5%;
+    background-color: var(--faction-color);
+    height: 7%;
+    * {
+      color: var(--faction-text);
+    }
+    
+    &::after {
+      left: 0;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 40%;
+      background-color: var(--faction-color);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
+      z-index: -1;
+    }
+  }
+
+  &__name {
+    font-size: 90%;
+    margin: 0;
+    line-height: 1;
+  }
+  &__class {
+    font-size: 60%;
+    margin: 0;
+    font-family: 'roboto';
+    font-weight: 500;
+    line-height: 1;
+  }
+  &__faction-logo {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 15%;
+    height: auto;
+  }
+
+  &__attributes {
+    margin-top: auto;
+    display: flex;
+    width: 100%;
+    // background-color: rgba(var(--faction-color-rgb), 0.5);
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 2%;
+    z-index: 7;
+    margin-left: auto;
+
+// background: linear-gradient(360deg,#ffffff9d 50%, #ffffff00 50%);
+  }
+  &__attribute {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(10%);
+    width: 8%;
+    height: auto;
+    
+    &-value {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      font-weight: 900;
+      text-shadow: 1px 1px 0 #ffffff, -1px 1px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff;
+    }
+    &:nth-of-type(6) {
+      width: 15%;
+      height: auto;
+      aspect-ratio: 1;
+      justify-content: center;
+      border: none;
+      background-color: transparent;
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &__abilities {
+    position: relative;
+    border-bottom-left-radius: $border-radius-md;
+    border-bottom-right-radius: $border-radius-md;
+    background-color: #ffffff9d;
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--faction-color);
+      width: 70%;
+      margin: auto;
+    }
+
+    img {
+      height: 1.4em;
+      width: auto;
+      aspect-ratio: 1;
+      transform: translateY(25%);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 10%;
+      transform: translateY(-100%);
+      background-color: rgba(var(--faction-color-rgb), 0.8);
+      clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+      z-index: -1;
+    }
+
+    
+  }
+
+
+  &__passive {
+    font-size: 55%;
+    line-height: 1.2;
+    padding: 1%;
+    &-name {
+      font-weight: bold;
+    }
+    p {
+      display: inline;
+    }
+    &:nth-of-type(1) {
+      padding-bottom: 0;
+    }
+
+    &:nth-of-type(2) {
+      padding-top: 0;
+    }
+  }
+
+  &__active {
+    font-size: 65%;
+    line-height: 1.2;
+    padding: 1%;
+    &-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+    &-info {
+      margin: auto 0;
+      display: flex;
+      gap: 3%;
+      align-items: baseline;
+    }
+    &-name {
+      font-weight: bold;
+    }
+    &-types {
+      font-size: 85%;
+      font-style: italic;
+    }
+    &-cost {
+      polygon {
+        stroke-width: 3%;
+      }
+    }
+    &-description {
+      margin-top: -1.5%;
+    }
+  }
+
+  &__footer {
+    background-color: rgba(var(--faction-color-rgb), 0.8);;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50%;
+    font-family: 'almendra';
+    font-style: italic;
+    font-weight: 600;
+    .logo-icon {
+      height: 80%;
+      path {
+        fill: #000000;
+      }
+    }
+  }
+}

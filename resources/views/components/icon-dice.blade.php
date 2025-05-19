@@ -26,7 +26,6 @@
 
 <span {{ $attributes->merge(['class' => "icon-dice {$typeClass} {$sizeClass}"]) }}>
   @if(in_array($type, ['red-green', 'red-blue', 'green-blue']))
-    <!-- Ajustamos el viewBox para reducir el espacio exterior: 10,10,180,180 -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 180 180" stroke-linejoin="round">
       <polygon 
         points="100,180 30,140 30,60 100,100" 
@@ -57,7 +56,6 @@
       />
     </svg>
   @else
-    <!-- Ajustamos el viewBox para reducir el espacio exterior: 10,10,180,180 -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 180 180" stroke-linejoin="round">
       <polygon 
         points="100,180 30,140 30,60 100,100" 

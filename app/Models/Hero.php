@@ -282,4 +282,97 @@ class Hero extends Model implements LocalizedUrlRoutable
   {
     return $this->agility + $this->mental + $this->will + $this->strength + $this->armor;
   }
+
+  /**
+   * Get the hero class name with proper gender
+   * 
+   * @return string
+   */
+  public function getGenderizedClassName(): mixed
+  {
+    if (!$this->heroClass) {
+      return '';
+    }
+
+    if (app()->getLocale() !== 'es') {
+      return $this->heroClass->name;
+    }
+
+    if ($this->gender !== 'female') {
+      return $this->heroClass->name;
+    }
+    
+    // Intentamos obtener la traducción con género
+    $name = strtolower($this->heroClass->name);
+    $translation = __("genderized.hero_classes.{$name}");
+    
+    // Si no existe traducción con género, devolvemos el nombre original
+    if ($translation === "genderized.hero_classes.{$name}") {
+      return $this->heroClass->name;
+    }
+    
+    return ucfirst($translation);
+  }
+
+  /**
+   * Get the hero race name with proper gender
+   * 
+   * @return string
+   */
+  public function getGenderizedRaceName(): mixed
+  {
+    if (!$this->heroRace) {
+      return '';
+    }
+
+    if (app()->getLocale() !== 'es') {
+      return $this->heroRace->name;
+    }
+
+    if ($this->gender !== 'female') {
+      return $this->heroRace->name;
+    }
+    
+    // Intentamos obtener la traducción con género
+    $name = strtolower($this->heroRace->name);
+    $translation = __("genderized.hero_races.{$name}");
+    
+    // Si no existe traducción con género, devolvemos el nombre original
+    if ($translation === "genderized.hero_races.{$name}") {
+      return $this->heroRace->name;
+    }
+    
+    return ucfirst($translation);
+  }
+
+  /**
+   * Get the hero superclass name with proper gender
+   * 
+   * @return string
+   */
+  public function getGenderizedSuperclassName(): mixed
+  {
+    if (!$this->heroClass) {
+      return '';
+    }
+
+    if (app()->getLocale() !== 'es') {
+      return $this->heroClass->heroSuperclass->name;
+    }
+
+    if ($this->gender !== 'female') {
+      return $this->heroClass->heroSuperclass->name;
+    }
+    
+    // Intentamos obtener la traducción con género
+    $name = strtolower($this->heroClass->heroSuperclass->name);
+    $translation = __("genderized.hero_superclasses.{$name}");
+    
+    // Si no existe traducción con género, devolvemos el nombre original
+    if ($translation === "genderized.hero_superclasses.{$name}") {
+      return $this->heroClass->heroSuperclass->name;
+    }
+    
+    return ucfirst($translation);
+  }
 }
