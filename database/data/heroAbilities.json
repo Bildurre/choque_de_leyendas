@@ -487,8 +487,8 @@
     },
     "description":
     {
-      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. Deals +1 damage for each card the Opponent player has discarded in this Singular Combat.</p>",
-      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Hace +1 de daño por cada carta que el jugador Rival haya descartado en este Combate Singular.</p>"
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. Deals +1 damage for each Card the Opponent player has discarded in this Singular Combat.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Hace +1 de daño por cada Carta que el jugador Rival haya descartado en este Combate Singular.</p>"
     },
     "attack_range_id": 1,
     "attack_subtype_id": 1,
@@ -519,8 +519,8 @@
     },
     "description":
     {
-      "en": "<p>Deals 2 + Strength damage to the paired enemy hero. If the Opponent player has 3 or fewer cards in hand, it deals +2 damage.</p>",
-      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si el jugador Rival tiene 3 o menos cartas en la mano, hace +2 de daño.</p>"
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero. If the Opponent player has 3 or fewer Cards in hand, it deals +2 damage.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado. Si el jugador Rival tiene 3 o menos Cartas en la mano, hace +2 de daño.</p>"
     },
     "attack_range_id": 1,
     "attack_subtype_id": 1,
@@ -631,12 +631,44 @@
     },
     "description":
     {
-      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. If this is the first Action this hero performs in the Singular Combat, Trick cards cannot be activated until this Ability resolves.</p>",
-      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular no se pueden activar cartas de Ardid hasta que se resuelva esta Habilidad.</p>"
+      "en": "<p>Deals 3 + Strength damage to the paired enemy hero. If this is the first Action this hero performs in the Singular Combat, Trick Cards cannot be activated until this Ability resolves.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado. Si es la primera Acción que este héroe realiza en el Combate Singular no se pueden activar Cartas de Ardid hasta que se resuelva esta Habilidad.</p>"
     },
     "attack_range_id": 1,
     "attack_subtype_id": 2,
     "cost": "RB",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Shield Bash",
+      "es": "Golpe de Escudo"
+    },
+    "description":
+    {
+      "en": "<p>Place 1 bane counter: Stunned on the paired rival hero.</p>",
+      "es": "<p>Coloca 1 contador de perjuicio: Aturdido sobre el héroe rival emparejado.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 3,
+    "cost": "R",
+    "area": false
+  },
+  {
+    "name":
+    {
+      "en": "Dazzling Strike",
+      "es": "Golpe Deslumbrante"
+    },
+    "description":
+    {
+      "en": "<p>Deals 3 + Strength damage to the paired rival hero.</p>",
+      "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado.</p>"
+    },
+    "attack_range_id": 1,
+    "attack_subtype_id": 10,
+    "cost": "RG",
     "area": false
   }
 ]

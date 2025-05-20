@@ -94,7 +94,7 @@
           </x-slot:badges>
           
           <div class="card-details">
-            <div class="card-details__content">
+            {{-- <div class="card-details__content">
               @if($card->restriction)
                 <div class="card-details__section">
                   <h4 class="card-details__label">{{ __('entities.cards.restriction') }}:</h4>
@@ -105,7 +105,8 @@
               <div class="card-details__section">
                 <div class="card-details__text">{{ strip_tags($card->effect) }}</div>
               </div>
-            </div>
+            </div> --}}
+            <img src="{{ $card->getImageUrl() }}" width="200px">
           </div>
         </x-entity.list-card>
       @endforeach

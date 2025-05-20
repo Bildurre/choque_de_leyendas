@@ -1,0 +1,634 @@
+[
+  {
+    "cost": "BB",
+    "name": 
+    {
+      "en": "Death Spread",
+      "es": "Abanico de Muerte"
+    },
+    "lore_text":
+    {
+      "en": "With a fluid motion, the knives shoot out in a perfect arc, tracing silver lines through the air. Each one finds its mark, numbing limbs and destabilizing armor. Not a lethal attack, but a masterful technique: it paralyzes, confuses, and buys time. In Thenân, it is the prelude to victory.",
+      "es": "Con un movimiento fluido, los cuchillos salen disparados en un arco perfecto, trazando líneas plateadas en el aire. Cada uno encuentra su marca, entumeciendo extremidades y desestabilizando armaduras. No es un ataque letal, pero es una técnica maestra: paraliza, confunde y gana tiempo. En Thenân, es el preludio de la victoria."
+    },
+    "effect": {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero and to 1 random adjacent enemy hero.</p><p>If the hero playing this Technique is a Saboteur hero, place 1 bane counter: Numbed on each hero damaged this way.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a 1 héroe rival adyacente aleatorio.</p><p>Si el héroe que juega esta Técnica es un héroe Pícaro, coloca 1 contador de perjuicio: Entumecido sobre cada héroe dañado de esta manera.</p>"
+    },
+    "card_type_id": 6,
+    "attack_range_id": 2,
+    "attack_subtype_id": 2,
+    "area": true,
+    "image": "images/cards/abanico-de-muerte.jpeg"
+  },
+  {
+    "cost": "B",
+    "name": 
+    {
+      "en": "Superhuman Agility",
+      "es": "Agilidad Sobrehumana"
+    },
+    "lore_text":
+    {
+      "en": "The ranger moves like lightning, dodging blows and cutting through the air with their weapons. Their agility defies logic, each movement fluid and precise. In Thenân, speed is not just an advantage, it is an art form, and intruders rarely see it coming.",
+      "es": "El guardabosque se mueve como un relámpago, esquivando golpes y cortando el aire con sus armas. Su agilidad desafía la lógica, cada movimiento es fluido y preciso. En Thenân, la velocidad no es solo una ventaja, es una forma de arte, y los intrusos rara vez la ven venir."
+    },
+    "effect": {
+      "en": "<p>Until the end of the Singular Combat, each time the active allied hero is targeted by a Range Attack, make an Initiative roll against your Opponent. If you win this roll, that Attack deals -2 damage (minimum 1).</p>",
+      "es": "<p>Hasta el final del Combate Singular, cada vez que el héroe aliado activo sea objetivo de un Ataque A Distancia haz una tirada de Iniciativa enfrentada con tu Rival. Si ganas dicha tirada ese Ataque hace -2 de daño (mínimo 1).</p>"
+    },
+    "card_type_id": 2,
+    "image": "images/cards/agilidad-sobrehumana.jpeg"
+  },
+  {
+    "cost": "B",
+    "name": 
+    {
+      "en": "Alert",
+      "es": "Alerta"
+    },
+    "lore_text":
+    {
+      "en": "In the silence of the forest, the eyes of the Rangers never rest. Each creaking branch, each moving shadow, is registered. Alertness is their mantra, and the forest, their ally. When danger lurks, they already know. In Thenân, vigilance is the first line of defense.",
+      "es": "En el silencio del bosque, los ojos de los Guardabosques nunca descansan. Cada crujido de rama, cada sombra que se mueve, es registrado. La alerta es su mantra, y el bosque, su aliado. Cuando el peligro acecha, ellos ya lo saben. En Thenân, la vigilancia es la primera línea de defensa."
+    },
+    "effect": {
+      "en": "<p>Place 1 boon counter: Swiftness on the active allied hero and on each adjacent allied hero.</p>",
+      "es": "<p>Coloca 1 contador de beneficio: Presteza sobre el héroe aliado activo y sobre cada héroe aliado adyacente.</p>"
+    },
+    "card_type_id": 2,
+    "image": "images/cards/alerta.jpeg"
+  },
+  {
+    "cost": "RRG",
+    "name": 
+    {
+      "en": "Serenity Amulet",
+      "es": "Amuleto de Serenidad"
+    },
+    "lore_text":
+    {
+      "en": "The Amulet of Serenity hangs lightly, but its power is immense. Enchanted with elven magic, it wraps the bearer in an aura of unshakable calm. Physical and magical attacks are deflected, while the mind remains clear. It is a symbol of protection and balance, as ancient as the trees of Thenân.",
+      "es": "El Amuleto de Serenidad cuelga ligero, pero su poder es inmenso. Encantado con magia élfica, envuelve al portador en un aura de calma inquebrantable. Ataques físicos y mágicos se desvían, mientras la mente permanece clara. Es un símbolo de protección y equilibrio, tan antiguo como los árboles de Thenân."
+    },
+    "effect": {
+      "en": "<p>When you attach this Equipment draw 1 Card.</p><p>You may detach and discard this Equipment to completely ignore all damage from 1 Single-Target Attack affecting the attached hero.</p>",
+      "es": "<p>Cuando anexes este Equipo roba 1 Carta.</p><p>Puedes desanexar y descartar este Equipo para ignorar completamente todo el daño de 1 Ataque de 1 Objetivo que afecte al héroe anexado.</p>"
+    },
+    "card_type_id": 1,
+    "equipment_type_id": 15,
+    "image": "images/cards/amuleto-de-serenidad.jpeg"
+  },
+  {
+    "cost": "GB",
+    "name": 
+    {
+      "en": "Electric Aura",
+      "es": "Aura Eléctrica"
+    },
+    "lore_text":
+    {
+      "en": "The air crackles when the ranger caster deploys their electric aura. A bluish glow envelops their body, empowering every movement with the fury of a storm. Enemies who approach receive lightning strikes, while their speed and precision multiply. It is nature itself fighting at their side.",
+      "es": "El aire crepita cuando el hechicero guardabosques despliega su aura eléctrica. Un resplandor azulado envuelve su cuerpo, potenciando cada movimiento con la furia de una tormenta. Los enemigos que se acercan reciben descargas fulminantes, mientras su velocidad y precisión se multiplican. Es la naturaleza misma luchando a su lado."
+    },
+    "effect": {
+      "en": "<p>Until the end of the Singular Combat, each time the active hero receives damage from 1 Melee Attack the attacking hero suffers 1 Direct damage.</p><p>If the hero playing this Spell is a Caster hero, this effect lasts until the end of the Battle Round and instead of 1 Direct damage the attacking hero suffers 2 Direct damage.</p>",
+      "es": "<p>Hasta el final del Combate Singular, cada vez que el héroe activo reciba daño de 1 Ataque Melee el héroe atacante sufre 1 daño Directo.</p><p>Si el héroe que juega este Hechizo es un héroe Hechicero, este efecto dura hasta el final de la Ronda de Batalla y en vez de 1 daño Directo el héroe atacante sufre 2 daños Directos.</p>"
+    },
+    "card_type_id": 5,
+    "attack_range_id": 4,
+    "attack_subtype_id": 6,
+    "image": "images/cards/aura-electrica.jpeg"
+  },
+  {
+    "cost": "RG",
+    "name": 
+    {
+      "en": "Raven Cloak",
+      "es": "Capa de Cuervo"
+    },
+    "lore_text":
+    {
+      "en": "The Raven Cloak is a masterpiece of stealth, woven with dark threads that absorb light. Under its mantle, the ranger vanishes into the shadows, invisible beyond two meters. It is an essential tool for protecting Thenân, a reminder that true strength lies in subtlety.",
+      "es": "La Capa de Cuervo es una obra maestra de sigilo, tejida con hilos oscuros que absorben la luz. Bajo su manto, el guardabosques se desvanece en las sombras, invisible a más de dos metros. Es una herramienta esencial para proteger Thenân, un recordatorio de que la verdadera fuerza reside en la sutileza."
+    },
+    "effect": {
+      "en": "<p>The attached hero receives -1 Magical damage.</p><p>If you discard this Equipment due to any effect draw 1 Card.</p>",
+      "es": "<p>El héroe anexado recibe -1 de daño Mágico.</p><p>Si descartas este Equipo por cualquier efecto roba 1 Carta.</p>"
+    },
+    "card_type_id": 1,
+    "equipment_type_id": 16,
+    "image": "images/cards/capa-de-cuervo.jpeg"
+  },
+  {
+    "cost": "BB",
+    "name": 
+    {
+      "en": "Lightning Clash",
+      "es": "Choque de Relámpagos"
+    },
+    "lore_text":
+    {
+      "en": "The caster raises their hands, and a sphere of lightning grows between their fingers. With a gesture, they hurl it at the enemy. The impact is brutal: a blinding flash, a deafening thunder. The adversary falls, stunned and vulnerable. In Thenân, lightning not only illuminates, it also purges.",
+      "es": "El hechicero alza sus manos, y una esfera de relámpagos crece entre sus dedos. Con un gesto, la lanza hacia el enemigo. El impacto es brutal: un destello cegador, un trueno ensordecedor. El adversario cae, aturdido y vulnerable. En Thenân, el rayo no solo ilumina, también purga."
+    },
+    "effect": {
+      "en": "<p>Deals 3 + Mental damage to the paired enemy hero and places 1 bane counter: Overloaded on them.</p><p>If the hero playing this Spell is a Caster hero, this Spell deals +2 damage.</p>",
+      "es": "<p>Hace 3 + Mental de daño al héroe rival emparejado y le coloca 1 contador de perjuicio: Sobrecargado.</p><p>Si el héroe que juega este Hechizo es un héroe Hechicero, este Hechizo hace +2 de daño.</p>"
+    },
+    "card_type_id": 5,
+    "attack_range_id": 1,
+    "attack_subtype_id": 6,
+    "image": "images/cards/choque-de-relampagos.jpeg"
+  },
+  {
+    "name": 
+    {
+      "en": "Energetic Concentration",
+      "es": "Concentración Enérgica"
+    },
+    "lore_text":
+    {
+      "en": "The warrior focuses their energy, and an electric glow runs through their weapon. Each strike is now faster, more precise, more lethal. Enemy defenses vanish under the power of lightning. On the battlefield, this technique is synonymous with victory: a single cut can change the course of the fight.",
+      "es": "El guerrero enfoca su energía, y un brillo eléctrico recorre su arma. Cada golpe ahora es más rápido, más preciso, más letal. Las defensas enemigas se desvanecen bajo el poder del rayo. En el campo de batalla, esta técnica es sinónimo de victoria: un solo corte puede cambiar el rumbo de la lucha."
+    },
+    "effect": {
+      "en": "<p>You may keep 1 <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> Dice before making any roll.</p><p>If the hero playing this Trick is a Caster hero, they may keep 1 additional <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> Dice.</p>",
+      "es": "<p>Puedes guardar 1 Dado <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> antes de hacer ninguna tirada.</p><p>Si el héroe que juega este Ardid es un héroe Hechicero, puede guardar 1 Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> adicional.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick before preparing the Action Dice.</p>",
+      "es": "<p>Juega este Ardid antes de preparar los Dados de Acción.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/concentracion-energica.jpeg"
+  },
+  {
+    "cost": "GG",
+    "name": 
+    {
+      "en": "Riposte",
+      "es": "Contragolpe"
+    },
+    "lore_text":
+    {
+      "en": "The ranger dodges the attack with feline grace and, in an instant, returns the blow. Their weapon finds its mark with relentless precision. Every movement is calculated, every counterattack, a lesson in mastery. In Thenân, defense is not just dodging, it's turning the enemy's mistake into their defeat.",
+      "es": "El guardabosque esquiva el ataque con la gracia de un felino y, en un instante, devuelve el golpe. Su arma encuentra su marca con precisión implacable. Cada movimiento es calculado, cada contraataque, una lección de maestría. En Thenân, la defensa no es solo esquivar, es convertir el error del enemigo en su derrota."
+    },
+    "effect": {
+      "en": "<p>The paired enemy hero suffers 1 Direct damage.</p><p>If the active allied hero is a Fighter, instead, make 1 Physical Slashing Melee Attack of 2 + Agility damage.</p>",
+      "es": "<p>El héroe rival emparejado sufre 1 daño Directo.</p><p>Si el héroe aliado activo es Guerrero, en vez de eso, hace 1 Ataque Melee Físico Cortante de 2 + Agilidad de daño.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick when the paired enemy hero makes 1 Melee Attack.</p>",
+      "es": "<p>Juega este Ardid cuando el héroe rival emparejado haga 1 Ataque Melee.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/contragolpe.jpeg"
+  },
+  {
+    "cost": "G",
+    "name": 
+    {
+      "en": "Surgical Strike",
+      "es": "Corte Preciso"
+    },
+    "lore_text":
+    {
+      "en": "In the twilight of the forest, the ranger's blade moves like lightning. A single cut, precise and lethal, leaves the enemy immobilized and vulnerable. The air fills with tension, but the heroes do not hesitate. Each step forward is a promise: Thenân will not fall.",
+      "es": "En la penumbra del bosque, la hoja del guardabosque se mueve como un relámpago. Un solo corte, preciso y letal, deja al enemigo inmovilizado y vulnerable. El aire se llena de tensión, pero los héroes no dudan. Cada paso adelante es una promesa: Thenân no caerá."
+    },
+    "effect": {
+      "en": "<p>Place 1 bane counter: Numbed on 1 enemy hero of your choice from among those who have suffered damage from that Attack.</p>",
+      "es": "<p>Coloca 1 contador de perjuicio: Entumecido sobre 1 héroe rival a tu elección de entre los que hayan sufrido daño de dicho Ataque.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick when the active allied hero deals damage with 1 Physical Attack.</p>",
+      "es": "<p>Juega este Ardid cuando el héroe aliado activo haga daño con 1 Ataque Físico.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/corte-preciso.jpeg"
+  },
+  {
+    "cost": "B",
+    "name": 
+    {
+      "en": "Lightning Blade",
+      "es": "Cuchilla Relámpago"
+    },
+    "lore_text":
+    {
+      "en": "The caster's sword illuminates with a bluish glow, charged with electrical energy. With a quick movement, the blade pierces through the enemy, leaving them convulsing under the power of lightning. It's not just a strike, it's the fury of the storm channeled into a sharp edge.",
+      "es": "La espada del hechicero se ilumina con un brillo azulado, cargada de energía eléctrica. Con un movimiento rápido, la cuchilla atraviesa al enemigo, dejándolo convulsionando bajo el poder del rayo. No es solo un golpe, es la furia de la tormenta canalizada en una hoja afilada."
+    },
+    "effect": {
+      "en": "<p>Deals 2 + Mental damage to the paired enemy hero.</p><p>If the paired enemy hero has at least 1 bane counter: Overloaded on them, deals +2 damage.</p>",
+      "es": "<p>Hace 2 + Mente de daño al héroe rival emparejado.</p><p>Si el héroe rival emparejado tiene al menos 1 contador de perjuicio: Sobrecargado sobre el, hace +2 de daño.</p>"
+    },
+    "card_type_id": 5,
+    "attack_range_id": 1,
+    "attack_subtype_id": 6,
+    "image": "images/cards/cuchilla-relampago.jpeg"
+  },
+  {
+    "cost": "GG",
+    "name": 
+    {
+      "en": "Dagger of Irnael",
+      "es": "Daga de Irnael"
+    },
+    "lore_text":
+    {
+      "en": "The Dagger of Irnael gleams with an edge that seems to cut through time itself. Swift as the wind, its legendary owner left a wake of fear and respect in the forests of Thenân. Today, it is a symbol of strength and courage, a legacy that inspires rangers to protect their home with the same ferocity.",
+      "es": "La Daga de Irnael brilla con un filo que parece cortar el tiempo. Veloz como el viento, su dueño legendario dejó una estela de temor y respeto en los bosques de Thenân. Hoy, es un símbolo de fuerza y valentía, un legado que inspira a los guardabosques a proteger su hogar con la misma ferocidad."
+    },
+    "effect": {
+      "en": "<p>Each Single-Target Physical Melee Attack performed by the attached hero, in addition to its effect, deals 2 + Agility Piercing Physical Melee damage to the hero it targets.</p>",
+      "es": "<p>Cada Ataque Melee Físico de 1 Objetivo que realice el héroe anexado, además de su efecto, hace 2 + Agilidad de daño Melee Físico Perforante al héroe al que haga objetivo.</p>"
+    },
+    "card_type_id": 1,
+    "equipment_type_id": 4,
+    "hands": 1,
+    "image": "images/cards/daga-de-irnael.jpeg"
+  },
+  {
+    "cost": "R",
+    "name": 
+    {
+      "en": "Thenân's Edge",
+      "es": "Daga de Thenân"
+    },
+    "lore_text":
+    {
+      "en": "The Dagger of Thenân is a masterpiece of elven precision. Its sharp blade and lightweight design allow for quick and deadly movements. In the hands of a ranger, it becomes an extension of their will, cutting with grace and lethality. It is the perfect weapon for those who rely on speed and subtlety.",
+      "es": "La Daga de Thenân es una obra maestra de precisión élfica. Su hoja afilada y diseño ligero permiten movimientos rápidos y mortales. En manos de un guardabosques, se convierte en una extensión de su voluntad, cortando con gracia y letalidad. Es el arma perfecta para quien confía en la velocidad y la sutileza."
+    },
+    "effect": {
+      "en": "<p>The attached hero deals +1 damage with Single-Target Piercing Physical Melee Attacks.</p>",
+      "es": "<p>El héroe anexado hace +1 de daño con los Ataques Melee Físicos Perforantes de 1 Objetivo.</p>"
+    },
+    "card_type_id": 1,
+    "equipment_type_id": 4,
+    "hands": 1,
+    "image": "images/cards/daga-de-thenan.jpeg"
+  },
+  {
+    "name": 
+    {
+      "en": "Bladedance",
+      "es": "Danza de Cuchillas"
+    },
+    "lore_text":
+    {
+      "en": "The ranger spins with lethal elegance, their blades flashing like lightning in the darkness. Each movement is calculated, each cut, a work of art. The Bladedance is not just a technique, it's a choreography of death that leaves enemies breathless and defenseless.",
+      "es": "El guardabosques gira con elegancia letal, sus cuchillas brillando como relámpagos en la oscuridad. Cada movimiento es calculado, cada corte, una obra de arte. La Danza de Cuchillas no es solo una técnica, es una coreografía de muerte que deja a los enemigos sin aliento y sin defensa."
+    },
+    "effect": {
+      "en": "p>Until the end of the Singular Combat, the active allied hero deals +1 damage with Single-Target Physical Melee attacks (does not affect Direct damage).</p><p>If the hero playing this Trick is a Fighter hero, instead, each time they make 1 Single-Target Physical Melee Attack they make another Slashing Physical Melee Attack of 2 + Agility damage against the same target.</p>",
+      "es": "<p>Hasta el final del Combate Singular, el héroe aliado activo hace +1 de daño con los ataques Melee Físicos de 1 Objetivo (no afecta al daño Directo).</p><p>Si el héroe que juega este Ardid es un héroe Guerrero, en vez de eso, cada vez que haga 1 Ataque Melee Físico de 1 Objetivo hace otro Ataque Melee Físico Cortante de 2 + Agilidad de daño contra el mismo objetivo.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick after the Initiative roll, only if you have won that roll.</p>",
+      "es": "<p>Juega este Ardid despues de la tirada de Iniciativa, solo si has ganado dicha tirada.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/danza-de-cuchillas.jpeg"
+  },
+  {
+    "cost": "RGB",
+    "name": 
+    {
+      "en": "Vanish",
+      "es": "Esfumarse"
+    },
+    "lore_text":
+    {
+      "en": "In the blink of an eye, the ranger dissolves into the shadows, as if the forest itself absorbed them. Not even the most attentive eye can detect them. From the darkness, they observe, wait, and strike. Knowing how to vanish is not just a skill, it's the art of being invisible in a world full of threats.",
+      "es": "En un abrir y cerrar de ojos, el guardabosques se desvanece entre las sombras, como si el bosque mismo lo absorbiera. Ni el ojo más atento puede detectarlo. Desde la oscuridad, observa, espera y ataca. Saber esfumarse no es solo una habilidad, es el arte de ser invisible en un mundo lleno de amenazas."
+    },
+    "effect": {
+      "en": "<p>Discard from the Stack all Actions that remain to be resolved once this Subterfuge is resolved.</p><p>Restart the Singular Combat from the Prepare Action Dice phase.</p><p>Draw 1 Card.</p><p> If you discard this Trick due to any effect draw 1 Card.</p>",
+      "es": "<p>Descarta de la Pila todas las Acciones que falten por resolverse una vez resuelto este Ardid.</p><p>Reinicia el Combate Singular desde la fase de Preparar Dados de Acción.</p><p>Roba 1 Carta.</p><p>Si descartas este Ardid por cualquier efecto roba 1 Carta.</p>"
+    },
+    "restriction": {
+      "en": "<p>This Subterfuge can only be played by a Rogue hero.</p><p>Play this Subterfige at any time.</p>",
+      "es": "<p>Este Subterfugio solo puede jugarlo un héroe Pícaro.</p><p>Juega este Subterfugio en cualquier momento.</p>"
+    },
+    "card_type_id": 6,
+    "image": "images/cards/esfumarse.jpeg"
+  },
+  {
+    "cost": "RB",
+    "name": 
+    {
+      "en": "Narlaret's Blade",
+      "es": "Espada de Narlaret"
+    },
+    "lore_text":
+    {
+      "en": "The Sword of Narlaret shines with an ancestral glow, its blade impeccably sharpened. Forged for a legend, it is an extension of its owner's grace and lethality. Today, it rests in Sherilom as a symbol of courage, remembering one who fought with the heart of the forest in every strike.",
+      "es": "La Espada de Narlaret brilla con un fulgor ancestral, su hoja impecablemente afilada. Forjada para una leyenda, es una extensión de la gracia y letalidad de su dueña. Hoy, reposa en Sherilom como un símbolo de valentía, recordando a quien luchó con el corazón del bosque en cada golpe."
+    },
+    "effect": {
+      "en": "<p>When you attach this Equipment draw 1 Card.</p><p>The attached hero deals +1 damage with Single-Target Slashing Physical Melee Attacks.</p>",
+      "es": "<p>Cuando anexes este Equipo roba 1 Carta.</p><p>El héroe anexado hace +1 de daño con los Ataques Melee Físicos Cortantes de 1 Objetivo.</p>"
+    },
+    "card_type_id": 1,
+    "equipment_type_id": 1,
+    "hands": 1,
+    "image": "images/cards/espada-de-narlaret.jpeg"
+  },
+  {
+    "cost": "RB",
+    "name": 
+    {
+      "en": "Back-to-Back",
+      "es": "Espalda con Espalda"
+    },
+    "lore_text":
+    {
+      "en": "In the heart of Thenân, the rangers fight as one. Back to back, they form an unbreakable circle. Every movement is synchronized, every strike, supported. No matter the threat, their loyalty and unity make them unstoppable. Together, they are the wall that protects the forest.",
+      "es": "En el corazón de Thenân, los guardabosques luchan como uno solo. Espalda con espalda, forman un círculo inquebrantable. Cada movimiento está sincronizado, cada golpe, respaldado. No importa la amenaza, su lealtad y unidad los hacen imparables. Juntos, son el muro que protege el bosque."
+    },
+    "effect": {
+      "en": "<p>Adjacent allied heroes cannot suffer damage or receive effects from that Attack.</p><p>If you discard this Trick due to any effect draw 1 Card.</p>",
+      "es": "<p>Los héroes aliados adyacentes no pueden sufrir daño ni recibir efectos de dicho Ataque.</p><p>Si descartas este Ardid por cualquier efecto roba 1 Carta.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick when the paired enemy hero activates an Area Attack.</p>",
+      "es": "<p>Juega este Ardid cuando el héroe rival emparejado active un Ataque de Área.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/espalda-con-espalda.jpeg"
+  },
+  {
+    "cost": "B",
+    "name": 
+    {
+      "en": "Precision Thrust",
+      "es": "Estocada"
+    },
+    "lore_text":
+    {
+      "en": "In the twilight of Thenân, the ranger's blade moves like a whisper. A single movement, quick and precise, and the thrust finds its mark. The enemy falls in silence, and the forest reclaims its peace. It is the art of precision, where a single strike decides everything.",
+      "es": "En la penumbra de Thenân, la hoja del guardabosque se mueve como un susurro. Un solo movimiento, rápido y preciso, y la estocada encuentra su marca. El enemigo cae en silencio, y el bosque recupera su paz. Es el arte de la precisión, donde un solo golpe lo decide todo."
+    },
+    "effect": {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Technique is a Fighter hero, you may prepare 1 of your Spent <img src='../../storage/images/dices/dice-divided-red-green.svg' alt='Dice Divided Red Green' width='20' height='20'> Dice and keep it as a Prepared Dice.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega esta Técnica es un héroe Guerrero, puedes preparar 1 de tus Dados <img src='../../storage/images/dices/dice-divided-red-green.svg' alt='Dice Divided Red Green' width='20' height='20'> Gastados y guardarlo como Dado Preparado.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/estocada.jpeg"
+  },
+  {
+    "cost": "RR",
+    "name": 
+    {
+      "en": "Feint",
+      "es": "Finta"
+    },
+    "lore_text":
+    {
+      "en": "The ranger moves like a shadow, their body dodging blows with impossible grace. Each feint is a perfect deception, each movement, an illusion. Enemy attacks find only air, while they prepare their counterattack. In Thenân, agility is as lethal as the sharpest blade.",
+      "es": "El guardabosque se mueve como una sombra, su cuerpo esquivando golpes con una gracia imposible. Cada finta es un engaño perfecto, cada movimiento, una ilusión. Los ataques enemigos solo encuentran aire, mientras él prepara su contraataque. En Thenân, la agilidad es tan letal como la hoja más afilada."
+    },
+    "effect": {
+      "en": "<p>If the active allied hero has equal or more Agility than the hero playing that Attack, ignore that Attack.</p>",
+      "es": "<p>Si el héroe aliado activo tiene igual o más Agilidad que el héroe que juegue dicho Ataque, ignora dicho Ataque.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick when the active allied hero is targeted by a Melee Attack.</p>",
+      "es": "<p>Juega este Ardid cuando el héroe aliado activo sea objetivo de un Ataque Melee.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/finta.jpeg"
+  },
+  {
+    "cost": "RG",
+    "name": 
+    {
+      "en": "Crushing Blow",
+      "es": "Golpe Brutal"
+    },
+    "lore_text":
+    {
+      "en": "The ranger emerges from the shadows, their strike impacting with the force of thunder. Bones crack, armor shatters. There is no elegance here, only raw power. In Thenân, a brutal blow is the definitive answer to any threat, leaving enemies breathless and defenseless.",
+      "es": "El guardabosque emerge de las sombras, su golpe impactando con la fuerza de un trueno. Huesos crujen, armaduras se resquebrajan. No hay elegancia aquí, solo poder crudo. En Thenân, un golpe brutal es la respuesta definitiva a cualquier amenaza, dejando a los enemigos sin aliento y sin defensa."
+    },
+    "effect": {
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Technique is a Fighter hero, you may roll 1 of your Spent Dice and keep it as a Prepared Dice.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega esta Técnica es un héroe Guerrero, puedes lanzar 1 de tus Dados Gastados y guardarlo como Dado Preparado.</p>"
+    },
+    "card_type_id": 4,
+    "attack_range_id": 1,
+    "attack_subtype_id": 2,
+    "image": "images/cards/golpe-brutal.jpeg"
+  },
+  {
+    "cost": "R",
+    "name": 
+    {
+      "en": "Shadow Strike",
+      "es": "Golpe desde las Sombras"
+    },
+    "lore_text":
+    {
+      "en": "From the shadows, the ranger attacks. Their strike is quick, silent, and deadly. Intruders have no time to react before falling. In Thenân, darkness is not a refuge for enemies, but the elves' most lethal weapon. Where there are shadows, there is danger.",
+      "es": "Desde las sombras, el guardabosque ataca. Su golpe es rápido, silencioso y mortal. Los intrusos no tienen tiempo de reaccionar antes de caer. En Thenân, la oscuridad no es un refugio para los enemigos, sino el arma más letal de los elfos. Donde hay sombras, hay peligro."
+    },
+    "effect": {
+      "en": "<p>Deals 1 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Subterfuge is a Rogue hero deals +1 damage and places 1 bane counter: Numbed on them.</p>",
+      "es": "<p>Hace 1 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega este Subterfugio es un héroe Pícaro hace +1 de daño y le coloca 1 contador de perjuicio: Entumecido.</p>"
+    },
+    "card_type_id": 6,
+    "image": "images/cards/golpe-desde-las-sombras.jpeg"
+  },
+  {
+    "cost": "RR",
+    "name": 
+    {
+      "en": "Vital Intelligence",
+      "es": "Información Vital"
+    },
+    "lore_text":
+    {
+      "en": "The ravens of Thenân are the eyes of the forest. From the treetops, they observe and listen, carrying crucial messages to the rangers. With their help, the elves anticipate threats and prepare ambushes. In Thenân, information is as vital as the sword, and ravens, their silent guardians.",
+      "es": "Los cuervos de Thenân son los ojos del bosque. Desde las copas de los árboles, observan y escuchan, llevando mensajes cruciales a los guardabosques. Con su ayuda, los elfos anticipan amenazas y preparan emboscadas. En Thenân, la información es tan vital como la espada, y los cuervos, sus guardianes silenciosos."
+    },
+    "effect": {
+      "en": "<p>Draw 1 Card.</p><p>If the hero playing this Support is a Saboteur hero, draw 1 Card.</p>",
+      "es": "<p>Roba 1 Carta.</p><p>Si el héroe que juega este Apoyo es un héroe Saboteador, roba 1 Carta.</p>"
+    },
+    "card_type_id": 2,
+    "image": "images/cards/informacion-vital.jpeg"
+  },
+  {
+    "cost": "",
+    "name": 
+    {
+      "en": "Sherilom's Chestplate",
+      "es": "Peto de Sherilom"
+    },
+    "lore_text":
+    {
+      "en": "The Sherilom's Chestplate is a masterpiece of balance: light as a feather, resilient as oak. Forged from hardened leather, it allows rangers to move with feline grace, protecting them without restricting their agility. In Thenân, it is the second skin of those who defend the forest.",
+      "es": "El Peto de Sherilom es una obra maestra de equilibrio: ligero como una pluma, resistente como el roble. Forjado en cuero endurecido, permite a los guardabosques moverse con la gracia de un felino, protegiéndolos sin restringir su agilidad. En Thenân, es la segunda piel de quienes defienden el bosque."
+    },
+    "effect": {
+      "en": "<p>When you attach or detach this Equipment draw 1 Card.</p><p>The attached hero receives -1 Physical damage.</p>",
+      "es": "<p>Cuando anexes o desanexes este Equipo roba 1 Carta.</p><p>El héroe anexado recibe -1 de daño Físico.</p>"
+    },
+    "card_type_id": 1,
+    "equipment_type_id": 12,
+    "image": "images/cards/peto-de-sherilom.jpeg"
+  },
+  {
+    "cost": "G",
+    "name": 
+    {
+      "en": "Acrobatics",
+      "es": "Pirueta"
+    },
+    "lore_text":
+    {
+      "en": "The ranger spins in the air, their body tracing a perfect arc. The pirouette not only evades the enemy attack, but also returns the blow with lethal precision. As they land, they're already in an advantageous position, ready to continue the dance of battle.",
+      "es": "El guardabosque gira en el aire, su cuerpo trazando un arco perfecto. La pirueta no solo evade el ataque enemigo, sino que también devuelve el golpe con precisión letal. Al caer, ya está en una posición ventajosa, listo para continuar la danza de la batalla."
+    },
+    "effect": {
+      "en": "<p>During this Singular Combat the active allied hero may use their Agility to defend instead of their Armor or Will.</p>",
+      "es": "<p>Durante este Combate Singular el héroe aliado activo puede usar su Agilidad para defender en vez de su Armadura o Voluntad.</p>"
+    },
+    "card_type_id": 2,
+    "image": "images/cards/pirueta.jpeg"
+  },
+  {
+    "cost": "G",
+    "name": 
+    {
+      "en": "Combat Readiness",
+      "es": "Preparado para el Combate"
+    },
+    "lore_text":
+    {
+      "en": "In Thenân, each dawn brings with it the sound of sharpened swords and taut bows. The elves train with relentless discipline, perfecting every movement, every strategy. Their preparation is meticulous, their focus, unbreakable. When the threat arrives, they are ready: the forest will never be defenseless.",
+      "es": "En Thenân, cada amanecer trae consigo el sonido de espadas afiladas y arcos tensados. Los elfos entrenan con disciplina implacable, perfeccionando cada movimiento, cada estrategia. Su preparación es meticulosa, su enfoque, inquebrantable. Cuando la amenaza llega, están listos: el bosque nunca estará indefenso."
+    },
+    "effect": {
+      "en": "<p>The next Physical Attack performed by the active allied hero during this Singular Combat deals +1 damage.</p><p>If the hero playing this Support is a Fighter hero place 1 boon counter: Swiftness on this hero and the next Physical Attack they receive during this Singular Combat deals -1 damage.</p>",
+      "es": "<p>El siguiente Ataque Físico que realice el héroe aliado activo durante este Combate Singular hace +1 de daño.</p><p>Si el héroe que juega este Apoyo es un héroe Combatiente coloca 1 contador de beneficio: Presteza sobre este héroe y el siguiente Ataque Físico que reciba durante este Combate Singular hace -1 de daño.</p>"
+    },
+    "card_type_id": 2,
+    "image": "images/cards/preparado-para-el-combate.jpeg"
+  },
+  {
+    "cost": "R",
+    "name": 
+    {
+      "en": "Thunderbolt",
+      "es": "Relámpago"
+    },
+    "lore_text":
+    {
+      "en": "The caster raises their hand, and the sky responds. A lightning bolt descends, illuminating the forest with a blinding flash. The enemy falls, stunned and burned. In Thenân, the storm is not just a natural phenomenon, it is a weapon in the hands of those who protect the forest.",
+      "es": "El hechicero alza su mano, y el cielo responde. Un relámpago desciende, iluminando el bosque con un destello cegador. El enemigo cae, aturdido y quemado. En Thenân, la tormenta no es solo un fenómeno natural, es un arma en manos de quienes protegen el bosque."
+    },
+    "effect": {
+      "en": "<p>Deals 1 + Mental damage to the paired enemy hero.</p><p>If it is the second Electricity Attack that the active allied hero makes in this Singular Combat deals +1 damage and places 1 bane counter: Overloaded.</p>",
+      "es": "<p>Hace 1 + Mental de daño al héroe rival emparejado.</p><p>Si es el segundo Ataque Electricidad que el héroe aliado activo hace en este Combate Singular hace +1 de daño y coloca 1 contador de perjuicio: Sobrecargado.</p>"
+    },
+    "card_type_id": 5,
+    "attack_range_id": 2,
+    "attack_subtype_id": 6,
+    "image": "images/cards/relampago.jpeg"
+  },
+  {
+    "cost": "GGB",
+    "name": 
+    {
+      "en": "Chain Lightning",
+      "es": "Relámpago Encadenado"
+    },
+    "lore_text":
+    {
+      "en": "The caster extends their arms, and the air charges with electricity. A lightning bolt jumps from one enemy to another, chaining pain and paralysis. The storm is their ally, and the forest, their battlefield. In Thenân, lightning doesn't just strike, it also chains.",
+      "es": "El hechicero extiende sus brazos, y el aire se carga de electricidad. Un relámpago salta de un enemigo a otro, encadenando dolor y parálisis. La tormenta es su aliada, y el bosque, su campo de batalla. En Thenân, el rayo no solo golpea, también encadena."
+    },
+    "effect": {
+      "en": "<p>Deals 3 + Mental damage to the paired enemy hero and 2 + Mental damage to adjacent enemy heroes.</p>",
+      "es": "<p>Hace 3 + Mente de daño al héroe rival emparejado y 2 + Mente de daño a los héroes rivales adyacentes.</p>"
+    },
+    "card_type_id": 5,
+    "attack_range_id": 2,
+    "attack_subtype_id": 6,
+    "area": true,
+    "image": "images/cards/relampago-encadenado.jpeg"
+  },
+  {
+    "cost": "G",
+    "name": 
+    {
+      "en": "Natural Resistance",
+      "es": "Resistencia Natural"
+    },
+    "lore_text":
+    {
+      "en": "The elves of Thenân carry magic in their blood, allowing them to resist spells and enchantments with ease. Their connection to the forest strengthens them, making them formidable adversaries for any caster. In Thenân, enemy magic finds an unbreakable wall.",
+      "es": "Los elfos de Thenân llevan la magia en su sangre, lo que les permite resistir hechizos y encantamientos con facilidad. Su conexión con el bosque los fortalece, convirtiéndolos en adversarios formidables para cualquier hechicero. En Thenân, la magia enemiga encuentra un muro inquebrantable."
+    },
+    "effect": {
+      "en": "<p>The active allied hero receives -1 damage from that Attack.</p>",
+      "es": "<p>El héroe aliado activo recibe -1 de daño de dicho Ataque.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick when the active allied hero is targeted by a Magical Attack.</p>",
+      "es": "<p>Juega este Ardid cuando el héroe aliado activo sea objetivo de un Ataque Mágico.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/resistencia-natural.jpeg"
+  },
+  {
+    "cost": "B",
+    "name": 
+    {
+      "en": "Overcharge",
+      "es": "Sobrecarga"
+    },
+    "lore_text":
+    {
+      "en": "The intruder falls to the ground, their body shaken by a brutal electrical discharge. The overload leaves them trembling, unable to move or defend themselves. The rangers watch, relentless. In Thenân, electrical energy not only attacks, it also neutralizes, making it clear that the forest does not forgive intruders.",
+      "es": "El intruso cae al suelo, su cuerpo sacudido por una descarga eléctrica brutal. La sobrecarga lo deja temblando, incapaz de moverse o defenderse. Los guardabosques observan, implacables. En Thenân, la energía eléctrica no solo ataca, también neutraliza, dejando claro que el bosque no perdona a los intrusos."
+    },
+    "effect": {
+      "en": "<p>Place 1 bane counter: Overloaded on 1 enemy hero of your choice from among those who have received damage from that Attack.</p><p>If the hero playing this Spell is a Swordcaster hero, instead place 1 bane counter: Overloaded on each enemy hero that has received damage from that attack.</p>",
+      "es": "<p>Coloca 1 contador de perjuicio: Sobrecargado sobre 1 héroe rival a tu elección de entre los que hayan recibido daño de dicho Ataque.</p><p>Si el héroe que juega este Hechizo es un héroe Hechicero, en vez de eso coloca 1 contador de perjuicio: Sobrecargado sobre cada héroe rival que haya recibido daño de dicho ataque.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick when the active allied hero deals damage with 1 Electricity Magical Attack.</p>",
+      "es": "<p>Juega este Ardid cuando el héroe aliado activo haga daño con 1 Ataque Mágico Electricidad.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/sobrecarga.jpeg"
+  },
+  {
+    "name": 
+    {
+      "en": "Supernatural Speed",
+      "es": "Velocidad Sobrenatural"
+    },
+    "lore_text":
+    {
+      "en": "The supernatural speed of the Thenân elves is a formidable weapon that surprises their rivals. This agility allows them to move quickly, disorienting their enemies and executing precise attacks before retreating. Their rapidity is both a combat tool and a defensive tactic, protecting the forest and its inhabitants.",
+      "es": "La velocidad sobrenatural de los elfos de Thenân es un arma formidable que sorprende a sus rivales. Esta agilidad les permite moverse rápidamente, desorientando a sus enemigos y ejecutando ataques precisos antes de retirarse. Su rapidez es tanto una herramienta de combate como una táctica defensiva, protegiendo el bosque y sus habitantes."
+    },
+    "effect": {
+      "en": "<p>Choose an adjacent allied hero and swap it with the active allied hero.</p><p>If at least 1 of the swapped heroes is a Fighter hero, place 1 boon counter: Swiftness on both swapped heroes.</p><p> Continue the Singular Combat normally, keeping in mind that now the swapped hero is the active allied hero.</p>",
+      "es": "<p>Elige un héroe aliado adyacente e intercambialo con el héroe aliado activo.</p><p>Si al menos 1 de los héroes intercambiados es un héroe Guerrero, coloca 1 contador de beneficio: Presteza sobre ambos héroes intercambiados.</p><p>Sigue el Combate Singular de forma normal, teniendo en cuenta que ahora el héroe intercambiado es el héroe aliado activo.</p>"
+    },
+    "restriction": {
+      "en": "<p>Play this Trick at the beginning of the Action Resolution phase.</p>",
+      "es": "<p>Juega este Ardid al comienzo de la fase de Resolución de Acciones.</p>"
+    },
+    "card_type_id": 3,
+    "image": "images/cards/velocidad-sobrenatural.png"
+  }
+]
