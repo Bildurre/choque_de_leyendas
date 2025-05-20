@@ -1,6 +1,5 @@
 @props([
   'type' => 'red',
-  'size' => 'md',
 ])
 
 @php
@@ -13,18 +12,11 @@
     'green-blue' => 'icon-dice--green-blue',
     'red-green-blue' => 'icon-dice--red-green-blue',
   ];
-  
-  $sizeClasses = [
-    'sm' => 'icon-dice--sm',
-    'md' => 'icon-dice--md',
-    'lg' => 'icon-dice--lg'
-  ];
-  
+
   $typeClass = $types[$type] ?? $types['red'];
-  $sizeClass = $sizeClasses[$size] ?? $sizeClasses['md'];
 @endphp
 
-<span {{ $attributes->merge(['class' => "icon-dice {$typeClass} {$sizeClass}"]) }}>
+<span {{ $attributes->merge(['class' => "icon-dice {$typeClass}"]) }}>
   @if(in_array($type, ['red-green', 'red-blue', 'green-blue']))
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 180 180" stroke-linejoin="round">
       <polygon 

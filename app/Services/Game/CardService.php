@@ -35,7 +35,8 @@ class CardService
       'equipmentType', 
       'attackRange', 
       'attackSubtype',
-      'heroAbility'
+      'heroAbility',
+      'cardType.heroSuperclass'
     ]);
     
     // Apply trash filters

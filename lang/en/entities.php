@@ -89,6 +89,7 @@ return [
         'count' => ':count cards',
         'area' => 'Area',
         'is_area_attack' => 'Is area attack',
+        'hand' => 'Hand',
         'hands' => 'Hands',
         'hands_count' => '{1} hand|[2,*] hands',
         'one_hand' => 'One Hand',

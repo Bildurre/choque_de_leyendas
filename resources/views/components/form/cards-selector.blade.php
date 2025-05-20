@@ -83,7 +83,7 @@
               
               @if(isset($card->cost) && $card->cost)
                 <div class="cards-selector__cost">
-                  <x-cost-display :cost="$card->cost" size="sm" />
+                  <x-cost-display :cost="$card->cost" />
                 </div>
               @endif
             </div>

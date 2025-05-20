@@ -106,7 +106,7 @@
                 <div class="card-details__text">{{ strip_tags($card->effect) }}</div>
               </div>
             </div> --}}
-            <img src="{{ $card->getImageUrl() }}" width="200px">
+            <x-previews.card :card="$card" />
           </div>
         </x-entity.list-card>
       @endforeach
