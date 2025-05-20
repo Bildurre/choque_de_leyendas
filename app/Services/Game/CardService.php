@@ -31,12 +31,14 @@ class CardService
     // Base query with relationships
     $query = Card::with([
       'faction', 
-      'cardType', 
+      'cardType',
+      'cardType.heroSuperclass',
       'equipmentType', 
       'attackRange', 
       'attackSubtype',
       'heroAbility',
-      'cardType.heroSuperclass'
+      'heroAbility.attackRange',
+      'heroAbility.attackSubtype'
     ]);
     
     // Apply trash filters

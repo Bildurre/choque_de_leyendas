@@ -170,7 +170,7 @@ class Card extends Model implements LocalizedUrlRoutable
         'label' => __('entities.cards.name')
       ],
       [
-        'field' => 'card_type.name',
+        'field' => 'cardType.name',
         'label' => __('entities.card_types.singular')
       ],
       [

@@ -34,6 +34,7 @@ class HeroesSeeder extends Seeder
       $hero->strength = $heroData['strength'];
       $hero->armor = $heroData['armor'];
       $hero->image = $heroData['image'] ?? '';
+      $hero->is_published = true;
             
       $hero->save();
     }

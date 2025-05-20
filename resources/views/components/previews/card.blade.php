@@ -12,40 +12,33 @@
   } elseif ($card->cardType->heroSuperclass != null) {
     $class .= ' - ' . $card->cardType->heroSuperclass->name;
   }
+
+  $types = '';
+  if ($card->attackRange && $card->attackSubtype) {
+    $types = $card->attackRange->name . 
+              ' - ' . __('entities.attack_subtypes.types.' . $card->attackSubtype->type) . 
+              ' - ' . $card->attackSubtype->name . 
+              ($card->area ? ' - '.__('entities.hero_abilities.area') : '');
+  }
+  
 @endphp
 
-<article 
-  class="card-preview"
-  style="--faction-color: {{ $card->faction->color }}; --faction-color-rgb: {{ $card->faction->rgb_values }}; --faction-text: {{ $card->faction->text_is_dark ? '#000000' : '#ffffff' }}"
->
-  <header class="card-preview__header">
-    <div class="card-preview__title-container">
-      <h2 class="card-preview__name">{{ $card->name }}</h2>
-      <h3 class="card-preview__class">{{ $class }}</h3>
-    </div>
-    <div class="card-preview__faction-logo">
-      <img src="{{ $card->faction->getImageUrl() }}" alt="{{ $card->faction->name }}">
-    </div>
-  </header>
-
-  <div class="card-preview__image-container">
-    <img class="card-preview__image" src="{{ $card->getImageUrl() }}" alt="{{ $card->name }}">
-  </div>
+<x-previews.entity :entity="$card" type="card">
+  <x-slot:header>
+    <h2 class="entity-preview__name">{{ $card->name }}</h2>
+    <h3 class="entity-preview__class">{{ $class }}</h3>
+  </x-slot:header>
   
-  <section class="card-preview__cost">
-    <x-cost-display :cost="$card->cost" />
-  </section>
+  <x-slot:attributes_section>
+    <section class="card-preview__cost">
+      <x-cost-display :cost="$card->cost" />
+    </section>
+  </x-slot:attributes_section>
 
-  <section class="card-preview__abilities">
+  <x-slot:abilities>
     <div class="card-preview__types">
       @if ($card->attackSubtype && $card->attackRange)
-        <span>
-          {{ $card->attackRange->name . 
-          ' - ' . __('entities.attack_subtypes.types.' . $card->attackSubtype->type) . 
-          ' - ' . $card->attackSubtype->name . 
-          ($card->area ? ' - '.__('entities.hero_abilities.area') : '')
-          }}
-        </span>
+        <span> {{ $types }} </span>
       @endif
     </div>
     <div class="card-preview__effects">
@@ -58,11 +51,11 @@
       @endif
     </div>
     @if ($card->heroAbility)
-      <div class="card-preview__active">
-        <div class="card-preview__active-header">
-          <div class="card-preview__active-info">
-            <span class="card-preview__active-name">{{ $card->heroAbility->name }}</span>
-            <span class="card-preview__active-types">
+      <div class="entity-preview__active">
+        <div class="entity-preview__active-header">
+          <div class="entity-preview__active-info">
+            <span class="entity-preview__active-name">{{ $card->heroAbility->name }}</span>
+            <span class="entity-preview__active-types">
               {{ $card->heroAbility->attackRange->name . 
                 ' - ' . __('entities.attack_subtypes.types.'.$card->heroAbility->attackSubtype->type) . 
                 ' - ' . $card->heroAbility->attackSubtype->name . 
@@ -70,18 +63,14 @@
               }}
             </span>
           </div>
-          <div class="card-preview__active-cost">
+          <div class="entity-preview__active-cost">
             <x-cost-display :cost="$card->heroAbility->cost" />
           </div>
         </div>
-        <div class="card-preview__active-description">
+        <div class="entity-preview__active-description">
           {!! $card->heroAbility->description !!}
         </div>
       </div>
     @endif
-  </section>
-  <footer class="card-preview__footer">
-    <span>Alanda: Choque de Leyendas</span>
-    <x-logo-icon />
-  </footer>
-</article>
+  </x-slot:abilities>
+</x-previews.entity>

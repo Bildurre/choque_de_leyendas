@@ -3,10 +3,8 @@
     <h1 class="cards-title">{{ __('public.cards.title') }}</h1>
     
     <div class="cards-grid">
-      @forelse($cards as $hero)
-        <a href="{{ route('public.cards.show', $hero) }}" class="hero-card">
-          <h2 class="hero-card__name">{{ $hero->name }}</h2>
-        </a>
+      @forelse($cards as $card)
+      <x-previews.card :card="$card" />
       @empty
         <div class="cards-empty">
           {{ __('public.cards.empty') }}

@@ -92,6 +92,13 @@
           
           <div class="entity-list__content">
             @if(isset($items) && (is_countable($items) ? count($items) : 0) > 0)
+
+              @if(isset($pagination))
+                <div class="entity-list__pagination">
+                  {{ $pagination }}
+                </div>
+              @endif
+              
               <div class="entity-list__items {{ $isReorderable ? 'entity-list__items--reorderable' : '' }}" 
                   @if($isReorderable) id="reorderable-items" data-reorder-url="{{ $reorderUrl }}" data-id-field="{{ $reorderItemIdField }}" @endif>
                 {{ $slot }}
@@ -166,6 +173,13 @@
     
     <div class="entity-list__content">
       @if(isset($items) && (is_countable($items) ? count($items) : 0) > 0)
+      
+        @if(isset($pagination))
+          <div class="entity-list__pagination">
+            {{ $pagination }}
+          </div>
+        @endif
+
         <div class="entity-list__items {{ $isReorderable ? 'entity-list__items--reorderable' : '' }}" 
              @if($isReorderable) id="reorderable-items" data-reorder-url="{{ $reorderUrl }}" data-id-field="{{ $reorderItemIdField }}" @endif>
           {{ $slot }}

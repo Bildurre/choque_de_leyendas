@@ -14,7 +14,15 @@ class HeroController extends Controller
   public function index(): View
   {
     $heroes = Hero::published()
-      ->with(['faction', 'heroClass', 'heroRace'])
+      ->with([
+        'faction',
+        'heroClass',
+        'heroRace',
+        'heroClass.heroSuperclass',
+        'heroAbilities',
+        'heroAbilities.attackRange',
+        'heroAbilities.attackSubtype',
+      ])
       ->orderBy('name')
       ->get();
     
@@ -32,6 +40,7 @@ class HeroController extends Controller
     }
     $hero->load([
       'faction',
+      'heroClass',
       'heroClass',
       'heroRace',
       'heroAbilities'

@@ -371,8 +371,8 @@
       "es": "El estandarte ondea alto, sus colores brillando bajo el sol. Cada guerrero de Terik lo mira, sintiendo el peso del honor y la unidad. En manos del más valiente, se convierte en un faro de esperanza. Donde el estandarte avanza, los Defensores siguen, listos para luchar y morir por su hogar."
     },
     "effect": {
-      "en": "<p>When preparing Action Dice, adjacent allied heroes can prepare 1 extra die and can keep 1 <img src='../../storage/images/dices/dice-divided-red-blue.svg' alt='Dice Divided Red Blue' width='20' height='20'> Dice before making any rolls.</p>",
-      "es": "<p>A la hora de preparar los Dados de Acción, los héroes aliados adyacentes pueden preparar 1 dado extra y pueden guardar 1 Dado <img src='../../storage/images/dices/dice-divided-red-blue.svg' alt='Dice Divided Red Blue' width='20' height='20'> antes de hacer ninguna tirada.</p>"
+      "en": "<p>When preparing Action Dice, adjacent allied heroes can prepare 1 extra die and can keep 1 <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> Dice before making any rolls.</p>",
+      "es": "<p>A la hora de preparar los Dados de Acción, los héroes aliados adyacentes pueden preparar 1 dado extra y pueden guardar 1 Dado <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> antes de hacer ninguna tirada.</p>"
     },
     "card_type_id": 1,
     "equipment_type_id": 7,

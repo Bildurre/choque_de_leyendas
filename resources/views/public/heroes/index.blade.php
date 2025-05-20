@@ -4,9 +4,7 @@
     
     <div class="heroes-grid">
       @forelse($heroes as $hero)
-        <a href="{{ route('public.heroes.show', $hero) }}" class="hero-card">
-          <h2 class="hero-card__name">{{ $hero->name }}</h2>
-        </a>
+        <x-previews.hero :hero="$hero" />
       @empty
         <div class="heroes-empty">
           {{ __('public.heroes.empty') }}

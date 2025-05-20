@@ -374,8 +374,8 @@
       "es": "En la penumbra de Thenân, la hoja del guardabosque se mueve como un susurro. Un solo movimiento, rápido y preciso, y la estocada encuentra su marca. El enemigo cae en silencio, y el bosque recupera su paz. Es el arte de la precisión, donde un solo golpe lo decide todo."
     },
     "effect": {
-      "en": "<p>Deals 2 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Technique is a Fighter hero, you may prepare 1 of your Spent <img src='../../storage/images/dices/dice-divided-red-green.svg' alt='Dice Divided Red Green' width='20' height='20'> Dice and keep it as a Prepared Dice.</p>",
-      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega esta Técnica es un héroe Guerrero, puedes preparar 1 de tus Dados <img src='../../storage/images/dices/dice-divided-red-green.svg' alt='Dice Divided Red Green' width='20' height='20'> Gastados y guardarlo como Dado Preparado.</p>"
+      "en": "<p>Deals 2 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Technique is a Fighter hero, you may prepare 1 of your Spent <img src='../../storage/images/dices/dice-red-green.svg' alt='Dice Red Green' width='20' height='20'> Dice and keep it as a Prepared Dice.</p>",
+      "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega esta Técnica es un héroe Guerrero, puedes preparar 1 de tus Dados <img src='../../storage/images/dices/dice-red-green.svg' alt='Dice Red Green' width='20' height='20'> Gastados y guardarlo como Dado Preparado.</p>"
     },
     "card_type_id": 3,
     "image": "images/cards/estocada.jpeg"

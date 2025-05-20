@@ -1,115 +1,20 @@
 @use '../../abstracts/all' as *;
 
-$color-white-transparent: #ffffffbd;
-
-
+// Custom styles specific to card previews
 .card-preview {
-  max-width: 20rem;
-  height: auto;
-  aspect-ratio: 5/7;
-  overflow: hidden;
-  position: relative;
-  border-radius: $border-radius-md;
-  border: 1px solid var(--faction-color);
-  display: flex;
-  flex-direction: column;
-  * {
-    color: #000000;
-    z-index: $z-index-preview;
-    margin: 0;
-  }
-
-  &__image-container {
-    position: absolute;
-    height: 93%;
-    width: 100%;
-    z-index: $z-index-base;
-    top: 7%;
-    img {
-      height: 100%;
-      width: auto;
-      object-position: center;
-      object-fit: cover;
-    }
-  }
-
-  &__header {
-    position: relative;
-    padding: 1% 5%;
-    background-color: var(--faction-color);
-    height: 7%;
-    * {
-      color: var(--faction-text);
-    }
-    
-    &::after {
-      left: 0;
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 40%;
-      background-color: var(--faction-color);
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
-      z-index: -1;
-    }
-  }
-
-  &__name {
-    font-size: 90%;
-    margin: 0;
-    line-height: 1;
-  }
-  &__class {
-    font-size: 60%;
-    margin: 0;
-    font-family: 'roboto';
-    font-weight: 500;
-    line-height: 1;
-  }
-  &__faction-logo {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    width: 15%;
-    height: auto;
-  }
-
   &__cost {
     position: absolute;
     right: 0;
     top: 12%;
+    
     .cost-display {
-    display: flex;
-    flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
+    
     .icon-dice {
       width: 3em;
       height: 3em;
-    }
-  }
-
-  &__abilities {
-    margin-top: auto;
-    min-height: 30%;
-    position: relative;
-    border-bottom-left-radius: $border-radius-md;
-    border-bottom-right-radius: $border-radius-md;
-    background-color: $color-white-transparent;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    hr {
-      border: none;
-      border-top: 1px solid var(--faction-color);
-      width: 70%;
-    }
-
-    img {
-      height: 1.4em;
-      width: auto;
-      aspect-ratio: 1;
-      transform: translateY(25%);
     }
   }
 
@@ -119,17 +24,18 @@ $color-white-transparent: #ffffffbd;
     top: 0;
     width: 100%;
     transform: translateY(-100%);
-    background-color: rgba(var(--faction-color-rgb), 0.6);
-    height: 15%;
     background-color: rgba(var(--faction-color-rgb), 0.8);
+    height: 17%;
     clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
     z-index: -1;
     display: flex;
     justify-content: flex-end;
+    
     span {
       margin-top: auto;
       padding-right: 4%;
       font-weight: 500;
+      color: var(--faction-text);
     }
   }
   
@@ -137,58 +43,22 @@ $color-white-transparent: #ffffffbd;
     font-size: 65%;
     line-height: 1.2;
     width: 100%;
+    
     &-effects,
     &-restrictions {
       padding: 1%;
     }
   }
+}
 
-  &__active {
-    font-size: 65%;
-    line-height: 1.2;
-    padding: 1%;
-    &-header {
-      display: grid;
-      grid-template-columns: 1fr auto;
-    }
-    &-info {
-      margin: auto 0;
-      display: flex;
-      gap: 3%;
-      align-items: baseline;
-    }
-    &-name {
-      font-weight: bold;
-    }
-    &-types {
-      font-size: 85%;
-      font-style: italic;
-    }
-    &-cost {
-      .icon-dice {
-        height: 2em;
-        width: 2em;
-      }
-    }
-    &-description {
-      margin-top: -1.5%;
-    }
-  }
-
-  &__footer {
-    background-color: rgba(var(--faction-color-rgb), 0.8);;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50%;
-    font-family: 'almendra';
-    font-style: italic;
-    font-weight: 600;
-    .logo-icon {
-      height: 80%;
-      path {
-        fill: #000000;
-      }
-    }
+// Override entity-preview__abilities for cards
+.card-preview .entity-preview__abilities {
+  min-height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  hr {
+    margin: 0 auto;
   }
 }
