@@ -43,7 +43,7 @@
 
       <x-form.checkbox
         name="is_published"
-        :label="__('admin.is_published')"
+        :label="__('admin.published')"
         :checked="old('is_published', isset($faction) ? $faction->is_published : false)"
       />
     </div>

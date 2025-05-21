@@ -65,7 +65,7 @@
         
         <x-form.checkbox
           name="is_published"
-          :label="__('pages.is_published')"
+          :label="__('pages.published')"
           :checked="old('is_published', isset($page) ? $page->is_published : false)"
         />
         

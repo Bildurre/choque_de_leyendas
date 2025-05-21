@@ -135,7 +135,7 @@ class Counter extends Model
    */
   public function getTypeNameAttribute(): string
   {
-    return __('counters.types.' . $this->type);
+    return __('entities.counters.types.' . $this->type);
   }
 
   /**
