@@ -1,0 +1,146 @@
+[
+  {
+    "name": {
+      "en": "Exalted",
+      "es": "Exaltado"
+    },
+    "effect": {
+      "en": "When preparing Action Dice, you may prepare 1 extra dice.",
+      "es": "A la hora de preparar los Dados de Acción, puedes preparar 1 dado más."
+    },
+    "type": "boon",
+    "icon": "images/counters/exaltado.png"
+  },
+  {
+    "name": {
+      "en": "Exhausted",
+      "es": "Exhausto"
+    },
+    "effect": {
+      "en": "When preparing Action Dice, you must prepare 1 fewer dice.",
+      "es": "A la hora de preparar los Dados de Acción, debes preparar 1 dado menos."
+    },
+    "type": "bane",
+    "icon": "images/counters/exhausto.png"
+  },
+  {
+    "name": {
+      "en": "Swiftness",
+      "es": "Presteza"
+    },
+    "effect": {
+      "en": "When determining Initiative, you get +1 to the dice roll.",
+      "es": "A la hora de determinar la Iniciativa, tienes +1 en la Tirada de Dado."
+    },
+    "type": "boon",
+    "icon": "images/counters/presteza.png"
+  },
+  {
+    "name": {
+      "en": "Stunned",
+      "es": "Aturdido"
+    },
+    "effect": {
+      "en": "When determining Initiative, you get -1 to the dice roll.",
+      "es": "A la hora de determinar la Iniciativa, tienes -1 en la Tirada de Dado."
+    },
+    "type": "bane",
+    "icon": "images/counters/aturdido.png"
+  },
+  {
+    "name": {
+      "en": "Inspired",
+      "es": "Inspirado"
+    },
+    "effect": {
+      "en": "When preparing Action Dice, you may make 1 additional reroll.",
+      "es": "A la hora de preparar los Dados de Acción, puedes hacer 1 repetición más."
+    },
+    "type": "boon",
+    "icon": "images/counters/inspirado.png"
+  },
+  {
+    "name": {
+      "en": "Terrified",
+      "es": "Aterrado"
+    },
+    "effect": {
+      "en": "When preparing Action Dice, you may make 1 fewer reroll.",
+      "es": "A la hora de preparar los Dados de Acción, debes hacer 1 repetición menos."
+    },
+    "type": "bane",
+    "icon": "images/counters/aterrado.png"
+  },
+  {
+    "name": {
+      "en": "Determined",
+      "es": "Determinado"
+    },
+    "effect": {
+      "en": "When preparing Action Dice, you may keep 1 fewer mandatory dice in each reroll.",
+      "es": "A la hora de preparar los Dados de Acción, puedes guardar 1 dado obligatorio menos en cada repetición."
+    },
+    "type": "boon",
+    "icon": "images/counters/determinado.png"
+  },
+  {
+    "name": {
+      "en": "Numbed",
+      "es": "Entumecido"
+    },
+    "effect": {
+      "en": "When preparing Action Dice, you must keep 1 additional mandatory dice in each reroll.",
+      "es": "A la hora de preparar los Dados de Acción, debes guardar 1 dado obligatorio más en cada repetición."
+    },
+    "type": "bane",
+    "icon": "images/counters/entumecido.png"
+  },
+  {
+    "name": {
+      "en": "Invigorated",
+      "es": "Vigorizado"
+    },
+    "effect": {
+      "en": "If you have kept at least 3 dice of the same color, draw 1 Card.",
+      "es": "Si has guardado al menos 3 dados del mismo color, roba 1 Carta."
+    },
+    "type": "boon",
+    "icon": "images/counters/vigorizado.png"
+  },
+  {
+    "name": {
+      "en": "Overloaded",
+      "es": "Sobrecargado"
+    },
+    "effect": {
+      "en": "If you have kept at least 3 dice of the same color, discard 1 Card.",
+      "es": "Si has guardado al menos 3 dados del mismo color, descarta 1 Carta."
+    },
+    "type": "bane",
+    "icon": "images/counters/sobrecargado.png"
+  },
+  {
+    "name": {
+      "en": "Regeneration",
+      "es": "Regeneración"
+    },
+    "effect": {
+      "en": "When you remove this counter during the Counter Cleanup phase, heal 2 health.",
+      "es": "Cuando remuevas este contador en la fase de Limpieza de Contadores, te curas 2 de vida."
+    },
+    "type": "boon",
+    "icon": "images/counters/regeneracion.png"
+  },
+  {
+    "name": {
+      "en": "Pained",
+      "es": "Dolorido"
+    },
+    "effect": {
+      "en": "When you remove this counter during the Counter Cleanup phase, take 2 Direct damage.",
+      "es": "Cuando remuevas este contador en la fase de Limpieza de Contadores, recibes 2 daños Directos."
+    },
+    "type": "bane",
+    "icon": "images/counters/dolorido.png"
+  }
+]

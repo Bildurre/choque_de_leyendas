@@ -154,7 +154,7 @@
     },
     "effect": {
       "en": "<p>You may keep 1 <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> Dice before making any roll.</p><p>If the hero playing this Trick is a Caster hero, they may keep 1 additional <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> Dice.</p>",
-      "es": "<p>Puedes guardar 1 Dado <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> antes de hacer ninguna tirada.</p><p>Si el héroe que juega este Ardid es un héroe Hechicero, puede guardar 1 Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> adicional.</p>"
+      "es": "<p>Puedes guardar 1 dado <img src='../../storage/images/dices/dice-red-green-blue.svg' alt='Dice Red Green Blue' width='20' height='20'> antes de hacer ninguna tirada.</p><p>Si el héroe que juega este Ardid es un héroe Hechicero, puede guardar 1 Dado <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> adicional.</p>"
     },
     "restriction": {
       "en": "<p>Play this Trick before preparing the Action Dice.</p>",

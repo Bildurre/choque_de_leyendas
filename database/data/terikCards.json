@@ -372,7 +372,7 @@
     },
     "effect": {
       "en": "<p>When preparing Action Dice, adjacent allied heroes can prepare 1 extra die and can keep 1 <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> Dice before making any rolls.</p>",
-      "es": "<p>A la hora de preparar los Dados de Acción, los héroes aliados adyacentes pueden preparar 1 dado extra y pueden guardar 1 Dado <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> antes de hacer ninguna tirada.</p>"
+      "es": "<p>A la hora de preparar los Dados de Acción, los héroes aliados adyacentes pueden preparar 1 dado extra y pueden guardar 1 dado <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> antes de hacer ninguna tirada.</p>"
     },
     "card_type_id": 1,
     "equipment_type_id": 7,

@@ -42,7 +42,7 @@
     },
     "passive_description": {
       "en": "<p>When determining Initiative, this hero gets +1 to the Die roll for each pairing subsequent to this one.</p>",
-      "es": "<p>A la hora de determinar la Iniciativa, este héroe tiene +1 en la tirada de Dado por cada emparejamiento que haya posterior a este.</p>"
+      "es": "<p>A la hora de determinar la Iniciativa, este héroe tiene +1 en la Tirada de Dado por cada emparejamiento que haya posterior a este.</p>"
     },
     "image": "images/heroes/astheriel-estei.jpeg",
     "faction_id": 1,
@@ -602,7 +602,7 @@
     },
     "passive_description": {
       "en": "<p>When determining Initiative, this hero gets +1 on the Die roll for each enemy hero without boon counters on them in this and previous pairings.</p>",
-      "es": "<p>A la hora de determinar la Iniciativa, este héroe tiene +1 en la tirada de Dado por cada héroe rival sin contadores de beneficio sobre él que haya en este y los emparejamientos anteriores.</p>"
+      "es": "<p>A la hora de determinar la Iniciativa, este héroe tiene +1 en la Tirada de Dado por cada héroe rival sin contadores de beneficio sobre él que haya en este y los emparejamientos anteriores.</p>"
     },
     "image": "images/heroes/erinla.jpeg",
     "faction_id": 3,
