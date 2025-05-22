@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hero;
-use App\Models\Card;
-use App\Models\Faction;
-use App\Models\HeroSuperclass;
 use Illuminate\View\View;
 
 class HeroController extends Controller
@@ -16,7 +13,7 @@ class HeroController extends Controller
    */
   public function index(): View
   {
-    // Obtener todos los héroes publicados con sus relaciones
+    // Get all published heroes with their relationships, paginated
     $heroes = Hero::published()
       ->with([
         'faction',
@@ -28,44 +25,9 @@ class HeroController extends Controller
         'heroAbilities.attackSubtype',
       ])
       ->orderBy('name')
-      ->get();
+      ->paginate(12); // 12 heroes per page
     
-    // Obtener todas las facciones para los filtros
-    $factions = Faction::published()->orderBy('name')->get();
-    
-    // Obtener todas las superclases para los filtros
-    $superclasses = HeroSuperclass::orderBy('name')->get();
-    
-    // Obtener cartas destacadas (5 cartas aleatorias publicadas)
-    $featuredCards = Card::published()
-      ->with([
-        'faction',
-        'cardType',
-        'cardType.heroSuperclass',
-        'equipmentType',
-        'attackRange',
-        'attackSubtype',
-        'heroAbility',
-        'heroAbility.attackRange',
-        'heroAbility.attackSubtype'
-      ])
-      ->inRandomOrder()
-      ->take(5)
-      ->get();
-    
-    // Obtener facciones destacadas (3 facciones aleatorias publicadas)
-    $featuredFactions = Faction::published()
-      ->inRandomOrder()
-      ->take(3)
-      ->get();
-    
-    return view('public.heroes.index', compact(
-      'heroes', 
-      'factions', 
-      'superclasses', 
-      'featuredCards', 
-      'featuredFactions'
-    ));
+    return view('public.heroes.index', compact('heroes'));
   }
 
   /**
@@ -73,7 +35,7 @@ class HeroController extends Controller
    */
   public function show(Hero $hero): View
   {
-    // Verificar que la facción está publicada
+    // Verify that the hero and faction are published
     if (!$hero->isPublished() || !$hero->faction->isPublished()) {
       abort(404);
     }

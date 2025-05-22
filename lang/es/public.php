@@ -35,4 +35,25 @@ return [
         'cta_title' => '¿Listo para Jugar?',
         'cta_description' => '¡Únete a la batalla y conviértete en una leyenda hoy!',
     ],
+    
+    // Heroes section
+    'heroes' => [
+        'title' => 'Héroes',
+        'description' => 'Explora todos los héroes disponibles en Alanda: Choque de Leyendas. Cada héroe tiene habilidades únicas y pertenece a una facción específica.',
+        'no_heroes' => 'No hay héroes disponibles en este momento.',
+    ],
+    
+    // Factions section
+    'factions' => [
+        'title' => 'Facciones',
+        'description' => 'Descubre las diferentes facciones que luchan por el control de Alanda. Cada una tiene sus propias estrategias y estilo de juego.',
+        'no_factions' => 'No hay facciones disponibles en este momento.',
+    ],
+    
+    // Cards section
+    'cards' => [
+        'title' => 'Cartas',
+        'description' => 'Consulta todas las cartas del juego, desde equipamiento hasta hechizos y técnicas especiales.',
+        'no_cards' => 'No hay cartas disponibles en este momento.',
+    ],
 ];

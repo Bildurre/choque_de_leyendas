@@ -1,0 +1,29 @@
+@use '../../abstracts/all' as *;
+
+// Minimal styles specific to heroes list layout
+.heroes-list {
+  &__item {
+    display: flex;
+    justify-content: center;
+    transition: transform $transition-medium;
+    
+    &:hover {
+      transform: translateY(-$spacing-xs) scale(1.02);
+    }
+  }
+  
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+  }
+}
+
+// Override entity-list grid for heroes display
+.block .entity-list__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: $spacing-xl;
+  justify-content: center;
+}

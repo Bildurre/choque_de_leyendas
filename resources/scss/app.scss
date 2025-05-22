@@ -33,9 +33,6 @@
 @use 'components/pagination';
 @use 'components/cost-display';
 @use 'components/icon-attribute';
-@use 'components/featured-section';
-@use 'components/heroes-grid';
-
 // Entity Components
 @use 'components/entity/list';
 @use 'components/entity/list-card';
@@ -69,6 +66,7 @@
 
 // Pages
 @use 'pages/login';
+@use 'pages/heroes/heroes-index';
 
 // Bloques
 @use 'components/blocks/block';
