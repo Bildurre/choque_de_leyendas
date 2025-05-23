@@ -293,6 +293,12 @@ class GeneratePreviewImage implements ShouldQueue
           --faction-color-rgb: {$faction->rgb_values};
           --faction-text: {($faction->text_is_dark) ? '#000000' : '#ffffff'};
         }
+        
+        .entity-preview {
+          --faction-color: {$faction->color};
+          --faction-color-rgb: {$faction->rgb_values};
+          --faction-text: {($faction->text_is_dark) ? '#000000' : '#ffffff'};
+        }
 CSS;
     }
 
@@ -327,6 +333,16 @@ CSS;
           --random-accent-color-bg-hard: rgba(64, 140, 253, 0.8);
           --random-accent-color-bg: rgba(64, 140, 253, 0.2);
           --random-accent-color-rgb: 64, 140, 253;
+          
+          /* Z-index variables */
+          --z-index-base: 1;
+          --z-index-preview: 5;
+          --z-index-preview-top: 7;
+          
+          /* Border radius */
+          --border-radius-sm: 0.25rem;
+          --border-radius-md: 0.5rem;
+          --border-radius-lg: 1rem;
         }
         
         {$factionCss}
@@ -336,6 +352,10 @@ CSS;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
         }
         
         html, body {
@@ -357,21 +377,40 @@ CSS;
         /* Include compiled CSS */
         {$css}
         
-        /* Override styles for image generation */
+        /* Specific overrides for preview generation */
         .entity-preview {
-            margin: 0;
+            margin: 0 !important;
             box-shadow: none !important;
-            /* Ensure it fills the space */
-            width: 560px;
-            height: 810px;
+            /* Fixed dimensions for generation */
+            width: 560px !important;
+            height: 784px !important; /* 560 * 1.4 (aspect ratio 5:7) */
+            max-width: none !important;
+            font-size: 32px !important; /* Base font size for proper scaling */
         }
         
-        /* Ensure fonts are loaded */
-        @font-face {
-            font-family: 'roboto';
-            src: url('data:font/woff2;base64,') format('woff2');
-            font-weight: 400;
-            font-style: normal;
+        /* Cost display positioning fix */
+        .cost-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        /* Ensure proper icon sizes */
+        .icon-dice {
+            width: 3em !important;
+            height: 3em !important;
+        }
+        
+        .icon-attribute {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* Footer positioning */
+        .entity-preview__footer {
+            position: relative;
+            height: auto;
+            padding: 0.5em 1em;
         }
     </style>
 </head>
