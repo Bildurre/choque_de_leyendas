@@ -132,4 +132,15 @@ trait HasPreviewImage
     
     return $slug . '-preview.png';
   }
+  
+  /**
+   * Get the full directory path for a specific locale
+   * 
+   * @param string $locale
+   * @return string
+   */
+  public function getPreviewImageDirectoryForLocale(string $locale): string
+  {
+    return $this->getPreviewImageDirectory() . '/' . $locale;
+  }
 }
