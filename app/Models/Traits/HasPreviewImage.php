@@ -3,9 +3,34 @@
 namespace App\Models\Traits;
 
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\GeneratePreviewImage;
 
 trait HasPreviewImage
 {
+  /**
+   * Boot the trait
+   */
+  public static function bootHasPreviewImage()
+  {
+    // After creating a model
+    static::created(function ($model) {
+      $model->dispatchPreviewGeneration();
+    });
+    
+    // After updating a model
+    static::updated(function ($model) {
+      // Check if we should regenerate preview
+      if ($model->shouldRegeneratePreview()) {
+        $model->dispatchPreviewGeneration();
+      }
+    });
+    
+    // Before deleting, clean up preview images
+    static::deleting(function ($model) {
+      $model->deletePreviewImage();
+    });
+  }
+  
   /**
    * Get the preview image URL for a specific locale
    * 
@@ -64,8 +89,9 @@ trait HasPreviewImage
     $previewImages = $this->preview_image ?? [];
     $previewImages[$locale] = $path;
     
+    // Use saveQuietly to avoid triggering events
     $this->preview_image = $previewImages;
-    $this->save();
+    $this->saveQuietly();
   }
   
   /**
@@ -85,7 +111,7 @@ trait HasPreviewImage
       }
       
       $this->preview_image = null;
-      $this->save();
+      $this->saveQuietly();
       
       return true;
     }
@@ -97,7 +123,7 @@ trait HasPreviewImage
       unset($previewImages[$locale]);
       
       $this->preview_image = empty($previewImages) ? null : $previewImages;
-      $this->save();
+      $this->saveQuietly();
       
       return true;
     }
@@ -142,5 +168,50 @@ trait HasPreviewImage
   public function getPreviewImageDirectoryForLocale(string $locale): string
   {
     return $this->getPreviewImageDirectory() . '/' . $locale;
+  }
+  
+  /**
+   * Dispatch the preview generation job
+   * 
+   * @return void
+   */
+  public function dispatchPreviewGeneration(): void
+  {
+    GeneratePreviewImage::dispatch($this);
+  }
+  
+  /**
+   * Determine if preview should be regenerated
+   * 
+   * @return bool
+   */
+  protected function shouldRegeneratePreview(): bool
+  {
+    // Don't regenerate if only is_published changed
+    if ($this->wasChanged(['is_published']) && count($this->getChanges()) === 2) {
+      // 2 because getChanges includes 'updated_at'
+      return false;
+    }
+    
+    // Don't regenerate if only timestamps changed
+    $changes = array_keys($this->getChanges());
+    $timestampOnly = count(array_diff($changes, ['created_at', 'updated_at'])) === 0;
+    
+    if ($timestampOnly) {
+      return false;
+    }
+    
+    // Regenerate for any other change
+    return true;
+  }
+  
+  /**
+   * Force preview regeneration
+   * 
+   * @return void
+   */
+  public function regeneratePreviews(): void
+  {
+    $this->dispatchPreviewGeneration();
   }
 }

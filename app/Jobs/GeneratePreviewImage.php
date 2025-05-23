@@ -95,6 +95,10 @@ class GeneratePreviewImage implements ShouldQueue
       Log::info('Generating preview image for locale', [
         'locale' => $locale
       ]);
+      
+      // Get existing preview image path BEFORE generating new one
+      $existingImages = $this->model->getAllPreviewImages();
+      $oldImagePath = $existingImages[$locale] ?? null;
 
       // Set the locale for this generation
       app()->setLocale($locale);
@@ -121,7 +125,17 @@ class GeneratePreviewImage implements ShouldQueue
         ->delay(500) // Wait 500ms to ensure styles are applied
         ->save($fullPath);
 
-      // Update model with preview image path
+      // Now delete the old image if it exists and is different from the new one
+      if ($oldImagePath && $oldImagePath !== $path && Storage::disk('public')->exists($oldImagePath)) {
+        Storage::disk('public')->delete($oldImagePath);
+        Log::info('Deleted old preview image', [
+          'locale' => $locale,
+          'old_path' => $oldImagePath,
+          'new_path' => $path
+        ]);
+      }
+
+      // Update model with new preview image path
       $this->model->setPreviewImagePath($locale, $path);
 
       Log::info('Preview image generated for locale', [
@@ -291,13 +305,13 @@ class GeneratePreviewImage implements ShouldQueue
         :root {
           --faction-color: {$faction->color};
           --faction-color-rgb: {$faction->rgb_values};
-          --faction-text: {($faction->text_is_dark) ? '#000000' : '#ffffff'};
+          --faction-text: {($faction->text_is_dark ? '#000000' : '#ffffff')};
         }
         
         .entity-preview {
           --faction-color: {$faction->color};
           --faction-color-rgb: {$faction->rgb_values};
-          --faction-text: {($faction->text_is_dark) ? '#000000' : '#ffffff'};
+          --faction-text: {($faction->text_is_dark ? '#000000' : '#ffffff')};
         }
 CSS;
     }
