@@ -13,10 +13,11 @@ return new class extends Migration
   {
     Schema::create('cards', function (Blueprint $table) {
       $table->id();
-      $table->json('name'); // Cambiado a json para traducciones
+      $table->json('name');
       $table->json('slug');
       $table->string('image')->nullable();
-      $table->json('lore_text')->nullable(); // Cambiado a json
+       $table->json('preview_image')->nullable();
+      $table->json('lore_text')->nullable();
       $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('card_type_id')->constrained()->onDelete('restrict');
       $table->foreignId('equipment_type_id')->nullable()->constrained()->onDelete('set null');
@@ -25,8 +26,8 @@ return new class extends Migration
       $table->foreignId('hero_ability_id')->nullable()->constrained()->onDelete('set null');
       $table->tinyInteger('hands')->nullable()->comment('1 or 2 hands for weapons');
       $table->string('cost', 5)->nullable();
-      $table->json('effect')->nullable(); // Cambiado a json
-      $table->json('restriction')->nullable(); // Cambiado a json
+      $table->json('effect')->nullable();
+      $table->json('restriction')->nullable();
       $table->boolean('area')->default(false);
       $table->boolean('is_published')->default(false);
       $table->datetimes();

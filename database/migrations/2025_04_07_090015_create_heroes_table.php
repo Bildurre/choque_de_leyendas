@@ -19,6 +19,7 @@ return new class extends Migration
             $table->json('passive_name')->nullable();
             $table->json('passive_description')->nullable();
             $table->string('image')->nullable();
+            $table->json('preview_image')->nullable();
             $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('hero_race_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('hero_class_id')->nullable()->constrained()->onDelete('set null');
