@@ -118,6 +118,7 @@ class GeneratePreviewImage implements ShouldQueue
         ->windowSize(600, 850) // Card/Hero preview size
         ->deviceScaleFactor(2) // For better quality
         ->waitUntilNetworkIdle()
+        ->delay(500) // Wait 500ms to ensure styles are applied
         ->save($fullPath);
 
       // Update model with preview image path
@@ -194,9 +195,42 @@ class GeneratePreviewImage implements ShouldQueue
    */
   protected function wrapInHtmlDocument(string $content, string $locale): string
   {
-    // Get the compiled CSS path
-    $cssPath = public_path('build/assets/app.css');
-    $css = file_exists($cssPath) ? file_get_contents($cssPath) : '';
+    // Try multiple possible paths for the CSS file
+    $possiblePaths = [
+      public_path('build/assets/app.css'),
+      public_path('build/assets/app-*.css'), // Vite may add hash to filename
+      public_path('css/app.css'), // Fallback path
+    ];
+    
+    $css = '';
+    foreach ($possiblePaths as $pattern) {
+      $files = glob($pattern);
+      if (!empty($files)) {
+        $cssPath = $files[0]; // Take the first match
+        if (file_exists($cssPath)) {
+          $css = file_get_contents($cssPath);
+          Log::info('CSS loaded from: ' . $cssPath);
+          break;
+        }
+      }
+    }
+    
+    if (empty($css)) {
+      Log::warning('No CSS file found for preview generation');
+    }
+
+    // Get the faction color CSS variables if available
+    $factionCss = '';
+    if (isset($this->model->faction)) {
+      $faction = $this->model->faction;
+      $factionCss = <<<CSS
+        :root {
+          --faction-color: {$faction->color};
+          --faction-color-rgb: {$faction->rgb_values};
+          --faction-text: {($faction->text_is_dark) ? '#000000' : '#ffffff'};
+        }
+CSS;
+    }
 
     return <<<HTML
 <!DOCTYPE html>
@@ -205,6 +239,34 @@ class GeneratePreviewImage implements ShouldQueue
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* CSS Variables and theme setup */
+        :root {
+          /* Default theme variables */
+          --color-background: #1A1A1A;
+          --color-card-bg: #262626;
+          --color-card-border: #333333;
+          --color-header-bg: #262626;
+          --color-text-primary: #dddddd;
+          --color-text-secondary: #929292;
+          
+          /* Game colors */
+          --color-game-red: #f15959;
+          --color-game-blue: #408cfd;
+          --color-game-green: #29ab5f;
+          
+          /* Default accent color */
+          --random-accent-color: #408cfd;
+          --random-accent-color-hover: #6fadfe;
+          --random-accent-color-dark: #195ec0;
+          --random-accent-color-bg-light: rgba(64, 140, 253, 0.2);
+          --random-accent-color-bg-semi: rgba(64, 140, 253, 0.5);
+          --random-accent-color-bg-hard: rgba(64, 140, 253, 0.8);
+          --random-accent-color-bg: rgba(64, 140, 253, 0.2);
+          --random-accent-color-rgb: 64, 140, 253;
+        }
+        
+        {$factionCss}
+        
         /* Reset and base styles */
         * {
             margin: 0;
@@ -212,24 +274,40 @@ class GeneratePreviewImage implements ShouldQueue
             box-sizing: border-box;
         }
         
-        body {
+        html, body {
             margin: 0;
-            padding: 20px;
-            background: transparent;
+            padding: 0;
+            width: 600px;
+            height: 850px;
+            overflow: hidden;
+        }
+        
+        body {
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            font-family: 'roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         /* Include compiled CSS */
         {$css}
         
-        /* Ensure preview is properly sized */
+        /* Override styles for image generation */
         .entity-preview {
             margin: 0;
-            /* Remove any box-shadow for the image */
             box-shadow: none !important;
+            /* Ensure it fills the space */
+            width: 560px;
+            height: 810px;
+        }
+        
+        /* Ensure fonts are loaded */
+        @font-face {
+            font-family: 'roboto';
+            src: url('data:font/woff2;base64,') format('woff2');
+            font-weight: 400;
+            font-style: normal;
         }
     </style>
 </head>
