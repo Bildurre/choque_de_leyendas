@@ -181,9 +181,73 @@ class GeneratePreviewImage implements ShouldQueue
 
     // Generate the preview HTML
     $previewHtml = view($viewName, $viewData)->render();
+    
+    // Convert image URLs to base64
+    $previewHtml = $this->convertImagesToBase64($previewHtml);
 
     // Wrap in a complete HTML document with styles
     return $this->wrapInHtmlDocument($previewHtml, $locale);
+  }
+  
+  /**
+   * Convert image URLs to base64 data URIs
+   *
+   * @param string $html
+   * @return string
+   */
+  protected function convertImagesToBase64(string $html): string
+  {
+    // Pattern to match img src attributes
+    $pattern = '/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i';
+    
+    return preg_replace_callback($pattern, function($matches) {
+      $fullTag = $matches[0];
+      $src = $matches[1];
+      
+      try {
+        // Skip if already base64
+        if (strpos($src, 'data:') === 0) {
+          return $fullTag;
+        }
+        
+        // Handle different URL formats
+        $imagePath = null;
+        
+        if (strpos($src, 'storage/') === 0) {
+          // URL like "storage/images/..."
+          $imagePath = storage_path('app/public/' . substr($src, 8));
+        } elseif (strpos($src, '/storage/') === 0) {
+          // URL like "/storage/images/..."
+          $imagePath = storage_path('app/public/' . substr($src, 9));
+        } elseif (strpos($src, 'http') === 0) {
+          // Full URL - extract the storage path
+          $storagePath = parse_url($src, PHP_URL_PATH);
+          if (strpos($storagePath, '/storage/') === 0) {
+            $imagePath = storage_path('app/public/' . substr($storagePath, 9));
+          }
+        }
+        
+        if ($imagePath && file_exists($imagePath)) {
+          $imageData = file_get_contents($imagePath);
+          $mimeType = mime_content_type($imagePath);
+          $base64 = base64_encode($imageData);
+          $dataUri = "data:{$mimeType};base64,{$base64}";
+          
+          // Replace src with data URI
+          return str_replace($src, $dataUri, $fullTag);
+        }
+        
+        Log::warning('Image not found for preview', ['src' => $src, 'path' => $imagePath]);
+        return $fullTag;
+        
+      } catch (\Exception $e) {
+        Log::error('Error converting image to base64', [
+          'src' => $src,
+          'error' => $e->getMessage()
+        ]);
+        return $fullTag;
+      }
+    }, $html);
   }
 
   /**
