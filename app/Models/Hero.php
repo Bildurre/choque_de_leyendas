@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
 use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasPreviewImage;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
@@ -23,6 +24,7 @@ class Hero extends Model implements LocalizedUrlRoutable
   use HasImageAttribute;
   use HasAdminFilters;
   use HasPublishedAttribute;
+  use HasPreviewImage;
 
   /**
    * The table associated with the model.
@@ -43,6 +45,7 @@ class Hero extends Model implements LocalizedUrlRoutable
     'passive_name',
     'passive_description',
     'image',
+    'preview_image',
     'faction_id',
     'hero_race_id',
     'hero_class_id',
@@ -68,6 +71,7 @@ class Hero extends Model implements LocalizedUrlRoutable
     'armor' => 'integer',
     'deleted_at' => 'datetime',
     'is_published' => 'boolean',
+    'preview_image' => 'array'
   ];
 
   /**
@@ -374,5 +378,15 @@ class Hero extends Model implements LocalizedUrlRoutable
     }
     
     return ucfirst($translation);
+  }
+
+    /**
+   * Get the directory for storing preview images
+   * 
+   * @return string
+   */
+  public function getPreviewImageDirectory(): string
+  {
+    return 'images/previews/heroes';
   }
 }

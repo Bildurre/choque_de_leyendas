@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
 use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasPreviewImage;
 use App\Models\Traits\HasCostAttribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
@@ -24,6 +25,7 @@ class Card extends Model implements LocalizedUrlRoutable
   use HasCostAttribute;
   use HasAdminFilters;
   use HasPublishedAttribute;
+  use HasPreviewImage;
 
   /**
    * The attributes that are mass assignable.
@@ -34,6 +36,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'name',
     'slug',
     'image',
+    'preview_image',
     'lore_text',
     'faction_id',
     'card_type_id',
@@ -59,6 +62,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'area' => 'boolean',
     'deleted_at' => 'datetime',
     'is_published' => 'boolean',
+    'preview_image' => 'array'
   ];
 
   /**
@@ -289,5 +293,15 @@ class Card extends Model implements LocalizedUrlRoutable
   public function heroAbility()
   {
     return $this->belongsTo(HeroAbility::class);
+  }
+
+    /**
+   * Get the directory for storing preview images
+   * 
+   * @return string
+   */
+  public function getPreviewImageDirectory(): string
+  {
+    return 'images/previews/cards';
   }
 }
