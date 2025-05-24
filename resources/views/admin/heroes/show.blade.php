@@ -27,7 +27,7 @@
     <div class="hero-view">
       <div class="hero-view__container">
         <div class="hero-view__header">
-          <div class="hero-view__badges">
+          {{-- <div class="hero-view__badges">
             @if($hero->faction)
               <x-badge 
                 :variant="$hero->faction->text_is_dark ? 'light' : 'dark'" 
@@ -52,12 +52,12 @@
             <x-badge variant="{{ $hero->gender === 'male' ? 'success' : 'warning' }}">
               {{ __('entities.heroes.genders.' . $hero->gender) }}
             </x-badge>
-          </div>
+          </div> --}}
         </div>
         
         <div class="hero-view__content">
           <div class="hero-view__main">
-            <div class="hero-view__image-container">
+            {{-- <div class="hero-view__image-container">
               @if($hero->image)
                 <img src="{{ $hero->getImageUrl() }}" alt="{{ $hero->name }}" class="hero-view__image">
               @else
@@ -68,11 +68,11 @@
                   <p>{{ __('entities.heroes.no_image') }}</p>
                 </div>
               @endif
-            </div>
+            </div> --}}
 
             <x-previews.hero :hero="$hero" />
             
-            <div class="hero-view__details">
+            {{-- <div class="hero-view__details">
               <div class="hero-view__section">
                 <h2 class="hero-view__section-title">{{ __('entities.heroes.attributes.title') }}</h2>
                 
@@ -138,12 +138,12 @@
                   </div>
                 </div>
               @endif
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
 
-      @if($hero->heroAbilities->count() > 0)
+      {{-- @if($hero->heroAbilities->count() > 0)
         <div class="hero-view__abilities">
           <h2 class="hero-view__section-title">{{ __('entities.hero_abilities.plural') }}</h2>
           
@@ -208,7 +208,7 @@
             @endforeach
           </div>
         </div>
-      @endif
+      @endif --}}
     </div>
   </div>
 </x-admin-layout>

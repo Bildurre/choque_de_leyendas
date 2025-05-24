@@ -14,9 +14,9 @@ class CardController extends Controller
   public function index(): View
   {
     $cards = Card::published()
-    ->with(['faction', 'cardType', 'equipmentType'])
+      ->with(['faction', 'cardType', 'equipmentType'])
       ->orderBy('name')
-      ->get();
+      ->paginate(12); // Cambiar de get() a paginate(12)
     
     return view('public.cards.index', compact('cards'));
   }

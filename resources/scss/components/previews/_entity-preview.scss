@@ -12,6 +12,7 @@ $color-white-transparent: #ffffffbd;
   border: 1px solid var(--faction-color);
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
   
   * {
     color: #000000;
@@ -36,7 +37,7 @@ $color-white-transparent: #ffffffbd;
 
   &__header {
     position: relative;
-    padding: 1% 5%;
+    padding: .25rem .5rem 0;
     background-color: var(--faction-color);
     height: 7%;
     
@@ -57,14 +58,16 @@ $color-white-transparent: #ffffffbd;
   }
 
   &__title-container {
+    position: relative;
     .entity-preview__name {
-      font-size: 90%;
+      font-size: 1rem;
       margin: 0;
       line-height: 1;
     }
     
     .entity-preview__class {
-      font-size: 60%;
+      font-size: .7rem;
+      font-style: italic;
       margin: 0;
       font-family: 'roboto';
       font-weight: 500;
@@ -74,22 +77,20 @@ $color-white-transparent: #ffffffbd;
   
   &__faction-logo {
     position: absolute;
-    top: 2px;
-    right: 2px;
-    width: 15%;
+    top: .125rem;
+    right: .125rem;
+    width: 3rem;
     height: auto;
   }
 
   &__abilities {
     margin-top: auto;
     position: relative;
-    border-bottom-left-radius: $border-radius-md;
-    border-bottom-right-radius: $border-radius-md;
     background-color: $color-white-transparent;
     
     hr {
       border: none;
-      border-top: 1px solid var(--faction-color);
+      border-top: .0625rem solid var(--faction-color);
       width: 70%;
       margin: auto;
     }

@@ -26,7 +26,7 @@
         @foreach($heroes as $hero)
           <div class="heroes-list__item">
             <a href="{{ route('public.heroes.show', $hero) }}" class="heroes-list__link">
-              <x-previews.hero :hero="$hero" />
+              <x-previews.preview-image :entity="$hero" type="hero" />
             </a>
           </div>
         @endforeach
