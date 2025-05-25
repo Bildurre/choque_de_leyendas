@@ -45,10 +45,10 @@ $color-white-transparent: #ffffffbd;
     }
     
     &::after {
-      left: 0;
+      left: -1px;
       content: '';
       position: absolute;
-      width: 100%;
+      width: calc(100% + 2px);
       height: 40%;
       background-color: var(--faction-color);
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);

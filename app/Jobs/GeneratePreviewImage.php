@@ -125,8 +125,8 @@ class GeneratePreviewImage implements ShouldQueue
 
       // Generate image using Browsershot
       Browsershot::html($html)
-        ->windowSize(600, 850) // Card/Hero preview size
-        ->deviceScaleFactor(2) // For better quality
+        ->windowSize(333, 477) // Card/Hero preview size
+        ->deviceScaleFactor(3) // For better quality
         ->waitUntilNetworkIdle()
         ->delay(500) // Wait 500ms to ensure styles are applied
         ->save($fullPath);
@@ -414,8 +414,8 @@ CSS;
         html, body {
             margin: 0;
             padding: 0;
-            width: 600px;
-            height: 850px;
+            width: 88mm;
+            height: 126mm;
             overflow: hidden;
         }
         
@@ -435,10 +435,8 @@ CSS;
             margin: 0 !important;
             box-shadow: none !important;
             /* Fixed dimensions for generation */
-            width: 560px !important;
-            height: 784px !important; /* 560 * 1.4 (aspect ratio 5:7) */
-            max-width: none !important;
-            font-size: 32px !important; /* Base font size for proper scaling */
+            width: 88mm !important;
+            height: 126mm !important;
         }
         
         /* Cost display positioning fix */
@@ -447,23 +445,10 @@ CSS;
             flex-direction: column;
             gap: 0;
         }
-        
-        /* Ensure proper icon sizes */
-        .icon-dice {
-            width: 3em !important;
-            height: 3em !important;
-        }
-        
-        .icon-attribute {
-            width: 100% !important;
-            height: 100% !important;
-        }
-        
-        /* Footer positioning */
-        .entity-preview__footer {
-            position: relative;
-            height: auto;
-            padding: 0.5em 1em;
+        .entity-preview__active .cost-display {
+            display: flex;
+            flex-direction: row !important;
+            gap: 0;
         }
     </style>
 </head>
