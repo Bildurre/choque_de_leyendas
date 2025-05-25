@@ -211,7 +211,8 @@ class PreviewManage extends Command
    */
   protected function regenerateAll(): int
   {
-    $this->option('force', true); // Force regeneration
+    // Force the --force option to be true
+    $this->input->setOption('force', true);
     return $this->generateAll();
   }
   

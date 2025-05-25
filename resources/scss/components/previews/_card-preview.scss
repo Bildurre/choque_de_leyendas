@@ -4,7 +4,7 @@
 .card-preview {
   &__cost {
     position: absolute;
-    right: 0;
+    right: .2rem;
     top: 12%;
     
     .cost-display {
@@ -13,13 +13,14 @@
     }
     
     .icon-dice {
-      width: 3em;
-      height: 3em;
+      width: 3rem;
+      height: 3rem;
     }
   }
 
   &__types {
-    font-size: 65%;
+    font-size: .7rem;
+    font-style: italic;
     position: absolute;
     top: 0;
     width: 100%;
@@ -33,7 +34,7 @@
     
     span {
       margin-top: auto;
-      padding-right: 4%;
+      padding-right: .5rem;
       font-weight: 500;
       color: var(--faction-text);
     }

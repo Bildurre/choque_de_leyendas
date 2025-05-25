@@ -3,9 +3,8 @@
 $color-white-transparent: #ffffffbd;
 
 .entity-preview {
-  max-width: 20rem;
-  height: auto;
-  aspect-ratio: 5/7;
+  width: 88mm;
+  height: 126mm;
   overflow: hidden;
   position: relative;
   border-radius: $border-radius-md;
@@ -96,15 +95,22 @@ $color-white-transparent: #ffffffbd;
     }
 
     img {
-      height: 1.4em;
+      height: 1.2em;
       width: auto;
       aspect-ratio: 1;
       transform: translateY(25%);
     }
+
+    p {
+      margin-bottom: .25rem;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__active {
-    font-size: 65%;
+    font-size: .65rem;
     line-height: 1.2;
     padding: 1%;
     
@@ -116,28 +122,25 @@ $color-white-transparent: #ffffffbd;
     &-info {
       margin: auto 0;
       display: flex;
-      gap: 3%;
+      gap: .5rem;
       align-items: baseline;
     }
     
     &-name {
+      font-size: .7rem;
       font-weight: bold;
     }
     
     &-types {
-      font-size: 85%;
+      font-size: .6rem;
       font-style: italic;
     }
     
     &-cost {
       .icon-dice {
-        height: 2em;
-        width: 2em;
+        height: 1.1rem;
+        width: 1.1rem;
       }
-    }
-    
-    &-description {
-      margin-top: -1.5%;
     }
   }
 
@@ -146,16 +149,21 @@ $color-white-transparent: #ffffffbd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 50%;
+    font-size: .65rem;
     font-family: 'almendra';
     font-style: italic;
     font-weight: 600;
     
+    span {
+      line-height: 1;
+      margin: .25rem 0;
+      color: var(--faction-text);
+    }
     .logo-icon {
       height: 80%;
       
       path {
-        fill: #000000;
+        fill: var(--faction-text);
       }
     }
   }

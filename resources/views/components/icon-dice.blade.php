@@ -18,7 +18,7 @@
 
 <span {{ $attributes->merge(['class' => "icon-dice {$typeClass}"]) }}>
   @if(in_array($type, ['red-green', 'red-blue', 'green-blue']))
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 160 160" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="16 16 168 168" stroke-linejoin="round">
       <polygon 
         points="100,180 30,140 30,60 100,100" 
         class="icon-dice__face1"
@@ -48,7 +48,7 @@
       />
     </svg>
   @else
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 160 160" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="16 16 168 168" stroke-linejoin="round">
       <polygon 
         points="100,180 30,140 30,60 100,100" 
         class="icon-dice__face"

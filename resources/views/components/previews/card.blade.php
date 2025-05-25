@@ -51,6 +51,7 @@
       @endif
     </div>
     @if ($card->heroAbility)
+      <hr />
       <div class="entity-preview__active">
         <div class="entity-preview__active-header">
           <div class="entity-preview__active-info">

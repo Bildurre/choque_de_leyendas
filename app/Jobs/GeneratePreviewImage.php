@@ -99,6 +99,12 @@ class GeneratePreviewImage implements ShouldQueue
       // Get existing preview image path BEFORE generating new one
       $existingImages = $this->model->getAllPreviewImages();
       $oldImagePath = $existingImages[$locale] ?? null;
+      
+      Log::info('Current preview status', [
+        'locale' => $locale,
+        'old_path' => $oldImagePath,
+        'old_exists' => $oldImagePath ? Storage::disk('public')->exists($oldImagePath) : false
+      ]);
 
       // Set the locale for this generation
       app()->setLocale($locale);
@@ -227,7 +233,12 @@ class GeneratePreviewImage implements ShouldQueue
         // Handle different URL formats
         $imagePath = null;
         
-        if (strpos($src, 'storage/') === 0) {
+        // Handle dice images from WYSIWYG (they come as relative paths)
+        if (strpos($src, 'dice-') !== false && strpos($src, '.svg') !== false) {
+          // Extract just the filename
+          $filename = basename($src);
+          $imagePath = storage_path('app/public/images/dices/' . $filename);
+        } elseif (strpos($src, 'storage/') === 0) {
           // URL like "storage/images/..."
           $imagePath = storage_path('app/public/' . substr($src, 8));
         } elseif (strpos($src, '/storage/') === 0) {
@@ -241,9 +252,33 @@ class GeneratePreviewImage implements ShouldQueue
           }
         }
         
+        // Try common dice paths if not found
+        if (!$imagePath || !file_exists($imagePath)) {
+          $filename = basename($src);
+          $possiblePaths = [
+            storage_path('app/public/images/dices/' . $filename),
+            storage_path('app/public/images/' . $filename),
+            public_path('images/dices/' . $filename),
+            public_path('images/' . $filename),
+          ];
+          
+          foreach ($possiblePaths as $path) {
+            if (file_exists($path)) {
+              $imagePath = $path;
+              break;
+            }
+          }
+        }
+        
         if ($imagePath && file_exists($imagePath)) {
           $imageData = file_get_contents($imagePath);
           $mimeType = mime_content_type($imagePath);
+          
+          // Fix for SVG mime type
+          if (pathinfo($imagePath, PATHINFO_EXTENSION) === 'svg') {
+            $mimeType = 'image/svg+xml';
+          }
+          
           $base64 = base64_encode($imageData);
           $dataUri = "data:{$mimeType};base64,{$base64}";
           
@@ -251,7 +286,11 @@ class GeneratePreviewImage implements ShouldQueue
           return str_replace($src, $dataUri, $fullTag);
         }
         
-        Log::warning('Image not found for preview', ['src' => $src, 'path' => $imagePath]);
+        Log::warning('Image not found for preview', [
+          'src' => $src, 
+          'tried_path' => $imagePath,
+          'exists' => $imagePath ? file_exists($imagePath) : false
+        ]);
         return $fullTag;
         
       } catch (\Exception $e) {
