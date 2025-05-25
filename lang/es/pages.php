@@ -1,90 +1,88 @@
 <?php
 
 return [
-    // Pages
-    'plural' => 'Páginas',
-    'singular' => 'Página',
-    'create' => 'Crear Página',
-    'edit' => 'Editar Página',
-    'edit_details' => 'Editar Detalles de Página',
-    'form_title' => 'Información de la Página',
+  // General
+  'singular' => 'Página',
+  'plural' => 'Páginas',
+  'create' => 'Crear página',
+  'edit' => 'Editar página',
+  'form_title' => 'Información de la página',
+  'all_pages' => 'Todas las páginas',
+  'read_more' => 'Leer más',
+  'no_pages' => 'No hay páginas disponibles',
+  
+  // Campos
+  'title' => 'Título',
+  'slug' => 'URL amigable',
+  'description' => 'Descripción',
+  'content' => 'Contenido',
+  'template' => 'Plantilla',
+  'parent' => 'Página padre',
+  'no_parent' => 'Sin página padre',
+  'order' => 'Orden',
+  'published' => 'Publicada',
+  'draft' => 'Borrador',
+  'meta_info' => 'Información META',
+  'meta_title' => 'Título META',
+  'meta_description' => 'Descripción META',
+  'background_image' => 'Imagen de fondo',
+  
+  // Mensajes
+  'children_count' => ':count páginas hijas',
+  'back_to_list' => 'Volver al listado',
+  'confirm_delete' => '¿Estás seguro de que deseas eliminar esta página?',
+  'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente esta página?',
+  'no_blocks' => 'Esta página no tiene bloques de contenido',
+  
+  // Bloques
+  'blocks' => [
+    'singular' => 'Bloque',
+    'plural' => 'Bloques',
+    'page_blocks' => 'Bloques de la página',
+    'add_block' => 'Añadir bloque',
+    'create' => 'Crear bloque :type',
+    'edit' => 'Editar bloque :type',
+    'form_title' => 'Configuración del bloque',
     'title' => 'Título',
-    'slug' => 'Slug',
-    'description' => 'Descripción',
-    'template' => 'Plantilla',
-    'parent' => 'Página Padre',
-    'no_parent' => 'Sin Padre',
-    'order' => 'Orden',
-    'is_published' => 'Está Publicada',
-    'published' => 'Publicada',
-    'draft' => 'Borrador',
-    'no_pages' => 'No hay páginas disponibles',
-    'children_count' => ':count páginas hijas',
-    'all_pages' => 'Todas las Páginas',
-    'read_more' => 'Leer Más',
-    
-    // Blocks
-    'blocks' => [
-        'page_blocks' => 'Bloques de Página',
-        'add_block' => 'Añadir Bloque',
-        'create' => 'Crear Bloque',
-        'edit' => 'Editar Bloque',
-        'form_title' => 'Información del Bloque',
-        'title' => 'Título',
-        'subtitle' => 'Subtítulo',
-        'content' => 'Contenido',
-        'appearance' => 'Apariencia',
-        'background_color' => 'Color de Fondo',
-        'image' => 'Imagen',
-        'image_position' => 'Posición de la Imagen',
-        'image_position_options' => [
-            'left' => 'Izquierda',
-            'right' => 'Derecha',
-        ],
-        'settings' => [
-            'text_alignment' => 'Alineación de Texto',
-            'text_alignment_options' => [
-                'left' => 'Izquierda',
-                'center' => 'Centro',
-                'right' => 'Derecha',
-            ],
-            'full_width' => 'Ancho Completo',
-            // Configuraciones del bloque relateds
-            'model_type' => 'Tipo de elemento',
-            'display_type' => 'Tipo de visualización',
-            'button_text' => 'Texto del botón',
-            'model_types' => [
-                'faction' => 'Facciones',
-                'hero' => 'Héroes',
-                'card' => 'Cartas',
-            ],
-            'display_types' => [
-                'latest' => 'Últimos añadidos',
-                'random' => 'Selección aleatoria',
-            ],
-        ],
-        'confirm_delete' => '¿Estás seguro de que quieres eliminar este bloque?',
-        'types' => [
-            'text' => 'Bloque de Texto',
-            'header' => 'Bloque de Cabecera',
-            'relateds' => 'Elementos Relacionados',
-            'image' => 'Bloque de Imagen',
-            'gallery' => 'Bloque de Galería',
-            'cards' => 'Bloque de Cartas',
-            'heroes' => 'Bloque de Héroes',
-        ],
-        // Específicas del bloque relateds
-        'relateds' => [
-            'view_all' => 'Ver todos',
-            'title_placeholder' => 'Elementos destacados',
-            'subtitle_placeholder' => 'Descubre los últimos elementos añadidos',
-        ],
+    'subtitle' => 'Subtítulo',
+    'content' => 'Contenido',
+    'image' => 'Imagen',
+    'background_color' => 'Color de fondo',
+    'appearance' => 'Apariencia',
+    'image_position' => 'Posición de la imagen',
+    'image_position_options' => [
+      'left' => 'Izquierda',
+      'right' => 'Derecha',
     ],
-    
-    // Meta information
-    'meta_info' => 'Información Meta',
-    'meta_title' => 'Título Meta',
-    'meta_description' => 'Descripción Meta',
-    'background_image' => 'Imagen de Fondo',
-    'no_blocks' => 'Esta página aún no tiene bloques de contenido.',
+    'types' => [
+      'text' => 'Texto',
+      'header' => 'Encabezado',
+      'relateds' => 'Contenido relacionado',
+    ],
+    'settings' => [
+      'full_width' => 'Ancho completo',
+      'text_alignment' => 'Alineación del texto',
+      'text_alignment_options' => [
+        'left' => 'Izquierda',
+        'center' => 'Centro',
+        'right' => 'Derecha',
+      ],
+      'model_type' => 'Tipo de contenido',
+      'model_type_options' => [
+        'hero' => 'Héroes',
+        'card' => 'Cartas',
+        'faction' => 'Facciones',
+      ],
+      'display_type' => 'Tipo de visualización',
+      'display_type_options' => [
+        'latest' => 'Más recientes',
+        'random' => 'Aleatorio',
+      ],
+      'button_text' => 'Texto del botón',
+    ],
+    'relateds' => [
+      'view_all' => 'Ver todos',
+    ],
+    'confirm_delete' => '¿Estás seguro de que deseas eliminar este bloque?',
+  ],
 ];

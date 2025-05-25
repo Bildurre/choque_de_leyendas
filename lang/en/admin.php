@@ -1,68 +1,57 @@
 <?php
 
 return [
-    // General
-    'dashboard' => 'Dashboard',
-    'administration' => 'Administration',
-    'game' => 'Game',
-    'content' => 'Content',
-    'settings' => 'Settings',
-    'configuration' => 'Configuration',
-    'home' => 'Home',
-    
-    // Actions
-    'create' => 'Create',
-    'edit' => 'Edit',
-    'update' => 'Update',
-    'delete' => 'Delete',
-    'save' => 'Save',
-    'cancel' => 'Cancel',
-    'back_to_list' => 'Back to list',
-    'confirm_delete' => 'Are you sure you want to delete this item?',
-    'restore' => 'Restore',
-    'force_delete' => 'Force Delete',
-    'confirm_force_delete' => 'Are you sure you want to permanently delete this item?',
-    'view' => 'View',
-    'save_order' => 'Save Order',
-    
-    // List view
-    'no_records' => 'No records found',
-    'active_items' => 'Active',
-    'trashed_items' => 'Trash',
-    'trashed' => 'Trash',
-    'deleted_at' => 'Deleted at: :date',
-    'yes' => 'Yes',
-    'no' => 'No',
-    'none' => 'None',
-    'draft' => 'Borrador',
-    'published' => 'Publicado',
-    'publication_status' => 'Publication Status',
-    'unpublish' => 'Unpublish',
-    'publish' => 'Publish',
-    
-    // Image upload
-    'drag_image_here' => 'Drag an image here',
-    'or_click_to_browse' => 'or click to browse',
-    'remove_image' => 'Remove image',
-    
-    // Form fields
-    'select_option' => 'Select an option',
-    'form_title' => 'Details',
-    
-    // Toggle sidebar
-    'toggle_sidebar' => 'Toggle Sidebar',
-
-    // Filters
-    'filters' => [
-        'title' => 'Filters',
-        'search' => 'Search',
-        'search_placeholder' => 'Type to search...',
-        'apply' => 'Apply',
-        'reset' => 'Reset',
-        'sort_by' => 'Sort by',
-        'sort_by_field' => 'Sort by :field',
-        'showing_all_results' => 'Showing all :count results',
-        'showing_filtered_results' => 'Showing :count of :total results',
-        'clear_filters' => 'Clear filters',
-    ],
+  // Main navigation
+  'dashboard' => 'Dashboard',
+  'home' => 'Home',
+  'admin_panel' => 'Admin Panel',
+  'game' => 'Game Components',
+  'content' => 'Content',
+  'settings' => 'Settings',
+  'logout' => 'Logout',
+  'toggle_sidebar' => 'Toggle sidebar',
+  
+  // States and actions
+  'active_items' => 'Active items',
+  'trashed_items' => 'Trash',
+  'published' => 'Published',
+  'draft' => 'Draft',
+  'deleted_at' => 'Deleted on :date',
+  
+  // Generic messages
+  'back_to_list' => 'Back to list',
+  'save_order' => 'Save order',
+  'reorder' => 'Reorder',
+  'drag_to_reorder' => 'Drag to reorder',
+  'select_option' => 'Select an option',
+  
+  // Filters
+  'filters' => [
+    'title' => 'Filters',
+    'search' => 'Search',
+    'search_placeholder' => 'Search...',
+    'apply' => 'Apply filters',
+    'clear_filters' => 'Clear filters',
+    'sort_by' => 'Sort by',
+    'sort_by_field' => 'Sort by :field',
+    'showing_all_results' => 'Showing all results (:count)',
+    'showing_filtered_results' => 'Showing :count of :total results',
+  ],
+  
+  // Specific confirmations
+  'confirm_force_delete' => 'Are you sure? This action cannot be undone.',
+  
+  // Images
+  'drag_image_here' => 'Drag image here',
+  'or_click_to_browse' => 'or click to browse',
+  'remove_image' => 'Remove image',
+  'current_image' => 'Current image',
+  
+  // Errors
+  'error_saving_order' => 'Error saving order',
+  'error_reordering' => 'Error reordering',
+  
+  // Specific success messages
+  'order_saved' => 'Order saved successfully',
+  'status_toggled' => 'Status updated successfully',
 ];

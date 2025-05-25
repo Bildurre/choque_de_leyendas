@@ -1,74 +1,91 @@
 <?php
 
 return [
-    // Common terms
-    'name' => 'Name',
-    'description' => 'Description',
-    'type' => 'Type',
-    'image' => 'Image',
-    'icon' => 'Icon',
-    'status' => 'Status',
-    'actions' => 'Actions',
-    'details' => 'Details',
-    'category' => 'Category',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
-    'color' => 'Color',
-    'yes' => 'Yes',
-    'no' => 'No',
-    
-    // Common statuses
-    'active' => 'Active',
-    'inactive' => 'Inactive',
-    'draft' => 'Draft',
-    'published' => 'Published',
-    
-    // Common actions
-    'search' => 'Search',
-    'filter' => 'Filter',
-    'apply' => 'Apply',
-    'clear' => 'Clear',
-    'export' => 'Export',
-    'import' => 'Import',
-    'print' => 'Print',
-    'download' => 'Download',
-    
-    // Common messages
-    'confirm' => 'Are you sure?',
-    'success' => 'Operation completed successfully.',
-    'error' => 'An error occurred.',
-    'warning' => 'Warning',
-    'info' => 'Information',
-
-    // Common Errors
-    'errors' => [
-    'create' => 'An error occurred while creating the :entity: ',
-    'update' => 'An error occurred while updating the :entity: ',
-    'delete' => 'An error occurred while deleting the :entity: ',
-    'restore' => 'An error occurred while restoring the :entity: ',
-    'force_delete' => 'An error occurred while permanently deleting the :entity: ',
-    ],
-
-    // Common successes
-    'success' => [
-        'created' => ':entity created successfully.',
-        'updated' => ':entity updated successfully.',
-        'deleted' => ':entity deleted successfully.',
-        'restored' => ':entity restored successfully.',
-        'force_deleted' => ':entity permanently deleted successfully.',
-    ],
-
-    // Costs
-    'no_cost' => 'No Cost',
-    'cost_exact' => 'Exact Cost',
-    'total_cost' => 'Total Cost',
-    'cost' => 'Cost',
-    'cost_contains' => 'Cost Contains',
-    'cost_order' => 'Cost Colors',
-    'cost_help' => 'Use R for Red dice, G for Green dice, and B for Blue dice',
-    'cost_colors' => [
-      'red' => 'Red',
-      'green' => 'Green',
-      'blue' => 'Blue'
-    ],
+  // Basic actions
+  'create' => 'Create',
+  'edit' => 'Edit',
+  'update' => 'Update',
+  'save' => 'Save',
+  'delete' => 'Delete',
+  'cancel' => 'Cancel',
+  'back' => 'Back',
+  'view' => 'View',
+  'search' => 'Search',
+  'filter' => 'Filter',
+  'sort' => 'Sort',
+  'download' => 'Download',
+  'export' => 'Export',
+  'import' => 'Import',
+  'upload' => 'Upload',
+  'select' => 'Select',
+  'confirm' => 'Confirm',
+  'restore' => 'Restore',
+  'publish' => 'Publish',
+  'unpublish' => 'Unpublish',
+  
+  // States
+  'active' => 'Active',
+  'inactive' => 'Inactive',
+  'published' => 'Published',
+  'draft' => 'Draft',
+  'deleted' => 'Deleted',
+  'archived' => 'Archived',
+  
+  // Common information
+  'name' => 'Name',
+  'description' => 'Description',
+  'type' => 'Type',
+  'status' => 'Status',
+  'created_at' => 'Created',
+  'updated_at' => 'Updated',
+  'deleted_at' => 'Deleted',
+  'actions' => 'Actions',
+  
+  // Generic messages
+  'yes' => 'Yes',
+  'no' => 'No',
+  'none' => 'None',
+  'all' => 'All',
+  'total' => 'Total',
+  'results' => 'Results',
+  'of' => 'of',
+  'to' => 'to',
+  'from' => 'from',
+  'showing' => 'Showing',
+  'per_page' => 'per page',
+  
+  // Confirmations
+  'confirm_delete' => 'Are you sure you want to delete this item?',
+  'confirm_restore' => 'Are you sure you want to restore this item?',
+  'confirm_publish' => 'Are you sure you want to publish this item?',
+  'confirm_unpublish' => 'Are you sure you want to unpublish this item?',
+  
+  // Success messages
+  'created_successfully' => 'Created successfully',
+  'updated_successfully' => 'Updated successfully',
+  'deleted_successfully' => 'Deleted successfully',
+  'restored_successfully' => 'Restored successfully',
+  'published_successfully' => 'Published successfully',
+  'unpublished_successfully' => 'Unpublished successfully',
+  
+  // Common errors
+  'error_occurred' => 'An error occurred',
+  'not_found' => 'Not found',
+  'unauthorized' => 'Unauthorized',
+  'forbidden' => 'Forbidden',
+  
+  // Game attributes
+  'cost' => 'Cost',
+  'attack' => 'Attack',
+  'defense' => 'Defense',
+  'health' => 'Health',
+  'damage' => 'Damage',
+  'effect' => 'Effect',
+  'ability' => 'Ability',
+  'passive' => 'Passive',
+  
+  // Others
+  'loading' => 'Loading...',
+  'no_results' => 'No results found',
+  'confirm_action' => 'Are you sure?',
 ];

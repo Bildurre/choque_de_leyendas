@@ -1,59 +1,102 @@
 <?php
 
 return [
-    // Navigation menu
-    'menu' => [
-        'home' => 'Inicio',
-        'explore' => 'Explorar',
-        'rules' => 'Reglas',
-        'gallery' => 'Galería',
-        'factions' => 'Facciones',
-        'heroes' => 'Héroes',
-        'cards' => 'Cartas',
-        'decks' => 'Mazos',
-        'admin_panel' => 'Panel de Administración',
+  // Navegación principal
+  'menu' => [
+    'home' => 'Inicio',
+    'factions' => 'Facciones',
+    'heroes' => 'Héroes',
+    'cards' => 'Cartas',
+    'rules' => 'Reglas',
+    'downloads' => 'Descargas',
+    'admin_panel' => 'Panel de administración',
+  ],
+  
+  // Página de bienvenida
+  'welcome' => [
+    'subtitle' => 'El juego de cartas coleccionables definitivo',
+    'description' => 'Explora el mundo de Alanda, conoce a los héroes y descubre todas las cartas del juego.',
+    'login' => 'Iniciar sesión',
+    'game_art' => 'Arte del juego',
+    'section_title_1' => 'Sobre el juego',
+    'section_title_2' => 'Facciones',
+    'section_title_3' => 'Características',
+    'section_title_4' => 'Más información',
+    'faction_image' => 'Imagen de facción',
+    'faction_name' => 'Facción',
+    'feature_icon' => 'Icono',
+    'feature_title_1' => 'Estrategia profunda',
+    'feature_title_2' => 'Combates épicos',
+    'feature_title_3' => 'Personalización total',
+    'feature_title_4' => 'Comunidad activa',
+    'cta_title' => '¿Listo para empezar?',
+    'cta_description' => 'Únete a miles de jugadores en batallas épicas.',
+  ],
+  
+  // Facciones
+  'factions' => [
+    'title' => 'Facciones',
+    'empty' => 'No hay facciones disponibles',
+    'heroes' => 'Héroes de la facción',
+    'cards' => 'Cartas de la facción',
+    'decks' => 'Mazos de la facción',
+    'no_heroes' => 'Esta facción no tiene héroes',
+    'no_cards' => 'Esta facción no tiene cartas',
+    'no_decks' => 'Esta facción no tiene mazos',
+  ],
+  
+  // Héroes
+  'heroes' => [
+    'title' => 'Héroes',
+    'description' => 'Descubre todos los héroes de Alanda',
+    'no_heroes' => 'No hay héroes disponibles',
+    'details' => 'Detalles',
+    'lore' => 'Historia',
+    'abilities' => 'Habilidades',
+    'stats' => 'Estadísticas',
+  ],
+  
+  // Cartas
+  'cards' => [
+    'title' => 'Cartas',
+    'description' => 'Explora todas las cartas del juego',
+    'no_cards' => 'No hay cartas disponibles',
+    'details' => 'Detalles',
+    'lore' => 'Historia',
+    'effect' => 'Efecto',
+    'restriction' => 'Restricción',
+  ],
+  
+  // Colección temporal
+  'collection' => [
+    'title' => 'Mi colección',
+    'add' => 'Añadir a la colección',
+    'remove' => 'Quitar de la colección',
+    'download' => 'Descargar PDF',
+    'empty' => 'Tu colección está vacía',
+    'added' => 'Añadido a la colección',
+    'removed' => 'Eliminado de la colección',
+  ],
+  
+  // Búsqueda y filtros
+  'search' => [
+    'placeholder' => 'Buscar...',
+    'no_results' => 'No se encontraron resultados',
+    'filters' => 'Filtros',
+    'clear_filters' => 'Limpiar filtros',
+    'sort_by' => 'Ordenar por',
+    'sort_options' => [
+      'name_asc' => 'Nombre (A-Z)',
+      'name_desc' => 'Nombre (Z-A)',
+      'cost_asc' => 'Coste (menor a mayor)',
+      'cost_desc' => 'Coste (mayor a menor)',
     ],
-    
-    // Welcome page
-    'welcome' => [
-        'subtitle' => 'El juego de cartas definitivo de batallas legendarias',
-        'description' => 'Explora el mundo de Alanda, un juego de cartas donde las leyendas se enfrentan en batallas épicas.',
-        'login' => 'Iniciar sesión',
-        'register' => 'Registrarse',
-        'game_art' => 'Arte del Juego',
-        'section_title_1' => 'Acerca del Juego',
-        'section_title_2' => 'Facciones',
-        'section_title_3' => 'Características del Juego',
-        'section_title_4' => 'Reglas del Juego',
-        'faction_image' => 'Imagen de Facción',
-        'faction_name' => 'Nombre de Facción',
-        'feature_icon' => 'Icono de Característica',
-        'feature_title_1' => 'Combate Estratégico',
-        'feature_title_2' => 'Construcción de Mazos',
-        'feature_title_3' => 'Héroes Épicos',
-        'feature_title_4' => 'Batallas Legendarias',
-        'cta_title' => '¿Listo para Jugar?',
-        'cta_description' => '¡Únete a la batalla y conviértete en una leyenda hoy!',
-    ],
-    
-    // Heroes section
-    'heroes' => [
-        'title' => 'Héroes',
-        'description' => 'Explora todos los héroes disponibles en Alanda: Choque de Leyendas. Cada héroe tiene habilidades únicas y pertenece a una facción específica.',
-        'no_heroes' => 'No hay héroes disponibles en este momento.',
-    ],
-    
-    // Factions section
-    'factions' => [
-        'title' => 'Facciones',
-        'description' => 'Descubre las diferentes facciones que luchan por el control de Alanda. Cada una tiene sus propias estrategias y estilo de juego.',
-        'no_factions' => 'No hay facciones disponibles en este momento.',
-    ],
-    
-    // Cards section
-    'cards' => [
-        'title' => 'Cartas',
-        'description' => 'Consulta todas las cartas del juego, desde equipamiento hasta hechizos y técnicas especiales.',
-        'no_cards' => 'No hay cartas disponibles en este momento.',
-    ],
+  ],
+  
+  // Pie de página
+  'footer' => [
+    'copyright' => '© :year Alanda - Choque de Leyendas. Todos los derechos reservados.',
+    'by' => 'por',
+    'under_license' => 'está bajo licencia',
+  ],
 ];
