@@ -33,6 +33,7 @@
 @use 'components/pagination';
 @use 'components/cost-display';
 @use 'components/icon-attribute';
+
 // Entity Components
 @use 'components/entity/list';
 @use 'components/entity/list-card';
@@ -72,3 +73,4 @@
 @use 'components/blocks/block';
 @use 'components/blocks/header';
 @use 'components/blocks/text';
+@use 'components/blocks/relateds';

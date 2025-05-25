@@ -49,15 +49,35 @@ return [
                 'right' => 'Right',
             ],
             'full_width' => 'Full Width',
+            // Relateds block settings
+            'model_type' => 'Item Type',
+            'display_type' => 'Display Type',
+            'button_text' => 'Button Text',
+            'model_types' => [
+                'faction' => 'Factions',
+                'hero' => 'Heroes',
+                'card' => 'Cards',
+            ],
+            'display_types' => [
+                'latest' => 'Latest Added',
+                'random' => 'Random Selection',
+            ],
         ],
         'confirm_delete' => 'Are you sure you want to delete this block?',
         'types' => [
             'text' => 'Text Block',
             'header' => 'Header Block',
+            'relateds' => 'Related Items',
             'image' => 'Image Block',
             'gallery' => 'Gallery Block',
             'cards' => 'Cards Block',
             'heroes' => 'Heroes Block',
+        ],
+        // Relateds block specific
+        'relateds' => [
+            'view_all' => 'View All',
+            'title_placeholder' => 'Featured Items',
+            'subtitle_placeholder' => 'Discover the latest added items',
         ],
     ],
     
@@ -66,5 +86,5 @@ return [
     'meta_title' => 'Meta Title',
     'meta_description' => 'Meta Description',
     'background_image' => 'Background Image',
-    'no_blocks' => 'This page has no content blocks yet.',
+    'no_blocks' => 'This page doesn\'t have content blocks yet.',
 ];

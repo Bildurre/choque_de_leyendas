@@ -39,7 +39,7 @@ class BlockRequest extends FormRequest
         }
         
         // Agregar reglas específicas según el tipo de bloque
-        if ($type === 'text') {
+         if ($type === 'text') {
             $rules['content'] = ['required', 'array'];
             $rules['content.es'] = ['required', 'string']; // El contenido en español es obligatorio
             
@@ -51,6 +51,10 @@ class BlockRequest extends FormRequest
             }
         } elseif ($type === 'header') {
             // Para un bloque de tipo encabezado, título es obligatorio
+            $rules['title'] = ['required', 'array'];
+            $rules['title.es'] = ['required', 'string'];
+        } elseif ($type === 'relateds') {
+            // Para un bloque de tipo relacionados, título es obligatorio
             $rules['title'] = ['required', 'array'];
             $rules['title.es'] = ['required', 'string'];
         }

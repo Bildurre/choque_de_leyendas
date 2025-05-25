@@ -49,15 +49,35 @@ return [
                 'right' => 'Derecha',
             ],
             'full_width' => 'Ancho Completo',
+            // Configuraciones del bloque relateds
+            'model_type' => 'Tipo de elemento',
+            'display_type' => 'Tipo de visualización',
+            'button_text' => 'Texto del botón',
+            'model_types' => [
+                'faction' => 'Facciones',
+                'hero' => 'Héroes',
+                'card' => 'Cartas',
+            ],
+            'display_types' => [
+                'latest' => 'Últimos añadidos',
+                'random' => 'Selección aleatoria',
+            ],
         ],
         'confirm_delete' => '¿Estás seguro de que quieres eliminar este bloque?',
         'types' => [
             'text' => 'Bloque de Texto',
             'header' => 'Bloque de Cabecera',
+            'relateds' => 'Elementos Relacionados',
             'image' => 'Bloque de Imagen',
             'gallery' => 'Bloque de Galería',
             'cards' => 'Bloque de Cartas',
             'heroes' => 'Bloque de Héroes',
+        ],
+        // Específicas del bloque relateds
+        'relateds' => [
+            'view_all' => 'Ver todos',
+            'title_placeholder' => 'Elementos destacados',
+            'subtitle_placeholder' => 'Descubre los últimos elementos añadidos',
         ],
     ],
     

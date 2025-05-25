@@ -40,6 +40,44 @@ return [
         ],
       ],
     ],
+    'relateds' => [
+      'name' => 'Related Items Block',
+      'view' => 'content.blocks.relateds',
+      'icon' => 'layers',
+      'allows_image' => false,
+      'settings' => [
+        'model_type' => [
+          'type' => 'select',
+          'default' => 'hero',
+          'options' => [
+            'faction' => 'Factions',
+            'hero' => 'Heroes',
+            'card' => 'Cards',
+          ],
+        ],
+        'display_type' => [
+          'type' => 'select',
+          'default' => 'latest',
+          'options' => [
+            'latest' => 'Latest Added',
+            'random' => 'Random Selection',
+          ],
+        ],
+        'button_text' => [
+          'type' => 'text',
+          'default' => 'Ver todos',
+        ],
+        'text_alignment' => [
+          'type' => 'select',
+          'default' => 'left',
+          'options' => [
+            'left' => 'Left',
+            'center' => 'Center',
+            'right' => 'Right',
+          ],
+        ],
+      ],
+    ],
       // Podemos añadir más tipos después
   ],
 
