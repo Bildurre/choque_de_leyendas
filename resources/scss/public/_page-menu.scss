@@ -2,6 +2,16 @@
 
 .nav-item {
   &--has-children {
+    // Mobile: hide icon
+    .nav-link__icon {
+      display: none;
+      
+      @include responsive(tablet) {
+        display: inline-block;
+        transition: transform $transition-fast;
+      }
+    }
+    
     // Desktop: hover behavior
     @include responsive(tablet) {
       &:hover, &:focus-within {
@@ -10,34 +20,33 @@
           opacity: 1;
           transform: translateY(0);
         }
+        
+        .nav-link__icon {
+          transform: rotateX(180deg) translateY(-25%);
+        }
       }
       
       .nav-link {
         display: flex;
         align-items: center;
         gap: $spacing-xs;
-        
-        &__icon {
-          transition: transform $transition-fast;
-        }
-      }
-      
-      &:hover .nav-link__icon,
-      &:focus-within .nav-link__icon {
-        transform: rotate(180deg);
-      }
-    }
-    
-    // Mobile: always show children
-    @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-      .nav-link__icon {
-        display: none;
       }
     }
   }
 }
 
 .nav-dropdown {
+  // Mobile first - always visible
+  position: static;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  margin-left: $spacing-lg;
+  margin-top: $spacing-xs;
+  
   // Desktop styles
   @include responsive(tablet) {
     position: absolute;
@@ -46,65 +55,62 @@
     z-index: $z-index-dropdown;
     min-width: 200px;
     background-color: var(--color-card-bg);
-    border: 1px solid var(--color-card-border);
+    border: 1px solid var(--random-accent-color-dark);
     border-radius: $border-radius-sm;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     visibility: hidden;
     opacity: 0;
     transform: translateY(-10px);
+    margin-left: 0;
+    margin-top: 0;
     transition: 
       visibility $transition-medium,
       opacity $transition-medium,
       transform $transition-medium;
   }
   
-  // Mobile styles - always visible
-  @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-    position: static;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    visibility: visible;
-    opacity: 1;
-    transform: none;
-    margin-left: $spacing-lg;
-    margin-top: $spacing-xs;
-  }
-  
   &__list {
     list-style: none;
     margin: 0;
-    padding: $spacing-xs 0;
+    padding: 0;
     
-    @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-      padding: 0;
+    @include responsive(tablet) {
+      padding: $spacing-xs 0;
     }
   }
   
   &__item {
+    margin-bottom: $spacing-xs;
+    
     @include responsive(tablet) {
+      margin-bottom: 0;
+      
       &:not(:last-child) {
         border-bottom: 1px solid var(--color-card-border);
       }
-    }
-    
-    @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-      margin-bottom: $spacing-xs;
     }
   }
   
   &__link {
     display: block;
-    color: var(--color-text-primary);
+    padding: $spacing-xs $spacing-md;
+    color: var(--color-text-secondary);
     text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: $border-radius-sm;
     transition: 
       background-color $transition-fast,
       color $transition-fast;
     
-    // Desktop styles
+    &:hover {
+      background-color: var(--random-accent-color-bg-light);
+      color: var(--random-accent-color);
+    }
+    
     @include responsive(tablet) {
       padding: $spacing-sm $spacing-md;
-      font-size: 0.9rem;
+      color: var(--color-text-primary);
+      border-radius: 0;
       
       &:hover, &:focus {
         background-color: var(--random-accent-color-bg-light);
@@ -112,26 +118,10 @@
       }
     }
     
-    // Mobile styles
-    @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-      padding: $spacing-xs $spacing-md;
-      font-size: 0.9rem;
-      color: var(--color-text-secondary);
-      border-radius: $border-radius-sm;
-      
-      &:hover {
-        background-color: var(--random-accent-color-bg-light);
-        color: var(--random-accent-color);
-      }
-    }
-    
     &.nav-link--active {
+      background-color: var(--random-accent-color-bg-light);
       color: var(--random-accent-color);
       font-weight: 600;
-      
-      @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-        background-color: var(--random-accent-color-bg-light);
-      }
     }
   }
 }
