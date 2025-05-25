@@ -10,8 +10,8 @@
 @if($rootPages->isNotEmpty())
   @foreach($rootPages as $page)
     @php
-      $publishedChildren = $page->children()->published()->count();
-      $hasPublishedChildren = $publishedChildren > 0;
+      $publishedChildren = $page->children()->published()->orderBy('order')->get();
+      $hasPublishedChildren = $publishedChildren->count() > 0;
     @endphp
     
     <li class="nav-item {{ $hasPublishedChildren ? 'nav-item--has-children' : '' }}">
@@ -26,7 +26,7 @@
       @if($hasPublishedChildren)
         <div class="nav-dropdown">
           <ul class="nav-dropdown__list">
-            @foreach($page->children()->published()->orderBy('order')->get() as $childPage)
+            @foreach($publishedChildren as $childPage)
               <li class="nav-dropdown__item">
                 <a href="{{ route('content.page', $childPage) }}" 
                    class="nav-dropdown__link {{ request()->url() == route('content.page', $childPage) ? $activeClass : '' }}">
