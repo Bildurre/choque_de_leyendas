@@ -8,23 +8,29 @@
 
 @php
   $locale = $locale ?? app()->getLocale();
-  $imageUrl = $entity->getPreviewImageUrl($locale);
   $altText = $alt ?? $entity->name;
   $componentClass = $type . '-preview-image';
 @endphp
 
-@if($imageUrl && $entity->hasPreviewImage($locale))
-  <img 
-    src="{{ $imageUrl }}" 
-    alt="{{ $altText }}"
-    class="preview-image {{ $componentClass }} {{ $class }}"
-    loading="lazy"
-  />
+@if($type === 'faction')
+  <x-previews.faction :faction="$entity" />
 @else
-  {{-- Fallback to component if preview image doesn't exist --}}
-  @if($type === 'hero')
-    <x-previews.hero :hero="$entity" />
-  @elseif($type === 'card')
-    <x-previews.card :card="$entity" />
+  @php
+    $imageUrl = $entity->getPreviewImageUrl($locale);
+  @endphp
+  
+  @if($imageUrl && $entity->hasPreviewImage($locale))
+    <img 
+      src="{{ $imageUrl }}" 
+      alt="{{ $altText }}"
+      class="preview-image {{ $componentClass }} {{ $class }}"
+      loading="lazy"
+    />
+  @else
+    @if($type === 'hero')
+      <x-previews.hero :hero="$entity" />
+    @elseif($type === 'card')
+      <x-previews.card :card="$entity" />
+    @endif
   @endif
 @endif

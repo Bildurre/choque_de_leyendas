@@ -56,7 +56,9 @@ h6 {
 
 a {
   color: var(--random-accent-color);
+  text-decoration: none;
   
+
   &:hover {
     color: var(--random-accent-color-hover);
   }

@@ -1,15 +1,27 @@
 <x-public-layout>
   {{-- Header Block --}}
-  <section class="block block--header">
-    <div class="block__inner">
-      <div class="header-block__content text-left">
-        <h2 class="header-block__title">{{ __('public.cards.title') }}</h2>
-        @if(__('public.cards.description') !== 'public.cards.description')
-          <h3 class="header-block__subtitle">{{ __('public.cards.description') }}</h3>
-        @endif
-      </div>
-    </div>
-  </section>
+  @php
+    $titleTranslations = [];
+    $subtitleTranslations = [];
+    
+    foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
+      $titleTranslations[$locale] = __('public.cards.title', [], $locale);
+      
+      $description = __('public.cards.description', [], $locale);
+      $subtitleTranslations[$locale] = $description !== 'public.cards.description' ? $description : '';
+    }
+    
+    $headerBlock = new \App\Models\Block([
+      'type' => 'header',
+      'title' => $titleTranslations,
+      'subtitle' => $subtitleTranslations,
+      'background_color' => 'none',
+      'settings' => [
+        'text_alignment' => 'left'
+      ]
+    ]);
+  @endphp
+  {!! $headerBlock->render() !!}
 
   {{-- Cards List Block --}}
   <section class="block">
@@ -37,4 +49,38 @@
       </x-entity.list>
     </div>
   </section>
+
+  {{-- Related Heroes Block --}}
+  @php
+    $heroesBlock = new \App\Models\Block([
+      'type' => 'relateds',
+      'title' => ['es' => 'Héroes', 'en' => 'Heroes'],
+      'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
+      'background_color' => 'none',
+      'settings' => [
+        'model_type' => 'hero',
+        'display_type' => 'random',
+        'button_text' => __('public.view_all_heroes'),
+        'text_alignment' => 'left'
+      ]
+    ]);
+  @endphp
+  {!! $heroesBlock->render() !!}
+
+  {{-- Related Factions Block --}}
+  @php
+    $factionsBlock = new \App\Models\Block([
+      'type' => 'relateds',
+      'title' => ['es' => 'Facciones', 'en' => 'Factions'],
+      'subtitle' => ['es' => 'Explora las facciones disponibles', 'en' => 'Explore the available factions'],
+      'background_color' => 'none',
+      'settings' => [
+        'model_type' => 'faction',
+        'display_type' => 'random',
+        'button_text' => __('public.view_all_factions'),
+        'text_alignment' => 'left'
+      ]
+    ]);
+  @endphp
+  {!! $factionsBlock->render() !!}
 </x-public-layout>

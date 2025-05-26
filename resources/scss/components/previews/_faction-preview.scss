@@ -1,0 +1,53 @@
+@use '../../abstracts/all' as *;
+
+.faction-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border: 2px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  background-color: var(--faction-color);
+  transition: all $transition-medium;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-$spacing-xs);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-color: var(--faction-color);
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: $spacing-lg;
+    text-align: center;
+  }
+  
+  &__icon {
+    width: 60%;
+    max-width: 120px;
+    margin-bottom: $spacing-md;
+    
+    img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+  }
+  
+  &__name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--faction-text);
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    
+    @include responsive(tablet) {
+      font-size: 1.5rem;
+    }
+  }
+}

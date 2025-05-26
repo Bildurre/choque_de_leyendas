@@ -13,7 +13,7 @@ class FactionController extends Controller
    */
   public function index(): View
   {
-    $factions = Faction::published()->orderBy('name')->get();
+    $factions = Faction::published()->orderBy('name')->paginate(12);
     
     return view('public.factions.index', compact('factions'));
   }

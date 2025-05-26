@@ -46,71 +46,65 @@
       </div>
       
       <div>
-        <fieldset class="form-fieldset">
-          <legend>{{ __('pages.blocks.appearance') }}</legend>
-          
-          <x-form.select
-            name="background_color"
-            :label="__('pages.blocks.background_color')"
-            :options="config('blocks.background_colors')"
-            :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
-          />
-          
-          @if($allowsImage ?? true)
-            <x-form.image-upload
-              name="image"
-              :label="__('pages.blocks.image')"
-              :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
-              :remove-name="isset($block) ? 'remove_image' : null"
+      <x-form.select
+        name="background_color"
+        :label="__('pages.blocks.background_color')"
+        :options="config('blocks.background_colors')"
+        :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
+      />
+      
+      @if($allowsImage ?? true)
+        <x-form.image-upload
+          name="image"
+          :label="__('pages.blocks.image')"
+          :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
+          :remove-name="isset($block) ? 'remove_image' : null"
+        />
+        
+        <!-- Siempre mostrar selección de posición cuando se permite imagen -->
+        <x-form.select
+          name="settings[image_position]"
+          :label="__('pages.blocks.image_position')"
+          :options="[
+            'left' => __('pages.blocks.image_position_options.left'),
+            'right' => __('pages.blocks.image_position_options.right')
+          ]"
+          :selected="old('settings.image_position', 
+            isset($block) && isset($block->settings['image_position']) 
+              ? $block->settings['image_position'] 
+              : 'left'
+          )"
+        />
+      @endif
+      
+      @if(isset($blockConfig['settings']))
+        @foreach($blockConfig['settings'] as $settingKey => $setting)
+          @if($setting['type'] === 'boolean')
+            <x-form.checkbox
+              name="settings[{{ $settingKey }}]"
+              :label="__('blocks.settings.' . $settingKey)"
+              :checked="old('settings.' . $settingKey, 
+                isset($block) && isset($block->settings[$settingKey]) 
+                  ? $block->settings[$settingKey] 
+                  : ($setting['default'] ?? false)
+              )"
             />
-            
-            <!-- Siempre mostrar selección de posición cuando se permite imagen -->
+          @elseif($setting['type'] === 'select')
             <x-form.select
-              name="settings[image_position]"
-              :label="__('pages.blocks.image_position')"
-              :options="[
-                'left' => __('pages.blocks.image_position_options.left'),
-                'right' => __('pages.blocks.image_position_options.right')
-              ]"
-              :selected="old('settings.image_position', 
-                isset($block) && isset($block->settings['image_position']) 
-                  ? $block->settings['image_position'] 
-                  : 'left'
+              name="settings[{{ $settingKey }}]"
+              :label="__('blocks.settings.' . $settingKey)"
+              :options="collect($setting['options'])->mapWithKeys(function($option, $key) use ($settingKey) {
+                return [$key => __('blocks.settings.' . $settingKey . '_options.' . $key)];
+              })->toArray()"
+              :selected="old('settings.' . $settingKey, 
+                isset($block) && isset($block->settings[$settingKey]) 
+                  ? $block->settings[$settingKey] 
+                  : ($setting['default'] ?? null)
               )"
             />
           @endif
-          
-          @if(isset($blockConfig['settings']))
-            @foreach($blockConfig['settings'] as $settingKey => $setting)
-              <!-- No necesitamos excluir image_position aquí porque lo eliminaremos de la configuración -->
-              @if($setting['type'] === 'boolean')
-                <x-form.checkbox
-                  name="settings[{{ $settingKey }}]"
-                  :label="__('blocks.settings.' . $settingKey)"
-                  :checked="old('settings.' . $settingKey, 
-                    isset($block) && isset($block->settings[$settingKey]) 
-                      ? $block->settings[$settingKey] 
-                      : ($setting['default'] ?? false)
-                  )"
-                />
-              @elseif($setting['type'] === 'select')
-                <x-form.select
-                  name="settings[{{ $settingKey }}]"
-                  :label="__('blocks.settings.' . $settingKey)"
-                  :options="collect($setting['options'])->mapWithKeys(function($option, $key) use ($settingKey) {
-                    return [$key => __('blocks.settings.' . $settingKey . '_options.' . $key)];
-                  })->toArray()"
-                  :selected="old('settings.' . $settingKey, 
-                    isset($block) && isset($block->settings[$settingKey]) 
-                      ? $block->settings[$settingKey] 
-                      : ($setting['default'] ?? null)
-                  )"
-                />
-              @endif
-            @endforeach
-          @endif
-        </fieldset>
-      </div>
+        @endforeach
+      @endif
     </div>
   </x-form.card>
 </form>
