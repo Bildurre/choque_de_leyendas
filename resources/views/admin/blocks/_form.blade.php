@@ -43,68 +43,120 @@
             required
           />
         @endif
+        
+        @if((!isset($block) && $type === 'cta') || (isset($block) && $block->type === 'cta'))
+          @php
+            $contentData = isset($block) ? $block->getTranslations('content') : [];
+            $textValues = [];
+            $buttonTextValues = [];
+            $buttonLinkValues = [];
+            
+            // Extraer los valores del content JSON
+            foreach (config('laravellocalization.supportedLocales', ['es' => []]) as $locale => $localeData) {
+              $textValues[$locale] = old("content.text.{$locale}", $contentData[$locale]['text'] ?? '');
+              $buttonTextValues[$locale] = old("content.button_text.{$locale}", $contentData[$locale]['button_text'] ?? '');
+              $buttonLinkValues[$locale] = old("content.button_link.{$locale}", $contentData[$locale]['button_link'] ?? '');
+            }
+          @endphp
+          
+          <x-form.multilingual-wysiwyg
+            name="content[text]"
+            :label="__('pages.blocks.cta_text')"
+            :values="$textValues"
+            required
+          />
+          
+          <x-form.multilingual-input
+            name="content[button_text]"
+            :label="__('pages.blocks.button_text')"
+            :values="$buttonTextValues"
+            required
+          />
+          
+          <x-form.multilingual-input
+            name="content[button_link]"
+            :label="__('pages.blocks.button_link')"
+            :values="$buttonLinkValues"
+            required
+          />
+        @endif
       </div>
       
       <div>
-      <x-form.select
-        name="background_color"
-        :label="__('pages.blocks.background_color')"
-        :options="config('blocks.background_colors')"
-        :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
-      />
-      
-      @if($allowsImage ?? true)
-        <x-form.image-upload
-          name="image"
-          :label="__('pages.blocks.image')"
-          :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
-          :remove-name="isset($block) ? 'remove_image' : null"
+        <x-form.select
+          name="background_color"
+          :label="__('pages.blocks.background_color')"
+          :options="config('blocks.background_colors')"
+          :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
         />
         
-        <!-- Siempre mostrar selección de posición cuando se permite imagen -->
-        <x-form.select
-          name="settings[image_position]"
-          :label="__('pages.blocks.image_position')"
-          :options="[
-            'left' => __('pages.blocks.image_position_options.left'),
-            'right' => __('pages.blocks.image_position_options.right')
-          ]"
-          :selected="old('settings.image_position', 
-            isset($block) && isset($block->settings['image_position']) 
-              ? $block->settings['image_position'] 
-              : 'left'
-          )"
-        />
-      @endif
-      
-      @if(isset($blockConfig['settings']))
-        @foreach($blockConfig['settings'] as $settingKey => $setting)
-          @if($setting['type'] === 'boolean')
-            <x-form.checkbox
-              name="settings[{{ $settingKey }}]"
-              :label="__('blocks.settings.' . $settingKey)"
-              :checked="old('settings.' . $settingKey, 
-                isset($block) && isset($block->settings[$settingKey]) 
-                  ? $block->settings[$settingKey] 
-                  : ($setting['default'] ?? false)
-              )"
-            />
-          @elseif($setting['type'] === 'select')
+        @if($allowsImage ?? true)
+          <x-form.image-upload
+            name="image"
+            :label="__('pages.blocks.image')"
+            :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
+            :remove-name="isset($block) ? 'remove_image' : null"
+          />
+          
+          @if((!isset($block) && in_array($type, ['text', 'cta'])) || (isset($block) && in_array($block->type, ['text', 'cta'])))
             <x-form.select
-              name="settings[{{ $settingKey }}]"
-              :label="__('blocks.settings.' . $settingKey)"
-              :options="collect($setting['options'])->mapWithKeys(function($option, $key) use ($settingKey) {
-                return [$key => __('blocks.settings.' . $settingKey . '_options.' . $key)];
-              })->toArray()"
-              :selected="old('settings.' . $settingKey, 
-                isset($block) && isset($block->settings[$settingKey]) 
-                  ? $block->settings[$settingKey] 
-                  : ($setting['default'] ?? null)
+              name="settings[image_position]"
+              :label="__('pages.blocks.image_position')"
+              :options="[
+                'left' => __('pages.blocks.image_position_options.left'),
+                'right' => __('pages.blocks.image_position_options.right'),
+                'top' => __('pages.blocks.image_position_options.top'),
+                'bottom' => __('pages.blocks.image_position_options.bottom')
+              ]"
+              :selected="old('settings.image_position', 
+                isset($block) && isset($block->settings['image_position']) 
+                  ? $block->settings['image_position'] 
+                  : 'left'
               )"
             />
           @endif
-        @endforeach
-      @endif
+        @endif
+        
+        @if(isset($blockConfig['settings']))
+          @foreach($blockConfig['settings'] as $settingKey => $setting)
+            @if($setting['type'] === 'boolean')
+              <x-form.checkbox
+                name="settings[{{ $settingKey }}]"
+                :label="__('blocks.settings.' . $settingKey)"
+                :checked="old('settings.' . $settingKey, 
+                  isset($block) && isset($block->settings[$settingKey]) 
+                    ? $block->settings[$settingKey] 
+                    : ($setting['default'] ?? false)
+                )"
+              />
+            @elseif($setting['type'] === 'select')
+              <x-form.select
+                name="settings[{{ $settingKey }}]"
+                :label="__('blocks.settings.' . $settingKey)"
+                :options="collect($setting['options'])->mapWithKeys(function($option, $key) use ($settingKey) {
+                  return [$key => __('blocks.settings.' . $settingKey . '_options.' . $key)];
+                })->toArray()"
+                :selected="old('settings.' . $settingKey, 
+                  isset($block) && isset($block->settings[$settingKey]) 
+                    ? $block->settings[$settingKey] 
+                    : ($setting['default'] ?? null)
+                )"
+              />
+            @elseif($setting['type'] === 'text')
+              <x-form.input
+                type="text"
+                name="settings[{{ $settingKey }}]"
+                :label="__('blocks.settings.' . $settingKey)"
+                :value="old('settings.' . $settingKey, 
+                  isset($block) && isset($block->settings[$settingKey]) 
+                    ? $block->settings[$settingKey] 
+                    : ($setting['default'] ?? '')
+                )"
+              />
+            @endif
+          @endforeach
+        @endif
+      </div>
     </div>
   </x-form.card>
 </form>

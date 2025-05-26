@@ -238,6 +238,11 @@ $sizeClass = $sizes[$size] ?? $sizes['md'];
         <line x1="2" y1="2" x2="22" y2="22"></line>
       </svg>
       @break
+    @case('megaphone')
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12l-18 0m18 0l-2-7l-6 7l-4 0l0 4l4 0l6 7l2-7m-11-2l0 0"></path>
+      </svg>
+      @break
     @default
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"></circle>

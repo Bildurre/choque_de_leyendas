@@ -39,7 +39,7 @@ class BlockRequest extends FormRequest
         }
         
         // Agregar reglas específicas según el tipo de bloque
-         if ($type === 'text') {
+        if ($type === 'text') {
             $rules['content'] = ['required', 'array'];
             $rules['content.es'] = ['required', 'string']; // El contenido en español es obligatorio
             
@@ -57,6 +57,28 @@ class BlockRequest extends FormRequest
             // Para un bloque de tipo relacionados, título es obligatorio
             $rules['title'] = ['required', 'array'];
             $rules['title.es'] = ['required', 'string'];
+        } elseif ($type === 'cta') {
+            // Para un bloque de tipo CTA
+            $rules['title'] = ['required', 'array'];
+            $rules['title.es'] = ['required', 'string'];
+            
+            // El content en CTA contendrá: text, button_text, button_link
+            $rules['content'] = ['required', 'array'];
+            $rules['content.text'] = ['required', 'array'];
+            $rules['content.text.es'] = ['required', 'string'];
+            $rules['content.button_text'] = ['required', 'array'];
+            $rules['content.button_text.es'] = ['required', 'string'];
+            $rules['content.button_link'] = ['required', 'array'];
+            $rules['content.button_link.es'] = ['required', 'string'];
+            
+            // Otros idiomas son opcionales
+            foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
+                if ($locale !== 'es') {
+                    $rules["content.text.{$locale}"] = ['nullable', 'string'];
+                    $rules["content.button_text.{$locale}"] = ['nullable', 'string'];
+                    $rules["content.button_link.{$locale}"] = ['nullable', 'string'];
+                }
+            }
         }
         
         // También podríamos tener reglas específicas para cada campo settings según el tipo
@@ -84,6 +106,12 @@ class BlockRequest extends FormRequest
         return [
             'content.required' => 'El contenido del bloque es obligatorio.',
             'content.es.required' => 'El contenido en español es obligatorio.',
+            'content.text.required' => 'El texto del CTA es obligatorio.',
+            'content.text.es.required' => 'El texto del CTA en español es obligatorio.',
+            'content.button_text.required' => 'El texto del botón es obligatorio.',
+            'content.button_text.es.required' => 'El texto del botón en español es obligatorio.',
+            'content.button_link.required' => 'El enlace del botón es obligatorio.',
+            'content.button_link.es.required' => 'El enlace del botón en español es obligatorio.',
             'title.required' => 'El título del bloque es obligatorio.',
             'title.es.required' => 'El título en español es obligatorio.',
             'image.image' => 'El archivo debe ser una imagen válida.',

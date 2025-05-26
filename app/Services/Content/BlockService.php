@@ -25,6 +25,11 @@ class BlockService
      */
     public function create(array $data): Block
     {
+        // Process content for CTA blocks
+        if ($data['type'] === 'cta' && isset($data['content'])) {
+            $data = $this->processCTAContent($data);
+        }
+        
         // Process translatable fields
         $data = $this->processTranslatableFields($data, $this->translatableFields);
         
@@ -59,6 +64,11 @@ class BlockService
      */
     public function update(Block $block, array $data): Block
     {
+        // Process content for CTA blocks
+        if ($block->type === 'cta' && isset($data['content'])) {
+            $data = $this->processCTAContent($data);
+        }
+        
         // Process translatable fields
         $data = $this->processTranslatableFields($data, $this->translatableFields);
         
@@ -132,5 +142,31 @@ class BlockService
     public function getBlockTypes(): array
     {
         return config('blocks.types', []);
+    }
+    
+    /**
+     * Process CTA content structure
+     */
+    protected function processCTAContent(array $data): array
+    {
+        if (isset($data['content']['text']) && 
+            isset($data['content']['button_text']) && 
+            isset($data['content']['button_link'])) {
+            
+            $processedContent = [];
+            $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
+            
+            foreach ($locales as $locale) {
+                $processedContent[$locale] = [
+                    'text' => $data['content']['text'][$locale] ?? '',
+                    'button_text' => $data['content']['button_text'][$locale] ?? '',
+                    'button_link' => $data['content']['button_link'][$locale] ?? ''
+                ];
+            }
+            
+            $data['content'] = $processedContent;
+        }
+        
+        return $data;
     }
 }

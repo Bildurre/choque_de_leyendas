@@ -1,13 +1,18 @@
-<section class="block block--text {{ $block->image ? 'has-image' : '' }} {{ $block->image && in_array(($block->settings['image_position'] ?? 'left'), ['left', 'right']) ? 'has-image-beside' : '' }}" 
+<section class="block block--text" 
   @if($block->background_color && $block->background_color != 'none') 
     data-background="{{ $block->background_color }}"
   @endif
 >
+  @php
+    $imagePosition = $block->settings['image_position'] ?? 'top';
+    $hasImage = $block->image ? true : false;
+    $contentWrapperClass = $hasImage ? 'has-image-' . $imagePosition : '';
+  @endphp
+  
   <div class="block__inner @if($block->settings['full_width'] ?? false) block__inner--full-width @endif">
-    <!-- Eliminar la comprobación para 'top' ya que no es una opción en la configuración actual -->
-    <div class="block__content-wrapper {{ $block->image ? 'has-image-' . ($block->settings['image_position'] ?? 'left') : '' }}">
-      @if($block->image && ($block->settings['image_position'] ?? 'left') == 'left')
-        <div class="block__image block__image--left">
+    <div class="block__content-wrapper {{ $contentWrapperClass }}">
+      @if($block->image && in_array($imagePosition, ['top', 'left']))
+        <div class="block__image">
           <img src="{{ $block->getImageUrl() }}" alt="{{ $block->title }}">
         </div>
       @endif
@@ -24,8 +29,8 @@
         <div class="block__content text-{{ $block->settings['text_alignment'] ?? 'left' }}">{!! $block->content !!}</div>
       </div>
       
-      @if($block->image && ($block->settings['image_position'] ?? 'left') == 'right')
-        <div class="block__image block__image--right">
+      @if($block->image && in_array($imagePosition, ['right', 'bottom']))
+        <div class="block__image">
           <img src="{{ $block->getImageUrl() }}" alt="{{ $block->title }}">
         </div>
       @endif

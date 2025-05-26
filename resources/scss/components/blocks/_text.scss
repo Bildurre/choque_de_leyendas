@@ -1,8 +1,129 @@
 @use '../../abstracts/all' as *;
 
 .block--text {
-  // Específico para el bloque de texto
+  // Contenedor principal del contenido
+  .block__content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+    
+    // Imagen arriba (por defecto en móvil)
+    &.has-image-top {
+      .block__image {
+        order: -1;
+      }
+    }
+    
+    // Imagen abajo
+    &.has-image-bottom {
+      .block__image {
+        order: 2;
+      }
+    }
+    
+    // Imagen a la izquierda (solo desktop)
+    &.has-image-left {
+      @include responsive(tablet) {
+        grid-template-columns: 2fr 3fr;
+        align-items: center;
+        
+        .block__image {
+          order: -1;
+        }
+      }
+    }
+    
+    // Imagen a la derecha (solo desktop)
+    &.has-image-right {
+      @include responsive(tablet) {
+        grid-template-columns: 3fr 2fr;
+        align-items: center;
+        
+        .block__image {
+          order: 2;
+        }
+      }
+    }
+  }
+  
+  // Estilos para la imagen
+  .block__image {
+    width: 100%;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    
+    // Para imágenes laterales, limitar altura
+    .has-image-left &,
+    .has-image-right & {
+      @include responsive(tablet) {
+        max-height: 30rem;
+        
+        img {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  
+  // Contenedor del contenido textual
+  .block__content-column {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+  
+  // Estilos específicos del contenido
   .block__content {
     margin: 0 auto;
+    color: var(--color-text-primary);
+    
+    p {
+      margin-bottom: $spacing-md;
+      line-height: 1.6;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    ul, ol {
+      margin-bottom: $spacing-md;
+      margin-left: $spacing-lg;
+      
+      li {
+        margin-bottom: $spacing-xs;
+      }
+    }
+    
+    a {
+      color: var(--random-accent-color);
+      text-decoration: none;
+      
+      &:hover {
+        color: var(--random-accent-color-hover);
+        text-decoration: underline;
+      }
+    }
+    
+    blockquote {
+      margin: $spacing-md 0;
+      padding: $spacing-sm $spacing-md;
+      border-left: 4px solid var(--random-accent-color);
+      background-color: var(--color-card-bg);
+      font-style: italic;
+    }
+    
+    h2, h3, h4, h5, h6 {
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-sm;
+    }
   }
 }

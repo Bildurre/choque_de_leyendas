@@ -78,6 +78,45 @@ return [
         ],
       ],
     ],
+    'cta' => [
+      'name' => 'CTA Block',
+      'view' => 'content.blocks.cta',
+      'icon' => 'megaphone',
+      'allows_image' => true,
+      'settings' => [
+        'text_alignment' => [
+          'type' => 'select',
+          'default' => 'center',
+          'options' => [
+            'left' => 'Left',
+            'center' => 'Center',
+            'right' => 'Right',
+          ],
+        ],
+        'button_variant' => [
+          'type' => 'select',
+          'default' => 'primary',
+          'options' => [
+            'primary' => 'Primary',
+            'secondary' => 'Secondary',
+            'accent' => 'Accent',
+          ],
+        ],
+        'button_size' => [
+          'type' => 'select',
+          'default' => 'lg',
+          'options' => [
+            'sm' => 'Small',
+            'md' => 'Medium',
+            'lg' => 'Large',
+          ],
+        ],
+        'full_width' => [
+          'type' => 'boolean',
+          'default' => false,
+        ],
+      ],
+    ],
       // Podemos añadir más tipos después
   ],
 

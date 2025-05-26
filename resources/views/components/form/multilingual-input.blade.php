@@ -10,11 +10,14 @@
 @php
   // Obtener el idioma actual de la aplicación
   $currentLocale = app()->getLocale();
+  
+  // Generar un ID base seguro reemplazando caracteres problemáticos
+  $safeIdBase = str_replace(['[', ']', ' '], ['_', '', '_'], $name);
 @endphp
 
 <div class="form-field form-field--multilingual">
   @if($label)
-    <x-form.label :for="$name.'_'.$currentLocale" :required="$required">{{ $label }}</x-form.label>
+    <x-form.label :for="$safeIdBase.'_'.$currentLocale" :required="$required">{{ $label }}</x-form.label>
   @endif
   
   <x-form.language-tabs :locales="$locales" :field-name="$name">
@@ -23,7 +26,7 @@
         <input 
           type="text"
           name="{{ $name }}[{{ $locale }}]"
-          id="{{ $name }}_{{ $locale }}"
+          id="{{ $safeIdBase }}_{{ $locale }}"
           value="{{ $values[$locale] ?? old($name.'.'.$locale, '') }}"
           placeholder="{{ $placeholder }}"
           class="form-input"
