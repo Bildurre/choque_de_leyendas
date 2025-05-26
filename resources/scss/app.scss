@@ -68,7 +68,8 @@
 
 // Pages
 @use 'pages/login';
-@use 'pages/heroes/heroes-index';
+@use 'pages/hero-detail';
+@use 'pages/card-detail';
 
 // Bloques
 @use 'components/blocks/block';

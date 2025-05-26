@@ -11,7 +11,7 @@
 
 @switch($type)
   @case('will')
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 624 724" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
       <path class="icon-attribute__path"
         fill="none" stroke="currentColor" stroke-width="8"
         d="M 188.00,694.00
@@ -118,7 +118,7 @@
     @break
   
   @case('strength')
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 624 724" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
       <path class="icon-attribute__path" 
         fill="none" stroke="currentColor" stroke-width="8"
         d="M 186.00,335.00
@@ -291,7 +291,7 @@
     @break
   
   @case('mental')
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 624 724" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
       <path class="icon-attribute__path"
         fill="none" stroke="currentColor" stroke-width="8"
         d="M 425.00,633.00
@@ -410,7 +410,7 @@
     @break
   
   @case('health')
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 650" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 674 674" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
       <path class="icon-attribute__path"
         fill="none" stroke="currentColor" stroke-width="8"
         d="M 326.00,115.00
@@ -445,7 +445,7 @@
     @break
   
   @case('armor')
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 624 724" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
       <path class="icon-attribute__path"
         fill="none" stroke="currentColor" stroke-width="8"
         d="M 297.00,3.57
@@ -577,7 +577,7 @@
     @break
   
   @case('agility')
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 624 724" {{ $attributes->merge(['class' => "icon-attribute $colorClass"]) }}>
       <path class="icon-attribute__path"
         fill="none" stroke="currentColor" stroke-width="8"
         d="M 4.28,4.04
@@ -734,7 +734,7 @@
   
   @default
     <!-- Icono por defecto para tipos desconocidos -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 650">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 674 674">
       <circle cx="325" cy="325" r="250" fill="none" stroke="currentColor" stroke-width="8"/>
     </svg>
 @endswitch
