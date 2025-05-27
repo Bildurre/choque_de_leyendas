@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +13,7 @@ class AttackSubtype extends Model
   use HasFactory;
   use HasTranslations;
   use SoftDeletes;
-  use HasAdminFilters;
+  use HasFilters;
 
   /**
    * The table associated with the model.

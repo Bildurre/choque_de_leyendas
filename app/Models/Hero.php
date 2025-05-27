@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use App\Models\Traits\HasPreviewImage;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
@@ -22,7 +22,7 @@ class Hero extends Model implements LocalizedUrlRoutable
   use HasTranslatableSlug;
   use SoftDeletes;
   use HasImageAttribute;
-  use HasAdminFilters;
+  use HasFilters;
   use HasPublishedAttribute;
   use HasPreviewImage;
 

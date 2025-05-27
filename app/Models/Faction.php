@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasColorAttribute;
 use App\Models\Traits\HasImageAttribute;
@@ -22,7 +22,7 @@ class Faction extends Model implements LocalizedUrlRoutable
   use SoftDeletes;
   use HasColorAttribute;
   use HasImageAttribute;
-  use HasAdminFilters;
+  use HasFilters;
   use HasPublishedAttribute;
 
   /**

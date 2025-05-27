@@ -22,124 +22,35 @@
       box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
     }
     
-    // Variantes según posición de imagen
-    &.has-image-left,
-    &.has-image-right {
-      @include responsive(tablet) {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    // Usar la estructura de grid del block general
+    @include responsive(tablet) {
+      &.has-image-left,
+      &.has-image-right {
         max-width: 64rem;
       }
     }
-    
-    &.has-image-right {
-      .cta-block__image {
-        @include responsive(tablet) {
-          order: 2;
-        }
-      }
-    }
   }
   
-  .cta-block__image {
-    width: 100%;
-    height: 16rem;
-    overflow: hidden;
-    
-    @include responsive(tablet) {
-      height: 100%;
-      min-height: 20rem;
-    }
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    // Para imágenes laterales
-    .has-image-left &,
-    .has-image-right & {
-      @include responsive(tablet) {
-        height: 100%;
-      }
-    }
-    
-    // Para imagen inferior
-    .has-image-bottom & {
-      order: 2;
-    }
-  }
-  
-  .cta-block__content {
+  // Sobrescribir el padding del block__content para CTA
+  .block__content {
     padding: $spacing-xl;
     
     @include responsive(tablet) {
       padding: $spacing-xxl;
     }
-    
-    // Ajustes para imágenes laterales
-    .has-image-left &,
-    .has-image-right & {
-      @include responsive(tablet) {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-    }
   }
   
-  .cta-block__title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin-bottom: $spacing-md;
+  // El block__image necesita ajustes específicos para CTA
+  .block__image {
+    height: 16rem;
+    margin: 0; // Resetear márgenes del block general
+    border-radius: 0; // Sin border radius en CTA
     
     @include responsive(tablet) {
-      font-size: 2.5rem;
-    }
-  }
-  
-  .cta-block__subtitle {
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-    margin-bottom: $spacing-lg;
-    
-    @include responsive(tablet) {
-      font-size: 1.5rem;
-    }
-  }
-  
-  .cta-block__text {
-    margin-bottom: $spacing-xl;
-    color: var(--color-text-primary);
-    line-height: 1.6;
-    
-    p {
-      margin-bottom: $spacing-md;
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-    
-    ul, ol {
-      margin-bottom: $spacing-md;
-      margin-left: $spacing-lg;
-      
-      li {
-        margin-bottom: $spacing-xs;
-      }
-    }
-    
-    a {
-      color: var(--random-accent-color);
-      text-decoration: none;
-      
-      &:hover {
-        color: var(--random-accent-color-hover);
-        text-decoration: underline;
+      .has-image-left &,
+      .has-image-right & {
+        height: auto;
+        min-height: 20rem;
       }
     }
   }
@@ -150,26 +61,20 @@
     margin-top: $spacing-xl;
   }
   
-  // Variantes de alineación
+  // Variantes de alineación del botón
   .text-left {
-    text-align: left;
-    
     .cta-block__action {
       justify-content: flex-start;
     }
   }
   
   .text-center {
-    text-align: center;
-    
     .cta-block__action {
       justify-content: center;
     }
   }
   
   .text-right {
-    text-align: right;
-    
     .cta-block__action {
       justify-content: flex-end;
     }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use App\Models\Traits\HasPreviewImage;
 use App\Models\Traits\HasCostAttribute;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +23,7 @@ class Card extends Model implements LocalizedUrlRoutable
   use SoftDeletes;
   use HasImageAttribute;
   use HasCostAttribute;
-  use HasAdminFilters;
+  use HasFilters;
   use HasPublishedAttribute;
   use HasPreviewImage;
 

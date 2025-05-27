@@ -97,7 +97,7 @@
             :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
             :remove-name="isset($block) ? 'remove_image' : null"
           />
-          
+
           @if((!isset($block) && in_array($type, ['text', 'cta'])) || (isset($block) && in_array($block->type, ['text', 'cta'])))
             <x-form.select
               name="settings[image_position]"
@@ -112,6 +112,39 @@
                 isset($block) && isset($block->settings['image_position']) 
                   ? $block->settings['image_position'] 
                   : 'left'
+              )"
+            />
+            
+            <x-form.select
+              name="settings[image_scale_mode]"
+              :label="__('pages.blocks.image_scale_mode')"
+              :options="[
+                'adjust' => __('pages.blocks.image_scale_mode_options.adjust'),
+                'maintain' => __('pages.blocks.image_scale_mode_options.maintain')
+              ]"
+              :selected="old('settings.image_scale_mode', 
+                isset($block) && isset($block->settings['image_scale_mode']) 
+                  ? $block->settings['image_scale_mode'] 
+                  : 'adjust'
+              )"
+            />
+            
+            <x-form.select
+              name="settings[column_proportions]"
+              :label="__('pages.blocks.column_proportions')"
+              :options="[
+                '1-1' => '1:1',
+                '2-1' => '2:1',
+                '1-2' => '1:2',
+                '3-1' => '3:1',
+                '1-3' => '1:3',
+                '3-2' => '3:2',
+                '2-3' => '2:3'
+              ]"
+              :selected="old('settings.column_proportions', 
+                isset($block) && isset($block->settings['column_proportions']) 
+                  ? $block->settings['column_proportions'] 
+                  : '1-1'
               )"
             />
           @endif

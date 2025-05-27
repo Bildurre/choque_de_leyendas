@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
@@ -16,7 +16,7 @@ class Counter extends Model
   use SoftDeletes;
   use HasTranslations;
   use HasImageAttribute;
-  use HasAdminFilters;
+  use HasFilters;
   use HasPublishedAttribute;
 
   /**

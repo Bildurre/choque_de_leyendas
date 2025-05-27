@@ -7,6 +7,15 @@
     $imagePosition = $block->settings['image_position'] ?? 'top';
     $hasImage = $block->image ? true : false;
     $contentWrapperClass = $hasImage ? 'has-image-' . $imagePosition : '';
+    
+    // Añadir clases para scale mode y proportions
+    if ($hasImage && in_array($imagePosition, ['left', 'right'])) {
+      $scaleMode = $block->settings['image_scale_mode'] ?? 'adjust';
+      $contentWrapperClass .= ' image-scale-' . $scaleMode;
+      
+      $proportions = $block->settings['column_proportions'] ?? '1-1';
+      $contentWrapperClass .= ' proportions-' . $proportions;
+    }
   @endphp
   
   <div class="block__inner @if($block->settings['full_width'] ?? false) block__inner--full-width @endif">

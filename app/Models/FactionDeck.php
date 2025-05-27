@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
@@ -20,7 +20,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   use HasTranslatableSlug;
   use SoftDeletes;
   use HasImageAttribute;
-  use HasAdminFilters;
+  use HasFilters;
   use HasPublishedAttribute;
 
   /**

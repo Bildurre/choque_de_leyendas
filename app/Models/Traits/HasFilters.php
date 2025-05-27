@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-trait HasAdminFilters
+trait HasFilters
 {
   /**
    * Apply all admin filters to the query builder

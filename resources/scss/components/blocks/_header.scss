@@ -14,26 +14,4 @@
   .header-block__content {
     margin: 0 auto;
   }
-  
-  .header-block__title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin-bottom: $spacing-md;
-    
-    @include responsive(tablet) {
-      font-size: 3rem;
-    }
-  }
-  
-  .header-block__subtitle {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-    margin-bottom: $spacing-lg;
-    
-    @include responsive(tablet) {
-      font-size: 1.75rem;
-    }
-  }
 }

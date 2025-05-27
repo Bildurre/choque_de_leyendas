@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasAdminFilters;
+use App\Models\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +14,7 @@ class HeroClass extends Model
   use HasFactory;
   use HasTranslations;
   use SoftDeletes;
-  use HasAdminFilters;
+  use HasFilters;
 
   /**
    * The table associated with the model.
