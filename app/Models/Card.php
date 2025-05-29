@@ -79,20 +79,30 @@ class Card extends Model implements LocalizedUrlRoutable
   ];
 
   /**
-  * Get fields that can be searched
-  *
-  * @return array
-  */
+   * Get fields that can be searched in admin
+   *
+   * @return array
+   */
   public function getAdminSearchable(): array
+  {
+    return ['lore_text', 'effect', 'restriction'];
+  }
+
+  /**
+   * Get fields that can be searched in public
+   *
+   * @return array
+   */
+  public function getPublicSearchable(): array
   {
     return ['lore_text', 'effect', 'restriction'];
   }
   
   /**
-  * Get fields that can be filtered
-  *
-  * @return array
-  */
+   * Get fields that can be filtered in admin
+   *
+   * @return array
+   */
   public function getAdminFilterable(): array
   {
     return [
@@ -160,12 +170,110 @@ class Card extends Model implements LocalizedUrlRoutable
       ],
     ];
   }
+
+  /**
+   * Get fields that can be filtered in public
+   *
+   * @return array
+   */
+  public function getPublicFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'faction_id',
+        'relation' => 'faction',
+        'label' => __('entities.factions.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'card_type_id',
+        'relation' => 'cardType',
+        'label' => __('entities.card_types.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'nested_relation',
+        'field' => 'cardType.hero_superclass_id',
+        'through' => ['cardType', 'heroSuperclass'],
+        'label' => __('entities.hero_superclasses.singular'),
+        'option_model' => \App\Models\HeroSuperclass::class,
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'equipment_type_id',
+        'relation' => 'equipmentType',
+        'label' => __('entities.equipment_types.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'attack_range_id',
+        'relation' => 'attackRange',
+        'label' => __('entities.attack_ranges.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'attack_subtype_id',
+        'relation' => 'attackSubtype',
+        'label' => __('entities.attack_subtypes.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'cost_range',
+        'field' => 'cost_total',
+        'label' => __('common.total_cost'),
+        'options' => [
+          '0' => '0',
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'cost_colors',
+        'field' => 'cost_colors',
+        'label' => __('common.cost_contains'),
+        'options' => [
+          'R' => __('common.cost_colors.red'),
+          'G' => __('common.cost_colors.green'),
+          'B' => __('common.cost_colors.blue')
+        ]
+      ],
+      [
+        'type' => 'cost_exact',
+        'field' => 'cost_exact',
+        'label' => __('common.cost_exact'),
+        'options' => $this->getPredefinedCostOptions()
+      ],
+      [
+        'type' => 'enum',
+        'field' => 'area',
+        'label' => __('entities.cards.area'),
+        'options' => [
+          '1' => __('common.yes'),
+          '0' => __('common.no')
+        ]
+      ],
+    ];
+  }
   
   /**
-  * Get fields that can be sorted
-  *
-  * @return array
-  */
+   * Get fields that can be sorted in admin
+   *
+   * @return array
+   */
   public function getAdminSortable(): array
   {
     return [
@@ -194,6 +302,39 @@ class Card extends Model implements LocalizedUrlRoutable
       [
         'field' => 'is_published',
         'label' => __('admin.publication_status')
+      ],
+    ];
+  }
+
+  /**
+   * Get fields that can be sorted in public
+   *
+   * @return array
+   */
+  public function getPublicSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.cards.name')
+      ],
+      [
+        'field' => 'faction.name',
+        'label' => __('entities.factions.singular')
+      ],
+      [
+        'field' => 'cardType.name',
+        'label' => __('entities.card_types.singular')
+      ],
+      [
+        'field' => 'cost_total',
+        'label' => __('common.total_cost'),
+        'custom_sort' => 'cost_total'
+      ],
+      [
+        'field' => 'cost_order',
+        'label' => __('common.cost_order'),
+        'custom_sort' => 'cost_order'
       ],
     ];
   }

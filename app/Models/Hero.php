@@ -88,20 +88,30 @@ class Hero extends Model implements LocalizedUrlRoutable
   ];
 
   /**
-  * Get fields that can be searched
-  *
-  * @return array
-  */
+   * Get fields that can be searched in admin
+   *
+   * @return array
+   */
   public function getAdminSearchable(): array
   {
     return ['lore_text'];
   }
+
+  /**
+   * Get fields that can be searched in public
+   *
+   * @return array
+   */
+  public function getPublicSearchable(): array
+  {
+    return ['lore_text', 'passive_name', 'passive_description'];
+  }
   
   /**
-  * Get fields that can be filtered
-  *
-  * @return array
-  */
+   * Get fields that can be filtered in admin
+   *
+   * @return array
+   */
   public function getAdminFilterable(): array
   {
     return [
@@ -151,12 +161,125 @@ class Hero extends Model implements LocalizedUrlRoutable
       ],
     ];
   }
+
+  /**
+   * Get fields that can be filtered in public
+   *
+   * @return array
+   */
+  public function getPublicFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relation',
+        'field' => 'faction_id',
+        'relation' => 'faction',
+        'label' => __('entities.factions.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'nested_relation',
+        'field' => 'heroClass.hero_superclass_id',
+        'through' => ['heroClass', 'heroSuperclass'],
+        'label' => __('entities.hero_superclasses.singular'),
+        'option_model' => \App\Models\HeroSuperclass::class,
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'hero_class_id',
+        'relation' => 'heroClass',
+        'label' => __('entities.hero_classes.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'hero_race_id',
+        'relation' => 'heroRace',
+        'label' => __('entities.hero_races.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'enum',
+        'field' => 'gender',
+        'label' => __('entities.heroes.gender'),
+        'options' => [
+          'male' => __('entities.heroes.genders.male'),
+          'female' => __('entities.heroes.genders.female')
+        ]
+      ],
+      [
+        'type' => 'attribute_range',
+        'field' => 'agility',
+        'label' => __('entities.heroes.attributes.agility'),
+        'options' => [
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'attribute_range',
+        'field' => 'mental',
+        'label' => __('entities.heroes.attributes.mental'),
+        'options' => [
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'attribute_range',
+        'field' => 'will',
+        'label' => __('entities.heroes.attributes.will'),
+        'options' => [
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'attribute_range',
+        'field' => 'strength',
+        'label' => __('entities.heroes.attributes.strength'),
+        'options' => [
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+      [
+        'type' => 'attribute_range',
+        'field' => 'armor',
+        'label' => __('entities.heroes.attributes.armor'),
+        'options' => [
+          '1' => '1',
+          '2' => '2',
+          '3' => '3',
+          '4' => '4',
+          '5' => '5+'
+        ]
+      ],
+    ];
+  }
   
   /**
-  * Get fields that can be sorted
-  *
-  * @return array
-  */
+   * Get fields that can be sorted in admin
+   *
+   * @return array
+   */
   public function getAdminSortable(): array
   {
     return [
@@ -175,6 +298,43 @@ class Hero extends Model implements LocalizedUrlRoutable
       [
         'field' => 'is_published',
         'label' => __('admin.publication_status')
+      ],
+    ];
+  }
+
+  /**
+   * Get fields that can be sorted in public
+   *
+   * @return array
+   */
+  public function getPublicSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.heroes.name')
+      ],
+      [
+        'field' => 'faction.name',
+        'label' => __('entities.factions.singular')
+      ],
+      [
+        'field' => 'heroRace.name',
+        'label' => __('entities.hero_races.singular')
+      ],
+      [
+        'field' => 'heroClass.name',
+        'label' => __('entities.hero_classes.singular')
+      ],
+      [
+        'field' => 'health',
+        'label' => __('entities.heroes.attributes.health'),
+        'custom_sort' => 'health'
+      ],
+      [
+        'field' => 'total_attributes',
+        'label' => __('entities.heroes.total_attributes'),
+        'custom_sort' => 'total_attributes'
       ],
     ];
   }

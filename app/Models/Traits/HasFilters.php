@@ -9,7 +9,29 @@ use Illuminate\Support\Str;
 trait HasFilters
 {
   /**
-   * Apply all admin filters to the query builder
+   * Apply all filters to the query builder based on context
+   *
+   * @param Builder $query
+   * @param Request $request
+   * @param string $context 'admin' or 'public'
+   * @return Builder
+   */
+  public function scopeApplyFilters(Builder $query, Request $request, string $context = 'admin'): Builder
+  {
+    // Apply search filters
+    $this->applySearchFilters($query, $request, $context);
+
+    // Apply column filters
+    $this->applyColumnFilters($query, $request, $context);
+    
+    // Apply sort filters
+    $this->applySortFilters($query, $request, $context);
+    
+    return $query;
+  }
+
+  /**
+   * Apply admin filters to the query builder (backward compatibility)
    *
    * @param Builder $query
    * @param Request $request
@@ -17,19 +39,52 @@ trait HasFilters
    */
   public function scopeApplyAdminFilters(Builder $query, Request $request): Builder
   {
-    // Apply search filters
-    $this->applySearchFilters($query, $request);
+    return $this->scopeApplyFilters($query, $request, 'admin');
+  }
 
-    // Apply column filters
-    $this->applyColumnFilters($query, $request);
-    
-    // Apply sort filters
-    $this->applySortFilters($query, $request);
-    
-    // In the future, we'll add column filters here
-    // $this->applyColumnFilters($query, $request);
-    
-    return $query;
+  /**
+   * Apply public filters to the query builder
+   *
+   * @param Builder $query
+   * @param Request $request
+   * @return Builder
+   */
+  public function scopeApplyPublicFilters(Builder $query, Request $request): Builder
+  {
+    return $this->scopeApplyFilters($query, $request, 'public');
+  }
+  
+  /**
+   * Get the searchable fields method name based on context
+   *
+   * @param string $context
+   * @return string
+   */
+  protected function getSearchableMethodName(string $context): string
+  {
+    return $context === 'public' ? 'getPublicSearchable' : 'getAdminSearchable';
+  }
+
+  /**
+   * Get the filterable fields method name based on context
+   *
+   * @param string $context
+   * @return string
+   */
+  protected function getFilterableMethodName(string $context): string
+  {
+    return $context === 'public' ? 'getPublicFilterable' : 'getAdminFilterable';
+  }
+
+  /**
+   * Get the sortable fields method name based on context
+   *
+   * @param string $context
+   * @return string
+   */
+  protected function getSortableMethodName(string $context): string
+  {
+    return $context === 'public' ? 'getPublicSortable' : 'getAdminSortable';
   }
   
   /**
@@ -37,9 +92,10 @@ trait HasFilters
    *
    * @param Builder $query
    * @param Request $request
+   * @param string $context
    * @return void
    */
-  protected function applySearchFilters(Builder $query, Request $request): void
+  protected function applySearchFilters(Builder $query, Request $request, string $context): void
   {
     // Apply search filter if search term is provided
     if ($request->has('search') && !empty($request->search)) {
@@ -49,8 +105,9 @@ trait HasFilters
       // Always include 'name' field and any additional searchable fields if method exists
       $searchable = ['name'];
       
-      if (method_exists($this, 'getAdminSearchable')) {
-        $additionalFields = $this->getAdminSearchable();
+      $searchableMethod = $this->getSearchableMethodName($context);
+      if (method_exists($this, $searchableMethod)) {
+        $additionalFields = $this->{$searchableMethod}();
         // Remove 'name' if it's already in the additional fields to avoid duplicates
         $additionalFields = array_filter($additionalFields, function($field) {
           return $field !== 'name';
@@ -86,13 +143,15 @@ trait HasFilters
    *
    * @param Builder $query
    * @param Request $request
+   * @param string $context
    * @return void
    */
-  protected function applySortFilters(Builder $query, Request $request): void
+  protected function applySortFilters(Builder $query, Request $request, string $context): void
   {
     // Apply sorting if sort field is provided and model has sortable fields
-    if (method_exists($this, 'getAdminSortable') && $request->has('sort')) {
-      $sortable = $this->getAdminSortable();
+    $sortableMethod = $this->getSortableMethodName($context);
+    if (method_exists($this, $sortableMethod) && $request->has('sort')) {
+      $sortable = $this->{$sortableMethod}();
       $sortField = $request->sort;
       $sortDirection = $request->has('direction') && $request->direction === 'desc' ? 'desc' : 'asc';
       
@@ -311,6 +370,16 @@ trait HasFilters
           ");
         }
         break;
+        
+      case 'health':
+        // Sort by calculated health value
+        $query->orderByRaw("(agility + mental + will + strength + armor) {$direction}");
+        break;
+        
+      case 'total_attributes':
+        // Sort by total attribute points
+        $query->orderByRaw("(agility + mental + will + strength + armor) {$direction}");
+        break;
     }
   }
 
@@ -319,16 +388,18 @@ trait HasFilters
    *
    * @param Builder $query
    * @param Request $request
+   * @param string $context
    * @return void
    */
-  protected function applyColumnFilters(Builder $query, Request $request): void
+  protected function applyColumnFilters(Builder $query, Request $request, string $context): void
   {
     // Check if model has filterable fields
-    if (!method_exists($this, 'getAdminFilterable')) {
+    $filterableMethod = $this->getFilterableMethodName($context);
+    if (!method_exists($this, $filterableMethod)) {
       return;
     }
     
-    $filterables = $this->getAdminFilterable();
+    $filterables = $this->{$filterableMethod}();
     $thisTable = $this->getTable();
     
     foreach ($filterables as $filter) {
@@ -388,6 +459,10 @@ trait HasFilters
 
         case 'cost_exact':
           $this->applyCostExactFilter($query, $filterValues);
+          break;
+          
+        case 'attribute_range':
+          $this->applyAttributeRangeFilter($query, $fieldName, $filterValues);
           break;
       }
     }
@@ -501,6 +576,29 @@ trait HasFilters
             REPEAT('B', LENGTH(cost) - LENGTH(REPLACE(UPPER(cost), 'B', '')))
           ) = ?
         ", [$normalizedCost]);
+      }
+    });
+  }
+
+  /**
+   * Apply attribute range filter to the query
+   * 
+   * @param Builder $query
+   * @param string $attribute
+   * @param array $values
+   * @return void
+   */
+  protected function applyAttributeRangeFilter(Builder $query, string $attribute, array $values): void
+  {
+    $query->where(function ($q) use ($attribute, $values) {
+      foreach ($values as $value) {
+        if ($value === '5') {
+          // For "5+" range
+          $q->orWhere($attribute, '>=', 5);
+        } else {
+          // For specific value
+          $q->orWhere($attribute, '=', (int)$value);
+        }
       }
     });
   }

@@ -32,7 +32,13 @@
         emptyMessage="{{ __('public.heroes.no_heroes') }}"
       >
         <x-slot:filters>
-          {{-- Space for future filters if needed --}}
+          <x-filters.card
+            :model="$heroModel"
+            :request="$request"
+            :totalCount="$totalCount"
+            :filteredCount="$filteredCount"
+            context="public"
+          />
         </x-slot:filters>
 
         @foreach($heroes as $hero)

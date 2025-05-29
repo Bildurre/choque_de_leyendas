@@ -1,20 +1,26 @@
 @props([
   'model',
-  'request'
+  'request',
+  'context' => 'admin'
 ])
 
 @php
+  $isPublic = $context === 'public';
+  $sortableMethod = $isPublic ? 'getPublicSortable' : 'getAdminSortable';
+  
   // Obtener los campos ordenables del modelo
-  $sortableFields = method_exists($model, 'getAdminSortable') ? $model->getAdminSortable() : [];
+  $sortableFields = method_exists($model, $sortableMethod) ? $model->{$sortableMethod}() : [];
   
   // Obtener el campo actual de ordenación y la dirección
   $currentSort = $request->sort ?? '';
   $currentDirection = $request->direction ?? 'asc';
+  
+  $translationPrefix = $isPublic ? 'public.filters' : 'admin.filters';
 @endphp
 
 @if(count($sortableFields) > 0)
   <div class="filters-sort">
-    <span class="filters-sort__label">{{ __('admin.filters.sort_by') }}:</span>
+    <span class="filters-sort__label">{{ __($translationPrefix . '.sort_by') }}:</span>
     
     <div class="filters-sort__buttons">
       @foreach($sortableFields as $field)
@@ -42,7 +48,7 @@
           $buttonClass .= $isActive ? ' filters-sort__button--active' : '';
         @endphp
         
-        <a href="{{ $sortUrl }}" class="{{ $buttonClass }}" title="{{ __('admin.filters.sort_by_field', ['field' => $fieldLabel]) }}">
+        <a href="{{ $sortUrl }}" class="{{ $buttonClass }}" title="{{ __($translationPrefix . '.sort_by_field', ['field' => $fieldLabel]) }}">
           <span class="filters-sort__button-text">{{ $fieldLabel }}</span>
           
           @if($isActive)

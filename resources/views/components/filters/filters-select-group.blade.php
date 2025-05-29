@@ -1,10 +1,13 @@
 @props([
   'model',
-  'request'
+  'request',
+  'context' => 'admin'
 ])
 
 @php
-  $filterables = method_exists($model, 'getAdminFilterable') ? $model->getAdminFilterable() : [];
+  $isPublic = $context === 'public';
+  $filterableMethod = $isPublic ? 'getPublicFilterable' : 'getAdminFilterable';
+  $filterables = method_exists($model, $filterableMethod) ? $model->{$filterableMethod}() : [];
 @endphp
 
 @if(count($filterables) > 0)
@@ -28,6 +31,7 @@
           case 'cost_range':
           case 'cost_colors':
           case 'cost_exact':
+          case 'attribute_range':
             $options = $filters['options'] ?? [];
             break;
             
@@ -39,15 +43,21 @@
                 $labelField = $filters['option_label'] ?? 'name';
                 $valueField = $filters['option_value'] ?? 'id';
                 
+                // Solo mostrar items publicados en filtros públicos
+                $query = $relatedModel::query();
+                if ($isPublic && method_exists($relatedModel, 'scopePublished')) {
+                  $query->published();
+                }
+                
                 if (property_exists($relatedModel, 'translatable') && in_array($labelField, $relatedModel->translatable)) {
                   // Para campos traducibles
-                  $items = $relatedModel::all();
+                  $items = $query->get();
                   foreach ($items as $item) {
                     $options[$item->{$valueField}] = $item->{$labelField};
                   }
                 } else {
                   // Para campos normales
-                  $options = $relatedModel::all()->pluck($labelField, $valueField)->toArray();
+                  $options = $query->pluck($labelField, $valueField)->toArray();
                 }
               }
             } catch (\Exception $e) {
@@ -67,15 +77,21 @@
                 if (class_exists($modelClass)) {
                   $instance = new $modelClass;
                   
+                  // Solo mostrar items publicados en filtros públicos
+                  $query = $modelClass::query();
+                  if ($isPublic && method_exists($instance, 'scopePublished')) {
+                    $query->published();
+                  }
+                  
                   if (property_exists($instance, 'translatable') && in_array($labelField, $instance->translatable)) {
                     // Para campos traducibles
-                    $items = $modelClass::all();
+                    $items = $query->get();
                     foreach ($items as $item) {
                       $options[$item->{$valueField}] = $item->{$labelField};
                     }
                   } else {
                     // Para campos normales
-                    $options = $modelClass::all()->pluck($labelField, $valueField)->toArray();
+                    $options = $query->pluck($labelField, $valueField)->toArray();
                   }
                 }
               }
@@ -87,22 +103,24 @@
         }
       @endphp
       
-      @if($filters['type'] === 'cost_exact')
-        <x-filters.cost-filter-select
-          :name="$paramName"
-          :label="$label"
-          :options="$options"
-          :selected="$selectedValues"
-          :multiple="true"
-        />
-      @else
-        <x-filters.filters-select
-          :name="$paramName"
-          :label="$label"
-          :options="$options"
-          :selected="$selectedValues"
-          :multiple="true"
-        />
+      @if(count($options) > 0)
+        @if($filters['type'] === 'cost_exact')
+          <x-filters.cost-filter-select
+            :name="$paramName"
+            :label="$label"
+            :options="$options"
+            :selected="$selectedValues"
+            :multiple="true"
+          />
+        @else
+          <x-filters.filters-select
+            :name="$paramName"
+            :label="$label"
+            :options="$options"
+            :selected="$selectedValues"
+            :multiple="true"
+          />
+        @endif
       @endif
     @endforeach
   </div>

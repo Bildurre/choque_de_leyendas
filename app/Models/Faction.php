@@ -63,20 +63,30 @@ class Faction extends Model implements LocalizedUrlRoutable
   ];
 
   /**
-  * Get fields that can be searched
-  *
-  * @return array
-  */
+   * Get fields that can be searched in admin
+   *
+   * @return array
+   */
   public function getAdminSearchable(): array
   {
     return ['lore_text'];
   }
 
   /**
-  * Get fields that can be filtered
-  *
-  * @return array
-  */
+   * Get fields that can be searched in public
+   *
+   * @return array
+   */
+  public function getPublicSearchable(): array
+  {
+    return ['lore_text'];
+  }
+
+  /**
+   * Get fields that can be filtered in admin
+   *
+   * @return array
+   */
   public function getAdminFilterable(): array
   {
     return [
@@ -93,10 +103,22 @@ class Faction extends Model implements LocalizedUrlRoutable
   }
 
   /**
-  * Get fields that can be sorted
-  *
-  * @return array
-  */
+   * Get fields that can be filtered in public
+   *
+   * @return array
+   */
+  public function getPublicFilterable(): array
+  {
+    // Por ahora las facciones no tienen filtros en la parte pública
+    // pero podríamos añadir filtros por cantidad de héroes/cartas en el futuro
+    return [];
+  }
+
+  /**
+   * Get fields that can be sorted in admin
+   *
+   * @return array
+   */
   public function getAdminSortable(): array
   {
     return [
@@ -111,6 +133,21 @@ class Faction extends Model implements LocalizedUrlRoutable
       [
         'field' => 'is_published',
         'label' => __('admin.publication_status')
+      ],
+    ];
+  }
+
+  /**
+   * Get fields that can be sorted in public
+   *
+   * @return array
+   */
+  public function getPublicSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.factions.name')
       ],
     ];
   }

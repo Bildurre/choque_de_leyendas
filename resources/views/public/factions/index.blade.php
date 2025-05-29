@@ -32,7 +32,13 @@
         emptyMessage="{{ __('public.factions.empty') }}"
       >
         <x-slot:filters>
-          {{-- Space for future filters if needed --}}
+          <x-filters.card
+            :model="$factionModel"
+            :request="$request"
+            :totalCount="$totalCount"
+            :filteredCount="$filteredCount"
+            context="public"
+          />
         </x-slot:filters>
 
         @foreach($factions as $faction)
@@ -42,6 +48,10 @@
             </a>
           </div>
         @endforeach
+        
+        <x-slot:pagination>
+          {{ $factions->links() }}
+        </x-slot:pagination>
       </x-entity.list>
     </div>
   </section>
