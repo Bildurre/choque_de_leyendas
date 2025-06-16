@@ -185,16 +185,16 @@ export default function initFactionDeckForm() {
       
       // Deshabilitar inputs de copias
       const copiesInput = item.querySelector('.entity-selector__copies-input');
-      const idInput = item.querySelector('input[type="hidden"]');
       
       if (copiesInput) {
         copiesInput.disabled = true;
         copiesInput.value = 1;
       }
-      
-      if (idInput) {
-        idInput.disabled = true;
-      }
+    });
+    
+    // Limpiar los inputs ocultos generados
+    document.querySelectorAll('.entity-selector__form-inputs').forEach(container => {
+      container.innerHTML = '';
     });
     
     // Limpiar listas de seleccionados

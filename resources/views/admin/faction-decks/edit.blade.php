@@ -8,8 +8,11 @@
       'factionDeck' => $factionDeck,
       'factions' => $factions,
       'gameModes' => $gameModes,
-      'availableCards' => $availableCards,
-      'availableHeroes' => $availableHeroes,
+      'gameMode' => $gameMode,
+      'deckConfig' => $deckConfig,
+      'gameModeId' => $gameModeId,
+      'allCards' => $allCards,
+      'allHeroes' => $allHeroes,
       'selectedCards' => $selectedCards,
       'selectedHeroes' => $selectedHeroes
     ])

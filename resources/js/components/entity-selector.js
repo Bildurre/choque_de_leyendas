@@ -5,6 +5,7 @@ export default function initEntitySelector() {
   
   selectors.forEach(selector => {
     const entityType = selector.dataset.entityType || 'entity';
+    const fieldName = selector.dataset.fieldName || entityType + 's';
     const entityItems = selector.querySelectorAll('.entity-selector__item');
     const checkboxes = selector.querySelectorAll('.entity-selector__checkbox');
     const selectedList = selector.querySelector('.entity-selector__selected-list');
@@ -12,9 +13,11 @@ export default function initEntitySelector() {
     const searchInput = selector.querySelector('.entity-selector__search-input');
     const clearSearchBtn = selector.querySelector('.entity-selector__search-clear');
     const showCopies = selector.querySelector('.entity-selector__copies') !== null;
+    const formInputsContainer = selector.querySelector('.entity-selector__form-inputs');
     
-    // Inicializar la lista de entidades seleccionadas
+    // Inicializar
     updateSelectedList();
+    updateFormInputs();
     
     // Manejar selección de entidades
     entityItems.forEach(item => {
@@ -32,44 +35,44 @@ export default function initEntitySelector() {
         if (checkbox.checked) {
           item.classList.add('is-selected');
           
-          // Si hay control de copias, habilitar los inputs
+          // Si hay control de copias, habilitar el input
           if (showCopies) {
             const copiesInput = item.querySelector('.entity-selector__copies-input');
-            const idInput = item.querySelector('input[type="hidden"]');
-            
             if (copiesInput) copiesInput.disabled = false;
-            if (idInput) idInput.disabled = false;
           }
         } else {
           item.classList.remove('is-selected');
           
-          // Si hay control de copias, deshabilitar los inputs
+          // Si hay control de copias, deshabilitar el input
           if (showCopies) {
             const copiesInput = item.querySelector('.entity-selector__copies-input');
-            const idInput = item.querySelector('input[type="hidden"]');
-            
-            if (copiesInput) copiesInput.disabled = true;
-            if (idInput) idInput.disabled = true;
+            if (copiesInput) {
+              copiesInput.disabled = true;
+              copiesInput.value = 1; // Reset a 1
+            }
           }
         }
         
         updateSelectedList();
+        updateFormInputs();
         
-        // Disparar evento para notificar cambios (útil para actualizar contadores externos)
+        // Disparar evento para notificar cambios
         const event = new CustomEvent('entity-selection-changed', {
           detail: {
             entityType: entityType,
             selectedCount: getSelectedCount(),
             selectedEntities: getSelectedEntities(),
-            totalCount: getTotalCount()  // Añadido para proporcionar el totalCount también aquí
+            totalCount: getTotalCount()
           }
         });
         selector.dispatchEvent(event);
       });
     });
     
-    // Manejar botones de control de copias en la lista disponible
-    setupCopyButtons(selector, entityType);
+    // Manejar botones de control de copias
+    if (showCopies) {
+      setupCopyButtons();
+    }
     
     // Filtrado de búsqueda
     if (searchInput) {
@@ -89,153 +92,146 @@ export default function initEntitySelector() {
     }
     
     // Función para configurar los botones de copias
-    function setupCopyButtons(container, entityType) {
-      if (!showCopies) return;
+    function setupCopyButtons() {
+      selector.addEventListener('click', (e) => {
+        const decreaseBtn = e.target.closest('.entity-selector__copies-btn--decrease');
+        const increaseBtn = e.target.closest('.entity-selector__copies-btn--increase');
+        
+        if (decreaseBtn) {
+          handleDecreaseCopies(decreaseBtn);
+        } else if (increaseBtn) {
+          handleIncreaseCopies(increaseBtn);
+        }
+      });
       
-      // Configurar botones en todo el contenedor (afecta tanto lista original como seleccionados)
-      setupCopyButtonsInContainer(container, entityType);
+      selector.addEventListener('change', (e) => {
+        if (e.target.classList.contains('entity-selector__copies-input')) {
+          handleCopiesInputChange(e.target);
+        }
+      });
     }
     
-    // Función para configurar botones de copias en un contenedor específico
-    function setupCopyButtonsInContainer(container, entityType) {
-      const decreaseButtons = container.querySelectorAll('.entity-selector__copies-btn--decrease');
-      const increaseButtons = container.querySelectorAll('.entity-selector__copies-btn--increase');
-      const copiesInputs = container.querySelectorAll('.entity-selector__copies-input');
+    function handleDecreaseCopies(button) {
+      const controls = button.closest('.entity-selector__copies-controls');
+      const input = controls.querySelector('.entity-selector__copies-input');
+      const entityItem = button.closest('.entity-selector__item');
+      const entityId = entityItem.getAttribute('data-entity-id');
+      const maxCopies = parseInt(button.dataset.maxCopies || 1, 10);
+      let value = parseInt(input.value, 10);
       
-      // Botones para disminuir copias
-      decreaseButtons.forEach(button => {
-        // Eliminar cualquier event listener anterior para evitar duplicados
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
+      if (value > 1) {
+        value--;
+        input.value = value;
         
-        newButton.addEventListener('click', () => {
-          const controls = newButton.closest('.entity-selector__copies-controls');
-          const input = controls.querySelector('.entity-selector__copies-input');
-          const entityItem = newButton.closest('.entity-selector__item');
-          const entityId = entityItem.getAttribute('data-entity-id');
-          const maxCopies = parseInt(newButton.dataset.maxCopies || 1, 10);
-          let value = parseInt(input.value, 10);
-          
-          if (value > 1) {
-            value--;
-            input.value = value;
-            
-            // Actualizar estado de botones
-            newButton.disabled = value <= 1;
-            controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
-            
-            // Sincronizar con la otra instancia del mismo item si existe
-            syncCopiesValue(entityId, value);
-            
-            // Disparar evento para notificar cambios
-            const event = new CustomEvent('entity-copies-changed', {
-              detail: {
-                entityType: entityType,
-                totalCount: getTotalCount(),
-                entityId: entityId,
-                copies: value
-              }
-            });
-            selector.dispatchEvent(event);
+        // Actualizar estado de botones
+        button.disabled = value <= 1;
+        controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
+        
+        // Sincronizar con la otra instancia del mismo item si existe
+        syncCopiesValue(entityId, value);
+        
+        // Actualizar los inputs del formulario
+        updateFormInputs();
+        
+        // Disparar evento
+        const event = new CustomEvent('entity-copies-changed', {
+          detail: {
+            entityType: entityType,
+            totalCount: getTotalCount(),
+            entityId: entityId,
+            copies: value
           }
         });
-      });
+        selector.dispatchEvent(event);
+      }
+    }
+    
+    function handleIncreaseCopies(button) {
+      const controls = button.closest('.entity-selector__copies-controls');
+      const input = controls.querySelector('.entity-selector__copies-input');
+      const entityItem = button.closest('.entity-selector__item');
+      const entityId = entityItem.getAttribute('data-entity-id');
+      const maxCopies = parseInt(button.dataset.maxCopies || 1, 10);
+      let value = parseInt(input.value, 10);
       
-      // Botones para aumentar copias
-      increaseButtons.forEach(button => {
-        // Eliminar cualquier event listener anterior para evitar duplicados
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
+      if (value < maxCopies) {
+        value++;
+        input.value = value;
         
-        newButton.addEventListener('click', () => {
-          const controls = newButton.closest('.entity-selector__copies-controls');
-          const input = controls.querySelector('.entity-selector__copies-input');
-          const entityItem = newButton.closest('.entity-selector__item');
-          const entityId = entityItem.getAttribute('data-entity-id');
-          const maxCopies = parseInt(newButton.dataset.maxCopies || 1, 10);
-          let value = parseInt(input.value, 10);
-          
-          if (value < maxCopies) {
-            value++;
-            input.value = value;
-            
-            // Actualizar estado de botones
-            newButton.disabled = value >= maxCopies;
-            controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
-            
-            // Sincronizar con la otra instancia del mismo item si existe
-            syncCopiesValue(entityId, value);
-            
-            // Disparar evento para notificar cambios
-            const event = new CustomEvent('entity-copies-changed', {
-              detail: {
-                entityType: entityType,
-                totalCount: getTotalCount(),
-                entityId: entityId,
-                copies: value
-              }
-            });
-            selector.dispatchEvent(event);
+        // Actualizar estado de botones
+        button.disabled = value >= maxCopies;
+        controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
+        
+        // Sincronizar con la otra instancia del mismo item si existe
+        syncCopiesValue(entityId, value);
+        
+        // Actualizar los inputs del formulario
+        updateFormInputs();
+        
+        // Disparar evento
+        const event = new CustomEvent('entity-copies-changed', {
+          detail: {
+            entityType: entityType,
+            totalCount: getTotalCount(),
+            entityId: entityId,
+            copies: value
           }
         });
-      });
+        selector.dispatchEvent(event);
+      }
+    }
+    
+    function handleCopiesInputChange(input) {
+      const controls = input.closest('.entity-selector__copies-controls');
+      const entityItem = input.closest('.entity-selector__item');
+      const entityId = entityItem.getAttribute('data-entity-id');
+      const maxCopies = parseInt(controls.querySelector('.entity-selector__copies-btn--increase').dataset.maxCopies || 1, 10);
+      let value = parseInt(input.value, 10);
       
-      // Cambios directos en los inputs
-      copiesInputs.forEach(input => {
-        // Eliminar cualquier event listener anterior para evitar duplicados
-        const newInput = input.cloneNode(true);
-        input.parentNode.replaceChild(newInput, input);
-        
-        newInput.addEventListener('change', () => {
-          const controls = newInput.closest('.entity-selector__copies-controls');
-          const entityItem = newInput.closest('.entity-selector__item');
-          const entityId = entityItem.getAttribute('data-entity-id');
-          const maxCopies = parseInt(controls.querySelector('.entity-selector__copies-btn--increase').dataset.maxCopies || 1, 10);
-          let value = parseInt(newInput.value, 10);
-          
-          // Validar límites
-          if (value < 1) value = 1;
-          if (value > maxCopies) value = maxCopies;
-          
-          newInput.value = value;
-          
-          // Actualizar estado de botones
-          controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
-          controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
-          
-          // Sincronizar con la otra instancia del mismo item si existe
-          syncCopiesValue(entityId, value);
-          
-          // Disparar evento para notificar cambios
-          const event = new CustomEvent('entity-copies-changed', {
-            detail: {
-              entityType: entityType,
-              totalCount: getTotalCount(),
-              entityId: entityId,
-              copies: value
-            }
-          });
-          selector.dispatchEvent(event);
-        });
+      // Validar límites
+      if (isNaN(value) || value < 1) value = 1;
+      if (value > maxCopies) value = maxCopies;
+      
+      input.value = value;
+      
+      // Actualizar estado de botones
+      controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
+      controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
+      
+      // Sincronizar con la otra instancia del mismo item si existe
+      syncCopiesValue(entityId, value);
+      
+      // Actualizar los inputs del formulario
+      updateFormInputs();
+      
+      // Disparar evento
+      const event = new CustomEvent('entity-copies-changed', {
+        detail: {
+          entityType: entityType,
+          totalCount: getTotalCount(),
+          entityId: entityId,
+          copies: value
+        }
       });
+      selector.dispatchEvent(event);
     }
     
     // Función para sincronizar el valor de copias entre el item original y el clonado
     function syncCopiesValue(entityId, value) {
-      // Buscar todas las instancias de este entityId (tanto en original como en seleccionados)
       const allItems = selector.querySelectorAll(`.entity-selector__item[data-entity-id="${entityId}"]`);
       
       allItems.forEach(item => {
         const copiesInput = item.querySelector('.entity-selector__copies-input');
-        if (copiesInput) {
+        if (copiesInput && copiesInput.value != value) {
           copiesInput.value = value;
           
           // Actualizar estado de botones
           const controls = copiesInput.closest('.entity-selector__copies-controls');
-          const maxCopies = parseInt(controls.querySelector('.entity-selector__copies-btn--increase').dataset.maxCopies || 1, 10);
-          
-          controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
-          controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
+          if (controls) {
+            const maxCopies = parseInt(controls.querySelector('.entity-selector__copies-btn--increase').dataset.maxCopies || 1, 10);
+            controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
+            controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
+          }
         }
       });
     }
@@ -244,7 +240,7 @@ export default function initEntitySelector() {
     function updateSelectedList() {
       const selectedEntities = Array.from(checkboxes).filter(checkbox => checkbox.checked);
       
-      // Limpiar la lista existente siempre, independientemente de si hay seleccionados
+      // Limpiar la lista existente
       const existingItems = selectedList.querySelectorAll('.entity-selector__item.in-selected-list');
       existingItems.forEach(item => item.remove());
       
@@ -259,7 +255,13 @@ export default function initEntitySelector() {
           // Añadir clase para identificar que está en la lista de seleccionados
           clonedItem.classList.add('in-selected-list');
           
-          // Añadir botón para quitar de la selección con icono de papelera
+          // Habilitar el input de copias si existe
+          const copiesInput = clonedItem.querySelector('.entity-selector__copies-input');
+          if (copiesInput) {
+            copiesInput.disabled = false;
+          }
+          
+          // Añadir botón para quitar de la selección
           const removeBtn = document.createElement('button');
           removeBtn.className = 'entity-selector__remove';
           removeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>';
@@ -268,31 +270,32 @@ export default function initEntitySelector() {
           
           // Manejar clic en el botón de eliminar
           removeBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evitar que se propague al ítem
+            e.stopPropagation();
             
             // Desmarcar el checkbox original
             checkbox.checked = false;
             originalItem.classList.remove('is-selected');
             
-            // Si hay control de copias, deshabilitar los inputs
+            // Deshabilitar y resetear copias
             if (showCopies) {
               const copiesInput = originalItem.querySelector('.entity-selector__copies-input');
-              const idInput = originalItem.querySelector('input[type="hidden"]');
-              
-              if (copiesInput) copiesInput.disabled = true;
-              if (idInput) idInput.disabled = true;
+              if (copiesInput) {
+                copiesInput.disabled = true;
+                copiesInput.value = 1;
+              }
             }
             
             // Actualizar la lista
             updateSelectedList();
+            updateFormInputs();
             
-            // Disparar evento para notificar cambios
+            // Disparar evento
             const event = new CustomEvent('entity-selection-changed', {
               detail: {
                 entityType: entityType,
                 selectedCount: getSelectedCount(),
                 selectedEntities: getSelectedEntities(),
-                totalCount: getTotalCount() // Añadido para proporcionar el totalCount también aquí
+                totalCount: getTotalCount()
               }
             });
             selector.dispatchEvent(event);
@@ -302,13 +305,38 @@ export default function initEntitySelector() {
           selectedList.appendChild(clonedItem);
         });
         
-        // Configurar los botones de copias en la lista de seleccionados también
-        setupCopyButtonsInContainer(selectedList, entityType);
-        
       } else {
         // Mostrar el placeholder cuando no hay elementos seleccionados
         placeholder.style.display = 'block';
       }
+    }
+    
+    // Función para actualizar los inputs del formulario
+    function updateFormInputs() {
+      // Limpiar contenedor
+      formInputsContainer.innerHTML = '';
+      
+      // Obtener entidades seleccionadas
+      const selectedEntities = getSelectedEntities();
+      
+      // Crear inputs para cada entidad seleccionada
+      selectedEntities.forEach((entity, index) => {
+        // Input para el ID
+        const idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = `${fieldName}[${index}][id]`;
+        idInput.value = entity.id;
+        formInputsContainer.appendChild(idInput);
+        
+        // Input para las copias si es necesario
+        if (showCopies) {
+          const copiesInput = document.createElement('input');
+          copiesInput.type = 'hidden';
+          copiesInput.name = `${fieldName}[${index}][copies]`;
+          copiesInput.value = entity.copies;
+          formInputsContainer.appendChild(copiesInput);
+        }
+      });
     }
     
     // Función para filtrar entidades
@@ -351,6 +379,8 @@ export default function initEntitySelector() {
             const copiesInput = item.querySelector('.entity-selector__copies-input');
             if (copiesInput) {
               result.copies = parseInt(copiesInput.value, 10);
+            } else {
+              result.copies = 1;
             }
           }
           
@@ -358,7 +388,7 @@ export default function initEntitySelector() {
         });
     }
     
-    // Función para obtener el total de copias (para cartas o héroes)
+    // Función para obtener el total de copias
     function getTotalCount() {
       return Array.from(checkboxes)
         .filter(checkbox => checkbox.checked)

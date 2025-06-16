@@ -28,7 +28,7 @@
     <x-form.label :for="$name" :required="$required">{{ $label }}</x-form.label>
   @endif
   
-  <div class="entity-selector" data-entity-type="{{ $entityType }}">
+  <div class="entity-selector" data-entity-type="{{ $entityType }}" data-field-name="{{ $name }}" {{ $attributes }}>
     <div class="entity-selector__controls">
       <div class="entity-selector__search">
         <input type="text" class="form-input entity-selector__search-input" placeholder="{{ $searchPlaceholder }}" id="{{ $entityType }}-search-input">
@@ -107,33 +107,38 @@
                  data-entity-id="{{ $entity->id }}" 
                  data-entity-name="{{ $mainValue }}" 
                  data-entity-type="{{ $secondaryValue }}">
-              <input type="checkbox" id="{{ $entityType }}_{{ $entity->id }}" name="{{ $name }}[]" value="{{ $entity->id }}" class="entity-selector__checkbox" {{ $isSelected ? 'checked' : '' }}>
+              {{-- Checkbox sin name attribute para evitar envío duplicado --}}
+              <input type="checkbox" 
+                     id="{{ $entityType }}_{{ $entity->id }}" 
+                     value="{{ $entity->id }}" 
+                     class="entity-selector__checkbox" 
+                     {{ $isSelected ? 'checked' : '' }}>
               
               <div class="entity-selector__content">
                 <div class="entity-selector__header">
                   <div class="entity-selector__name">{{ $mainValue }}</div>
                   
-                  {{-- @if($secondaryValue)
+                  @if($secondaryValue)
                     <div class="entity-selector__type {{ $secondaryClass }}">
                       {{ $secondaryValue }}
                     </div>
-                  @endif --}}
+                  @endif
                 </div>
                 
-                {{-- @if($detailsView && view()->exists($detailsView))
+                @if($detailsView && view()->exists($detailsView))
                   <div class="entity-selector__details">
                     @include($detailsView, ['entity' => $entity])
                   </div>
-                @endif --}}
+                @endif
                 
                 @if($showCopies)
                   <div class="entity-selector__copies">
-                    <label class="entity-selector__copies-label">{{ __('components.form.entity_selector.copies') }}:</label>
+                    <label class="entity-selector__copies-label">{{ __('form.entity_selector.copies') }}:</label>
                     <div class="entity-selector__copies-controls">
                       <button type="button" class="entity-selector__copies-btn entity-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
+                      {{-- Input sin name para que no se envíe directamente --}}
                       <input 
                         type="number" 
-                        name="{{ $name }}[{{ $entity->id }}][copies]" 
                         class="entity-selector__copies-input" 
                         value="{{ $copies ?: 1 }}" 
                         min="1" 
@@ -141,7 +146,6 @@
                         {{ !$isSelected ? 'disabled' : '' }}
                       >
                       <button type="button" class="entity-selector__copies-btn entity-selector__copies-btn--increase" {{ $copies >= $maxCopies ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">+</button>
-                      <input type="hidden" name="{{ $name }}[{{ $entity->id }}][id]" value="{{ $entity->id }}" {{ !$isSelected ? 'disabled' : '' }}>
                     </div>
                   </div>
                 @endif
@@ -162,6 +166,9 @@
         </div>
       </div>
     </div>
+    
+    {{-- Contenedor para los inputs dinámicos que serán generados por JavaScript --}}
+    <div class="entity-selector__form-inputs" style="display: none;"></div>
   </div>
   
   <x-form.error :name="$name" />

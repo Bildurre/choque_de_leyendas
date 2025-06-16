@@ -7,8 +7,13 @@
     @include('admin.faction-decks._form', [
       'factions' => $factions,
       'gameModes' => $gameModes,
-      'availableCards' => $availableCards ?? [],
-      'availableHeroes' => $availableHeroes ?? []
+      'gameMode' => $gameMode,
+      'deckConfig' => $deckConfig,
+      'gameModeId' => $gameModeId,
+      'allCards' => $allCards,
+      'allHeroes' => $allHeroes,
+      'selectedFaction' => $selectedFaction ?? null,
+      'factionId' => $factionId ?? null
     ])
   </div>
 </x-admin-layout>

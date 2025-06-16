@@ -23,7 +23,7 @@ class FactionDeckRequest extends FormRequest
    */
   public function rules(): array
   {
-    $factionDeckId = $this->route('faction_deck');
+    $factionDeck = $this->route('faction_deck');
     $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
     $rules = [
@@ -42,28 +42,15 @@ class FactionDeckRequest extends FormRequest
     ];
 
     // Solo añadir la regla de game_mode_id si es una nueva creación
-    if (!$factionDeckId) {
+    if (!$factionDeck) {
       $rules['game_mode_id'] = ['required', 'exists:game_modes,id'];
     }
 
-    // Add uniqueness rules for each locale within the same faction
-    foreach ($locales as $locale) {
-      $rules["name.{$locale}"] = [
-        'required',
-        function ($attribute, $value, $fail) use ($locale, $factionDeckId) {
-          $query = \App\Models\FactionDeck::whereRaw("JSON_EXTRACT(name, '$.\"{$locale}\"') = ?", [$value])
-            ->where('faction_id', $this->faction_id);
-          
-          if ($factionDeckId) {
-            $query->where('id', '!=', $factionDeckId);
-          }
-          
-          if ($query->exists()) {
-            $fail("Ya existe un mazo de facción con este nombre en " . locale_name($locale) . " para esta facción.");
-          }
-        }
-      ];
-    }
+    // Add uniqueness rules for each locale (globally unique)
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('faction_decks', 'name', $factionDeck, $locales)
+    );
 
     return $rules;
   }
@@ -74,9 +61,10 @@ class FactionDeckRequest extends FormRequest
   protected function prepareForValidation()
   {
     // Si estamos editando, obtener el game_mode_id existente
-    if ($this->route('faction_deck')) {
+    $factionDeck = $this->route('faction_deck');
+    if ($factionDeck) {
       $this->merge([
-        'game_mode_id' => $this->route('faction_deck')->game_mode_id,
+        'game_mode_id' => $factionDeck->game_mode_id,
       ]);
     }
   }
@@ -86,7 +74,7 @@ class FactionDeckRequest extends FormRequest
    */
   public function messages(): array
   {
-    return [
+    $messages = [
       'name.required' => 'El nombre del mazo es obligatorio.',
       'name.array' => __('validation.array', ['attribute' => __('common.name')]),
       'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
@@ -108,5 +96,13 @@ class FactionDeckRequest extends FormRequest
       'heroes.*.copies.integer' => 'El número de copias debe ser un número entero.',
       'heroes.*.copies.min' => 'El número de copias debe ser al menos 1.',
     ];
+
+    // Messages for uniqueness in each language
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
+      $localeName = locale_name($locale);
+      $messages["name.{$locale}.unique"] = "Ya existe un mazo con este nombre en {$localeName}.";
+    }
+
+    return $messages;
   }
 }
