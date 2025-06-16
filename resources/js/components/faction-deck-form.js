@@ -1,3 +1,4 @@
+// resources/js/components/faction-deck-form.js
 export default function initFactionDeckForm() {
   const form = document.querySelector('#faction-deck-form');
   if (!form) return;
@@ -23,8 +24,13 @@ export default function initFactionDeckForm() {
   
   // Escuchar eventos de cambios en selección de cartas
   if (cardSelector) {
+    // Inicializar contador de cartas al cargar
+    totalCards = getInitialCount(cardSelector);
+    
     cardSelector.addEventListener('entity-selection-changed', function(e) {
-      // No necesitamos hacer nada aquí porque las copias no cambian
+      // Actualizar contador con el total proporcionado en el evento
+      totalCards = e.detail.totalCount;
+      updateStats();
     });
     
     cardSelector.addEventListener('entity-copies-changed', function(e) {
@@ -35,14 +41,38 @@ export default function initFactionDeckForm() {
   
   // Escuchar eventos de cambios en selección de héroes
   if (heroSelector) {
+    // Inicializar contador de héroes al cargar
+    totalHeroes = getInitialCount(heroSelector);
+    
     heroSelector.addEventListener('entity-selection-changed', function(e) {
-      // No necesitamos hacer nada aquí porque las copias no cambian
+      // Actualizar contador con el total proporcionado en el evento
+      totalHeroes = e.detail.totalCount;
+      updateStats();
     });
     
     heroSelector.addEventListener('entity-copies-changed', function(e) {
       totalHeroes = e.detail.totalCount;
       updateStats();
     });
+  }
+  
+  // Función para obtener el conteo inicial de entidades
+  function getInitialCount(selector) {
+    const selectedCheckboxes = selector.querySelectorAll('.entity-selector__checkbox:checked');
+    let count = 0;
+    
+    selectedCheckboxes.forEach(checkbox => {
+      const item = checkbox.closest('.entity-selector__item');
+      const copiesInput = item.querySelector('.entity-selector__copies-input');
+      
+      if (copiesInput) {
+        count += parseInt(copiesInput.value, 10);
+      } else {
+        count += 1;
+      }
+    });
+    
+    return count;
   }
   
   // Manejar cambio de facción

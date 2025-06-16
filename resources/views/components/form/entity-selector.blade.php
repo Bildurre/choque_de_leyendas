@@ -113,18 +113,18 @@
                 <div class="entity-selector__header">
                   <div class="entity-selector__name">{{ $mainValue }}</div>
                   
-                  @if($secondaryValue)
+                  {{-- @if($secondaryValue)
                     <div class="entity-selector__type {{ $secondaryClass }}">
                       {{ $secondaryValue }}
                     </div>
-                  @endif
+                  @endif --}}
                 </div>
                 
-                @if($detailsView && view()->exists($detailsView))
+                {{-- @if($detailsView && view()->exists($detailsView))
                   <div class="entity-selector__details">
                     @include($detailsView, ['entity' => $entity])
                   </div>
-                @endif
+                @endif --}}
                 
                 @if($showCopies)
                   <div class="entity-selector__copies">
