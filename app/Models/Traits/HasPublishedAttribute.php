@@ -36,7 +36,8 @@ trait HasPublishedAttribute
    */
   public function scopePublished($query)
   {
-    return $query->where('is_published', true);
+    // Always specify the table to avoid ambiguity when joining
+    return $query->where($this->getTable() . '.is_published', true);
   }
 
   /**
@@ -47,6 +48,7 @@ trait HasPublishedAttribute
    */
   public function scopeDraft($query)
   {
-    return $query->where('is_published', false);
+    // Always specify the table to avoid ambiguity when joining
+    return $query->where($this->getTable() . '.is_published', false);
   }
 }
