@@ -21,6 +21,7 @@ import initFactionDeckForm from './components/faction-deck-form';
 import initEntitySelector from './components/entity-selector';
 import initAdminFilters from './components/filters';
 import initCostFilters from './components/filter-cost';
+import initPrintCollection from './components/print-collection';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEntitySelector();
   initAdminFilters();
   initCostFilters();
+  initPrintCollection()
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

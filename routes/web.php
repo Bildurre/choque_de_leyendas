@@ -6,6 +6,7 @@ use App\Http\Controllers\Public\HeroController;
 use App\Http\Controllers\Content\PageController;
 use App\Http\Controllers\Public\FactionController;
 use App\Http\Controllers\Public\FactionDeckController;
+use App\Http\Controllers\Public\PrintCollectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Grupo de rutas con localización
@@ -38,6 +39,17 @@ Route::group([
         ->name('public.cards.show');
     Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
         ->name('public.faction-decks.show');
+
+
+    // Print Collection routes
+    Route::prefix('print-collection')->name('public.print-collection.')->group(function () {
+        Route::get('/', [PrintCollectionController::class, 'index'])->name('index');
+        Route::post('/add', [PrintCollectionController::class, 'add'])->name('add');
+        Route::post('/update', [PrintCollectionController::class, 'update'])->name('update');
+        Route::post('/remove', [PrintCollectionController::class, 'remove'])->name('remove');
+        Route::post('/clear', [PrintCollectionController::class, 'clear'])->name('clear');
+        Route::get('/generate-pdf', [PrintCollectionController::class, 'generatePdf'])->name('generate-pdf');
+    });
     
     
 });
