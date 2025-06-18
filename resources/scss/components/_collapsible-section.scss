@@ -15,7 +15,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-md;
     padding-bottom: $spacing-sm;
     border-bottom: 1px solid var(--color-card-border);
     cursor: pointer;
@@ -59,6 +58,7 @@
     max-height: 9999px;
     opacity: 1;
     overflow: hidden;
+    margin-top: $spacing-md;
   }
   
   &.is-collapsed &__content {

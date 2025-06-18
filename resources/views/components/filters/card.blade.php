@@ -17,6 +17,7 @@
     id="filters-section" 
     :title="__($translationPrefix . '.title')"
     :collapsed="session('filter_collapsed', false)"
+    :forceCollapse="true"
   >
     <form action="{{ url()->current() }}" method="GET" class="filters-form">
       <!-- Search Input and Apply Button -->
@@ -79,7 +80,7 @@
     </form>
   </x-collapsible-section>
   
-  @if($filteredCount > 0 || $request->has('search') || $request->has('sort'))
+  {{-- @if($filteredCount > 0 || $request->has('search') || $request->has('sort'))
     <div class="filters-results">
       @if($filteredCount == $totalCount)
         {{ __($translationPrefix . '.showing_all_results', ['count' => $filteredCount]) }}
@@ -94,5 +95,5 @@
         </a>
       @endif
     </div>
-  @endif
+  @endif --}}
 </div>

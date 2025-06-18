@@ -1,70 +1,74 @@
 export default function initCollapsibleSections() {
-  // Obtener todos los collapsibles
+  // Get all collapsibles
   const collapsibleSections = document.querySelectorAll('.collapsible-section');
   
   if (!collapsibleSections.length) return;
   
-  // Función para actualizar el icono según el estado
+  // Function to update icon based on state
   function updateIcon(section) {
     const icon = section.querySelector('.collapsible-section__icon');
     if (!icon) return;
     
-    // El icono ya será manejado por CSS - no necesitamos cambiar clases aquí
+    // Icon will be handled by CSS - we don't need to change classes here
   }
   
-  // Función para actualizar el estado del collapsible
+  // Function to update collapsible state
   function updateCollapsibleState(section, collapsed = null, enableAnimation = false) {
-    // Si queremos habilitar animaciones, quitamos la clase que las desactiva
+    // If we want to enable animations, remove the class that disables them
     if (enableAnimation) {
       section.classList.remove('collapsible-section--no-animation');
     }
     
-    // Si collapsed es null, alternamos el estado
+    // If collapsed is null, toggle the state
     const newState = collapsed !== null ? collapsed : !section.classList.contains('is-collapsed');
     
-    // Actualizar clase
+    // Update class
     if (newState) {
       section.classList.add('is-collapsed');
     } else {
       section.classList.remove('is-collapsed');
     }
     
-    // Actualizar icono
+    // Update icon
     updateIcon(section);
     
     return newState;
   }
   
-  // Configurar el event listener para cada sección
+  // Setup event listener for each section
   function setupSectionListeners(section) {
     const header = section.querySelector('.collapsible-section__header');
     const sectionId = section.id;
     const accordion = section.closest('.accordion');
+    const forceCollapse = section.getAttribute('data-force-collapse') === 'true';
     
     if (!header || !sectionId) return;
     
     header.addEventListener('click', (event) => {
-      // Asegurarnos de que el clic no fue en un enlace u otro elemento interactivo
+      // Make sure the click wasn't on a link or other interactive element
       if (event.target.closest('a, input, textarea, select')) {
         return;
       }
       
-      // Habilitar animaciones a partir del primer clic
+      // Enable animations starting from the first click
       const enableAnimation = true;
       
       const isSidebarAccordion = accordion?.getAttribute('data-is-sidebar') === 'true';
       
-      // Actualizar estado de este collapsible
+      // Update this collapsible's state
       const isNowCollapsed = updateCollapsibleState(section, null, enableAnimation);
       
-      // Si no es parte de un acordeón o no es el sidebar, guardar estado en localStorage
+      // If not part of an accordion or not the sidebar, save state in localStorage
+      // Don't save if forceCollapse is true
       if (!accordion || !isSidebarAccordion) {
-        localStorage.setItem(`section-${sectionId}`, isNowCollapsed ? 'collapsed' : 'expanded');
+        if (!forceCollapse) {
+          localStorage.setItem(`section-${sectionId}`, isNowCollapsed ? 'collapsed' : 'expanded');
+        }
       }
       
-      // Si está en un acordeón y se expandió, disparar evento
+      // If in an accordion and expanded, trigger event
       if (accordion && !isNowCollapsed) {
-        // Crear y disparar evento personalizado
+        // Create and trigger custom event
         const event = new CustomEvent('section:opened', {
           detail: { 
             sectionId: sectionId,
@@ -76,33 +80,41 @@ export default function initCollapsibleSections() {
     });
   }
   
-  // Inicializar secciones independientes (fuera de acordeones)
+  // Initialize independent sections (outside accordions)
   function initializeIndependentSections() {
     collapsibleSections.forEach(section => {
       const accordion = section.closest('.accordion');
       const sectionId = section.id;
+      const forceCollapse = section.getAttribute('data-force-collapse') === 'true';
       
-      if (!sectionId || accordion) return; // Ignorar las que están en acordeones
+      if (!sectionId || accordion) return; // Ignore those in accordions
       
-      // Fuera de acordeón: usar localStorage o colapsado por defecto
-      const savedState = localStorage.getItem(`section-${sectionId}`);
-      
-      // Si debe estar expandido según localStorage, expandirlo sin animación
-      if (savedState === 'expanded') {
-        updateCollapsibleState(section, false, false);
+      // If forceCollapse is true, always start collapsed
+      if (forceCollapse) {
+        updateCollapsibleState(section, true, false);
+        // Remove any saved state from localStorage
+        localStorage.removeItem(`section-${sectionId}`);
+      } else {
+        // Outside accordion: use localStorage or collapsed by default
+        const savedState = localStorage.getItem(`section-${sectionId}`);
+        
+        // If should be expanded according to localStorage, expand without animation
+        if (savedState === 'expanded') {
+          updateCollapsibleState(section, false, false);
+        }
+        // Otherwise, already collapsed by default, do nothing
       }
-      // Si no, ya está colapsado por defecto, no hacemos nada
     });
   }
   
-  // Configurar todos los listeners de los collapsibles
+  // Setup all collapsible listeners
   collapsibleSections.forEach(section => {
     setupSectionListeners(section);
   });
   
-  // Inicializar el estado de las secciones independientes
+  // Initialize independent sections state
   initializeIndependentSections();
   
-  // Exponer función para uso externo
+  // Expose function for external use
   window.updateCollapsibleState = updateCollapsibleState;
 }

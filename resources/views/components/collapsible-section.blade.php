@@ -2,12 +2,14 @@
   'id',
   'title',
   'collapsed' => true,
-  'inAccordion' => false
+  'inAccordion' => false,
+  'forceCollapse' => false
 ])
 
-<div class="collapsible-section is-collapsed collapsible-section--no-animation" 
+<div class="collapsible-section is-collapsed  collapsible-section--no-animation" 
   id="{{ $id }}" 
-  data-in-accordion="{{ $inAccordion ? 'true' : 'false' }}">
+  data-in-accordion="{{ $inAccordion ? 'true' : 'false' }}"
+  data-force-collapse="{{ $forceCollapse ? 'true' : 'false' }}">
   <div class="collapsible-section__header">
     <h2 class="collapsible-section__title">{{ $title }}</h2>
     

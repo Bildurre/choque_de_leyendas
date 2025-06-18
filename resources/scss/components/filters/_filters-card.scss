@@ -2,9 +2,7 @@
 
 .filters-card {
   margin-bottom: $spacing-xxl;
-  padding: $spacing-md;
   border-radius: $border-radius-md;
-  background-color: var(--color-card-bg);
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
   overflow: visible; // Cambiado de 'show' a 'visible'
 
