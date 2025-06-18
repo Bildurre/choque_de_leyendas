@@ -1,0 +1,88 @@
+@use '../../abstracts/all' as *;
+
+.entity-public-card {
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition-fast;
+  
+  &:hover {
+    transform: translateY(-$spacing-xs);
+  }
+  
+  &__link {
+    display: block;
+    text-decoration: none;
+  }
+  
+  &__preview {
+    width: 100%;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow $transition-fast;
+    margin-bottom: $spacing-sm;
+    
+    .entity-public-card:hover & {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+  }
+  
+  &__action {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-decoration: none;
+    
+    &:hover {
+      background-color: var(--random-accent-color-bg);
+      color: var(--random-accent-color);
+      border-color: var(--random-accent-color);
+      
+      .icon {
+        transform: scale(1.1);
+      }
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    // Success state
+    &.added {
+      background-color: var(--color-success-bg);
+      color: var(--color-success);
+      border-color: var(--color-success);
+      
+      .icon {
+        animation: rotate-check 0.6s ease-out;
+      }
+    }
+  }
+}
+
+@keyframes rotate-check {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}

@@ -37,6 +37,7 @@
 // Entity Components
 @use 'components/entity/list';
 @use 'components/entity/list-card';
+@use 'components/entity/public-card';
 
 // Form Components
 @use 'components/form/input';
@@ -65,6 +66,7 @@
 @use 'components/previews/hero-preview';
 @use 'components/previews/card-preview';
 @use 'components/previews/faction-preview';
+@use 'components/previews/deck-preview';
 
 // Pages
 @use 'pages/login';

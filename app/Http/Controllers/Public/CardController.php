@@ -16,7 +16,7 @@ class CardController extends Controller
   {
     // Base query for published cards
     $query = Card::published()
-      ->with(['faction', 'cardType', 'equipmentType', 'attackRange', 'attackSubtype']);
+      ->with(['faction', 'cardType.heroSuperclass', 'equipmentType', 'attackRange', 'attackSubtype', 'heroAbility.attackRange', 'heroAbility.attackSubtype']);
     
     // Count total before filters
     $totalCount = $query->count();
@@ -62,11 +62,12 @@ class CardController extends Controller
 
     $card->load([
       'faction', 
-      'cardType', 
+      'cardType.heroSuperclass', 
       'equipmentType', 
       'attackRange', 
       'attackSubtype',
-      'heroAbility'
+      'heroAbility.attackRange',
+      'heroAbility.attackSubtype'
     ]);
     
     return view('public.cards.show', compact('card'));

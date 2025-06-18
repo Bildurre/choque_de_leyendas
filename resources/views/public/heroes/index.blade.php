@@ -42,11 +42,11 @@
         </x-slot:filters>
 
         @foreach($heroes as $hero)
-          <div class="heroes-list__item">
-            <a href="{{ route('public.heroes.show', $hero) }}" class="heroes-list__link">
-              <x-previews.preview-image :entity="$hero" type="hero" />
-            </a>
-          </div>
+          <x-entity.public-card 
+            :entity="$hero"
+            type="hero"
+            :view-route="route('public.heroes.show', $hero)"
+          />
         @endforeach
         
         <x-slot:pagination>

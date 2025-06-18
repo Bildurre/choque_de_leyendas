@@ -1,0 +1,85 @@
+@use '../../abstracts/all' as *;
+
+// Deck preview styles - similar to faction preview
+.deck-preview {
+  width: 100%;
+  aspect-ratio: 88 / 126;
+  position: relative;
+  background-color: var(--color-card-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  &__background {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.1;
+  }
+  
+  &__icon {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    
+    &--faction {
+      opacity: 0.6; // Slightly less opacity when using faction icon
+    }
+  }
+  
+  &__content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    padding: $spacing-md;
+  }
+  
+  &__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 $spacing-xs;
+    color: var(--color-text-primary);
+  }
+  
+  &__mode {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+  
+  &__stats {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: $spacing-md;
+    background: linear-gradient(to top, var(--color-card-bg) 0%, transparent 100%);
+  }
+  
+  &__stat {
+    text-align: center;
+    
+    &-value {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--random-accent-color);
+      line-height: 1;
+    }
+    
+    &-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: $spacing-xs;
+    }
+  }
+}

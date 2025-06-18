@@ -7,5 +7,7 @@ return [
   'hero_show' => 'heroes/{hero}',
   'cards' => 'cards',
   'card_show' => 'cards/{card}',
+  'faction_decks' => 'decks',
+  'faction_deck_show' => 'decks/{faction_deck}',
   'page_show' => '{page?}',
 ];

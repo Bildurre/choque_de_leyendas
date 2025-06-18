@@ -29,7 +29,7 @@
       <x-entity.list 
         :items="$factions"
         :showHeader="false"
-        emptyMessage="{{ __('public.factions.empty') }}"
+        emptyMessage="{{ __('public.factions.no_factions') }}"
       >
         <x-slot:filters>
           <x-filters.card
@@ -42,11 +42,11 @@
         </x-slot:filters>
 
         @foreach($factions as $faction)
-          <div class="factions-list__item">
-            <a href="{{ route('public.factions.show', $faction) }}" class="factions-list__link">
-              <x-previews.preview-image :entity="$faction" type="faction" />
-            </a>
-          </div>
+          <x-entity.public-card 
+            :entity="$faction"
+            type="faction"
+            :view-route="route('public.factions.show', $faction)"
+          />
         @endforeach
         
         <x-slot:pagination>
@@ -61,7 +61,7 @@
     $heroesBlock = new \App\Models\Block([
       'type' => 'relateds',
       'title' => ['es' => 'Héroes', 'en' => 'Heroes'],
-      'subtitle' => ['es' => 'Conoce a los héroes de las facciones', 'en' => 'Meet the faction heroes'],
+      'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
       'background_color' => 'none',
       'settings' => [
         'model_type' => 'hero',
@@ -78,7 +78,7 @@
     $cardsBlock = new \App\Models\Block([
       'type' => 'relateds',
       'title' => ['es' => 'Cartas', 'en' => 'Cards'],
-      'subtitle' => ['es' => 'Descubre las cartas de las facciones', 'en' => 'Discover the faction cards'],
+      'subtitle' => ['es' => 'Descubre las cartas del juego', 'en' => 'Discover the game cards'],
       'background_color' => 'none',
       'settings' => [
         'model_type' => 'card',

@@ -5,6 +5,7 @@ use App\Http\Controllers\Public\CardController;
 use App\Http\Controllers\Public\HeroController;
 use App\Http\Controllers\Content\PageController;
 use App\Http\Controllers\Public\FactionController;
+use App\Http\Controllers\Public\FactionDeckController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Grupo de rutas con localización
@@ -35,6 +36,8 @@ Route::group([
         ->name('public.cards.index');
     Route::get(LaravelLocalization::transRoute('routes.card_show'), [CardController::class, 'show'])
         ->name('public.cards.show');
+    Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
+        ->name('public.faction-decks.show');
     
     
 });

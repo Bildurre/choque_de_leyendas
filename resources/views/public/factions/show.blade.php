@@ -1,5 +1,5 @@
 <x-public-layout>
-  {{-- Page background image --}}
+  {{-- Page background with faction icon --}}
   @if($faction->hasImage())
     <x-page-background :image="$faction->getImageUrl()" />
   @endif
@@ -26,116 +26,156 @@
   @endphp
   {!! $headerBlock->render() !!}
 
-  {{-- Faction Details Section --}}
-  <section class="block faction-detail-block">
+  {{-- Statistics Card --}}
+  <section class="block">
     <div class="block__inner">
-      <div class="faction-detail-content">
-        {{-- Preview Image --}}
-        <div class="faction-detail__preview">
-          <x-previews.preview-image :entity="$faction" type="faction" />
-        </div>
-        
-        {{-- Faction Info --}}
-        <div class="faction-detail__info">
-          {{-- Basic Info Block --}}
-          <div class="info-block">
-            <h2 class="info-block__title">{{ __('public.factions.basic_info') }}</h2>
-            <dl class="info-list">
-              <dt>{{ __('entities.factions.name') }}</dt>
-              <dd>{{ $faction->name }}</dd>
-              
-              <dt>{{ __('entities.factions.color') }}</dt>
-              <dd>
-                <span class="color-indicator" style="background-color: {{ $faction->color }};"></span>
-                {{ $faction->color }}
-              </dd>
-              
-              <dt>{{ __('entities.heroes.plural') }}</dt>
-              <dd>{{ $faction->heroes()->published()->count() }}</dd>
-              
-              <dt>{{ __('entities.cards.plural') }}</dt>
-              <dd>{{ $faction->cards()->published()->count() }}</dd>
-              
-              <dt>{{ __('entities.faction_decks.plural') }}</dt>
-              <dd>{{ $faction->factionDecks()->published()->count() }}</dd>
-            </dl>
+      <div class="faction-stats-card">
+        <h2 class="faction-stats-card__title">{{ __('public.factions.statistics') }}</h2>
+        <div class="faction-stats-card__grid">
+          <div class="faction-stats-card__item">
+            <span class="faction-stats-card__value">{{ $faction->cards()->published()->count() }}</span>
+            <span class="faction-stats-card__label">{{ __('entities.cards.plural') }}</span>
+          </div>
+          <div class="faction-stats-card__item">
+            <span class="faction-stats-card__value">{{ $faction->heroes()->published()->with('heroClass')->distinct('hero_class_id')->count('hero_class_id') }}</span>
+            <span class="faction-stats-card__label">{{ __('entities.hero_classes.plural') }}</span>
+          </div>
+          <div class="faction-stats-card__item">
+            <span class="faction-stats-card__value">{{ $faction->factionDecks()->published()->count() }}</span>
+            <span class="faction-stats-card__label">{{ __('entities.faction_decks.plural') }}</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  {{-- Heroes Section --}}
-  @if($faction->heroes()->published()->count() > 0)
-    <section class="block faction-heroes-block">
-      <div class="block__inner">
-        <h2 class="block__title">{{ __('public.factions.faction_heroes') }}</h2>
+  {{-- Content Tabs --}}
+  <section class="block">
+    <div class="block__inner">
+      <x-tabs>
+        <x-slot:header>
+          <x-tab-item 
+            id="heroes" 
+            :active="request()->get('tab', 'heroes') === 'heroes'" 
+            :href="route('public.factions.show', ['faction' => $faction, 'tab' => 'heroes'])"
+            icon="users"
+            :count="$faction->heroes()->published()->count()"
+          >
+            {{ __('entities.heroes.plural') }}
+          </x-tab-item>
+          
+          <x-tab-item 
+            id="cards" 
+            :active="request()->get('tab') === 'cards'" 
+            :href="route('public.factions.show', ['faction' => $faction, 'tab' => 'cards'])"
+            icon="layers"
+            :count="$faction->cards()->published()->count()"
+          >
+            {{ __('entities.cards.plural') }}
+          </x-tab-item>
+          
+          <x-tab-item 
+            id="decks" 
+            :active="request()->get('tab') === 'decks'" 
+            :href="route('public.factions.show', ['faction' => $faction, 'tab' => 'decks'])"
+            icon="box"
+            :count="$faction->factionDecks()->published()->count()"
+          >
+            {{ __('entities.faction_decks.plural') }}
+          </x-tab-item>
+        </x-slot:header>
         
-        <div class="heroes-grid">
-          @foreach($faction->heroes()->published()->orderBy('name')->get() as $hero)
-            <div class="heroes-grid__item">
-              <a href="{{ route('public.heroes.show', $hero) }}" class="heroes-grid__link">
-                <x-previews.preview-image :entity="$hero" type="hero" />
-                <div class="heroes-grid__info">
-                  <h3 class="heroes-grid__name">{{ $hero->name }}</h3>
-                  @if($hero->class)
-                    <span class="heroes-grid__class">{{ $hero->class->name }}</span>
-                  @endif
-                </div>
-              </a>
-            </div>
-          @endforeach
-        </div>
-      </div>
-    </section>
-  @endif
-
-  {{-- Cards Section --}}
-  @if($faction->cards()->published()->count() > 0)
-    <section class="block faction-cards-block">
-      <div class="block__inner">
-        <h2 class="block__title">{{ __('public.factions.faction_cards') }}</h2>
-        
-        <div class="cards-grid">
-          @foreach($faction->cards()->published()->orderBy('cost')->orderBy('name')->get() as $card)
-            <div class="cards-grid__item">
-              <a href="{{ route('public.cards.show', $card) }}" class="cards-grid__link">
-                <div class="cards-grid__header">
-                  <h3 class="cards-grid__name">{{ $card->name }}</h3>
-                </div>
-              </a>
-            </div>
-          @endforeach
-        </div>
-      </div>
-    </section>
-  @endif
-
-  {{-- Faction Decks Section --}}
-  @if($faction->factionDecks()->published()->count() > 0)
-    <section class="block faction-decks-block">
-      <div class="block__inner">
-        <h2 class="block__title">{{ __('public.factions.preset_decks') }}</h2>
-        
-        <div class="decks-list">
-          @foreach($faction->factionDecks()->published()->orderBy('name')->get() as $deck)
-            <div class="deck-item">
-              <div class="deck-item__content">
-                <h3 class="deck-item__name">{{ $deck->name }}</h3>
-                @if($deck->description)
-                  <p class="deck-item__description">{{ $deck->description }}</p>
-                @endif
-              </div>
-              <a href="{{ route('public.faction-decks.show', $deck) }}" class="deck-item__link">
-                {{ __('public.factions.view_deck') }}
-                <x-icon name="arrow-right" size="sm" />
-              </a>
-            </div>
-          @endforeach
-        </div>
-      </div>
-    </section>
-  @endif
+        <x-slot:content>
+          @php
+            $tab = request()->get('tab', 'heroes');
+          @endphp
+          
+          @if($tab === 'heroes')
+            {{-- Heroes Tab Content --}}
+            @php
+              $heroes = $faction->heroes()->published()
+                ->with(['heroClass.heroSuperclass', 'heroRace', 'faction', 'heroAbilities.attackRange', 'heroAbilities.attackSubtype'])
+                ->orderBy('name')
+                ->paginate(12);
+            @endphp
+            
+            <x-entity.list
+              :items="$heroes"
+              :showHeader="false"
+              emptyMessage="{{ __('public.factions.no_heroes') }}"
+            >
+              @foreach($heroes as $hero)
+                <x-entity.public-card 
+                  :entity="$hero"
+                  type="hero"
+                  :view-route="route('public.heroes.show', $hero)"
+                />
+              @endforeach
+              
+              <x-slot:pagination>
+                {{ $heroes->appends(['tab' => 'heroes'])->links() }}
+              </x-slot:pagination>
+            </x-entity.list>
+            
+          @elseif($tab === 'cards')
+            {{-- Cards Tab Content --}}
+            @php
+              $cards = $faction->cards()->published()
+                ->with(['cardType.heroSuperclass', 'equipmentType', 'attackRange', 'attackSubtype', 'heroAbility.attackRange', 'heroAbility.attackSubtype', 'faction'])
+                ->orderBy('cost')
+                ->orderBy('name')
+                ->paginate(12);
+            @endphp
+            
+            <x-entity.list
+              :items="$cards"
+              :showHeader="false"
+              emptyMessage="{{ __('public.factions.no_cards') }}"
+            >
+              @foreach($cards as $card)
+                <x-entity.public-card 
+                  :entity="$card"
+                  type="card"
+                  :view-route="route('public.cards.show', $card)"
+                />
+              @endforeach
+              
+              <x-slot:pagination>
+                {{ $cards->appends(['tab' => 'cards'])->links() }}
+              </x-slot:pagination>
+            </x-entity.list>
+            
+          @elseif($tab === 'decks')
+            {{-- Decks Tab Content --}}
+            @php
+              $decks = $faction->factionDecks()->published()
+                ->with(['gameMode', 'heroes.heroClass', 'cards.cardType'])
+                ->orderBy('name')
+                ->paginate(12);
+            @endphp
+            
+            <x-entity.list
+              :items="$decks"
+              :showHeader="false"
+              emptyMessage="{{ __('public.factions.no_decks') }}"
+            >
+              @foreach($decks as $deck)
+                <x-entity.public-card 
+                  :entity="$deck"
+                  type="deck"
+                  :view-route="route('public.faction-decks.show', $deck)"
+                />
+              @endforeach
+              
+              <x-slot:pagination>
+                {{ $decks->appends(['tab' => 'decks'])->links() }}
+              </x-slot:pagination>
+            </x-entity.list>
+          @endif
+        </x-slot:content>
+      </x-tabs>
+    </div>
+  </section>
 
   {{-- Related Factions Block --}}
   @php

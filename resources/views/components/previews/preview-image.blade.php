@@ -12,9 +12,13 @@
   $componentClass = $type . '-preview-image';
 @endphp
 
+{{-- Factions and Decks are always rendered as components, never as images --}}
 @if($type === 'faction')
   <x-previews.faction :faction="$entity" />
+@elseif($type === 'deck')
+  <x-previews.deck :deck="$entity" />
 @else
+  {{-- Heroes and Cards can have generated preview images --}}
   @php
     $imageUrl = $entity->getPreviewImageUrl($locale);
   @endphp
