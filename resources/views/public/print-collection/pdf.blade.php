@@ -1,186 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
-    <meta charset="utf-8">
-    <title>Alanda Cards - {{ date('Y-m-d') }}</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        @page {
-            size: A4;
-            margin: 10mm;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-        }
-        
-        .page {
-            page-break-after: always;
-            position: relative;
-            width: 190mm;
-            height: 277mm;
-        }
-        
-        .page:last-child {
-            page-break-after: auto;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 2mm;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .card-slot {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .card-wrapper {
-            width: 63mm;
-            height: 88mm;
-            position: relative;
-            margin: auto;
-        }
-        
-        /* Cut marks */
-        .cut-marks {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        
-        .cut-mark {
-            position: absolute;
-            width: 5mm;
-            height: 0.5mm;
-            background: #ccc;
-        }
-        
-        .cut-mark.horizontal {
-            width: 5mm;
-            height: 0.5mm;
-        }
-        
-        .cut-mark.vertical {
-            width: 0.5mm;
-            height: 5mm;
-        }
-        
-        .cut-mark.top-left.horizontal {
-            top: -1mm;
-            left: -6mm;
-        }
-        
-        .cut-mark.top-left.vertical {
-            top: -6mm;
-            left: -1mm;
-        }
-        
-        .cut-mark.top-right.horizontal {
-            top: -1mm;
-            right: -6mm;
-        }
-        
-        .cut-mark.top-right.vertical {
-            top: -6mm;
-            right: -1mm;
-        }
-        
-        .cut-mark.bottom-left.horizontal {
-            bottom: -1mm;
-            left: -6mm;
-        }
-        
-        .cut-mark.bottom-left.vertical {
-            bottom: -6mm;
-            left: -1mm;
-        }
-        
-        .cut-mark.bottom-right.horizontal {
-            bottom: -1mm;
-            right: -6mm;
-        }
-        
-        .cut-mark.bottom-right.vertical {
-            bottom: -6mm;
-            right: -1mm;
-        }
-        
-        /* Card content */
-        .preview-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .preview-content img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Alanda Cards - {{ date('Y-m-d') }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    @page {
+      size: A4;
+      margin: 0; /* Quitamos el margen de @page para controlarlo nosotros */
+    }
+    
+    body {
+      margin: 0;
+      padding: 5mm;
+      background: white;
+      font-size: 0; /* Eliminar espacios entre inline-blocks */
+    }
+    
+    /* Contenedor principal */
+    .container {
+      width: 100%;
+      line-height: 0;
+    }
+    
+    /* Items con inline-block */
+    .card, .hero {
+      display: inline-block;
+      vertical-align: top;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      font-size: 12px; /* Restaurar font-size para contenido */
+    }
+    
+    /* Sin gap - cartas pegadas */
+    .container.no-gap .card,
+    .container.no-gap .hero {
+      margin: 0;
+    }
+    
+    /* Con gap - añadir márgenes */
+    .container.with-gap .card,
+    .container.with-gap .hero {
+      margin-right: 2mm;
+      margin-bottom: 2mm;
+    }
+    
+    /* Tamaños */
+    .card {
+      width: 63mm;
+      height: 88mm;
+    }
+    
+    .hero {
+      width: 88mm;
+      height: 126mm;
+    }
+    
+    .hero.reduced {
+      width: 63mm;
+      height: 88mm;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
 </head>
 <body>
+
+@php
+  // Configuración
+  $reduceHeroes = request()->get('reduce_heroes', false);
+  $withGap = request()->get('with_gap', false);
+  
+  // Funciones helper
+  function assetToPath($url) {
+    $url = parse_url($url, PHP_URL_PATH);
+    if (strpos($url, '/storage/') === 0) {
+      return storage_path('app/public/' . substr($url, 9));
+    }
+    if (strpos($url, 'storage/') === 0) {
+      return storage_path('app/public/' . substr($url, 8));
+    }
+    return public_path($url);
+  }
+  
+  function imageToBase64($path) {
+    if (file_exists($path)) {
+      $type = pathinfo($path, PATHINFO_EXTENSION);
+      $data = file_get_contents($path);
+      return 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+    return null;
+  }
+@endphp
+
+<div class="container {{ $withGap ? 'with-gap' : 'no-gap' }}">
+  @foreach($items as $item)
     @php
-        $chunks = array_chunk($items, 9);
+      $entity = $item['entity'];
+      $locale = app()->getLocale();
+      
+      $hasPreview = $entity->hasPreviewImage($locale);
+      $previewUrl = $hasPreview ? $entity->getPreviewImageUrl($locale) : null;
+      $hasMainImage = $entity->hasImage();
+      $mainImageUrl = $hasMainImage ? $entity->getImageUrl() : null;
+      
+      $imageUrl = $previewUrl ?: $mainImageUrl;
+      $imagePath = $imageUrl ? assetToPath($imageUrl) : null;
+      $imageData = $imagePath ? imageToBase64($imagePath) : null;
+      
+      $isHero = $item['type'] === 'hero';
+      $class = $isHero ? 'hero' : 'card';
+      if ($isHero && $reduceHeroes) {
+        $class .= ' reduced';
+      }
     @endphp
     
-    @foreach($chunks as $pageItems)
-        <div class="page">
-            <div class="grid">
-                @for($i = 0; $i < 9; $i++)
-                    <div class="card-slot">
-                        @if(isset($pageItems[$i]))
-                            <div class="card-wrapper">
-                                <div class="cut-marks">
-                                    <div class="cut-mark horizontal top-left"></div>
-                                    <div class="cut-mark vertical top-left"></div>
-                                    <div class="cut-mark horizontal top-right"></div>
-                                    <div class="cut-mark vertical top-right"></div>
-                                    <div class="cut-mark horizontal bottom-left"></div>
-                                    <div class="cut-mark vertical bottom-left"></div>
-                                    <div class="cut-mark horizontal bottom-right"></div>
-                                    <div class="cut-mark vertical bottom-right"></div>
-                                </div>
-                                <div class="preview-content">
-                                    @if($pageItems[$i]['type'] === 'hero')
-                                        {{-- For heroes, we need to render the preview or use the generated image --}}
-                                        @if($pageItems[$i]['entity']->hasPreviewImage())
-                                            <img src="{{ $pageItems[$i]['entity']->getPreviewImageUrl() }}" alt="{{ $pageItems[$i]['entity']->name }}">
-                                        @else
-                                            {{-- Fallback: render the component (note: this might not work well in PDF) --}}
-                                            <x-previews.hero :hero="$pageItems[$i]['entity']" />
-                                        @endif
-                                    @else
-                                        {{-- For cards --}}
-                                        @if($pageItems[$i]['entity']->hasPreviewImage())
-                                            <img src="{{ $pageItems[$i]['entity']->getPreviewImageUrl() }}" alt="{{ $pageItems[$i]['entity']->name }}">
-                                        @else
-                                            {{-- Fallback: render the component (note: this might not work well in PDF) --}}
-                                            <x-previews.card :card="$pageItems[$i]['entity']" />
-                                        @endif
-                                    @endif
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                @endfor
-            </div>
-        </div>
-    @endforeach
+    <div class="{{ $class }}">
+      @if($imageData)
+        <img src="{{ $imageData }}" alt="{{ $entity->name }}">
+      @else
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect width='200' height='280' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='14' fill='%23999'%3E{{ $entity->name }}%3C/text%3E%3C/svg%3E" alt="{{ $entity->name }}">
+      @endif
+    </div>
+  @endforeach
+</div>
+
 </body>
 </html>

@@ -165,7 +165,7 @@ class PrintCollectionController extends Controller
     /**
      * Generate the PDF
      */
-    public function generatePdf()
+    public function generatePdf(Request $request)
     {
         $collection = session('print_collection', [
             'heroes' => [],
@@ -217,8 +217,23 @@ class PrintCollectionController extends Controller
             }
         }
 
-        $pdf = PDF::loadView('public.print-collection.pdf', compact('items'));
+        // Obtener el parámetro reduce_heroes
+        $reduceHeroes = $request->get('reduce_heroes', false);
+        $withGap = $request->get('with_gap', true);
+
+        // Configurar opciones de DomPDF
+        $pdf = PDF::loadView('public.print-collection.pdf', compact('items', 'reduceHeroes', 'withGap'));
         $pdf->setPaper('a4', 'portrait');
+        
+        // Configuraciones adicionales para mejorar el renderizado
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'isPhpEnabled' => false,
+            'defaultFont' => 'sans-serif',
+            'dpi' => 150,
+            'enable_font_subsetting' => false,
+        ]);
         
         return $pdf->download('alanda-cards-' . date('Y-m-d') . '.pdf');
     }

@@ -26,6 +26,19 @@
   @endphp
   {!! $headerBlock->render() !!}
 
+  {{-- Print Collection Button --}}
+  <div class="info-block">
+    <button 
+      type="button" 
+      class="print-collection-add"
+      data-entity-type="card"
+      data-entity-id="{{ $card->id }}"
+    >
+      <x-icon name="file-text" size="sm" />
+      {{ __('public.save_to_pdf') }}
+    </button>
+  </div>
+
   {{-- Card Details Section --}}
   <section class="block card-detail-block">
     <div class="block__inner">

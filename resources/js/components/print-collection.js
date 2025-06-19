@@ -37,6 +37,13 @@ export default function initPrintCollection() {
       e.preventDefault();
       clearCollection();
     }
+    
+    // Handle generate PDF button
+    const generateBtn = e.target.closest('.collection-generate-pdf');
+    if (generateBtn) {
+      e.preventDefault();
+      generatePDF();
+    }
   });
   
   // Handle quantity input changes
@@ -48,6 +55,30 @@ export default function initPrintCollection() {
       }
     }
   });
+  
+  // Generate PDF function
+  function generatePDF() {
+    const reduceHeroesCheckbox = document.getElementById('reduce-heroes');
+    const withGapCheckbox = document.getElementById('with-gap');
+    
+    const reduceHeroes = reduceHeroesCheckbox ? reduceHeroesCheckbox.checked : false;
+    const withGap = withGapCheckbox ? withGapCheckbox.checked : true;
+    
+    // Get the base URL from the button's data attribute or construct it
+    const generateBtn = document.querySelector('.collection-generate-pdf');
+    let baseUrl = generateBtn.dataset.url || '/print-collection/generate-pdf';
+    
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (reduceHeroes) params.append('reduce_heroes', '1');
+    if (withGap) params.append('with_gap', '1');
+    
+    // Add parameters to URL
+    const url = baseUrl + (params.toString() ? '?' + params.toString() : '');
+    
+    // Redirect to generate PDF
+    window.location.href = url;
+  }
   
   // Add to collection function
   async function addToCollection(button) {
@@ -67,39 +98,26 @@ export default function initPrintCollection() {
       const data = await response.json();
       
       if (data.success) {
-        // Update button state
-        button.classList.add('added');
-        const icon = button.querySelector('.icon');
-        if (icon) {
-          icon.innerHTML = '<svg>...</svg>'; // Check icon SVG
-        }
-        
-        // Reset button after animation
-        setTimeout(() => {
-          button.classList.remove('added');
-          if (icon) {
-            icon.innerHTML = '<svg>...</svg>'; // Original icon SVG
-          }
-        }, 2000);
-        
-        // Update counter
         updateCounter(data.count);
-        
-        // Show toast notification
         showToast(data.message);
+        
+        // Update button state
+        button.classList.add('entity-public-card__action--added');
+        setTimeout(() => {
+          button.classList.remove('entity-public-card__action--added');
+        }, 2000);
       }
     } catch (error) {
       console.error('Error adding to collection:', error);
-      showToast(__('public.error_adding_to_collection'), 'error');
+      showToast(__('public.error_adding_item'), 'error');
     }
   }
   
   // Update quantity function
   async function updateQuantity(button) {
-    const container = button.closest('.collection-item');
-    const input = container.querySelector('.collection-item__quantity');
     const type = button.dataset.entityType;
     const id = button.dataset.entityId;
+    const input = button.previousElementSibling;
     const copies = parseInt(input.value);
     
     if (copies < 1 || copies > 99) {

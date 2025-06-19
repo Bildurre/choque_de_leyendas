@@ -65,6 +65,19 @@
             </dl>
           </div>
 
+          {{-- Print Collection Button --}}
+          <div class="info-block">
+            <button 
+              type="button" 
+              class="print-collection-add"
+              data-entity-type="hero"
+              data-entity-id="{{ $hero->id }}"
+            >
+              <x-icon name="file-text" size="sm" />
+              {{ __('public.save_to_pdf') }}
+            </button>
+          </div>
+
           {{-- Attributes Block --}}
           <div class="info-block">
             <h2 class="info-block__title">{{ __('public.heroes.attributes') }}</h2>

@@ -50,8 +50,85 @@ Route::group([
         Route::post('/clear', [PrintCollectionController::class, 'clear'])->name('clear');
         Route::get('/generate-pdf', [PrintCollectionController::class, 'generatePdf'])->name('generate-pdf');
     });
-    
-    
+
+
+    if (app()->environment('local')) {
+        Route::get('/debug-pdf', function () {
+            // Parámetros de debug
+            $numHeroes = request()->get('heroes', 5);
+            $numCards = request()->get('cards', 10);
+            $onlyHeroes = request()->get('only_heroes', false);
+            $onlyCards = request()->get('only_cards', false);
+            
+            $items = [];
+            
+            // Añadir héroes
+            if (!$onlyCards) {
+                $heroes = \App\Models\Hero::with(['faction', 'heroClass', 'heroRace'])
+                    ->published()
+                    ->take($numHeroes)
+                    ->get();
+                    
+                foreach ($heroes as $hero) {
+                    $copies = request()->get('hero_copies', 1);
+                    for ($i = 0; $i < $copies; $i++) {
+                        $items[] = [
+                            'type' => 'hero',
+                            'entity' => $hero
+                        ];
+                    }
+                }
+            }
+            
+            // Añadir cartas
+            if (!$onlyHeroes) {
+                $cards = \App\Models\Card::with(['faction', 'cardType'])
+                    ->published()
+                    ->take($numCards)
+                    ->get();
+                    
+                foreach ($cards as $card) {
+                    $copies = request()->get('card_copies', 1);
+                    for ($i = 0; $i < $copies; $i++) {
+                        $items[] = [
+                            'type' => 'card',
+                            'entity' => $card
+                        ];
+                    }
+                }
+            }
+            
+            // Mezclar si se solicita
+            if (request()->get('shuffle')) {
+                shuffle($items);
+            }
+            
+            // Mostrar HTML
+            if (request()->get('html')) {
+                return view('public.print-collection.pdf', compact('items'));
+            }
+            
+            // Generar PDF
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('public.print-collection.pdf', compact('items'));
+            $pdf->setPaper('a4', 'portrait');
+            
+            // Configuraciones adicionales
+            $pdf->setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isRemoteEnabled' => true,
+                'isPhpEnabled' => false,
+                'defaultFont' => 'sans-serif',
+                'dpi' => 150,
+                'enable_font_subsetting' => false,
+            ]);
+            
+            if (request()->get('inline')) {
+                return $pdf->stream('debug.pdf');
+            }
+            
+            return $pdf->download('debug-' . date('Y-m-d-H-i-s') . '.pdf');
+        })->name('debug.pdf');
+    }
 });
 
 Route::post('/set-locale', [App\Http\Controllers\LocaleController::class, 'setLocale'])->name('set-locale');

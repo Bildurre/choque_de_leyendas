@@ -7,6 +7,33 @@
           
           <div class="collection-page__actions">
             @if(count($collection['heroes']) > 0 || count($collection['cards']) > 0)
+              {{-- Checkbox para reducir tamaño de héroes --}}
+              <div class="collection-page__option">
+                <label class="checkbox-wrapper">
+                  <input 
+                    type="checkbox" 
+                    id="reduce-heroes" 
+                    name="reduce_heroes"
+                    class="checkbox-input"
+                  >
+                  <span class="checkbox-label">{{ __('public.reduce_heroes_size') }}</span>
+                </label>
+              </div>
+
+              {{-- Checkbox para añadir gap --}}
+              <div class="collection-page__option">
+                <label class="checkbox-wrapper">
+                  <input 
+                    type="checkbox" 
+                    id="with-gap" 
+                    name="with_gap"
+                    class="checkbox-input"
+                    checked
+                  >
+                  <span class="checkbox-label">{{ __('public.with_gap') }}</span>
+                </label>
+              </div>
+              
               <x-button
                 type="button"
                 variant="secondary"
@@ -16,13 +43,15 @@
                 {{ __('public.clear_all') }}
               </x-button>
               
-              <x-button-link
-                :href="route('public.print-collection.generate-pdf')"
+              <x-button
+                type="button"
                 variant="primary"
                 icon="file-text"
+                class="collection-generate-pdf"
+                data-url="{{ route('public.print-collection.generate-pdf') }}"
               >
                 {{ __('public.generate_pdf') }}
-              </x-button-link>
+              </x-button>
             @endif
           </div>
         </div>
