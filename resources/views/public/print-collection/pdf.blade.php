@@ -17,7 +17,8 @@
     
     body {
       margin: 0;
-      padding: 5mm;
+      padding: 13mm 7mm; /* vertical: 13mm, horizontal: 7mm */
+      padding-right: 4mm;
       background: white;
       font-size: 0; /* Eliminar espacios entre inline-blocks */
     }
@@ -46,8 +47,8 @@
     /* Con gap - añadir márgenes */
     .container.with-gap .card,
     .container.with-gap .hero {
-      margin-right: 2mm;
-      margin-bottom: 2mm;
+      margin-right: 3mm;
+      margin-bottom: 3mm;
     }
     
     /* Tamaños */
