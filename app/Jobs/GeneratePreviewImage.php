@@ -123,12 +123,12 @@ class GeneratePreviewImage implements ShouldQueue
       // Full path for Browsershot
       $fullPath = Storage::disk('public')->path($path);
 
-      // Generate image using Browsershot
+      // Generate image using Browsershot with optimized settings
       Browsershot::html($html)
-        ->windowSize(333, 477) // Card/Hero preview size
-        ->deviceScaleFactor(3) // For better quality
+        ->windowSize(333, 477) // Reduced size: ~66% of original (was 333x477) (220, 315)
+        ->deviceScaleFactor(1) // Reduced from 3 to 1 for smaller file size
         ->waitUntilNetworkIdle()
-        ->delay(500) // Wait 500ms to ensure styles are applied
+        ->delay(300) // Reduced delay for faster processing
         ->save($fullPath);
 
       // Now delete the old image if it exists and is different from the new one
@@ -146,7 +146,8 @@ class GeneratePreviewImage implements ShouldQueue
 
       Log::info('Preview image generated for locale', [
         'locale' => $locale,
-        'path' => $path
+        'path' => $path,
+        'size' => filesize($fullPath) / 1024 . ' KB' // Log file size
       ]);
 
     } catch (\Exception $e) {
@@ -314,9 +315,9 @@ class GeneratePreviewImage implements ShouldQueue
   {
     // Try multiple possible paths for the CSS file
     $possiblePaths = [
-      public_path('build/assets/app.css'),
-      public_path('build/assets/app-*.css'), // Vite may add hash to filename
-      public_path('css/app.css'), // Fallback path
+      public_path('build/assets/style-*.css'), // Vite may add hash to filename
+      public_path('build/assets/style.css'),
+      public_path('css/style.css'), // Fallback path
     ];
     
     $css = '';
@@ -327,6 +328,9 @@ class GeneratePreviewImage implements ShouldQueue
         if (file_exists($cssPath)) {
           $css = file_get_contents($cssPath);
           Log::info('CSS loaded from: ' . $cssPath);
+          
+          // Process CSS to convert relative paths to absolute and include fonts
+          $css = $this->processCssForInline($css, dirname($cssPath));
           break;
         }
       }
@@ -434,7 +438,7 @@ CSS;
         .entity-preview {
             margin: 0 !important;
             box-shadow: none !important;
-            /* Fixed dimensions for generation */
+            /* Original dimensions */
             width: 88mm !important;
             height: 126mm !important;
         }
@@ -457,5 +461,83 @@ CSS;
 </body>
 </html>
 HTML;
+  }
+  
+  /**
+   * Process CSS to convert relative paths and include fonts as base64
+   *
+   * @param string $css
+   * @param string $basePath
+   * @return string
+   */
+  protected function processCssForInline(string $css, string $basePath): string
+  {
+    // Convert url() references to base64
+    $css = preg_replace_callback('/url\([\'"]?([^\'"\)]+)[\'"]?\)/i', function($matches) use ($basePath) {
+      $url = $matches[1];
+      
+      // Skip if already base64
+      if (strpos($url, 'data:') === 0) {
+        return $matches[0];
+      }
+      
+      // Build absolute path
+      $filePath = null;
+      
+      if (strpos($url, '/') === 0) {
+        // Absolute path from web root
+        $filePath = public_path(ltrim($url, '/'));
+      } else {
+        // Relative path
+        $filePath = $basePath . '/' . $url;
+      }
+      
+      // Clean up the path
+      $filePath = realpath($filePath);
+      
+      if ($filePath && file_exists($filePath)) {
+        $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+        
+        // Process fonts
+        if (in_array($extension, ['woff', 'woff2', 'ttf', 'otf', 'eot'])) {
+          $mimeTypes = [
+            'woff' => 'font/woff',
+            'woff2' => 'font/woff2',
+            'ttf' => 'font/ttf',
+            'otf' => 'font/otf',
+            'eot' => 'application/vnd.ms-fontobject'
+          ];
+          
+          $mimeType = $mimeTypes[$extension] ?? 'application/octet-stream';
+          $fontData = file_get_contents($filePath);
+          $base64 = base64_encode($fontData);
+          
+          return "url('data:{$mimeType};base64,{$base64}')";
+        }
+        
+        // Process images
+        if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif', 'svg'])) {
+          $imageData = file_get_contents($filePath);
+          $mimeType = mime_content_type($filePath);
+          
+          if ($extension === 'svg') {
+            $mimeType = 'image/svg+xml';
+          }
+          
+          $base64 = base64_encode($imageData);
+          return "url('data:{$mimeType};base64,{$base64}')";
+        }
+      }
+      
+      Log::warning('Asset not found in CSS', [
+        'url' => $url,
+        'tried_path' => $filePath,
+        'exists' => $filePath ? file_exists($filePath) : false 
+      ]);
+      
+      return $matches[0];
+    }, $css);
+    
+    return $css;
   }
 }
