@@ -369,121 +369,129 @@ class PrintCollectionController extends Controller
         };
     }
 
-    /**
-     * Generate PDF directly for a faction
-     */
-    public function generateFactionPdf(Request $request, $factionId)
-    {
-        $faction = Faction::published()->findOrFail($factionId);
-        
-        // Get all heroes from faction (1 copy each)
-        $heroes = $faction->heroes()->published()
-            ->with(['faction', 'heroClass.heroSuperclass', 'heroRace', 'heroAbilities.attackRange', 'heroAbilities.attackSubtype'])
-            ->get();
-        
-        // Get all cards from faction (2 copies each)
-        $cards = $faction->cards()->published()
-            ->with(['faction', 'cardType.heroSuperclass', 'equipmentType', 'attackRange', 'attackSubtype', 'heroAbility.attackRange', 'heroAbility.attackSubtype'])
-            ->get();
-        
-        // Prepare items for PDF
-        $items = [];
-        
-        // Add heroes (1 copy each)
-        foreach ($heroes as $hero) {
+   /**
+ * Generate PDF directly for a faction
+ */
+public function generateFactionPdf(Request $request, Faction $faction)
+{
+    // Ya no necesitas buscar la facción, Laravel te la pasa directamente
+    // Solo verificar que esté publicada
+    if (!$faction->is_published) {
+        abort(404);
+    }
+    
+    // Get all heroes from faction (1 copy each)
+    $heroes = $faction->heroes()->published()
+        ->with(['faction', 'heroClass.heroSuperclass', 'heroRace', 'heroAbilities.attackRange', 'heroAbilities.attackSubtype'])
+        ->get();
+    
+    // Get all cards from faction (2 copies each)
+    $cards = $faction->cards()->published()
+        ->with(['faction', 'cardType.heroSuperclass', 'equipmentType', 'attackRange', 'attackSubtype', 'heroAbility.attackRange', 'heroAbility.attackSubtype'])
+        ->get();
+    
+    // Prepare items for PDF
+    $items = [];
+    
+    // Add heroes (1 copy each)
+    foreach ($heroes as $hero) {
+        $items[] = [
+            'type' => 'hero',
+            'entity' => $hero
+        ];
+    }
+    
+    // Add cards (2 copies each)
+    foreach ($cards as $card) {
+        for ($i = 0; $i < 2; $i++) {
+            $items[] = [
+                'type' => 'card',
+                'entity' => $card
+            ];
+        }
+    }
+    
+    // Get parameters
+    $reduceHeroes = $request->get('reduce_heroes', false);
+    $withGap = $request->get('with_gap', true);
+    
+    // Configure DomPDF options
+    $pdf = PDF::loadView('public.print-collection.pdf', compact('items', 'reduceHeroes', 'withGap'));
+    $pdf->setPaper('a4', 'portrait');
+    
+    $pdf->setOptions([
+        'isHtml5ParserEnabled' => true,
+        'isRemoteEnabled' => true,
+        'isPhpEnabled' => false,
+        'defaultFont' => 'sans-serif',
+        'dpi' => 150,
+        'enable_font_subsetting' => false,
+    ]);
+    
+    // Return as stream to open in browser
+    return $pdf->stream('alanda-' . Str::slug($faction->name) . '-' . date('Y-m-d') . '.pdf');
+}
+
+/**
+ * Generate PDF directly for a deck
+ */
+public function generateDeckPdf(Request $request, FactionDeck $deck)
+{
+    // Ya no necesitas buscar el deck, Laravel te lo pasa directamente
+    // Solo verificar que esté publicado
+    if (!$deck->is_published) {
+        abort(404);
+    }
+    
+    // Get heroes with their copies
+    $heroes = $deck->heroes()->with(['faction', 'heroClass.heroSuperclass', 'heroRace', 'heroAbilities.attackRange', 'heroAbilities.attackSubtype'])->get();
+    
+    // Get cards with their copies
+    $cards = $deck->cards()->with(['faction', 'cardType.heroSuperclass', 'equipmentType', 'attackRange', 'attackSubtype', 'heroAbility.attackRange', 'heroAbility.attackSubtype'])->get();
+    
+    // Prepare items for PDF (respecting deck copies)
+    $items = [];
+    
+    // Add heroes with their copies
+    foreach ($heroes as $hero) {
+        $copies = $hero->pivot->copies;
+        for ($i = 0; $i < $copies; $i++) {
             $items[] = [
                 'type' => 'hero',
                 'entity' => $hero
             ];
         }
-        
-        // Add cards (2 copies each)
-        foreach ($cards as $card) {
-            for ($i = 0; $i < 2; $i++) {
-                $items[] = [
-                    'type' => 'card',
-                    'entity' => $card
-                ];
-            }
-        }
-        
-        // Get parameters
-        $reduceHeroes = $request->get('reduce_heroes', false);
-        $withGap = $request->get('with_gap', true);
-        
-        // Configure DomPDF options
-        $pdf = PDF::loadView('public.print-collection.pdf', compact('items', 'reduceHeroes', 'withGap'));
-        $pdf->setPaper('a4', 'portrait');
-        
-        $pdf->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => true,
-            'isPhpEnabled' => false,
-            'defaultFont' => 'sans-serif',
-            'dpi' => 150,
-            'enable_font_subsetting' => false,
-        ]);
-        
-        // Return as stream to open in browser
-        return $pdf->stream('alanda-' . Str::slug($faction->name) . '-' . date('Y-m-d') . '.pdf');
     }
-
-    /**
-     * Generate PDF directly for a deck
-     */
-    public function generateDeckPdf(Request $request, $deckId)
-    {
-        $deck = FactionDeck::published()->findOrFail($deckId);
-        
-        // Get heroes with their copies
-        $heroes = $deck->heroes()->with(['faction', 'heroClass.heroSuperclass', 'heroRace', 'heroAbilities.attackRange', 'heroAbilities.attackSubtype'])->get();
-        
-        // Get cards with their copies
-        $cards = $deck->cards()->with(['faction', 'cardType.heroSuperclass', 'equipmentType', 'attackRange', 'attackSubtype', 'heroAbility.attackRange', 'heroAbility.attackSubtype'])->get();
-        
-        // Prepare items for PDF (respecting deck copies)
-        $items = [];
-        
-        // Add heroes with their copies
-        foreach ($heroes as $hero) {
-            $copies = $hero->pivot->copies;
-            for ($i = 0; $i < $copies; $i++) {
-                $items[] = [
-                    'type' => 'hero',
-                    'entity' => $hero
-                ];
-            }
+    
+    // Add cards with their copies
+    foreach ($cards as $card) {
+        $copies = $card->pivot->copies;
+        for ($i = 0; $i < $copies; $i++) {
+            $items[] = [
+                'type' => 'card',
+                'entity' => $card
+            ];
         }
-        
-        // Add cards with their copies
-        foreach ($cards as $card) {
-            $copies = $card->pivot->copies;
-            for ($i = 0; $i < $copies; $i++) {
-                $items[] = [
-                    'type' => 'card',
-                    'entity' => $card
-                ];
-            }
-        }
-        
-        // Get parameters
-        $reduceHeroes = $request->get('reduce_heroes', false);
-        $withGap = $request->get('with_gap', true);
-        
-        // Configure DomPDF options
-        $pdf = PDF::loadView('public.print-collection.pdf', compact('items', 'reduceHeroes', 'withGap'));
-        $pdf->setPaper('a4', 'portrait');
-        
-        $pdf->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => true,
-            'isPhpEnabled' => false,
-            'defaultFont' => 'sans-serif',
-            'dpi' => 150,
-            'enable_font_subsetting' => false,
-        ]);
-        
-        // Return as stream to open in browser
-        return $pdf->stream('alanda-' . Str::slug($deck->name) . '-' . date('Y-m-d') . '.pdf');
     }
+    
+    // Get parameters
+    $reduceHeroes = $request->get('reduce_heroes', false);
+    $withGap = $request->get('with_gap', true);
+    
+    // Configure DomPDF options
+    $pdf = PDF::loadView('public.print-collection.pdf', compact('items', 'reduceHeroes', 'withGap'));
+    $pdf->setPaper('a4', 'portrait');
+    
+    $pdf->setOptions([
+        'isHtml5ParserEnabled' => true,
+        'isRemoteEnabled' => true,
+        'isPhpEnabled' => false,
+        'defaultFont' => 'sans-serif',
+        'dpi' => 150,
+        'enable_font_subsetting' => false,
+    ]);
+    
+    // Return as stream to open in browser
+    return $pdf->stream('alanda-' . Str::slug($deck->name) . '-' . date('Y-m-d') . '.pdf');
+}
 }
