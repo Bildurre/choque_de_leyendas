@@ -5,10 +5,17 @@ export default function initPrintCollection() {
   // Add to collection buttons
   document.addEventListener('click', function(e) {
     // Handle add to collection buttons
-    const addBtn = e.target.closest('.entity-public-card__action');
+    const addBtn = e.target.closest('.entity-public-card__action--add');
     if (addBtn && addBtn.dataset.entityType && addBtn.dataset.entityId) {
       e.preventDefault();
       addToCollection(addBtn);
+    }
+    
+    // Handle regular entity card actions (heroes/cards)
+    const regularBtn = e.target.closest('.entity-public-card__action:not(.entity-public-card__action--add):not(.entity-public-card__action--download)');
+    if (regularBtn && regularBtn.dataset.entityType && regularBtn.dataset.entityId) {
+      e.preventDefault();
+      addToCollection(regularBtn);
     }
     
     // Handle single page add buttons
@@ -76,14 +83,19 @@ export default function initPrintCollection() {
     // Add parameters to URL
     const url = baseUrl + (params.toString() ? '?' + params.toString() : '');
     
-    // Redirect to generate PDF
-    window.location.href = url;
+    // Abrir en nueva pestaña en lugar de redirigir
+    window.open(url, '_blank');
   }
   
   // Add to collection function
   async function addToCollection(button) {
     const type = button.dataset.entityType;
     const id = button.dataset.entityId;
+    
+    // Si es un botón de descarga directa, no hacer nada
+    if (button.classList.contains('entity-public-card__action--download')) {
+      return;
+    }
     
     try {
       const response = await fetch('/print-collection/add', {

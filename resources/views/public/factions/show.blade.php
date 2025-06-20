@@ -26,6 +26,32 @@
   @endphp
   {!! $headerBlock->render() !!}
 
+    {{-- Action Buttons --}}
+  <section class="block">
+    <div class="block__inner">
+      <div class="faction-actions">
+        <button 
+          type="button" 
+          class="print-collection-add"
+          data-entity-type="faction"
+          data-entity-id="{{ $faction->id }}"
+        >
+          <x-icon name="plus" />
+          {{ __('public.add_faction_to_collection') }}
+        </button>
+        
+        <a 
+          href="{{ route('public.print-collection.faction-pdf', $faction) }}"
+          class="print-collection-download"
+          target="_blank"
+        >
+          <x-icon name="download" />
+          {{ __('public.download_faction_pdf') }}
+        </a>
+      </div>
+    </div>
+  </section>
+
   {{-- Statistics Card --}}
   <section class="block">
     <div class="block__inner">
