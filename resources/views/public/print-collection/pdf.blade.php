@@ -17,7 +17,7 @@
     
     body {
       margin: 0;
-      padding: 13mm 7mm; /* vertical: 13mm, horizontal: 7mm */
+      padding: 13mm 4mm 10mm 7mm; /* vertical: 13mm, horizontal: 7mm */
       padding-right: 4mm;
       background: white;
       font-size: 0; /* Eliminar espacios entre inline-blocks */

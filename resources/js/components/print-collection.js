@@ -223,11 +223,11 @@ export default function initPrintCollection() {
     if (!counter) return;
     
     if (count === null) {
-      // Get count from server or localStorage
-      count = parseInt(localStorage.getItem('print_collection_count') || 0);
+      // Get count from server or sessionStorage
+      count = parseInt(sessionStorage.getItem('print_collection_count') || 0);
     } else {
-      // Save to localStorage
-      localStorage.setItem('print_collection_count', count);
+      // Save to sessionStorage
+      sessionStorage.setItem('print_collection_count', count);
     }
     
     counter.textContent = count;
