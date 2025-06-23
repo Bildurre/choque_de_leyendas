@@ -3,11 +3,6 @@
 .entity-public-card {
   display: flex;
   flex-direction: column;
-  transition: transform $transition-fast;
-  
-  &:hover {
-    transform: translateY(-$spacing-xs);
-  }
   
   &__link {
     display: block;
@@ -33,89 +28,30 @@
     gap: $spacing-sm;
   }
   
-  &__action {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-xs;
-    padding: $spacing-xs $spacing-sm;
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-card-border);
-    border-radius: $border-radius-sm;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all $transition-fast;
-    text-decoration: none;
-    
-    &:hover {
-      background-color: var(--random-accent-color-bg);
-      color: var(--random-accent-color);
-      border-color: var(--random-accent-color);
-      
-      .icon {
-        transform: scale(1.1);
-      }
-    }
-    
-    &:active {
-      transform: scale(0.98);
-    }
-    
-    // Success state
-    &.added {
-      background-color: var(--color-success-bg);
-      color: var(--color-success);
-      border-color: var(--color-success);
-      
-      .icon {
-        animation: rotate-check 0.6s ease-out;
-      }
-    }
-  }
+
 
   &__actions {
     display: flex;
     gap: $spacing-sm;
     padding: $spacing-sm;
-    border-top: 1px solid var(--color-card-border);
+    justify-content: flex-start;
   }
   
   &__action {
-    flex: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: $spacing-xs;
-    padding: $spacing-xs $spacing-sm;
     background-color: var(--color-bg-secondary);
     color: var(--color-text-primary);
-    border: 1px solid var(--color-card-border);
-    border-radius: $border-radius-sm;
-    font-size: 0.875rem;
-    font-weight: 500;
+    border: none;
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all $transition-fast;
     text-decoration: none;
     
     &:hover {
-      background-color: var(--random-accent-color-bg);
       color: var(--random-accent-color);
-      border-color: var(--random-accent-color);
-    }
-    
-    &--added {
-      background-color: var(--color-success-bg);
-      color: var(--color-success);
-      border-color: var(--color-success);
-    }
-    
-    &--add {
-      // Estilos específicos para el botón de agregar si es necesario
-    }
-    
-    &--download {
-      // Estilos específicos para el botón de descarga si es necesario
     }
   }
 }

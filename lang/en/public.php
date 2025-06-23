@@ -111,7 +111,7 @@ return [
   ],
   
   // Print collection
-  'add_to_collection' => 'Add to collection',
+  'add_to_collection' => 'Add to PDF',
   'save_to_pdf' => 'Save to PDF',
   'download_pdf' => 'Download PDF',
   'add_deck_to_collection' => 'Add deck to collection',

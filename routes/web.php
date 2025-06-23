@@ -54,6 +54,97 @@ Route::group([
     });
 });
 
+
+// Development route for icon showcase
+if (app()->environment('local')) {
+    Route::get('/icons', function () {
+        // Get icons from the icon component file
+        $iconComponentPath = resource_path('views/components/icon.blade.php');
+        $icons = [];
+        
+        if (File::exists($iconComponentPath)) {
+            $content = File::get($iconComponentPath);
+            
+            // Extract all case statements from the switch
+            preg_match_all("/@case\('([^']+)'\)/", $content, $matches);
+            
+            if (!empty($matches[1])) {
+                $icons = $matches[1];
+                // Remove 'default' if it exists
+                $icons = array_filter($icons, function($icon) {
+                    return $icon !== 'default';
+                });
+                sort($icons);
+            }
+        }
+        
+        return response('
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Icons</title>
+                <style>
+                    body {
+                        font-family: system-ui, -apple-system, sans-serif;
+                        padding: 2rem;
+                        background: #f5f5f5;
+                    }
+                    h1 {
+                        text-align: center;
+                        color: #333;
+                        margin-bottom: 2rem;
+                    }
+                    .grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                        gap: 1rem;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                    }
+                    .icon-card {
+                        background: white;
+                        border: 1px solid #ddd;
+                        border-radius: 0.5rem;
+                        padding: 1rem;
+                        text-align: center;
+                    }
+                    .icon-preview {
+                        height: 48px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 0.5rem;
+                    }
+                    .icon-preview svg {
+                        width: 32px;
+                        height: 32px;
+                    }
+                    .icon-name {
+                        font-size: 0.875rem;
+                        color: #666;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Icons (' . count($icons) . ')</h1>
+                
+                <div class="grid">
+                    ' . collect($icons)->map(function ($icon) {
+                        return '
+                        <div class="icon-card">
+                            <div class="icon-preview">
+                                ' . Blade::render('<x-icon name="' . $icon . '" />') . '
+                            </div>
+                            <div class="icon-name">' . $icon . '</div>
+                        </div>';
+                    })->implode('') . '
+                </div>
+            </body>
+            </html>
+        ');
+    });
+}
+
 Route::post('/set-locale', [App\Http\Controllers\LocaleController::class, 'setLocale'])->name('set-locale');
     
 require __DIR__.'/auth.php';
@@ -68,3 +159,5 @@ Route::group([
     ->name('content.page')
     ->where('page', '[a-z0-9\-]+'); // Restricción para admitir solo slugs válidos
 });
+
+

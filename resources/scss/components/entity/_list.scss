@@ -39,12 +39,8 @@
   
   &__items {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: $spacing-md;
-    
-    @include responsive(tablet) {
-      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    }
 
     &--reorderable {
       display: grid;

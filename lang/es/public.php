@@ -111,7 +111,7 @@ return [
   ],
   
   // Colección de impresión
-  'add_to_collection' => 'Añadir a colección',
+  'add_to_collection' => 'Añadir al PDF',
   'save_to_pdf' => 'Guardar en PDF',
   'download_pdf' => 'Descargar PDF',
   'add_deck_to_collection' => 'Añadir mazo a la colección',
