@@ -89,18 +89,12 @@ return [
   ],
   
   // Search and filters
-  'search' => [
-    'placeholder' => 'Search...',
-    'no_results' => 'No results found',
-    'filters' => 'Filters',
-    'clear_filters' => 'Clear filters',
-    'sort_by' => 'Sort by',
-    'sort_options' => [
-      'name_asc' => 'Name (A-Z)',
-      'name_desc' => 'Name (Z-A)',
-      'cost_asc' => 'Cost (low to high)',
-      'cost_desc' => 'Cost (high to low)',
-    ],
+  'filters' => [
+    'title' => 'Filters',
+    'search' => 'Search',
+    'search_placeholder' => 'Type to Search',
+    'sort_by' => 'Sort',
+    'apply' => 'Filter'
   ],
   
   // Footer

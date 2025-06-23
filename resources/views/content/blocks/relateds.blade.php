@@ -1,11 +1,11 @@
 @php
-  // Configuración del bloque
+  // Block configuration
   $modelType = $block->settings['model_type'] ?? 'hero';
   $displayType = $block->settings['display_type'] ?? 'latest';
   $buttonText = $block->settings['button_text'] ?? __('pages.blocks.relateds.view_all');
   $textAlignment = $block->settings['text_alignment'] ?? 'left';
   
-  // Determinar el modelo y la ruta
+  // Determine model and route
   $modelClass = match($modelType) {
     'faction' => \App\Models\Faction::class,
     'hero' => \App\Models\Hero::class,
@@ -20,7 +20,7 @@
     default => route('public.heroes.index'),
   };
   
-  // Obtener los elementos
+  // Get items
   $query = $modelClass::published();
   
   if ($displayType === 'random') {
@@ -37,7 +37,7 @@
 >
   <div class="block__inner">
     <div class="relateds-block__header text-{{ $textAlignment }}">
-      <div class="relateds-block__content">
+      <div class="block__content">
         @if($block->title)
           <h2 class="block__title">{{ $block->title }}</h2>
         @endif

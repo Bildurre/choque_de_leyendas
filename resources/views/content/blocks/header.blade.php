@@ -4,7 +4,7 @@
   @endif
 >
   <div class="block__inner">
-    <div class="header-block__content text-{{ $block->settings['text_alignment'] ?? 'center' }}">
+    <div class="block__content text-{{ $block->settings['text_alignment'] ?? 'center' }}">
       @if($block->title)
         <h2 class="block__title">{{ $block->title }}</h2>
       @endif

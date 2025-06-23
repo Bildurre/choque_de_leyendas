@@ -9,7 +9,7 @@
   <div class="faction-preview__content">
     @if($faction->hasImage())
       <div class="faction-preview__icon">
-        <img src="{{ $faction->getImageUrl() }}" alt="{{ $faction->name }} icon">
+        <img src="{{ $faction->getImageUrl() }}" alt="{{ $faction->name }}">
       </div>
     @endif
     

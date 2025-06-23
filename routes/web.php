@@ -55,7 +55,7 @@ Route::group([
 });
 
 
-// Development route for icon showcase
+// Development route for icon and color showcase
 if (app()->environment('local')) {
     Route::get('/icons', function () {
         // Get icons from the icon component file
@@ -78,22 +78,122 @@ if (app()->environment('local')) {
             }
         }
         
+        // Define block colors
+        $blockColors = [
+            'red' => '#f15959',
+            'orange' => '#f1753a',
+            'lime' => '#88b033',
+            'green' => '#29ab5f',
+            'teal' => '#31a28e',
+            'cyan' => '#3999cd',
+            'blue' => '#408cfd',
+            'purple' => '#7a64c8',
+            'magenta' => '#a75da5',
+        ];
+        
         return response('
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Icons</title>
+                <title>Icons & Colors</title>
                 <style>
+                    :root {
+                        /* Dark theme colors */
+                        --color-bg-dark: #1A1A1A;
+                        --color-bg-dark-secondary: #262626;
+                        --color-bg-dark-border: #333333;
+                        
+                        /* Light theme colors */
+                        --color-bg-light: #E8E8E8;
+                        --color-bg-light-secondary: #DADADA;
+                        --color-bg-light-border: #CCCCCC;
+                        
+                        /* Text colors */
+                        --color-text-light: #dddddd;
+                        --color-text-dark: #272727;
+                        --color-text-muted: #929292;
+                        
+                        /* Block colors with opacity */
+                        --color-block-bg-red: rgba(241, 89, 89, 0.2);
+                        --color-block-bg-orange: rgba(241, 117, 58, 0.2);
+                        --color-block-bg-lime: rgba(136, 176, 51, 0.2);
+                        --color-block-bg-green: rgba(41, 171, 95, 0.2);
+                        --color-block-bg-teal: rgba(49, 162, 142, 0.2);
+                        --color-block-bg-cyan: rgba(57, 153, 205, 0.2);
+                        --color-block-bg-blue: rgba(64, 140, 253, 0.2);
+                        --color-block-bg-purple: rgba(122, 100, 200, 0.2);
+                        --color-block-bg-magenta: rgba(167, 93, 165, 0.2);
+                    }
+                    
                     body {
                         font-family: system-ui, -apple-system, sans-serif;
                         padding: 2rem;
                         background: #f5f5f5;
+                        margin: 0;
                     }
-                    h1 {
+                    
+                    body.dark {
+                        background: var(--color-bg-dark);
+                        color: var(--color-text-light);
+                    }
+                    
+                    body.light {
+                        background: var(--color-bg-light);
+                        color: var(--color-text-dark);
+                    }
+                    
+                    h1, h2 {
                         text-align: center;
                         color: #333;
                         margin-bottom: 2rem;
                     }
+                    
+                    body.dark h1,
+                    body.dark h2 {
+                        color: var(--color-text-light);
+                    }
+                    
+                    body.light h1,
+                    body.light h2 {
+                        color: var(--color-text-dark);
+                    }
+                    
+                    /* Theme switcher */
+                    .theme-switcher {
+                        text-align: center;
+                        margin-bottom: 3rem;
+                    }
+                    
+                    .theme-btn {
+                        padding: 0.5rem 1rem;
+                        margin: 0 0.5rem;
+                        border: 1px solid #ddd;
+                        background: white;
+                        color: #333;
+                        border-radius: 0.25rem;
+                        cursor: pointer;
+                        font-size: 0.875rem;
+                    }
+                    
+                    body.dark .theme-btn {
+                        background: var(--color-bg-dark-secondary);
+                        border-color: var(--color-bg-dark-border);
+                        color: var(--color-text-light);
+                    }
+                    
+                    body.light .theme-btn {
+                        background: var(--color-bg-light-secondary);
+                        border-color: var(--color-bg-light-border);
+                        color: var(--color-text-dark);
+                    }
+                    
+                    .theme-btn.active {
+                        background: #408cfd;
+                        color: white;
+                        border-color: #408cfd;
+                    }
+                    
+                    /* Icons section */
                     .grid {
                         display: grid;
                         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -101,6 +201,7 @@ if (app()->environment('local')) {
                         max-width: 1200px;
                         margin: 0 auto;
                     }
+                    
                     .icon-card {
                         background: white;
                         border: 1px solid #ddd;
@@ -108,6 +209,17 @@ if (app()->environment('local')) {
                         padding: 1rem;
                         text-align: center;
                     }
+                    
+                    body.dark .icon-card {
+                        background: var(--color-bg-dark-secondary);
+                        border-color: var(--color-bg-dark-border);
+                    }
+                    
+                    body.light .icon-card {
+                        background: var(--color-bg-light-secondary);
+                        border-color: var(--color-bg-light-border);
+                    }
+                    
                     .icon-preview {
                         height: 48px;
                         display: flex;
@@ -115,18 +227,175 @@ if (app()->environment('local')) {
                         justify-content: center;
                         margin-bottom: 0.5rem;
                     }
+                    
                     .icon-preview svg {
                         width: 32px;
                         height: 32px;
                     }
+                    
+                    body.dark .icon-preview svg {
+                        fill: none;
+                    }
+                    
+                    body.light .icon-preview svg {
+                        fill: none;
+                    }
+                    
                     .icon-name {
                         font-size: 0.875rem;
                         color: #666;
                     }
+                    
+                    body.dark .icon-name {
+                        color: var(--color-text-muted);
+                    }
+                    
+                    body.light .icon-name {
+                        color: #666;
+                    }
+                    
+                    /* Colors section */
+                    .colors-section {
+                        margin-top: 4rem;
+                        max-width: 1200px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    
+                    .colors-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                        gap: 1rem;
+                    }
+                    
+                    .color-card {
+                        border-radius: 0.5rem;
+                        overflow: hidden;
+                        border: 1px solid #ddd;
+                    }
+                    
+                    body.dark .color-card {
+                        border-color: var(--color-bg-dark-border);
+                    }
+                    
+                    body.light .color-card {
+                        border-color: var(--color-bg-light-border);
+                    }
+                    
+                    .color-preview {
+                        height: 100px;
+                        position: relative;
+                    }
+                    
+                    .block {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 0.875rem;
+                    }
+                    
+                    .block[data-background="none"] {
+                        background-color: transparent;
+                        border: 2px dashed currentColor;
+                        opacity: 0.3;
+                    }
+                    
+                    .block[data-background="red"] {
+                        background-color: var(--color-block-bg-red);
+                    }
+                    
+                    .block[data-background="orange"] {
+                        background-color: var(--color-block-bg-orange);
+                    }
+                    
+                    .block[data-background="lime"] {
+                        background-color: var(--color-block-bg-lime);
+                    }
+                    
+                    .block[data-background="green"] {
+                        background-color: var(--color-block-bg-green);
+                    }
+                    
+                    .block[data-background="teal"] {
+                        background-color: var(--color-block-bg-teal);
+                    }
+                    
+                    .block[data-background="cyan"] {
+                        background-color: var(--color-block-bg-cyan);
+                    }
+                    
+                    .block[data-background="blue"] {
+                        background-color: var(--color-block-bg-blue);
+                    }
+                    
+                    .block[data-background="purple"] {
+                        background-color: var(--color-block-bg-purple);
+                    }
+                    
+                    .block[data-background="magenta"] {
+                        background-color: var(--color-block-bg-magenta);
+                    }
+                    
+                    .color-info {
+                        padding: 0.75rem;
+                        background: white;
+                        border-top: 1px solid #eee;
+                    }
+                    
+                    body.dark .color-info {
+                        background: var(--color-bg-dark-secondary);
+                        border-top-color: var(--color-bg-dark-border);
+                    }
+                    
+                    body.light .color-info {
+                        background: var(--color-bg-light-secondary);
+                        border-top-color: var(--color-bg-light-border);
+                    }
+                    
+                    .color-name {
+                        font-weight: 600;
+                        margin-bottom: 0.25rem;
+                        text-transform: capitalize;
+                    }
+                    
+                    .color-code {
+                        font-size: 0.75rem;
+                        color: #666;
+                        font-family: monospace;
+                    }
+                    
+                    body.dark .color-code {
+                        color: var(--color-text-muted);
+                    }
+                    
+                    /* Divider */
+                    .divider {
+                        height: 1px;
+                        background: #ddd;
+                        margin: 3rem auto;
+                        max-width: 1200px;
+                    }
+                    
+                    body.dark .divider {
+                        background: var(--color-bg-dark-border);
+                    }
+                    
+                    body.light .divider {
+                        background: var(--color-bg-light-border);
+                    }
                 </style>
             </head>
-            <body>
-                <h1>Icons (' . count($icons) . ')</h1>
+            <body class="dark">
+                <h1>Icons & Colors</h1>
+                
+                <div class="theme-switcher">
+                    <button class="theme-btn active" onclick="setTheme(\'dark\')">Dark Theme</button>
+                    <button class="theme-btn" onclick="setTheme(\'light\')">Light Theme</button>
+                </div>
+                
+                <h2>Icons (' . count($icons) . ')</h2>
                 
                 <div class="grid">
                     ' . collect($icons)->map(function ($icon) {
@@ -139,6 +408,50 @@ if (app()->environment('local')) {
                         </div>';
                     })->implode('') . '
                 </div>
+                
+                <div class="divider"></div>
+                
+                <div class="colors-section">
+                    <h2>Block Colors</h2>
+                    
+                    <div class="colors-grid">
+                        <div class="color-card">
+                            <div class="color-preview">
+                                <div class="block" data-background="none">
+                                    Transparent
+                                </div>
+                            </div>
+                            <div class="color-info">
+                                <div class="color-name">none</div>
+                                <div class="color-code">transparent</div>
+                            </div>
+                        </div>
+                        ' . collect($blockColors)->map(function ($hex, $name) {
+                            return '
+                            <div class="color-card">
+                                <div class="color-preview">
+                                    <div class="block" data-background="' . $name . '">
+                                        Sample Text
+                                    </div>
+                                </div>
+                                <div class="color-info">
+                                    <div class="color-name">' . $name . '</div>
+                                    <div class="color-code">' . $hex . ' @ 20%</div>
+                                </div>
+                            </div>';
+                        })->implode('') . '
+                    </div>
+                </div>
+                
+                <script>
+                    function setTheme(theme) {
+                        document.body.className = theme;
+                        document.querySelectorAll(".theme-btn").forEach(btn => {
+                            btn.classList.remove("active");
+                        });
+                        event.target.classList.add("active");
+                    }
+                </script>
             </body>
             </html>
         ');

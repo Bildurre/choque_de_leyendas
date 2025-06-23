@@ -79,7 +79,7 @@
       'type' => 'relateds',
       'title' => ['es' => 'Cartas', 'en' => 'Cards'],
       'subtitle' => ['es' => 'Descubre las cartas del juego', 'en' => 'Discover the game cards'],
-      'background_color' => 'none',
+      'background_color' => 'magenta',
       'settings' => [
         'model_type' => 'card',
         'display_type' => 'random',

@@ -1,173 +1,113 @@
 @use '../../abstracts/all' as *;
 
+// Base block styles
 .block {
   padding: $spacing-xl 0;
-  transition: background-color 0.3s ease;
   
+  @include responsive(tablet) {
+    padding: $spacing-xxl 0;
+  }
+  
+  // Block inner container
   &__inner {
     max-width: $max-width;
     margin: 0 auto;
     padding: 0 $spacing-md;
     
+    @include responsive(tablet) {
+      padding: 0 $spacing-lg;
+    }
+    
     &--full-width {
-      max-width: none;
+      max-width: 100%;
+      padding: 0;
     }
   }
   
-  &__title {
-    margin-bottom: $spacing-md;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    font-family: 'almendra', serif;
-    
-    @include responsive(tablet) {
-      font-size: 2.5rem;
-    }
-  }
-  
-  &__subtitle {
-    margin-bottom: $spacing-lg;
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-    
-    @include responsive(tablet) {
-      font-size: 1.5rem;
-    }
-  }
-
-  &__image {
-    width: 100%;
-    overflow: hidden;
-    border-radius: $border-radius-md;
-    
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-  }
-
+  // Content wrapper for layouts with images
   &__content-wrapper {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-md;
     
-    @include responsive(tablet) {
-      gap: $spacing-lg;
+    // Image on top/bottom
+    &.has-image-top,
+    &.has-image-bottom {
+      grid-template-columns: 1fr;
     }
-
-    // Imagen a la izquierda o derecha
-    &.has-image-left,
-    &.has-image-right {
-      @include responsive(tablet) {
-        align-items: start;
+    
+    // Image on left/right
+    @include responsive(tablet) {
+      &.has-image-left,
+      &.has-image-right {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: $spacing-xl;
         
-        // Proporciones de columnas
-        &.proportions-1-1 {
-          grid-template-columns: 1fr 1fr;
+        // Column proportions
+        &.proportions-1-2 {
+          grid-template-columns: 1fr 2fr;
         }
         
         &.proportions-2-1 {
           grid-template-columns: 2fr 1fr;
         }
         
-        &.proportions-1-2 {
-          grid-template-columns: 1fr 2fr;
+        &.proportions-1-3 {
+          grid-template-columns: 1fr 3fr;
         }
         
         &.proportions-3-1 {
           grid-template-columns: 3fr 1fr;
         }
-        
-        &.proportions-1-3 {
-          grid-template-columns: 1fr 3fr;
-        }
-        
-        &.proportions-3-2 {
-          grid-template-columns: 3fr 2fr;
-        }
-        
-        &.proportions-2-3 {
-          grid-template-columns: 2fr 3fr;
-        }
-        
-        // Modo de escala: ajustar al contenido
-        &.image-scale-adjust {
-          align-items: stretch;
-          
-          .block__image {
-            height: 100%;
-            
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-          }
-        }
-        
-        // Modo de escala: mantener tamaño
-        &.image-scale-maintain {
-          .block__image {
-            img {
-              width: 100%;
-              height: auto;
-              object-fit: contain;
-            }
-          }
-        }
       }
-    }
-    
-    // Imagen arriba (por defecto en móvil)
-    &.has-image-top {
-      .block__image {
-        order: -1;
-        margin-bottom: $spacing-lg;
-      }
-    }
-    
-    // Imagen abajo
-    &.has-image-bottom {
-      .block__image {
-        order: 2;
-        margin-top: $spacing-lg;
-      }
-    }
-    
-    // Imagen a la derecha
-    &.has-image-right {
-      @include responsive(tablet) {
+      
+      &.has-image-right {
         .block__image {
           order: 2;
         }
       }
     }
+  }
+  
+  // Block content area
+  &__content {
+    // Content is styled by each specific block
+  }
+  
+  // Common title styles
+  &__title {
+    margin: 0 0 $spacing-sm;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    font-family: 'almendra', serif;
+    line-height: 1.2;
     
-    // Imagen a la izquierda
-    &.has-image-left {
-      @include responsive(tablet) {
-        .block__image {
-          order: -1;
-        }
-      }
+    @include responsive(tablet) {
+      font-size: 1.75rem;
     }
   }
   
-  &__content-column {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-md;
+  // Common subtitle styles
+  &__subtitle {
+    margin: 0 0 $spacing-md;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    
+    @include responsive(tablet) {
+      font-size: 1.125rem;
+    }
   }
   
-  &__content {
+  // Common text content styles
+  &__text {
     color: var(--color-text-primary);
     line-height: 1.6;
     
     p {
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-sm;
       
       &:last-child {
         margin-bottom: 0;
@@ -175,15 +115,15 @@
     }
     
     ul, ol {
-      margin-bottom: $spacing-md;
-      margin-left: $spacing-lg;
+      margin: $spacing-sm 0;
+      padding-left: $spacing-lg;
       
       li {
         margin-bottom: $spacing-xs;
-      }
-      
-      &:last-child {
-        margin-bottom: 0;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
     
@@ -212,6 +152,20 @@
       &:first-child {
         margin-top: 0;
       }
+    }
+  }
+  
+  // Common image styles
+  &__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius-md;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
   }
 }

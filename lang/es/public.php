@@ -89,18 +89,12 @@ return [
   ],
   
   // Búsqueda y filtros
-  'search' => [
-    'placeholder' => 'Buscar...',
-    'no_results' => 'No se encontraron resultados',
-    'filters' => 'Filtros',
-    'clear_filters' => 'Limpiar filtros',
-    'sort_by' => 'Ordenar por',
-    'sort_options' => [
-      'name_asc' => 'Nombre (A-Z)',
-      'name_desc' => 'Nombre (Z-A)',
-      'cost_asc' => 'Coste (menor a mayor)',
-      'cost_desc' => 'Coste (mayor a menor)',
-    ],
+  'filters' => [
+    'title' => 'Filtros',
+    'search' => 'Buscar',
+    'search_placeholder' => 'Escribe para Buscar',
+    'sort_by' => 'Ordenar',
+    'apply' => 'Filtrar'
   ],
   
   // Pie de página

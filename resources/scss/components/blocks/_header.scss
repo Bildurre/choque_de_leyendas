@@ -1,17 +1,22 @@
 @use '../../abstracts/all' as *;
 
 .block--header {
-  position: relative;
-  padding: $spacing-xl 0;
-  background-size: cover;
-  background-position: center;
-  
-  .block__inner {
-    position: relative;
-    z-index: 2;
+  // Override common title size for header block
+  .block__title {
+    font-size: 1.75rem;
+    margin-bottom: $spacing-md;
+    
+    @include responsive(tablet) {
+      font-size: 2rem;
+    }
   }
   
-  .header-block__content {
-    margin: 0 auto;
+  // Override common subtitle size for header block
+  .block__subtitle {
+    font-size: 1.125rem;
+    
+    @include responsive(tablet) {
+      font-size: 1.25rem;
+    }
   }
 }

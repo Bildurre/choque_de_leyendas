@@ -22,3 +22,24 @@
     @media (min-width: $breakpoint-ultrawide) { @content; }
   }
 }
+
+@mixin text-stroke($width: 2px, $color: #000) {
+ -webkit-text-stroke: $width $color;
+ text-stroke: $width $color;
+ paint-order: stroke fill;
+ 
+ @supports not (-webkit-text-stroke: $width $color) {
+   $shadows: ();
+   $w: $width / 1px; // Convertir a número sin unidad
+   
+   @for $x from -$w through $w {
+     @for $y from -$w through $w {
+       @if not ($x == 0 and $y == 0) {
+         $shadows: append($shadows, #{$x}px #{$y}px 0 $color, comma);
+       }
+     }
+   }
+   
+   text-shadow: $shadows;
+ }
+}

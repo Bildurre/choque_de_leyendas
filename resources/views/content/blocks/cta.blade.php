@@ -1,16 +1,16 @@
 @php
-  // Obtener el contenido del CTA
+  // Get CTA content
   $ctaContent = $block->getTranslation('content', app()->getLocale());
   $ctaText = $ctaContent['text'] ?? '';
   $buttonText = $ctaContent['button_text'] ?? '';
   $buttonLink = $ctaContent['button_link'] ?? '';
   
-  // Obtener la posición de la imagen
+  // Get image position
   $imagePosition = $block->settings['image_position'] ?? 'top';
   $hasImage = $block->image ? true : false;
   $contentWrapperClass = $hasImage ? 'has-image-' . $imagePosition : '';
   
-  // Añadir clases para scale mode y proportions
+  // Add classes for scale mode and proportions
   if ($hasImage && in_array($imagePosition, ['left', 'right'])) {
     $scaleMode = $block->settings['image_scale_mode'] ?? 'adjust';
     $contentWrapperClass .= ' image-scale-' . $scaleMode;
@@ -45,7 +45,7 @@
             @endif
             
             @if($ctaText)
-              <div class="block__content">{!! $ctaText !!}</div>
+              <div class="block__text">{!! $ctaText !!}</div>
             @endif
             
             @if($buttonText && $buttonLink)
