@@ -3,7 +3,7 @@
 .faction-preview {
   position: relative;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 5/7;
   border: 2px solid var(--color-card-border);
   border-radius: $border-radius-md;
   background-color: var(--faction-color);
@@ -11,7 +11,6 @@
   overflow: hidden;
   
   &:hover {
-    transform: translateY(-$spacing-xs);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     border-color: var(--faction-color);
   }

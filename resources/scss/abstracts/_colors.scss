@@ -143,6 +143,22 @@ $color-text-dark-dim: #4a4a4a;
 
   --faction-color: #ffffff;
   --faction-text: #000000;
+
+  // Success
+  --color-success: #{$color-green};
+  --color-success-bg: #{rgba($color-green, 0.1)};
+  
+  // Error
+  --color-error: #{$color-red};
+  --color-error-bg: #{rgba($color-red, 0.1)};
+  
+  // Warning
+  --color-warning: #{$color-orange};
+  --color-warning-bg: #{rgba($color-orange, 0.1)};
+  
+  // Info
+  --color-info: #{$color-blue};
+  --color-info-bg: #{rgba($color-blue, 0.1)};
 }
 
 // Light theme variables

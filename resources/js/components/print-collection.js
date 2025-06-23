@@ -111,7 +111,9 @@ export default function initPrintCollection() {
       
       if (data.success) {
         updateCounter(data.count);
-        showToast(data.message);
+        
+        // Show notification
+        window.showNotification(data.message, 'success');
         
         // Update button state
         button.classList.add('entity-public-card__action--added');
@@ -121,7 +123,7 @@ export default function initPrintCollection() {
       }
     } catch (error) {
       console.error('Error adding to collection:', error);
-      showToast(__('public.error_adding_item'), 'error');
+      window.showNotification(__('public.error_adding_item'), 'error');
     }
   }
   
@@ -133,7 +135,7 @@ export default function initPrintCollection() {
     const copies = parseInt(input.value);
     
     if (copies < 1 || copies > 99) {
-      showToast(__('public.invalid_quantity'), 'error');
+      window.showNotification(__('public.invalid_quantity'), 'error');
       return;
     }
     
@@ -151,11 +153,11 @@ export default function initPrintCollection() {
       
       if (data.success) {
         updateCounter(data.count);
-        showToast(__('public.quantity_updated'));
+        window.showNotification(__('public.quantity_updated'));
       }
     } catch (error) {
       console.error('Error updating quantity:', error);
-      showToast(__('public.error_updating_quantity'), 'error');
+      window.showNotification(__('public.error_updating_quantity'), 'error');
     }
   }
   
@@ -183,14 +185,14 @@ export default function initPrintCollection() {
         setTimeout(() => item.remove(), 300);
         
         updateCounter(data.count);
-        showToast(__('public.item_removed'));
+        window.showNotification(__('public.item_removed'));
         
         // Check if collection is empty
         checkEmptyState();
       }
     } catch (error) {
       console.error('Error removing from collection:', error);
-      showToast(__('public.error_removing_item'), 'error');
+      window.showNotification(__('public.error_removing_item'), 'error');
     }
   }
   
@@ -218,14 +220,14 @@ export default function initPrintCollection() {
         });
         
         updateCounter(0);
-        showToast(data.message);
+        window.showNotification(data.message);
         
         // Show empty state
         checkEmptyState();
       }
     } catch (error) {
       console.error('Error clearing collection:', error);
-      showToast(__('public.error_clearing_collection'), 'error');
+      window.showNotification(__('public.error_clearing_collection'), 'error');
     }
   }
   
@@ -262,30 +264,6 @@ export default function initPrintCollection() {
       emptyState.style.display = 'block';
       collectionContent.style.display = 'none';
     }
-  }
-  
-  // Show toast notification
-  function showToast(message, type = 'success') {
-    // Remove existing toasts
-    document.querySelectorAll('.toast').forEach(toast => toast.remove());
-    
-    const toast = document.createElement('div');
-    toast.className = `toast toast--${type}`;
-    toast.innerHTML = `
-      <div class="toast__message">${message}</div>
-      ${type === 'success' ? '<a href="/print-collection" class="toast__action">' + __('public.view_collection') + '</a>' : ''}
-    `;
-    
-    document.body.appendChild(toast);
-    
-    // Trigger animation
-    setTimeout(() => toast.classList.add('toast--show'), 10);
-    
-    // Remove after delay
-    setTimeout(() => {
-      toast.classList.remove('toast--show');
-      setTimeout(() => toast.remove(), 300);
-    }, 5000);
   }
   
   // Translation helper (would need to be implemented)

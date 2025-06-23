@@ -1,30 +1,80 @@
 @use '../abstracts/all' as *;
 
+// Notifications container
+.notifications-container {
+  position: fixed;
+  top: $header-height-base + 1rem;
+  right: calc(50% - #{$max-width} / 2 + 1rem); // Alineado con el contenedor principal
+  z-index: calc(#{$z-index-header} - 1); // Por debajo del header
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  max-width: 25rem;
+  pointer-events: none;
+  
+  @include responsive(tablet) {
+    top: $header-height-big + 2rem;
+    right: calc(50% - #{$max-width} / 2 + 2rem); // Alineado con el contenedor principal
+  }
+  
+  // En pantallas más pequeñas que el max-width
+  @media (max-width: #{$max-width + 4rem}) {
+    right: 2rem; // Margen fijo cuando la pantalla es más pequeña
+    
+    @media (max-width: 768px) {
+      right: 1rem; // Margen más pequeño en móvil
+    }
+  }
+}
+
+// Individual notification
 .notification {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: $spacing-md;
-  margin-bottom: $spacing-md;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-card-border);
   border-radius: $border-radius-md;
-  border-left: 0.25rem solid;
-  animation: slide-in-right 0.3s ease-out forwards;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2rem);
+  opacity: 0;
+  transition: transform $transition-medium, opacity $transition-medium;
+  pointer-events: auto;
+  
+  &--show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  &--closing {
+    transform: translateY(-2rem);
+    opacity: 0;
+  }
   
   &__content {
     display: flex;
     align-items: center;
     gap: $spacing-sm;
+    flex: 1;
   }
   
   &__icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
   }
   
   &__message {
     flex: 1;
+    font-weight: 500;
   }
   
   &__close {
@@ -34,60 +84,54 @@
     color: inherit;
     opacity: 0.7;
     transition: opacity $transition-fast;
+    padding: $spacing-xs;
+    margin-left: $spacing-sm;
+    flex-shrink: 0;
     
     &:hover {
       opacity: 1;
+    }
+    
+    svg {
+      width: 1rem;
+      height: 1rem;
     }
   }
   
   // Variants
   &--success {
-    background-color: rgba($color-green, 0.1);
-    color: $color-green;
-    border-left-color: $color-green;
+    border-color: var(--color-success);
+    
+    .notification__icon,
+    .notification__message {
+      color: var(--color-success);
+    }
   }
   
   &--error {
-    background-color: rgba($color-red, 0.1);
-    color: $color-red;
-    border-left-color: $color-red;
+    border-color: var(--color-error);
+    
+    .notification__icon,
+    .notification__message {
+      color: var(--color-error);
+    }
   }
   
   &--warning {
-    background-color: rgba(orange, 0.1);
-    color: orange;
-    border-left-color: orange;
+    border-color: var(--color-warning);
+    
+    .notification__icon,
+    .notification__message {
+      color: var(--color-warning);
+    }
   }
   
   &--info {
-    background-color: rgba($color-blue, 0.1);
-    color: $color-blue;
-    border-left-color: $color-blue;
+    border-color: var(--color-info);
+    
+    .notification__icon,
+    .notification__message {
+      color: var(--color-info);
+    }
   }
-}
-
-// Animation for notifications
-@keyframes slide-in-right {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-// Animation for closing notifications
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.notification.is-closing {
-  animation: fade-out 0.3s ease-out forwards;
 }
