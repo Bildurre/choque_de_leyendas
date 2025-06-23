@@ -10,6 +10,7 @@ return [
     'rules' => 'Reglas',
     'downloads' => 'Descargas',
     'admin_panel' => 'Panel de administración',
+    'toggle' => 'Alternar menú',
   ],
   
   // Página de bienvenida
@@ -36,7 +37,9 @@ return [
   // Facciones
   'factions' => [
     'title' => 'Facciones',
+    'description' => 'Explora las diferentes facciones del juego',
     'empty' => 'No hay facciones disponibles',
+    'no_factions' => 'No hay facciones disponibles',
     'heroes' => 'Héroes de la facción',
     'cards' => 'Cartas de la facción',
     'decks' => 'Mazos de la facción',
@@ -54,6 +57,8 @@ return [
     'lore' => 'Historia',
     'abilities' => 'Habilidades',
     'stats' => 'Estadísticas',
+    'passive_abilities' => 'Habilidades pasivas',
+    'active_abilities' => 'Habilidades activas',
   ],
   
   // Cartas
@@ -66,6 +71,11 @@ return [
     'effect' => 'Efecto',
     'restriction' => 'Restricción',
   ],
+  
+  // Botones de "Ver todos"
+  'view_all_factions' => 'Ver todas las facciones',
+  'view_all_heroes' => 'Ver todos los héroes',
+  'view_all_cards' => 'Ver todas las cartas',
   
   // Colección temporal
   'collection' => [
@@ -98,5 +108,26 @@ return [
     'copyright' => '© :year Alanda - Choque de Leyendas. Todos los derechos reservados.',
     'by' => 'por',
     'under_license' => 'está bajo licencia',
+  ],
+  
+  // Colección de impresión
+  'add_to_collection' => 'Añadir a colección',
+  'save_to_pdf' => 'Guardar en PDF',
+  'download_pdf' => 'Descargar PDF',
+  'add_deck_to_collection' => 'Añadir mazo a la colección',
+  'download_deck_pdf' => 'Descargar mazo en PDF',
+  'generate_pdf' => 'Generar PDF',
+  'copies' => 'Copias',
+  'print_collection_empty' => 'La colección de impresión está vacía',
+  'error_adding_item' => 'Error al añadir el elemento',
+  'invalid_quantity' => 'Cantidad inválida',
+  
+  // Mazos de facción
+  'faction_decks' => [
+    'statistics' => 'Estadísticas',
+    'back_to_faction' => 'Volver a :faction',
+    'other_decks' => 'Otros mazos',
+    'no_heroes' => 'Este mazo no tiene héroes',
+    'no_cards' => 'Este mazo no tiene cartas',
   ],
 ];

@@ -24,7 +24,7 @@
       "en": "The Forest of Thenân is a place of beauty and danger, where Forest Wardens reign as silent protectors. Dressed in white linen and gleaming armor, they master the sword, stealth, and electric magic. No one crosses their boundaries without their consent. They are the guardians of a magical world, where nature and elves live in harmony, far from prying eyes.",
       "es": "El Bosque de Thenân es un lugar de belleza y peligro, donde los Guardabosques reinan como protectores silenciosos. Vestidos de lino blanco y armaduras relucientes, dominan la espada, el sigilo y la magia eléctrica. Nadie cruza sus límites sin su consentimiento. Son los guardianes de un mundo mágico, donde la naturaleza y los elfos viven en armonía, lejos de miradas indiscretas."
     }, 
-    "color": "#2a7a5d",
+    "color": "#00695C",
     "icon": "images/factions/guardabosques-de-thenan.png"
   },
   {
@@ -38,7 +38,7 @@
       "en": "Nomads, raiders, devourers of hope. The Raging Flame Tribe devastates like a wildfire, leaving only ruin in their wake. Without a fixed home, without loyalties, their brutality is their law. Night and day, their ambushes drink the fear of their victims before tearing away their lives. Where they trample, not even the earth grows again.",
       "es": "Nómadas, saqueadores, devoradores de esperanza. La Tribu Llama Furiosa arrasa como un incendio, dejando solo ruina a su paso. Sin hogar fijo, sin lealtades, su brutalidad es su ley. Noche y día, sus emboscadas sorben el miedo de sus víctimas antes de arrancarles la vida. Donde pisotean, ni la tierra vuelve a crecer."
     }, 
-    "color": "#151d20",
+    "color": "#212121",
     "icon": "images/factions/tribu-llama-furiosa.png"
   }
 ]

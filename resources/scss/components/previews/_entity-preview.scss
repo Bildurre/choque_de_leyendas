@@ -79,7 +79,10 @@ $color-white-transparent: #ffffffbd;
     top: .125rem;
     right: .125rem;
     width: 3rem;
-    height: auto;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid black;
   }
 
   &__abilities {
