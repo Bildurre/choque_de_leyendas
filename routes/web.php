@@ -275,11 +275,11 @@ if (app()->environment('local')) {
                     }
                     
                     body.dark .icon-preview svg {
-                        fill: var(--color-text-light);
+                        fill: none;
                     }
                     
                     body.light .icon-preview svg {
-                        fill: var(--color-text-dark);
+                        fill: none;
                     }
                     
                     .icon-name {

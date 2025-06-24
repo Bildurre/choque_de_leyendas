@@ -6,7 +6,7 @@
   'forceCollapse' => false
 ])
 
-<div class="collapsible-section is-collapsed  collapsible-section--no-animation" 
+<div class="collapsible-section{{ ($collapsed || $forceCollapse) ? ' is-collapsed' : '' }}" 
   id="{{ $id }}" 
   data-in-accordion="{{ $inAccordion ? 'true' : 'false' }}"
   data-force-collapse="{{ $forceCollapse ? 'true' : 'false' }}">
@@ -18,7 +18,9 @@
     </div>
   </div>
   
-  <div class="collapsible-section__content">
-    {{ $slot }}
+  <div class="collapsible-section__content-wrapper">
+    <div class="collapsible-section__content">
+      {{ $slot }}
+    </div>
   </div>
 </div>

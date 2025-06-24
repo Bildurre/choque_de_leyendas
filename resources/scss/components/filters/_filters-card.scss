@@ -6,23 +6,43 @@
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
   overflow: visible; // Cambiado de 'show' a 'visible'
 
-  .collapsible-section {
-    margin-bottom: 0;
-    overflow: visible; // Asegurar que el contenedor colapsable no oculte los desplegables
+  .filter-select,
+  .form-field {
+    &:focus-within {
+      label {
+        color: var(--random-accent-color);
+      }
+    }
   }
 }
 
 .filters-form {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-xl;
-  position: relative; // Añadir posición relativa para el contexto de apilamiento
+  gap: $spacing-md;
+  position: relative;
+
+  label {
+    display: inline-block;
+    position: relative;
+    font-size: .75rem;
+    font-weight: 400;
+    padding: 0 $spacing-sm;
+    margin-left: $spacing-xs;
+    margin-bottom: 0;
+    background-color: var(--color-background);
+    transform: translateY(50%);
+    z-index: 1;
+  }
+
+  ::placeholder {
+    font-size: .75rem;
+  }
 }
 
 .filters-search-row {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: $spacing-md;
   align-items: flex-end;
   .form-field {
     margin-bottom: 0;
@@ -34,42 +54,28 @@
 }
 
 .filters-search-actions {
+  margin-left: $spacing-md;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   margin-top: auto;
 }
 
-.filters-results {
+.filters-actions {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: $spacing-sm;
-  padding: $spacing-sm $spacing-md;
-  background-color: var(--color-bg-transparent-light);
-  border-radius: $border-radius-sm;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  
-  &__clear {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-xs;
-    color: var(--random-accent-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color $transition-fast;
-    
-    &:hover {
-      color: var(--random-accent-color-hover);
-    }
-    
-    .icon {
-      transition: transform $transition-fast;
-    }
-    
-    &:hover .icon {
-      transform: scale(1.2);
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  @include responsive(small) {
+    flex-direction: row;;
+  }
+
+  .btn {
+    width: 100%;
+
+    @include responsive(small) {
+      width: fit-content;
     }
   }
 }

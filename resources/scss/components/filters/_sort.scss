@@ -5,13 +5,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: $spacing-sm;
-  
-  &__label {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-  }
-  
+
   &__buttons {
     display: flex;
     flex-wrap: wrap;
@@ -27,7 +21,7 @@
     border: 0.0625rem solid var(--color-card-border);
     background-color: var(--color-background);
     color: var(--color-text-primary);
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     text-decoration: none;
     transition: all $transition-fast;
     

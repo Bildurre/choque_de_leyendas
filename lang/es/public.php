@@ -94,7 +94,8 @@ return [
     'search' => 'Buscar',
     'search_placeholder' => 'Escribe para Buscar',
     'sort_by' => 'Ordenar',
-    'apply' => 'Filtrar'
+    'apply' => 'Filtrar',
+    'clear' => 'Quitar Filtros',
   ],
   
   // Pie de página

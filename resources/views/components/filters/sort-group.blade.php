@@ -20,8 +20,6 @@
 
 @if(count($sortableFields) > 0)
   <div class="filters-sort">
-    <span class="filters-sort__label">{{ __($translationPrefix . '.sort_by') }}:</span>
-    
     <div class="filters-sort__buttons">
       @foreach($sortableFields as $field)
         @php

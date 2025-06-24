@@ -18,7 +18,7 @@
           <x-language-selector />
 
           <a href="{{ route('public.print-collection.index') }}" class="print-collection-icon" style="display: none;">
-            <x-icon name="file-text" size="md" />
+            <x-icon name="pdf-download" size="md" />
             <span class="print-collection-counter">0</span>
           </a>
           

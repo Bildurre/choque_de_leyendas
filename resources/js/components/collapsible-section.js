@@ -4,21 +4,8 @@ export default function initCollapsibleSections() {
   
   if (!collapsibleSections.length) return;
   
-  // Function to update icon based on state
-  function updateIcon(section) {
-    const icon = section.querySelector('.collapsible-section__icon');
-    if (!icon) return;
-    
-    // Icon will be handled by CSS - we don't need to change classes here
-  }
-  
   // Function to update collapsible state
-  function updateCollapsibleState(section, collapsed = null, enableAnimation = false) {
-    // If we want to enable animations, remove the class that disables them
-    if (enableAnimation) {
-      section.classList.remove('collapsible-section--no-animation');
-    }
-    
+  function updateCollapsibleState(section, collapsed = null) {
     // If collapsed is null, toggle the state
     const newState = collapsed !== null ? collapsed : !section.classList.contains('is-collapsed');
     
@@ -28,9 +15,6 @@ export default function initCollapsibleSections() {
     } else {
       section.classList.remove('is-collapsed');
     }
-    
-    // Update icon
-    updateIcon(section);
     
     return newState;
   }
@@ -50,13 +34,10 @@ export default function initCollapsibleSections() {
         return;
       }
       
-      // Enable animations starting from the first click
-      const enableAnimation = true;
-      
       const isSidebarAccordion = accordion?.getAttribute('data-is-sidebar') === 'true';
       
       // Update this collapsible's state
-      const isNowCollapsed = updateCollapsibleState(section, null, enableAnimation);
+      const isNowCollapsed = updateCollapsibleState(section);
       
       // If not part of an accordion or not the sidebar, save state in localStorage
       // Don't save if forceCollapse is true
@@ -91,16 +72,16 @@ export default function initCollapsibleSections() {
       
       // If forceCollapse is true, always start collapsed
       if (forceCollapse) {
-        updateCollapsibleState(section, true, false);
+        updateCollapsibleState(section, true);
         // Remove any saved state from localStorage
         localStorage.removeItem(`section-${sectionId}`);
       } else {
         // Outside accordion: use localStorage or collapsed by default
         const savedState = localStorage.getItem(`section-${sectionId}`);
         
-        // If should be expanded according to localStorage, expand without animation
+        // If should be expanded according to localStorage, expand
         if (savedState === 'expanded') {
-          updateCollapsibleState(section, false, false);
+          updateCollapsibleState(section, false);
         }
         // Otherwise, already collapsed by default, do nothing
       }

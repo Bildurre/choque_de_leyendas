@@ -94,7 +94,8 @@ return [
     'search' => 'Search',
     'search_placeholder' => 'Type to Search',
     'sort_by' => 'Sort',
-    'apply' => 'Filter'
+    'apply' => 'Filter',
+    'clear' => 'Clear FIlters',
   ],
   
   // Footer

@@ -3,21 +3,15 @@
 .collapsible-section {
   margin-bottom: $spacing-xl;
   
-  // Eliminar animaciones durante la carga inicial
-  &--no-animation {
-    .collapsible-section__content,
-    .collapsible-section__icon {
-      transition: none !important;
-    }
-  }
-  
   &__header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacing-md;
     align-items: center;
     padding-bottom: $spacing-sm;
     border-bottom: 1px solid var(--color-card-border);
     cursor: pointer;
+    user-select: none;
   }
   
   &__title {
@@ -26,24 +20,25 @@
   }
   
   &__icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     color: var(--color-text-primary);
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    transition: background-color $transition-fast, color $transition-fast;
+    transition: background-color $transition-fast, 
+                color $transition-fast,
+                transform $transition-fast;
     
     &:hover {
       background-color: var(--random-accent-color-bg);
       color: var(--random-accent-color);
+      transform: scale(1.1);
     }
   }
   
   &__icon {
-    transition: transform $transition-medium ease;
-    // Estado inicial: flecha apuntando hacia abajo (cerrado)
+    transition: transform $transition-slow ease-in-out;
   }
   
   // Cuando está abierto, la flecha apunta hacia arriba
@@ -51,21 +46,33 @@
     transform: rotate(180deg);
   }
   
-  &__content {
-    transition: max-height $transition-medium ease,
-                opacity $transition-medium ease,
-                margin $transition-medium ease;
-    max-height: 9999px;
-    opacity: 1;
+  // Wrapper para el contenido con overflow hidden
+  &__content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
     overflow: hidden;
-    margin-top: $spacing-md;
+    transition: grid-template-rows $transition-slow ease-in-out;
   }
   
-  &.is-collapsed &__content {
-    max-height: 0;
-    opacity: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    pointer-events: none;
+  &:not(.is-collapsed) &__content-wrapper {
+    grid-template-rows: 1fr;
+  }
+  
+  &__content {
+    min-height: 0;
+    padding-top: $spacing-md;
+  }
+  
+  // Nada aquí, ya está definido arriba
+  
+  // Variante para acordeones (opcional: animación más rápida)
+  &[data-in-accordion="true"] {
+    .collapsible-section__content-wrapper {
+      transition-duration: calc(#{$transition-slow} * 0.8);
+    }
+    
+    .collapsible-section__icon {
+      transition-duration: calc(#{$transition-slow} * 0.8);
+    }
   }
 }

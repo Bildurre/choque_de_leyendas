@@ -37,7 +37,11 @@
     max-width: $max-width;
     margin: 0 auto;
     padding: 0 $spacing-md;
-    gap: $spacing-md;
+    gap: $spacing-sm;
+
+    @include responsive(small) {
+      gap: $spacing-md
+    }
     
     @include responsive(tablet) {
       height: calc(#{$header-height-big} * 2 / 3);
@@ -64,9 +68,14 @@
   }
 
   .header-logo {
-    height: 100%;
+
     padding: $spacing-xs 0;
     justify-self: center;
+    height: 80%;
+
+    @include responsive(small) {
+      height: 100%;
+    }
 
     &:hover {
       .logo-path {
@@ -155,18 +164,6 @@
       display: flex;
       align-items: center;
     }
-    
-    &--admin {
-      margin-top: $spacing-lg;
-      padding-top: $spacing-lg;
-      border-top: 1px solid var(--color-card-border);
-      
-      @include responsive(tablet) {
-        margin-top: 0;
-        padding-top: 0;
-        border-top: none;
-      }
-    }
   }
   
   .nav-link {
@@ -225,9 +222,13 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: $spacing-sm;
+  padding: 0;
   color: var(--color-text-primary);
   transition: color $transition-fast;
+
+  @include responsive(small) {
+    padding: $spacing-sm;
+  }
   
   @include responsive(tablet) {
     display: none;

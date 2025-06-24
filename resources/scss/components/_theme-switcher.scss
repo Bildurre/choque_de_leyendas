@@ -13,6 +13,8 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   position: relative;
+
+  padding: 0;
   
   &:hover {
     color: var(--random-accent-color);
