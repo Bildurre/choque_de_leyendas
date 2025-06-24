@@ -1,5 +1,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/colors' as *;
+@use "sass:list";
 
 // Responsive Mixins
 @mixin responsive($breakpoint) {
@@ -30,12 +31,12 @@
  
  @supports not (-webkit-text-stroke: $width $color) {
    $shadows: ();
-   $w: $width / 1px; // Convertir a número sin unidad
+   $w: calc($width / 1px); // Convertir a número sin unidad
    
    @for $x from -$w through $w {
      @for $y from -$w through $w {
        @if not ($x == 0 and $y == 0) {
-         $shadows: append($shadows, #{$x}px #{$y}px 0 $color, comma);
+         $shadows: list.append($shadows, #{$x}px #{$y}px 0 $color, $separator: comma);
        }
      }
    }

@@ -8,6 +8,8 @@
   border-radius: $border-radius-md;
   transition: all $transition-medium;
   overflow: hidden;
+
+  
   
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -28,7 +30,8 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      border-radius: .25rem;
+      border-radius: $border-radius-sm;
+      box-shadow: 0 0 0px 4px var(--faction-color);
     }
   }
   &__content {

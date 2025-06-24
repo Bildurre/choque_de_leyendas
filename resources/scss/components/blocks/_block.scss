@@ -224,4 +224,30 @@
   &[data-background="magenta"] {
     background-color: var(--color-block-bg-magenta);
   }
+  
+  // Random accent colors
+  &[data-background="accent-primary"] {
+    background-color: var(--random-accent-color-bg-light);
+  }
+  
+  &[data-background="accent-secondary"] {
+    background-color: var(--random-accent-color-secondary-bg-light);
+  }
+  
+  &[data-background="accent-tertiary"] {
+    background-color: var(--random-accent-color-tertiary-bg-light);
+  }
+  
+  // Theme colors with transparency
+  &[data-background="theme-card"] {
+    background-color: var(--color-theme-card-bg);
+  }
+  
+  &[data-background="theme-border"] {
+    background-color: var(--color-theme-border-bg);
+  }
+  
+  &[data-background="theme-header"] {
+    background-color: var(--color-theme-header-bg);
+  }
 }

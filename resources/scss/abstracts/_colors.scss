@@ -141,6 +141,11 @@ $color-text-dark-dim: #4a4a4a;
   --color-block-bg-orange: #{$color-orange-transparent-light};
   --color-block-bg-lime: #{$color-lime-transparent-light};
 
+  // Theme-specific block backgrounds with transparency
+  --color-theme-card-bg: #{rgba($color-bg-dark-secondary, 0.5)};
+  --color-theme-border-bg: #{rgba($color-bg-dark-tertiary, 0.5)};
+  --color-theme-header-bg: #{rgba($color-bg-dark-secondary, 0.5)};
+
   --faction-color: #ffffff;
   --faction-text: #000000;
 
@@ -175,6 +180,10 @@ $color-text-dark-dim: #4a4a4a;
   
   --color-text-primary: #{$color-text-dark};
   --color-text-secondary: #{$color-text-dark-dim};
+
+  --color-theme-card-bg: #{rgba($color-bg-light-secondary, 0.5)};
+  --color-theme-border-bg: #{rgba($color-bg-light-tertiary, 0.5)};
+  --color-theme-header-bg: #{rgba($color-bg-light-secondary, 0.5)};
 }
 
 // Dark theme variables

@@ -35,36 +35,67 @@ export default function initRandomAccentColor() {
     }
   ];
   
-  // Función para elegir un color aleatorio
-  function getRandomColorSet() {
-    const randomIndex = Math.floor(Math.random() * baseColors.length);
-    return baseColors[randomIndex];
+  // Función para mezclar aleatoriamente un array
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }
   
-  // Elegimos un color aleatorio cada vez
-  const randomColorSet = getRandomColorSet();
+  // Mezclamos los colores aleatoriamente
+  const randomizedColors = shuffleArray(baseColors);
   
-  // Aplicar a las variables CSS para random-accent-color
+  // Asignamos los colores a primary, secondary y tertiary
+  const [primaryColor, secondaryColor, tertiaryColor] = randomizedColors;
+  
+  // Aplicar a las variables CSS
   const root = document.documentElement;
-  root.style.setProperty('--random-accent-color', randomColorSet.main);
-  root.style.setProperty('--random-accent-color-hover', randomColorSet.light);
-  root.style.setProperty('--random-accent-color-dark', randomColorSet.dark);
   
-  // Establecer todas las variables transparentes
-  root.style.setProperty('--random-accent-color-bg-light', randomColorSet.bgLight);
-  root.style.setProperty('--random-accent-color-bg-semi', randomColorSet.bgSemi);
-  root.style.setProperty('--random-accent-color-bg-hard', randomColorSet.bgHard);
+  // Primary color (mantenemos compatibilidad con código existente)
+  root.style.setProperty('--random-accent-color', primaryColor.main);
+  root.style.setProperty('--random-accent-color-hover', primaryColor.light);
+  root.style.setProperty('--random-accent-color-dark', primaryColor.dark);
+  root.style.setProperty('--random-accent-color-bg-light', primaryColor.bgLight);
+  root.style.setProperty('--random-accent-color-bg-semi', primaryColor.bgSemi);
+  root.style.setProperty('--random-accent-color-bg-hard', primaryColor.bgHard);
+  root.style.setProperty('--random-accent-color-bg', primaryColor.bgLight); // compatibilidad
+  root.style.setProperty('--random-accent-color-rgb', primaryColor.rgb);
   
-  // Para compatibilidad con código existente
-  root.style.setProperty('--random-accent-color-bg', randomColorSet.bgLight);
+  // Secondary color
+  root.style.setProperty('--random-accent-color-secondary', secondaryColor.main);
+  root.style.setProperty('--random-accent-color-secondary-hover', secondaryColor.light);
+  root.style.setProperty('--random-accent-color-secondary-dark', secondaryColor.dark);
+  root.style.setProperty('--random-accent-color-secondary-bg-light', secondaryColor.bgLight);
+  root.style.setProperty('--random-accent-color-secondary-bg-semi', secondaryColor.bgSemi);
+  root.style.setProperty('--random-accent-color-secondary-bg-hard', secondaryColor.bgHard);
+  root.style.setProperty('--random-accent-color-secondary-bg', secondaryColor.bgLight); // compatibilidad
+  root.style.setProperty('--random-accent-color-secondary-rgb', secondaryColor.rgb);
   
-  root.style.setProperty('--random-accent-color-rgb', randomColorSet.rgb);
+  // Tertiary color
+  root.style.setProperty('--random-accent-color-tertiary', tertiaryColor.main);
+  root.style.setProperty('--random-accent-color-tertiary-hover', tertiaryColor.light);
+  root.style.setProperty('--random-accent-color-tertiary-dark', tertiaryColor.dark);
+  root.style.setProperty('--random-accent-color-tertiary-bg-light', tertiaryColor.bgLight);
+  root.style.setProperty('--random-accent-color-tertiary-bg-semi', tertiaryColor.bgSemi);
+  root.style.setProperty('--random-accent-color-tertiary-bg-hard', tertiaryColor.bgHard);
+  root.style.setProperty('--random-accent-color-tertiary-bg', tertiaryColor.bgLight); // compatibilidad
+  root.style.setProperty('--random-accent-color-tertiary-rgb', tertiaryColor.rgb);
   
   // Actualizar los elementos del logo que utilicen la clase logo-path
   const logoPaths = document.querySelectorAll('.logo-path');
   if (logoPaths.length > 0) {
     logoPaths.forEach(path => {
-      path.setAttribute('fill', randomColorSet.main);
+      path.setAttribute('fill', primaryColor.main);
     });
   }
+  
+  // Log para debug (puedes eliminarlo en producción)
+  console.log('Random accent colors assigned:', {
+    primary: primaryColor.name,
+    secondary: secondaryColor.name,
+    tertiary: tertiaryColor.name
+  });
 }

@@ -130,6 +130,12 @@ return [
     'cyan' => 'Cian',
     'blue' => 'Azul',
     'purple' => 'Morado',
-    'magenta' => 'Magenta'
+    'magenta' => 'Magenta',
+    'accent-primary' => 'Color de acento primario',
+    'accent-secondary' => 'Color de acento secundario',
+    'accent-tertiary' => 'Color de acento terciario',
+    'theme-card' => 'Fondo de tarjeta del tema',
+    'theme-border' => 'Borde del tema',
+    'theme-header' => 'Fondo de cabecera del tema'
   ]
 ];

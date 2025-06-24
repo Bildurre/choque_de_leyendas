@@ -62,7 +62,7 @@
       'type' => 'relateds',
       'title' => ['es' => 'Héroes', 'en' => 'Heroes'],
       'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
-      'background_color' => 'none',
+      'background_color' => 'theme-card',
       'settings' => [
         'model_type' => 'hero',
         'display_type' => 'random',
@@ -79,7 +79,7 @@
       'type' => 'relateds',
       'title' => ['es' => 'Cartas', 'en' => 'Cards'],
       'subtitle' => ['es' => 'Descubre las cartas del juego', 'en' => 'Discover the game cards'],
-      'background_color' => 'magenta',
+      'background_color' => 'none',
       'settings' => [
         'model_type' => 'card',
         'display_type' => 'random',

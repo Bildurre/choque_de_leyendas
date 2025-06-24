@@ -89,6 +89,12 @@ if (app()->environment('local')) {
             'blue' => '#408cfd',
             'purple' => '#7a64c8',
             'magenta' => '#a75da5',
+            'accent-primary' => 'Random (Primary)',
+            'accent-secondary' => 'Random (Secondary)',
+            'accent-tertiary' => 'Random (Tertiary)',
+            'theme-card' => 'Theme Card BG',
+            'theme-border' => 'Theme Border',
+            'theme-header' => 'Theme Header BG',
         ];
         
         return response('
@@ -113,6 +119,16 @@ if (app()->environment('local')) {
                         --color-text-dark: #272727;
                         --color-text-muted: #929292;
                         
+                        /* Theme colors with transparency - Dark theme */
+                        --color-bg-transparent-light: rgba(26, 26, 26, 0.2);
+                        --color-bg-transparent-semi: rgba(26, 26, 26, 0.5);
+                        --color-bg-transparent-hard: rgba(26, 26, 26, 0.8);
+                        
+                        /* Additional theme backgrounds for blocks */
+                        --color-theme-card-bg: rgba(38, 38, 38, 0.5);
+                        --color-theme-border-bg: rgba(51, 51, 51, 0.5);
+                        --color-theme-header-bg: rgba(38, 38, 38, 0.5);
+                        
                         /* Block colors with opacity */
                         --color-block-bg-red: rgba(241, 89, 89, 0.2);
                         --color-block-bg-orange: rgba(241, 117, 58, 0.2);
@@ -123,6 +139,11 @@ if (app()->environment('local')) {
                         --color-block-bg-blue: rgba(64, 140, 253, 0.2);
                         --color-block-bg-purple: rgba(122, 100, 200, 0.2);
                         --color-block-bg-magenta: rgba(167, 93, 165, 0.2);
+                        
+                        /* Random accent colors - will be set by JS but we need defaults */
+                        --random-accent-color-bg-light: rgba(64, 140, 253, 0.2);
+                        --random-accent-color-secondary-bg-light: rgba(241, 89, 89, 0.2);
+                        --random-accent-color-tertiary-bg-light: rgba(41, 171, 95, 0.2);
                     }
                     
                     body {
@@ -137,9 +158,29 @@ if (app()->environment('local')) {
                         color: var(--color-text-light);
                     }
                     
+                    body.dark {
+                        /* Override theme colors for dark mode */
+                        --color-bg-transparent-light: rgba(26, 26, 26, 0.2);
+                        --color-bg-transparent-semi: rgba(26, 26, 26, 0.5);
+                        --color-bg-transparent-hard: rgba(26, 26, 26, 0.8);
+                        --color-theme-card-bg: rgba(38, 38, 38, 0.5);
+                        --color-theme-border-bg: rgba(51, 51, 51, 0.5);
+                        --color-theme-header-bg: rgba(38, 38, 38, 0.5);
+                    }
+                    
                     body.light {
                         background: var(--color-bg-light);
                         color: var(--color-text-dark);
+                    }
+                    
+                    body.light {
+                        /* Override theme colors for light mode */
+                        --color-bg-transparent-light: rgba(232, 232, 232, 0.2);
+                        --color-bg-transparent-semi: rgba(232, 232, 232, 0.5);
+                        --color-bg-transparent-hard: rgba(232, 232, 232, 0.8);
+                        --color-theme-card-bg: rgba(218, 218, 218, 0.5);
+                        --color-theme-border-bg: rgba(204, 204, 204, 0.5);
+                        --color-theme-header-bg: rgba(218, 218, 218, 0.5);
                     }
                     
                     h1, h2 {
@@ -234,11 +275,11 @@ if (app()->environment('local')) {
                     }
                     
                     body.dark .icon-preview svg {
-                        fill: none;
+                        fill: var(--color-text-light);
                     }
                     
                     body.light .icon-preview svg {
-                        fill: none;
+                        fill: var(--color-text-dark);
                     }
                     
                     .icon-name {
@@ -338,6 +379,30 @@ if (app()->environment('local')) {
                         background-color: var(--color-block-bg-magenta);
                     }
                     
+                    .block[data-background="accent-primary"] {
+                        background-color: var(--random-accent-color-bg-light);
+                    }
+                    
+                    .block[data-background="accent-secondary"] {
+                        background-color: var(--random-accent-color-secondary-bg-light);
+                    }
+                    
+                    .block[data-background="accent-tertiary"] {
+                        background-color: var(--random-accent-color-tertiary-bg-light);
+                    }
+                    
+                    .block[data-background="theme-card"] {
+                        background-color: var(--color-theme-card-bg);
+                    }
+                    
+                    .block[data-background="theme-border"] {
+                        background-color: var(--color-theme-border-bg);
+                    }
+                    
+                    .block[data-background="theme-header"] {
+                        background-color: var(--color-theme-header-bg);
+                    }
+                    
                     .color-info {
                         padding: 0.75rem;
                         background: white;
@@ -427,6 +492,13 @@ if (app()->environment('local')) {
                             </div>
                         </div>
                         ' . collect($blockColors)->map(function ($hex, $name) {
+                            $isAccent = str_starts_with($name, 'accent-');
+                            $isTheme = str_starts_with($name, 'theme-');
+                            if ($isAccent || $isTheme) {
+                                $colorCode = $hex;
+                            } else {
+                                $colorCode = $hex . ' @ 20%';
+                            }
                             return '
                             <div class="color-card">
                                 <div class="color-preview">
@@ -436,7 +508,7 @@ if (app()->environment('local')) {
                                 </div>
                                 <div class="color-info">
                                     <div class="color-name">' . $name . '</div>
-                                    <div class="color-code">' . $hex . ' @ 20%</div>
+                                    <div class="color-code">' . $colorCode . '</div>
                                 </div>
                             </div>';
                         })->implode('') . '
