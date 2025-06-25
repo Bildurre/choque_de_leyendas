@@ -87,7 +87,7 @@
             id="heroes" 
             :active="request()->get('tab', 'heroes') === 'heroes'" 
             :href="route('public.faction-decks.show', ['faction_deck' => $factionDeck, 'tab' => 'heroes'])"
-            icon="users"
+            icon="heroes"
             :count="$factionDeck->heroes->count()"
           >
             {{ __('entities.heroes.plural') }}

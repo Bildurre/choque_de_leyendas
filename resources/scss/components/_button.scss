@@ -21,6 +21,7 @@
   
   &__text {
     line-height: 1.2;
+    text-align: center;
   }
   
   // Variants
@@ -29,20 +30,21 @@
     color: var(--color-background);
     
     &:hover {
-      background-color: var(--color-background);
+      background-color: var(--color-card-bg);
       color: var(--random-accent-color-hover);
       border-color: var(--random-accent-color-hover);
     }
   }
   
   &--secondary {
-    background-color: var(--color-background);
+    background-color: var(--color-card-bg);
     color: var(--random-accent-color);
     border-color: var(--random-accent-color);
     
     &:hover {
       background-color: var(--random-accent-color-hover);
       border-color: var(--random-accent-color-hover);
+      color: var(--color-background);
     }
   }
 

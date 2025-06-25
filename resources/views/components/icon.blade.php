@@ -169,7 +169,7 @@ $sizeClass = $sizes[$size] ?? $sizes['md'];
         <polyline points="7 3 7 8 15 8"></polyline>
       </svg>
       @break
-    @case('users')
+    @case('heroes')
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
         <circle cx="9" cy="7" r="4"></circle>
@@ -235,18 +235,12 @@ $sizeClass = $sizes[$size] ?? $sizes['md'];
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
       </svg>
       @break
-
     @case('globe-slash')
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="2" y1="12" x2="22" y2="12"></line>
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
         <line x1="2" y1="2" x2="22" y2="22"></line>
-      </svg>
-      @break
-    @case('megaphone')
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12l-18 0m18 0l-2-7l-6 7l-4 0l0 4l4 0l6 7l2-7m-11-2l0 0"></path>
       </svg>
       @break
     @case('pdf-add')
@@ -297,6 +291,21 @@ $sizeClass = $sizes[$size] ?? $sizes['md'];
         <line x1="1" y1="14" x2="7" y2="14"></line>
         <line x1="9" y1="8" x2="15" y2="8"></line>
         <line x1="17" y1="16" x2="23" y2="16"></line>
+      </svg>
+      @break
+    @case('decks')
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="8" height="12" rx="1"></rect>
+        <rect x="14" y="6" width="8" height="12" rx="1"></rect>
+        <path d="M6 6V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2"></path>
+        <path d="M6 18v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2"></path>
+      </svg>
+      @break
+    @case('cards')
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="7" width="12" height="14" rx="1"></rect>
+        <path d="M7 7V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-3"></path>
+        <path d="M11 4V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1"></path>
       </svg>
       @break
     @default

@@ -8,21 +8,6 @@
     display: flex;
     border-bottom: 1px solid var(--color-card-border);
     margin-bottom: $spacing-lg;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    
-    &::-webkit-scrollbar {
-      height: 0.25rem;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: var(--color-card-bg);
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--random-accent-color);
-      border-radius: $border-radius-sm;
-    }
   }
   
   &__item {
@@ -51,13 +36,12 @@
     
     &:hover {
       color: var(--color-text-primary);
-      background-color: var(--color-bg-transparent-light); // Añadimos efecto hover
+      background-color: var(--random-accent-color-bg-light);
     }
     
     &--active {
       color: var(--random-accent-color);
       font-weight: 600;
-      background-color: var(--random-accent-color-bg-light); // Fondo para la pestaña activa
       
       &::after {
         background-color: var(--random-accent-color);
@@ -67,9 +51,6 @@
         color: var(--random-accent-color);
       }
     }
-  }
-  
-  &__icon {
   }
   
   &__text {
@@ -82,7 +63,6 @@
   &__count {
     margin-left: $spacing-xs;
     font-size: 0.85em;
-    opacity: 0.8;
   }
   
   &__content {

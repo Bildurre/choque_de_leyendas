@@ -1,85 +1,67 @@
 @use '../../abstracts/all' as *;
 
-// Deck preview styles - similar to faction preview
 .deck-preview {
-  width: 100%;
-  aspect-ratio: 88 / 126;
+  container-type: inline-size;
   position: relative;
-  background-color: var(--color-card-bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  aspect-ratio: 5/7;
+  border: 2px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  transition: all $transition-medium;
   overflow: hidden;
-  
-  &__background {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.1;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-color: var(--faction-color);
   }
   
   &__icon {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-    
-    &--faction {
-      opacity: 0.6; // Slightly less opacity when using faction icon
-    }
-  }
-  
-  &__content {
-    position: relative;
-    text-align: center;
-    z-index: 1;
-    padding: $spacing-md;
-  }
-  
-  &__name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 0 $spacing-xs;
-    color: var(--color-text-primary);
-  }
-  
-  &__mode {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    margin: 0;
-  }
-  
-  &__stats {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-around;
-    padding: $spacing-md;
-    background: linear-gradient(to top, var(--color-card-bg) 0%, transparent 100%);
+    width: 100%;
+    height: 100%;
+    border: .5rem solid var(--faction-color);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: $border-radius-sm;
+      box-shadow: 0 0 0px 4px var(--faction-color);
+    }
   }
-  
-  &__stat {
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  &__name {
+    padding: 1rem;
     text-align: center;
-    
-    &-value {
-      display: block;
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--random-accent-color);
-      line-height: 1;
-    }
-    
-    &-label {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--color-text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-top: $spacing-xs;
-    }
+    font-size: clamp(1rem, 10cqw, 2rem);
+    font-weight: 700;
+    color: var(--faction-text);
+    margin: 0;
+    line-height: 1.2;
+    z-index: 1;
+
+    @include text-stroke (5px, var(--faction-color));
+  }
+  &__mode {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    font-size: clamp(.8rem, 5cqw, 1rem);
+    color: var(--faction-text);
+    background-color:  var(--faction-color);
+    padding: $spacing-sm $spacing-lg;
+    border-bottom-left-radius: $spacing-sm;
+    margin: 0;
+    line-height: 1;
+    z-index: 1;
   }
 }

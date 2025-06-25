@@ -1,7 +1,7 @@
 @use '../../abstracts/all' as *;
 
 .filters-card {
-  margin-bottom: $spacing-xxl;
+  margin-bottom: $spacing-xl;
   border-radius: $border-radius-md;
   box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
   overflow: visible; // Cambiado de 'show' a 'visible'

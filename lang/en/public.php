@@ -79,13 +79,6 @@ return [
   
   // Temporary collection
   'collection' => [
-    'title' => 'My collection',
-    'add' => 'Add to collection',
-    'remove' => 'Remove from collection',
-    'download' => 'Download PDF',
-    'empty' => 'Your collection is empty',
-    'added' => 'Added to collection',
-    'removed' => 'Removed from collection',
   ],
   
   // Search and filters
@@ -104,18 +97,6 @@ return [
     'by' => 'by',
     'under_license' => 'is under license',
   ],
-  
-  // Print collection
-  'add_to_collection' => 'Add to PDF',
-  'save_to_pdf' => 'Save to PDF',
-  'download_pdf' => 'Download PDF',
-  'add_deck_to_collection' => 'Add deck to collection',
-  'download_deck_pdf' => 'Download deck as PDF',
-  'generate_pdf' => 'Generate PDF',
-  'copies' => 'Copies',
-  'print_collection_empty' => 'The print collection is empty',
-  'error_adding_item' => 'Error adding item',
-  'invalid_quantity' => 'Invalid quantity',
   
   // Faction decks
   'faction_decks' => [

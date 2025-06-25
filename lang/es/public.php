@@ -79,13 +79,9 @@ return [
   
   // Colección temporal
   'collection' => [
-    'title' => 'Mi colección',
-    'add' => 'Añadir a la colección',
-    'remove' => 'Quitar de la colección',
-    'download' => 'Descargar PDF',
-    'empty' => 'Tu colección está vacía',
-    'added' => 'Añadido a la colección',
-    'removed' => 'Eliminado de la colección',
+    'add_to_pdf' => 'Añadir al PDF',
+    'faction_pdf' => 'PDF de la Facción',
+    'deck_pdf' => 'PDF del Mazo'
   ],
   
   // Búsqueda y filtros
@@ -104,18 +100,6 @@ return [
     'by' => 'por',
     'under_license' => 'está bajo licencia',
   ],
-  
-  // Colección de impresión
-  'add_to_collection' => 'Añadir al PDF',
-  'save_to_pdf' => 'Guardar en PDF',
-  'download_pdf' => 'Descargar PDF',
-  'add_deck_to_collection' => 'Añadir mazo a la colección',
-  'download_deck_pdf' => 'Descargar mazo en PDF',
-  'generate_pdf' => 'Generar PDF',
-  'copies' => 'Copias',
-  'print_collection_empty' => 'La colección de impresión está vacía',
-  'error_adding_item' => 'Error al añadir el elemento',
-  'invalid_quantity' => 'Cantidad inválida',
   
   // Mazos de facción
   'faction_decks' => [

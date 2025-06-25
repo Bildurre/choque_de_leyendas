@@ -70,7 +70,7 @@
             id="heroes" 
             :active="$tab === 'heroes'" 
             :href="route('admin.factions.show', ['faction' => $faction, 'tab' => 'heroes'])"
-            icon="users"
+            icon="heroes"
             :count="$faction->heroes_count"
           >
             {{ __('entities.heroes.plural') }}

@@ -15,7 +15,7 @@
         data-entity-id="{{ $entity->id }}"
       >
         <x-icon name="pdf-add" size="sm" />
-        <span>{{ __('public.add_to_collection') }}</span>
+        <span>{{ __('public.collection.add_to_pdf') }}</span>
       </button>
       
       {{-- Botón para descarga directa de PDF --}}
@@ -27,7 +27,13 @@
         target="_blank"
       >
         <x-icon name="pdf-download" size="sm" />
-        <span>{{ __('public.download_pdf') }}</span>
+        <span>
+          @if($type === 'deck')
+            {{ __('public.collection.deck_pdf') }}
+          @elseif($type === 'faction')
+            {{ __('public.collection.faction_pdf') }}
+          @endif
+        </span>
       </a>
     @else
       {{-- Para heroes y cartas, solo botón de agregar --}}
@@ -38,23 +44,14 @@
         data-entity-id="{{ $entity->id }}"
       >
         <x-icon name="pdf-add" size="sm" />
-        <span>{{ __('public.add_to_collection') }}</span>
+        <span>{{ __('public.collection.add_to_pdf') }}</span>
       </button>
     @endif
   </div>
 
   <a href="{{ $viewRoute }}" class="entity-public-card__link">
     <div class="entity-public-card__preview">
-      @if($type === 'hero')
-        <x-previews.hero :hero="$entity" />
-      @elseif($type === 'card')
-        <x-previews.card :card="$entity" />
-      @elseif($type === 'faction')
-        <x-previews.faction :faction="$entity" />
-      @elseif($type === 'deck')
-        <x-previews.deck :deck="$entity" />
-      @endif
+      <x-previews.preview-image :entity="$entity" :type="$type"/>
     </div>
   </a>
-  
 </div>

@@ -5,77 +5,52 @@
   @endif
 
   {{-- Header Block con acciones --}}
-@php
-  $titleTranslations = [];
-  $subtitleTranslations = [];
-  
-  foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
-    $titleTranslations[$locale] = $faction->getTranslation('name', $locale);
-    $subtitleTranslations[$locale] = $faction->getTranslation('lore_text', $locale);
-  }
-  
-  $headerBlock = new \App\Models\Block([
-    'type' => 'header',
-    'title' => $titleTranslations,
-    'subtitle' => $subtitleTranslations,
-    'background_color' => 'none',
-    'settings' => [
-      'text_alignment' => 'left'
-    ]
-  ]);
-@endphp
+  @php
+    $titleTranslations = [];
+    $subtitleTranslations = [];
+    
+    foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
+      $titleTranslations[$locale] = $faction->getTranslation('name', $locale);
+      $subtitleTranslations[$locale] = $faction->getTranslation('lore_text', $locale);
+    }
+    
+    $headerBlock = new \App\Models\Block([
+      'type' => 'header',
+      'title' => $titleTranslations,
+      'subtitle' => $subtitleTranslations,
+      'background_color' => 'none',
+      'settings' => [
+        'text_alignment' => 'left'
+      ]
+    ]);
+  @endphp
 
-@component('content.blocks.header', ['block' => $headerBlock])
-  @slot('actions')
+  @component('content.blocks.header', ['block' => $headerBlock])
+    @slot('actions')
+      <x-button
+        type="button"
+        variant="primary"
+        icon="pdf-add"
+        data-entity-type="faction"
+        data-entity-id="{{ $faction->id }}"
+        class="print-collection-add"
+      >
+        {{ __('public.collection.add_to_pdf') }}
+      </x-button>
 
-
-    <x-button
-      type="button"
-      variant="primary"
-      icon="pdf-add"
-      data-entity-type="faction"
-      data-entity-id="{{ $faction->id }}"
-      class="print-collection-add"
-    >
-      {{ __('public.add_to_collection') }}
-    </x-button>
-
-    <x-button-link
-      href="{{ route('public.print-collection.faction-pdf', $faction) }}"
-      variant="secondary"
-      icon="pdf-download"
-      data-entity-type="faction"
-      data-entity-id="{{ $faction->id }}"
-      class="print-collection-download"
-      target="_blank"
-    >
-      {{ __('public.download_pdf') }}
-    </x-button-link>
-  @endslot
-@endcomponent
-
-  {{-- Statistics Card --}}
-  <section class="block">
-    <div class="block__inner">
-      <div class="faction-stats-card">
-        <h2 class="faction-stats-card__title">{{ __('public.factions.statistics') }}</h2>
-        <div class="faction-stats-card__grid">
-          <div class="faction-stats-card__item">
-            <span class="faction-stats-card__value">{{ $faction->cards()->published()->count() }}</span>
-            <span class="faction-stats-card__label">{{ __('entities.cards.plural') }}</span>
-          </div>
-          <div class="faction-stats-card__item">
-            <span class="faction-stats-card__value">{{ $faction->heroes()->published()->with('heroClass')->distinct('hero_class_id')->count('hero_class_id') }}</span>
-            <span class="faction-stats-card__label">{{ __('entities.hero_classes.plural') }}</span>
-          </div>
-          <div class="faction-stats-card__item">
-            <span class="faction-stats-card__value">{{ $faction->factionDecks()->published()->count() }}</span>
-            <span class="faction-stats-card__label">{{ __('entities.faction_decks.plural') }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <x-button-link
+        href="{{ route('public.print-collection.faction-pdf', $faction) }}"
+        variant="secondary"
+        icon="pdf-download"
+        data-entity-type="faction"
+        data-entity-id="{{ $faction->id }}"
+        class="print-collection-download"
+        target="_blank"
+      >
+        {{ __('public.collection.faction_pdf') }}
+      </x-button-link>
+    @endslot
+  @endcomponent
 
   {{-- Content Tabs --}}
   <section class="block">
@@ -86,7 +61,7 @@
             id="heroes" 
             :active="request()->get('tab', 'heroes') === 'heroes'" 
             :href="route('public.factions.show', ['faction' => $faction, 'tab' => 'heroes'])"
-            icon="users"
+            icon="heroes"
             :count="$faction->heroes()->published()->count()"
           >
             {{ __('entities.heroes.plural') }}
@@ -96,7 +71,7 @@
             id="cards" 
             :active="request()->get('tab') === 'cards'" 
             :href="route('public.factions.show', ['faction' => $faction, 'tab' => 'cards'])"
-            icon="layers"
+            icon="cards"
             :count="$faction->cards()->published()->count()"
           >
             {{ __('entities.cards.plural') }}
@@ -106,7 +81,7 @@
             id="decks" 
             :active="request()->get('tab') === 'decks'" 
             :href="route('public.factions.show', ['faction' => $faction, 'tab' => 'decks'])"
-            icon="box"
+            icon="decks"
             :count="$faction->factionDecks()->published()->count()"
           >
             {{ __('entities.faction_decks.plural') }}

@@ -4,7 +4,7 @@
   width: 100%;
   margin: 0 auto;
   transition: background-color 0.3s ease, color 0.3s ease;
-  padding-top: $header-height-base;
+  padding-top: calc( $header-height-base * 2 / 3);
   
   @include responsive(tablet) {
     padding-top: $header-height-big;

@@ -7,7 +7,7 @@
     gap: $spacing-md;
     margin-bottom: $spacing-xl;
     
-    @include responsive(tablet) {
+    @include responsive(mobile) {
       grid-template-columns: 1fr auto;
       align-items: center;
     }
@@ -15,10 +15,7 @@
   
   .relateds-block__action {
     display: grid;
-    
-    @include responsive(tablet) {
       justify-content: end;
-    }
   }
   
   .relateds-block__grid {
