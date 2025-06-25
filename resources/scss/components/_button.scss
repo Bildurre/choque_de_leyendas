@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  border: none;
+  border: 0.0625rem solid transparent;
   border-radius: $border-radius-md;
   cursor: pointer;
   transition: all $transition-fast;
@@ -29,18 +29,19 @@
     color: var(--color-background);
     
     &:hover {
-      background-color: var(--random-accent-color-hover);
+      background-color: var(--color-background);
+      color: var(--random-accent-color-hover);
+      border-color: var(--random-accent-color-hover);
     }
   }
   
   &--secondary {
-    background-color: transparent;
+    background-color: var(--color-background);
     color: var(--random-accent-color);
-    border: 0.0625rem solid var(--random-accent-color);
+    border-color: var(--random-accent-color);
     
     &:hover {
-      background-color: var(--random-accent-color-bg);
-      color: var(--random-accent-color-hover);
+      background-color: var(--random-accent-color-hover);
       border-color: var(--random-accent-color-hover);
     }
   }

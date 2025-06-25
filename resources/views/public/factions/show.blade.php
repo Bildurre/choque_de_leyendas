@@ -4,53 +4,55 @@
     <x-page-background :image="$faction->getImageUrl()" />
   @endif
 
-  {{-- Header Block --}}
-  @php
-    $titleTranslations = [];
-    $subtitleTranslations = [];
-    
-    foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
-      $titleTranslations[$locale] = $faction->getTranslation('name', $locale);
-      $subtitleTranslations[$locale] = $faction->getTranslation('lore_text', $locale);
-    }
-    
-    $headerBlock = new \App\Models\Block([
-      'type' => 'header',
-      'title' => $titleTranslations,
-      'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
-      'settings' => [
-        'text_alignment' => 'center'
-      ]
-    ]);
-  @endphp
-  {!! $headerBlock->render() !!}
+  {{-- Header Block con acciones --}}
+@php
+  $titleTranslations = [];
+  $subtitleTranslations = [];
+  
+  foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
+    $titleTranslations[$locale] = $faction->getTranslation('name', $locale);
+    $subtitleTranslations[$locale] = $faction->getTranslation('lore_text', $locale);
+  }
+  
+  $headerBlock = new \App\Models\Block([
+    'type' => 'header',
+    'title' => $titleTranslations,
+    'subtitle' => $subtitleTranslations,
+    'background_color' => 'none',
+    'settings' => [
+      'text_alignment' => 'left'
+    ]
+  ]);
+@endphp
 
-    {{-- Action Buttons --}}
-  <section class="block">
-    <div class="block__inner">
-      <div class="faction-actions">
-        <button 
-          type="button" 
-          class="print-collection-add"
-          data-entity-type="faction"
-          data-entity-id="{{ $faction->id }}"
-        >
-          <x-icon name="plus" />
-          {{ __('public.add_faction_to_collection') }}
-        </button>
-        
-        <a 
-          href="{{ route('public.print-collection.faction-pdf', $faction) }}"
-          class="print-collection-download"
-          target="_blank"
-        >
-          <x-icon name="download" />
-          {{ __('public.download_faction_pdf') }}
-        </a>
-      </div>
-    </div>
-  </section>
+@component('content.blocks.header', ['block' => $headerBlock])
+  @slot('actions')
+
+
+    <x-button
+      type="button"
+      variant="primary"
+      icon="pdf-add"
+      data-entity-type="faction"
+      data-entity-id="{{ $faction->id }}"
+      class="print-collection-add"
+    >
+      {{ __('public.add_to_collection') }}
+    </x-button>
+
+    <x-button-link
+      href="{{ route('public.print-collection.faction-pdf', $faction) }}"
+      variant="secondary"
+      icon="pdf-download"
+      data-entity-type="faction"
+      data-entity-id="{{ $faction->id }}"
+      class="print-collection-download"
+      target="_blank"
+    >
+      {{ __('public.download_pdf') }}
+    </x-button-link>
+  @endslot
+@endcomponent
 
   {{-- Statistics Card --}}
   <section class="block">
