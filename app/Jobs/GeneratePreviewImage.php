@@ -315,8 +315,8 @@ class GeneratePreviewImage implements ShouldQueue
   {
     // Try multiple possible paths for the CSS file
     $possiblePaths = [
-      public_path('build/assets/style-*.css'), // Vite may add hash to filename
-      public_path('build/assets/style.css'),
+      public_path('build/assets/app-*.css'), // Vite may add hash to filename
+      public_path('build/assets/app.css'),
       public_path('css/style.css'), // Fallback path
     ];
     

@@ -1,5 +1,4 @@
 import Choices from 'choices.js';
-import 'choices.js/public/assets/styles/choices.min.css';
 
 export default function initAdminFilters() {
   // Initialize Choices.js on filter selects
