@@ -31,10 +31,6 @@
       loading="lazy"
     />
   @else
-    @if($type === 'hero')
-      <x-previews.hero :hero="$entity" />
-    @elseif($type === 'card')
-      <x-previews.card :card="$entity" />
-    @endif
+    <span>No Image Available</span>
   @endif
 @endif
