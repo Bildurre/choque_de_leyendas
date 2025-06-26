@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers\PdfGenerator\PrintCollection;
 
 use App\Http\Controllers\Controller;
-use App\Services\PrintCollection\PrintCollectionService;
+use App\Services\PdfGenerator\PrintCollection\PrintCollectionService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -30,7 +30,7 @@ class PrintCollectionController extends Controller
     ]);
 
     if (empty($collection['heroes']) && empty($collection['cards'])) {
-      return view('public.print-collection.index', [
+      return view('pdf-generator.print-collection.index', [
         'collection' => $collection,
         'heroes' => collect(),
         'cards' => collect()
@@ -39,7 +39,7 @@ class PrintCollectionController extends Controller
 
     $models = $this->printCollectionService->loadCollectionModels($collection);
 
-    return view('public.print-collection.index', [
+    return view('pdf-generator.print-collection.index', [
       'collection' => $collection,
       'heroes' => $models['heroes'],
       'cards' => $models['cards']
@@ -82,8 +82,7 @@ class PrintCollectionController extends Controller
 
     return response()->json([
       'success' => true,
-      'message' => $this->printCollectionService->getSuccessMessage($validated['type']),
-      'count' => $this->printCollectionService->getTotalCount($collection)
+      'message' => $this->printCollectionService->getSuccessMessage($validated['type'])
     ]);
   }
 
@@ -116,8 +115,7 @@ class PrintCollectionController extends Controller
 
     return response()->json([
       'success' => true,
-      'message' => __('public.quantity_updated'),
-      'count' => $this->printCollectionService->getTotalCount($collection)
+      'message' => __('public.quantity_updated')
     ]);
   }
 
@@ -148,8 +146,7 @@ class PrintCollectionController extends Controller
 
     return response()->json([
       'success' => true,
-      'message' => __('public.item_removed_from_collection'),
-      'count' => $this->printCollectionService->getTotalCount($collection)
+      'message' => __('public.item_removed_from_collection')
     ]);
   }
 
@@ -197,7 +194,7 @@ class PrintCollectionController extends Controller
     $withGap = $request->boolean('with_gap', true);
 
     // Generate PDF
-    $pdf = PDF::loadView('public.print-collection.pdf.collection', [
+    $pdf = PDF::loadView('pdf-generator.print-collection.pdf.collection', [
       'items' => $items,
       'reduceHeroes' => $reduceHeroes,
       'withGap' => $withGap,

@@ -1,4 +1,4 @@
-@use '../abstracts/all' as *;
+@use '../../abstracts/all' as *;
 
 // Header icon
 .print-collection-icon {
@@ -15,23 +15,6 @@
   &:hover {
     color: var(--random-accent-color);
   }
-}
-
-.print-collection-counter {
-  position: absolute;
-  top: -0.25rem;
-  right: -0.25rem;
-  min-width: 1.25rem;
-  height: 1.25rem;
-  padding: 0 0.25rem;
-  background-color: var(--random-accent-color);
-  color: white;
-  border-radius: 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 // Collection page styles
@@ -59,7 +42,7 @@
 }
 
 .collection-content {
-  &__items {
+  &__grid {
     display: grid;
     gap: $spacing-md;
   }
@@ -71,34 +54,30 @@
   border-radius: $border-radius-md;
   padding: $spacing-md;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: $spacing-md;
   align-items: center;
   transition: opacity $transition-medium;
   
-  &__image {
-    width: 4rem;
-    height: 4rem;
-    object-fit: cover;
-    border-radius: $border-radius-sm;
+  &__preview {
+    // Preview content styling
   }
   
-  &__info {
-    &-name {
-      font-weight: 600;
-      margin-bottom: $spacing-xs;
-    }
-    
-    &-type {
-      font-size: 0.875rem;
-      color: var(--color-text-secondary);
-    }
-  }
-  
-  &__actions {
+  &__controls {
     display: flex;
     gap: $spacing-sm;
     align-items: center;
+  }
+  
+  &__quantity-group {
+    display: flex;
+    gap: $spacing-xs;
+    align-items: center;
+    
+    label {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
   }
   
   &__quantity {
@@ -107,51 +86,101 @@
     border: 1px solid var(--color-card-border);
     border-radius: $border-radius-sm;
     text-align: center;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    
+    &:focus {
+      outline: none;
+      border-color: var(--random-accent-color);
+    }
   }
   
   &__update {
-    padding: $spacing-xs $spacing-sm;
+    padding: $spacing-xs;
     background-color: var(--random-accent-color);
     color: white;
     border: none;
     border-radius: $border-radius-sm;
     cursor: pointer;
     transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &:hover {
-      background-color: var(--random-accent-color-hover);
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
     }
   }
   
   &__remove {
     padding: $spacing-xs;
-    background-color: var(--color-error-bg);
+    background-color: transparent;
     color: var(--color-error);
-    border: none;
+    border: 1px solid var(--color-error);
     border-radius: $border-radius-sm;
     cursor: pointer;
     transition: all $transition-fast;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &:hover {
       background-color: var(--color-error);
       color: white;
+    }
+    
+    &:active {
+      transform: scale(0.95);
     }
   }
 }
 
 .collection-empty {
   text-align: center;
-  padding: $spacing-xxl;
+  padding: $spacing-xxl $spacing-md;
   
   &__icon {
     font-size: 4rem;
     color: var(--color-text-secondary);
     margin-bottom: $spacing-md;
+    opacity: 0.5;
   }
   
   &__message {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--color-text-secondary);
     margin-bottom: $spacing-lg;
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// PDF Options
+.pdf-options {
+  display: flex;
+  gap: $spacing-lg;
+  align-items: center;
+  padding: $spacing-md;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  
+  &__title {
+    font-weight: 600;
+    margin-right: $spacing-sm;
+  }
+  
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
   }
 }

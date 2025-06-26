@@ -1,7 +1,4 @@
 export default function initPrintCollection() {
-  // Update counter on page load
-  updateCounter();
-  
   // Add to collection buttons
   document.addEventListener('click', function(e) {
     // Handle add to collection buttons
@@ -83,7 +80,7 @@ export default function initPrintCollection() {
     // Add parameters to URL
     const url = baseUrl + (params.toString() ? '?' + params.toString() : '');
     
-    // Abrir en nueva pestaña en lugar de redirigir
+    // Open in new tab
     window.open(url, '_blank');
   }
   
@@ -91,11 +88,6 @@ export default function initPrintCollection() {
   async function addToCollection(button) {
     const type = button.dataset.entityType;
     const id = button.dataset.entityId;
-    
-    // Si es un botón de descarga directa, no hacer nada
-    if (button.classList.contains('entity-public-card__action--download')) {
-      return;
-    }
     
     try {
       const response = await fetch('/print-collection/add', {
@@ -110,20 +102,11 @@ export default function initPrintCollection() {
       const data = await response.json();
       
       if (data.success) {
-        updateCounter(data.count);
-        
-        // Show notification
-        window.showNotification(data.message, 'success');
-        
-        // Update button state
-        button.classList.add('entity-public-card__action--added');
-        setTimeout(() => {
-          button.classList.remove('entity-public-card__action--added');
-        }, 2000);
+        window.showNotification(data.message);
       }
     } catch (error) {
       console.error('Error adding to collection:', error);
-      window.showNotification(__('public.error_adding_item'), 'error');
+      window.showNotification(__('public.error_adding_to_collection'), 'error');
     }
   }
   
@@ -134,7 +117,7 @@ export default function initPrintCollection() {
     const input = button.previousElementSibling;
     const copies = parseInt(input.value);
     
-    if (copies < 1 || copies > 99) {
+    if (isNaN(copies) || copies < 1 || copies > 99) {
       window.showNotification(__('public.invalid_quantity'), 'error');
       return;
     }
@@ -152,7 +135,6 @@ export default function initPrintCollection() {
       const data = await response.json();
       
       if (data.success) {
-        updateCounter(data.count);
         window.showNotification(__('public.quantity_updated'));
       }
     } catch (error) {
@@ -184,7 +166,6 @@ export default function initPrintCollection() {
         item.style.opacity = '0';
         setTimeout(() => item.remove(), 300);
         
-        updateCounter(data.count);
         window.showNotification(__('public.item_removed'));
         
         // Check if collection is empty
@@ -219,7 +200,6 @@ export default function initPrintCollection() {
           setTimeout(() => item.remove(), 300);
         });
         
-        updateCounter(0);
         window.showNotification(data.message);
         
         // Show empty state
@@ -228,29 +208,6 @@ export default function initPrintCollection() {
     } catch (error) {
       console.error('Error clearing collection:', error);
       window.showNotification(__('public.error_clearing_collection'), 'error');
-    }
-  }
-  
-  // Update counter in header
-  function updateCounter(count = null) {
-    const counter = document.querySelector('.print-collection-counter');
-    if (!counter) return;
-    
-    if (count === null) {
-      // Get count from server or sessionStorage
-      count = parseInt(sessionStorage.getItem('print_collection_count') || 0);
-    } else {
-      // Save to sessionStorage
-      sessionStorage.setItem('print_collection_count', count);
-    }
-    
-    counter.textContent = count;
-    counter.style.display = count > 0 ? 'flex' : 'none';
-    
-    // Update header icon visibility
-    const headerIcon = document.querySelector('.print-collection-icon');
-    if (headerIcon) {
-      headerIcon.style.display = count > 0 ? 'flex' : 'none';
     }
   }
   

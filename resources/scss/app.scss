@@ -33,7 +33,6 @@
 @use 'components/pagination';
 @use 'components/cost-display';
 @use 'components/icon-attribute';
-@use 'components/print-collection';
 
 // Entity Components
 @use 'components/entity/list';
@@ -68,6 +67,9 @@
 @use 'components/previews/card-preview';
 @use 'components/previews/faction-preview';
 @use 'components/previews/deck-preview';
+
+// PDF Generator
+@use 'pdf-generator/print-collection/print-collection';
 
 // Pages
 @use 'pages/login';

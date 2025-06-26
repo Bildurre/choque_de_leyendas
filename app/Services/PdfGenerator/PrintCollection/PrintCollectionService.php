@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\PrintCollection;
+namespace App\Services\PdfGenerator\PrintCollection;
 
 use App\Models\Card;
-use App\Models\Hero;
 use App\Models\Faction;
 use App\Models\FactionDeck;
+use App\Models\Hero;
 use Illuminate\Support\Collection;
 
 class PrintCollectionService
@@ -16,7 +16,7 @@ class PrintCollectionService
   public function addHero(int $id, array $collection): array
   {
     $hero = Hero::published()->findOrFail($id);
-    $key = 'hero_' . $hero->id;
+    $key = 'hero_' . $id;
 
     if (isset($collection['heroes'][$key])) {
       $collection['heroes'][$key]['copies']++;
@@ -37,7 +37,7 @@ class PrintCollectionService
   public function addCard(int $id, array $collection): array
   {
     $card = Card::published()->findOrFail($id);
-    $key = 'card_' . $card->id;
+    $key = 'card_' . $id;
 
     if (isset($collection['cards'][$key])) {
       $collection['cards'][$key]['copies']++;
@@ -76,12 +76,14 @@ class PrintCollectionService
     // Add all cards from faction (2 copies each)
     foreach ($faction->cards()->published()->get() as $card) {
       $key = 'card_' . $card->id;
+      $copiesToAdd = 2;
+      
       if (isset($collection['cards'][$key])) {
-        $collection['cards'][$key]['copies'] += 2;
+        $collection['cards'][$key]['copies'] += $copiesToAdd;
       } else {
         $collection['cards'][$key] = [
           'id' => $card->id,
-          'copies' => 2,
+          'copies' => $copiesToAdd,
           'name' => $card->name
         ];
       }
@@ -96,8 +98,8 @@ class PrintCollectionService
   public function addDeck(int $id, array $collection): array
   {
     $deck = FactionDeck::published()->findOrFail($id);
-    
-    // Add heroes with their copies
+
+    // Add heroes with their copies from the deck
     foreach ($deck->heroes as $hero) {
       $key = 'hero_' . $hero->id;
       $copiesToAdd = $hero->pivot->copies;
@@ -113,7 +115,7 @@ class PrintCollectionService
       }
     }
 
-    // Add cards with their copies
+    // Add cards with their copies from the deck
     foreach ($deck->cards as $card) {
       $key = 'card_' . $card->id;
       $copiesToAdd = $card->pivot->copies;
@@ -133,7 +135,7 @@ class PrintCollectionService
   }
 
   /**
-   * Update item quantity in the collection
+   * Update the quantity of an item
    */
   public function updateItemQuantity(string $type, int $id, int $copies, array $collection): array
   {

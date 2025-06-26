@@ -17,9 +17,8 @@
         <div class="header-actions">
           <x-language-selector />
 
-          <a href="{{ route('public.print-collection.index') }}" class="print-collection-icon" style="display: none;">
+          <a href="{{ route('public.print-collection.index') }}" class="print-collection-icon">
             <x-icon name="pdf-download" size="md" />
-            <span class="print-collection-counter">0</span>
           </a>
           
           <x-theme-switcher />

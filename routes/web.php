@@ -6,7 +6,7 @@ use App\Http\Controllers\Public\HeroController;
 use App\Http\Controllers\Content\PageController;
 use App\Http\Controllers\Public\FactionController;
 use App\Http\Controllers\Public\FactionDeckController;
-use App\Http\Controllers\Public\PrintCollectionController;
+use App\Http\Controllers\PdfGenerator\PrintCollection\PrintCollectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Grupo de rutas con localización
