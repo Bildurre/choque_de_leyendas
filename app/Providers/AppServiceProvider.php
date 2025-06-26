@@ -1,5 +1,4 @@
 <?php
-// app/Providers/AppServiceProvider.php
 
 namespace App\Providers;
 
@@ -19,6 +18,7 @@ use App\Services\Game\AttackSubtypeService;
 use App\Services\Game\EquipmentTypeService;
 use App\Services\Game\HeroSuperclassService;
 use App\Services\Game\HeroAttributesConfigurationService;
+use App\Services\PrintCollection\PrintCollectionService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
             AttackRangeService::class,
             FactionService::class,
             CardService::class,
+            PrintCollectionService::class,
         ];
         
         foreach ($services as $service) {

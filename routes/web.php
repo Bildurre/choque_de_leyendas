@@ -19,11 +19,6 @@ Route::group([
         return view('welcome');
     })->name('welcome');
     
-    // // Redirección de dashboard a home
-    // Route::get('/dashboard', function () {
-    //     return redirect()->route('welcome');
-    // });
-    
     // Rutas específicas de contenido público
     Route::get(LaravelLocalization::transRoute('routes.factions'), [FactionController::class, 'index'])
         ->name('public.factions.index');
@@ -40,8 +35,7 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
         ->name('public.faction-decks.show');
 
-
-    // Print Collection routes
+    // Print Collection routes (solo colección temporal)
     Route::prefix('print-collection')->name('public.print-collection.')->group(function () {
         Route::get('/', [PrintCollectionController::class, 'index'])->name('index');
         Route::post('/add', [PrintCollectionController::class, 'add'])->name('add');
@@ -49,8 +43,6 @@ Route::group([
         Route::post('/remove', [PrintCollectionController::class, 'remove'])->name('remove');
         Route::post('/clear', [PrintCollectionController::class, 'clear'])->name('clear');
         Route::get('/generate-pdf', [PrintCollectionController::class, 'generatePdf'])->name('generate-pdf');
-        Route::get('/faction/{faction}/pdf', [PrintCollectionController::class, 'generateFactionPdf'])->name('faction-pdf');
-        Route::get('/deck/{deck}/pdf', [PrintCollectionController::class, 'generateDeckPdf'])->name('deck-pdf');
     });
 });
 

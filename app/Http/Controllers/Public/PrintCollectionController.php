@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\Faction;
-use App\Models\FactionDeck;
-use App\Services\Public\PrintCollectionService;
+use App\Services\PrintCollection\PrintCollectionService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -169,7 +167,7 @@ class PrintCollectionController extends Controller
   }
 
   /**
-   * Generate the PDF
+   * Generate the PDF for the current collection
    */
   public function generatePdf(Request $request)
   {
@@ -194,42 +192,29 @@ class PrintCollectionController extends Controller
       $models['cards']
     );
 
+    // Get PDF options from request
+    $reduceHeroes = $request->boolean('reduce_heroes', false);
+    $withGap = $request->boolean('with_gap', true);
+
     // Generate PDF
-    $pdf = PDF::loadView('public.print-collection.pdf', [
+    $pdf = PDF::loadView('public.print-collection.pdf.collection', [
       'items' => $items,
+      'reduceHeroes' => $reduceHeroes,
+      'withGap' => $withGap,
       'totalCopies' => $this->printCollectionService->getTotalCopies($collection)
     ]);
 
+    // Configure PDF options
+    $pdf->setPaper('a4', 'portrait');
+    $pdf->setOptions([
+      'isHtml5ParserEnabled' => true,
+      'isRemoteEnabled' => true,
+      'isPhpEnabled' => false,
+      'defaultFont' => 'sans-serif',
+      'dpi' => 150,
+      'enable_font_subsetting' => false,
+    ]);
+
     return $pdf->stream('collection-' . now()->format('Y-m-d') . '.pdf');
-  }
-
-  /**
-   * Generate PDF directly for a faction
-   */
-  public function generateFactionPdf(Request $request, Faction $faction)
-  {
-    $items = $this->printCollectionService->generateFactionPdf($faction);
-    
-    $pdf = PDF::loadView('public.print-collection.pdf', [
-      'items' => $items,
-      'totalCopies' => count($items)
-    ]);
-
-    return $pdf->stream('faction-' . $faction->id . '-' . now()->format('Y-m-d') . '.pdf');
-  }
-
-  /**
-   * Generate PDF directly for a deck
-   */
-  public function generateDeckPdf(Request $request, FactionDeck $deck)
-  {
-    $items = $this->printCollectionService->generateDeckPdf($deck);
-    
-    $pdf = PDF::loadView('public.print-collection.pdf', [
-      'items' => $items,
-      'totalCopies' => count($items)
-    ]);
-
-    return $pdf->stream('deck-' . $deck->id . '-' . now()->format('Y-m-d') . '.pdf');
   }
 }
