@@ -67,15 +67,16 @@
 
           {{-- Print Collection Button --}}
           <div class="info-block">
-            <button 
-              type="button" 
-              class="print-collection-add"
-              data-entity-type="hero"
-              data-entity-id="{{ $hero->id }}"
+            <x-button
+              type="button"
+              variant="primary"
+              icon="pdf-add"
+              data-collection-add
+              data-entity-type="card"
+              data-entity-id="{{ $card->id }}"
             >
-              <x-icon name="file-text" size="sm" />
-              {{ __('public.save_to_pdf') }}
-            </button>
+              {{ __('public.add_to_collection') }}
+            </x-button>
           </div>
 
           {{-- Attributes Block --}}

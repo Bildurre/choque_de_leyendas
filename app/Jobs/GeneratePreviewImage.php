@@ -272,19 +272,12 @@ class GeneratePreviewImage implements ShouldQueue
         }
         
         if ($imagePath && file_exists($imagePath)) {
-          $imageData = file_get_contents($imagePath);
-          $mimeType = mime_content_type($imagePath);
+          $dataUri = image_to_base64($imagePath);
           
-          // Fix for SVG mime type
-          if (pathinfo($imagePath, PATHINFO_EXTENSION) === 'svg') {
-            $mimeType = 'image/svg+xml';
+          if ($dataUri) {
+            // Replace src with data URI
+            return str_replace($src, $dataUri, $fullTag);
           }
-          
-          $base64 = base64_encode($imageData);
-          $dataUri = "data:{$mimeType};base64,{$base64}";
-          
-          // Replace src with data URI
-          return str_replace($src, $dataUri, $fullTag);
         }
         
         Log::warning('Image not found for preview', [
@@ -517,15 +510,8 @@ HTML;
         
         // Process images
         if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif', 'svg'])) {
-          $imageData = file_get_contents($filePath);
-          $mimeType = mime_content_type($filePath);
-          
-          if ($extension === 'svg') {
-            $mimeType = 'image/svg+xml';
-          }
-          
-          $base64 = base64_encode($imageData);
-          return "url('data:{$mimeType};base64,{$base64}')";
+          $dataUri = image_to_base64($filePath);
+          return $dataUri ? "url('{$dataUri}')" : $matches[0];
         }
       }
       

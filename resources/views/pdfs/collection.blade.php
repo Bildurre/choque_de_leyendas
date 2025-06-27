@@ -76,34 +76,11 @@
   </style>
 </head>
 <body>
-
 @php
   // Configuración
-  $reduceHeroes = request()->get('reduce_heroes', false);
-  $withGap = request()->get('with_gap', false);
-  
-  // Funciones helper
-  function assetToPath($url) {
-    $url = parse_url($url, PHP_URL_PATH);
-    if (strpos($url, '/storage/') === 0) {
-      return storage_path('app/public/' . substr($url, 9));
-    }
-    if (strpos($url, 'storage/') === 0) {
-      return storage_path('app/public/' . substr($url, 8));
-    }
-    return public_path($url);
-  }
-  
-  function imageToBase64($path) {
-    if (file_exists($path)) {
-      $type = pathinfo($path, PATHINFO_EXTENSION);
-      $data = file_get_contents($path);
-      return 'data:image/' . $type . ';base64,' . base64_encode($data);
-    }
-    return null;
-  }
+  $reduceHeroes = $reduceHeroes ?? false;
+  $withGap = $withGap ?? false;
 @endphp
-
 <div class="container {{ $withGap ? 'with-gap' : 'no-gap' }}">
   @foreach($items as $item)
     @php
@@ -116,8 +93,8 @@
       $mainImageUrl = $hasMainImage ? $entity->getImageUrl() : null;
       
       $imageUrl = $previewUrl ?: $mainImageUrl;
-      $imagePath = $imageUrl ? assetToPath($imageUrl) : null;
-      $imageData = $imagePath ? imageToBase64($imagePath) : null;
+      $imagePath = $imageUrl ? pdf_asset_to_path($imageUrl) : null;
+      $imageData = $imagePath ? image_to_base64($imagePath) : null;
       
       $isHero = $item['type'] === 'hero';
       $class = $isHero ? 'hero' : 'card';
@@ -135,6 +112,5 @@
     </div>
   @endforeach
 </div>
-
 </body>
 </html>

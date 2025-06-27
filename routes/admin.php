@@ -13,6 +13,7 @@ use App\Http\Controllers\Game\GameModeController;
 use App\Http\Controllers\Game\HeroRaceController;
 use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PdfExportController;
 use App\Http\Controllers\Game\AttackRangeController;
 use App\Http\Controllers\Game\FactionDeckController;
 use App\Http\Controllers\Game\HeroAbilityController;
@@ -127,4 +128,30 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::post('counters/{id}/restore', [CounterController::class, 'restore'])->name('counters.restore');
   Route::delete('counters/{id}/force-delete', [CounterController::class, 'forceDelete'])->name('counters.force-delete');
   Route::post('counters/{counter}/toggle-published', [CounterController::class, 'togglePublished'])->name('counters.toggle-published');
+
+  // PDF Export routes
+  Route::prefix('pdf-export')->name('pdf-export.')->group(function () {
+      Route::get('/', [PdfExportController::class, 'index'])->name('index');
+      Route::get('/dynamic', [PdfExportController::class, 'dynamicExports'])->name('dynamic');
+      Route::get('/other', [PdfExportController::class, 'otherExports'])->name('other');
+      
+      // Generate routes
+      Route::post('/generate-faction/{faction}', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
+      Route::post('/generate-deck/{deck}', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
+      Route::post('/generate-all-factions', [PdfExportController::class, 'generateAllFactions'])->name('generate-all-factions');
+      Route::post('/generate-all-decks', [PdfExportController::class, 'generateAllDecks'])->name('generate-all-decks');
+      Route::post('/generate-custom', [PdfExportController::class, 'generateCustom'])->name('generate-custom');
+      
+      // Management
+      Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
+
+      // Statistics endpoint
+      Route::get('/statistics', [App\Http\Controllers\Admin\PdfExportController::class, 'statistics'])->name('statistics');
+
+      // Cleanup endpoint
+      Route::post('/cleanup', [App\Http\Controllers\Admin\PdfExportController::class, 'cleanup'])->name('cleanup');
+
+      // Job status endpoint
+      Route::get('/status/{jobId}', [App\Http\Controllers\Admin\PdfExportController::class, 'checkStatus'])->name('status');
+  });
 });

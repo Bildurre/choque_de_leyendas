@@ -145,6 +145,13 @@
                   <span class="admin-sidebar__text">{{ __('pages.plural') }}</span>
                 </a>
               </li>
+
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.pdf-export.index') }}" 
+                  class="admin-sidebar__link {{ request()->routeIs('admin.pdf-export.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('admin.pdf_export.menu_title') }}</span>
+                </a>
+              </li>
             </ul>
           </x-collapsible-section>
         </x-accordion>

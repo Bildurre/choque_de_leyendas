@@ -1,0 +1,23 @@
+@use '../abstracts/all' as *;
+
+// Import component styles
+@use '../downloads/downloads-section';
+@use '../downloads/download-card';
+@use '../downloads/collection-section';
+@use '../downloads/collection-item';
+@use '../downloads/collection-actions';
+@use '../downloads/pdf-notification';
+@use '../downloads/quantity-control';
+
+// Main page styles
+.downloads-page {
+  &__header {
+    margin-bottom: $spacing-xl;
+  }
+  
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+}

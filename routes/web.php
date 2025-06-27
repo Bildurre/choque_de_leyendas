@@ -5,8 +5,9 @@ use App\Http\Controllers\Public\CardController;
 use App\Http\Controllers\Public\HeroController;
 use App\Http\Controllers\Content\PageController;
 use App\Http\Controllers\Public\FactionController;
+use App\Http\Controllers\Public\DownloadsController;
+use App\Http\Controllers\Public\CollectionController;
 use App\Http\Controllers\Public\FactionDeckController;
-use App\Http\Controllers\PdfGenerator\PrintCollection\PrintCollectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Grupo de rutas con localización
@@ -35,14 +36,22 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
         ->name('public.faction-decks.show');
 
-    // Print Collection routes (solo colección temporal)
-    Route::prefix('print-collection')->name('public.print-collection.')->group(function () {
-        Route::get('/', [PrintCollectionController::class, 'index'])->name('index');
-        Route::post('/add', [PrintCollectionController::class, 'add'])->name('add');
-        Route::post('/update', [PrintCollectionController::class, 'update'])->name('update');
-        Route::post('/remove', [PrintCollectionController::class, 'remove'])->name('remove');
-        Route::post('/clear', [PrintCollectionController::class, 'clear'])->name('clear');
-        Route::get('/generate-pdf', [PrintCollectionController::class, 'generatePdf'])->name('generate-pdf');
+    // Downloads & Collection routes
+    Route::prefix('downloads')->name('public.downloads.')->group(function () {
+        Route::get('/', [DownloadsController::class, 'index'])->name('index');
+        Route::get('/{pdf}/download', [DownloadsController::class, 'download'])->name('download');
+        Route::delete('/{pdf}', [DownloadsController::class, 'destroy'])->name('destroy');
+
+    });
+
+    // Collection management routes (temporary collection)
+    Route::prefix('collection')->name('public.collection.')->group(function () {
+        Route::post('/add', [CollectionController::class, 'add'])->name('add');
+        Route::post('/update', [CollectionController::class, 'update'])->name('update');
+        Route::post('/remove', [CollectionController::class, 'remove'])->name('remove');
+        Route::post('/clear', [CollectionController::class, 'clear'])->name('clear');
+        Route::post('/generate-pdf', [CollectionController::class, 'generatePdf'])->name('generate-pdf');
+        Route::get('/status/{jobId}', [CollectionController::class, 'checkStatus'])->name('status');
     });
 });
 

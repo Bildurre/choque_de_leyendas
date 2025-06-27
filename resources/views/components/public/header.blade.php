@@ -1,3 +1,11 @@
+@php
+  $collectionCount = 0;
+  if (session()->has('print_collection')) {
+    $collection = session('print_collection');
+    $collectionCount = count($collection['heroes'] ?? []) + count($collection['cards'] ?? []);
+  }
+@endphp
+
 <header class="public-header">
   <div class="header-container">
     <div class="header-main-container">
@@ -17,8 +25,15 @@
         <div class="header-actions">
           <x-language-selector />
 
-          <a href="{{ route('public.print-collection.index') }}" class="print-collection-icon">
-            <x-icon name="pdf-download" size="md" />
+          <a href="{{ route('public.downloads.index') }}" 
+            class="collection-icon"
+            title="{{ __('public.downloads_and_collection') }}">
+            <x-icon name="layers" />
+            <span class="collection-counter" 
+                  data-collection-count="{{ $collectionCount }}"
+                  style="{{ $collectionCount > 0 ? '' : 'display: none;' }}">
+              {{ $collectionCount }}
+            </span>
           </a>
           
           <x-theme-switcher />

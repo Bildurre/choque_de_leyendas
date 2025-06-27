@@ -68,13 +68,11 @@
 @use 'components/previews/faction-preview';
 @use 'components/previews/deck-preview';
 
-// PDF Generator
-@use 'pdf-generator/print-collection/print-collection';
-
 // Pages
 @use 'pages/login';
 @use 'pages/hero-detail';
 @use 'pages/card-detail';
+@use 'pages/downloads-collection';
 
 // Bloques
 @use 'components/blocks/block';
