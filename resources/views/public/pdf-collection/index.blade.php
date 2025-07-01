@@ -5,9 +5,9 @@
     $subtitleTranslations = [];
     
     foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
-      $titleTranslations[$locale] = __('public.pdf_collection.title', [], $locale);
+      $titleTranslations[$locale] = __('pdf.collection.title', [], $locale);
       
-      $description = __('public.pdf_collection.description', [], $locale);
+      $description = __('pdf.collection.description', [], $locale);
       $subtitleTranslations[$locale] = $description !== 'public.pdf_collection.description' ? $description : '';
     }
     
@@ -55,7 +55,7 @@
         {{-- Other PDFs --}}
         @if($otherPdfs->isNotEmpty())
           <div class="pdf-collection__section">
-            <h2 class="pdf-collection__section-title">{{ __('public.pdf_collection.other_documents') }}</h2>
+            <h2 class="pdf-collection__section-title">{{ __('pdf.collection.other_documents') }}</h2>
             <x-pdf.list :items="$otherPdfs" type="other">
               @foreach($otherPdfs as $pdf)
                 <x-pdf.public-item :pdf="$pdf" />
@@ -67,9 +67,9 @@
         {{-- Temporary PDFs --}}
         @if($temporaryPdfs->isNotEmpty())
           <div class="pdf-collection__section">
-            <h2 class="pdf-collection__section-title">{{ __('public.pdf_collection.your_pdfs') }}</h2>
+            <h2 class="pdf-collection__section-title">{{ __('pdf.collection.your_pdfs') }}</h2>
             <p class="pdf-collection__section-description">
-              {{ __('public.pdf_collection.temporary_description') }}
+              {{ __('pdf.collection.temporary_description') }}
             </p>
             <x-pdf.list :items="$temporaryPdfs" type="temporary">
               @foreach($temporaryPdfs as $pdf)
@@ -83,7 +83,7 @@
         @if($factionPdfs->isEmpty() && $deckPdfs->isEmpty() && $otherPdfs->isEmpty() && $temporaryPdfs->isEmpty())
           <div class="pdf-collection__empty">
             <x-icon name="file-x" size="lg" />
-            <p>{{ __('public.pdf_collection.no_pdfs_available') }}</p>
+            <p>{{ __('pdf.collection.no_available') }}</p>
           </div>
         @endif
         

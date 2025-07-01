@@ -32,7 +32,7 @@
       </div>
     @else
       <div class="pdf-item__info">
-        <span class="pdf-item__processing">{{ __('public.pdf_processing') }}</span>
+        <span class="pdf-item__processing">{{ __('pdf.processing') }}</span>
       </div>
     @endif
   </div>
@@ -67,7 +67,7 @@
           variant="delete"
           size="sm"
           icon="trash"
-          :confirmMessage="__('public.confirm_delete_pdf')"
+          :confirmMessage="__('pdf.confirm_delete')"
         >
         </x-action-button>
       @endif

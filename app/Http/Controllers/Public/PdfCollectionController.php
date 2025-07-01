@@ -91,10 +91,10 @@ class PdfCollectionController extends Controller
     // Delete the PDF
     if ($this->pdfCollectionService->deletePdf($pdf)) {
       return redirect()->route('public.pdf-collection.index')
-        ->with('success', __('public.pdf_deleted_successfully'));
+        ->with('success', __('pdf.deleted_successfully'));
     }
     
     return redirect()->route('public.pdf-collection.index')
-      ->with('error', __('public.pdf_deletion_failed'));
+      ->with('error', __('pdf.deletion_failed'));
   }
 }

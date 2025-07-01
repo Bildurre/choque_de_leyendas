@@ -3,137 +3,141 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 class GeneratedPdf extends Model
 {
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array<string>
-   */
-  protected $fillable = [
-    'type',
-    'filename',
-    'path',
-    'session_id',
-    'metadata',
-    'is_permanent',
-    'expires_at',
-  ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<string>
+     */
+    protected $fillable = [
+        'type',
+        'template',
+        'filename',
+        'path',
+        'session_id',
+        'locale',
+        'faction_id',
+        'deck_id',
+        'is_permanent',
+        'expires_at',
+    ];
 
-  /**
-   * The attributes that should be cast.
-   *
-   * @var array<string, string>
-   */
-  protected $casts = [
-    'metadata' => 'array',
-    'is_permanent' => 'boolean',
-    'expires_at' => 'datetime',
-  ];
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_permanent' => 'boolean',
+        'expires_at' => 'datetime',
+    ];
 
-  /**
-   * The "booted" method of the model.
-   */
-  protected static function booted(): void
-  {
-    // Delete file when model is deleted
-    static::deleting(function ($pdf) {
-      if (Storage::disk('public')->exists($pdf->path)) {
-        Storage::disk('public')->delete($pdf->path);
-      }
-    });
-  }
+    /**
+     * Get the faction associated with this PDF
+     */
+    public function faction(): BelongsTo
+    {
+        return $this->belongsTo(Faction::class);
+    }
 
-  /**
-   * Scope for permanent PDFs
-   */
-  public function scopePermanent($query)
-  {
-    return $query->where('is_permanent', true);
-  }
+    /**
+     * Get the deck associated with this PDF
+     */
+    public function deck(): BelongsTo
+    {
+        return $this->belongsTo(FactionDeck::class, 'deck_id');
+    }
 
-  /**
-   * Scope for temporary PDFs
-   */
-  public function scopeTemporary($query)
-  {
-    return $query->where('is_permanent', false);
-  }
+    /**
+     * Check if the PDF file exists in storage
+     */
+    public function exists(): bool
+    {
+        return Storage::disk('public')->exists($this->path);
+    }
 
-  /**
-   * Scope for session PDFs
-   */
-  public function scopeForSession($query, string $sessionId)
-  {
-    return $query->where('session_id', $sessionId);
-  }
+    /**
+     * Get the URL for the PDF
+     */
+    public function getUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->path);
+    }
 
-  /**
-   * Scope for expired PDFs
-   */
-  public function scopeExpired($query)
-  {
-    return $query->where('expires_at', '<', now());
-  }
+    /**
+     * Get the size of the PDF file
+     */
+    public function getSizeAttribute(): int
+    {
+        if (!$this->exists()) {
+            return 0;
+        }
+        
+        return Storage::disk('public')->size($this->path);
+    }
 
-  /**
-   * Get the full URL to the PDF
-   */
-  public function getUrlAttribute(): string
-  {
-    return Storage::disk('public')->url($this->path);
-  }
+    /**
+     * Get the formatted size of the PDF file
+     */
+    public function getFormattedSizeAttribute(): string
+    {
+        $size = $this->size;
+        
+        if ($size >= 1048576) {
+            return round($size / 1048576, 2) . ' MB';
+        } elseif ($size >= 1024) {
+            return round($size / 1024, 2) . ' KB';
+        } else {
+            return $size . ' bytes';
+        }
+    }
 
-  /**
-   * Get the file size in bytes
-   */
-  public function getSizeAttribute(): int
-  {
-    return Storage::disk('public')->size($this->path);
-  }
+    /**
+     * Scope for permanent PDFs
+     */
+    public function scopePermanent($query)
+    {
+        return $query->where('is_permanent', true);
+    }
 
-  /**
-   * Get the file size formatted for humans
-   */
-  public function getFormattedSizeAttribute(): string
-  {
-    $size = $this->size;
-    $units = ['B', 'KB', 'MB', 'GB'];
-    $power = floor(($size ? log($size) : 0) / log(1024));
-    $power = min($power, count($units) - 1);
-    
-    return round($size / pow(1024, $power), 2) . ' ' . $units[$power];
-  }
+    /**
+     * Scope for temporary PDFs
+     */
+    public function scopeTemporary($query)
+    {
+        return $query->where('is_permanent', false);
+    }
 
-  /**
-   * Check if the PDF still exists
-   */
-  public function exists(): bool
-  {
-    return Storage::disk('public')->exists($this->path);
-  }
+    /**
+     * Scope for PDFs of a specific session
+     */
+    public function scopeForSession($query, string $sessionId)
+    {
+        return $query->where('session_id', $sessionId);
+    }
 
-  /**
-   * Mark as permanent
-   */
-  public function makePermanent(): void
-  {
-    $this->update([
-      'is_permanent' => true,
-      'expires_at' => null,
-      'session_id' => null,
-    ]);
-  }
+    /**
+     * Scope for expired PDFs
+     */
+    public function scopeExpired($query)
+    {
+        return $query->where('expires_at', '<', now());
+    }
 
-  /**
-   * Set expiration
-   */
-  public function setExpiration($hours = 24): void
-  {
-    $this->update([
-      'expires_at' => now()->addHours($hours),
-    ]);
-  }
+    /**
+     * Delete the model and its associated file
+     */
+    public function delete()
+    {
+        // Delete the file if it exists
+        if ($this->exists()) {
+            Storage::disk('public')->delete($this->path);
+        }
+
+        return parent::delete();
+    }
 }

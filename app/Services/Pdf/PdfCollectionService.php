@@ -66,16 +66,14 @@ class PdfCollectionService
     
     return GeneratedPdf::where('type', 'faction')
       ->where('is_permanent', true)
-      ->where('metadata->locale', $locale)
-      ->whereIn('metadata->faction_id', $publishedFactionIds)
+      ->where('locale', $locale)
+      ->whereIn('faction_id', $publishedFactionIds)
+      ->with('faction')
       ->orderBy('created_at', 'desc')
       ->get()
       ->map(function ($pdf) {
         // Add faction name to PDF for display
-        if (isset($pdf->metadata['faction_id'])) {
-          $faction = Faction::find($pdf->metadata['faction_id']);
-          $pdf->display_name = $faction ? $faction->name : $pdf->filename;
-        }
+        $pdf->display_name = $pdf->faction ? $pdf->faction->name : $pdf->filename;
         return $pdf;
       });
   }
@@ -90,19 +88,17 @@ class PdfCollectionService
     
     return GeneratedPdf::where('type', 'deck')
       ->where('is_permanent', true)
-      ->where('metadata->locale', $locale)
-      ->whereIn('metadata->deck_id', $publishedDeckIds)
+      ->where('locale', $locale)
+      ->whereIn('deck_id', $publishedDeckIds)
+      ->with(['deck.faction'])
       ->orderBy('created_at', 'desc')
       ->get()
       ->map(function ($pdf) {
         // Add deck name to PDF for display
-        if (isset($pdf->metadata['deck_id'])) {
-          $deck = FactionDeck::with('faction')->find($pdf->metadata['deck_id']);
-          if ($deck) {
-            $pdf->display_name = $deck->name . ' (' . $deck->faction->name . ')';
-          } else {
-            $pdf->display_name = $pdf->filename;
-          }
+        if ($pdf->deck) {
+          $pdf->display_name = $pdf->deck->name . ' (' . $pdf->deck->faction->name . ')';
+        } else {
+          $pdf->display_name = $pdf->filename;
         }
         return $pdf;
       });
@@ -116,8 +112,8 @@ class PdfCollectionService
     return GeneratedPdf::whereIn('type', ['rules', 'tokens'])
       ->where('is_permanent', true)
       ->where(function ($query) use ($locale) {
-        $query->where('metadata->locale', $locale)
-              ->orWhereNull('metadata->locale');
+        $query->where('locale', $locale)
+              ->orWhereNull('locale');
       })
       ->orderBy('type')
       ->orderBy('created_at', 'desc')

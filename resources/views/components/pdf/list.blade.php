@@ -1,7 +1,7 @@
 @props([
   'items' => collect(),
   'type' => 'faction', // faction, deck, or other
-  'emptyMessage' => __('admin.no_pdfs_found'),
+  'emptyMessage' => __('pdf.no_pdfs_found'),
 ])
 
 @php

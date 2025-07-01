@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Faction;
-use Illuminate\View\View;
 use App\Models\FactionDeck;
 use App\Models\GeneratedPdf;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use App\Services\Pdf\PdfExportService;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PdfExportController extends Controller
 {
@@ -33,28 +33,6 @@ class PdfExportController extends Controller
       'decks' => $data['decks'],
       'customExports' => $data['customExports'],
       'existingPdfs' => $data['existingPdfs'],
-    ]);
-  }
-
-  /**
-   * View a PDF file
-   */
-  public function view(GeneratedPdf $pdf)
-  {
-    // Get current locale
-    $currentLocale = app()->getLocale();
-    
-    // Get the appropriate PDF for viewing
-    $pdfToView = $this->pdfExportService->getPdfForViewing($pdf, $currentLocale);
-    
-    if (!$pdfToView) {
-      abort(404, 'PDF file not found');
-    }
-    
-    // Serve the PDF
-    return response()->file(storage_path('app/public/' . $pdfToView->path), [
-      'Content-Type' => 'application/pdf',
-      'Content-Disposition' => 'inline; filename="' . $pdfToView->filename . '"',
     ]);
   }
   
@@ -116,10 +94,10 @@ class PdfExportController extends Controller
     
     try {
       // Delete all PDFs for this entity (all locales)
-      if ($pdf->type === 'faction' && isset($pdf->metadata['faction_id'])) {
-        $this->pdfExportService->deleteFactionPdfs($pdf->metadata['faction_id']);
-      } elseif ($pdf->type === 'deck' && isset($pdf->metadata['deck_id'])) {
-        $this->pdfExportService->deleteDeckPdfs($pdf->metadata['deck_id']);
+      if ($pdf->type === 'faction' && $pdf->faction_id) {
+        $this->pdfExportService->deleteFactionPdfs($pdf->faction_id);
+      } elseif ($pdf->type === 'deck' && $pdf->deck_id) {
+        $this->pdfExportService->deleteDeckPdfs($pdf->deck_id);
       } else {
         // For custom PDFs, just delete this one
         $pdf->delete();
@@ -147,14 +125,36 @@ class PdfExportController extends Controller
       $deletedCount = $this->pdfExportService->cleanupTemporaryPdfs();
       
       return redirect()->route('admin.pdf-export.index', ['tab' => request()->get('tab', 'factions')])
-        ->with('success', __('admin.pdf_cleanup_completed', ['count' => $deletedCount]));
+        ->with('success', __('pdf.cleanup_completed', ['count' => $deletedCount]));
     } catch (\Exception $e) {
       \Log::error('Failed to cleanup temporary PDFs', [
         'error' => $e->getMessage(),
       ]);
       
       return redirect()->route('admin.pdf-export.index', ['tab' => request()->get('tab', 'factions')])
-        ->with('error', __('admin.pdf_cleanup_failed'));
+        ->with('error', __('pdf.cleanup_failed'));
     }
+  }
+  
+  /**
+   * View a PDF file
+   */
+  public function view(GeneratedPdf $pdf)
+  {
+    // Get current locale
+    $currentLocale = app()->getLocale();
+    
+    // Get the appropriate PDF for viewing
+    $pdfToView = $this->pdfExportService->getPdfForViewing($pdf, $currentLocale);
+    
+    if (!$pdfToView) {
+      abort(404, 'PDF file not found');
+    }
+    
+    // Serve the PDF
+    return response()->file(storage_path('app/public/' . $pdfToView->path), [
+      'Content-Type' => 'application/pdf',
+      'Content-Disposition' => 'inline; filename="' . $pdfToView->filename . '"',
+    ]);
   }
 }

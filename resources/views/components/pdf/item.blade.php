@@ -36,7 +36,7 @@
       </div>
     @elseif($hasExistingPdf && !$pdfExists)
       <div class="pdf-item__info">
-        <span class="pdf-item__processing">{{ __('admin.pdf_processing') }}</span>
+        <span class="pdf-item__processing">{{ __('pdf.processing') }}</span>
       </div>
     @endif
   </div>
@@ -49,7 +49,7 @@
         variant="publish"
         size="sm"
         icon="{{ $hasExistingPdf ? 'refresh' : 'pdf-add' }}"
-        :confirmMessage="$hasExistingPdf ? __('admin.confirm_regenerate_pdf') : null"
+        :confirmMessage="$hasExistingPdf ? __('pdf.confirm_regenerate') : null"
       >
       </x-action-button>
     @endif
@@ -72,7 +72,7 @@
         variant="delete"
         size="sm"
         icon="trash"
-        :confirmMessage="__('admin.confirm_delete_pdf')"
+        :confirmMessage="__('pdf.confirm_delete')"
       >
       </x-action-button>
     @endif

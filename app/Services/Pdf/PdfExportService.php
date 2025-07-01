@@ -92,10 +92,8 @@ class PdfExportService
         'type' => 'faction',
         'filename' => $filename,
         'path' => 'pdfs/factions/' . $filename,
-        'metadata' => [
-          'faction_id' => $faction->id,
-          'locale' => $locale,
-        ],
+        'locale' => $locale,
+        'faction_id' => $faction->id,
         'is_permanent' => true,
         'expires_at' => null,
       ]);
@@ -159,10 +157,8 @@ class PdfExportService
         'type' => 'deck',
         'filename' => $filename,
         'path' => 'pdfs/decks/' . $filename,
-        'metadata' => [
-          'deck_id' => $deck->id,
-          'locale' => $locale,
-        ],
+        'locale' => $locale,
+        'deck_id' => $deck->id,
         'is_permanent' => true,
         'expires_at' => null,
       ]);
@@ -186,7 +182,7 @@ class PdfExportService
   public function deleteFactionPdfs(int $factionId): void
   {
     $pdfs = GeneratedPdf::where('type', 'faction')
-      ->where('metadata->faction_id', $factionId)
+      ->where('faction_id', $factionId)
       ->get();
     
     foreach ($pdfs as $pdf) {
@@ -206,7 +202,7 @@ class PdfExportService
   public function deleteDeckPdfs(int $deckId): void
   {
     $pdfs = GeneratedPdf::where('type', 'deck')
-      ->where('metadata->deck_id', $deckId)
+      ->where('deck_id', $deckId)
       ->get();
     
     foreach ($pdfs as $pdf) {
@@ -279,14 +275,14 @@ class PdfExportService
     return collect([
       [
         'key' => 'rules',
-        'name' => __('admin.pdf_export.rules'),
-        'description' => __('admin.pdf_export.rules_description'),
+        'name' => __('pdf.types.rules'),
+        'description' => __('pdf.types.rules_description'),
         'template' => 'rules',
       ],
       [
         'key' => 'tokens',
-        'name' => __('admin.pdf_export.tokens'),
-        'description' => __('admin.pdf_export.tokens_description'),
+        'name' => __('pdf.types.tokens'),
+        'description' => __('pdf.types.tokens_description'),
         'template' => 'tokens',
       ],
     ]);
@@ -295,7 +291,7 @@ class PdfExportService
   /**
    * Get existing PDFs by type and organize by entity ID
    */
-  private function getExistingPdfs(string $type, string $metadataKey): array
+  private function getExistingPdfs(string $type, string $entityIdField): array
   {
     $currentLocale = app()->getLocale();
     
@@ -308,8 +304,8 @@ class PdfExportService
     
     // First, group all PDFs by entity
     foreach ($pdfs as $pdf) {
-      if (isset($pdf->metadata[$metadataKey])) {
-        $entityId = $pdf->metadata[$metadataKey];
+      $entityId = $pdf->$entityIdField;
+      if ($entityId) {
         $byEntity[$entityId][] = $pdf;
       }
     }
@@ -320,9 +316,7 @@ class PdfExportService
       $fallbackPdf = null;
       
       foreach ($entityPdfs as $pdf) {
-        $pdfLocale = $pdf->metadata['locale'] ?? null;
-        
-        if ($pdfLocale === $currentLocale) {
+        if ($pdf->locale === $currentLocale) {
           $currentLocalePdf = $pdf;
           break; // Found the current locale, stop looking
         } elseif (!$fallbackPdf) {
@@ -364,11 +358,8 @@ class PdfExportService
       return null;
     }
     
-    // Check if this PDF has a locale in metadata
-    $pdfLocale = $pdf->metadata['locale'] ?? null;
-    
     // If PDF has no specific locale or matches current locale, return it
-    if (!$pdfLocale || $pdfLocale === $currentLocale) {
+    if (!$pdf->locale || $pdf->locale === $currentLocale) {
       return $pdf;
     }
     
@@ -381,18 +372,18 @@ class PdfExportService
    */
   private function findLocalizedPdf(GeneratedPdf $pdf, string $locale): ?GeneratedPdf
   {
-    if ($pdf->type === 'faction' && isset($pdf->metadata['faction_id'])) {
+    if ($pdf->type === 'faction' && $pdf->faction_id) {
       $localizedPdf = GeneratedPdf::where('type', 'faction')
-        ->where('metadata->faction_id', $pdf->metadata['faction_id'])
-        ->where('metadata->locale', $locale)
+        ->where('faction_id', $pdf->faction_id)
+        ->where('locale', $locale)
         ->first();
         
       return ($localizedPdf && $localizedPdf->exists()) ? $localizedPdf : null;
       
-    } elseif ($pdf->type === 'deck' && isset($pdf->metadata['deck_id'])) {
+    } elseif ($pdf->type === 'deck' && $pdf->deck_id) {
       $localizedPdf = GeneratedPdf::where('type', 'deck')
-        ->where('metadata->deck_id', $pdf->metadata['deck_id'])
-        ->where('metadata->locale', $locale)
+        ->where('deck_id', $pdf->deck_id)
+        ->where('locale', $locale)
         ->first();
         
       return ($localizedPdf && $localizedPdf->exists()) ? $localizedPdf : null;

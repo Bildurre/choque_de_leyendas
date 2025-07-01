@@ -10,9 +10,9 @@
             type="submit"
             variant="warning"
             icon="trash"
-            onclick="return confirm('{{ __('admin.pdf_export.confirm_cleanup') }}')"
+            onclick="return confirm('{{ __('pdf.confirm_cleanup') }}')"
           >
-            {{ __('admin.pdf_export.cleanup_temporary') }}
+            {{ __('pdf.cleanup_temporary') }}
           </x-button>
         </form>
       </div>
@@ -46,7 +46,7 @@
           :href="route('admin.pdf-export.index', ['tab' => 'others'])"
           icon="layers"
         >
-          {{ __('admin.others') }}
+          {{ __('pdf.others') }}
         </x-tab-item>
       </x-slot:header>
       
