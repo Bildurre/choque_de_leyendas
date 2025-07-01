@@ -8,6 +8,7 @@ use App\Http\Controllers\Public\FactionController;
 use App\Http\Controllers\Public\DownloadsController;
 use App\Http\Controllers\Public\CollectionController;
 use App\Http\Controllers\Public\FactionDeckController;
+use App\Http\Controllers\Public\PdfCollectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Grupo de rutas con localización
@@ -35,6 +36,17 @@ Route::group([
         ->name('public.cards.show');
     Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
         ->name('public.faction-decks.show');
+
+    Route::prefix(LaravelLocalization::transRoute('routes.downloads'))->name('public.pdf-collection.')->group(function () {
+      Route::get('/', [PdfCollectionController::class, 'index'])
+        ->name('index');
+      Route::get(LaravelLocalization::transRoute('routes.pdf_view'), [PdfCollectionController::class, 'view'])
+        ->name('view');
+      Route::get(LaravelLocalization::transRoute('routes.pdf_download'), [PdfCollectionController::class, 'download'])
+        ->name('download');        
+      Route::delete(LaravelLocalization::transRoute('routes.pdf_delete'), [PdfCollectionController::class, 'destroy'])
+        ->name('destroy');
+    });
 });
 
 

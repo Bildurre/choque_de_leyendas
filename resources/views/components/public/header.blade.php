@@ -25,8 +25,7 @@
         <div class="header-actions">
           <x-language-selector />
 
-          {{-- <a href="{{ route('public.downloads.index') }}"  --}}
-          <a href="#"
+          <a href="{{ route('public.pdf-collection.index') }}" 
             class="collection-icon"
             title="{{ __('public.downloads_and_collection') }}">
             <x-icon name="layers" />

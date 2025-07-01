@@ -10,4 +10,8 @@ return [
   'faction_decks' => 'decks',
   'faction_deck_show' => 'decks/{faction_deck}',
   'page_show' => '{page?}',
+  'downloads' => 'downloads',
+  'pdf_view' => 'view/{pdf}',
+  'pdf_download' => 'download/{pdf}',
+  'pdf_delete' => 'delete/{pdf}',
 ];
