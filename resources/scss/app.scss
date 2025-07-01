@@ -39,6 +39,11 @@
 @use 'components/entity/list-card';
 @use 'components/entity/public-card';
 
+// PDF Components
+@use 'components/pdf/pdf-public-card';
+@use 'components/pdf/pdf-admin-card';
+@use 'components/pdf/pdf-list';
+
 // Form Components
 @use 'components/form/input';
 @use 'components/form/label';
@@ -72,7 +77,6 @@
 @use 'pages/login';
 @use 'pages/hero-detail';
 @use 'pages/card-detail';
-@use 'pages/downloads-collection';
 
 // Bloques
 @use 'components/blocks/block';

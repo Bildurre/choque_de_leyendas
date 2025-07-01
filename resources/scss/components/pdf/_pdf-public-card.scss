@@ -1,0 +1,113 @@
+@use '../../abstracts/all' as *;
+
+// PDF Public Card Component
+.pdf-public-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  transition: all $transition-fast ease-in-out;
+  
+  &:hover {
+    background: var(--color-theme-card-bg);
+    border-color: var(--random-accent-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  &--temporary {
+    border-color: var(--color-warning);
+    background: var(--color-warning-bg);
+    
+    &:hover {
+      background: rgba(var(--color-warning), 0.15);
+      border-color: var(--color-warning);
+    }
+    
+    .pdf-public-card__icon {
+      color: var(--color-warning);
+    }
+  }
+  
+  &__info {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+    min-width: 0; // Prevent text overflow
+  }
+  
+  &__icon {
+    font-size: 1.5rem;
+    color: var(--random-accent-color);
+    flex-shrink: 0;
+  }
+  
+  &__name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin: 0 0 $spacing-xs 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: $base-line-height;
+  }
+  
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: $base-line-height;
+  }
+  
+  &__separator {
+    opacity: 0.5;
+  }
+  
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    flex-shrink: 0;
+  }
+  
+  // Responsive
+  @include responsive(mobile) {
+    grid-template-columns: 1fr auto;
+    
+    &__actions {
+      flex-direction: row;
+      
+      .button {
+        flex: initial;
+      }
+    }
+  }
+  
+  @media (max-width: #{$breakpoint-mobile - 0.0625rem}) {
+    grid-template-columns: 1fr;
+    
+    &__info {
+      margin-bottom: $spacing-sm;
+    }
+    
+    &__actions {
+      flex-direction: row;
+      gap: $spacing-sm;
+      
+      .button {
+        flex: 1;
+        
+        &--sm {
+          padding: $spacing-xs $spacing-sm;
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}

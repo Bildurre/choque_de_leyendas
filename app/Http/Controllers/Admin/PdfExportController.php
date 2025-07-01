@@ -10,8 +10,8 @@ use App\Services\PdfExport\PdfExportService;
 use App\Services\PdfExport\Storage\PdfStorageService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 
 class PdfExportController extends Controller
 {
@@ -21,27 +21,12 @@ class PdfExportController extends Controller
   ) {}
   
   /**
-   * Display the PDF export dashboard
+   * Display the PDF export dashboard with tabs
    */
-  public function index(): View
+  public function index(Request $request): View
   {
-    $statistics = $this->pdfStorageService->getStatistics();
-    $recentPdfs = GeneratedPdf::permanent()
-      ->latest()
-      ->take(10)
-      ->get();
+    $activeTab = $request->get('tab', 'factions');
     
-    return view('admin.pdf-export.index', [
-      'statistics' => $statistics,
-      'recentPdfs' => $recentPdfs,
-    ]);
-  }
-  
-  /**
-   * Display dynamic exports (factions and decks)
-   */
-  public function dynamicExports(): View
-  {
     $factions = Faction::with(['heroes', 'cards'])
       ->orderBy('name')
       ->get();
@@ -50,18 +35,6 @@ class PdfExportController extends Controller
       ->orderBy('name')
       ->get();
     
-    return view('admin.pdf-export.dynamic', [
-      'factions' => $factions,
-      'decks' => $decks,
-    ]);
-  }
-  
-  /**
-   * Display other exports
-   */
-  public function otherExports(): View
-  {
-    // Define available custom exports
     $customExports = [
       [
         'key' => 'rules',
@@ -75,44 +48,76 @@ class PdfExportController extends Controller
         'description' => __('admin.pdf_export.tokens_description'),
         'template' => 'tokens',
       ],
-      // Add more custom exports as needed
     ];
     
-    return view('admin.pdf-export.other', [
-      'customExports' => $customExports,
-    ]);
+    // Check existing PDFs
+    $existingPdfs = $this->getExistingPdfs();
+    
+    return view('admin.pdf-export.index', compact(
+      'factions',
+      'decks',
+      'customExports',
+      'existingPdfs',
+      'activeTab'
+    ));
   }
   
   /**
-   * Generate PDF for a faction
+   * Get existing PDFs organized by type
    */
-  public function generateFaction(Request $request, Faction $faction): JsonResponse
+  private function getExistingPdfs(): array
+  {
+    $existingPdfs = [
+      'faction' => [],
+      'deck' => [],
+      'custom' => [],
+    ];
+    
+    $pdfs = GeneratedPdf::permanent()->get();
+    
+    foreach ($pdfs as $pdf) {
+      if ($pdf->type === 'faction' && isset($pdf->metadata['faction_id'])) {
+        $existingPdfs['faction'][$pdf->metadata['faction_id']] = $pdf;
+      } elseif ($pdf->type === 'deck' && isset($pdf->metadata['deck_id'])) {
+        $existingPdfs['deck'][$pdf->metadata['deck_id']] = $pdf;
+      } elseif (in_array($pdf->type, ['rules', 'tokens'])) {
+        $existingPdfs['custom'][$pdf->type] = $pdf;
+      }
+    }
+    
+    return $existingPdfs;
+  }
+  
+  /**
+   * Generate PDF for a single faction
+   */
+  public function generateFaction(Faction $faction): RedirectResponse
   {
     try {
-      // Generate PDF asynchronously
-      $jobId = $this->pdfExportService->generateAsync(
+      // Delete existing PDF if any
+      GeneratedPdf::where('type', 'faction')
+        ->where('metadata->faction_id', $faction->id)
+        ->permanent()
+        ->delete();
+      
+      $this->pdfExportService->generateAsync(
         'faction',
         'faction',
         [
           'faction_id' => $faction->id,
-          'faction_name' => $faction->name,
-          'reduce_heroes' => $request->boolean('reduce_heroes', false),
-          'with_gap' => $request->boolean('with_gap', true),
           'is_permanent' => true,
+          'filename' => Str::slug($faction->name) . '.pdf',
           'metadata' => [
             'faction_id' => $faction->id,
             'faction_name' => $faction->name,
           ],
         ],
-        null, // No session ID for admin
-        true  // Is permanent
+        null,
+        true
       );
       
-      return response()->json([
-        'success' => true,
-        'message' => __('admin.pdf_generation_started'),
-        'jobId' => $jobId,
-      ]);
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'factions'])
+        ->with('success', __('admin.pdf_generation_started'));
       
     } catch (\Exception $e) {
       \Log::error('Failed to start faction PDF generation', [
@@ -120,44 +125,42 @@ class PdfExportController extends Controller
         'error' => $e->getMessage(),
       ]);
       
-      return response()->json([
-        'success' => false,
-        'message' => __('admin.pdf_generation_failed'),
-      ], 500);
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'factions'])
+        ->with('error', __('admin.pdf_generation_failed'));
     }
   }
   
   /**
-   * Generate PDF for a deck
+   * Generate PDF for a single deck
    */
-  public function generateDeck(Request $request, FactionDeck $deck): JsonResponse
+  public function generateDeck(FactionDeck $deck): RedirectResponse
   {
     try {
-      // Generate PDF asynchronously
-      $jobId = $this->pdfExportService->generateAsync(
+      // Delete existing PDF if any
+      GeneratedPdf::where('type', 'deck')
+        ->where('metadata->deck_id', $deck->id)
+        ->permanent()
+        ->delete();
+      
+      $this->pdfExportService->generateAsync(
         'deck',
         'deck',
         [
           'deck_id' => $deck->id,
-          'deck_name' => $deck->name,
-          'reduce_heroes' => $request->boolean('reduce_heroes', false),
-          'with_gap' => $request->boolean('with_gap', true),
           'is_permanent' => true,
+          'filename' => Str::slug($deck->name) . '.pdf',
           'metadata' => [
             'deck_id' => $deck->id,
             'deck_name' => $deck->name,
-            'faction_id' => $deck->faction_id,
+            'faction_name' => $deck->faction->name,
           ],
         ],
-        null, // No session ID for admin
-        true  // Is permanent
+        null,
+        true
       );
       
-      return response()->json([
-        'success' => true,
-        'message' => __('admin.pdf_generation_started'),
-        'jobId' => $jobId,
-      ]);
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'decks'])
+        ->with('success', __('admin.pdf_generation_started'));
       
     } catch (\Exception $e) {
       \Log::error('Failed to start deck PDF generation', [
@@ -165,144 +168,39 @@ class PdfExportController extends Controller
         'error' => $e->getMessage(),
       ]);
       
-      return response()->json([
-        'success' => false,
-        'message' => __('admin.pdf_generation_failed'),
-      ], 500);
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'decks'])
+        ->with('error', __('admin.pdf_generation_failed'));
     }
   }
   
   /**
-   * Generate all faction PDFs
+   * Generate custom PDF (rules, tokens, etc.)
    */
-  public function generateAllFactions(Request $request): JsonResponse
-  {
-    $factions = Faction::published()->get();
-    $jobIds = [];
-    $failed = 0;
-    
-    foreach ($factions as $faction) {
-      try {
-        $jobId = $this->pdfExportService->generateAsync(
-          'faction',
-          'faction',
-          [
-            'faction_id' => $faction->id,
-            'faction_name' => $faction->name,
-            'reduce_heroes' => $request->boolean('reduce_heroes', false),
-            'with_gap' => $request->boolean('with_gap', true),
-            'is_permanent' => true,
-            'metadata' => [
-              'faction_id' => $faction->id,
-              'faction_name' => $faction->name,
-              'batch' => true,
-            ],
-          ],
-          null,
-          true
-        );
-        
-        $jobIds[] = $jobId;
-      } catch (\Exception $e) {
-        $failed++;
-        \Log::error('Failed to queue faction PDF generation', [
-          'faction_id' => $faction->id,
-          'error' => $e->getMessage(),
-        ]);
-      }
-    }
-    
-    return response()->json([
-      'success' => $failed === 0,
-      'message' => __('admin.batch_generation_queued', [
-        'queued' => count($jobIds),
-        'failed' => $failed,
-      ]),
-      'jobIds' => $jobIds,
-      'queued' => count($jobIds),
-      'failed' => $failed,
-    ]);
-  }
-  
-  /**
-   * Generate all deck PDFs
-   */
-  public function generateAllDecks(Request $request): JsonResponse
-  {
-    $decks = FactionDeck::published()->get();
-    $jobIds = [];
-    $failed = 0;
-    
-    foreach ($decks as $deck) {
-      try {
-        $jobId = $this->pdfExportService->generateAsync(
-          'deck',
-          'deck',
-          [
-            'deck_id' => $deck->id,
-            'deck_name' => $deck->name,
-            'reduce_heroes' => $request->boolean('reduce_heroes', false),
-            'with_gap' => $request->boolean('with_gap', true),
-            'is_permanent' => true,
-            'metadata' => [
-              'deck_id' => $deck->id,
-              'deck_name' => $deck->name,
-              'faction_id' => $deck->faction_id,
-              'batch' => true,
-            ],
-          ],
-          null,
-          true
-        );
-        
-        $jobIds[] = $jobId;
-      } catch (\Exception $e) {
-        $failed++;
-        \Log::error('Failed to queue deck PDF generation', [
-          'deck_id' => $deck->id,
-          'error' => $e->getMessage(),
-        ]);
-      }
-    }
-    
-    return response()->json([
-      'success' => $failed === 0,
-      'message' => __('admin.batch_generation_queued', [
-        'queued' => count($jobIds),
-        'failed' => $failed,
-      ]),
-      'jobIds' => $jobIds,
-      'queued' => count($jobIds),
-      'failed' => $failed,
-    ]);
-  }
-  
-  /**
-   * Generate custom PDF
-   */
-  public function generateCustom(Request $request): JsonResponse
+  public function generateCustom(Request $request): RedirectResponse
   {
     $validated = $request->validate([
-      'template' => 'required|string',
-      'options' => 'array',
+      'template' => 'required|string|in:rules,tokens',
     ]);
     
     try {
-      $jobId = $this->pdfExportService->generateAsync(
+      // Delete existing PDF if any
+      GeneratedPdf::where('type', $validated['template'])
+        ->permanent()
+        ->delete();
+      
+      $this->pdfExportService->generateAsync(
         $validated['template'],
         $validated['template'],
-        array_merge([
+        [
           'is_permanent' => true,
-        ], $validated['options'] ?? []),
+          'filename' => $validated['template'] . '-' . date('Y-m-d') . '.pdf',
+        ],
         null,
         true
       );
       
-      return response()->json([
-        'success' => true,
-        'message' => __('admin.pdf_generation_started'),
-        'jobId' => $jobId,
-      ]);
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'other'])
+        ->with('success', __('admin.pdf_generation_started'));
       
     } catch (\Exception $e) {
       \Log::error('Failed to start custom PDF generation', [
@@ -310,10 +208,8 @@ class PdfExportController extends Controller
         'error' => $e->getMessage(),
       ]);
       
-      return response()->json([
-        'success' => false,
-        'message' => __('admin.pdf_generation_failed'),
-      ], 500);
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'other'])
+        ->with('error', __('admin.pdf_generation_failed'));
     }
   }
   
@@ -322,75 +218,48 @@ class PdfExportController extends Controller
    */
   public function destroy(GeneratedPdf $pdf): RedirectResponse
   {
+    $tab = 'factions'; // Default tab
+    
+    // Determine which tab to redirect to
+    if ($pdf->type === 'deck') {
+      $tab = 'decks';
+    } elseif (in_array($pdf->type, ['rules', 'tokens'])) {
+      $tab = 'other';
+    }
+    
     try {
       $pdf->delete();
       
-      return back()->with('success', __('admin.pdf_deleted_successfully'));
+      return redirect()->route('admin.pdf-export.index', ['tab' => $tab])
+        ->with('success', __('admin.pdf_deleted_successfully'));
     } catch (\Exception $e) {
       \Log::error('Failed to delete PDF', [
         'pdf_id' => $pdf->id,
         'error' => $e->getMessage(),
       ]);
       
-      return back()->with('error', __('admin.pdf_deletion_failed'));
+      return redirect()->route('admin.pdf-export.index', ['tab' => $tab])
+        ->with('error', __('admin.pdf_deletion_failed'));
     }
-  }
-  
-  /**
-   * Get statistics as JSON
-   */
-  public function statistics(): JsonResponse
-  {
-    $statistics = $this->pdfStorageService->getStatistics();
-    
-    return response()->json($statistics);
   }
   
   /**
    * Run cleanup of temporary PDFs
    */
-  public function cleanup(): JsonResponse
+  public function cleanup(): RedirectResponse
   {
     try {
       $deleted = $this->pdfStorageService->cleanupExpired();
       
-      return response()->json([
-        'success' => true,
-        'message' => __('admin.pdf_cleanup_completed', ['count' => $deleted]),
-        'deleted' => $deleted
-      ]);
+      return redirect()->route('admin.pdf-export.index')
+        ->with('success', __('admin.pdf_cleanup_completed', ['count' => $deleted]));
     } catch (\Exception $e) {
       \Log::error('PDF cleanup failed', [
         'error' => $e->getMessage()
       ]);
       
-      return response()->json([
-        'success' => false,
-        'message' => __('admin.pdf_cleanup_failed')
-      ], 500);
+      return redirect()->route('admin.pdf-export.index')
+        ->with('error', __('admin.pdf_cleanup_failed'));
     }
-  }
-  
-  /**
-   * Check job status
-   */
-  public function checkStatus(string $jobId): JsonResponse
-  {
-    $status = $this->pdfExportService->getJobStatus($jobId);
-    
-    if ($status['status'] === 'completed' && $status['pdf_id']) {
-      $pdf = GeneratedPdf::find($status['pdf_id']);
-      
-      if ($pdf) {
-        $status['pdf'] = [
-          'id' => $pdf->id,
-          'url' => $pdf->url,
-          'filename' => $pdf->filename,
-          'size' => $pdf->formatted_size,
-        ];
-      }
-    }
-    
-    return response()->json($status);
   }
 }

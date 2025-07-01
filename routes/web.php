@@ -35,24 +35,6 @@ Route::group([
         ->name('public.cards.show');
     Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
         ->name('public.faction-decks.show');
-
-    // Downloads & Collection routes
-    Route::prefix('downloads')->name('public.downloads.')->group(function () {
-        Route::get('/', [DownloadsController::class, 'index'])->name('index');
-        Route::get('/{pdf}/download', [DownloadsController::class, 'download'])->name('download');
-        Route::delete('/{pdf}', [DownloadsController::class, 'destroy'])->name('destroy');
-
-    });
-
-    // Collection management routes (temporary collection)
-    Route::prefix('collection')->name('public.collection.')->group(function () {
-        Route::post('/add', [CollectionController::class, 'add'])->name('add');
-        Route::post('/update', [CollectionController::class, 'update'])->name('update');
-        Route::post('/remove', [CollectionController::class, 'remove'])->name('remove');
-        Route::post('/clear', [CollectionController::class, 'clear'])->name('clear');
-        Route::post('/generate-pdf', [CollectionController::class, 'generatePdf'])->name('generate-pdf');
-        Route::get('/status/{jobId}', [CollectionController::class, 'checkStatus'])->name('status');
-    });
 });
 
 

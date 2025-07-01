@@ -1,39 +1,62 @@
 <x-admin-layout>
-  <x-admin.page-header :title="__('admin.pdf_export.title')">
+  <x-admin.page-header :title="__('pdf.plural')">
     <x-slot:actions>
-      <x-button-link 
-        :href="route('admin.pdf-export.dynamic')" 
-        icon="layers" 
-        variant="primary"
-      >
-        {{ __('admin.pdf_export.dynamic_exports') }}
-      </x-button-link>
-      <x-button-link 
-        :href="route('admin.pdf-export.other')" 
-        icon="file-text" 
-        variant="secondary"
-      >
-        {{ __('admin.pdf_export.other_exports') }}
-      </x-button-link>
+      <form action="{{ route('admin.pdf-export.cleanup') }}" method="POST" class="inline">
+        @csrf
+        <x-button
+          type="submit"
+          variant="warning"
+          icon="trash"
+          onclick="return confirm('{{ __('admin.pdf_export.confirm_cleanup') }}')"
+        >
+          {{ __('admin.pdf_export.cleanup_temporary') }}
+        </x-button>
+      </form>
     </x-slot:actions>
   </x-admin.page-header>
   
   <div class="page-content">
-    {{-- Statistics Section --}}
-    <x-collapsible-section 
-      id="pdf-statistics-section" 
-      title="{{ __('admin.pdf_export.statistics') }}"
-      :open="true"
-    >
-      @include('admin.pdf-export.partials.statistics', ['statistics' => $statistics])
-    </x-collapsible-section>
-    
-    {{-- Recent PDFs Section --}}
-    <x-collapsible-section 
-      id="pdf-recent-section" 
-      title="{{ __('admin.pdf_export.recent_pdfs') }}"
-    >
-      @include('admin.pdf-export.partials.recent-pdfs', ['recentPdfs' => $recentPdfs])
-    </x-collapsible-section>
+    {{-- Simple navigation links instead of JavaScript tabs --}}
+    <div class="tabs">
+      <div class="tabs__header">
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'factions']) }}" 
+           class="tabs__item {{ $activeTab === 'factions' ? 'tabs__item--active' : '' }}">
+          <x-icon name="heroes" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('entities.factions.plural') }}</span>
+        </a>
+        
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'decks']) }}" 
+           class="tabs__item {{ $activeTab === 'decks' ? 'tabs__item--active' : '' }}">
+          <x-icon name="decks" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('entities.faction_decks.plural') }}</span>
+        </a>
+        
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'other']) }}" 
+           class="tabs__item {{ $activeTab === 'other' ? 'tabs__item--active' : '' }}">
+          <x-icon name="pdf" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('pdf.other') }}</span>
+        </a>
+      </div>
+      
+      <div class="tabs__content">
+        {{-- Show content based on active tab --}}
+        @if($activeTab === 'factions')
+          @include('admin.pdf-export._factions-list', [
+            'factions' => $factions,
+            'existingPdfs' => $existingPdfs['faction'] ?? []
+          ])
+        @elseif($activeTab === 'decks')
+          @include('admin.pdf-export._decks-list', [
+            'decks' => $decks,
+            'existingPdfs' => $existingPdfs['deck'] ?? []
+          ])
+        @else
+          @include('admin.pdf-export._other-list', [
+            'customExports' => $customExports,
+            'existingPdfs' => $existingPdfs['custom'] ?? []
+          ])
+        @endif
+      </div>
+    </div>
   </div>
 </x-admin-layout>
