@@ -129,19 +129,14 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::delete('counters/{id}/force-delete', [CounterController::class, 'forceDelete'])->name('counters.force-delete');
   Route::post('counters/{counter}/toggle-published', [CounterController::class, 'togglePublished'])->name('counters.toggle-published');
 
-  // PDF Export routes
+  
+  // PDF Export
   Route::prefix('pdf-export')->name('pdf-export.')->group(function () {
     Route::get('/', [PdfExportController::class, 'index'])->name('index');
-    
-    // Generate routes
-    Route::post('/generate-faction/{faction}', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
-    Route::post('/generate-deck/{deck}', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
-    Route::post('/generate-custom', [PdfExportController::class, 'generateCustom'])->name('generate-custom');
-    
-    // Delete route
-    Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
-    
-    // Cleanup endpoint
+    Route::get('/view/{pdf}', [PdfExportController::class, 'view'])->name('view');
+    Route::post('/faction/{faction}/generate', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
+    Route::post('/deck/{deck}/generate', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
     Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
+    Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
   });
 });

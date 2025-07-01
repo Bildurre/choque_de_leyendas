@@ -14,7 +14,6 @@ class GeneratedPdf extends Model
    */
   protected $fillable = [
     'type',
-    'template',
     'filename',
     'path',
     'session_id',

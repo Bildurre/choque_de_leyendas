@@ -3,145 +3,86 @@
 namespace App\Jobs;
 
 use App\Models\GeneratedPdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class GeneratePdfJob implements ShouldQueue
 {
   use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+  
   /**
-   * The PDF type
-   *
-   * @var string
-   */
-  protected string $type;
-
-  /**
-   * The template to use
-   *
-   * @var string
-   */
-  protected string $template;
-
-  /**
-   * The data for PDF generation
-   *
-   * @var array
-   */
-  protected array $data;
-
-  /**
-   * Optional session ID for temporary PDFs
-   *
-   * @var string|null
-   */
-  protected ?string $sessionId;
-
-  /**
-   * Whether the PDF is permanent
-   *
-   * @var bool
-   */
-  protected bool $isPermanent;
-
-  /**
-   * Optional callback class and method
-   *
-   * @var array|null
-   */
-  protected ?array $callback;
-
-  /**
-   * Create a new job instance.
+   * Create a new job instance
    */
   public function __construct(
-    string $type,
-    string $template,
-    array $data,
-    ?string $sessionId = null,
-    bool $isPermanent = false,
-    ?array $callback = null
-  ) {
-    $this->type = $type;
-    $this->template = $template;
-    $this->data = $data;
-    $this->sessionId = $sessionId;
-    $this->isPermanent = $isPermanent;
-    $this->callback = $callback;
-  }
-
+    public GeneratedPdf $generatedPdf,
+    public string $view,
+    public array $data
+  ) {}
+  
   /**
-   * Execute the job.
+   * Execute the job
    */
   public function handle(): void
   {
     try {
-      Log::info('Starting PDF generation', [
-        'type' => $this->type,
-        'template' => $this->template,
-        'is_permanent' => $this->isPermanent,
-      ]);
-
-      // Get the appropriate generator service
-      $generator = app("App\\Services\\PdfExport\\Generators\\" . ucfirst($this->template) . "PdfGenerator");
-      
-      // Generate the PDF
-      $result = $generator->generate($this->data);
-      
-      // Store the PDF record
-      $pdf = GeneratedPdf::create([
-        'type' => $this->type,
-        'template' => $this->template,
-        'filename' => $result['filename'],
-        'path' => $result['path'],
-        'session_id' => $this->sessionId,
-        'metadata' => $this->data['metadata'] ?? null,
-        'is_permanent' => $this->isPermanent,
-        'expires_at' => $this->isPermanent ? null : now()->addHours(24),
-      ]);
-
-      Log::info('PDF generated successfully', [
-        'pdf_id' => $pdf->id,
-        'filename' => $pdf->filename,
-      ]);
-
-      // Execute callback if provided
-      if ($this->callback) {
-        if (count($this->callback) === 3) {
-          [$class, $method, $jobId] = $this->callback;
-          app($class)->$method($pdf, $jobId);
-        } else {
-          [$class, $method] = $this->callback;
-          app($class)->$method($pdf);
-        }
+      // Set locale for this job
+      if (isset($this->data['locale'])) {
+        App::setLocale($this->data['locale']);
       }
-
+      
+      // Process items to expand copies
+      if (isset($this->data['items'])) {
+        $expandedItems = collect();
+        
+        foreach ($this->data['items'] as $item) {
+          $copies = $item['copies'] ?? 1;
+          
+          for ($i = 0; $i < $copies; $i++) {
+            $expandedItems->push([
+              'type' => $item['type'],
+              'entity' => $item['entity'],
+            ]);
+          }
+        }
+        
+        $this->data['items'] = $expandedItems;
+      }
+      
+      // Generate PDF
+      $pdf = PDF::loadView($this->view, $this->data);
+      $pdf->setPaper('a4', 'portrait');
+      
+      // PDF options
+      $pdf->setOptions([
+        'isHtml5ParserEnabled' => true,
+        'isRemoteEnabled' => true,
+        'isPhpEnabled' => false,
+        'defaultFont' => 'sans-serif',
+        'dpi' => 150,
+        'enable_font_subsetting' => false,
+      ]);
+      
+      // Save PDF
+      $content = $pdf->output();
+      Storage::disk('public')->put($this->generatedPdf->path, $content);
+      
     } catch (\Exception $e) {
-      Log::error('Failed to generate PDF', [
-        'type' => $this->type,
-        'template' => $this->template,
+      \Log::error('Failed to generate PDF', [
+        'pdf_id' => $this->generatedPdf->id,
         'error' => $e->getMessage(),
         'trace' => $e->getTraceAsString(),
       ]);
-
+      
+      // Delete the PDF record if generation failed
+      $this->generatedPdf->delete();
+      
       throw $e;
     }
-  }
-
-  /**
-   * The job failed to process.
-   */
-  public function failed(\Throwable $exception): void
-  {
-    Log::error('PDF generation job failed', [
-      'type' => $this->type,
-      'template' => $this->template,
-      'error' => $exception->getMessage(),
-    ]);
   }
 }

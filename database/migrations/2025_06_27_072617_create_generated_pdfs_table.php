@@ -14,7 +14,6 @@ return new class extends Migration
     Schema::create('generated_pdfs', function (Blueprint $table) {
       $table->id();
       $table->string('type'); // collection, faction, deck, rules, tokens, etc.
-      $table->string('template'); // collection, rules, tokens, etc.
       $table->string('filename');
       $table->string('path');
       $table->string('session_id')->nullable(); // for temporary PDFs

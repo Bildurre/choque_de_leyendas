@@ -18,9 +18,6 @@ use App\Services\Game\AttackSubtypeService;
 use App\Services\Game\EquipmentTypeService;
 use App\Services\Game\HeroSuperclassService;
 use App\Services\Game\HeroAttributesConfigurationService;
-use App\Services\PdfExport\PdfExportService;
-use App\Services\PdfExport\Storage\PdfStorageService;
-use App\Services\Collection\CollectionService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,9 +41,6 @@ class AppServiceProvider extends ServiceProvider
             AttackRangeService::class,
             FactionService::class,
             CardService::class,
-            PdfExportService::class,
-            PdfStorageService::class,
-            CollectionService::class,
         ];
         
         foreach ($services as $service) {

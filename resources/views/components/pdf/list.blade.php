@@ -1,23 +1,22 @@
 @props([
-  'type' => 'admin', // 'admin' or 'public'
-  'emptyMessage' => null,
-  'emptyIcon' => 'alert-triangle',
-  'class' => '',
+  'items' => collect(),
+  'type' => 'faction', // faction, deck, or other
+  'emptyMessage' => __('admin.no_pdfs_found'),
 ])
 
-<div class="pdf-list {{ $class }}">
-  <div class="pdf-list__content">
-    <div class="pdf-list__grid">
+@php
+  // Convertir a Collection si es un array
+  $items = $items instanceof \Illuminate\Support\Collection ? $items : collect($items);
+@endphp
+
+<div {{ $attributes->merge(['class' => 'pdf-list']) }}>
+  @if($items->isEmpty())
+    <div class="pdf-list__empty">
+      <p>{{ $emptyMessage }}</p>
+    </div>
+  @else
+    <div class="pdf-list__items">
       {{ $slot }}
     </div>
-    
-    @if(isset($empty) && $empty)
-      <div class="pdf-list__empty">
-        <x-icon :name="$emptyIcon" class="pdf-list__empty-icon" />
-        <p class="pdf-list__empty-text">
-          {{ $emptyMessage ?? __('admin.no_results') }}
-        </p>
-      </div>
-    @endif
-  </div>
+  @endif
 </div>
