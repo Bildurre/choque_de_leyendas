@@ -31,7 +31,6 @@ class PdfExportController extends Controller
       'activeTab' => $activeTab,
       'factions' => $data['factions'],
       'decks' => $data['decks'],
-      'customExports' => $data['customExports'],
       'existingPdfs' => $data['existingPdfs'],
     ]);
   }
@@ -88,7 +87,7 @@ class PdfExportController extends Controller
     // Determine which tab to redirect to
     if ($pdf->type === 'deck') {
       $tab = 'decks';
-    } elseif (in_array($pdf->type, ['rules', 'tokens'])) {
+    } elseif ($pdf->type === 'counters-list') {
       $tab = 'others';
     }
     
@@ -99,7 +98,7 @@ class PdfExportController extends Controller
       } elseif ($pdf->type === 'deck' && $pdf->deck_id) {
         $this->pdfExportService->deleteDeckPdfs($pdf->deck_id);
       } else {
-        // For custom PDFs, just delete this one
+        // For any other PDFs, just delete this one
         $pdf->delete();
       }
       
@@ -113,6 +112,26 @@ class PdfExportController extends Controller
       
       return redirect()->route('admin.pdf-export.index', ['tab' => $tab])
         ->with('error', __('admin.pdf_deletion_failed'));
+    }
+  }
+  
+  /**
+   * Generate counters list PDF
+   */
+  public function generateCountersList(): RedirectResponse
+  {
+    try {
+      $this->pdfExportService->generateCountersListPdf();
+      
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
+        ->with('success', __('admin.pdf_generation_started', ['name' => __('pdf.counters_list')]));
+    } catch (\Exception $e) {
+      \Log::error('Failed to generate counters list PDF', [
+        'error' => $e->getMessage(),
+      ]);
+      
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
+        ->with('error', __('admin.pdf_generation_failed'));
     }
   }
   

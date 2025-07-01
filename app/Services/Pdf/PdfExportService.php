@@ -20,11 +20,10 @@ class PdfExportService
     $data = [
       'factions' => collect(),
       'decks' => collect(),
-      'customExports' => collect(),
       'existingPdfs' => [
         'faction' => [],
         'deck' => [],
-        'custom' => [],
+        'others' => [],
       ],
     ];
     
@@ -40,8 +39,7 @@ class PdfExportService
         break;
         
       case 'others':
-        $data['customExports'] = $this->getCustomExports();
-        $data['existingPdfs']['custom'] = $this->getExistingCustomPdfs();
+        $data['existingPdfs']['others'] = $this->getExistingOtherPdfs();
         break;
     }
     
@@ -268,27 +266,6 @@ class PdfExportService
   }
   
   /**
-   * Get custom export configurations
-   */
-  private function getCustomExports(): Collection
-  {
-    return collect([
-      [
-        'key' => 'rules',
-        'name' => __('pdf.types.rules'),
-        'description' => __('pdf.types.rules_description'),
-        'template' => 'rules',
-      ],
-      [
-        'key' => 'tokens',
-        'name' => __('pdf.types.tokens'),
-        'description' => __('pdf.types.tokens_description'),
-        'template' => 'tokens',
-      ],
-    ]);
-  }
-  
-  /**
    * Get existing PDFs by type and organize by entity ID
    */
   private function getExistingPdfs(string $type, string $entityIdField): array
@@ -326,23 +303,6 @@ class PdfExportService
       
       // Use current locale PDF if available, otherwise use fallback
       $organized[$entityId] = $currentLocalePdf ?: $fallbackPdf;
-    }
-    
-    return $organized;
-  }
-  
-  /**
-   * Get existing custom PDFs organized by type
-   */
-  private function getExistingCustomPdfs(): array
-  {
-    $pdfs = GeneratedPdf::whereIn('type', ['rules', 'tokens'])
-      ->where('is_permanent', true)
-      ->get();
-    
-    $organized = [];
-    foreach ($pdfs as $pdf) {
-      $organized[$pdf->type] = $pdf;
     }
     
     return $organized;
@@ -390,5 +350,115 @@ class PdfExportService
     }
     
     return null;
+  }
+  
+  /**
+   * Generate counters list PDF (one per locale)
+   */
+  public function generateCountersListPdf(): void
+  {
+    // Delete existing counters list PDFs first
+    $this->deleteCountersListPdf();
+    
+    // Get published counters for the list
+    $boonCounters = \App\Models\Counter::published()
+      ->where('type', 'boon')
+      ->orderBy('name')
+      ->get();
+      
+    $baneCounters = \App\Models\Counter::published()
+      ->where('type', 'bane')
+      ->orderBy('name')
+      ->get();
+    
+    // Get supported locales
+    $locales = config('laravellocalization.supportedLocales', ['es' => []]);
+    
+    foreach (array_keys($locales) as $locale) {
+      // Generate counters list PDF
+      $listFilename = ($locale === 'es' ? 'lista_de_contadores' : 'counters_list') . '_' . $locale . '.pdf';
+      $listTitle = $locale === 'es' ? 'Lista de Contadores' : 'Counters List';
+      
+      $listPdf = GeneratedPdf::create([
+        'type' => 'counters-list',
+        'filename' => $listFilename,
+        'path' => 'pdfs/others/' . $listFilename,
+        'locale' => $locale,
+        'is_permanent' => true,
+        'expires_at' => null,
+      ]);
+      
+      GeneratePdfJob::dispatch(
+        $listPdf,
+        'pdfs.counters-list',
+        [
+          'locale' => $locale,
+          'title' => $listTitle,
+          'boonCounters' => $boonCounters,
+          'baneCounters' => $baneCounters,
+        ]
+      );
+    }
+  }
+  
+  /**
+   * Delete counters list PDF
+   */
+  private function deleteCountersListPdf(): void
+  {
+    $pdfs = GeneratedPdf::where('type', 'counters-list')->get();
+    
+    foreach ($pdfs as $pdf) {
+      // Delete file from storage
+      if (Storage::disk('public')->exists($pdf->path)) {
+        Storage::disk('public')->delete($pdf->path);
+      }
+      
+      // Delete database record
+      $pdf->delete();
+    }
+  }
+  
+  /**
+   * Get existing PDFs for the others tab
+   */
+  private function getExistingOtherPdfs(): array
+  {
+    $currentLocale = app()->getLocale();
+    
+    $pdfs = GeneratedPdf::where('type', 'counters-list')
+      ->where('is_permanent', true)
+      ->orderBy('locale')
+      ->get();
+    
+    // Group by type and find the current locale PDF
+    $grouped = [];
+    foreach ($pdfs as $pdf) {
+      $key = 'counters-list';
+      
+      if (!isset($grouped[$key])) {
+        $grouped[$key] = [
+          'pdfs' => [],
+          'display_name' => __('pdf.counters_list'),
+          'current_locale_pdf' => null,
+        ];
+      }
+      
+      $grouped[$key]['pdfs'][] = $pdf;
+      
+      // Set the current locale PDF for the view button
+      if ($pdf->locale === $currentLocale) {
+        $grouped[$key]['current_locale_pdf'] = $pdf;
+      }
+    }
+    
+    // If no current locale PDF exists, use the first one as fallback
+    foreach ($grouped as $key => &$group) {
+      if (!$group['current_locale_pdf'] && !empty($group['pdfs'])) {
+        $group['current_locale_pdf'] = $group['pdfs'][0];
+      }
+    }
+    
+    return $grouped;
   }
 }

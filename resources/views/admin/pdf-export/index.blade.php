@@ -63,7 +63,6 @@
           ])
         @elseif($activeTab === 'others')
           @include('admin.pdf-export._others', [
-            'customExports' => $customExports,
             'existingPdfs' => $existingPdfs
           ])
         @endif
