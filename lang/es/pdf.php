@@ -38,9 +38,27 @@ return [
     'types' => [
         'rules' => 'Reglas del juego',
         'rules_description' => 'PDF con todas las reglas del juego',
-        'tokens' => 'Fichas del juego',
-        'tokens_description' => 'PDF con todas las fichas imprimibles',
+        'counters' => 'Fichas del juego',
+        'counters_description' => 'PDF con todas las fichas imprimibles del juego',
     ],
+    
+    // Counters específicos
+    'counters' => 'Contadores',
+    'counters_list' => 'Lista de contadores',
+    'counters_pdf_description' => 'Genera los PDFs de lista de contadores para todos los idiomas',
+    'cut_out_counters' => 'Contadores recortables',
+    'cut_out_counters_description' => 'Genera los PDFs de contadores para imprimir y recortar',
+    
+    // Visualización
+    'view_counters_list' => 'Ver lista de contadores',
+    'view_counters_printable' => 'Ver contadores imprimibles',
+    
+    // Mensajes para lista
+    'no_boon_counters' => 'No hay contadores de tipo boon publicados',
+    'no_bane_counters' => 'No hay contadores de tipo bane publicados',
+    
+    // Archivos generados
+    'generated_files' => 'Archivos generados',
     
     // Limpieza
     'cleanup_temporary' => 'Eliminar PDFs temporales',

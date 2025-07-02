@@ -87,7 +87,7 @@ class PdfExportController extends Controller
     // Determine which tab to redirect to
     if ($pdf->type === 'deck') {
       $tab = 'decks';
-    } elseif ($pdf->type === 'counters-list') {
+    } elseif (in_array($pdf->type, ['counters-list', 'cut-out-counters'])) {
       $tab = 'others';
     }
     
@@ -97,6 +97,10 @@ class PdfExportController extends Controller
         $this->pdfExportService->deleteFactionPdfs($pdf->faction_id);
       } elseif ($pdf->type === 'deck' && $pdf->deck_id) {
         $this->pdfExportService->deleteDeckPdfs($pdf->deck_id);
+      } elseif ($pdf->type === 'counters-list') {
+        $this->pdfExportService->deleteCountersListPdfs();
+      } elseif ($pdf->type === 'cut-out-counters') {
+        $this->pdfExportService->deleteCutOutCountersPdfs();
       } else {
         // For any other PDFs, just delete this one
         $pdf->delete();
@@ -127,6 +131,26 @@ class PdfExportController extends Controller
         ->with('success', __('admin.pdf_generation_started', ['name' => __('pdf.counters_list')]));
     } catch (\Exception $e) {
       \Log::error('Failed to generate counters list PDF', [
+        'error' => $e->getMessage(),
+      ]);
+      
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
+        ->with('error', __('admin.pdf_generation_failed'));
+    }
+  }
+  
+  /**
+   * Generate cut-out counters PDF
+   */
+  public function generateCutOutCounters(): RedirectResponse
+  {
+    try {
+      $this->pdfExportService->generateCutOutCountersPdf();
+      
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
+        ->with('success', __('admin.pdf_generation_started', ['name' => __('pdf.cut_out_counters')]));
+    } catch (\Exception $e) {
+      \Log::error('Failed to generate cut-out counters PDF', [
         'error' => $e->getMessage(),
       ]);
       

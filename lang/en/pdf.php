@@ -5,7 +5,7 @@ return [
     'plural' => 'PDFs',
     'singular' => 'PDF',
     'export_management' => 'PDF Export Management',
-    'other' => 'Others',
+    'other' => 'Other',
     'others' => 'Others',
     
     // States
@@ -36,18 +36,36 @@ return [
     
     // PDF types
     'types' => [
-        'rules' => 'Game Rules',
+        'rules' => 'Game rules',
         'rules_description' => 'PDF with all game rules',
-        'tokens' => 'Game Tokens',
-        'tokens_description' => 'PDF with all printable tokens',
+        'counters' => 'Game counters',
+        'counters_description' => 'PDF with all printable game counters',
     ],
+    
+    // Counters specific
+    'counters' => 'Counters',
+    'counters_list' => 'Counters list',
+    'counters_pdf_description' => 'Generate counters list PDFs for all languages',
+    'cut_out_counters' => 'Cut-out counters',
+    'cut_out_counters_description' => 'Generate printable cut-out counters PDFs',
+    
+    // View
+    'view_counters_list' => 'View counters list',
+    'view_counters_printable' => 'View printable counters',
+    
+    // Messages for list
+    'no_boon_counters' => 'No published boon counters',
+    'no_bane_counters' => 'No published bane counters',
+    
+    // Generated files
+    'generated_files' => 'Generated files',
     
     // Cleanup
     'cleanup_temporary' => 'Delete temporary PDFs',
     
     // Public downloads page
     'collection' => [
-        'title' => 'Download Center',
+        'title' => 'Download center',
         'description' => 'Download all available game PDFs',
         'other_documents' => 'Other documents',
         'your_pdfs' => 'Your temporary PDFs',

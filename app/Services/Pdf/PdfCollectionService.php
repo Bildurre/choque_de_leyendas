@@ -105,11 +105,11 @@ class PdfCollectionService
   }
   
   /**
-   * Get other PDFs (rules, tokens) for the current locale
+   * Get other PDFs (not faction or deck) for the current locale
    */
   private function getOtherPdfs(string $locale): Collection
   {
-    return GeneratedPdf::whereIn('type', ['rules', 'tokens'])
+    return GeneratedPdf::whereNotIn('type', ['faction', 'deck'])
       ->where('is_permanent', true)
       ->where(function ($query) use ($locale) {
         $query->where('locale', $locale)
@@ -120,7 +120,15 @@ class PdfCollectionService
       ->get()
       ->map(function ($pdf) {
         // Add display name based on type
-        $pdf->display_name = __('admin.pdf_export.' . $pdf->type);
+        $displayNames = [
+          'counters-list' => __('pdf.counters_list'),
+          'cut-out-counters' => __('pdf.cut_out_counters'),
+          'rules' => __('pdf.types.rules'),
+          'tokens' => __('pdf.types.tokens'),
+          // Add more types here as needed
+        ];
+        
+        $pdf->display_name = $displayNames[$pdf->type] ?? ucfirst(str_replace('-', ' ', $pdf->type));
         return $pdf;
       });
   }
