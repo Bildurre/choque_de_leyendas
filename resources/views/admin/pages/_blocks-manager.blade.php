@@ -7,7 +7,7 @@
   :showHeader="true"
 >
   <x-slot:actions>
-    <x-dropdown label="{{ __('pages.blocks.add_block') }}" icon="plus">
+    <x-dropdown label="{{ __('pages.blocks.add_block') }}" icon="plus" align="left">
       @foreach(config('blocks.types') as $blockType => $blockConfig)
         <x-dropdown-item 
           :href="route('admin.pages.blocks.create', [$page, 'type' => $blockType])"

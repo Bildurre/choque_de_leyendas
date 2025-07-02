@@ -4,11 +4,13 @@ namespace App\Services\Pdf;
 
 use App\Models\Faction;
 use App\Models\FactionDeck;
+use App\Models\Page;
 use App\Models\GeneratedPdf;
 use App\Services\Pdf\ExportServices\FactionExportService;
 use App\Services\Pdf\ExportServices\DeckExportService;
 use App\Services\Pdf\ExportServices\CountersListExportService;
 use App\Services\Pdf\ExportServices\CutOutCountersExportService;
+use App\Services\Pdf\ExportServices\PagesExportService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,6 +20,7 @@ class PdfExportService
   protected DeckExportService $deckExportService;
   protected CountersListExportService $countersListExportService;
   protected CutOutCountersExportService $cutOutCountersExportService;
+  protected PagesExportService $pagesExportService;
   
   /**
    * Create a new service instance
@@ -26,12 +29,14 @@ class PdfExportService
     FactionExportService $factionExportService,
     DeckExportService $deckExportService,
     CountersListExportService $countersListExportService,
-    CutOutCountersExportService $cutOutCountersExportService
+    CutOutCountersExportService $cutOutCountersExportService,
+    PagesExportService $pagesExportService
   ) {
     $this->factionExportService = $factionExportService;
     $this->deckExportService = $deckExportService;
     $this->countersListExportService = $countersListExportService;
     $this->cutOutCountersExportService = $cutOutCountersExportService;
+    $this->pagesExportService = $pagesExportService;
   }
   
   /**
@@ -42,9 +47,11 @@ class PdfExportService
     $data = [
       'factions' => collect(),
       'decks' => collect(),
+      'pages' => collect(),
       'existingPdfs' => [
         'faction' => [],
         'deck' => [],
+        'page' => [],
         'others' => [],
       ],
     ];
@@ -58,6 +65,11 @@ class PdfExportService
       case 'decks':
         $data['decks'] = $this->getDecks();
         $data['existingPdfs']['deck'] = $this->deckExportService->getExistingPdfs();
+        break;
+        
+      case 'pages':
+        $data['pages'] = $this->getPrintablePages();
+        $data['existingPdfs']['page'] = $this->pagesExportService->getAllPagesExistingPdfs();
         break;
         
       case 'others':
@@ -104,6 +116,14 @@ class PdfExportService
   }
   
   /**
+   * Generate page PDF by slug (delegates to PagesExportService)
+   */
+  public function generatePagePdf(string $slug): void
+  {
+    $this->pagesExportService->generatePdfs($slug);
+  }
+  
+  /**
    * Delete all PDFs for a faction (delegates to FactionExportService)
    */
   public function deleteFactionPdfs(int $factionId): void
@@ -133,6 +153,14 @@ class PdfExportService
   public function deleteCutOutCountersPdfs(): void
   {
     $this->cutOutCountersExportService->deletePdfs();
+  }
+  
+  /**
+   * Delete page PDFs by slug (delegates to PagesExportService)
+   */
+  public function deletePagePdfs(string $slug): void
+  {
+    $this->pagesExportService->deletePdfs($slug);
   }
   
   /**
@@ -187,6 +215,17 @@ class PdfExportService
   }
   
   /**
+   * Get all printable pages
+   */
+  private function getPrintablePages(): Collection
+  {
+    return Page::printable()
+      ->published()
+      ->orderBy('title')
+      ->get();
+  }
+  
+  /**
    * Get the appropriate PDF for viewing based on locale
    */
   public function getPdfForViewing(GeneratedPdf $pdf, string $currentLocale): ?GeneratedPdf
@@ -227,6 +266,12 @@ class PdfExportService
       return ($localizedPdf && $localizedPdf->exists()) ? $localizedPdf : null;
     }
     
-    return null;
+    // For page PDFs or other types
+    $localizedPdf = GeneratedPdf::where('type', $pdf->type)
+      ->where('locale', $locale)
+      ->where('is_permanent', true)
+      ->first();
+      
+    return ($localizedPdf && $localizedPdf->exists()) ? $localizedPdf : null;
   }
 }

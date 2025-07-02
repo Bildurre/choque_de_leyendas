@@ -2,7 +2,7 @@
   <x-pdf.list :items="collect(['counters-list', 'cut-out-counters'])" type="other">
     {{-- Counters List PDF - Item manual --}}
     @php
-      $countersListPdfs = $existingPdfs['others']['counters-list'] ?? null;
+      $countersListPdfs = $existingPdfs['counters-list'] ?? null;
       $hasCountersListPdf = $countersListPdfs && count($countersListPdfs['pdfs']) > 0;
       $currentLocalePdf = $countersListPdfs['current_locale_pdf'] ?? null;
       $expectedPdfCount = count(config('laravellocalization.supportedLocales', []));
@@ -20,7 +20,7 @@
     
     {{-- Cut-out Counters PDF - Item manual --}}
     @php
-      $cutOutCountersPdfs = $existingPdfs['others']['cut-out-counters'] ?? null;
+      $cutOutCountersPdfs = $existingPdfs['cut-out-counters'] ?? null;
       $hasCutOutCountersPdf = $cutOutCountersPdfs && count($cutOutCountersPdfs['pdfs']) > 0;
       $currentLocaleCutOutPdf = $cutOutCountersPdfs['current_locale_pdf'] ?? null;
       $allCutOutPdfsGenerated = $hasCutOutCountersPdf && count($cutOutCountersPdfs['pdfs']) === $expectedPdfCount;
@@ -34,8 +34,5 @@
       :generateRoute="route('admin.pdf-export.generate-cut-out-counters')"
       :deleteRoute="$currentLocaleCutOutPdf ? route('admin.pdf-export.destroy', $currentLocaleCutOutPdf) : null"
     />
-    
-    {{-- Aquí puedes agregar más items manuales en el futuro --}}
-    
   </x-pdf.list>
 </div>

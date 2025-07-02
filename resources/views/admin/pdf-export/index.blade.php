@@ -1,72 +1,72 @@
 <x-admin-layout>
-  <div class="page-header">
-    <div class="page-header__content">
-      <h1 class="page-title">{{ __('pdf.export_management') }}</h1>
-      
-      <div class="page-header__actions">
-        <form action="{{ route('admin.pdf-export.cleanup') }}" method="POST" class="inline">
-          @csrf
-          <x-button
-            type="submit"
-            variant="warning"
-            icon="trash"
-            onclick="return confirm('{{ __('pdf.confirm_cleanup') }}')"
-          >
-            {{ __('pdf.cleanup_temporary') }}
-          </x-button>
-        </form>
-      </div>
-    </div>
-  </div>
+  <x-admin.page-header :title="__('pdf.plural')">
+    <x-slot:actions>
+      <form action="{{ route('admin.pdf-export.cleanup') }}" method="POST" class="inline">
+        @csrf
+        <x-button
+          type="submit"
+          variant="warning"
+          icon="trash"
+          onclick="return confirm('{{ __('admin.pdf_export.confirm_cleanup') }}')"
+        >
+          {{ __('admin.pdf_export.cleanup_temporary') }}
+        </x-button>
+      </form>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
-    <x-tabs>
-      <x-slot:header>
-        <x-tab-item 
-          id="factions" 
-          :active="$activeTab === 'factions'" 
-          :href="route('admin.pdf-export.index', ['tab' => 'factions'])"
-          icon="heroes"
-        >
-          {{ __('entities.factions.plural') }}
-        </x-tab-item>
+    {{-- Simple navigation links instead of JavaScript tabs --}}
+    <div class="tabs">
+      <div class="tabs__header">
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'factions']) }}" 
+           class="tabs__item {{ $activeTab === 'factions' ? 'tabs__item--active' : '' }}">
+          <x-icon name="heroes" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('entities.factions.plural') }}</span>
+        </a>
         
-        <x-tab-item 
-          id="decks" 
-          :active="$activeTab === 'decks'" 
-          :href="route('admin.pdf-export.index', ['tab' => 'decks'])"
-          icon="box"
-        >
-          {{ __('entities.faction_decks.plural') }}
-        </x-tab-item>
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'decks']) }}" 
+           class="tabs__item {{ $activeTab === 'decks' ? 'tabs__item--active' : '' }}">
+          <x-icon name="decks" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('entities.faction_decks.plural') }}</span>
+        </a>
         
-        <x-tab-item 
-          id="others" 
-          :active="$activeTab === 'others'" 
-          :href="route('admin.pdf-export.index', ['tab' => 'others'])"
-          icon="layers"
-        >
-          {{ __('pdf.others') }}
-        </x-tab-item>
-      </x-slot:header>
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'pages']) }}" 
+           class="tabs__item {{ $activeTab === 'pages' ? 'tabs__item--active' : '' }}">
+          <x-icon name="layers" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('pages.plural') }}</span>
+        </a>
+        
+        <a href="{{ route('admin.pdf-export.index', ['tab' => 'others']) }}" 
+           class="tabs__item {{ $activeTab === 'others' ? 'tabs__item--active' : '' }}">
+          <x-icon name="pdf" size="sm" class="tabs__icon" />
+          <span class="tabs__text">{{ __('pdf.other') }}</span>
+        </a>
+      </div>
       
-      <x-slot:content>
+      <div class="tabs__content">
+        {{-- Show content based on active tab --}}
         @if($activeTab === 'factions')
-          @include('admin.pdf-export._factions', [
+          @include('admin.pdf-export._factions-list', [
             'factions' => $factions,
-            'existingPdfs' => $existingPdfs
+            'existingPdfs' => $existingPdfs['faction'] ?? []
           ])
         @elseif($activeTab === 'decks')
-          @include('admin.pdf-export._decks', [
+          @include('admin.pdf-export._decks-list', [
             'decks' => $decks,
-            'existingPdfs' => $existingPdfs
+            'existingPdfs' => $existingPdfs['deck'] ?? []
           ])
-        @elseif($activeTab === 'others')
-          @include('admin.pdf-export._others', [
-            'existingPdfs' => $existingPdfs
+        @elseif($activeTab === 'pages')
+          @include('admin.pdf-export._pages-list', [
+            'pages' => $pages,
+            'existingPdfs' => $existingPdfs['page'] ?? []
+          ])
+        @else
+          @include('admin.pdf-export._others-list', [
+            'existingPdfs' => $existingPdfs['others'] ?? []
           ])
         @endif
-      </x-slot:content>
-    </x-tabs>
+      </div>
+    </div>
   </div>
 </x-admin-layout>

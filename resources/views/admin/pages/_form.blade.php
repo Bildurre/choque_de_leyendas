@@ -69,6 +69,13 @@
           :checked="old('is_published', isset($page) ? $page->is_published : false)"
         />
         
+        <x-form.checkbox
+          name="is_printable"
+          :label="__('pages.printable')"
+          :checked="old('is_printable', isset($page) ? $page->is_printable : false)"
+          :help="__('pages.printable_help')"
+        />
+        
         <fieldset class="form-fieldset">
           <legend>{{ __('pages.meta_info') }}</legend>
           

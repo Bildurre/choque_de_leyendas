@@ -19,6 +19,7 @@ return new class extends Migration
       $table->json('subtitle')->nullable();
       $table->json('content')->nullable();
       $table->integer('order')->default(0);
+      $table->boolean('is_printable')->default(true);
       $table->string('background_color')->nullable();
       $table->string('image')->nullable();
       $table->json('settings')->nullable();

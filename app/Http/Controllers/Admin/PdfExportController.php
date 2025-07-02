@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Faction;
 use App\Models\FactionDeck;
+use App\Models\Page;
 use App\Models\GeneratedPdf;
 use App\Services\Pdf\PdfExportService;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class PdfExportController extends Controller
       'activeTab' => $activeTab,
       'factions' => $data['factions'],
       'decks' => $data['decks'],
+      'pages' => $data['pages'],
       'existingPdfs' => $data['existingPdfs'],
     ]);
   }
@@ -78,6 +80,41 @@ class PdfExportController extends Controller
   }
   
   /**
+   * Generate PDF for a page by slug or page model
+   */
+  public function generatePage($pageSlugOrModel): RedirectResponse
+  {
+    try {
+      // Determine if we received a slug or a Page model
+      if ($pageSlugOrModel instanceof Page) {
+        $page = $pageSlugOrModel;
+        $slug = $page->slug;
+      } else {
+        $slug = $pageSlugOrModel;
+        // Find the page by slug
+        $page = Page::where('slug', $slug)->first();
+        if (!$page) {
+          return redirect()->route('admin.pdf-export.index', ['tab' => 'pages'])
+            ->with('error', __('admin.page_not_found'));
+        }
+      }
+      
+      $this->pdfExportService->generatePagePdf($slug);
+      
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'pages'])
+        ->with('success', __('admin.pdf_generation_started', ['name' => $page->title]));
+    } catch (\Exception $e) {
+      \Log::error('Failed to generate page PDF', [
+        'slug' => $slug ?? 'unknown',
+        'error' => $e->getMessage(),
+      ]);
+      
+      return redirect()->route('admin.pdf-export.index', ['tab' => 'pages'])
+        ->with('error', __('admin.pdf_generation_failed'));
+    }
+  }
+  
+  /**
    * Delete a PDF and all its locale variations
    */
   public function destroy(GeneratedPdf $pdf): RedirectResponse
@@ -89,6 +126,8 @@ class PdfExportController extends Controller
       $tab = 'decks';
     } elseif (in_array($pdf->type, ['counters-list', 'cut-out-counters'])) {
       $tab = 'others';
+    } elseif ($this->isPageType($pdf->type)) {
+      $tab = 'pages';
     }
     
     try {
@@ -101,6 +140,9 @@ class PdfExportController extends Controller
         $this->pdfExportService->deleteCountersListPdfs();
       } elseif ($pdf->type === 'cut-out-counters') {
         $this->pdfExportService->deleteCutOutCountersPdfs();
+      } elseif ($this->isPageType($pdf->type)) {
+        // For page types, use the page delete method
+        $this->pdfExportService->deletePagePdfs($pdf->type);
       } else {
         // For any other PDFs, just delete this one
         $pdf->delete();
@@ -199,5 +241,14 @@ class PdfExportController extends Controller
       'Content-Type' => 'application/pdf',
       'Content-Disposition' => 'inline; filename="' . $pdfToView->filename . '"',
     ]);
+  }
+  
+  /**
+   * Check if a type is a page type
+   */
+  private function isPageType(string $type): bool
+  {
+    // Check if any printable page has this slug
+    return Page::printable()->where('slug', $type)->exists();
   }
 }

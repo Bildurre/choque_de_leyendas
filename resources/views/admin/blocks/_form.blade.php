@@ -16,6 +16,9 @@
     <input type="hidden" name="type" value="{{ $type }}">
   @endif
   
+  {{-- Hidden field to ensure is_printable is always sent --}}
+  <input type="hidden" name="is_printable" value="0">
+  
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.pages.edit', $page)">
     <x-slot:header>
       <h2>{{ __('pages.blocks.form_title') }}: {{ $page->title }}</h2>
@@ -59,59 +62,82 @@
             }
           @endphp
           
-          <x-form.multilingual-wysiwyg
+          <x-form.multilingual-input
             name="content[text]"
             :label="__('pages.blocks.cta_text')"
             :values="$textValues"
-            required
+            type="textarea"
           />
           
           <x-form.multilingual-input
             name="content[button_text]"
-            :label="__('pages.blocks.button_text')"
+            :label="__('pages.blocks.cta_button_text')"
             :values="$buttonTextValues"
-            required
           />
           
           <x-form.multilingual-input
             name="content[button_link]"
-            :label="__('pages.blocks.button_link')"
+            :label="__('pages.blocks.cta_button_link')"
             :values="$buttonLinkValues"
-            required
           />
         @endif
       </div>
-      
+
       <div>
         <x-form.select
           name="background_color"
           :label="__('pages.blocks.background_color')"
-          :options="config('blocks.background_colors')"
+          :options="config('theme.background_colors', [])"
           :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
         />
         
-        @if($allowsImage ?? true)
+        <x-form.checkbox
+          name="is_printable"
+          :label="__('pages.blocks.printable')"
+          :checked="old('is_printable', isset($block) ? $block->is_printable : true)"
+          :help="__('pages.blocks.printable_help')"
+        />
+        
+        @if((isset($blockConfig) && $blockConfig['allows_image']) || (isset($block) && $block->image))
           <x-form.image-upload
             name="image"
             :label="__('pages.blocks.image')"
             :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
-            :remove-name="isset($block) ? 'remove_image' : null"
+            :remove-name="'remove_image'"
           />
-
-          @if((!isset($block) && in_array($type, ['text', 'cta'])) || (isset($block) && in_array($block->type, ['text', 'cta'])))
+          
+          @if((!isset($block) && $type === 'text') || (isset($block) && $block->type === 'text'))
             <x-form.select
               name="settings[image_position]"
               :label="__('pages.blocks.image_position')"
               :options="[
+                'top' => __('pages.blocks.image_position_options.top'),
+                'bottom' => __('pages.blocks.image_position_options.bottom'),
                 'left' => __('pages.blocks.image_position_options.left'),
                 'right' => __('pages.blocks.image_position_options.right'),
-                'top' => __('pages.blocks.image_position_options.top'),
-                'bottom' => __('pages.blocks.image_position_options.bottom')
               ]"
               :selected="old('settings.image_position', 
                 isset($block) && isset($block->settings['image_position']) 
                   ? $block->settings['image_position'] 
-                  : 'left'
+                  : 'top'
+              )"
+            />
+          @endif
+          
+          @if((!isset($block) && $type === 'cta') || (isset($block) && $block->type === 'cta'))
+            <x-form.select
+              name="settings[image_position]"
+              :label="__('pages.blocks.image_position')"
+              :options="[
+                'top' => __('pages.blocks.image_position_options.top'),
+                'bottom' => __('pages.blocks.image_position_options.bottom'),
+                'left' => __('pages.blocks.image_position_options.left'),
+                'right' => __('pages.blocks.image_position_options.right'),
+              ]"
+              :selected="old('settings.image_position', 
+                isset($block) && isset($block->settings['image_position']) 
+                  ? $block->settings['image_position'] 
+                  : 'top'
               )"
             />
             
@@ -120,7 +146,7 @@
               :label="__('pages.blocks.image_scale_mode')"
               :options="[
                 'adjust' => __('pages.blocks.image_scale_mode_options.adjust'),
-                'maintain' => __('pages.blocks.image_scale_mode_options.maintain')
+                'cover' => __('pages.blocks.image_scale_mode_options.cover'),
               ]"
               :selected="old('settings.image_scale_mode', 
                 isset($block) && isset($block->settings['image_scale_mode']) 

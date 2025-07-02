@@ -3,6 +3,8 @@
 .dropdown {
   position: relative;
   display: inline-block;
+
+    overflow: show;
   
   &__toggle {
     cursor: pointer;

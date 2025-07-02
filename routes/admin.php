@@ -136,8 +136,9 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
     Route::get('/view/{pdf}', [PdfExportController::class, 'view'])->name('view');
     Route::post('/faction/{faction}/generate', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
     Route::post('/deck/{deck}/generate', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
-    Route::post('pdf-export/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
-    Route::post('pdf-export/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
+    Route::post('/page/{page}/generate', [PdfExportController::class, 'generatePage'])->name('generate-page');
+    Route::post('/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
+    Route::post('/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
     Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
     Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
   });
