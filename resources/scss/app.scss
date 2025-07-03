@@ -79,10 +79,11 @@
 
 // Bloques
 @use 'components/blocks/block';
-@use 'components/blocks/header';
-@use 'components/blocks/text';
-@use 'components/blocks/relateds';
-@use 'components/blocks/cta';
+@use 'components/blocks/block-header';
+@use 'components/blocks/block-text';
+@use 'components/blocks/block-relateds';
+@use 'components/blocks/block-cta';
+@use 'components/blocks/block-content-wrapper';
 
 // Vendors
 @import 'choices.js/public/assets/styles/choices.min.css';

@@ -1,0 +1,32 @@
+@use '../../abstracts/all' as *;
+
+.block--text {
+
+
+  
+  // Tipografía mejorada para bloques de texto
+  .block__text {
+    // Mejor espaciado para contenido largo
+    h2, h3, h4, h5, h6 {
+      margin-top: $spacing-xl;
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    
+    // Espaciado de párrafos mejorado
+    p + p {
+      margin-top: $spacing-md;
+    }
+    
+    // Mejor estilo de listas
+    ul, ol {
+      margin: $spacing-md 0;
+      
+      li {
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+}

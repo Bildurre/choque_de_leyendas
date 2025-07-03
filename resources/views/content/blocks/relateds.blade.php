@@ -1,11 +1,8 @@
 @php
-  // Block configuration
   $modelType = $block->settings['model_type'] ?? 'hero';
   $displayType = $block->settings['display_type'] ?? 'latest';
   $buttonText = $block->settings['button_text'] ?? __('pages.blocks.relateds.view_all');
-  $textAlignment = $block->settings['text_alignment'] ?? 'left';
   
-  // Determine model and route
   $modelClass = match($modelType) {
     'faction' => \App\Models\Faction::class,
     'hero' => \App\Models\Hero::class,
@@ -20,7 +17,6 @@
     default => route('public.heroes.index'),
   };
   
-  // Get items
   $query = $modelClass::published();
   
   if ($displayType === 'random') {
@@ -30,21 +26,11 @@
   }
 @endphp
 
-<section class="block block--relateds" 
-  @if($block->background_color && $block->background_color != 'none') 
-    data-background="{{ $block->background_color }}"
-  @endif
->
-  <div class="block__inner">
-    <div class="relateds-block__header text-{{ $textAlignment }}">
-      <div class="block__content">
-        @if($block->title)
-          <h2 class="block__title">{{ $block->title }}</h2>
-        @endif
-        
-        @if($block->subtitle)
-          <h3 class="block__subtitle">{{ $block->subtitle }}</h3>
-        @endif
+<x-blocks.block :block="$block">
+  <div class="block__content">
+    <div class="relateds-block__header">
+      <div class="relateds-block__title-wrapper">
+        <x-blocks.titles :block="$block" />
       </div>
       
       <div class="relateds-block__action">
@@ -76,4 +62,4 @@
       @endforeach
     </div>
   </div>
-</section>
+</x-blocks.block>

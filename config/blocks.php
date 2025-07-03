@@ -12,15 +12,6 @@ return [
           'type' => 'boolean',
           'default' => false,
         ],
-        'text_alignment' => [
-          'type' => 'select',
-          'default' => 'left',
-          'options' => [
-            'left' => 'Left',
-            'center' => 'Center',
-            'right' => 'Right',
-          ],
-        ],
       ],
     ],
     'header' => [
@@ -29,15 +20,6 @@ return [
       'icon' => 'heading',
       'allows_image' => false,
       'settings' => [
-        'text_alignment' => [
-          'type' => 'select',
-          'default' => 'center',
-          'options' => [
-            'left' => 'Left',
-            'center' => 'Center',
-            'right' => 'Right',
-          ],
-        ],
       ],
     ],
     'relateds' => [
@@ -67,15 +49,6 @@ return [
           'type' => 'text',
           'default' => 'Ver todos',
         ],
-        'text_alignment' => [
-          'type' => 'select',
-          'default' => 'left',
-          'options' => [
-            'left' => 'Left',
-            'center' => 'Center',
-            'right' => 'Right',
-          ],
-        ],
       ],
     ],
     'cta' => [
@@ -84,15 +57,6 @@ return [
       'icon' => 'megaphone',
       'allows_image' => true,
       'settings' => [
-        'text_alignment' => [
-          'type' => 'select',
-          'default' => 'center',
-          'options' => [
-            'left' => 'Left',
-            'center' => 'Center',
-            'right' => 'Right',
-          ],
-        ],
         'button_variant' => [
           'type' => 'select',
           'default' => 'primary',

@@ -1,0 +1,61 @@
+@use '../../abstracts/all' as *;
+
+.block--cta {
+  .cta-block {
+    display: grid;
+    place-items: center;
+  }
+  
+  .cta-block__card {
+    background-color: var(--color-bg-transparent-light);
+    border: 1px solid var(--color-card-border);
+    border-radius: $border-radius-lg;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 90%;
+  }
+  
+  // Padding del contenido dentro de la tarjeta
+  .block__content-wrapper {
+    gap: 0;
+  }
+  .block__content {
+    padding: $spacing-lg;
+    
+    // @include responsive(tablet) {
+    //   padding: $spacing-xxl;
+    // }
+  }
+  
+  .cta-block__action {
+    margin-top: $spacing-xl;
+  }
+}
+
+.block.block--cta {
+  background-color: transparent;
+}
+
+.block.block--cta {
+  // Solid background colors
+  &[data-background="red"] { .cta-block__card { background-color: var(--color-block-bg-red); }}
+  &[data-background="orange"] { .cta-block__card { background-color: var(--color-block-bg-orange); }}
+  &[data-background="lime"] { .cta-block__card { background-color: var(--color-block-bg-lime); }}
+  &[data-background="green"] { .cta-block__card { background-color: var(--color-block-bg-green); }}
+  &[data-background="teal"] { .cta-block__card { background-color: var(--color-block-bg-teal); }}
+  &[data-background="cyan"] { .cta-block__card { background-color: var(--color-block-bg-cyan); }}
+  &[data-background="blue"] { .cta-block__card { background-color: var(--color-block-bg-blue); }}
+  &[data-background="purple"] { .cta-block__card { background-color: var(--color-block-bg-purple); }}
+  &[data-background="magenta"] { .cta-block__card { background-color: var(--color-block-bg-magenta); }}
+  
+  // Accent colors
+  &[data-background="accent-primary"] { .cta-block__card { background-color: var(--random-accent-color-bg-light); }}
+  &[data-background="accent-secondary"] { .cta-block__card { background-color: var(--random-accent-color-secondary-bg-light); }}
+  &[data-background="accent-tertiary"] { .cta-block__card { background-color: var(--random-accent-color-tertiary-bg-light); }}
+  
+  // Theme colors
+  &[data-background="theme-card"] { .cta-block__card { background-color: var(--color-theme-card-bg); }}
+  &[data-background="theme-border"] { .cta-block__card { background-color: var(--color-theme-border-bg); }}
+  &[data-background="theme-header"] { .cta-block__card { background-color: var(--color-theme-header-bg); }}
+}

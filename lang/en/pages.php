@@ -42,7 +42,7 @@ return [
     'add_block' => 'Add block',
     'create' => 'Create :type block',
     'edit' => 'Edit :type block',
-    'form_title' => 'Block configuration',
+    'form_title' => 'Configuration of :block_name block for page :page_title',
     'title' => 'Title',
     'subtitle' => 'Subtitle',
     'content' => 'Content',
@@ -58,6 +58,7 @@ return [
       'text' => 'Text',
       'header' => 'Header',
       'relateds' => 'Related content',
+      'cta' => 'Call to Action'
     ],
     'settings' => [
       'full_width' => 'Full width',

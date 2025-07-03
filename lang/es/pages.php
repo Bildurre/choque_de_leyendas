@@ -42,7 +42,7 @@ return [
     'add_block' => 'Añadir bloque',
     'create' => 'Crear bloque :type',
     'edit' => 'Editar bloque :type',
-    'form_title' => 'Configuración del bloque',
+    'form_title' => 'Configuración del bloque :block_name de la página :page_title',
     'title' => 'Título',
     'subtitle' => 'Subtítulo',
     'content' => 'Contenido',
@@ -58,6 +58,7 @@ return [
       'text' => 'Texto',
       'header' => 'Encabezado',
       'relateds' => 'Contenido relacionado',
+      'cta' => 'Llamada a la Acción'
     ],
     'settings' => [
       'full_width' => 'Ancho completo',

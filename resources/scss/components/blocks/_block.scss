@@ -24,61 +24,16 @@
     }
   }
   
-  // Content wrapper for layouts with images
-  &__content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    
-    // Image on top/bottom
-    &.has-image-top,
-    &.has-image-bottom {
-      grid-template-columns: 1fr;
-    }
-    
-    // Image on left/right
-    @include responsive(tablet) {
-      &.has-image-left,
-      &.has-image-right {
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        gap: $spacing-xl;
-        
-        // Column proportions
-        &.proportions-1-2 {
-          grid-template-columns: 1fr 2fr;
-        }
-        
-        &.proportions-2-1 {
-          grid-template-columns: 2fr 1fr;
-        }
-        
-        &.proportions-1-3 {
-          grid-template-columns: 1fr 3fr;
-        }
-        
-        &.proportions-3-1 {
-          grid-template-columns: 3fr 1fr;
-        }
-      }
-      
-      &.has-image-right {
-        .block__image {
-          order: 2;
-        }
-      }
-    }
-  }
-  
-  // Block content area
+  // Block content area (when not using content wrapper)
   &__content {
-    // Content is styled by each specific block
+    // Content without wrapper doesn't need grid-area
   }
   
   // Common title styles
   &__title {
     margin: 0 0 $spacing-sm;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--color-text-primary);
     font-family: 'almendra', serif;
     line-height: 1.2;
@@ -92,7 +47,8 @@
   &__subtitle {
     margin: 0 0 $spacing-md;
     font-size: 1rem;
-    font-weight: 400;
+    font-family: 'roboto';
+    font-weight: 500;
     color: var(--color-text-secondary);
     line-height: 1.4;
     
@@ -154,100 +110,34 @@
       }
     }
   }
-  
-  // Common image styles
-  &__image {
-    position: relative;
-    overflow: hidden;
-    border-radius: $border-radius-md;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-  }
 }
 
 // Text alignment helpers
-.text-left {
-  text-align: left;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
 
 // Background colors
 .block {
-  &[data-background="none"] {
-    background-color: transparent;
-  }
+  // Solid background colors
+  &[data-background="red"] { background-color: var(--color-block-bg-red); }
+  &[data-background="orange"] { background-color: var(--color-block-bg-orange); }
+  &[data-background="lime"] { background-color: var(--color-block-bg-lime); }
+  &[data-background="green"] { background-color: var(--color-block-bg-green); }
+  &[data-background="teal"] { background-color: var(--color-block-bg-teal); }
+  &[data-background="cyan"] { background-color: var(--color-block-bg-cyan); }
+  &[data-background="blue"] { background-color: var(--color-block-bg-blue); }
+  &[data-background="purple"] { background-color: var(--color-block-bg-purple); }
+  &[data-background="magenta"] { background-color: var(--color-block-bg-magenta); }
   
-  &[data-background="red"] {
-    background-color: var(--color-block-bg-red);
-  }
+  // Accent colors
+  &[data-background="accent-primary"] { background-color: var(--random-accent-color-bg-light); }
+  &[data-background="accent-secondary"] { background-color: var(--random-accent-color-secondary-bg-light); }
+  &[data-background="accent-tertiary"] { background-color: var(--random-accent-color-tertiary-bg-light); }
   
-  &[data-background="orange"] {
-    background-color: var(--color-block-bg-orange);
-  }
-  
-  &[data-background="lime"] {
-    background-color: var(--color-block-bg-lime);
-  }
-  
-  &[data-background="green"] {
-    background-color: var(--color-block-bg-green);
-  }
-  
-  &[data-background="teal"] {
-    background-color: var(--color-block-bg-teal);
-  }
-  
-  &[data-background="cyan"] {
-    background-color: var(--color-block-bg-cyan);
-  }
-  
-  &[data-background="blue"] {
-    background-color: var(--color-block-bg-blue);
-  }
-  
-  &[data-background="purple"] {
-    background-color: var(--color-block-bg-purple);
-  }
-  
-  &[data-background="magenta"] {
-    background-color: var(--color-block-bg-magenta);
-  }
-  
-  // Random accent colors
-  &[data-background="accent-primary"] {
-    background-color: var(--random-accent-color-bg-light);
-  }
-  
-  &[data-background="accent-secondary"] {
-    background-color: var(--random-accent-color-secondary-bg-light);
-  }
-  
-  &[data-background="accent-tertiary"] {
-    background-color: var(--random-accent-color-tertiary-bg-light);
-  }
-  
-  // Theme colors with transparency
-  &[data-background="theme-card"] {
-    background-color: var(--color-theme-card-bg);
-  }
-  
-  &[data-background="theme-border"] {
-    background-color: var(--color-theme-border-bg);
-  }
-  
-  &[data-background="theme-header"] {
-    background-color: var(--color-theme-header-bg);
-  }
+  // Theme colors
+  &[data-background="theme-card"] { background-color: var(--color-theme-card-bg); }
+  &[data-background="theme-border"] { background-color: var(--color-theme-border-bg); }
+  &[data-background="theme-header"] { background-color: var(--color-theme-header-bg); }
 }

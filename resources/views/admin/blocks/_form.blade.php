@@ -21,7 +21,12 @@
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.pages.edit', $page)">
     <x-slot:header>
-      <h2>{{ __('pages.blocks.form_title') }}: {{ $page->title }}</h2>
+      @php
+        $blockName = isset($block) 
+          ? __('pages.blocks.types.' . $block->type) 
+          : __('pages.blocks.types.' . $type);
+      @endphp
+      <h2>{{ __('pages.blocks.form_title', ['block_name' => $blockName, 'page_title' => $page->title]) }}</h2>
     </x-slot:header>
     
     <div class="form-grid">
@@ -31,8 +36,8 @@
           :label="__('pages.blocks.title')"
           :values="old('title', isset($block) ? $block->getTranslations('title') : [])"
         />
-        
-        <x-form.multilingual-input
+
+        <x-form.multilingual-wysiwyg
           name="subtitle"
           :label="__('pages.blocks.subtitle')"
           :values="old('subtitle', isset($block) ? $block->getTranslations('subtitle') : [])"
@@ -62,7 +67,7 @@
             }
           @endphp
           
-          <x-form.multilingual-input
+          <x-form.multilingual-wysiwyg
             name="content[text]"
             :label="__('pages.blocks.cta_text')"
             :values="$textValues"
@@ -85,9 +90,25 @@
 
       <div>
         <x-form.select
+            name="settings[text_alignment]"
+            :label="__('pages.blocks.text_alignment')"
+            :options="[
+              'left' => __('pages.blocks.text_alignment_options.left'),
+              'right' => __('pages.blocks.text_alignment_options.right'),
+              'center' => __('pages.blocks.text_alignment_options.center'),
+              'justify' => __('pages.blocks.text_alignment_options.justify'),
+            ]"
+            :selected="old('settings.text_alignment', 
+              isset($block) && isset($block->settings['text_alignment']) 
+                ? $block->settings['text_alignment'] 
+                : 'left'
+            )"
+          />
+
+        <x-form.select
           name="background_color"
           :label="__('pages.blocks.background_color')"
-          :options="config('theme.background_colors', [])"
+          :options="config('blocks.background_colors', [])"
           :selected="old('background_color', isset($block) ? $block->background_color : 'none')"
         />
         
@@ -106,74 +127,55 @@
             :remove-name="'remove_image'"
           />
           
-          @if((!isset($block) && $type === 'text') || (isset($block) && $block->type === 'text'))
-            <x-form.select
-              name="settings[image_position]"
-              :label="__('pages.blocks.image_position')"
-              :options="[
-                'top' => __('pages.blocks.image_position_options.top'),
-                'bottom' => __('pages.blocks.image_position_options.bottom'),
-                'left' => __('pages.blocks.image_position_options.left'),
-                'right' => __('pages.blocks.image_position_options.right'),
-              ]"
-              :selected="old('settings.image_position', 
-                isset($block) && isset($block->settings['image_position']) 
-                  ? $block->settings['image_position'] 
-                  : 'top'
-              )"
-            />
-          @endif
+          <x-form.select
+            name="settings[image_position]"
+            :label="__('pages.blocks.image_position')"
+            :options="[
+              'left' => __('pages.blocks.image_position_options.left'),
+              'right' => __('pages.blocks.image_position_options.right'),
+              'top' => __('pages.blocks.image_position_options.top'),
+              'bottom' => __('pages.blocks.image_position_options.bottom'),
+            ]"
+            :selected="old('settings.image_position', 
+              isset($block) && isset($block->settings['image_position']) 
+                ? $block->settings['image_position'] 
+                : 'left'
+            )"
+          />
           
-          @if((!isset($block) && $type === 'cta') || (isset($block) && $block->type === 'cta'))
-            <x-form.select
-              name="settings[image_position]"
-              :label="__('pages.blocks.image_position')"
-              :options="[
-                'top' => __('pages.blocks.image_position_options.top'),
-                'bottom' => __('pages.blocks.image_position_options.bottom'),
-                'left' => __('pages.blocks.image_position_options.left'),
-                'right' => __('pages.blocks.image_position_options.right'),
-              ]"
-              :selected="old('settings.image_position', 
-                isset($block) && isset($block->settings['image_position']) 
-                  ? $block->settings['image_position'] 
-                  : 'top'
-              )"
-            />
-            
-            <x-form.select
-              name="settings[image_scale_mode]"
-              :label="__('pages.blocks.image_scale_mode')"
-              :options="[
-                'adjust' => __('pages.blocks.image_scale_mode_options.adjust'),
-                'cover' => __('pages.blocks.image_scale_mode_options.cover'),
-              ]"
-              :selected="old('settings.image_scale_mode', 
-                isset($block) && isset($block->settings['image_scale_mode']) 
-                  ? $block->settings['image_scale_mode'] 
-                  : 'adjust'
-              )"
-            />
-            
-            <x-form.select
-              name="settings[column_proportions]"
-              :label="__('pages.blocks.column_proportions')"
-              :options="[
-                '1-1' => '1:1',
-                '2-1' => '2:1',
-                '1-2' => '1:2',
-                '3-1' => '3:1',
-                '1-3' => '1:3',
-                '3-2' => '3:2',
-                '2-3' => '2:3'
-              ]"
-              :selected="old('settings.column_proportions', 
-                isset($block) && isset($block->settings['column_proportions']) 
-                  ? $block->settings['column_proportions'] 
-                  : '1-1'
-              )"
-            />
-          @endif
+          <x-form.select
+            name="settings[image_scale_mode]"
+            :label="__('pages.blocks.image_scale_mode')"
+            :options="[
+              'contain' => __('pages.blocks.image_scale_mode_options.contain'),
+              'cover' => __('pages.blocks.image_scale_mode_options.cover'),
+              'fill' => __('pages.blocks.image_scale_mode_options.fill'),
+            ]"
+            :selected="old('settings.image_scale_mode', 
+              isset($block) && isset($block->settings['image_scale_mode']) 
+                ? $block->settings['image_scale_mode'] 
+                : 'contain'
+            )"
+          />
+          
+          <x-form.select
+            name="settings[column_proportions]"
+            :label="__('pages.blocks.column_proportions')"
+            :options="[
+              '1-1' => '1:1',
+              '2-1' => '2:1',
+              '1-2' => '1:2',
+              '3-1' => '3:1',
+              '1-3' => '1:3',
+              '3-2' => '3:2',
+              '2-3' => '2:3'
+            ]"
+            :selected="old('settings.column_proportions', 
+              isset($block) && isset($block->settings['column_proportions']) 
+                ? $block->settings['column_proportions'] 
+                : '1-1'
+            )"
+          />
         @endif
         
         @if(isset($blockConfig['settings']))

@@ -99,7 +99,7 @@ class BlockController extends Controller
 
       $this->blockService->update($block, $data);
       
-      return redirect()->route('admin.pages.edit', $page)
+      return redirect()->route('admin.pages.blocks.edit', [$page, $block])
         ->with('success', __('blocks.updated_successfully'));
     } catch (\Exception $e) {
       return back()->with('error', __('blocks.update_error'))

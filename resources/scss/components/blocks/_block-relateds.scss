@@ -1,0 +1,125 @@
+@use '../../abstracts/all' as *;
+
+.block--relateds {
+  .relateds-block__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: $spacing-md;
+    margin-bottom: $spacing-xxl;
+    align-items: start;
+    
+    @include responsive(tablet) {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
+  
+  .relateds-block__title-wrapper {
+    min-width: 0; // Prevenir overflow de texto
+  }
+  
+  .relateds-block__action {
+    justify-self: start;
+    
+    @include responsive(tablet) {
+      justify-self: end;
+    }
+  }
+  
+  .relateds-block__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    
+    @include responsive(tablet) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-lg;
+    }
+    
+    @include responsive(desktop) {
+      gap: $spacing-xl;
+    }
+  }
+
+  .relateds-block__item {
+    display: block;
+    width: 100%;
+  }
+
+  .relateds-block__link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: transform $transition-fast;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    
+    &:hover {
+      transform: translateY(-$spacing-xs);
+    }
+    
+    &:focus {
+      outline: 2px solid var(--random-accent-color);
+      outline-offset: 2px;
+    }
+    
+    .preview-image,
+    .entity-preview,
+    .hero-preview,
+    .card-preview,
+    .faction-preview {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform $transition-fast;
+    }
+    
+    &:hover {
+      .preview-image,
+      .entity-preview,
+      .hero-preview,
+      .card-preview,
+      .faction-preview {
+        transform: scale(1.02);
+      }
+    }
+  }
+  
+  // Variaciones de alineación
+  &.text-center,
+  &.text-justify {
+    .relateds-block__header {
+      @include responsive(tablet) {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+    
+    .relateds-block__action {
+      justify-self: center;
+    }
+  }
+  
+  &.text-right {
+    .relateds-block__header {
+      @include responsive(tablet) {
+        grid-template-columns: auto 1fr;
+      }
+    }
+    
+    .relateds-block__title-wrapper {
+      @include responsive(tablet) {
+        order: 2;
+        text-align: right;
+      }
+    }
+    
+    .relateds-block__action {
+      @include responsive(tablet) {
+        order: 1;
+        justify-self: start;
+      }
+    }
+  }
+}
