@@ -7,6 +7,7 @@ return [
       'view' => 'content.blocks.text',
       'icon' => 'text',
       'allows_image' => true,
+      'allows_clearfix_image' => true,
       'settings' => [
         'full_width' => [
           'type' => 'boolean',

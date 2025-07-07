@@ -126,16 +126,25 @@
             :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
             :remove-name="'remove_image'"
           />
-          
-          <x-form.select
-            name="settings[image_position]"
-            :label="__('pages.blocks.image_position')"
-            :options="[
+
+         @php
+            $options = [
               'left' => __('pages.blocks.image_position_options.left'),
               'right' => __('pages.blocks.image_position_options.right'),
               'top' => __('pages.blocks.image_position_options.top'),
               'bottom' => __('pages.blocks.image_position_options.bottom'),
-            ]"
+            ];
+            
+            if (isset($blockConfig) && isset($blockConfig['allows_clearfix_image']) && $blockConfig['allows_clearfix_image']) {
+              $options['clearfix-left'] = __('pages.blocks.image_position_options.clearfix_left');
+              $options['clearfix-right'] = __('pages.blocks.image_position_options.clearfix_right');
+            }
+          @endphp
+
+          <x-form.select
+            name="settings[image_position]"
+            :label="__('pages.blocks.image_position')"
+            :options="$options"
             :selected="old('settings.image_position', 
               isset($block) && isset($block->settings['image_position']) 
                 ? $block->settings['image_position'] 

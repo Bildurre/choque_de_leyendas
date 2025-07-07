@@ -8,10 +8,12 @@
   if ($hasImage) {
     $contentWrapperClass .= ' has-image-' . $imagePosition;
     
-    if (in_array($imagePosition, ['left', 'right'])) {
-      $scaleMode = $block->settings['image_scale_mode'] ?? 'adjust';
-      $contentWrapperClass .= ' image-scale-' . $scaleMode;
-      
+    // Scale mode para todas las posiciones de imagen
+    $scaleMode = $block->settings['image_scale_mode'] ?? 'cover';
+    $contentWrapperClass .= ' image-scale-' . $scaleMode;
+    
+    // Proportions para left/right Y clearfix
+    if (in_array($imagePosition, ['left', 'right', 'clearfix-left', 'clearfix-right'])) {
       $proportions = $block->settings['column_proportions'] ?? '1-1';
       $contentWrapperClass .= ' proportions-' . $proportions;
     }

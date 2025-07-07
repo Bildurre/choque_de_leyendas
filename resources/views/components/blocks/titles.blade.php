@@ -7,7 +7,7 @@
 @endif
 
 @if($block->subtitle)
-  <h3 class="block__subtitle" {{ $attributes->merge() }}>
+  <div class="block__subtitle" {{ $attributes->merge() }}>
     {!! $block->subtitle !!}
-  </h3>
+  </div>
 @endif

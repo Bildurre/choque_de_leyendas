@@ -1,14 +1,81 @@
 @use '../../abstracts/all' as *;
 
 .block--text {
-
-
+  // Clearfix layouts específicos para el bloque texto
+  .block__content-wrapper {
+    &.has-image-clearfix-left,
+    &.has-image-clearfix-right {
+      display: block; // Override grid para clearfix
+      
+      // Clear floats después del contenido
+      &::after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+      
+      .block__image {
+        margin-bottom: $spacing-md;
+        width: 100%; // Full width en móvil
+        height: auto;
+        aspect-ratio: auto; // Sin aspect ratio fijo
+        overflow: visible;
+        
+        @include responsive(tablet) {
+          // Default width
+          max-width: 50%;
+          width: auto;
+        }
+        
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+          object-fit: initial; // Tamaño natural
+        }
+      }
+      
+      // Proportions para controlar el ancho de la imagen en clearfix
+      @include responsive(tablet) {
+        &.proportions-1-1 .block__image { max-width: 50%; }
+        &.proportions-1-2 .block__image { max-width: 33.333%; }
+        &.proportions-2-1 .block__image { max-width: 66.666%; }
+        &.proportions-1-3 .block__image { max-width: 25%; }
+        &.proportions-3-1 .block__image { max-width: 75%; }
+        &.proportions-2-3 .block__image { max-width: 40%; }
+        &.proportions-3-2 .block__image { max-width: 60%; }
+      }
+    }
+    
+    &.has-image-clearfix-left {
+      .block__image {
+        @include responsive(tablet) {
+          float: left;
+          margin-right: $spacing-xl;
+          margin-bottom: $spacing-md;
+          margin-left: 0;
+        }
+      }
+    }
+    
+    &.has-image-clearfix-right {
+      .block__image {
+        @include responsive(tablet) {
+          float: right;
+          margin-left: $spacing-xl;
+          margin-bottom: $spacing-md;
+          margin-right: 0;
+        }
+      }
+    }
+  }
   
   // Tipografía mejorada para bloques de texto
   .block__text {
     // Mejor espaciado para contenido largo
     h2, h3, h4, h5, h6 {
       margin-top: $spacing-xl;
+      // REMOVIDO: clear: both; - esto evita que el texto fluya alrededor de la imagen
       
       &:first-child {
         margin-top: 0;
