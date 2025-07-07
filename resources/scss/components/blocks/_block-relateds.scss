@@ -8,7 +8,7 @@
     margin-bottom: $spacing-xxl;
     align-items: start;
     
-    @include responsive(tablet) {
+    @include responsive(mobile) {
       grid-template-columns: 1fr auto;
       align-items: center;
     }
@@ -19,9 +19,15 @@
   }
   
   .relateds-block__action {
-    justify-self: start;
-    
-    @include responsive(tablet) {
+    width: 100%;
+    .btn {
+      width: 100%;
+
+    @include responsive(small) {
+      width: auto;
+    }
+    }
+    @include responsive(mobile) {
       justify-self: end;
     }
   }

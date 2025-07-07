@@ -4,16 +4,35 @@ export default function initCollapsibleSections() {
   
   if (!collapsibleSections.length) return;
   
+  // Get transition duration from CSS (convert to milliseconds)
+  const computedStyle = getComputedStyle(document.documentElement);
+  const transitionSlow = computedStyle.getPropertyValue('--transition-slow') || '300ms';
+  const transitionDuration = parseFloat(transitionSlow) * (transitionSlow.includes('s') && !transitionSlow.includes('ms') ? 1000 : 1);
+  
   // Function to update collapsible state
   function updateCollapsibleState(section, collapsed = null) {
     // If collapsed is null, toggle the state
     const newState = collapsed !== null ? collapsed : !section.classList.contains('is-collapsed');
     
+    // Clear any existing timeout
+    if (section.overflowTimeout) {
+      clearTimeout(section.overflowTimeout);
+      section.overflowTimeout = null;
+    }
+    
     // Update class
     if (newState) {
+      // Collapsing
+      section.classList.remove('is-fully-open');
       section.classList.add('is-collapsed');
     } else {
+      // Expanding
       section.classList.remove('is-collapsed');
+      
+      // Set overflow visible after animation completes
+      section.overflowTimeout = setTimeout(() => {
+        section.classList.add('is-fully-open');
+      }, transitionDuration);
     }
     
     return newState;

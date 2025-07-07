@@ -51,7 +51,7 @@ return [
   // Heroes
   'heroes' => [
     'title' => 'Heroes',
-    'description' => 'Discover all the heroes of Alanda',
+    'description' => 'Discover all the heroes of Alanda: Clash of Legends',
     'no_heroes' => 'No heroes available',
     'details' => 'Details',
     'lore' => 'Lore',
@@ -59,6 +59,8 @@ return [
     'stats' => 'Statistics',
     'passive_abilities' => 'Passive abilities',
     'active_abilities' => 'Active abilities',
+    'basic_info' => 'Hero Information',
+    'attributes' => 'Attributes',
   ],
   
   // Cards

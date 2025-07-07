@@ -28,16 +28,10 @@
 
   {{-- Print Collection Button --}}
   <div class="info-block">
-    <x-button
-      type="button"
-      variant="primary"
-      icon="pdf-add"
-      data-collection-add
+    <x-pdf.add-button
       data-entity-type="card"
       data-entity-id="{{ $card->id }}"
-    >
-      {{ __('public.add_to_collection') }}
-    </x-button>
+    </x-pdf.add-button>
   </div>
 
   {{-- Card Details Section --}}

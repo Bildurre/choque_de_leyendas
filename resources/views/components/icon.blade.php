@@ -2,6 +2,7 @@
 
 @php
 $sizes = [
+  'xs' => 'icon--xs',
   'sm' => 'icon--sm',
   'md' => 'icon--md',
   'lg' => 'icon--lg',
@@ -306,6 +307,12 @@ $sizeClass = $sizes[$size] ?? $sizes['md'];
         <rect x="3" y="7" width="12" height="14" rx="1"></rect>
         <path d="M7 7V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-3"></path>
         <path d="M11 4V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1"></path>
+      </svg>
+      @break
+    @case('link')
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
       </svg>
       @break
     @default

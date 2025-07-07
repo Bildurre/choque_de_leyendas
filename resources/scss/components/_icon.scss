@@ -15,6 +15,11 @@
       stroke: currentColor;
     }
   }
+
+  &--xs {
+    width: .75rem;
+    height: .75rem;
+  }
   
   &--sm {
     width: 1rem;

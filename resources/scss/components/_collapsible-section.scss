@@ -58,12 +58,15 @@
     grid-template-rows: 1fr;
   }
   
+  // Cuando está completamente abierto, permitir overflow visible
+  &.is-fully-open &__content-wrapper {
+    overflow: visible;
+  }
+  
   &__content {
     min-height: 0;
     padding-top: $spacing-md;
   }
-  
-  // Nada aquí, ya está definido arriba
   
   // Variante para acordeones (opcional: animación más rápida)
   &[data-in-accordion="true"] {

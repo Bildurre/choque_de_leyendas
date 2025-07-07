@@ -6,6 +6,7 @@
   &__inner {
     background-color: var(--color-background) !important;
     border-color: var(--color-card-border) !important;
+    border-radius: $border-radius-sm !important;
     .choices__item {
       background-color: var(--random-accent-color-bg) !important;
       border-color: var(--random-accent-color) !important;
@@ -15,6 +16,7 @@
   
   &__input {
     background-color: var(--color-background) !important;
+    color: var(--text-color);
   }
   
   &__list--dropdown {
@@ -22,11 +24,16 @@
     border-color: var(--color-card-border) !important;
     z-index: $z-index-dropdown !important; // Usar z-index para asegurar que esté por encima
     overflow: visible !important;
+
+    border-bottom-left-radius: $border-radius-sm !important;
+    border-bottom-right-radius: $border-radius-sm !important;
   }
   
   &.is-open {
     .choices__inner {
       border-color: var(--random-accent-color) !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
     }
     
     .choices__list--dropdown {

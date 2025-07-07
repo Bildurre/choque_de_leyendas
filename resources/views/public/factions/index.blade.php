@@ -17,7 +17,7 @@
       'subtitle' => $subtitleTranslations,
       'background_color' => 'none',
       'settings' => [
-        'text_alignment' => 'left'
+        'text_alignment' => 'justify'
       ]
     ]);
   @endphp

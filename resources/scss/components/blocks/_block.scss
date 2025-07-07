@@ -28,6 +28,23 @@
   &__content {
     // Content without wrapper doesn't need grid-area
   }
+
+  &-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacing-sm;
+    .add-button {
+      .icon {
+        width: 2rem;
+        height: 2rem;
+
+        @include responsive(tablet) {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+    }
+  }
   
   // Common title styles
   &__title {
@@ -116,7 +133,12 @@
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
-.text-justify { text-align: justify; }
+.text-justify {
+  text-align: justify;
+  .block__title {
+    text-align: left;
+  }
+}
 
 // Background colors
 .block {

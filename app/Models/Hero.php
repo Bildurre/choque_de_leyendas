@@ -203,75 +203,75 @@ class Hero extends Model implements LocalizedUrlRoutable
         'option_label' => 'name',
         'option_value' => 'id'
       ],
-      [
-        'type' => 'enum',
-        'field' => 'gender',
-        'label' => __('entities.heroes.gender'),
-        'options' => [
-          'male' => __('entities.heroes.genders.male'),
-          'female' => __('entities.heroes.genders.female')
-        ]
-      ],
-      [
-        'type' => 'attribute_range',
-        'field' => 'agility',
-        'label' => __('entities.heroes.attributes.agility'),
-        'options' => [
-          '1' => '1',
-          '2' => '2',
-          '3' => '3',
-          '4' => '4',
-          '5' => '5+'
-        ]
-      ],
-      [
-        'type' => 'attribute_range',
-        'field' => 'mental',
-        'label' => __('entities.heroes.attributes.mental'),
-        'options' => [
-          '1' => '1',
-          '2' => '2',
-          '3' => '3',
-          '4' => '4',
-          '5' => '5+'
-        ]
-      ],
-      [
-        'type' => 'attribute_range',
-        'field' => 'will',
-        'label' => __('entities.heroes.attributes.will'),
-        'options' => [
-          '1' => '1',
-          '2' => '2',
-          '3' => '3',
-          '4' => '4',
-          '5' => '5+'
-        ]
-      ],
-      [
-        'type' => 'attribute_range',
-        'field' => 'strength',
-        'label' => __('entities.heroes.attributes.strength'),
-        'options' => [
-          '1' => '1',
-          '2' => '2',
-          '3' => '3',
-          '4' => '4',
-          '5' => '5+'
-        ]
-      ],
-      [
-        'type' => 'attribute_range',
-        'field' => 'armor',
-        'label' => __('entities.heroes.attributes.armor'),
-        'options' => [
-          '1' => '1',
-          '2' => '2',
-          '3' => '3',
-          '4' => '4',
-          '5' => '5+'
-        ]
-      ],
+      // [
+      //   'type' => 'enum',
+      //   'field' => 'gender',
+      //   'label' => __('entities.heroes.gender'),
+      //   'options' => [
+      //     'male' => __('entities.heroes.genders.male'),
+      //     'female' => __('entities.heroes.genders.female')
+      //   ]
+      // ],
+      // [
+      //   'type' => 'attribute_range',
+      //   'field' => 'agility',
+      //   'label' => __('entities.heroes.attributes.agility'),
+      //   'options' => [
+      //     '1' => '1',
+      //     '2' => '2',
+      //     '3' => '3',
+      //     '4' => '4',
+      //     '5' => '5+'
+      //   ]
+      // ],
+      // [
+      //   'type' => 'attribute_range',
+      //   'field' => 'mental',
+      //   'label' => __('entities.heroes.attributes.mental'),
+      //   'options' => [
+      //     '1' => '1',
+      //     '2' => '2',
+      //     '3' => '3',
+      //     '4' => '4',
+      //     '5' => '5+'
+      //   ]
+      // ],
+      // [
+      //   'type' => 'attribute_range',
+      //   'field' => 'will',
+      //   'label' => __('entities.heroes.attributes.will'),
+      //   'options' => [
+      //     '1' => '1',
+      //     '2' => '2',
+      //     '3' => '3',
+      //     '4' => '4',
+      //     '5' => '5+'
+      //   ]
+      // ],
+      // [
+      //   'type' => 'attribute_range',
+      //   'field' => 'strength',
+      //   'label' => __('entities.heroes.attributes.strength'),
+      //   'options' => [
+      //     '1' => '1',
+      //     '2' => '2',
+      //     '3' => '3',
+      //     '4' => '4',
+      //     '5' => '5+'
+      //   ]
+      // ],
+      // [
+      //   'type' => 'attribute_range',
+      //   'field' => 'armor',
+      //   'label' => __('entities.heroes.attributes.armor'),
+      //   'options' => [
+      //     '1' => '1',
+      //     '2' => '2',
+      //     '3' => '3',
+      //     '4' => '4',
+      //     '5' => '5+'
+      //   ]
+      // ],
     ];
   }
   
@@ -318,24 +318,24 @@ class Hero extends Model implements LocalizedUrlRoutable
         'field' => 'faction.name',
         'label' => __('entities.factions.singular')
       ],
-      [
-        'field' => 'heroRace.name',
-        'label' => __('entities.hero_races.singular')
-      ],
+      // [
+      //   'field' => 'heroRace.name',
+      //   'label' => __('entities.hero_races.singular')
+      // ],
       [
         'field' => 'heroClass.name',
         'label' => __('entities.hero_classes.singular')
       ],
-      [
-        'field' => 'health',
-        'label' => __('entities.heroes.attributes.health'),
-        'custom_sort' => 'health'
-      ],
-      [
-        'field' => 'total_attributes',
-        'label' => __('entities.heroes.total_attributes'),
-        'custom_sort' => 'total_attributes'
-      ],
+      // [
+      //   'field' => 'health',
+      //   'label' => __('entities.heroes.attributes.health'),
+      //   'custom_sort' => 'health'
+      // ],
+      // [
+      //   'field' => 'total_attributes',
+      //   'label' => __('entities.heroes.total_attributes'),
+      //   'custom_sort' => 'total_attributes'
+      // ],
     ];
   }
 

@@ -36,24 +36,6 @@
     padding: $spacing-sm;
     justify-content: flex-start;
   }
-  
-  &__action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: $spacing-xs;
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-    border: none;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all $transition-fast;
-    text-decoration: none;
-    
-    &:hover {
-      color: var(--random-accent-color);
-    }
-  }
 }
 
 // Estilos para los botones en las páginas single

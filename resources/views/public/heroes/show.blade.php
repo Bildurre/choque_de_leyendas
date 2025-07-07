@@ -4,7 +4,7 @@
     <x-page-background :image="$hero->getImageUrl()" />
   @endif
 
-  {{-- Header Block --}}
+  {{-- Header Block con acciones --}}
   @php
     $titleTranslations = [];
     $subtitleTranslations = [];
@@ -20,11 +20,20 @@
       'subtitle' => $subtitleTranslations,
       'background_color' => 'none',
       'settings' => [
-        'text_alignment' => 'center'
+        'text_alignment' => 'justify'
       ]
     ]);
   @endphp
-  {!! $headerBlock->render() !!}
+
+  @component('content.blocks.header', ['block' => $headerBlock])
+    @slot('actions')
+      <x-pdf.add-button
+        data-entity-type="hero"
+        data-entity-id="{{ $hero->id }}"
+      >
+      </x-pdf.add-button>
+    @endslot
+  @endcomponent
 
   {{-- Hero Details Section --}}
   <section class="block hero-detail-block">
@@ -48,35 +57,37 @@
               <dd>
                 <a href="{{ route('public.factions.show', $hero->faction) }}" class="info-link">
                   {{ $hero->faction->name }}
+                  <x-icon name="link" size="xs" />
                 </a>
               </dd>
               
               <dt>{{ __('entities.hero_races.singular') }}</dt>
-              <dd>{{ $hero->getGenderizedRaceName() }}</dd>
+              <dd>
+                <a href="{{ route('public.heroes.index') . '?' . http_build_query(['hero_race_id' => [$hero->hero_race_id]]) }}" class="info-link">
+                  {{ $hero->getGenderizedRaceName() }}
+                  <x-icon name="link" size="xs" />
+                </a>
+              </dd>
               
               <dt>{{ __('entities.heroes.gender') }}</dt>
               <dd>{{ __('entities.heroes.genders.' . $hero->gender) }}</dd>
               
               <dt>{{ __('entities.hero_classes.singular') }}</dt>
-              <dd>{{ $hero->getGenderizedClassName() }}</dd>
+              <dd>
+                <a href="{{ route('public.heroes.index') . '?' . http_build_query(['hero_class_id' => [$hero->hero_class_id]]) }}" class="info-link">
+                  {{ $hero->getGenderizedClassName() }}
+                  <x-icon name="link" size="xs" />
+                </a>
+              </dd>
               
               <dt>{{ __('entities.hero_superclasses.singular') }}</dt>
-              <dd>{{ $hero->getGenderizedSuperclassName() }}</dd>
+              <dd>
+                <a href="{{ route('public.heroes.index') . '?' . http_build_query(['heroClass_hero_superclass_id' => [$hero->heroClass->hero_superclass_id]]) }}" class="info-link">
+                  {{ $hero->getGenderizedSuperclassName() }}
+                  <x-icon name="link" size="xs" />
+                </a>
+              </dd>
             </dl>
-          </div>
-
-          {{-- Print Collection Button --}}
-          <div class="info-block">
-            <x-button
-              type="button"
-              variant="primary"
-              icon="pdf-add"
-              data-collection-add
-              data-entity-type="card"
-              data-entity-id="{{ $card->id }}"
-            >
-              {{ __('public.add_to_collection') }}
-            </x-button>
           </div>
 
           {{-- Attributes Block --}}
@@ -85,87 +96,87 @@
             <div class="attributes-grid">
               <div class="attribute-item">
                 <x-icon-attribute type="agility" />
-                <span class="attribute-value">{{ $hero->agility }}</span>
                 <span class="attribute-label">{{ __('entities.heroes.attributes.agility') }}</span>
+                <span class="attribute-value">{{ $hero->agility }}</span>
               </div>
               <div class="attribute-item">
                 <x-icon-attribute type="mental" />
+                <span class="attribute-label">{{ __('entities.heroes.attributes.agility') }}</span>
                 <span class="attribute-value">{{ $hero->mental }}</span>
-                <span class="attribute-label">{{ __('entities.heroes.attributes.mental') }}</span>
               </div>
               <div class="attribute-item">
                 <x-icon-attribute type="will" />
-                <span class="attribute-value">{{ $hero->will }}</span>
                 <span class="attribute-label">{{ __('entities.heroes.attributes.will') }}</span>
+                <span class="attribute-value">{{ $hero->will }}</span>
               </div>
               <div class="attribute-item">
                 <x-icon-attribute type="strength" />
-                <span class="attribute-value">{{ $hero->strength }}</span>
                 <span class="attribute-label">{{ __('entities.heroes.attributes.strength') }}</span>
+                <span class="attribute-value">{{ $hero->strength }}</span>
               </div>
               <div class="attribute-item">
                 <x-icon-attribute type="armor" />
-                <span class="attribute-value">{{ $hero->armor }}</span>
                 <span class="attribute-label">{{ __('entities.heroes.attributes.armor') }}</span>
+                <span class="attribute-value">{{ $hero->armor }}</span>
               </div>
-              <div class="attribute-item attribute-item--total">
+              <div class="attribute-item">
                 <x-icon-attribute type="health" />
-                <span class="attribute-value">{{ $hero->health }}</span>
                 <span class="attribute-label">{{ __('entities.heroes.attributes.health') }}</span>
+                <span class="attribute-value">{{ $hero->health }}</span>
               </div>
             </div>
           </div>
+        </div>
 
-          {{-- Abilities Block --}}
-          <div class="info-block">
-            <h2 class="info-block__title">{{ __('public.heroes.abilities') }}</h2>
+        {{-- Abilities Block --}}
+        <div class="info-block info-block--abilities">
+          <h2 class="info-block__title">{{ __('public.heroes.abilities') }}</h2>
+          
+          {{-- Passive Abilities --}}
+          <div class="abilities-section">
+            <h3 class="abilities-section__subtitle">{{ __('public.heroes.passive_abilities') }}</h3>
             
-            {{-- Passive Abilities --}}
-            <div class="abilities-section">
-              <h3 class="abilities-section__subtitle">{{ __('public.heroes.passive_abilities') }}</h3>
-              
-              {{-- Class Passive --}}
-              <div class="ability-item ability-item--passive">
-                <h4 class="ability-name">{{ $hero->heroClass->name }}</h4>
-                <div class="ability-description">{!! $hero->heroClass->passive !!}</div>
-              </div>
-              
-              {{-- Hero Passive --}}
-              <div class="ability-item ability-item--passive">
-                <h4 class="ability-name">{{ $hero->passive_name }}</h4>
-                <div class="ability-description">{!! $hero->passive_description !!}</div>
-              </div>
+            {{-- Class Passive --}}
+            <div class="ability-item ability-item--passive">
+              <h4 class="ability-name">{{ $hero->heroClass->name }}</h4>
+              <div class="ability-description">{!! $hero->heroClass->passive !!}</div>
             </div>
             
-            {{-- Active Abilities --}}
-            @if($hero->heroAbilities->count() > 0)
-              <div class="abilities-section">
-                <h3 class="abilities-section__subtitle">{{ __('public.heroes.active_abilities') }}</h3>
-                
-                @foreach($hero->heroAbilities as $ability)
-                  <div class="ability-item ability-item--active">
-                    <div class="ability-header">
-                      <div class="ability-info">
-                        <h4 class="ability-name">{{ $ability->name }}</h4>
-                        <div class="ability-types">
-                          {{ $ability->attackRange->name }} - 
-                          {{ __('entities.attack_subtypes.types.' . $ability->attackSubtype->type) }} - 
-                          {{ $ability->attackSubtype->name }}
-                          @if($ability->area)
-                            - {{ __('entities.hero_abilities.area') }}
-                          @endif
-                        </div>
-                      </div>
-                      <div class="ability-cost">
-                        <x-cost-display :cost="$ability->cost" />
+            {{-- Hero Passive --}}
+            <div class="ability-item ability-item--passive">
+              <h4 class="ability-name">{{ $hero->passive_name }}</h4>
+              <div class="ability-description">{!! $hero->passive_description !!}</div>
+            </div>
+          </div>
+          
+          {{-- Active Abilities --}}
+          @if($hero->heroAbilities->count() > 0)
+            <div class="abilities-section">
+              <h3 class="abilities-section__subtitle">{{ __('public.heroes.active_abilities') }}</h3>
+              
+              @foreach($hero->heroAbilities as $ability)
+                <div class="ability-item ability-item--active">
+                  <div class="ability-header">
+                    <div class="ability-info">
+                      <h4 class="ability-name">{{ $ability->name }}</h4>
+                      <div class="ability-types">
+                        {{ $ability->attackRange->name }} - 
+                        {{ __('entities.attack_subtypes.types.' . $ability->attackSubtype->type) }} - 
+                        {{ $ability->attackSubtype->name }}
+                        @if($ability->area)
+                          - {{ __('entities.hero_abilities.area') }}
+                        @endif
                       </div>
                     </div>
-                    <div class="ability-description">{!! $ability->description !!}</div>
+                    <div class="ability-cost">
+                      <x-cost-display :cost="$ability->cost" />
+                    </div>
                   </div>
-                @endforeach
-              </div>
-            @endif
-          </div>
+                  <div class="ability-description">{!! $ability->description !!}</div>
+                </div>
+              @endforeach
+            </div>
+          @endif
         </div>
       </div>
     </div>

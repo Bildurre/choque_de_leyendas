@@ -51,7 +51,7 @@ return [
   // Héroes
   'heroes' => [
     'title' => 'Héroes',
-    'description' => 'Descubre todos los héroes de Alanda',
+    'description' => 'Descubre todos los héroes de Alanda: Choque de Leyendas',
     'no_heroes' => 'No hay héroes disponibles',
     'details' => 'Detalles',
     'lore' => 'Historia',
@@ -59,6 +59,8 @@ return [
     'stats' => 'Estadísticas',
     'passive_abilities' => 'Habilidades pasivas',
     'active_abilities' => 'Habilidades activas',
+    'basic_info' => 'Información del Héroe',
+    'attributes' => 'Atributos',
   ],
   
   // Cartas
