@@ -73,6 +73,14 @@
 @use 'components/pdf/pdf-item';
 @use 'components/pdf/pdf-add-button';
 
+// Entity Show
+@use 'components/entity-show/ability-card';
+@use 'components/entity-show/attribute-item';
+@use 'components/entity-show/effect-section';
+@use 'components/entity-show/info-block';
+@use 'components/entity-show/info-link';
+@use 'components/entity-show/info-list';
+
 // Pages
 @use 'pages/login';
 @use 'pages/hero-detail';

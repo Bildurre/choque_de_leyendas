@@ -104,13 +104,14 @@
       @endphp
       
       @if(count($options) > 0)
-        @if($filters['type'] === 'cost_exact')
+        @if(in_array($filters['type'], ['cost_exact', 'cost_colors']))
           <x-filters.cost-filter-select
             :name="$paramName"
             :label="$label"
             :options="$options"
             :selected="$selectedValues"
             :multiple="true"
+            :type="$filters['type']"
           />
         @else
           <x-filters.filters-select

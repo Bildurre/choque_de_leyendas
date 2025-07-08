@@ -72,5 +72,14 @@ return [
     'select_language' => 'Seleccionar idioma',
     'add_translation' => 'Añadir traducción',
     'remove_translation' => 'Eliminar traducción',
+    
+  ],// Choices.js
+  'choices' => [
+    'no_results' => 'No se encontraron resultados',
+    'no_choices' => 'No hay opciones para elegir',
+    'item_select' => '',
+    'placeholder' => 'Seleccione opciones...',
+    'search_placeholder' => 'Buscar...',
+    'remove_item' => 'Eliminar elemento',
   ],
 ];

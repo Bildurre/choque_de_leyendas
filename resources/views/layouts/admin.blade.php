@@ -19,6 +19,9 @@
     })();
   </script>
 
+  <!-- JavaScript Translations -->
+  <x-js-translations />
+
   <!-- Scripts and Styles -->
   @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>

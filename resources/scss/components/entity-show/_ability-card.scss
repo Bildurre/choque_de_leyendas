@@ -1,0 +1,78 @@
+@use '../../abstracts/all' as *;
+
+.ability-item {
+  padding: $spacing-md;
+  background-color: var(--color-bg-transparent-semi);
+  border-radius: $border-radius-sm;
+  
+  &:not(:last-child) {
+    margin-bottom: $spacing-md;
+  }
+  
+  &--passive {
+    border-left: 3px solid var(--random-accent-color-secondary);
+  }
+  
+  &--active {
+    border-left: 3px solid var(--random-accent-color-tertiary);
+  }
+  
+  .ability-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacing-md;
+    margin-bottom: $spacing-sm;
+    align-items: start;
+  }
+  
+  .ability-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+  
+  .ability-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+  
+  .ability-types {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+  
+  .ability-description {
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    
+    p {
+      margin: 0;
+      
+      &:not(:last-child) {
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+  
+  .ability-cost {
+    .cost-display {
+      gap: $spacing-xs;
+    }
+  }
+}
+
+.abilities-section {
+  &:not(:last-child) {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__subtitle {
+    font-size: 1.25rem;
+    margin-bottom: $spacing-md;
+    color: var(--color-text-primary);
+    font-family: 'almendra', serif;
+  }
+}

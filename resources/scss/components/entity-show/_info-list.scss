@@ -1,0 +1,18 @@
+@use '../../abstracts/all' as *;
+
+.info-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $spacing-sm $spacing-md;
+  margin: 0;
+  
+  dt {
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+  
+  dd {
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+}

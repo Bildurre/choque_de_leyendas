@@ -1,201 +1,202 @@
 <x-public-layout>
-  {{-- Page background image --}}
-  @if($card->hasImage())
-    <x-page-background :image="$card->getImageUrl()" />
-  @endif
+    {{-- Page background image --}}
+    @if($card->hasImage())
+        <x-page-background :image="$card->getImageUrl()" />
+    @endif
 
-  {{-- Header Block --}}
-  @php
-    $titleTranslations = [];
-    $subtitleTranslations = [];
-    
-    foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
-      $titleTranslations[$locale] = $card->getTranslation('name', $locale);
-      $subtitleTranslations[$locale] = $card->getTranslation('lore_text', $locale);
-    }
-    
-    $headerBlock = new \App\Models\Block([
-      'type' => 'header',
-      'title' => $titleTranslations,
-      'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
-      'settings' => [
-        'text_alignment' => 'center'
-      ]
-    ]);
-  @endphp
-  {!! $headerBlock->render() !!}
-
-  {{-- Print Collection Button --}}
-  <div class="info-block">
-    <x-pdf.add-button
-      data-entity-type="card"
-      data-entity-id="{{ $card->id }}"
-    </x-pdf.add-button>
-  </div>
-
-  {{-- Card Details Section --}}
-  <section class="block card-detail-block">
-    <div class="block__inner">
-      <div class="card-detail-content">
-        {{-- Preview Image --}}
-        <div class="card-detail__preview">
-          <x-previews.preview-image :entity="$card" type="card" />
-        </div>
+    {{-- Header Block con acciones --}}
+    @php
+        $titleTranslations = [];
+        $subtitleTranslations = [];
         
-        {{-- Card Info --}}
-        <div class="card-detail__info">
-          {{-- Basic Info Block --}}
-          <div class="info-block">
-            <h2 class="info-block__title">{{ __('public.cards.basic_info') }}</h2>
-            <dl class="info-list">
-              <dt>{{ __('entities.cards.name') }}</dt>
-              <dd>{{ $card->name }}</dd>
-              
-              <dt>{{ __('entities.factions.singular') }}</dt>
-              <dd>
-                <a href="{{ route('public.factions.show', $card->faction) }}" class="info-link">
-                  {{ $card->faction->name }}
-                </a>
-              </dd>
-              
-              <dt>{{ __('entities.card_types.singular') }}</dt>
-              <dd>{{ $card->cardType->name }}</dd>
-              
-              @if($card->cardType->id == 1 && $card->equipmentType) {{-- Equipment type --}}
-                <dt>{{ __('entities.equipment_types.singular') }}</dt>
-                <dd>{{ $card->equipmentType->name }}</dd>
-                
-                @if($card->equipmentType->category == 'weapon' && $card->hands)
-                  <dt>{{ __('entities.cards.hands_required') }}</dt>
-                  <dd>
-                    {{ $card->hands }} 
-                    {{ $card->hands > 1 ? __('entities.cards.hands') : __('entities.cards.hand') }}
-                  </dd>
-                @endif
-              @endif
-              
-              @if($card->cost)
-                <dt>{{ __('entities.cards.cost') }}</dt>
-                <dd>
-                  <x-cost-display :cost="$card->cost" />
-                </dd>
-              @endif
-            </dl>
-          </div>
+        foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
+            $titleTranslations[$locale] = $card->getTranslation('name', $locale);
+            $subtitleTranslations[$locale] = $card->getTranslation('lore_text', $locale);
+        }
+        
+        $headerBlock = new \App\Models\Block([
+            'type' => 'header',
+            'title' => $titleTranslations,
+            'subtitle' => $subtitleTranslations,
+            'background_color' => 'none',
+            'settings' => [
+                'text_alignment' => 'justify'
+            ]
+        ]);
+    @endphp
 
-          {{-- Attack Info Block --}}
-          @if($card->cardType->heroSuperclass || $card->attackRange || $card->attackSubtype)
-            <div class="info-block">
-              <h2 class="info-block__title">{{ __('public.cards.attack_info') }}</h2>
-              <dl class="info-list">
-                @if($card->cardType->heroSuperclass)
-                  <dt>{{ __('entities.hero_superclasses.singular') }}</dt>
-                  <dd>{{ $card->cardType->heroSuperclass->name }}</dd>
-                @endif
-                
-                @if($card->attackRange)
-                  <dt>{{ __('entities.attack_ranges.singular') }}</dt>
-                  <dd>{{ $card->attackRange->name }}</dd>
-                @endif
-                
-                @if($card->attackSubtype)
-                  <dt>{{ __('entities.attack_subtypes.attack_type') }}</dt>
-                  <dd>{{ __('entities.attack_subtypes.types.' . $card->attackSubtype->type) }}</dd>
-                  
-                  <dt>{{ __('entities.attack_subtypes.singular') }}</dt>
-                  <dd>{{ $card->attackSubtype->name }}</dd>
-                @endif
-                
-                @if($card->area)
-                  <dt>{{ __('entities.cards.area') }}</dt>
-                  <dd>{{ __('common.yes') }}</dd>
-                @endif
-              </dl>
-            </div>
-          @endif
+    @component('content.blocks.header', ['block' => $headerBlock])
+        @slot('actions')
+            <x-pdf.add-button
+                data-entity-type="card"
+                data-entity-id="{{ $card->id }}"
+            >
+            </x-pdf.add-button>
+        @endslot
+    @endcomponent
 
-          {{-- Effects Block --}}
-          @if($card->restriction || $card->effect || $card->heroAbility)
-            <div class="info-block">
-              <h2 class="info-block__title">{{ __('public.cards.effects') }}</h2>
-              
-              @if($card->restriction)
-                <div class="effect-section">
-                  <h3 class="effect-section__title">{{ __('entities.cards.restriction') }}</h3>
-                  <div class="effect-content">{!! $card->restriction !!}</div>
+    {{-- Card Details Section --}}
+    <section class="block card-detail-block">
+        <div class="block__inner">
+            <div class="card-detail-content">
+                {{-- Preview Image --}}
+                <div class="card-detail__preview">
+                    <x-previews.preview-image :entity="$card" type="card" />
                 </div>
-              @endif
-              
-              @if($card->effect)
-                <div class="effect-section">
-                  <h3 class="effect-section__title">{{ __('entities.cards.effect') }}</h3>
-                  <div class="effect-content">{!! $card->effect !!}</div>
+                
+                {{-- Card Info --}}
+                <div class="card-detail__info">
+                    {{-- Basic Info Block --}}
+                    <x-entity-show.info-block title="public.cards.basic_info">
+                        <x-entity-show.info-list>
+                            <x-entity-show.info-list-item label="entities.cards.name" :value="$card->name" />
+                            
+                            <x-entity-show.info-list-item label="entities.factions.singular">
+                                <x-entity-show.info-link :href="route('public.factions.show', $card->faction)">
+                                    {{ $card->faction->name }}
+                                </x-entity-show.info-link>
+                            </x-entity-show.info-list-item>
+                            
+                            <x-entity-show.info-list-item label="entities.card_types.singular">
+                                <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [$card->card_type_id]])">
+                                    {{ $card->cardType->name }}
+                                </x-entity-show.info-link>
+                            </x-entity-show.info-list-item>
+
+                            @if($card->cardType->heroSuperclass)
+                                <x-entity-show.info-list-item label="entities.hero_superclasses.singular">
+                                    <x-entity-show.info-link :href="route('public.heroes.index') . '?' . http_build_query(['heroClass_hero_superclass_id' => [$card->cardType->hero_superclass_id]])">
+                                        {{ $card->cardType->heroSuperclass->name }}
+                                    </x-entity-show.info-link>
+                                </x-entity-show.info-list-item>
+                            @endif
+                            
+                            @if($card->cardType->id == 1 && $card->equipmentType) {{-- Equipment type --}}
+                                <x-entity-show.info-list-item label="entities.equipment_types.singular">
+                                    <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [1], 'equipment_type_id' => [$card->equipment_type_id]])">
+                                        {{ $card->equipmentType->name }}
+                                    </x-entity-show.info-link>
+                                </x-entity-show.info-list-item>
+                                
+                                @if($card->equipmentType->category == 'weapon' && $card->hands)
+                                    <x-entity-show.info-list-item label="entities.cards.hands_required">
+                                        {{ $card->hands }} 
+                                        {{ $card->hands > 1 ? __('entities.cards.hands') : __('entities.cards.hand') }}
+                                    </x-entity-show.info-list-item>
+                                @endif
+                            @endif
+                            
+                            @if($card->cost)
+                                <x-entity-show.info-list-item label="entities.cards.cost">
+                                    <x-cost-display :cost="$card->cost" />
+                                </x-entity-show.info-list-item>
+                            @endif
+                        </x-entity-show.info-list>
+                    </x-entity-show.info-block>
+
+                    {{-- Attack Info Block --}}
+                    @if($card->attackRange || $card->attackSubtype)
+                        <x-entity-show.info-block title="public.cards.attack_info">
+                            <x-entity-show.info-list>
+                                @if($card->attackRange)
+                                    <x-entity-show.info-list-item label="entities.attack_ranges.singular">
+                                        <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attack_range_id' => [$card->attack_range_id]])">
+                                            {{ $card->attackRange->name }}
+                                        </x-entity-show.info-link>
+                                    </x-entity-show.info-list-item>
+                                @endif
+                                
+                                @if($card->attackSubtype)
+                                    <x-entity-show.info-list-item label="entities.attack_subtypes.type">
+                                        <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attackSubtype_type' => $card->attackSubtype->type])">
+                                            {{ __('entities.attack_subtypes.types.' . $card->attackSubtype->type) }}
+                                        </x-entity-show.info-link>
+                                    </x-entity-show.info-list-item>
+                                    
+                                    <x-entity-show.info-list-item label="entities.attack_subtypes.singular">
+                                        <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attack_subtype_id' => [$card->attack_subtype_id]])">
+                                            {{ $card->attackSubtype->name }}
+                                        </x-entity-show.info-link>
+                                    </x-entity-show.info-list-item>
+                                @endif
+                                
+                                @if($card->area)
+                                    <x-entity-show.info-list-item label="entities.cards.area">
+                                        <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'area' => 1])">
+                                            {{ __('common.yes') }}
+                                        </x-entity-show.info-link>
+                                    </x-entity-show.info-list-item>
+                                @endif
+                            </x-entity-show.info-list>
+                        </x-entity-show.info-block>
+                    @endif
+
+                    {{-- Effects Block --}}
+                    @if($card->restriction || $card->effect || $card->heroAbility)
+                        <x-entity-show.info-block title="public.cards.effects">
+                            @if($card->restriction)
+                                <x-entity-show.effect-section>
+                                    {!! $card->restriction !!}
+                                </x-entity-show.effect-section>
+                            @endif
+                            
+                            @if($card->effect)
+                                <x-entity-show.effect-section>
+                                    {!! $card->effect !!}
+                                </x-entity-show.effect-section>
+                            @endif
+                            
+                            @if($card->heroAbility)
+                                <x-entity-show.effect-section :title="__('entities.hero_abilities.singular')">
+                                    <x-entity-show.ability-card
+                                        variant="active"
+                                        :name="$card->heroAbility->name"
+                                        :description="$card->heroAbility->description"
+                                        :cost="$card->heroAbility->cost"
+                                        :attack-range="$card->heroAbility->attackRange"
+                                        :attack-subtype="$card->heroAbility->attackSubtype"
+                                        :area="$card->heroAbility->area"
+                                    />
+                                </x-entity-show.effect-section>
+                            @endif
+                        </x-entity-show.info-block>
+                    @endif
                 </div>
-              @endif
-              
-              @if($card->heroAbility)
-                <div class="effect-section">
-                  <h3 class="effect-section__title">{{ __('entities.hero_abilities.singular') }}</h3>
-                  <div class="ability-item ability-item--active">
-                    <div class="ability-header">
-                      <div class="ability-info">
-                        <h4 class="ability-name">{{ $card->heroAbility->name }}</h4>
-                        <div class="ability-types">
-                          {{ $card->heroAbility->attackRange->name }} - 
-                          {{ __('entities.attack_subtypes.types.' . $card->heroAbility->attackSubtype->type) }} - 
-                          {{ $card->heroAbility->attackSubtype->name }}
-                          @if($card->heroAbility->area)
-                            - {{ __('entities.hero_abilities.area') }}
-                          @endif
-                        </div>
-                      </div>
-                      <div class="ability-cost">
-                        <x-cost-display :cost="$card->heroAbility->cost" />
-                      </div>
-                    </div>
-                    <div class="ability-description">{!! $card->heroAbility->description !!}</div>
-                  </div>
-                </div>
-              @endif
             </div>
-          @endif
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  {{-- Related Cards Block --}}
-  @php
-    $relatedCardsBlock = new \App\Models\Block([
-      'type' => 'relateds',
-      'title' => ['es' => 'Otras Cartas', 'en' => 'Other Cards'],
-      'subtitle' => ['es' => 'Descubre más cartas del juego', 'en' => 'Discover more game cards'],
-      'background_color' => 'none',
-      'settings' => [
-        'model_type' => 'card',
-        'display_type' => 'random',
-        'button_text' => __('public.view_all_cards'),
-        'text_alignment' => 'left'
-      ]
-    ]);
-  @endphp
-  {!! $relatedCardsBlock->render() !!}
+    {{-- Related Cards Block --}}
+    @php
+        $relatedCardsBlock = new \App\Models\Block([
+            'type' => 'relateds',
+            'title' => ['es' => 'Otras Cartas', 'en' => 'Other Cards'],
+            'subtitle' => ['es' => 'Descubre más cartas del juego', 'en' => 'Discover more game cards'],
+            'background_color' => 'none',
+            'settings' => [
+                'model_type' => 'card',
+                'display_type' => 'random',
+                'button_text' => __('public.view_all_cards'),
+                'text_alignment' => 'left'
+            ]
+        ]);
+    @endphp
+    {!! $relatedCardsBlock->render() !!}
 
-  {{-- Related Heroes Block --}}
-  @php
-    $relatedHeroesBlock = new \App\Models\Block([
-      'type' => 'relateds',
-      'title' => ['es' => 'Héroes Relacionados', 'en' => 'Related Heroes'],
-      'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
-      'background_color' => 'none',
-      'settings' => [
-        'model_type' => 'hero',
-        'display_type' => 'random',
-        'button_text' => __('public.view_all_heroes'),
-        'text_alignment' => 'left'
-      ]
-    ]);
-  @endphp
-  {!! $relatedHeroesBlock->render() !!}
+    {{-- Related Heroes Block --}}
+    @php
+        $relatedHeroesBlock = new \App\Models\Block([
+            'type' => 'relateds',
+            'title' => ['es' => 'Héroes Relacionados', 'en' => 'Related Heroes'],
+            'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
+            'background_color' => 'none',
+            'settings' => [
+                'model_type' => 'hero',
+                'display_type' => 'random',
+                'button_text' => __('public.view_all_heroes'),
+                'text_alignment' => 'left'
+            ]
+        ]);
+    @endphp
+    {!! $relatedHeroesBlock->render() !!}
 </x-public-layout>

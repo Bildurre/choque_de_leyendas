@@ -1,0 +1,35 @@
+@use '../../abstracts/all' as *;
+
+.attribute-item {
+  display: grid;
+  grid-template-columns: 1.5rem 3.75rem auto;
+  align-items: center;
+  gap: $spacing-xs;
+  
+  .icon-attribute {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: black;
+  }
+  
+  .attribute-value {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  .attribute-label {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+  }
+}
+
+.attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-sm;
+
+  @container (max-width: 18rem) {
+    grid-template-columns: 1fr;
+  }
+}

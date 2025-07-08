@@ -72,6 +72,9 @@ return [
     'lore' => 'Historia',
     'effect' => 'Efecto',
     'restriction' => 'Restricción',
+    'basic_info' => 'Detalles de la Carta',
+    'attack_info' => 'Detalles del Ataque',
+    'effects' => 'Efectos',
   ],
   
   // Botones de "Ver todos"

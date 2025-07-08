@@ -59,7 +59,7 @@ return [
     'stats' => 'Statistics',
     'passive_abilities' => 'Passive abilities',
     'active_abilities' => 'Active abilities',
-    'basic_info' => 'Hero Information',
+    'basic_info' => 'Hero Details',
     'attributes' => 'Attributes',
   ],
   
@@ -72,6 +72,9 @@ return [
     'lore' => 'Lore',
     'effect' => 'Effect',
     'restriction' => 'Restriction',
+    'basic_info' => 'Card Details',
+    'attack_info' => 'Atack Details',
+    'effects' => 'Effects',
   ],
   
   // "View all" buttons

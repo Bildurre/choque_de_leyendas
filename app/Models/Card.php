@@ -148,9 +148,9 @@ class Card extends Model implements LocalizedUrlRoutable
         'field' => 'cost_colors',
         'label' => __('common.cost_contains'),
         'options' => [
-          'R' => __('common.cost_colors.red'),
-          'G' => __('common.cost_colors.green'),
-          'B' => __('common.cost_colors.blue')
+          'R' => 'R',
+          'G' => 'G',
+          'B' => 'B'
         ]
       ],
       [
@@ -255,9 +255,9 @@ class Card extends Model implements LocalizedUrlRoutable
         'field' => 'cost_colors',
         'label' => __('common.cost_contains'),
         'options' => [
-          'R' => __('common.cost_colors.red'),
-          'G' => __('common.cost_colors.green'),
-          'B' => __('common.cost_colors.blue')
+          'R' => 'R',
+          'G' => 'G',
+          'B' => 'B'
         ]
       ],
       [

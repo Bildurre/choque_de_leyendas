@@ -4,7 +4,8 @@
   'options' => [],
   'selected' => [],
   'placeholder' => null,
-  'multiple' => true
+  'multiple' => true,
+  'type' => 'cost_exact' // 'cost_exact' or 'cost_colors'
 ])
 
 @php
@@ -22,6 +23,7 @@
     {{ $multiple ? 'multiple' : '' }}
     data-choices
     data-cost-filter="true"
+    data-cost-filter-type="{{ $type }}"
   >
     @if($placeholder && !$multiple)
       <option value="">{{ $placeholder }}</option>

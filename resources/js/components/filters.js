@@ -8,10 +8,10 @@ export default function initAdminFilters() {
   filterSelects.forEach(select => {
     const choices = new Choices(select, {
       removeItemButton: true,
-      itemSelectText: '',
-      noResultsText: 'No se encontraron resultados',
-      noChoicesText: 'No hay opciones para elegir',
-      placeholderValue: select.getAttribute('placeholder') || 'Seleccione opciones...',
+      itemSelectText: window.translations?.forms?.choices?.itemSelect || '',
+      noResultsText: window.translations?.forms?.choices?.noResults || 'No results found',
+      noChoicesText: window.translations?.forms?.choices?.noChoices || 'No choices to choose from',
+      placeholderValue: select.getAttribute('placeholder') || window.translations?.forms?.choices?.placeholder || 'Select options...',
       renderChoiceLimit: -1,
       shouldSort: false, // Mantener el orden original
     });

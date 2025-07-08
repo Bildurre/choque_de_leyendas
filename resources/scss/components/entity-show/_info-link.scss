@@ -1,0 +1,19 @@
+@use '../../abstracts/all' as *;
+
+.info-link {
+  color: var(--random-accent-color);
+  text-decoration: none;
+  transition: color $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  
+  &:hover {
+    color: var(--random-accent-color-hover);
+    text-decoration: underline;
+  }
+  
+  .icon {
+    flex-shrink: 0;
+  }
+}

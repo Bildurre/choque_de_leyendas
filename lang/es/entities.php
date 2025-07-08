@@ -83,6 +83,7 @@ return [
     'area' => 'Área',
     'is_area_attack' => 'Es ataque de área',
     'hands' => 'Manos',
+    'hands_required' => 'Manos Requeridas',
     'hand' => 'mano',
     'hands_count' => '{1} mano|[2,*] manos',
     'one_hand' => '1 mano',
