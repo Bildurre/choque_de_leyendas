@@ -195,15 +195,15 @@ class Card extends Model implements LocalizedUrlRoutable
         'option_label' => 'name',
         'option_value' => 'id'
       ],
-      [
-        'type' => 'nested_relation',
-        'field' => 'cardType.hero_superclass_id',
-        'through' => ['cardType', 'heroSuperclass'],
-        'label' => __('entities.hero_superclasses.singular'),
-        'option_model' => \App\Models\HeroSuperclass::class,
-        'option_label' => 'name',
-        'option_value' => 'id'
-      ],
+      // [
+      //   'type' => 'nested_relation',
+      //   'field' => 'cardType.hero_superclass_id',
+      //   'through' => ['cardType', 'heroSuperclass'],
+      //   'label' => __('entities.hero_superclasses.singular'),
+      //   'option_model' => \App\Models\HeroSuperclass::class,
+      //   'option_label' => 'name',
+      //   'option_value' => 'id'
+      // ],
       [
         'type' => 'relation',
         'field' => 'equipment_type_id',
@@ -227,6 +227,15 @@ class Card extends Model implements LocalizedUrlRoutable
         'label' => __('entities.attack_subtypes.singular'),
         'option_label' => 'name',
         'option_value' => 'id'
+      ],
+      [
+        'type' => 'enum',
+        'field' => 'area',
+        'label' => __('entities.cards.area'),
+        'options' => [
+          '1' => __('common.yes'),
+          '0' => __('common.no')
+        ]
       ],
       [
         'type' => 'cost_range',
@@ -256,15 +265,6 @@ class Card extends Model implements LocalizedUrlRoutable
         'field' => 'cost_exact',
         'label' => __('common.cost_exact'),
         'options' => $this->getPredefinedCostOptions()
-      ],
-      [
-        'type' => 'enum',
-        'field' => 'area',
-        'label' => __('entities.cards.area'),
-        'options' => [
-          '1' => __('common.yes'),
-          '0' => __('common.no')
-        ]
       ],
     ];
   }
@@ -331,11 +331,11 @@ class Card extends Model implements LocalizedUrlRoutable
         'label' => __('common.total_cost'),
         'custom_sort' => 'cost_total'
       ],
-      [
-        'field' => 'cost_order',
-        'label' => __('common.cost_order'),
-        'custom_sort' => 'cost_order'
-      ],
+      // [
+      //   'field' => 'cost_order',
+      //   'label' => __('common.cost_order'),
+      //   'custom_sort' => 'cost_order'
+      // ],
     ];
   }
 

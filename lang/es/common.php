@@ -76,6 +76,14 @@ return [
   
   // Atributos del juego
   'cost' => 'Coste',
+  'total_cost' => 'Coste Total',
+  'cost_contains' => 'El Coste Contiene',
+  'cost_exact' => 'Coste Exacto',
+  'cost_colors' => [
+    'blue' => 'Azul',
+    'green' => ' Verde',
+    'red' => 'Rojo'
+  ],
   'attack' => 'Ataque',
   'defense' => 'Defensa',
   'health' => 'Vida',

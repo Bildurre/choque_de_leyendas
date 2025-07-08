@@ -76,6 +76,14 @@ return [
   
   // Game attributes
   'cost' => 'Cost',
+  'total_cost' => 'Total Cost',
+  'cost_contains' => 'Cost Contains',
+  'cost_exact' => 'Exact Cost',
+  'cost_colors' => [
+    'blue' => 'Blue',
+    'green' => ' Green',
+    'red' => 'Red'
+  ],
   'attack' => 'Attack',
   'defense' => 'Defense',
   'health' => 'Health',

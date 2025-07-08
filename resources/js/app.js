@@ -12,7 +12,7 @@ import initWysiwygEditor from './components/wysiwyg-editor';
 import initReorderableLists from './components/reorderable-list';
 import initCollapsibleSections from './components/collapsible-section';
 import initAccordions from './components/accordion';
-import initConditionalFields from './components/conditional-fields';
+import initConditionalField from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguageTabs();
   initWysiwygEditor();
   initReorderableLists();
-  initConditionalFields();
   initImageUpload();
   initAttributeConfigForm(); 
   initCostInput();
@@ -49,6 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     initAccordions();
   }, 0);
+
+  // Inicializar campos condicionales
+
+  initConditionalField('parent_id', 'order-field-container');
+
+  initConditionalField('card_type_id-filter', 'equipment_type_id-filter', '1');
+  initConditionalField('card_type_id-filter', ['attack_range_id-filter', 'attack_subtype_id-filter', 'area-filter'], ['4', '5', '6', '7']);
   
   // Inicializar componentes específicos si existen en la página
   const header = document.querySelector('.public-header');
