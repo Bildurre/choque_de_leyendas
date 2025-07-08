@@ -21,6 +21,7 @@
     class="filter-select__input"
     {{ $multiple ? 'multiple' : '' }}
     data-choices
+    data-cost-filter="true"
   >
     @if($placeholder && !$multiple)
       <option value="">{{ $placeholder }}</option>
@@ -30,11 +31,6 @@
       <option 
         value="{{ $value }}" 
         {{ in_array($value, $selectedValues) ? 'selected' : '' }}
-        @if(!empty($value))
-          data-custom-properties='{
-            "html": "<span class=\"cost-option\">{{ $value }}</span>"
-          }'
-        @endif
       >
         @if(empty($value))
           {{ $label }}

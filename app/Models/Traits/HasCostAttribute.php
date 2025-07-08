@@ -188,33 +188,39 @@ trait HasCostAttribute
   
   /**
    * Get predefined cost options for filtering
+   * Ordered by: Red > Green > Blue, then by cost amount (1, 2, 3)
    * 
    * @return array
    */
   public function getPredefinedCostOptions(): array
   {
-    // Lista de costes comunes predefinidos
+    // Lista de costes ordenados según las reglas:
+    // 1. Rojo antes que verde antes que azul
+    // 2. Primero coste 1, luego coste 2, luego coste 3
     $costs = [
       '',       // Sin coste
+      // Coste 1
       'R',      // Un dado rojo
       'G',      // Un dado verde
       'B',      // Un dado azul
+      // Coste 2
       'RR',     // Dos dados rojos
-      'GG',     // Dos dados verdes
-      'BB',     // Dos dados azules
       'RG',     // Un dado rojo y un dado verde
       'RB',     // Un dado rojo y un dado azul
+      'GG',     // Dos dados verdes
       'GB',     // Un dado verde y un dado azul
+      'BB',     // Dos dados azules
+      // Coste 3
       'RRR',    // Tres dados rojos
-      'GGG',    // Tres dados verdes
-      'BBB',    // Tres dados azules
       'RRG',    // Dos dados rojos y un dado verde
       'RRB',    // Dos dados rojos y un dado azul
       'RGG',    // Un dado rojo y dos dados verdes
+      'RGB',    // Un dado de cada color
       'RBB',    // Un dado rojo y dos dados azules
+      'GGG',    // Tres dados verdes
       'GGB',    // Dos dados verdes y un dado azul
       'GBB',    // Un dado verde y dos dados azules
-      'RGB'     // Un dado de cada color
+      'BBB',    // Tres dados azules
     ];
     
     $options = [];
