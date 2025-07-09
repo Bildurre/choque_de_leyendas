@@ -1,0 +1,24 @@
+[
+  {
+    "title": {"en": "How to Play", "es": "Como Jugar"},
+    "description": {"en": "<p>Page to access the game rules</p>", "es": "<p>Página para acceder a las reglas del juego</p>"},
+    "is_published": true,
+    "is_printable": true,
+    "meta_title": {"en": "How to Play", "es": "Como Jugar"},
+    "meta_description": {"en": "Learn to play Alanda: Clash of Legends", "es": "Aprende a jugar a Alanda: Choque de Leyendas"},
+    "parent_id": null,
+    "template": "default",
+    "order": 0
+  },
+  {
+    "title": {"en": "The Rules", "es": "Las Reglas"},
+    "description": {"en": "<p>Learn the basic rules of the game</p>", "es": "<p>Aprende las reglas básicas del juego</p>"},
+    "is_published": true,
+    "is_printable": true,
+    "meta_title": {"en": "Rules", "es": "Reglas"},
+    "meta_description": {"en": "Learn to play Alanda: Clash of Legends", "es": "Aprende a jugar a Alanda: Choque de Leyendas"},
+    "parent_reference": 0,
+    "template": "default",
+    "order": 0
+  }
+]

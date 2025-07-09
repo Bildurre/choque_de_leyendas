@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
       HeroesSeeder::class,
       HeroHeroAbilitiesSeeder::class,
       CardsSeeder::class,
-      CountersSeeder::class
+      CountersSeeder::class,
+      PagesWithBlocksSeeder::class,
     ]);
   }
 }

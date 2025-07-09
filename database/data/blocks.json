@@ -1,0 +1,134 @@
+[
+  {
+    "page_reference": 0,
+    "type": "header",
+    "title": {"en": "How to Play", "es": "Cómo Jugar"},
+    "subtitle": {"en": "<p>Everything you need to master the game: complete rules, component guide and reference material. Your path to victory starts here.</p>", "es": "<p>Todo lo que necesitas para dominar el juego: reglas completas, guía de componentes y material de referencia. Tu camino hacia la victoria empieza aquí.</p>"},
+    "content": null,
+    "order": 0,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"text_alignment": "justify"}
+  },
+  {
+    "page_reference": 0,
+    "type": "cta",
+    "title": {"en": "The Rules", "es": "Las Reglas"},
+    "subtitle": {"es": null},
+    "content": {"en": {"text": "<p>Rules are the foundation of every great strategy. Discover the game flow, learn the turn phases, master the available actions and understand the victory conditions. Know the combat fundamentals, the resource system and the essential mechanics. Your mastery begins here. Study the rules!</p>", "button_link": "/en/the-rules", "button_text": "Go to The Rules"}, "es": {"text": "<p>Las reglas son la base de toda gran estrategia. Descubre el flujo del juego, aprende las fases del turno, domina las acciones disponibles y comprende las condiciones de victoria. Conoce los fundamentos del combate, el sistema de recursos y las mecánicas esenciales. Tu maestría comienza aquí. ¡Estudia las reglas!</p>", "button_link": "/es/las-reglas", "button_text": "Ir a las Reglas"}},
+    "order": 1,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"button_size": "lg", "button_variant": "secondary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "3-2"}
+  },
+  {
+    "page_reference": 0,
+    "type": "cta",
+    "title": {"en": "The Components", "es": "Los Componentes"},
+    "subtitle": null,
+    "content": {"en": {"text": "<p>Understand every game element. Learn to read hero cards with their stats and abilities. Discover the different types of action cards and their characteristics. Understand the symbols, icons and information on each component. Master the game's visual language. Know the components!</p>", "button_link": "/en/how-to-play/componentes", "button_text": "View Components"}, "es": {"text": "<p>Comprende cada elemento del juego. Aprende a leer las cartas de héroe con sus estadísticas y habilidades. Descubre los diferentes tipos de cartas de acción y sus características. Entiende los símbolos, iconos y la información de cada componente. Domina el lenguaje visual del juego. ¡Conoce los componentes!</p>", "button_link": "/es/como-jugar/componentes", "button_text": "Ver Componentes"}},
+    "order": 2,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"button_size": "lg", "button_variant": "secondary", "image_position": "left", "text_alignment": "right", "image_scale_mode": "cover", "column_proportions": "2-3"}
+  },
+  {
+    "page_reference": 0,
+    "type": "cta",
+    "title": {"en": "The Appendices", "es": "Los Anexos"},
+    "subtitle": null,
+    "content": {"en": {"text": "<p>Access the essential game tools. Quickly check the effects of each counter, review action and phase summaries, find reference tables and play aids. Everything you need for smooth games without doubts. Indispensable support material. Explore the appendices!</p>", "button_link": "/en/how-to-play/appendices", "button_text": "Go to the Appendices"}, "es": {"text": "<p>Accede a las herramientas esenciales del juego. Consulta rápidamente los efectos de cada contador, revisa los resúmenes de acciones y fases, encuentra las tablas de referencia y las ayudas de juego. Todo lo que necesitas para partidas fluidas y sin dudas. Material de apoyo imprescindible. ¡Explora los anexos!</p>", "button_link": "/es/como-jugar/anexos", "button_text": "Ir a los Anexos"}},
+    "order": 3,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"button_size": "lg", "button_variant": "secondary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "3-2"}
+  },
+  {
+    "page_reference": 1,
+    "type": "header",
+    "title": {"en": "The Rules", "es": "Las Reglas"},
+    "subtitle": {"en": "<p>From setup to victory. Discover how a game unfolds, turn by turn, action by action.</p>", "es": "<p>Desde la preparación hasta la victoria. Descubre cómo se desarrolla una partida, turno a turno, acción por acción.</p>"},
+    "content": null,
+    "order": 0,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"text_alignment": "justify"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"en": "Introduction", "es": "Introducción"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>Welcome to the rules of <strong>Alanda: Clash of Legends</strong>. A game is structured in two main blocks: <strong>Setup</strong>, where you'll build your initial strategy, and <strong>Battle Rounds</strong>, where the fate of the confrontation will be decided. Each block has its own phases with crucial decisions. Discover step by step how to prepare and develop an epic game.</p>\r\n<p>The rules presented in this section correspond to the Standard game format, which constitutes the fundamental basis of the game. Although these rules generally apply to all game modes, some specific formats may introduce particular variations or exceptions. To learn about the modifications specific to each format, please refer to the section dedicated to each one.</p>", "es": "<p>Bienvenido a las reglas de <strong>Alanda: Choque de Leyendas</strong>. Una partida se estructura en dos grandes bloques: la <strong>Preparación</strong>, donde construirás tu estrategia inicial, y las <strong>Rondas de Batalla</strong>, donde se decidirá el destino del enfrentamiento. Cada bloque tiene sus propias fases con decisiones cruciales. Descubre paso a paso cómo preparar y desarrollar una partida épica.</p>\r\n<p>Las reglas presentadas en esta sección corresponden al formato de juego Estándar, que constituye la base fundamental del juego. Aunque estas reglas se aplican de manera general en todas las modalidades, algunos formatos específicos pueden introducir variaciones o excepciones particulares. Para conocer las modificaciones propias de cada formato, consulta la sección dedicada a cada uno de ellos.</p>"},
+    "order": 1,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"en": "Preparation", "es": "Preparación"},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Faction Selection, Heroes, and Action Deck Building</h3>\r\n<p>Before starting to play, each player must select a faction. Selecting this faction will restrict the action cards available for building the action deck and the selection of heroes: the available action cards and heroes will be those belonging to said faction and, also, the action cards and heroes from the Mercenaries faction (which will always be available to combine with all factions).</p>\r\n<p>Once the faction selection is made, each player selects 5 heroes to form their hero list. The only restriction for selecting them is their faction restriction (all must belong to the same faction or to the Mercenaries faction).</p>\r\n<p>Likewise, action cards must also be selected to form an action deck of at least 30 cards. In addition to respecting the faction limitation when selecting these action cards, it must also be taken into account that for each action card there can only be a maximum of 2 identical copies in each action deck.</p>\r\n<p>The selection of action cards and heroes must be done privately, without players having knowledge of their rivals' choices.</p>", "es": "<h3 id=\"selection\">Selección de Facción,  Héroes y construcción del Mazo de Acción</h3>\r\n<p>Antes de empezar a jugar, cada jugador ha de seleccionar una facción. La selección de esta facción restringirá las cartas de acción disponibles para la construcción del mazo de acción y la selección de héroes: las cartas de acción y héroes disponibles serán los que pertenezcan a dicha facción y, también, las cartas de acción y héroes de la facción Mercenarios (que siempre estarán disponibles para combinar con todas las facciones).</p>\r\n<p>Una vez hecha la selección de facción, cada jugador selecciona 5 héroes para que formen su lista de héroes. La única restricción para seleccionarlos es la restricción de facción de los mismos (todos han de pertenecer a la misma facción o a la facción Mercenarios).</p>\r\n<p>Así mismo, también habrá que seleccionar las cartas de acción para formar un mazo de acción de, al menos, 30 cartas. Además de respetar la limitación de facción a la hora de seleccionar estas cartas de acción, también hay que tener en cuenta que por cada carta de acción solo puede haber un máximo de 2 copias iguales en cada mazo de acción.</p>\r\n<p>La selección de las cartas de acción y de héroes hay que hacerla en privado, sin que los jugadores tengan conocimiento de las elecciones de sus rivales.</p>"},
+    "order": 2,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Hero Draft</h3>\r\n<p>Although each player starts with a selection of 5 heroes, <strong>Alanda: Clash of Legends</strong> matches are played in 3 versus 3 skirmishes.</p>\r\n<p>In this phase, each player reveals the 5 heroes from their hero list to their rival. Once the rival has been able to read and check each of them, each player hides the 5 heroes again. Without the rival knowing which ones they are, privately, each player chooses 3 of their heroes to compete in the skirmish and discards the other two.</p>", "es": "<h3>Draft de Héroes</h3>\r\n<p>Aunque cada jugador empieza con una selección de 5 héroes, las partidas de <strong>Alanda: Choque de Leyendas</strong> se hacen en escaramuzas de 3 contra 3.</p>\r\n<p>En esta fase, cada jugador revela los 5 héroes de su lista de héroes a su rival. Una vez que el rival ha podido leer y comprobar cada uno de ellos, cada jugador vuelve a ocultar a los 5 héroes. Sin que el rival sepa cuáles son, de forma privada, cada jugador elige 3 de sus héroes para que disputen la escaramuza y descarta los otros dos.</p>"},
+    "order": 3,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Initial Hand Draw</h3>\r\n<p> </p>\r\n<p>Both players shuffle their action deck and draw the first 5 action cards to form their initial hand.</p>\r\n<p>Each player may now discard any number of action cards from their hand and draw as many as they have discarded. This discard and draw of action cards can only be done once and all action cards that are to be replaced must be discarded before drawing the new cards.</p>\r\n<p>Each player will form with the discarded action cards a pile visible to both players where they will place, face up, visible and in order, the action cards they use or discard. We will call this pile the graveyard. Any player may look at, at any time, the action cards in their graveyard or their rival's graveyard.</p>\r\n<p>Although you start with an initial hand of 5 action cards, the maximum number of action cards you can have in your hand is 7. At the end of each singular combat you will have to discard as many action cards as necessary to meet this condition.</p>", "es": "<h3 id=\"hand\">Robo de Mano Inicial</h3>\r\n<p>Ambos jugadores barajan su mazo de acción y roban las 5 primeras cartas de acción para formar su mano inicial.</p>\r\n<p>Cada jugador puede descartar ahora cualquier número de cartas de acción de su mano y robar tantas como haya descartado. Solo se puede hacer este descarte y robo de cartas de acción una única vez y todas las cartas de acción que se quieran reemplazar han de descartarse antes de robar las cartas nuevas.</p>\r\n<p>Cada jugador formará con las cartas de acción descartadas una pila visible para ambos jugadores donde irá colocando, boca arriba, visibles y en orden, las cartas de acción que vaya usando o descartando. Llamaremos a esta pila cementerio. Cualquier jugador puede mirar, en cualquier momento, las cartas de acción de su cementerio o del cementerio del rival.</p>\r\n<p>Aunque se empieza con una mano inicial de 5 cartas de acción, la cantidad máxima de cartas de acción que se puede tener en la mano es de 7. Al final de cada combate singular habrá que descartar tantas cartas de acción como sea necesario para cumplir esta condición.</p>"},
+    "order": 4,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"en": "Battle Rounds", "es": "Rondas de Batalla"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>Once all preparations are made, with the heroes who will compete in the skirmish selected and the initial hand prepared, it is time to play the skirmish.</p>\r\n<p><strong>Alanda: Clash of Legends</strong> represents a small skirmish between champions. This skirmish is divided into battle rounds and these rounds, in turn, into singular combats. Let's see how each of these phases is divided and completed.</p>", "es": "<p>Una vez hechos todos los preparativos, con los héroes que van a disputar la escaramuza seleccionados y la mano inicial preparada, es hora de jugar la escaramuza.</p>\r\n<p><strong>Alanda: Choque de Leyendas</strong> representa una pequeña escaramuza entre campeones. Esta escaramuza se divide en rondas de batalla y estas rondas, a su vez, en combates singulares. Veamos cómo se dividen y completan cada una de estas fases.</p>"},
+    "order": 5,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Determine Attacker and Defender</h3>\r\n<p>At the beginning of the first battle round, players will randomly determine who is the attacking player and who is the defending player (for example, by each rolling a die and seeing who gets a higher number). The winner of the draw may decide to be the attacker or the defender.</p>\r\n<p>Starting from the second battle round, this will not be determined randomly, but will alternate: the player who was the attacking player in the previous round will now be the defending player and the player who was the defending player will now be the attacking player.</p>", "es": "<h3>Determinar Atacante y Defensor</h3>\r\n<p>Al inicio de la primera ronda de batalla, los jugadores determinarán de forma aleatoria quién es el jugador atacante y quién el jugador defensor (por ejemplo, tirando un dado cada uno y viendo quién saca un número mayor). El ganador del sorteo podrá decidir ser el atacante o el defensor.</p>\r\n<p>A partir de la segunda ronda de batalla esto no se determinará de forma aleatoria, sino que se irá alternando: el jugador que la ronda anterior fue el jugador atacante ahora será el jugador defensor y el jugador que fue el jugador defensor ahora será el jugador atacante.</p>"},
+    "order": 6,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Pairings</h3>\r\n<p>After determining initiative, players will pair each of their heroes with a rival hero to fight in singular combats. To make the pairings, the following sequence must be followed:</p>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-decimal space-y-1.5 pl-7\">\r\n<li>If it is the first battle round, both players reveal the 3 heroes they have selected in the draft step.</li>\r\n<li>The attacking player pairs one of their heroes with one of the defending player's to determine the first singular combat.</li>\r\n<li>Now the defending player pairs one of their heroes with one of the attacking player's to determine the second singular combat.</li>\r\n<li>The third singular combat is determined by the remaining heroes.</li>\r\n</ol>\r\n<p>The paired heroes are placed face to face and each pairing is placed following the previous one, in the center of the play area.</p>\r\n<p>The hero with which another hero is paired is called the paired hero.</p>\r\n<p>Heroes immediately adjacent to a pairing are called adjacent heroes (adjacent rivals or adjacent allies). Thus, the heroes adjacent to the heroes of the first pairing are the heroes of the second pairing, the heroes adjacent to the heroes of the second pairing are the heroes of the first and third pairing, and the heroes adjacent to the heroes of the third pairing are the heroes of the second pairing.</p>\r\n<p>Pairings that have not yet been played (not counting the current pairing) are called subsequent pairings and those that have already been played are called previous pairings.</p>", "es": "<h3>Emparejamientos</h3>\r\n<p>Tras determinar la iniciativa, los jugadores emparejarán a cada uno de sus héroes con un héroe rival para que luchen en combates singulares. Para hacer los emparejamientos hay que seguir la siguiente secuencia:</p>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-decimal space-y-1.5 pl-7\">\r\n<li>Si es la primera ronda de batalla, ambos jugadores revelan los 3 héroes que han seleccionado en el paso de draft.</li>\r\n<li>El jugador atacante empareja uno de sus héroes con otro del jugador defensor para determinar el primer combate singular.</li>\r\n<li>Ahora el jugador defensor empareja uno de sus héroes con otro del jugador atacante para determinar el segundo combate singular.</li>\r\n<li>El tercer combate singular queda determinado por los héroes restantes.</li>\r\n</ol>\r\n<p>Los héroes emparejados se colocan frente a frente y cada emparejamiento se coloca seguido del anterior, en el centro de la zona de juego.</p>\r\n<p>Al héroe con el que otro héroe está emparejado se le llama héroe emparejado.</p>\r\n<p>A los héroes inmediatamente adyacentes a un emparejamiento se les llama héroes adyacentes (rivales adyacentes o aliados adyacentes). Así, los héroes adyacentes a los héroes del primer emparejamiento son los héroes del segundo emparejamiento, los héroes adyacentes a los héroes del segundo emparejamiento son los héroes del primer y tercer emparejamiento y los héroes adyacentes a los héroes del tercer emparejamiento son los héroes del segundo emparejamiento.</p>\r\n<p>A los emparejamientos que aún no se han jugado (sin contar el emparejamiento actual) se les llama emparejamientos posteriores y a los que ya se han jugado emparejamientos anteriores.</p>"},
+    "order": 7,
+    "is_printable": true,
+    "background_color": "none",
+    "settings": {"image_position": "clearfix-left", "text_alignment": "left", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  }
+]
