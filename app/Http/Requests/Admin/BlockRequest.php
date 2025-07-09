@@ -55,6 +55,13 @@ class BlockRequest extends FormRequest
       'settings' => ['nullable', 'array'],
     ];
     
+    // Add multilingual image rules
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
+    foreach ($locales as $locale) {
+      $rules["image_{$locale}"] = ['nullable', 'image', 'max:2048'];
+      $rules["remove_image_{$locale}"] = ['nullable', 'string'];
+    }
+    
     // Only require type on creation
     if ($this->isMethod('POST')) {
       $rules['type'] = ['required', 'string'];

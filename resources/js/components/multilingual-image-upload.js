@@ -90,10 +90,13 @@ export default function initMultilingualImageUpload() {
         
         // Make the entire dropzone clickable
         dropzone.addEventListener('click', (e) => {
-          // Don't trigger if clicking on remove button
-          if (e.target.closest('.image-upload__remove-btn')) {
+          // Don't trigger if clicking on remove button or the input itself
+          if (e.target.closest('.image-upload__remove-btn') || e.target === input) {
             return;
           }
+          
+          // Prevent event from bubbling to avoid double triggers
+          e.stopPropagation();
           
           if (input) {
             input.click();
