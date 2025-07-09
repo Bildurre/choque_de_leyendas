@@ -50,7 +50,7 @@ class BlockRequest extends FormRequest
     $rules = [
       'is_printable' => ['nullable', 'boolean'],
       'background_color' => ['nullable', 'string'],
-      'image' => ['nullable', 'image', 'max:2048'],
+      'image' => ['nullable', 'array'],
       'remove_image' => ['nullable', 'boolean'],
       'settings' => ['nullable', 'array'],
     ];

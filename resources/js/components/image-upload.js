@@ -1,4 +1,3 @@
-// resources/js/components/image-upload.js
 export default function initImageUpload() {
   // Seleccionar todos los componentes de carga de imagen
   const imageUploads = document.querySelectorAll('.image-upload');

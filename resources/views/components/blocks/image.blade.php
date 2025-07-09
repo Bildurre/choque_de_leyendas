@@ -1,9 +1,9 @@
 @props(['block'])
 
-@if($block->image)
+@if($block->hasMultilingualImage())
   <div class="block__image" {{ $attributes }}>
     <img 
-      src="{{ $block->getImageUrl() }}" 
+      src="{{ $block->getMultilingualImageUrl() }}" 
       alt="{{ $block->title ?: 'Block image' }}"
       loading="lazy"
     >

@@ -7,7 +7,7 @@
   {{-- Titles always go first, outside the wrapper --}}
   <x-blocks.titles :block="$block" />
   
-  @if($block->image)
+  @if($block->hasMultilingualImage())
     @if($isClearfix)
       {{-- Clearfix layout: image floats, text wraps --}}
       <x-blocks.content-wrapper :block="$block">

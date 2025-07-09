@@ -14,6 +14,7 @@ import initCollapsibleSections from './components/collapsible-section';
 import initAccordions from './components/accordion';
 import initConditionalField from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
+import initMultilingualImageUpload from './components/multilingual-image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
 import initColorPicker from './components/color-picker';
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWysiwygEditor();
   initReorderableLists();
   initImageUpload();
+  initMultilingualImageUpload();
   initAttributeConfigForm(); 
   initCostInput();
   initColorPicker();

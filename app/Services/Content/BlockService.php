@@ -51,12 +51,11 @@ class BlockService
       $block->settings = $data['settings'];
     }
     
-    // Handle image upload using HasImageAttribute trait
-    if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-      $block->storeImage($data['image']);
-    }
-    
+    // Save the block first to get an ID (needed for image storage)
     $block->save();
+    
+    // Handle multilingual image uploads
+    $this->handleMultilingualImageUploads($block, $data);
     
     return $block;
   }
@@ -96,12 +95,8 @@ class BlockService
       $block->settings = $data['settings'];
     }
     
-    // Handle image updates using HasImageAttribute trait
-    if (isset($data['remove_image']) && $data['remove_image']) {
-      $block->deleteImage();
-    } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
-      $block->storeImage($data['image']);
-    }
+    // Handle multilingual image uploads and removals
+    $this->handleMultilingualImageUploads($block, $data);
     
     $block->save();
     
@@ -113,11 +108,8 @@ class BlockService
    */
   public function delete(Block $block): bool
   {
-    // Delete any associated images using HasImageAttribute trait
-    if ($block->hasImage()) {
-      $block->deleteImage();
-    }
-    
+    // The HasMultilingualImageAttribute trait will automatically delete all images
+    // when the model is deleted through the bootHasMultilingualImageAttribute method
     return $block->delete();
   }
 
@@ -175,5 +167,25 @@ class BlockService
     }
     
     return $data;
+  }
+  
+  /**
+   * Handle multilingual image uploads and removals
+   */
+  protected function handleMultilingualImageUploads(Block $block, array $data): void
+  {
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
+    
+    foreach ($locales as $locale) {
+      // Check for image removal
+      if (isset($data["remove_image_{$locale}"]) && $data["remove_image_{$locale}"]) {
+        $block->deleteMultilingualImage($locale);
+      }
+      
+      // Check for image upload
+      if (isset($data["image_{$locale}"]) && $data["image_{$locale}"] instanceof UploadedFile) {
+        $block->storeMultilingualImage($data["image_{$locale}"], $locale);
+      }
+    }
   }
 }

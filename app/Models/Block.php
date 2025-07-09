@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasImageAttribute;
+use App\Models\Traits\HasMultilingualImageAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Block extends Model
 {
-  use HasFactory, HasTranslations, HasImageAttribute;
+  use HasFactory, HasTranslations, HasMultilingualImageAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -32,6 +32,7 @@ class Block extends Model
    */
   protected $casts = [
     'settings' => 'array',
+    'image' => 'array',
     'order' => 'integer',
     'is_printable' => 'boolean',
   ];
@@ -71,11 +72,11 @@ class Block extends Model
   }
 
   /**
-   * Get the field name for storing images for this model
+   * Get the field name for storing multilingual images for this model
    * 
    * @return string
    */
-  public function getImageField(): string
+  public function getMultilingualImageField(): string
   {
     return 'image';
   }

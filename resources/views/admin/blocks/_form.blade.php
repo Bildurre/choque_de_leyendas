@@ -119,12 +119,11 @@
           :help="__('pages.blocks.printable_help')"
         />
         
-        @if((isset($blockConfig) && $blockConfig['allows_image']) || (isset($block) && $block->image))
-          <x-form.image-upload
+        @if((isset($blockConfig) && $blockConfig['allows_image']) || (isset($block) && $block->hasMultilingualImage()))
+          <x-form.multilingual-image-upload
             name="image"
             :label="__('pages.blocks.image')"
-            :current-image="isset($block) && $block->image ? $block->getImageUrl() : null"
-            :remove-name="'remove_image'"
+            :current-images="isset($block) ? $block->image : []"
           />
 
          @php

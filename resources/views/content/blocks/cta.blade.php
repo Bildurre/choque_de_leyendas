@@ -10,7 +10,7 @@
   <div class="cta-block">
     <div class="cta-block__card">
       <x-blocks.content-wrapper :block="$block">
-        @if($block->image && in_array($imagePosition, ['top', 'left']))
+        @if($block->hasMultilingualImage() && in_array($imagePosition, ['top', 'left']))
           <x-blocks.image :block="$block" />
         @endif
         
@@ -34,7 +34,7 @@
           @endif
         </div>
         
-        @if($block->image && in_array($imagePosition, ['bottom', 'right']))
+        @if($block->hasMultilingualImage() && in_array($imagePosition, ['bottom', 'right']))
           <x-blocks.image :block="$block" />
         @endif
       </x-blocks.content-wrapper>

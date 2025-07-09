@@ -1,7 +1,7 @@
 @props(['block'])
 
 @php
-  $hasImage = $block->image ? true : false;
+  $hasImage = $block->hasMultilingualImage();
   $imagePosition = $block->settings['image_position'] ?? 'top';
   $contentWrapperClass = 'block__content-wrapper';
   
