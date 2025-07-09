@@ -75,7 +75,7 @@ class BlockService
     $data = $this->processTranslatableFields($data, $this->translatableFields);
     
     // Apply translations
-    $this->applyTranslations($block, $data, $this->translatableFields);
+    $this->applyTranslations($block, $data, $this->translatableFields, true);
     
     // Update non-translatable fields
     if (isset($data['order'])) {

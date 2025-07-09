@@ -1,12 +1,12 @@
 <x-admin-layout>
-  <x-admin.page-header :title="__('blocks.edit', ['type' => __('blocks.types.' . $block->type)])">
+  <x-admin.page-header :title="__('pages.blocks.edit', ['type' => __('pages.blocks.types.' . $block->type)])">
     <x-slot:actions>
       <x-button-link 
         :href="route('admin.pages.edit', $page)" 
         icon="arrow-left" 
         variant="secondary"
       >
-        {{ __('blocks.back_to_page') }}
+        {{ __('pages.blocks.back_to_page') }}
       </x-button-link>
     </x-slot:actions>
   </x-admin.page-header>

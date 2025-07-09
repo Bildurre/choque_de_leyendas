@@ -91,12 +91,12 @@
       <div>
         <x-form.select
             name="settings[text_alignment]"
-            :label="__('pages.blocks.text_alignment')"
+            :label="__('pages.blocks.settings.text_alignment')"
             :options="[
-              'left' => __('pages.blocks.text_alignment_options.left'),
-              'right' => __('pages.blocks.text_alignment_options.right'),
-              'center' => __('pages.blocks.text_alignment_options.center'),
-              'justify' => __('pages.blocks.text_alignment_options.justify'),
+              'justify' => __('pages.blocks.settings.text_alignment_options.justify'),
+              'left' => __('pages.blocks.settings.text_alignment_options.left'),
+              'right' => __('pages.blocks.settings.text_alignment_options.right'),
+              'center' => __('pages.blocks.settings.text_alignment_options.center'),
             ]"
             :selected="old('settings.text_alignment', 
               isset($block) && isset($block->settings['text_alignment']) 
@@ -192,7 +192,7 @@
             @if($setting['type'] === 'boolean')
               <x-form.checkbox
                 name="settings[{{ $settingKey }}]"
-                :label="__('blocks.settings.' . $settingKey)"
+                :label="__('pages.blocks.settings.' . $settingKey)"
                 :checked="old('settings.' . $settingKey, 
                   isset($block) && isset($block->settings[$settingKey]) 
                     ? $block->settings[$settingKey] 
@@ -202,9 +202,9 @@
             @elseif($setting['type'] === 'select')
               <x-form.select
                 name="settings[{{ $settingKey }}]"
-                :label="__('blocks.settings.' . $settingKey)"
+                :label="__('pages.blocks.settings.' . $settingKey)"
                 :options="collect($setting['options'])->mapWithKeys(function($option, $key) use ($settingKey) {
-                  return [$key => __('blocks.settings.' . $settingKey . '_options.' . $key)];
+                  return [$key => __('pages.blocks.settings.' . $settingKey . '_options.' . $key)];
                 })->toArray()"
                 :selected="old('settings.' . $settingKey, 
                   isset($block) && isset($block->settings[$settingKey]) 
@@ -216,7 +216,7 @@
               <x-form.input
                 type="text"
                 name="settings[{{ $settingKey }}]"
-                :label="__('blocks.settings.' . $settingKey)"
+                :label="__('pages.blocks.settings.' . $settingKey)"
                 :value="old('settings.' . $settingKey, 
                   isset($block) && isset($block->settings[$settingKey]) 
                     ? $block->settings[$settingKey] 

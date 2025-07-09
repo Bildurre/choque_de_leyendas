@@ -75,66 +75,8 @@
             @endif
           </x-slot:badges>
           
-          <div class="hero-details">            
-            {{-- <div class="hero-details__content">
-              <div class="hero-details__attributes">
-                <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.agility') }}:</span>
-                  <span class="hero-attribute__value">{{ $hero->agility }}</span>
-                </div>
-                <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.mental') }}:</span>
-                  <span class="hero-attribute__value">{{ $hero->mental }}</span>
-                </div>
-                <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.will') }}:</span>
-                  <span class="hero-attribute__value">{{ $hero->will }}</span>
-                </div>
-                <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.strength') }}:</span>
-                  <span class="hero-attribute__value">{{ $hero->strength }}</span>
-                </div>
-                <div class="hero-attribute">
-                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.armor') }}:</span>
-                  <span class="hero-attribute__value">{{ $hero->armor }}</span>
-                </div>
-                <div class="hero-attribute hero-attribute--total">
-                  <span class="hero-attribute__label">{{ __('entities.heroes.attributes.health') }}:</span>
-                  <span class="hero-attribute__value">{{ $hero->health }}</span>
-                </div>
-              </div>
-              
-              @if($hero->heroAbilities->count() > 0)
-                <div class="hero-details__abilities">
-                  <h4 class="hero-details__section-title">{{ __('entities.hero_abilities.plural') }}:</h4>
-                  <ul class="hero-abilities-list">
-                    @foreach($hero->heroAbilities as $ability)
-                      <li class="hero-abilities-list__item">
-                        <span class="hero-abilities-list__name">{{ $ability->name }}</span>
-                        @if($ability->cost)
-                          <span class="hero-abilities-list__cost">
-                            <x-cost-display :cost="$ability->cost" />
-                          </span>
-                        @endif
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              @endif
-              
-              @if($hero->passive_name)
-                <div class="hero-details__passive">
-                  <h4 class="hero-details__section-title">{{ __('entities.heroes.passive') }}:</h4>
-                  <div class="hero-details__passive-name">{{ $hero->passive_name }}</div>
-                  @if($hero->passive_description)
-                    <div class="hero-details__passive-description">
-                      {{ strip_tags($hero->passive_description) }}
-                    </div>
-                  @endif
-                </div>
-              @endif
-            </div> --}}
-            <x-previews.hero :hero="$hero" />
+          <div class="hero-details">
+            <x-previews.preview-image :entity="$hero" type="hero"/>
           </div>
         </x-entity.list-card>
       @endforeach

@@ -53,7 +53,7 @@ trait HandlesTranslations
    * @param array $translatableFields List of translatable fields
    * @return void
    */
-  protected function applyTranslations($model, array $data, array $translatableFields): void
+  protected function applyTranslations($model, array $data, array $translatableFields, bool $allowEmpty = false): void
   {
     $availableLocales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
@@ -66,14 +66,20 @@ trait HandlesTranslations
       // Handle array of translations
       if (is_array($data[$field])) {
         foreach ($availableLocales as $locale) {
-          if (isset($data[$field][$locale]) && !empty($data[$field][$locale])) {
-            $model->setTranslation($field, $locale, $data[$field][$locale]);
+          if (array_key_exists($locale, $data[$field])) {
+            // Update if value is not empty OR if we allow empty values
+            if (!empty($data[$field][$locale]) || $allowEmpty) {
+              $model->setTranslation($field, $locale, $data[$field][$locale]);
+            }
           }
         }
       } 
       // Handle plain string (assign to current locale)
-      else if (is_string($data[$field]) && !empty($data[$field])) {
-        $model->setTranslation($field, app()->getLocale(), $data[$field]);
+      else if (is_string($data[$field])) {
+        // Update if value is not empty OR if we allow empty values
+        if (!empty($data[$field]) || $allowEmpty) {
+          $model->setTranslation($field, app()->getLocale(), $data[$field]);
+        }
       }
     }
   }

@@ -79,20 +79,19 @@ $color-bg-dark-transparent-semi: rgba($color-bg-dark-primary, $opacity-semi);
 $color-bg-dark-transparent-hard: rgba($color-bg-dark-primary, $opacity-hard);
 
 // Light Background Colors
-$color-bg-light-primary: #E8E8E8;
-$color-bg-light-secondary: #DADADA;
-$color-bg-light-tertiary: #CCCCCC;
+$color-bg-light-primary: #FAFAF9;
+$color-bg-light-secondary: #EFEEEC;
+$color-bg-light-tertiary: #E3E1DD;
 $color-bg-light-transparent-light: rgba($color-bg-light-primary, $opacity-light);
 $color-bg-light-transparent-semi: rgba($color-bg-light-primary, $opacity-semi);
 $color-bg-light-transparent-hard: rgba($color-bg-light-primary, $opacity-hard);
 
 // Text Colors
-$color-text-light: #dddddd;
-$color-text-light-dim: #ababab;
-$color-text-muted: #929292;
-$color-text-dark: #272727;
-$color-text-dark-dim: #4a4a4a;
-
+$color-text-light: #fafafa;
+$color-text-light-dim: #d0d0d0;
+$color-text-muted: #808080;
+$color-text-dark: #0a0a0a;
+$color-text-dark-dim: #2a2a2a; 
 // Theme variables
 :root {
   // Random accent color (inicializado en azul)

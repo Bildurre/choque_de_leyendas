@@ -17,6 +17,8 @@ return [
   'published' => 'Published',
   'draft' => 'Draft',
   'deleted_at' => 'Deleted on :date',
+  'update' => 'Update',
+  'create' => 'Create',
   
   // Generic messages
   'back_to_list' => 'Back to list',

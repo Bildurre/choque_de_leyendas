@@ -64,9 +64,9 @@ class BlockController extends Controller
       $this->blockService->create($data);
       
       return redirect()->route('admin.pages.edit', $page)
-        ->with('success', __('blocks.created_successfully'));
+        ->with('success', __('pages.blocks.created_successfully'));
     } catch (\Exception $e) {
-      return back()->with('error', __('blocks.create_error', ['message' => $e->getMessage()]))
+      return back()->with('error', __('pages.blocks.create_error', ['message' => $e->getMessage()]))
         ->withInput();
     }
   }

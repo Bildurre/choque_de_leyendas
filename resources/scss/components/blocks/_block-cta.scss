@@ -7,7 +7,7 @@
   }
   
   .cta-block__card {
-    background-color: var(--color-bg-transparent-light);
+    background-color: var(--color-bg-transparent-semi);
     border: 1px solid var(--color-card-border);
     border-radius: $border-radius-lg;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -22,14 +22,32 @@
   }
   .block__content {
     padding: $spacing-lg;
+      order: 2;
+
+      @include responsive(tablet) {
+        order: 0;
+      }
     
-    // @include responsive(tablet) {
-    //   padding: $spacing-xxl;
-    // }
+    .block__title {
+      text-align: center;
+
+      @include responsive(tablet) {
+        text-align: inherit;
+      }
+    }
+
+    .block__text {
+      text-align: justify;
+    }
   }
   
   .cta-block__action {
     margin-top: $spacing-xl;
+    text-align: center;
+
+    @include responsive(tablet) {
+      text-align: inherit;
+    }
   }
 }
 

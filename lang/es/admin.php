@@ -17,6 +17,8 @@ return [
   'published' => 'Publicado',
   'draft' => 'Borrador',
   'deleted_at' => 'Eliminado el :date',
+  'update' => 'Actualizar',
+  'create' => 'Crear',
   
   // Mensajes genéricos
   'back_to_list' => 'Volver al listado',

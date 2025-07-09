@@ -26,7 +26,7 @@ return [
     'relateds' => [
       'name' => 'Related Items Block',
       'view' => 'content.blocks.relateds',
-      'icon' => 'layers',
+      'icon' => 'dashboard',
       'allows_image' => false,
       'settings' => [
         'model_type' => [
@@ -55,7 +55,7 @@ return [
     'cta' => [
       'name' => 'CTA Block',
       'view' => 'content.blocks.cta',
-      'icon' => 'megaphone',
+      'icon' => 'link',
       'allows_image' => true,
       'settings' => [
         'button_variant' => [

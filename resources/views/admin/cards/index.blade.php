@@ -94,19 +94,7 @@
           </x-slot:badges>
           
           <div class="card-details">
-            {{-- <div class="card-details__content">
-              @if($card->restriction)
-                <div class="card-details__section">
-                  <h4 class="card-details__label">{{ __('entities.cards.restriction') }}:</h4>
-                  <div class="card-details__text">{{ strip_tags($card->restriction) }}</div>
-                </div>
-              @endif
-
-              <div class="card-details__section">
-                <div class="card-details__text">{{ strip_tags($card->effect) }}</div>
-              </div>
-            </div> --}}
-            <x-previews.card :card="$card" />
+            <x-previews.preview-image :entity="$card" type="card"/>
           </div>
         </x-entity.list-card>
       @endforeach

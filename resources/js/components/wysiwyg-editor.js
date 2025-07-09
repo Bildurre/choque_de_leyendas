@@ -43,8 +43,8 @@ export default function initWysiwygEditor() {
       height: 300,
       menubar: false,
       // Plugins y configuración existente
-      plugins: ['autolink', 'lists', 'link', 'visualblocks', 'code'],
-      toolbar: 'bold italic underline | bullist numlist outdent indent | link dice_image | removeformat code',
+      plugins: ['autolink', 'lists', 'link', 'visualblocks', 'code', 'heading'],
+      toolbar: 'bold italic underline | h2 h3 h4 h5 | bullist numlist outdent indent | link dice_image | removeformat code',
       
       // Importante: asegurar la sincronización automática con el textarea
       auto_focus: editor.id,
