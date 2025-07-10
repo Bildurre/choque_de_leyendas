@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Alanda - Choque de Leyendas') }}</title>
-  <meta name="description" content="@yield('meta_description', 'Explora el mundo de Alanda - Choque de Leyendas, todas las cartas, heroes y facciones del juego')">
+  {{-- Dynamic title --}}
+  <title>{{ $title ?? config('app.name', 'Alanda - Choque de Leyendas') }}</title>
+  
+  {{-- Dynamic meta description --}}
+  <meta name="description" content="{{ $metaDescription ?? 'Explora el mundo de Alanda - Choque de Leyendas. Descubre todas las cartas, héroes y facciones del juego de cartas estratégico.' }}">
+  
+  {{-- Open Graph tags for social media --}}
+  <meta property="og:title" content="{{ $ogTitle ?? $title ?? config('app.name') }}">
+  <meta property="og:description" content="{{ $ogDescription ?? $metaDescription ?? 'Explora el mundo de Alanda - Choque de Leyendas' }}">
+  <meta property="og:type" content="{{ $ogType ?? 'website' }}">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:image" content="{{ $ogImage ?? asset('images/og-default.jpg') }}">
+  
+  {{-- Additional meta tags --}}
+  {{ $metaTags ?? '' }}
 
   <!-- Theme Script (debe ir antes de los estilos) -->
   <script>

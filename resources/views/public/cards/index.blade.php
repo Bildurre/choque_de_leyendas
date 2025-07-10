@@ -1,4 +1,7 @@
-<x-public-layout>
+<x-public-layout
+  :title="__('entities.cards.index_page_title')"
+  :metaDescription="__('entities.cards.index_page_description')"
+>
   {{-- Header Block --}}
   @php
     $titleTranslations = [];

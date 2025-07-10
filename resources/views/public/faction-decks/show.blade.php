@@ -1,4 +1,13 @@
-<x-public-layout>
+<x-public-layout
+:title="__('entities.faction_decks.page_title', ['name' => $factionDeck->name])"
+  :metaDescription="__('entities.faction_decks.page_description', [
+    'name' => $factionDeck->name,
+    'faction' => $factionDeck->faction->name,
+    'description' => Str::limit(strip_tags($factionDeck->gameMode->name), 100)
+  ])"
+  ogType="article"
+  :ogImage="$factionDeck->faction->getImageUrl() ?? $factionDeck->faction->getImageUrl()"
+>
   {{-- Page background with deck icon or faction icon --}}
   @if($factionDeck->hasImage())
     <x-page-background :image="$factionDeck->getImageUrl()" />

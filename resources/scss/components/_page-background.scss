@@ -12,6 +12,7 @@
   z-index: -1;
   opacity: .1;
   filter: grayscale(60%);
+  background-position: center;
   
   transition: opacity $transition-medium ease;
   [data-theme="dark"] & {

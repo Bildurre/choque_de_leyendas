@@ -1,6 +1,10 @@
 <?php
 
 return [
+    // Meta
+    'downloads_page_title' => 'Descargas - Alanda: Choque de Leyendas',
+    'downloads_page_description' => 'Descarga PDFs oficiales de Alanda. Accede a las reglas del juego, hojas de referencia, mazos predeterminados y toda la documentación necesaria para jugar.',
+
     // Títulos y nombres
     'plural' => 'PDFs',
     'singular' => 'PDF',

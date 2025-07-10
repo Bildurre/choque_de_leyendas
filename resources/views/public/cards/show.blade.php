@@ -1,4 +1,14 @@
-<x-public-layout>
+<x-public-layout
+  :title="__('entities.cards.page_title', ['name' => $card->name])"
+  :metaDescription="__('entities.cards.page_description', [
+    'name' => $card->name,
+    'faction' => $card->faction->name,
+    'type' => $card->cardType->name,
+    'description' => Str::limit(strip_tags($card->lore_text), 80)
+  ])"
+  ogType="article"
+  :ogImage="$card->getImageUrl()"
+>
     {{-- Page background image --}}
     @if($card->hasImage())
         <x-page-background :image="$card->getImageUrl()" />

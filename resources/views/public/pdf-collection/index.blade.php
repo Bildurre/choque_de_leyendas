@@ -1,4 +1,8 @@
-<x-public-layout>
+<x-public-layout
+  :title="__('pdf.downloads_page_title')"
+  :metaDescription="__('pdf.downloads_page_description')"
+  ogType="website"
+>
   {{-- Header Block --}}
   @php
     $titleTranslations = [];

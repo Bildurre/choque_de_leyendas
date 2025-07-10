@@ -1,4 +1,13 @@
-<x-public-layout>
+<x-public-layout
+  :title="__('entities.heroes.page_title', ['name' => $hero->name])"
+  :metaDescription="__('entities.heroes.page_description', [
+    'name' => $hero->name, 
+    'faction' => $hero->faction->name,
+    'description' => Str::limit(strip_tags($hero->lore_text), 100)
+  ])"
+  ogType="article"
+  :ogImage="$hero->getImageUrl()"
+>
     {{-- Page background image --}}
     @if($hero->hasImage())
         <x-page-background :image="$hero->getImageUrl()" />

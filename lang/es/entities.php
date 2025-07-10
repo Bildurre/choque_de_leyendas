@@ -3,6 +3,10 @@
 return [
   // Facciones
   'factions' => [
+    'index_page_title' => 'Facciones de Alanda - Todos los bandos',
+    'index_page_description' => 'Descubre todas las facciones de Alanda: Choque de Leyendas. Conoce sus historias, estrategias únicas y encuentra tu bando favorito.',
+    'page_title' => ':name - Facción | Alanda',
+    'page_description' => 'Facción :name de Alanda. :description',
     'singular' => 'Facción',
     'plural' => 'Facciones',
     'create' => 'Crear facción',
@@ -30,6 +34,10 @@ return [
   
   // Héroes
   'heroes' => [
+    'index_page_title' => 'Héroes de Alanda - Todos los personajes jugables',
+    'index_page_description' => 'Explora todos los héroes de Alanda: Choque de Leyendas. Descubre sus habilidades únicas, atributos y encuentra el héroe perfecto para tu estrategia.',
+    'page_title' => ':name - Héroe | Alanda',
+    'page_description' => ':name - :faction. :description',
     'singular' => 'Héroe',
     'plural' => 'Héroes',
     'create' => 'Crear héroe',
@@ -67,6 +75,10 @@ return [
   
   // Cartas
   'cards' => [
+    'index_page_title' => 'Cartas de Alanda - Biblioteca completa',
+    'index_page_description' => 'Explora todas las cartas de Alanda: Choque de Leyendas. Busca por facción, tipo, coste y encuentra las cartas perfectas para tu estrategia.',
+    'page_title' => ':name - Carta | Alanda',
+    'page_description' => ':name - Carta de :type de :faction. :description',
     'singular' => 'Carta',
     'plural' => 'Cartas',
     'create' => 'Crear carta',
@@ -237,6 +249,8 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
+    'page_title' => ':name - Mazo predeterminado | Alanda',
+    'page_description' => 'Mazo :name de la facción :faction. :description',
     'singular' => 'Mazo de facción',
     'plural' => 'Mazos de facción',
     'create' => 'Crear mazo',

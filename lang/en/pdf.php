@@ -1,6 +1,10 @@
 <?php
 
 return [
+    // Meta
+    'downloads_page_title' => 'Downloads - Alanda: Clash of Legends',
+    'downloads_page_description' => 'Download official Alanda PDFs. Access game rules, reference sheets, preset decks and all the documentation needed to play.',
+
     // Titles and names
     'plural' => 'PDFs',
     'singular' => 'PDF',

@@ -3,6 +3,10 @@
 return [
   // Factions
   'factions' => [
+    'index_page_title' => 'Alanda Factions - All factions',
+    'index_page_description' => 'Discover all factions in Alanda: Clash of Legends. Learn their stories, unique strategies and find your favorite faction.',
+    'page_title' => ':name - Faction | Alanda',
+    'page_description' => ':name faction in Alanda. :description',
     'singular' => 'Faction',
     'plural' => 'Factions',
     'create' => 'Create faction',
@@ -30,6 +34,10 @@ return [
   
   // Heroes
   'heroes' => [
+    'index_page_title' => 'Alanda Heroes - All playable characters',
+    'index_page_description' => 'Explore all heroes from Alanda: Clash of Legends. Discover their unique abilities, attributes and find the perfect hero for your strategy.',
+    'page_title' => ':name - Hero | Alanda',
+    'page_description' => ':name - :faction. :description',
     'singular' => 'Hero',
     'plural' => 'Heroes',
     'create' => 'Create hero',
@@ -67,6 +75,10 @@ return [
   
   // Cards
   'cards' => [
+    'index_page_title' => 'Alanda Cards - Complete library',
+    'index_page_description' => 'Explore all cards from Alanda: Clash of Legends. Search by faction, type, cost and find the perfect cards for your strategy.',
+    'page_title' => ':name - Card | Alanda',
+    'page_description' => ':name - :type card from :faction. :description',
     'singular' => 'Card',
     'plural' => 'Cards',
     'create' => 'Create card',
@@ -237,6 +249,8 @@ return [
   
   // Faction decks
   'faction_decks' => [
+    'page_title' => ':name - Preset deck | Alanda',
+    'page_description' => ':name deck from :faction faction. :description',
     'singular' => 'Faction deck',
     'plural' => 'Faction decks',
     'create' => 'Create deck',

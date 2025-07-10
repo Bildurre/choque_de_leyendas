@@ -23,6 +23,9 @@ import initEntitySelector from './components/entity-selector';
 import initAdminFilters from './components/filters';
 import initCostFilters from './components/filter-cost';
 import initCtaImageHeight from './components/block-cta';
+import initTextImageHeight from './components/block-text';
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Primero los que no dependen de otros
@@ -43,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAdminFilters();
   initCostFilters();
   initCtaImageHeight();
+  initTextImageHeight();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();

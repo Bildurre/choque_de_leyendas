@@ -1,4 +1,12 @@
-<x-public-layout>
+<x-public-layout
+  :title="__('entities.factions.page_title', ['name' => $faction->name])"
+  :metaDescription="__('entities.factions.page_description', [
+    'name' => $faction->name,
+    'description' => Str::limit(strip_tags($faction->lore_text), 100)
+  ])"
+  ogType="profile"
+  :ogImage="$faction->getImageUrl()"
+>
   {{-- Page background with faction icon --}}
   @if($faction->hasImage())
     <x-page-background :image="$faction->getImageUrl()" />
