@@ -1,0 +1,29 @@
+@use '../abstracts/all' as *;
+
+.form--home-selector {
+  margin-bottom: $spacing-xl;
+  .form-text {
+    font-size: .75rem;
+    margin-bottom: 0;
+  }
+
+  @include responsive(mobile) {
+    .form-card {
+      &__content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: $spacing-md;
+      }
+
+      &__body {
+        margin-bottom: 0;
+      }
+
+
+      &__footer {
+        height: min-content;
+        margin-top: 1.6rem;
+      }
+    }
+  }
+}

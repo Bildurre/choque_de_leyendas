@@ -2,6 +2,31 @@
   <x-admin.page-header :title="__('pages.plural')" />
   
   <div class="page-content">
+
+    @if(!$trashed)
+      <form action="{{ route('admin.pages.set-home') }}" method="POST" class="form form--home-selector">
+        @csrf
+        <x-form.card
+          submit_label="{{ __('pages.set_as_home') }}"
+        >          
+          <x-form.select
+            name="page_id"
+            label="{{ __('pages.select_home_page') }}"
+            :options="$availablePages"
+            :selected="$currentHomePage?->id"
+            placeholder="{{ __('pages.no_home_page_selected') }}"
+            required
+          />
+          
+          @if($currentHomePage)
+            <p class="form-text">
+              {{ __('pages.current_home_page', ['title' => $currentHomePage->title]) }}
+            </p>
+          @endif
+        </x-form.card>
+      </form>
+    @endif
+    
     <x-entity.list 
       :create-route="!$trashed ? route('admin.pages.create') : null"
       :create-label="__('pages.create')"

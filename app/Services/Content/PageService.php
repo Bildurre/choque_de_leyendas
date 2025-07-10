@@ -153,4 +153,23 @@ class PageService
     
     return $templates;
   }
+
+  /**
+   * Set a page as the home page
+   * 
+   * @param int $pageId
+   * @return Page
+   */
+  public function setAsHome(int $pageId): Page
+  {
+      // Quitar el flag is_home de cualquier página que lo tenga
+      Page::where('is_home', true)->update(['is_home' => false]);
+      
+      // Establecer la nueva página como home
+      $page = Page::findOrFail($pageId);
+      $page->is_home = true;
+      $page->save();
+      
+      return $page;
+  }
 }

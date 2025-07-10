@@ -164,6 +164,14 @@ class Page extends Model implements LocalizedUrlRoutable
   }
 
   /**
+   * Scope a query to exclude home page.
+   */
+  public function scopeNotHome($query)
+  {
+    return $query->where('is_home', false);
+  }
+
+  /**
    * Check if page has any PDF generated
    */
   public function hasPdf(): bool

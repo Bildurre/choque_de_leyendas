@@ -35,7 +35,16 @@ return [
   'confirm_delete' => 'Are you sure you want to delete this page?',
   'confirm_force_delete' => 'Are you sure you want to permanently delete this page?',
   'no_blocks' => 'This page has no content blocks',
-  
+
+  // Home Page
+  'home_page_settings' => 'Home page settings',
+  'select_home_page' => 'Select home page',
+  'no_home_page_selected' => 'No page selected',
+  'current_home_page' => 'Current home page: :title',
+  'set_as_home' => 'Set',
+  'set_as_home_success' => 'The page ":title" has been set as home page',
+  'set_as_home_error' => 'Error setting home page',
+
   // Blocks
   'blocks' => [
     'singular' => 'Block',

@@ -3,6 +3,7 @@
 @php
   $rootPages = \App\Models\Page::root()
     ->published()
+    ->notHome()
     ->orderBy('order')
     ->get();
 @endphp

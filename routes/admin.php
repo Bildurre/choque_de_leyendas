@@ -107,6 +107,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
       
   // Pages
   Route::resource('pages', PageController::class);
+  Route::post('pages/set-home', [PageController::class, 'setHome'])->name('pages.set-home');
   Route::post('pages/{id}/restore', [PageController::class, 'restore'])->name('pages.restore');
   Route::delete('pages/{id}/force-delete', [PageController::class, 'forceDelete'])->name('pages.force-delete');
   Route::post('pages/{page}/toggle-published', [PageController::class, 'togglePublished'])->name('pages.toggle-published');

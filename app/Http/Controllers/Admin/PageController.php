@@ -42,7 +42,43 @@ class PageController extends Controller
         
         $pages = $query->orderBy('order')->paginate(20);
         
-        return view('admin.pages.index', compact('pages', 'trashed', 'activeCount', 'trashedCount'));
+        // Obtener todas las páginas publicadas para el selector
+        $availablePages = Page::where('is_published', true)
+            ->orderBy('title')
+            ->pluck('title', 'id');
+        
+        // Obtener la página actual establecida como home
+        $currentHomePage = Page::where('is_home', true)->first();
+        
+        return view('admin.pages.index', compact(
+            'pages', 
+            'trashed', 
+            'activeCount', 
+            'trashedCount',
+            'availablePages',
+            'currentHomePage'
+        ));
+    }
+
+    /**
+     * Set a page as the home page
+     */
+    public function setHome(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'page_id' => 'required|exists:pages,id'
+        ]);
+        
+        try {
+            $this->pageService->setAsHome($request->page_id);
+            
+            $page = Page::find($request->page_id);
+            
+            return redirect()->route('admin.pages.index')
+                ->with('success', __('pages.set_as_home_success', ['title' => $page->title]));
+        } catch (\Exception $e) {
+            return back()->with('error', __('pages.set_as_home_error'));
+        }
     }
 
     /**

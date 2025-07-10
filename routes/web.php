@@ -17,9 +17,8 @@ Route::group([
     'middleware' => ['localize', 'localizationRedirect', 'localeSessionRedirect']
 ], function () {
     // Página de inicio
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('welcome');
+    Route::get('/', [PageController::class, 'welcome'])
+    ->name('welcome');
     
     // Rutas específicas de contenido público
     Route::get(LaravelLocalization::transRoute('routes.factions'), [FactionController::class, 'index'])

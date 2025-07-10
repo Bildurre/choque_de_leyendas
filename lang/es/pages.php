@@ -35,6 +35,15 @@ return [
   'confirm_delete' => '¿Estás seguro de que deseas eliminar esta página?',
   'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente esta página?',
   'no_blocks' => 'Esta página no tiene bloques de contenido',
+
+  // Página Home
+  'home_page_settings' => 'Configuración de página de inicio',
+  'select_home_page' => 'Seleccionar página de inicio',
+  'no_home_page_selected' => 'Ninguna página seleccionada',
+  'current_home_page' => 'Página de inicio actual: :title',
+  'set_as_home' => 'Establecer',
+  'set_as_home_success' => 'La página ":title" se ha establecido como página de inicio',
+  'set_as_home_error' => 'Error al establecer la página de inicio',
   
   // Bloques
   'blocks' => [
