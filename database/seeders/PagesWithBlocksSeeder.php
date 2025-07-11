@@ -32,10 +32,12 @@ class PagesWithBlocksSeeder extends Seeder
       $page->description = $data['description'] ?? null;
       $page->is_published = $data['is_published'] ?? false;
       $page->is_printable = $data['is_printable'] ?? false;
+      $page->is_home = $data['is_home'] ?? false;
       $page->meta_title = $data['meta_title'] ?? null;
       $page->meta_description = $data['meta_description'] ?? null;
       $page->template = $data['template'] ?? 'default';
       $page->order = $data['order'] ?? 0;
+      $page->background_image = $data['background_image'] ?? null;
       
       // Handle parent reference
       if (isset($data['parent_reference'])) {
@@ -68,6 +70,7 @@ class PagesWithBlocksSeeder extends Seeder
         $block->is_printable = $blockData['is_printable'] ?? false;
         $block->background_color = $blockData['background_color'] ?? 'none';
         $block->settings = $blockData['settings'] ?? null;
+        $block->image = $blockData['image'] ?? null;
         
         $block->save();
       }

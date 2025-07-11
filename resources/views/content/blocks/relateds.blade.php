@@ -1,7 +1,8 @@
 @php
+  $relatedsContent = $block->getTranslation('content', app()->getLocale());
   $modelType = $block->settings['model_type'] ?? 'hero';
   $displayType = $block->settings['display_type'] ?? 'latest';
-  $buttonText = $block->settings['button_text'] ?? __('pages.blocks.relateds.view_all');
+  $buttonText = $relatedsContent['button_text'] ?? '';
   
   $modelClass = match($modelType) {
     'faction' => \App\Models\Faction::class,
@@ -33,15 +34,18 @@
         <x-blocks.titles :block="$block" />
       </div>
       
-      <div class="relateds-block__action">
-        <x-button-link
-          :href="$indexRoute"
-          variant="secondary"
-          size="md"
-        >
-          {{ $buttonText }}
-        </x-button-link>
-      </div>
+      @if ($buttonText)
+        <div class="relateds-block__action">
+           <x-button-link
+              :href="$indexRoute"
+              :variant="$block->settings['button_variant'] ?? 'primary'"
+              :size="$block->settings['button_size'] ?? 'lg'"
+            >
+              {{ $buttonText }}
+            </x-button-link>
+        </div>
+      @endif
+      
     </div>
     
     <div class="relateds-block__grid">

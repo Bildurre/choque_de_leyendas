@@ -66,6 +66,8 @@ return [
       'right' => 'Derecha',
       'top' => 'Encima',
       'bottom' => 'Debajo',
+      'clearfix_left' => 'Clearfix Izquierda',
+      'clearfix_right' => 'Clearfix Derecha',
     ],
     'image_scale_mode' => 'Modo de Escalado',
     'image_scale_mode_options' => [
@@ -112,6 +114,12 @@ return [
         'lg' => 'Largo',
         'md' => 'Medio',
         'sm' => 'Pequeño',
+      ],
+      'width' => 'Anchura',
+      'width_options' => [
+        'lg' => 'Ancho',
+        'md' => 'Medio',
+        'sm' => 'Estrecho',
       ],
     ],
     'relateds' => [

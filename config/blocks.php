@@ -9,10 +9,6 @@ return [
       'allows_image' => true,
       'allows_clearfix_image' => true,
       'settings' => [
-        'full_width' => [
-          'type' => 'boolean',
-          'default' => false,
-        ],
       ],
     ],
     'header' => [
@@ -46,10 +42,22 @@ return [
             'random' => 'Random Selection',
           ],
         ],
-        'button_text' => [
-          'type' => 'text',
-          'multilingual' => true,
-          'default' => 'Ver todos',
+        'button_variant' => [
+          'type' => 'select',
+          'default' => 'primary',
+          'options' => [
+            'primary' => 'Primary',
+            'secondary' => 'Secondary',
+          ],
+        ],
+        'button_size' => [
+          'type' => 'select',
+          'default' => 'lg',
+          'options' => [
+            'sm' => 'Small',
+            'md' => 'Medium',
+            'lg' => 'Large',
+          ],
         ],
       ],
     ],
@@ -65,7 +73,6 @@ return [
           'options' => [
             'primary' => 'Primary',
             'secondary' => 'Secondary',
-            'accent' => 'Accent',
           ],
         ],
         'button_size' => [
@@ -77,9 +84,14 @@ return [
             'lg' => 'Large',
           ],
         ],
-        'full_width' => [
-          'type' => 'boolean',
-          'default' => false,
+        'width' => [
+          'type' => 'select',
+          'default' => 'lg',
+          'options' => [
+            'sm' => 'Small',
+            'md' => 'Medium',
+            'lg' => 'Large',
+          ],
         ],
       ],
     ],

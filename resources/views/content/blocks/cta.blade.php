@@ -4,11 +4,12 @@
   $buttonText = $ctaContent['button_text'] ?? '';
   $buttonLink = $ctaContent['button_link'] ?? '';
   $imagePosition = $block->settings['image_position'] ?? 'top';
+  $cardWidth = $block->settings['width'] ?? 'lg';
 @endphp
 
 <x-blocks.block :block="$block">
   <div class="cta-block">
-    <div class="cta-block__card">
+    <div class="cta-block__card {{ 'cta-block__card--'.$cardWidth }} {{  $block->hasMultilingualImage() ?: 'cta-block__card--no-image' }}">
       <x-blocks.content-wrapper :block="$block">
         @if($block->hasMultilingualImage() && in_array($imagePosition, ['top', 'left']))
           <x-blocks.image :block="$block" />

@@ -4,6 +4,7 @@
     : route('admin.pages.blocks.store', $page);
   $submitMethod = isset($block) ? 'PUT' : 'POST';
   $submitLabel = isset($block) ? __('admin.update') : __('admin.create');
+  $blockType = isset($block) ? $block->type : $type;
 @endphp
 
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
@@ -22,15 +23,14 @@
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.pages.edit', $page)">
     <x-slot:header>
       @php
-        $blockName = isset($block) 
-          ? __('pages.blocks.types.' . $block->type) 
-          : __('pages.blocks.types.' . $type);
+        $blockName = __('pages.blocks.types.' . $blockType);
       @endphp
       <h2>{{ __('pages.blocks.form_title', ['block_name' => $blockName, 'page_title' => $page->title]) }}</h2>
     </x-slot:header>
     
     <div class="form-grid">
       <div>
+        {{-- Common fields for all blocks --}}
         <x-form.multilingual-input
           name="title"
           :label="__('pages.blocks.title')"
@@ -43,67 +43,30 @@
           :values="old('subtitle', isset($block) ? $block->getTranslations('subtitle') : [])"
         />
         
-        @if((!isset($block) && $type === 'text') || (isset($block) && $block->type === 'text'))
-          <x-form.multilingual-wysiwyg
-            name="content"
-            :label="__('pages.blocks.content')"
-            :values="old('content', isset($block) ? $block->getTranslations('content') : [])"
-            required
-          />
-        @endif
-        
-        @if((!isset($block) && $type === 'cta') || (isset($block) && $block->type === 'cta'))
-          @php
-            $contentData = isset($block) ? $block->getTranslations('content') : [];
-            $textValues = [];
-            $buttonTextValues = [];
-            $buttonLinkValues = [];
-            
-            // Extraer los valores del content JSON
-            foreach (config('laravellocalization.supportedLocales', ['es' => []]) as $locale => $localeData) {
-              $textValues[$locale] = old("content.text.{$locale}", $contentData[$locale]['text'] ?? '');
-              $buttonTextValues[$locale] = old("content.button_text.{$locale}", $contentData[$locale]['button_text'] ?? '');
-              $buttonLinkValues[$locale] = old("content.button_link.{$locale}", $contentData[$locale]['button_link'] ?? '');
-            }
-          @endphp
-          
-          <x-form.multilingual-wysiwyg
-            name="content[text]"
-            :label="__('pages.blocks.cta_text')"
-            :values="$textValues"
-            type="textarea"
-          />
-          
-          <x-form.multilingual-input
-            name="content[button_text]"
-            :label="__('pages.blocks.cta_button_text')"
-            :values="$buttonTextValues"
-          />
-          
-          <x-form.multilingual-input
-            name="content[button_link]"
-            :label="__('pages.blocks.cta_button_link')"
-            :values="$buttonLinkValues"
-          />
-        @endif
+        {{-- Block-specific content fields --}}
+        @include('admin.blocks.partials._' . $blockType, [
+          'block' => $block ?? null,
+          'page' => $page
+        ])
       </div>
 
       <div>
+        {{-- Common settings for all blocks --}}
         <x-form.select
-            name="settings[text_alignment]"
-            :label="__('pages.blocks.settings.text_alignment')"
-            :options="[
-              'justify' => __('pages.blocks.settings.text_alignment_options.justify'),
-              'left' => __('pages.blocks.settings.text_alignment_options.left'),
-              'right' => __('pages.blocks.settings.text_alignment_options.right'),
-              'center' => __('pages.blocks.settings.text_alignment_options.center'),
-            ]"
-            :selected="old('settings.text_alignment', 
-              isset($block) && isset($block->settings['text_alignment']) 
-                ? $block->settings['text_alignment'] 
-                : 'left'
-            )"
-          />
+          name="settings[text_alignment]"
+          :label="__('pages.blocks.settings.text_alignment')"
+          :options="[
+            'justify' => __('pages.blocks.settings.text_alignment_options.justify'),
+            'left' => __('pages.blocks.settings.text_alignment_options.left'),
+            'right' => __('pages.blocks.settings.text_alignment_options.right'),
+            'center' => __('pages.blocks.settings.text_alignment_options.center'),
+          ]"
+          :selected="old('settings.text_alignment', 
+            isset($block) && isset($block->settings['text_alignment']) 
+              ? $block->settings['text_alignment'] 
+              : 'justify'
+          )"
+        />
 
         <x-form.select
           name="background_color"
@@ -126,7 +89,7 @@
             :current-images="isset($block) ? $block->image : []"
           />
 
-         @php
+          @php
             $options = [
               'left' => __('pages.blocks.image_position_options.left'),
               'right' => __('pages.blocks.image_position_options.right'),
@@ -176,7 +139,11 @@
               '3-1' => '3:1',
               '1-3' => '1:3',
               '3-2' => '3:2',
-              '2-3' => '2:3'
+              '2-3' => '2:3',
+              '4-1' => '4:1',
+              '1-4' => '1:4',
+              '4-3' => '4:3',
+              '3-4' => '3:4',
             ]"
             :selected="old('settings.column_proportions', 
               isset($block) && isset($block->settings['column_proportions']) 
@@ -186,8 +153,14 @@
           />
         @endif
         
+        {{-- Dynamic settings from config --}}
         @if(isset($blockConfig['settings']))
           @foreach($blockConfig['settings'] as $settingKey => $setting)
+            {{-- Skip multilingual text settings that should be in content --}}
+            @if($setting['type'] === 'text' && ($setting['multilingual'] ?? false))
+              @continue
+            @endif
+            
             @if($setting['type'] === 'boolean')
               <x-form.checkbox
                 name="settings[{{ $settingKey }}]"
@@ -211,21 +184,13 @@
                     : ($setting['default'] ?? null)
                 )"
               />
-            @elseif($setting['type'] === 'text')
-              @if ($setting['multilingual'] ?? false)
-                <x-form.multilingual-input
-                  name="settings[{{ $settingKey }}]"
-                  :label="__('pages.blocks.settings.' . $settingKey)"
-                  :values="old('settings.' . $settingKey, isset($block) && isset($block->settings[$settingKey]) ? $block->getTranslations('settings.' . $settingKey) : [])"
-                />
-              @else
-                <x-form.input
-                  type="text"
-                  name="settings[{{ $settingKey }}]"
-                  :label="__('pages.blocks.settings.' . $settingKey)"
-                  :value="old('settings.' . $settingKey, isset($block) && isset($block->settings[$settingKey]) ? $block->settings[$settingKey] : ($setting['default'] ?? ''))"
-                />
-              @endif
+            @elseif($setting['type'] === 'text' && !($setting['multilingual'] ?? false))
+              <x-form.input
+                type="text"
+                name="settings[{{ $settingKey }}]"
+                :label="__('pages.blocks.settings.' . $settingKey)"
+                :value="old('settings.' . $settingKey, isset($block) && isset($block->settings[$settingKey]) ? $block->settings[$settingKey] : ($setting['default'] ?? ''))"
+              />
             @endif
           @endforeach
         @endif

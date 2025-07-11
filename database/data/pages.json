@@ -1,5 +1,18 @@
 [
   {
+    "title": {"en": "Home", "es": "Home"},
+    "description": {"en": "<p>Home Page</p>", "es": "<p>Página de Inicio</p>"},
+    "is_published": true,
+    "is_printable": false,
+    "is_home": true,
+    "meta_title": {"en": "Alanda: Clash of Legends - Strategic card game", "es": "Alanda: Choque de Leyendas - Juego de cartas estratégico"},
+    "meta_description": {"en": "Official library of Alanda: Clash of Legends. Browse all cards, meet the legendary heroes, study the factions and download the rules.", "es": "Biblioteca oficial de Alanda: Choque de Leyendas. Consulta todas las cartas, conoce a los héroes legendarios, estudia las facciones y descarga las reglas."},
+    "parent_id": null,
+    "template": "default",
+    "order": 0,
+    "background_image": "images/pages/home-bg.jpeg"
+  },
+  {
     "title": {"en": "How to Play", "es": "Como Jugar"},
     "description": {"en": "<p>Page to access the game rules</p>", "es": "<p>Página para acceder a las reglas del juego</p>"},
     "is_published": true,
@@ -17,7 +30,7 @@
     "is_printable": true,
     "meta_title": {"en": "Rules", "es": "Reglas"},
     "meta_description": {"en": "Learn to play Alanda: Clash of Legends", "es": "Aprende a jugar a Alanda: Choque de Leyendas"},
-    "parent_reference": 0,
+    "parent_reference": 1,
     "template": "default",
     "order": 0
   }

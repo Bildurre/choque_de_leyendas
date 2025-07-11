@@ -2,6 +2,150 @@
   {
     "page_reference": 0,
     "type": "header",
+    "title": {"es": null},
+    "subtitle": {"en": "<p>Where legends clash and heroes forge their destiny</p>", "es": "<p>Donde las leyendas chocan y los héroes forjan su destino</p>"},
+    "content": null,
+    "order": 0,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"text_alignment": "right"}
+  },
+  {
+    "page_reference": 0,
+    "type": "text",
+    "title": {"en": "Discover Alanda: Clash of Legends", "es": "Descubre Alanda: Choque de Leyendas"},
+    "subtitle": {"en": "<p>A strategic card game where every decision matters</p>", "es": "<p>Un juego de cartas estratégico donde cada decisión cuenta</p>"},
+    "content": {"en": "<p>Alanda: Clash of Legends is a card game that immerses you in a world of epic fantasy. Lead powerful legendary heroes, build your deck with strategic cards and face intense battles where every move can change the course of combat.</p>\r\n<p>With a wide variety of unique cards, multiple heroes with special abilities and diverse factions with distinctive playstyles, each game is a new experience. Whether you're a calculating strategist, an aggressive warrior or a master of control, you'll find your path to victory.</p>", "es": "<p>Alanda: Choque de Leyendas es un juego de cartas que te sumerge en un mundo de fantasía épica. Lidera a poderosos héroes legendarios, construye tu mazo con cartas estratégicas y enfréntate en intensas batallas donde cada movimiento puede cambiar el curso del combate.</p>\r\n<p>Con una amplia variedad de cartas únicas, múltiples héroes con habilidades especiales y diversas facciones con estilos de juego distintivos, cada partida es una experiencia nueva. Ya seas un estratega calculador, un guerrero agresivo o un maestro del control, encontrarás tu camino hacia la victoria.</p>"},
+    "order": 1,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"es": "images/blocks/home-text-es.jpeg"},
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
+  },
+  {
+    "page_reference": 0,
+    "type": "cta",
+    "title": {"en": "Ready to enter battle?", "es": "¿Listo para entrar en batalla?"},
+    "subtitle": {"en": "<p>Learn to play and begin your legend</p>", "es": "<p>Aprende a jugar y comienza tu leyenda</p>"},
+    "content": {"en": {"text": "<p>It's time to learn how to play. Discover the combat rules, master the action dice system and learn to build winning strategies. Everything you need to know to start your first game is just a click away.</p>", "button_link": "/en/how-to-play", "button_text": "Learn to play"}, "es": {"text": "<p>Es hora de aprender cómo se juega. Descubre las reglas de combate, domina el sistema de dados de acción y aprende a construir estrategias ganadoras. Todo lo que necesitas saber para comenzar tu primera partida está a un clic de distancia.</p>", "button_link": "/es/como-jugar", "button_text": "Aprende a jugar"}},
+    "order": 2,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"es": "images/blocks/home-cta-es.jpeg"},
+    "settings": {"width": "md", "button_size": "lg", "button_variant": "primary", "image_position": "right", "text_alignment": "center", "image_scale_mode": "cover", "column_proportions": "4-1"}
+  },
+  {
+    "page_reference": 0,
+    "type": "text",
+    "title": {"en": "Legendary heroes", "es": "Héroes legendarios"},
+    "subtitle": {"en": "<p>The champions who will lead your path to glory</p>", "es": "<p>Los campeones que liderarán tu camino hacia la gloria</p>"},
+    "content": {"en": "<p>In Alanda, heroes are the heart of your strategy. Each hero possesses unique attributes, special abilities and their own combat style that will define your way of playing. From relentless warriors who dominate melee combat to mystical casters who weave powerful spells, each hero offers different tactical possibilities.</p>\r\n<p>Choose your champions wisely: their strengths and weaknesses, their synergies with action cards and their ability to adapt to different situations will determine the outcome of each confrontation. In Alanda, there are no weak heroes, only strategies to discover.</p>", "es": "<p>En Alanda, los héroes son el corazón de tu estrategia. Cada héroe posee atributos únicos, habilidades especiales y un estilo de combate propio que definirá tu forma de jugar. Desde guerreros implacables que dominan el combate cuerpo a cuerpo hasta místicos conjuradores que tejen poderosos hechizos, cada héroe ofrece posibilidades tácticas diferentes.</p>\r\n<p>Elige sabiamente a tus campeones: sus fortalezas y debilidades, sus sinergias con las cartas de acción y su capacidad para adaptarse a diferentes situaciones determinarán el resultado de cada enfrentamiento. En Alanda, no hay héroes débiles, solo estrategias por descubrir.</p>"},
+    "order": 3,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 0,
+    "type": "relateds",
+    "title": {"es": null},
+    "subtitle": {"en": "<p>Lead the champions who will forge your legend</p>", "es": "<p>Lidera a los campeones que forjarán tu leyenda</p>"},
+    "content": {"en": {"button_text": "View all Heroes"}, "es": {"button_text": "Ver todos los Héroes"}},
+    "order": 4,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"model_type": "hero", "button_size": "lg", "display_type": "random", "button_variant": "primary", "text_alignment": "left"}
+  },
+  {
+    "page_reference": 0,
+    "type": "text",
+    "title": {"en": "A world in eternal war", "es": "Un mundo en guerra eterna"},
+    "subtitle": {"en": "<p>Where heroes forge their legend in the fire of battle</p>", "es": "<p>Donde los héroes forjan su leyenda en el fuego de la batalla</p>"},
+    "content": {"en": "<p>In the lands of Alanda, war is the only language everyone understands. Countless factions fight without respite: noble knights defend their kingdoms with honor, ancient elves protect their forests with ancestral magic, and barbarian clans descend from the mountains thirsty for glory.</p>\r\n<p>But the heroes of Alanda do not fight only for territory. They seek the immortality that only legends can grant, yearning for their names to be sung for generations and their deeds to be carved in eternal memory.</p>\r\n<p>In this crucible of perpetual conflict, every battle is an opportunity to forge your destiny. Alliances are born and die like the seasons, but for those with the necessary strength and cunning, Alanda offers the supreme promise: to transcend mortality and become a living legend. Do you have what it takes to carve your name in history?</p>", "es": "<p>En las tierras de Alanda, la guerra es el único idioma que todos comprenden. Innumerables facciones luchan sin tregua: nobles caballeros defienden sus reinos con honor, antiguos elfos protegen sus bosques con magia ancestral, y clanes bárbaros descienden de las montañas sedientos de gloria.</p>\r\n<p>Pero los héroes de Alanda no luchan solo por territorio. Buscan la inmortalidad que solo las leyendas pueden otorgar, anhelando que sus nombres sean cantados durante generaciones y sus hazañas se graben en la memoria eterna.</p>\r\n<p>En este crisol de conflicto perpetuo, cada batalla es una oportunidad para forjar tu destino. Las alianzas nacen y mueren como las estaciones, pero para aquellos con la fuerza y la astucia necesarias, Alanda ofrece la promesa suprema: trascender la mortalidad y convertirse en leyenda viviente. ¿Tendrás lo necesario para grabar tu nombre en la historia?</p>"},
+    "order": 5,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": {"es": "images/blocks/home-text-2-es.jpeg"},
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
+  },
+  {
+    "page_reference": 0,
+    "type": "text",
+    "title": {"en": "The arsenal of victory", "es": "El arsenal de la victoria"},
+    "subtitle": {"en": "<p>Weapons, spells and stratagems to dominate the battlefield</p>", "es": "<p>Armas, hechizos y estratagemas para dominar el campo de batalla</p>"},
+    "content": {"en": "<p>Action cards are the tools that will turn your heroes into legends. Equip powerful weapons and armor to enhance their capabilities. Unleash devastating techniques and arcane spells at the crucial moment. Surprise your rivals with unexpected tricks that change the course of battle.</p>\r\n<p>Each card is a tactical decision: will you use your resources now or wait for the perfect moment? True mastery in Alanda comes not just from having the best cards, but from knowing when and how to use them. Build your deck wisely and each card will be one more step towards victory.</p>", "es": "<p>Las cartas de acción son las herramientas que convertirán a tus héroes en leyendas. Equipa poderosas armas y armaduras para potenciar sus capacidades. Desata técnicas devastadoras y hechizos arcanos en el momento crucial. Sorprende a tus rivales con ardides inesperados que cambien el curso de la batalla.</p>\r\n<p>Cada carta es una decisión táctica: ¿usarás tus recursos ahora o esperarás el momento perfecto? La verdadera maestría en Alanda no viene solo de tener las mejores cartas, sino de saber cuándo y cómo usarlas. Construye tu mazo con sabiduría y cada carta será un paso más hacia la victoria.</p>"},
+    "order": 6,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 0,
+    "type": "relateds",
+    "title": {"es": null},
+    "subtitle": {"en": "<p>Unleash the power that will define your victory</p>", "es": "<p>Desata el poder que definirá tu victoria</p>"},
+    "content": {"en": {"button_text": "View all Cards"}, "es": {"button_text": "Ver todas las cartas"}},
+    "order": 7,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"model_type": "card", "button_size": "lg", "display_type": "random", "button_variant": "primary", "text_alignment": "left"}
+  },
+  {
+    "page_reference": 0,
+    "type": "text",
+    "title": {"en": "Choose your destiny", "es": "Elige tu destino"},
+    "subtitle": {"en": "<p>Each faction offers a unique path to glory</p>", "es": "<p>Cada facción ofrece un camino único hacia la gloria</p>"},
+    "content": {"en": "<p>In Alanda, each faction represents a distinctive combat philosophy. Some rely on brute force and the honor of steel. Others master the arcane arts and ancient secrets. There are those who prefer cunning and shadows, while others invoke primordial powers.</p>\r\n<p>Knowing the strengths and weaknesses of each faction is essential for victory. But even within the same faction you'll find multiple paths: aggressive heroes alongside defensive strategists, control decks or direct assault builds. Explore their unique styles, discover the synergies between their heroes and cards, and forge your own interpretation of each faction.</p>", "es": "<p>En Alanda, cada facción representa una filosofía de combate distintiva. Algunas confían en la fuerza bruta y el honor del acero. Otras dominan las artes arcanas y los secretos antiguos. Hay quienes prefieren la astucia y las sombras, mientras otros invocan poderes primigenios.</p>\r\n<p>Conocer las fortalezas y debilidades de cada facción es esencial para la victoria. Pero incluso dentro de una misma facción encontrarás múltiples caminos: héroes agresivos junto a estrategas defensivos, mazos de control o de asalto directo. Explora sus estilos únicos, descubre las sinergias entre sus héroes y cartas, y forja tu propia interpretación de cada facción.</p>"},
+    "order": 8,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 0,
+    "type": "relateds",
+    "title": {"es": null},
+    "subtitle": {"en": "<p>Explora las fuerzas que disputan el destino de Alanda</p>", "es": "<p>Conoce los poderes que chocan en la guerra eterna</p>"},
+    "content": {"en": {"button_text": "View all Factions"}, "es": {"button_text": "Ver todas las Facciones"}},
+    "order": 9,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"model_type": "faction", "button_size": "lg", "display_type": "random", "button_variant": "primary", "text_alignment": "left"}
+  },
+  {
+    "page_reference": 0,
+    "type": "text",
+    "title": {"en": "Legends that transcend time", "es": "Leyendas que trascienden el tiempo"},
+    "subtitle": {"en": "<p>Where yesterday's heroes light the path for today's champions</p>", "es": "<p>Donde los héroes de ayer iluminan el camino de los campeones de hoy</p>"},
+    "content": {"en": "<p>In Alanda's taverns, stories are whispered of heroes whose deeds defied the very gods. Warriors who defeated entire armies, mages who tamed ancestral storms, champions who rose from the dead to complete their vengeance. These legends are not just tales to frighten children or entertain drunks: they are the inspiration that ignites the fire in every new hero's heart.</p>\r\n<p>Each faction venerates its own foundational myths, each clan remembers the feats of their ancestors. Bards sing of impossible battles won by sheer will, of sacrifices that saved kingdoms, of betrayals that destroyed them.</p>\r\n<p>In Alanda, becoming a legend is not a metaphor: it is the destiny pursued by every hero who wields a sword or casts a spell.</p>", "es": "<p>En las tabernas de Alanda se susurran historias de héroes cuyas hazañas desafiaron a los propios dioses. Guerreros que derrotaron ejércitos enteros, magos que domaron tormentas ancestrales, campeones que se alzaron de entre los muertos para completar su venganza. Estas leyendas no son solo cuentos para asustar niños o entretener borrachos: son la inspiración que enciende el fuego en el corazón de cada nuevo héroe.</p>\r\n<p>Cada facción venera a sus propios mitos fundacionales, cada clan recuerda las gestas de sus ancestros. Los bardos cantan sobre batallas imposibles ganadas por pura voluntad, sobre sacrificios que salvaron reinos, sobre traiciones que los destruyeron.</p>\r\n<p>En Alanda, convertirse en leyenda no es una metáfora: es el destino que persigue todo héroe que empuña una espada o conjura un hechizo.</p>"},
+    "order": 10,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": {"es": "images/blocks/home-text-3-es.jpeg"},
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
+  },
+  {
+    "page_reference": 0,
+    "type": "cta",
+    "title": {"en": "Everything you need to play", "es": "Todo lo que necesitas para jugar"},
+    "subtitle": {"en": "<p>Download the rules, cards and game materials</p>", "es": "<p>Descarga las reglas, cartas y materiales del juego</p>"},
+    "content": {"en": {"text": "<p>Take Alanda with you. Download the complete rules in PDF, access printable cards and get quick reference guides. All the material you need to play is available for free.</p>", "button_link": "/en/downloads", "button_text": "Go to downloads"}, "es": {"text": "<p>Lleva Alanda contigo. Descarga las reglas completas en PDF, accede a cartas imprimibles y obtén guías de referencia rápida. Todo el material que necesitas para jugar está disponible de forma gratuita.</p>", "button_link": "/es/descargas", "button_text": "Ir a descargas"}},
+    "order": 11,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"es": "images/blocks/home-cta-2-es.jpeg"},
+    "settings": {"width": "md", "button_size": "lg", "button_variant": "primary", "image_position": "right", "text_alignment": "center", "image_scale_mode": "cover", "column_proportions": "4-1"}
+  },
+  {
+    "page_reference": 1,
+    "type": "header",
     "title": {"en": "How to Play", "es": "Cómo Jugar"},
     "subtitle": {"en": "<p>Everything you need to master the game: complete rules, component guide and reference material. Your path to victory starts here.</p>", "es": "<p>Todo lo que necesitas para dominar el juego: reglas completas, guía de componentes y material de referencia. Tu camino hacia la victoria empieza aquí.</p>"},
     "content": null,
@@ -11,7 +155,7 @@
     "settings": {"text_alignment": "justify"}
   },
   {
-    "page_reference": 0,
+    "page_reference": 1,
     "type": "cta",
     "title": {"en": "The Rules", "es": "Las Reglas"},
     "subtitle": {"es": null},
@@ -22,7 +166,7 @@
     "settings": {"button_size": "lg", "button_variant": "secondary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "3-2"}
   },
   {
-    "page_reference": 0,
+    "page_reference": 1,
     "type": "cta",
     "title": {"en": "The Components", "es": "Los Componentes"},
     "subtitle": null,
@@ -33,7 +177,7 @@
     "settings": {"button_size": "lg", "button_variant": "secondary", "image_position": "left", "text_alignment": "right", "image_scale_mode": "cover", "column_proportions": "2-3"}
   },
   {
-    "page_reference": 0,
+    "page_reference": 1,
     "type": "cta",
     "title": {"en": "The Appendices", "es": "Los Anexos"},
     "subtitle": null,
@@ -44,7 +188,7 @@
     "settings": {"button_size": "lg", "button_variant": "secondary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "3-2"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "header",
     "title": {"en": "The Rules", "es": "Las Reglas"},
     "subtitle": {"en": "<p>From setup to victory. Discover how a game unfolds, turn by turn, action by action.</p>", "es": "<p>Desde la preparación hasta la victoria. Descubre cómo se desarrolla una partida, turno a turno, acción por acción.</p>"},
@@ -55,7 +199,7 @@
     "settings": {"text_alignment": "justify"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"en": "Introduction", "es": "Introducción"},
     "subtitle": {"es": null},
@@ -66,7 +210,7 @@
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"en": "Preparation", "es": "Preparación"},
     "subtitle": {"es": null},
@@ -77,7 +221,7 @@
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"es": null},
     "subtitle": {"es": null},
@@ -88,7 +232,7 @@
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"es": null},
     "subtitle": {"es": null},
@@ -99,7 +243,7 @@
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"en": "Battle Rounds", "es": "Rondas de Batalla"},
     "subtitle": {"es": null},
@@ -110,7 +254,7 @@
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"es": null},
     "subtitle": {"es": null},
@@ -121,7 +265,7 @@
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
-    "page_reference": 1,
+    "page_reference": 2,
     "type": "text",
     "title": {"es": null},
     "subtitle": {"es": null},

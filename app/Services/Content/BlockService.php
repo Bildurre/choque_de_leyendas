@@ -25,10 +25,8 @@ class BlockService
    */
   public function create(array $data): Block
   {
-    // Process content for CTA blocks
-    if ($data['type'] === 'cta' && isset($data['content'])) {
-      $data = $this->processCTAContent($data);
-    }
+    // Process content based on block type
+    $data = $this->processBlockContent($data);
     
     // Process translatable fields
     $data = $this->processTranslatableFields($data, $this->translatableFields);
@@ -65,10 +63,8 @@ class BlockService
    */
   public function update(Block $block, array $data): Block
   {
-    // Process content for CTA blocks
-    if ($block->type === 'cta' && isset($data['content'])) {
-      $data = $this->processCTAContent($data);
-    }
+    // Process content based on block type
+    $data = $this->processBlockContent($data, $block->type);
     
     // Process translatable fields
     $data = $this->processTranslatableFields($data, $this->translatableFields);
@@ -144,6 +140,29 @@ class BlockService
   }
   
   /**
+   * Process block content based on type
+   */
+  protected function processBlockContent(array $data, ?string $blockType = null): array
+  {
+    $type = $blockType ?? $data['type'] ?? null;
+    
+    if (!$type || !isset($data['content'])) {
+      return $data;
+    }
+    
+    switch ($type) {
+      case 'cta':
+        return $this->processCTAContent($data);
+        
+      case 'relateds':
+        return $this->processRelatedsContent($data);
+        
+      default:
+        return $data;
+    }
+  }
+  
+  /**
    * Process CTA content structure
    */
   protected function processCTAContent(array $data): array
@@ -160,6 +179,27 @@ class BlockService
           'text' => $data['content']['text'][$locale] ?? '',
           'button_text' => $data['content']['button_text'][$locale] ?? '',
           'button_link' => $data['content']['button_link'][$locale] ?? ''
+        ];
+      }
+      
+      $data['content'] = $processedContent;
+    }
+    
+    return $data;
+  }
+  
+  /**
+   * Process Relateds content structure
+   */
+  protected function processRelatedsContent(array $data): array
+  {
+    if (isset($data['content']['button_text'])) {
+      $processedContent = [];
+      $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
+      
+      foreach ($locales as $locale) {
+        $processedContent[$locale] = [
+          'button_text' => $data['content']['button_text'][$locale] ?? ''
         ];
       }
       

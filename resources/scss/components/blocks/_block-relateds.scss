@@ -57,14 +57,11 @@
     width: 100%;
     text-decoration: none;
     color: inherit;
-    transition: transform $transition-fast;
+    transition: box-shadow $transition-medium;
     border-radius: $border-radius-md;
     overflow: hidden;
-    
-    &:hover {
-      transform: translateY(-$spacing-xs);
-    }
-    
+    box-shadow: 0 0 0 0 transparent;
+
     &:focus {
       outline: 2px solid var(--random-accent-color);
       outline-offset: 2px;
@@ -78,17 +75,10 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: transform $transition-fast;
     }
     
     &:hover {
-      .preview-image,
-      .entity-preview,
-      .hero-preview,
-      .card-preview,
-      .faction-preview {
-        transform: scale(1.02);
-      }
+        box-shadow: 0 0 4px 4px var(--random-accent-color);
     }
   }
   

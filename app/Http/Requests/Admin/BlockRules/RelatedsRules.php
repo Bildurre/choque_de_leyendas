@@ -13,6 +13,7 @@ class RelatedsRules
     return [
       'title' => ['nullable'],
       'subtitle' => ['nullable'],
+      'content' => ['nullable'],
     ];
   }
   

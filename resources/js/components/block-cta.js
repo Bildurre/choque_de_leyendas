@@ -54,7 +54,12 @@ export default function initCtaImageHeight() {
   }
   
   // Ejecutar al cargar
-  adjustImageHeights();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', adjustImageHeights);
+  } else {
+    // Pequeño delay para asegurar que el layout esté completo
+    setTimeout(adjustImageHeights, 100);
+  }
   
   // Ejecutar cuando cambie el tamaño de la ventana
   let resizeTimeout;
@@ -69,25 +74,11 @@ export default function initCtaImageHeight() {
     if (img.complete) {
       adjustImageHeights();
     } else {
-      img.addEventListener('load', adjustImageHeights);
+      img.addEventListener('load', adjustImageHeights, { once: true });
     }
   });
   
-  // Observer para detectar cambios dinámicos en el DOM
-  const observer = new MutationObserver(() => {
-    adjustImageHeights();
-  });
-  
-  // Observar cambios en el body (por si se añaden CTAs dinámicamente)
-  const body = document.querySelector('body');
-  if (body) {
-    observer.observe(body, { 
-      childList: true, 
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['class']
-    });
-  }
+  // NO MutationObserver - ¡no es necesario!
   
   // Cleanup function
   return () => {
@@ -95,6 +86,5 @@ export default function initCtaImageHeight() {
     images.forEach(img => {
       img.removeEventListener('load', adjustImageHeights);
     });
-    observer.disconnect();
   };
 }
