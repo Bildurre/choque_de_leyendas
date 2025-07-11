@@ -224,10 +224,22 @@
         @endif
         
         <div class="clearfix">
-          @if($block->hasImage())
+          @if($block->hasMultilingualImage($locale))
             @php
-              $imagePath = public_path('storage/' . $block->image);
-              $imageBase64 = image_to_base64($imagePath);
+              // Get the image array
+              $images = $block->image;
+              $imagePath = null;
+              
+              // Get the image path for the current locale
+              if (is_array($images) && isset($images[$locale])) {
+                $imagePath = public_path('storage/' . $images[$locale]);
+              }
+              
+              // Convert to base64 if path exists
+              $imageBase64 = null;
+              if ($imagePath && file_exists($imagePath)) {
+                $imageBase64 = image_to_base64($imagePath);
+              }
             @endphp
             @if($imageBase64)
               <img src="{{ $imageBase64 }}" alt="{{ $block->title ?? '' }}">
