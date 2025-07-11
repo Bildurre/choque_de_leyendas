@@ -212,16 +212,20 @@
                 )"
               />
             @elseif($setting['type'] === 'text')
-              <x-form.input
-                type="text"
-                name="settings[{{ $settingKey }}]"
-                :label="__('pages.blocks.settings.' . $settingKey)"
-                :value="old('settings.' . $settingKey, 
-                  isset($block) && isset($block->settings[$settingKey]) 
-                    ? $block->settings[$settingKey] 
-                    : ($setting['default'] ?? '')
-                )"
-              />
+              @if ($setting['multilingual'] ?? false)
+                <x-form.multilingual-input
+                  name="settings[{{ $settingKey }}]"
+                  :label="__('pages.blocks.settings.' . $settingKey)"
+                  :values="old('settings.' . $settingKey, isset($block) && isset($block->settings[$settingKey]) ? $block->getTranslations('settings.' . $settingKey) : [])"
+                />
+              @else
+                <x-form.input
+                  type="text"
+                  name="settings[{{ $settingKey }}]"
+                  :label="__('pages.blocks.settings.' . $settingKey)"
+                  :value="old('settings.' . $settingKey, isset($block) && isset($block->settings[$settingKey]) ? $block->settings[$settingKey] : ($setting['default'] ?? ''))"
+                />
+              @endif
             @endif
           @endforeach
         @endif

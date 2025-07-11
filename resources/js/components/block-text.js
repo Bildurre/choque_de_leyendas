@@ -4,35 +4,31 @@ export default function initTextImageHeight() {
     return window.matchMedia('(min-width: 48rem)').matches; // 768px/16 = 48rem
   }
   
-  // Function to adjust image heights for grid layouts only
+  // Function to adjust image heights
   function adjustImageHeights() {
-    // Only run on tablet or larger
+    // Only execute on tablet or larger
     if (!isTabletOrLarger()) {
       resetImageHeights();
       return;
     }
     
-    // Find all text blocks
+    // Find all text blocks with side images
     const textBlocks = document.querySelectorAll('.block--text');
     
     textBlocks.forEach(textBlock => {
       const contentWrapper = textBlock.querySelector('.block__content-wrapper');
       if (!contentWrapper) return;
       
-      // Check if it has lateral images (grid layout)
+      // Check if it has side image (not clearfix)
       const hasImageLeft = contentWrapper.classList.contains('has-image-left');
       const hasImageRight = contentWrapper.classList.contains('has-image-right');
       
-      // Skip if no lateral images or if it's clearfix layout
+      // Skip if no side image or if it's clearfix layout
       if (!hasImageLeft && !hasImageRight) return;
+      if (contentWrapper.classList.contains('has-image-clearfix-left') || 
+          contentWrapper.classList.contains('has-image-clearfix-right')) return;
       
-      // Skip clearfix layouts - they handle their own sizing
-      const isClearfixLeft = contentWrapper.classList.contains('has-image-clearfix-left');
-      const isClearfixRight = contentWrapper.classList.contains('has-image-clearfix-right');
-      
-      if (isClearfixLeft || isClearfixRight) return;
-      
-      // Get content and image elements
+      // Get content and image
       const content = contentWrapper.querySelector('.block__content');
       const imageContainer = contentWrapper.querySelector('.block__image');
       
@@ -46,7 +42,7 @@ export default function initTextImageHeight() {
         // Get content height
         const contentHeight = content.offsetHeight;
         
-        // Apply max height to image container
+        // Apply max height to image
         imageContainer.style.maxHeight = contentHeight + 'px';
       });
     });
@@ -54,40 +50,24 @@ export default function initTextImageHeight() {
   
   // Function to reset heights on mobile
   function resetImageHeights() {
-    // Only reset grid layout images, not clearfix
-    const imageContainers = document.querySelectorAll(
-      '.block--text .block__content-wrapper:is(.has-image-left, .has-image-right) .block__image'
-    );
-    
+    const imageContainers = document.querySelectorAll('.block--text .block__content-wrapper:not(.has-image-clearfix-left):not(.has-image-clearfix-right) .block__image');
     imageContainers.forEach(imageContainer => {
-      const wrapper = imageContainer.closest('.block__content-wrapper');
-      // Skip clearfix layouts
-      if (wrapper && (
-        wrapper.classList.contains('has-image-clearfix-left') || 
-        wrapper.classList.contains('has-image-clearfix-right')
-      )) {
-        return;
-      }
-      
       imageContainer.style.maxHeight = '';
     });
   }
   
-  // Run on load
+  // Execute on load
   adjustImageHeights();
   
-  // Run on window resize
+  // Execute on window resize
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(adjustImageHeights, 150);
   });
   
-  // Run when images load
-  const images = document.querySelectorAll(
-    '.block--text .block__content-wrapper:is(.has-image-left, .has-image-right) .block__image img'
-  );
-  
+  // Execute when images load
+  const images = document.querySelectorAll('.block--text .block__content-wrapper:not(.has-image-clearfix-left):not(.has-image-clearfix-right) .block__image img');
   images.forEach(img => {
     if (img.complete) {
       adjustImageHeights();
@@ -96,19 +76,19 @@ export default function initTextImageHeight() {
     }
   });
   
-  // Observer for dynamic DOM changes
+  // Observer to detect dynamic DOM changes
   const observer = new MutationObserver(() => {
     adjustImageHeights();
   });
   
-  // Observe body for dynamic content
+  // Observe body changes (in case text blocks are added dynamically)
   const body = document.querySelector('body');
   if (body) {
     observer.observe(body, { 
       childList: true, 
       subtree: true,
       attributes: true,
-      attributeFilter: ['class', 'style']
+      attributeFilter: ['class']
     });
   }
   

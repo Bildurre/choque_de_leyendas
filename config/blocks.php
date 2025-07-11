@@ -48,6 +48,7 @@ return [
         ],
         'button_text' => [
           'type' => 'text',
+          'multilingual' => true,
           'default' => 'Ver todos',
         ],
       ],
