@@ -38,17 +38,24 @@
     padding: $spacing-lg $spacing-xl;
     order: 2;
 
+
+    text-align: center;
+
     @include responsive(tablet) {
       padding: $spacing-xl $spacing-xxl;
       order: 0;
+
+      text-align: inherit;
     }
+
+
 
     .block__text {
       text-align: justify;
 
-      @include responsive(tablet) {
-        text-align: inherit;
-      }
+      // @include responsive(tablet) {
+      //   text-align: inherit;
+      // }
     }
   }
   

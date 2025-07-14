@@ -17,21 +17,64 @@
     "description": {"en": "<p>Page to access the game rules</p>", "es": "<p>Página para acceder a las reglas del juego</p>"},
     "is_published": true,
     "is_printable": true,
-    "meta_title": {"en": "How to Play", "es": "Como Jugar"},
-    "meta_description": {"en": "Learn to play Alanda: Clash of Legends", "es": "Aprende a jugar a Alanda: Choque de Leyendas"},
+    "is_home": false,
+    "meta_title": {"en": "How to Play - Alanda: Clash of Legends | Rules and Guides", "es": "Cómo Jugar - Alanda: Choque de Leyendas | Reglas y Guías"},
+    "meta_description": {"en": "Learn to play Alanda: Clash of Legends. Access complete rules, component guides and reference material. Everything you need to master the game.", "es": "Aprende a jugar Alanda: Choque de Leyendas. Accede a las reglas completas, guía de componentes y material de referencia. Todo lo necesario para dominar el juego."},
     "parent_id": null,
     "template": "default",
-    "order": 0
+    "order": 0,
+    "background_image": "images/pages/how-to-play-bg.jpeg"
   },
   {
-    "title": {"en": "The Rules", "es": "Las Reglas"},
-    "description": {"en": "<p>Learn the basic rules of the game</p>", "es": "<p>Aprende las reglas básicas del juego</p>"},
+    "title": {"en": "Game rules", "es": "Reglas del juego"},
+    "description": {"en": "<p>Complete rules for Alanda: Clash of Legends with step-by-step explanations</p>", "es": "<p>Reglas completas de Alanda: Choque de Leyendas con explicaciones paso a paso</p>"},
     "is_published": true,
     "is_printable": true,
-    "meta_title": {"en": "Rules", "es": "Reglas"},
-    "meta_description": {"en": "Learn to play Alanda: Clash of Legends", "es": "Aprende a jugar a Alanda: Choque de Leyendas"},
-    "parent_reference": 1,
+    "is_home": false,
+    "meta_title": {"en": "Game Rules - Alanda: Clash of Legends", "es": "Reglas del Juego - Alanda: Choque de Leyendas"},
+    "meta_description": {"en": "Learn the complete rules of Alanda: Clash of Legends. Setup, battle rounds, dice system, combat and all mechanics explained step by step.", "es": "Aprende las reglas completas de Alanda: Choque de Leyendas. Preparación, rondas de batalla, sistema de dados, combates y todas las mecánicas explicadas paso a paso."},
+    "parent_reference": 2,
     "template": "default",
-    "order": 0
+    "order": 0,
+    "background_image": "images/pages/game-rules-bg.jpeg"
+  },
+  {
+    "title": {"en": "Game components", "es": "Componentes del juego"},
+    "description": {"en": "<p>Detailed guide of all components: cards, dice and game elements</p>", "es": "<p>Guía detallada de todos los componentes: cartas, dados y elementos del juego</p>"},
+    "is_published": true,
+    "is_printable": true,
+    "is_home": false,
+    "meta_title": {"en": "Components - Alanda: Clash of Legends | Heroes, Cards and Dice", "es": "Componentes - Alanda: Choque de Leyendas | Héroes, Cartas y Dados"},
+    "meta_description": {"en": "Know all Alanda components: hero cards, action card types, three-color dice system. Complete visual guide with examples.", "es": "Conoce todos los componentes de Alanda: cartas de héroe, tipos de cartas de acción, sistema de dados tricolor. Guía visual completa con ejemplos."},
+    "parent_reference": 2,
+    "template": "default",
+    "order": 0,
+    "background_image": "images/pages/game-components-bg.jpeg"
+  },
+  {
+    "title": {"en": "Appendices and references", "es": "Anexos y referencias"},
+    "description": {"en": "<p>Quick reference material: rules summary, counters, glossary and sequences</p>", "es": "<p>Material de referencia rápida: resumen de reglas, contadores, glosario y secuencias</p>"},
+    "is_published": true,
+    "is_printable": true,
+    "is_home": false,
+    "meta_title": {"en": "Appendices - Alanda: Clash of Legends | Quick References", "es": "Anexos - Alanda: Choque de Leyendas | Referencias Rápidas"},
+    "meta_description": {"en": "Reference material for Alanda: rules summary, counter table, glossary of terms, turn sequence. Everything for quick consultations.", "es": "Material de referencia para Alanda: resumen de reglas, tabla de contadores, glosario de términos, secuencia de turno. Todo para consultas rápidas."},
+    "parent_reference": 2,
+    "template": "default",
+    "order": 0,
+    "background_image": "images/pages/appendices-and-references-bg.jpeg"
+  },
+  {
+    "title": {"en": "Game modes", "es": "Modos de juego"},
+    "description": {"en": "<p>Variants and alternative modes with different rules and special mechanics</p>", "es": "<p>Variantes y modos alternativos con diferentes reglas y mecánicas especiales</p>"},
+    "is_published": true,
+    "is_printable": true,
+    "is_home": false,
+    "meta_title": {"en": "Game Modes - Alanda: Clash of Legends | Variants", "es": "Modos de Juego - Alanda: Choque de Leyendas | Variantes"},
+    "meta_description": {"en": "Explore Alanda game modes: variants with different building rules, special mechanics, multiplayer and more ways to play.", "es": "Explora los modos de juego de Alanda: variantes con diferentes reglas de construcción, mecánicas especiales, multijugador y más formas de jugar."},
+    "parent_reference": 2,
+    "template": "default",
+    "order": 0,
+    "background_image": "images/pages/game-modes-bg.jpeg"
   }
 ]
