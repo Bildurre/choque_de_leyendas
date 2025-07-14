@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('locale', 5)->nullable();
             $table->unsignedBigInteger('faction_id')->nullable();
             $table->unsignedBigInteger('deck_id')->nullable();
+            $table->unsignedBigInteger('page_id')->nullable();
             $table->boolean('is_permanent')->default(false);
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
@@ -32,14 +33,17 @@ return new class extends Migration
             $table->index('locale');
             $table->index('faction_id');
             $table->index('deck_id');
+            $table->index('page_id');
             $table->index(['type', 'locale']);
             $table->index(['faction_id', 'locale']);
             $table->index(['deck_id', 'locale']);
+            $table->index(['page_id', 'locale']);
             $table->index(['type', 'is_permanent', 'locale']);
             
             // Foreign keys
             $table->foreign('faction_id')->references('id')->on('factions')->onDelete('cascade');
             $table->foreign('deck_id')->references('id')->on('faction_decks')->onDelete('cascade');
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
         });
     }
 

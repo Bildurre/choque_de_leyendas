@@ -22,6 +22,7 @@ class GeneratedPdf extends Model
         'locale',
         'faction_id',
         'deck_id',
+        'page_id',
         'is_permanent',
         'expires_at',
     ];
@@ -50,6 +51,14 @@ class GeneratedPdf extends Model
     public function deck(): BelongsTo
     {
         return $this->belongsTo(FactionDeck::class, 'deck_id');
+    }
+
+    /**
+     * Get the page associated with this PDF
+     */
+    public function page(): BelongsTo
+    {
+        return $this->belongsTo(Page::class, 'page_id');
     }
 
     /**

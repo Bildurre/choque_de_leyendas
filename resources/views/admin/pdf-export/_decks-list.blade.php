@@ -5,9 +5,9 @@
         :title="$deck->name . ' (' . $deck->faction->name . ')'"
         type="deck"
         :entityId="$deck->id"
-        :existingPdf="$existingPdfs['deck'][$deck->id] ?? null"
+        :existingPdf="$existingPdfs[$deck->id] ?? null"
         :generateRoute="route('admin.pdf-export.generate-deck', $deck)"
-        :deleteRoute="isset($existingPdfs['deck'][$deck->id]) ? route('admin.pdf-export.destroy', $existingPdfs['deck'][$deck->id]) : null"
+        :deleteRoute="isset($existingPdfs[$deck->id]) ? route('admin.pdf-export.destroy', $existingPdfs[$deck->id]) : null"
       />
     @endforeach
   </x-pdf.list>

@@ -69,7 +69,7 @@ class PdfExportService
         
       case 'pages':
         $data['pages'] = $this->getPrintablePages();
-        $data['existingPdfs']['page'] = $this->pagesExportService->getAllPagesExistingPdfs();
+        $data['existingPdfs']['page'] = $this->pagesExportService->getExistingPdfs();
         break;
         
       case 'others':
@@ -116,11 +116,11 @@ class PdfExportService
   }
   
   /**
-   * Generate page PDF by slug (delegates to PagesExportService)
+   * Generate page PDFs (delegates to PagesExportService)
    */
-  public function generatePagePdf(string $slug): void
+  public function generatePagePdfs(Page $page): void
   {
-    $this->pagesExportService->generatePdfs($slug);
+    $this->pagesExportService->generatePdfs($page);
   }
   
   /**
@@ -156,11 +156,11 @@ class PdfExportService
   }
   
   /**
-   * Delete page PDFs by slug (delegates to PagesExportService)
+   * Delete page PDFs (delegates to PagesExportService)
    */
-  public function deletePagePdfs(string $slug): void
+  public function deletePagePdfs(int $pageId): void
   {
-    $this->pagesExportService->deletePdfs($slug);
+    $this->pagesExportService->deletePdfs($pageId);
   }
   
   /**
@@ -264,9 +264,17 @@ class PdfExportService
         ->first();
         
       return ($localizedPdf && $localizedPdf->exists()) ? $localizedPdf : null;
+      
+    } elseif ($pdf->type === 'page' && $pdf->page_id) {
+      $localizedPdf = GeneratedPdf::where('type', 'page')
+        ->where('page_id', $pdf->page_id)
+        ->where('locale', $locale)
+        ->first();
+        
+      return ($localizedPdf && $localizedPdf->exists()) ? $localizedPdf : null;
     }
     
-    // For page PDFs or other types
+    // For other types (counters, etc.)
     $localizedPdf = GeneratedPdf::where('type', $pdf->type)
       ->where('locale', $locale)
       ->where('is_permanent', true)

@@ -538,5 +538,3 @@ Route::group([
     ->name('content.page')
     ->where('page', '[a-z0-9\-]+'); // Restricción para admitir solo slugs válidos
 });
-
-
