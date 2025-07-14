@@ -66,10 +66,17 @@
       'title' => ['es' => 'Cartas', 'en' => 'Cards'],
       'subtitle' => ['es' => 'Descubre las cartas del juego', 'en' => 'Discover the game cards'],
       'background_color' => 'none',
+      'content' => [
+        'en' => [
+          'button_text' => __('View all Cards'),
+        ],
+        'es' => [
+          'button_text' => __('Ver todas las Cartas'),
+        ]
+      ],
       'settings' => [
         'model_type' => 'card',
         'display_type' => 'random',
-        'button_text' => __('public.view_all_cards'),
         'text_alignment' => 'left'
       ]
     ]);
@@ -83,10 +90,17 @@
       'title' => ['es' => 'Facciones', 'en' => 'Factions'],
       'subtitle' => ['es' => 'Explora las facciones disponibles', 'en' => 'Explore the available factions'],
       'background_color' => 'none',
+      'content' => [
+        'en' => [
+          'button_text' => __('View all Factions'),
+        ],
+        'es' => [
+          'button_text' => __('Ver todas las Facciones'),
+        ]
+      ],
       'settings' => [
         'model_type' => 'faction',
         'display_type' => 'random',
-        'button_text' => __('public.view_all_factions'),
         'text_alignment' => 'left'
       ]
     ]);

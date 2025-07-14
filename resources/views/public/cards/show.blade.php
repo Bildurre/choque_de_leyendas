@@ -183,10 +183,17 @@
             'title' => ['es' => 'Otras Cartas', 'en' => 'Other Cards'],
             'subtitle' => ['es' => 'Descubre más cartas del juego', 'en' => 'Discover more game cards'],
             'background_color' => 'none',
+            'content' => [
+              'en' => [
+                'button_text' => __('View all Cards'),
+              ],
+              'es' => [
+                'button_text' => __('Ver todas las Cartas'),
+              ]
+            ],
             'settings' => [
                 'model_type' => 'card',
                 'display_type' => 'random',
-                'button_text' => __('public.view_all_cards'),
                 'text_alignment' => 'left'
             ]
         ]);
@@ -200,10 +207,17 @@
             'title' => ['es' => 'Héroes Relacionados', 'en' => 'Related Heroes'],
             'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
             'background_color' => 'none',
+            'content' => [
+              'en' => [
+                'button_text' => __('View all Heroes'),
+              ],
+              'es' => [
+                'button_text' => __('Ver todos los Héroes'),
+              ]
+            ],
             'settings' => [
                 'model_type' => 'hero',
                 'display_type' => 'random',
-                'button_text' => __('public.view_all_heroes'),
                 'text_alignment' => 'left'
             ]
         ]);

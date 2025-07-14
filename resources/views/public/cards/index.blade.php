@@ -66,10 +66,17 @@
       'title' => ['es' => 'Héroes', 'en' => 'Heroes'],
       'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
       'background_color' => 'none',
+      'content' => [
+        'en' => [
+          'button_text' => __('View all Heroes'),
+        ],
+        'es' => [
+          'button_text' => __('Ver todos los Héroes'),
+        ]
+      ],
       'settings' => [
         'model_type' => 'hero',
         'display_type' => 'random',
-        'button_text' => __('public.view_all_heroes'),
         'text_alignment' => 'left'
       ]
     ]);
@@ -83,10 +90,17 @@
       'title' => ['es' => 'Facciones', 'en' => 'Factions'],
       'subtitle' => ['es' => 'Explora las facciones disponibles', 'en' => 'Explore the available factions'],
       'background_color' => 'none',
+      'content' => [
+        'en' => [
+          'button_text' => __('View all Factions'),
+        ],
+        'es' => [
+          'button_text' => __('Ver todas las Facciones'),
+        ]
+      ],
       'settings' => [
         'model_type' => 'faction',
         'display_type' => 'random',
-        'button_text' => __('public.view_all_factions'),
         'text_alignment' => 'left'
       ]
     ]);

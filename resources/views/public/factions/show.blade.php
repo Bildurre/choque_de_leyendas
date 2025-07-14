@@ -183,10 +183,17 @@
       'title' => ['es' => 'Otras Facciones', 'en' => 'Other Factions'],
       'subtitle' => ['es' => 'Explora más facciones del juego', 'en' => 'Explore more game factions'],
       'background_color' => 'none',
+      'content' => [
+        'en' => [
+          'button_text' => __('View all Factions'),
+        ],
+        'es' => [
+          'button_text' => __('Ver todas las Facciones'),
+        ]
+      ],
       'settings' => [
         'model_type' => 'faction',
         'display_type' => 'random',
-        'button_text' => __('public.view_all_factions'),
         'text_alignment' => 'left'
       ]
     ]);
