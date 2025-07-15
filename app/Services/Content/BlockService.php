@@ -40,8 +40,10 @@ class BlockService
     $block->page_id = $data['page_id'];
     $block->type = $data['type'];
     $block->order = $data['order'] ?? 0;
-    // Fix: Check if is_printable exists in data array
+    $block->parent_id = $data['parent_id'] ?? null;
+    // Fix: Check if is_printable and is_indexable exists in data array
     $block->is_printable = array_key_exists('is_printable', $data) ? (bool)$data['is_printable'] : true;
+    $block->is_indexable = array_key_exists('is_indexable', $data) ? (bool)$data['is_indexable'] : true;
     $block->background_color = $data['background_color'] ?? null;
     
     // Handle settings
@@ -76,10 +78,17 @@ class BlockService
     if (isset($data['order'])) {
       $block->order = $data['order'];
     }
+
+    $block->parent_id = $data['parent_id'] ?? null;
     
-    // Fix: Check if is_printable exists in data array
+    // Check if is_printable exists in data array
     if (array_key_exists('is_printable', $data)) {
       $block->is_printable = (bool)$data['is_printable'];
+    }
+
+    // Check if is_indexable exists in data array
+    if (array_key_exists('is_indexable', $data)) {
+      $block->is_indexable = (bool)$data['is_indexable'];
     }
     
     if (isset($data['background_color'])) {

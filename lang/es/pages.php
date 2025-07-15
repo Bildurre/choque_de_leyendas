@@ -47,6 +47,14 @@ return [
   
   // Bloques
   'blocks' => [
+    'types' => [
+      'text' => 'Texto',
+      'text-card' => 'Tarjeta de Texto',
+      'header' => 'Encabezado',
+      'relateds' => 'Contenido relacionado',
+      'cta' => 'Llamada a la Acción',
+      'automatic-index' => 'Índice Automático',
+    ],
     'singular' => 'Bloque',
     'plural' => 'Bloques',
     'page_blocks' => 'Bloques de la página',
@@ -61,6 +69,8 @@ return [
     'background_color' => 'Color de fondo',
     'appearance' => 'Apariencia',
     'image_position' => 'Posición de la imagen',
+    'indexable' => 'Indexable',
+    'no_parent' => 'Sin bloque padre',
     'image_position_options' => [
       'left' => 'Izquierda',
       'right' => 'Derecha',
@@ -76,12 +86,6 @@ return [
       'fill' => 'Fill',
     ],
     'column_proportions' => 'Columnas',
-    'types' => [
-      'text' => 'Texto',
-      'header' => 'Encabezado',
-      'relateds' => 'Contenido relacionado',
-      'cta' => 'Llamada a la Acción'
-    ],
     'settings' => [
       'full_width' => 'Ancho completo',
       'text_alignment' => 'Alineación del texto',

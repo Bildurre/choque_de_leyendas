@@ -47,6 +47,14 @@ return [
 
   // Blocks
   'blocks' => [
+    'types' => [
+      'text' => 'Text',
+      'text-card' => 'Text Card',
+      'header' => 'Header',
+      'relateds' => 'Related content',
+      'cta' => 'Call to Action',
+      'automatic-index' => 'Automatic Index',
+    ],
     'singular' => 'Block',
     'plural' => 'Blocks',
     'page_blocks' => 'Page blocks',
@@ -61,6 +69,8 @@ return [
     'background_color' => 'Background color',
     'appearance' => 'Appearance',
     'image_position' => 'Image position',
+    'indexable' => 'Indexable',
+    'no_parent' => 'No parent block',
     'image_position_options' => [
       'left' => 'Left',
       'right' => 'Right',
@@ -76,12 +86,6 @@ return [
       'fill' => 'Fill',
     ],
     'column_proportions' => 'Columns',
-    'types' => [
-      'text' => 'Text',
-      'header' => 'Header',
-      'relateds' => 'Related content',
-      'cta' => 'Call to Action'
-    ],
     'settings' => [
       'full_width' => 'Full width',
       'text_alignment' => 'Text alignment',

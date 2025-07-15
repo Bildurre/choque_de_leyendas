@@ -3,10 +3,11 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Http\Requests\Admin\BlockRules\HeaderRules;
-use App\Http\Requests\Admin\BlockRules\TextRules;
 use App\Http\Requests\Admin\BlockRules\CtaRules;
+use App\Http\Requests\Admin\BlockRules\TextRules;
+use App\Http\Requests\Admin\BlockRules\HeaderRules;
 use App\Http\Requests\Admin\BlockRules\RelatedsRules;
+use App\Http\Requests\Admin\BlockRules\TextCardRules;
 
 class BlockRequest extends FormRequest
 {
@@ -25,9 +26,17 @@ class BlockRequest extends FormRequest
   {
     $data = $this->all();
     
-    // Ensure is_printable is always present
+    
     if (!isset($data['is_printable'])) {
       $data['is_printable'] = 0;
+    }
+
+    if (!isset($data['is_indexable'])) {
+      $data['is_indexable'] = 0;
+    }
+
+    if (!isset($data['parent_id'])) {
+      $data['parent_id'] = null;
     }
     
     $this->merge($data);
@@ -49,6 +58,8 @@ class BlockRequest extends FormRequest
     // Base rules common to all block types
     $rules = [
       'is_printable' => ['nullable', 'boolean'],
+      'is_indexable' => ['nullable', 'boolean'],
+      'parent_id' => ['nullable', 'integer'],
       'background_color' => ['nullable', 'string'],
       'image' => ['nullable', 'array'],
       'remove_image' => ['nullable', 'boolean'],
@@ -86,6 +97,7 @@ class BlockRequest extends FormRequest
     return match($type) {
       'header' => HeaderRules::getRules(),
       'text' => TextRules::getRules(),
+      'text-card' => TextCardRules::getRules(),
       'cta' => CtaRules::getRules(),
       'relateds' => RelatedsRules::getRules(),
       default => [],

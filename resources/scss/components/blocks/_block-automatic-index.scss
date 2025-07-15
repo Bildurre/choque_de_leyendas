@@ -1,0 +1,244 @@
+@use '../../abstracts/all' as *;
+
+.automatic-index {
+  &__nav {
+    margin-top: $spacing-lg;
+  }
+  
+  &__empty {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin-top: $spacing-md;
+  }
+}
+
+.index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  // Primer nivel (elementos principales)
+  &--level-0 {
+    > .index-list__item {
+      margin-bottom: $spacing-sm;
+      
+      @include responsive(tablet) {
+        margin-bottom: $spacing-md;
+      }
+      
+      > .index-list__link {
+        font-weight: 600;
+        font-size: 1.2rem;
+        
+        @include responsive(tablet) {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+  
+  // Niveles anidados
+  &--level-1,
+  &--level-2,
+  &--level-3 {
+    margin-left: $spacing-lg;
+    margin-top: $spacing-xs;
+    
+    @include responsive(tablet) {
+      margin-left: $spacing-xl;
+      margin-top: $spacing-sm;
+    }
+    
+    .index-list__item {
+      margin-bottom: $spacing-xs;
+      
+      @include responsive(tablet) {
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+  
+  // Reducir tamaño de fuente en niveles profundos
+  &--level-1 .index-list__link {
+    font-size: 1.1rem;
+    
+    @include responsive(tablet) {
+      font-size: 1.2rem;
+    }
+  }
+  
+  &--level-2 .index-list__link {
+    font-size: 1rem;
+    
+    @include responsive(tablet) {
+      font-size: 1.1rem;
+    }
+  }
+
+  &--level-3 .index-list__link {
+    font-size: .9rem;
+    
+    @include responsive(tablet) {
+      font-size: 1rem;
+    }
+  }
+  
+  &__link {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color $transition-fast ease;
+    display: inline-block;
+    padding: $spacing-xs 0;
+    
+    &:hover,
+    &:focus {
+      color: var(--random-accent-color);
+      text-decoration: none;
+    }
+    
+    &:focus {
+      outline: 2px solid var(--random-accent-color);
+      outline-offset: 2px;
+      border-radius: $border-radius-sm;
+    }
+    
+    // Estado activo (cuando se está viendo esa sección)
+    &.is-active {
+      color: var(--random-accent-color);
+      font-weight: 600;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: -$spacing-lg;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 1.5em;
+        background-color: var(--random-accent-color);
+        border-radius: $border-radius-sm;
+        
+        @include responsive(tablet) {
+          left: calc(-#{$spacing-xl} + #{$spacing-xs});
+        }
+      }
+    }
+  }
+}
+
+// Smooth scrolling
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes highlight-block {
+  0% {
+    box-shadow: 0 0 0 4px var(--random-accent-color);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+// Estilos para el índice sticky (opcional)
+@include responsive(desktop) {
+  .automatic-index {
+    &--sticky {
+      position: sticky;
+      top: calc(#{$header-height-base} + #{$spacing-lg});
+      
+      .automatic-index__nav {
+        max-height: calc(100vh - #{$header-height-base} - #{$spacing-xxl});
+        overflow-y: auto;
+        padding-right: $spacing-sm;
+        
+        // Scrollbar personalizado
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        &::-webkit-scrollbar-track {
+          background: var(--color-card-bg);
+          border-radius: $border-radius-sm;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          background: var(--color-text-secondary);
+          border-radius: $border-radius-sm;
+          
+          &:hover {
+            background: var(--random-accent-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Estilos para modo compacto (opcional)
+.automatic-index {
+  &--compact {
+    .index-list {
+      &--level-0 > .index-list__item {
+        margin-bottom: $spacing-xs;
+      }
+      
+      &__link {
+        padding: $spacing-xs/2 0;
+      }
+    }
+  }
+}
+
+// Numeración opcional
+.automatic-index {
+  &--numbered {
+    counter-reset: section;
+    
+    .index-list {
+      &--level-0 {
+        counter-reset: subsection;
+        
+        > .index-list__item {
+          counter-increment: section;
+          
+          > .index-list__link::before {
+            content: counter(section) ". ";
+            font-weight: 700;
+            color: var(--random-accent-color);
+          }
+        }
+      }
+      
+      &--level-1 {
+        counter-reset: subsubsection;
+        
+        > .index-list__item {
+          counter-increment: subsection;
+          
+          > .index-list__link::before {
+            content: counter(section) "." counter(subsection) " ";
+            font-weight: 600;
+            color: var(--random-accent-color);
+          }
+        }
+      }
+
+      &--level-2 {
+        counter-reset: subsubsubsection;
+        
+        > .index-list__item {
+          counter-increment: subsubsection;
+          
+          > .index-list__link::before {
+            content: counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+            font-weight: 600;
+            color: var(--random-accent-color);
+          }
+        }
+      }
+    }
+  }
+}

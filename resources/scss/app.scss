@@ -89,11 +89,13 @@
 
 // Bloques
 @use 'components/blocks/block';
+@use 'components/blocks/block-content-wrapper';
 @use 'components/blocks/block-header';
 @use 'components/blocks/block-text';
+@use 'components/blocks/block-text-card';
 @use 'components/blocks/block-relateds';
 @use 'components/blocks/block-cta';
-@use 'components/blocks/block-content-wrapper';
+@use 'components/blocks/block-automatic-index';
 
 // Vendors
 @import 'choices.js/public/assets/styles/choices.min.css';

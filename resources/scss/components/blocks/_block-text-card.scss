@@ -1,0 +1,111 @@
+@use '../../abstracts/all' as *;
+
+.block--text-card {
+  .block__inner {
+    max-width: calc($max-width * .9);
+  }
+  .block__content {
+    padding: 0 $spacing-md;
+  }
+
+  .text-card-block__card {
+    position: relative;
+    box-shadow: 0 0 10px 1px var(--random-accent-color);
+    border-radius: $spacing-sm;
+    padding: $spacing-md;
+    margin: 0 auto;
+
+    @include responsive(tablet) {
+      padding: $spacing-lg;
+    }
+
+    @include responsive(desktop) {
+      padding: $spacing-xl;
+    }
+  }
+
+    // Títulos más pequeños para headers
+  .block__title {
+    font-size: 1.54rem;
+    margin-bottom: $spacing-sm;
+    
+    @include responsive(tablet) {
+      font-size: 1.76rem;
+    }
+    
+    @include responsive(desktop) {
+      font-size: 1.98rem;
+    }
+  }
+  
+  .block__subtitle {
+    position: absolute;
+    top: -$spacing-xs;
+    right: $spacing-lg;
+    font-size: .9rem;
+    color: var(--random-accent-color);
+  }
+  // Tipografía mejorada para bloques de texto
+  .block__text {
+
+    padding-top: $spacing-xl;
+    @include responsive(tablet){
+      padding-top: $spacing-lg;
+    }  
+ 
+    // Mejor espaciado para contenido largo
+    h2, h3, h4, h5, h6 {
+      margin-top: $spacing-xl;
+      // REMOVIDO: clear: both; - esto evita que el texto fluya alrededor de la imagen
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    
+    // Espaciado de párrafos mejorado
+    p + p {
+      margin-top: $spacing-md;
+    }
+    
+    // Mejor estilo de listas
+    ul, ol {
+      margin: $spacing-md 0;
+      
+      li {
+        margin-bottom: $spacing-md;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.block.block--text-card {
+  background-color: transparent;
+}
+
+.block.block--text-card {
+  // Solid background colors
+  &[data-background="red"] { .text-card-block__card{ background-color: var(--color-block-bg-red); }}
+  &[data-background="orange"] { .text-card-block__card { background-color: var(--color-block-bg-orange); }}
+  &[data-background="lime"] { .text-card-block__card { background-color: var(--color-block-bg-lime); }}
+  &[data-background="green"] { .text-card-block__card { background-color: var(--color-block-bg-green); }}
+  &[data-background="teal"] { .text-card-block__card { background-color: var(--color-block-bg-teal); }}
+  &[data-background="cyan"] { .text-card-block__card { background-color: var(--color-block-bg-cyan); }}
+  &[data-background="blue"] { .text-card-block__card { background-color: var(--color-block-bg-blue); }}
+  &[data-background="purple"] { .text-card-block__card { background-color: var(--color-block-bg-purple); }}
+  &[data-background="magenta"] { .text-card-block__card { background-color: var(--color-block-bg-magenta); }}
+  
+  // Accent colors
+  &[data-background="accent-primary"] { .text-card-block__card { background-color: var(--random-accent-color-bg-light); }}
+  &[data-background="accent-secondary"] { .text-card-block__card { background-color: var(--random-accent-color-secondary-bg-light); }}
+  &[data-background="accent-tertiary"] { .text-card-block__card { background-color: var(--random-accent-color-tertiary-bg-light); }}
+  
+  // Theme colors
+  &[data-background="theme-card"] { .text-card-block__card { background-color: var(--color-theme-card-bg); }}
+  &[data-background="theme-border"] { .text-card-block__card { background-color: var(--color-theme-border-bg); }}
+  &[data-background="theme-header"] { .text-card-block__card { background-color: var(--color-theme-header-bg); }}
+}

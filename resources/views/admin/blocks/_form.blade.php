@@ -51,7 +51,20 @@
       </div>
 
       <div>
-        {{-- Common settings for all blocks --}}
+        <x-form.select
+          name="parent_id"
+          :label="__('pages.blocks.parent')"
+          :options="$blocks"
+          :selected="old('parent_id', isset($block) ? $block->parent_id : null)"
+          :placeholder="__('pages.blocks.no_parent')"
+        />
+
+        <x-form.checkbox
+          name="is_indexable"
+          :label="__('pages.blocks.indexable')"
+          :checked="old('is_indexable', isset($block) ? $block->is_indexable : false)"
+        />
+        
         <x-form.select
           name="settings[text_alignment]"
           :label="__('pages.blocks.settings.text_alignment')"

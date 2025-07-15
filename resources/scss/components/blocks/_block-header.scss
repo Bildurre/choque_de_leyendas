@@ -12,24 +12,24 @@
     margin-bottom: $spacing-sm;
     
     @include responsive(tablet) {
-      font-size: 2.5rem;
+      font-size: 2.375rem;
     }
     
     @include responsive(desktop) {
-      font-size: 3rem;
+      font-size: 2.75rem;
     }
   }
   
   .block__subtitle {
-    font-size: 1.375rem;  // Aumentado de 1.125rem a 1.375rem
+    font-size: 1.4rem;
     margin-bottom: 0;
     
     @include responsive(tablet) {
-      font-size: 1.5rem;  // Aumentado de 1.25rem a 1.5rem
+      font-size: 1.55rem;
     }
     
     @include responsive(desktop) {
-      font-size: 1.625rem;  // Aumentado de 1.375rem a 1.625rem
+      font-size: 1.7rem;
     }
   }
   

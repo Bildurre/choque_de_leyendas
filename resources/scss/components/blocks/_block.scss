@@ -30,9 +30,7 @@
   }
 
   &-header {
-    display: grid;
     grid-template-columns: 1fr auto;
-    gap: $spacing-sm;
     
     .add-button {
       .icon {
@@ -49,7 +47,7 @@
   
   // Common title styles
   &__title {
-    margin: 0 0 $spacing-sm !important;
+    margin: 0 0 $spacing-lg !important;
     font-size: 1.75rem;
     font-weight: 800;
     color: var(--color-text-primary);
@@ -68,18 +66,18 @@
   // Common subtitle styles
   &__subtitle {
     margin: 0 0 $spacing-md !important;
-    font-size: 1.25rem;  // Aumentado de 1rem a 1.25rem
+    font-size: 1.25rem;
     font-family: 'roboto';
     font-weight: 500;
     font-style: italic;
     color: var(--color-text-secondary);
     
     @include responsive(tablet) {
-      font-size: 1.375rem;  // Aumentado de 1.125rem a 1.375rem
+      font-size: 1.375rem;
     }
     
     @include responsive(desktop) {
-      font-size: 1.5rem;  // Aumentado de 1.25rem a 1.5rem
+      font-size: 1.5rem;
     }
   }
   
@@ -101,7 +99,7 @@
     
     // Paragraphs
     p {
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-md;
       display: block;
       
       &:last-child {
@@ -116,7 +114,7 @@
       list-style-position: outside;
       
       li {
-        margin-bottom: $spacing-xs;
+        margin-bottom: $spacing-md;
         display: list-item;
         
         &:last-child {
@@ -127,10 +125,12 @@
     
     ul {
       list-style-type: disc;
+      list-style-position: outside;
     }
     
     ol {
       list-style-type: decimal;
+      list-style-position: outside;
     }
     
     // Links
@@ -173,43 +173,30 @@
       }
     }
     
-    // Specific sizes for headers inside blocks
-    h1 {
-      font-size: 2rem;
-      
-      @include responsive(tablet) {
-        font-size: 2.25rem;
-      }
-      
-      @include responsive(desktop) {
-        font-size: 2.5rem;
-      }
-    }
-    
     h2 {
       font-size: 1.5rem;
       
       @include responsive(tablet) {
-        font-size: 1.75rem;
+        font-size: 1.625rem;
       }
       
       @include responsive(desktop) {
-        font-size: 2rem;
+        font-size: 1.75rem;
       }
     }
-    
+
     h3 {
       font-size: 1.25rem;
       
       @include responsive(tablet) {
-        font-size: 1.5rem;
+        font-size: 1.375rem;
       }
       
       @include responsive(desktop) {
-        font-size: 1.625rem;
+        font-size: 1.5rem;
       }
     }
-    
+
     h4 {
       font-size: 1.125rem;
       
@@ -221,28 +208,16 @@
         font-size: 1.375rem;
       }
     }
-    
+
     h5 {
-      font-size: 1rem;
+      font-size: 1.0625rem;  // 17px, apenas más grande que 1rem
       
       @include responsive(tablet) {
         font-size: 1.125rem;
       }
       
       @include responsive(desktop) {
-        font-size: 1.25rem;
-      }
-    }
-    
-    h6 {
-      font-size: 0.875rem;
-      
-      @include responsive(tablet) {
-        font-size: 1rem;
-      }
-      
-      @include responsive(desktop) {
-        font-size: 1.125rem;
+        font-size: 1.1875rem;
       }
     }
     
@@ -277,8 +252,8 @@
     img {
       max-width: 100%;
       height: auto;
-      display: block;
-      margin: $spacing-md 0;
+      display: inline-block;
+      transform: translateY(.4rem);
     }
     
     // Code blocks
@@ -354,4 +329,8 @@
       margin-inline-end: 0 !important;
     }
   }
+}
+
+.accent-colored {
+  color: var(--random-accent-color);
 }

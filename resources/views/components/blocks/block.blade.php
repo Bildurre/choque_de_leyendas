@@ -15,6 +15,7 @@
 @endphp
 
 <section 
+  id="block-{{ $block->order }}"
   class="block block--{{ $blockType }} text-{{ $textAlignment }}" 
   @if($backgroundColor !== 'none') 
     data-background="{{ $backgroundColor }}"

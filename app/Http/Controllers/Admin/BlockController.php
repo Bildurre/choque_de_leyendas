@@ -28,6 +28,7 @@ class BlockController extends Controller
    */
   public function create(Page $page, string $type): View
   {
+    $blocks = Block::forSelectOptions($page->id);
     $blockTypes = $this->blockService->getBlockTypes();
     
     if (!isset($blockTypes[$type])) {
@@ -37,7 +38,7 @@ class BlockController extends Controller
     $blockConfig = $blockTypes[$type];
     $allowsImage = $blockConfig['allows_image'] ?? true;
     
-    return view('admin.blocks.create', compact('page', 'type', 'blockConfig', 'allowsImage'));
+    return view('admin.blocks.create', compact('page', 'blocks', 'type', 'blockConfig', 'allowsImage'));
   }
 
   /**
@@ -76,6 +77,7 @@ class BlockController extends Controller
    */
   public function edit(Page $page, Block $block): View
   {
+    $blocks = Block::forSelectOptions($page->id, $block->id);
     $blockTypes = $this->blockService->getBlockTypes();
     
     if (!isset($blockTypes[$block->type])) {
@@ -85,7 +87,7 @@ class BlockController extends Controller
     $blockConfig = $blockTypes[$block->type];
     $allowsImage = $blockConfig['allows_image'] ?? true;
     
-    return view('admin.blocks.edit', compact('page', 'block', 'blockConfig', 'allowsImage'));
+    return view('admin.blocks.edit', compact('page', 'block', 'blocks', 'blockConfig', 'allowsImage'));
   }
 
   /**

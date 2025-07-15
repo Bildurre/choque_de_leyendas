@@ -95,6 +95,32 @@ return [
         ],
       ],
     ],
+    'text-card' => [
+      'name' => 'Text Card Block',
+      'view' => 'content.blocks.text-card',
+      'icon' => 'pdf',
+      'allows_image' => false,
+      'allows_clearfix_image' => false,
+      'settings' => [
+      ],
+    ],
+    'automatic-index' => [
+      'name' => 'Automatic Index Block',
+      'view' => 'content.blocks.automatic-index',
+      'icon' => 'list',
+      'allows_image' => false,
+      'allows_clearfix_image' => false,
+      'settings' => [
+        'compact' => [
+          'type' => 'boolean',
+          'default' => false,
+        ],
+        'numbered' => [
+          'type' => 'boolean',
+          'default' => false,
+        ],
+      ],
+    ],
       // Podemos añadir más tipos después
   ],
 
