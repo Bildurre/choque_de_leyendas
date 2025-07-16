@@ -82,6 +82,8 @@ class HeroController extends Controller
     $attributesConfig = $this->attributesService->getConfiguration();
     
     $selectedFactionId = $request->query('faction_id');
+
+    $selectedAbilities = [];
     
     return view('admin.heroes.create', compact(
       'factions',
@@ -89,7 +91,8 @@ class HeroController extends Controller
       'heroClasses',
       'heroAbilities',
       'attributesConfig',
-      'selectedFactionId'
+      'selectedFactionId',
+      'selectedAbilities'
     ));
   }
 
@@ -143,7 +146,12 @@ class HeroController extends Controller
     $hero->load('heroAbilities.attackRange', 'heroAbilities.attackSubtype');
     
     // Get IDs of selected abilities
-    $selectedAbilities = $hero->heroAbilities->pluck('id')->toArray();
+    $selectedAbilities = $hero->heroAbilities->map(function ($ability) {
+      return [
+        'id' => $ability->id,
+        'copies' => 1 // Heroes don't have multiple copies of abilities
+      ];
+    })->toArray();
     
     return view('admin.heroes.edit', compact(
       'hero',

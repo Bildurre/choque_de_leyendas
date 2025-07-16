@@ -110,7 +110,8 @@ class HeroService
       
       // Sync hero abilities
       if (isset($data['hero_abilities']) && is_array($data['hero_abilities'])) {
-        $hero->heroAbilities()->sync($data['hero_abilities']);
+        $abilityIds = $this->processHeroAbilities($data['hero_abilities']);
+        $hero->heroAbilities()->sync($abilityIds);
       }
       
       // Commit the transaction
@@ -158,7 +159,8 @@ class HeroService
       
       // Sync hero abilities
       if (isset($data['hero_abilities']) && is_array($data['hero_abilities'])) {
-        $hero->heroAbilities()->sync($data['hero_abilities']);
+        $abilityIds = $this->processHeroAbilities($data['hero_abilities']);
+        $hero->heroAbilities()->sync($abilityIds);
       }
       
       // Commit the transaction
@@ -170,6 +172,29 @@ class HeroService
       DB::rollBack();
       throw $e;
     }
+  }
+
+  /**
+   * Process hero abilities data to extract only IDs
+   * 
+   * @param array $abilitiesData
+   * @return array
+   */
+  protected function processHeroAbilities(array $abilitiesData): array
+  {
+    $abilityIds = [];
+    
+    foreach ($abilitiesData as $ability) {
+      if (is_array($ability) && isset($ability['id'])) {
+        // Si viene en formato de array con 'id'
+        $abilityIds[] = $ability['id'];
+      } elseif (is_numeric($ability)) {
+        // Si viene como ID directo (por compatibilidad)
+        $abilityIds[] = $ability;
+      }
+    }
+    
+    return $abilityIds;
   }
 
   /**

@@ -230,9 +230,25 @@
               $images = $block->image;
               $imagePath = null;
               
-              // Get the image path for the current locale
+              // First, try to get the image for the current locale
               if (is_array($images) && isset($images[$locale])) {
                 $imagePath = public_path('storage/' . $images[$locale]);
+                
+                // Check if the file exists
+                if (!file_exists($imagePath)) {
+                  $imagePath = null;
+                }
+              }
+              
+              // If no image found for current locale, get the first available image
+              if (!$imagePath && is_array($images) && !empty($images)) {
+                foreach ($images as $localeKey => $image) {
+                  $tempPath = public_path('storage/' . $image);
+                  if (file_exists($tempPath)) {
+                    $imagePath = $tempPath;
+                    break;
+                  }
+                }
               }
               
               // Convert to base64 if path exists
@@ -241,6 +257,7 @@
                 $imageBase64 = image_to_base64($imagePath);
               }
             @endphp
+            
             @if($imageBase64)
               <img src="{{ $imageBase64 }}" alt="{{ $block->title ?? '' }}">
             @endif

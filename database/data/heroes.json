@@ -23,9 +23,9 @@
     "gender": "female",
     "agility": 2,
     "mental": 3,
-    "will": 3,
+    "will": 4,
     "strength": 3,
-    "armor": 2
+    "armor": 4
   },
   {
     "name": {

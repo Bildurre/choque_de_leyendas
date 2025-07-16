@@ -1,4 +1,3 @@
-<!-- resources/views/admin/faction-decks/_form.blade.php -->
 @php
   $submitRoute = isset($factionDeck) 
     ? route('admin.faction-decks.update', $factionDeck) 
