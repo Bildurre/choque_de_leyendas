@@ -232,19 +232,44 @@
     
     // Tables (if using TinyMCE tables)
     table {
-      margin: $spacing-md 0;
+      table-layout: fixed;
+      margin: $spacing-md auto;
       width: 100%;
+      max-width: calc($max-width * .7);
       border-collapse: collapse;
+      font-size: .8rem;
+
+      @include responsive(small) {
+        font-size: 1rem;
+      }
+
+      img {
+        width: 1rem !important;
+        height: 1rem !important;
+
+        @include responsive(small) {
+          width: 1.5rem !important;
+          height: 1.5rem !important;
+        }
+      }
       
       th, td {
         padding: $spacing-xs $spacing-sm;
-        border: 1px solid var(--color-border);
+        border: 2px solid var(--color-card-border);
         text-align: left;
       }
       
       th {
-        font-weight: 700;
-        background-color: var(--color-card-bg);
+        background-color: var(--color-theme-card-bg);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      img {
+        width: 16px !important;
+        height: 16px !important;
+        transform: translateY(0);
       }
     }
     
@@ -333,4 +358,14 @@
 
 .accent-colored {
   color: var(--random-accent-color);
+}
+
+.green-bg {
+  background-color: var(--color-block-bg-green);
+}
+.yellow-bg {
+  background-color: var(--color-block-bg-lime);
+}
+.red-bg {
+  background-color: var(--color-block-bg-red);
 }

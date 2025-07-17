@@ -143,4 +143,7 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
     Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
     Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
   });
+
+  // Icons
+  Route::view('/icons', 'admin.icons')->name('icons');
 });

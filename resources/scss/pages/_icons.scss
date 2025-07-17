@@ -1,0 +1,61 @@
+@use '../abstracts/all' as *;
+
+// Base styles
+.icons-page {
+  padding: $spacing-xl 0;
+}
+
+// Icons grid
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: $spacing-md;
+  max-width: $max-width;
+  margin: 0 auto;
+  
+  @include responsive(mobile) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+// Icon card
+.icon-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  text-align: center;
+  transition: all $transition-fast ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--random-accent-color);
+  }
+  
+  &__preview {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-sm;
+    
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: var(--color-text-primary);
+      transition: stroke $transition-fast ease;
+    }
+  }
+  
+  &:hover &__preview svg {
+    stroke: var(--random-accent-color);
+  }
+  
+  &__name {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    word-break: break-word;
+  }
+}
