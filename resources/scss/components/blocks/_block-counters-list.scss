@@ -1,6 +1,10 @@
 @use '../../abstracts/all' as *;
 
 .block--counters-list {
+
+  .block__text {
+    margin-bottom: $spacing-md;
+  }
   .counter-list {
     display: grid;
     grid-template-columns: 1fr;

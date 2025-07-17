@@ -70,7 +70,10 @@ return [
     'background_color' => 'Color de fondo',
     'appearance' => 'Apariencia',
     'image_position' => 'Posición de la imagen',
+    'printable' => 'Imprimible',
+    'no_printable' => 'No Imprimible',
     'indexable' => 'Indexable',
+    'no_indexable' => 'No Indexable',
     'parent' => 'Bloque padre',
     'no_parent' => 'Sin bloque padre',
     'image_limit_height' => 'Limitar altura de la imagen',
@@ -90,6 +93,8 @@ return [
     ],
     'column_proportions' => 'Columnas',
     'settings' => [
+      'compact' => 'Compacto',
+      'numbered' => 'Numerado',
       'full_width' => 'Ancho completo',
       'text_alignment' => 'Alineación del texto',
       'text_alignment_options' => [

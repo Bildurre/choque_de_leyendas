@@ -13,6 +13,7 @@ class CountersListRules
     return [
       'title' => ['nullable'],
       'subtitle' => ['nullable'],
+      'content' => ['nullable'],
     ];
   }
   

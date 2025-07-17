@@ -70,7 +70,10 @@ return [
     'background_color' => 'Background color',
     'appearance' => 'Appearance',
     'image_position' => 'Image position',
+    'printable' => 'Printable',
+    'no_printable' => 'No Printable',
     'indexable' => 'Indexable',
+    'no_indexable' => 'No Indexable',
     'parent' => 'Parent block',
     'no_parent' => 'No parent block',
     'image_limit_height' => 'Limit image height',
@@ -90,6 +93,8 @@ return [
     ],
     'column_proportions' => 'Columns',
     'settings' => [
+      'compact' => 'Compact',
+      'numbered' => 'Numbered',
       'full_width' => 'Full width',
       'text_alignment' => 'Text alignment',
       'text_alignment_options' => [

@@ -116,8 +116,9 @@ class PageController extends Controller
         $pages = Page::where('id', '!=', $page->id)
             ->pluck('title', 'id');
         $templates = $this->pageService->getAvailableTemplates();
+        $blocks = $page->blocks()->with('parent')->get();
         
-        return view('admin.pages.edit', compact('page', 'pages', 'templates'));
+        return view('admin.pages.edit', compact('page', 'pages', 'blocks', 'templates'));
     }
 
     /**

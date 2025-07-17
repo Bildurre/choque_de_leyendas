@@ -4,8 +4,8 @@
 .notifications-container {
   position: fixed;
   top: $header-height-base + 1rem;
-  right: calc(50% - #{$max-width} / 2 + 1rem); // Alineado con el contenedor principal
-  z-index: calc(#{$z-index-header} - 1); // Por debajo del header
+  right: 2rem;
+  z-index: calc(#{$z-index-header} - 1);
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
@@ -14,16 +14,7 @@
   
   @include responsive(tablet) {
     top: $header-height-big + 2rem;
-    right: calc(50% - #{$max-width} / 2 + 2rem); // Alineado con el contenedor principal
-  }
-  
-  // En pantallas más pequeñas que el max-width
-  @media (max-width: #{$max-width + 4rem}) {
-    right: 2rem; // Margen fijo cuando la pantalla es más pequeña
-    
-    @media (max-width: 768px) {
-      right: 1rem; // Margen más pequeño en móvil
-    }
+    right: 4rem;
   }
 }
 

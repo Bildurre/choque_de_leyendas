@@ -179,7 +179,7 @@ class Block extends Model
     }
       
     // Fallback
-    return __('pages.blocks.untitled_block') . ' #' . $this->id;
+    return __('pages.blocks.types.' . $this->type);
   }
 
   /**

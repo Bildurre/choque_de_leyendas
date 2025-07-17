@@ -2,6 +2,9 @@
   {{-- Titles always go first, outside the wrapper --}}
   <x-blocks.titles :block="$block" />
   <div class="block__content">
+    @if($block->content)
+      <div class="block__text">{!! $block->content !!}</div>
+    @endif
     @if($counters->isNotEmpty())
       <ul class="counter-list">
         @foreach($counters as $counter)

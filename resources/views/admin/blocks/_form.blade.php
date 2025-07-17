@@ -62,7 +62,7 @@
         <x-form.checkbox
           name="is_indexable"
           :label="__('pages.blocks.indexable')"
-          :checked="old('is_indexable', isset($block) ? $block->is_indexable : false)"
+          :checked="old('is_indexable', isset($block) ? $block->is_indexable : true)"
         />
         
         <x-form.select
