@@ -121,6 +121,23 @@ return [
         ],
       ],
     ],
+    'counters-list' => [
+      'name' => 'Counters List Block',
+      'view' => 'content.blocks.counters-list',
+      'icon' => 'globe',
+      'allows_image' => false,
+      'allows_clearfix_image' => false,
+      'settings' => [
+        'counter_type' => [
+          'type' => 'select',
+          'default' => 'boon',
+          'options' => [
+            'boon' => 'Boon',
+            'bane' => 'Bane',
+          ],
+        ],
+      ],
+    ],
       // Podemos añadir más tipos después
   ],
 

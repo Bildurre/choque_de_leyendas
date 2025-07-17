@@ -22,9 +22,9 @@
     "hero_class_id": 5,
     "gender": "female",
     "agility": 2,
-    "mental": 3,
+    "mental": 4,
     "will": 4,
-    "strength": 3,
+    "strength": 2,
     "armor": 4
   },
   {
@@ -52,7 +52,7 @@
     "agility": 4,
     "mental": 2,
     "will": 3,
-    "strength": 3,
+    "strength": 4,
     "armor": 2
   },
   {
@@ -77,11 +77,11 @@
     "hero_race_id": 1,
     "hero_class_id": 2,
     "gender": "male",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
-    "armor": 3
+    "agility": 2,
+    "mental": 2,
+    "will": 2,
+    "strength": 4,
+    "armor": 4
   },
   {
     "name": {
@@ -105,11 +105,11 @@
     "hero_race_id": 1,
     "hero_class_id": 5,
     "gender": "male",
-    "agility": 3,
+    "agility": 2,
     "mental": 3,
     "will": 3,
     "strength": 3,
-    "armor": 3
+    "armor": 4
   },
   {
     "name": {
@@ -133,10 +133,10 @@
     "hero_race_id": 1,
     "hero_class_id": 5,
     "gender": "male",
-    "agility": 3,
+    "agility": 2,
     "mental": 3,
     "will": 3,
-    "strength": 3,
+    "strength": 4,
     "armor": 3
   },
   {
@@ -162,10 +162,10 @@
     "hero_class_id": 1,
     "gender": "female",
     "agility": 3,
-    "mental": 3,
-    "will": 3,
+    "mental": 2,
+    "will": 2,
     "strength": 3,
-    "armor": 3
+    "armor": 4
   },
   {
     "name": {
@@ -190,10 +190,10 @@
     "hero_class_id": 1,
     "gender": "male",
     "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
-    "armor": 3
+    "mental": 2,
+    "will": 2,
+    "strength": 4,
+    "armor": 4
   },
   {
     "name": {
@@ -218,7 +218,7 @@
     "hero_class_id": 1,
     "gender": "male",
     "agility": 3,
-    "mental": 3,
+    "mental": 2,
     "will": 3,
     "strength": 3,
     "armor": 3
@@ -245,10 +245,10 @@
     "hero_race_id": 2,
     "hero_class_id": 7,
     "gender": "male",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
+    "agility": 4,
+    "mental": 2,
+    "will": 2,
+    "strength": 4,
     "armor": 3
   },
   {
@@ -273,11 +273,11 @@
     "hero_race_id": 2,
     "hero_class_id": 7,
     "gender": "male",
-    "agility": 3,
-    "mental": 3,
+    "agility": 4,
+    "mental": 4,
     "will": 3,
-    "strength": 3,
-    "armor": 3
+    "strength": 2,
+    "armor": 2
   },
   {
     "name": {
@@ -301,11 +301,11 @@
     "hero_race_id": 2,
     "hero_class_id": 4,
     "gender": "male",
-    "agility": 3,
-    "mental": 3,
+    "agility": 5,
+    "mental": 2,
     "will": 3,
-    "strength": 3,
-    "armor": 3
+    "strength": 4,
+    "armor": 1
   },
   {
     "name": {
@@ -329,11 +329,11 @@
     "hero_race_id": 2,
     "hero_class_id": 1,
     "gender": "female",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
-    "armor": 3
+    "agility": 5,
+    "mental": 1,
+    "will": 2,
+    "strength": 4,
+    "armor": 2
   },
   {
     "name": {
@@ -357,8 +357,8 @@
     "hero_race_id": 2,
     "hero_class_id": 1,
     "gender": "male",
-    "agility": 3,
-    "mental": 3,
+    "agility": 4,
+    "mental": 2,
     "will": 3,
     "strength": 3,
     "armor": 3
@@ -385,11 +385,11 @@
     "hero_race_id": 2,
     "hero_class_id": 7,
     "gender": "female",
-    "agility": 3,
+    "agility": 4,
     "mental": 3,
     "will": 3,
     "strength": 3,
-    "armor": 3
+    "armor": 2
   },
   {
     "name": {
@@ -413,11 +413,11 @@
     "hero_race_id": 2,
     "hero_class_id": 4,
     "gender": "female",
-    "agility": 3,
+    "agility": 4,
     "mental": 3,
-    "will": 3,
-    "strength": 3,
-    "armor": 3
+    "will": 2,
+    "strength": 4,
+    "armor": 2
   },
   {
     "name": {
@@ -441,10 +441,10 @@
     "hero_race_id": 2,
     "hero_class_id": 1,
     "gender": "female",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
+    "agility": 4,
+    "mental": 2,
+    "will": 2,
+    "strength": 4,
     "armor": 3
   },
   {
@@ -470,10 +470,10 @@
     "hero_class_id": 1,
     "gender": "male",
     "agility": 3,
-    "mental": 3,
+    "mental": 2,
     "will": 3,
-    "strength": 3,
-    "armor": 3
+    "strength": 4,
+    "armor": 4
   },
   {
     "name": {
@@ -497,9 +497,9 @@
     "hero_race_id": 3,
     "hero_class_id": 3,
     "gender": "female",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
+    "agility": 34,
+    "mental": 2,
+    "will": 2,
     "strength": 3,
     "armor": 3
   },
@@ -525,10 +525,10 @@
     "hero_race_id": 3,
     "hero_class_id": 1,
     "gender": "male",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
+    "agility": 2,
+    "mental": 2,
+    "will": 2,
+    "strength": 5,
     "armor": 3
   },
   {
@@ -553,11 +553,11 @@
     "hero_race_id": 3,
     "hero_class_id": 1,
     "gender": "female",
-    "agility": 3,
-    "mental": 3,
+    "agility": 2,
+    "mental": 2,
     "will": 3,
-    "strength": 3,
-    "armor": 3
+    "strength": 4,
+    "armor": 4
   },
   {
     "name": {
@@ -582,10 +582,10 @@
     "hero_class_id": 3,
     "gender": "male",
     "agility": 3,
-    "mental": 3,
+    "mental": 1,
     "will": 3,
-    "strength": 3,
-    "armor": 3
+    "strength": 4,
+    "armor": 4
   },
   {
     "name": {
@@ -609,9 +609,9 @@
     "hero_race_id": 3,
     "hero_class_id": 3,
     "gender": "female",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
+    "agility": 4,
+    "mental": 2,
+    "will": 2,
     "strength": 3,
     "armor": 3
   },
@@ -637,11 +637,11 @@
     "hero_race_id": 3,
     "hero_class_id": 2,
     "gender": "male",
-    "agility": 3,
+    "agility": 2,
     "mental": 3,
     "will": 3,
     "strength": 3,
-    "armor": 3
+    "armor": 5
   },
   {
     "name": {
@@ -665,10 +665,10 @@
     "hero_race_id": 3,
     "hero_class_id": 4,
     "gender": "female",
-    "agility": 3,
-    "mental": 3,
-    "will": 3,
-    "strength": 3,
+    "agility": 4,
+    "mental": 1,
+    "will": 2,
+    "strength": 5,
     "armor": 3
   }
 ]

@@ -54,6 +54,7 @@ return [
       'relateds' => 'Contenido relacionado',
       'cta' => 'Llamada a la Acción',
       'automatic-index' => 'Índice Automático',
+      'counters-list' => 'Lista de Contadores'
     ],
     'singular' => 'Bloque',
     'plural' => 'Bloques',
@@ -70,7 +71,9 @@ return [
     'appearance' => 'Apariencia',
     'image_position' => 'Posición de la imagen',
     'indexable' => 'Indexable',
+    'parent' => 'Bloque padre',
     'no_parent' => 'Sin bloque padre',
+    'image_limit_height' => 'Limitar altura de la imagen',
     'image_position_options' => [
       'left' => 'Izquierda',
       'right' => 'Derecha',
@@ -125,9 +128,22 @@ return [
         'md' => 'Medio',
         'sm' => 'Estrecho',
       ],
+      'counter_type' => 'Tipo de Contador',
+      'counter_type_options' => [
+        'boon' => 'Beneficios',
+        'bane' => 'Perjuicios'
+      ],
     ],
     'relateds' => [
       'view_all' => 'Ver todos',
+    ],
+    'automatic_index' => [
+      'navigation_label' => 'Índice de contenidos',
+      'no_content' => 'No hay contenido indexable disponible.',
+    ],
+    'counter_list' => [
+      'image_alt' => 'Imagen del contador :name',
+      'no_counters' => 'No se encontraron contadores de tipo :type.',
     ],
     'confirm_delete' => '¿Estás seguro de que deseas eliminar este bloque?',
     'created_successfully' => 'Bloque creado con exito',
@@ -137,5 +153,7 @@ return [
     'cta_text' => 'Texto',
     'cta_button_text' => 'Texto del Botón',
     'cta_button_link' => 'Enlace',
+    'text_card_text' => 'Texto',
+    'text_card_label' => 'Etiqueta',
   ],
 ];

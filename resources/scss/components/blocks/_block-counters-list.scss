@@ -1,0 +1,89 @@
+@use '../../abstracts/all' as *;
+
+.block--counters-list {
+  .counter-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    &__item {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: $spacing-md;
+      padding: $spacing-sm;
+      border: 1px solid var(--color-card-border);
+      border-radius: $border-radius-md;
+      align-items: center;
+    }
+    
+    &__image-wrapper {
+      margin: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    &__content {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: $spacing-xs;
+    }
+    
+    &__name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: 0;
+      line-height: $base-line-height * 0.8;
+    }
+    
+    &__effect {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+      line-height: $base-line-height * 0.9;
+    }
+  }
+}
+
+
+.block.block--counters-list {
+  background-color: transparent;
+}
+
+.block.block--counters-list {
+  // Solid background colors
+  &[data-background="red"] { .counter-list__item { background-color: var(--color-block-bg-red); }}
+  &[data-background="orange"] { .counter-list__item { background-color: var(--color-block-bg-orange); }}
+  &[data-background="lime"] { .counter-list__item { background-color: var(--color-block-bg-lime); }}
+  &[data-background="green"] { .counter-list__item { background-color: var(--color-block-bg-green); }}
+  &[data-background="teal"] { .counter-list__item { background-color: var(--color-block-bg-teal); }}
+  &[data-background="cyan"] { .counter-list__item { background-color: var(--color-block-bg-cyan); }}
+  &[data-background="blue"] { .counter-list__item { background-color: var(--color-block-bg-blue); }}
+  &[data-background="purple"] { .counter-list__item { background-color: var(--color-block-bg-purple); }}
+  &[data-background="magenta"] { .counter-list__item { background-color: var(--color-block-bg-magenta); }}
+  
+  // Accent colors
+  &[data-background="accent-primary"] { .counter-list__item { background-color: var(--random-accent-color-bg-light); }}
+  &[data-background="accent-secondary"] { .counter-list__item { background-color: var(--random-accent-color-secondary-bg-light); }}
+  &[data-background="accent-tertiary"] { .counter-list__item { background-color: var(--random-accent-color-tertiary-bg-light); }}
+  
+  // Theme colors
+  &[data-background="theme-card"] { .counter-list__item { background-color: var(--color-theme-card-bg); }}
+  &[data-background="theme-border"] { .counter-list__item { background-color: var(--color-theme-border-bg); }}
+  &[data-background="theme-header"] { .counter-list__item { background-color: var(--color-theme-header-bg); }}
+}

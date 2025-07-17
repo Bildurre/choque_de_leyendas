@@ -91,11 +91,4 @@ export default function initRandomAccentColor() {
       path.setAttribute('fill', primaryColor.main);
     });
   }
-  
-  // Log para debug (puedes eliminarlo en producción)
-  console.log('Random accent colors assigned:', {
-    primary: primaryColor.name,
-    secondary: secondaryColor.name,
-    tertiary: tertiaryColor.name
-  });
 }

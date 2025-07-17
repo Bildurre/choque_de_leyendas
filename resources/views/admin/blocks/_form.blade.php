@@ -126,6 +126,12 @@
                 : 'left'
             )"
           />
+
+          <x-form.checkbox
+            name="settings[limit_height]"
+            :label="__('pages.blocks.image_limit_height')"
+            :checked="old('settings.limit_height', $block->settings['limit_height'] ?? true)"
+          />
           
           <x-form.select
             name="settings[image_scale_mode]"

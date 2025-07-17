@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasMultilingualImageAttribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use App\Services\Content\BlockDataService;
+use App\Models\Traits\HasMultilingualImageAttribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Block extends Model
 {
@@ -113,7 +114,14 @@ class Block extends Model
     
     $view = $config['view'];
     
-    return view($view, ['block' => $this]);
+    // Get block-specific data
+    $blockDataService = app(BlockDataService::class);
+    $data = $blockDataService->getBlockData($this);
+    
+    // Merge block and additional data
+    $viewData = array_merge(['block' => $this], $data);
+    
+    return view($view, $viewData)->render();
   }
   
   /**
@@ -234,14 +242,33 @@ class Block extends Model
    * @param int $length
    * @return string
    */
-  private function truncateText(string $text, int $length = 50): string
+  private function truncateText(string $text, int $length = 60): string
   {
     // Clean HTML first
     $text = $this->cleanHtml($text);
     
-    return strlen($text) > $length 
-      ? substr($text, 0, $length) . '...' 
-      : $text;
+    // If text is shorter than or equal to length, return as is
+    if (strlen($text) <= $length) {
+      return $text;
+    }
+    
+    // Find the last space before the length limit
+    $truncated = substr($text, 0, $length);
+    $lastSpace = strrpos($truncated, ' ');
+    
+    // If no space found, extend to find the next word boundary
+    if ($lastSpace === false) {
+      $position = $length;
+      while ($position < strlen($text) && $text[$position] !== ' ') {
+        $position++;
+      }
+      $truncated = substr($text, 0, $position);
+    } else {
+      // Cut at the last space found
+      $truncated = substr($text, 0, $lastSpace);
+    }
+    
+    return $truncated . '...';
   }
   
   /**

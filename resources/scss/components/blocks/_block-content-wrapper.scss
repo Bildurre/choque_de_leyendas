@@ -5,13 +5,13 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-lg;
+  align-items: top;
   
   // Image on left/right (desktop only)
   @include responsive(tablet) {
     &.has-image-left,
     &.has-image-right {
       grid-template-columns: 1fr 1fr;
-      align-items: center;
       gap: $spacing-xl;
       
       // Column proportions
@@ -25,17 +25,22 @@
       &.proportions-4-1 { grid-template-columns: 4fr 1fr; }
       &.proportions-4-3 { grid-template-columns: 4fr 3fr; }
       &.proportions-3-4 { grid-template-columns: 3fr 4fr; }
-      
-      // Alinear items arriba cuando la imagen está en modo adjust
-      &.image-scale-adjust {
-        align-items: start;
-      }
     }
+  }
+  .block__content {
+    height: fit-content;
   }
 }
 
 // Image styles when used with content wrapper
 .block__content-wrapper {
+    &.has-image-left,
+    &.has-image-right {
+      .block__image {
+        order: -1;
+      }
+    }
+
   .block__image {
     position: relative;
     overflow: hidden;
@@ -63,6 +68,7 @@
       .block__image {
         height: 100%;
         aspect-ratio: auto;
+        order: 0;
       }
     }
 
@@ -76,6 +82,7 @@
     &.image-scale-contain {
       img {
         object-fit: contain;
+        object-position: top;
       }
     }
 

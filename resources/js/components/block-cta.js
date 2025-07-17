@@ -16,6 +16,8 @@ export default function initCtaImageHeight() {
     const ctaBlocks = document.querySelectorAll('.block--cta');
     
     ctaBlocks.forEach(ctaBlock => {
+      if (ctaBlock.classList.contains('no-height-limit')) return;
+
       const contentWrapper = ctaBlock.querySelector('.block__content-wrapper');
       if (!contentWrapper) return;
       

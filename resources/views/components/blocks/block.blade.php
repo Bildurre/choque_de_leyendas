@@ -12,11 +12,14 @@
   if ($fullWidth) {
     $innerClass .= ' block__inner--full-width';
   }
+
+  // controlar el tamaño de la imagen
+  $limitHeight = $block->settings['limit_height'] ?? false;
 @endphp
 
 <section 
   id="block-{{ $block->order }}"
-  class="block block--{{ $blockType }} text-{{ $textAlignment }}" 
+  class="block block--{{ $blockType }} text-{{ $textAlignment }} {{ (!$limitHeight && $block->hasMultilingualImage()) ? 'no-height-limit' : '' }}" 
   @if($backgroundColor !== 'none') 
     data-background="{{ $backgroundColor }}"
   @endif

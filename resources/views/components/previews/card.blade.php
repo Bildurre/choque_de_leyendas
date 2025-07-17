@@ -5,7 +5,7 @@
 @php
   $class = $card->cardType->name;
   if ($card->cardType->id == 1) {
-    $class .= ' - ' . $card->equipmentType->name;
+    $class .= ' - ' . __('entities.equipment_types.categories.' . $card->equipmentType->category) . ' - ' . $card->equipmentType->name;
     if ($card->equipmentType->category == 'weapon') {
       $class .= ' - ' . $card->hands . ' ' . ($card->hands > 1 ? __('entities.cards.hands') : __('entities.cards.hand'));
     }

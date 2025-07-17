@@ -54,6 +54,7 @@ return [
       'relateds' => 'Related content',
       'cta' => 'Call to Action',
       'automatic-index' => 'Automatic Index',
+      'counters-list' => 'Counters List'
     ],
     'singular' => 'Block',
     'plural' => 'Blocks',
@@ -70,7 +71,9 @@ return [
     'appearance' => 'Appearance',
     'image_position' => 'Image position',
     'indexable' => 'Indexable',
+    'parent' => 'Parent block',
     'no_parent' => 'No parent block',
+    'image_limit_height' => 'Limit image height',
     'image_position_options' => [
       'left' => 'Left',
       'right' => 'Right',
@@ -125,9 +128,22 @@ return [
         'md' => 'Medium',
         'sm' => 'Narrow',
       ],
+      'counter_type' => 'Counter Typer',
+      'counter_type_options' => [
+        'boon' => 'Boons',
+        'bane' => 'Banes'
+      ],
     ],
     'relateds' => [
       'view_all' => 'View all',
+    ],
+    'automatic_index' => [
+      'navigation_label' => 'Content Index',
+      'no_content' => 'No indexable content available',
+    ],
+    'counter_list' => [
+      'image_alt' => ':name counter image',
+      'no_counters' => ':type type counters not found',
     ],
     'confirm_delete' => 'Are you sure you want to delete this block?',
     'created_successfully' => 'Bloque created successfully',
@@ -137,5 +153,7 @@ return [
     'cta_text' => 'Text',
     'cta_button_text' => 'Button Text',
     'cta_button_link' => 'Link',
+    'text_card_text' => 'Text',
+    'text_card_label' => 'Label',
   ],
 ];

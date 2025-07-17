@@ -9,7 +9,7 @@
 
 <x-blocks.block :block="$block">
   <div class="cta-block">
-    <div class="cta-block__card {{ 'cta-block__card--'.$cardWidth }} {{  $block->hasMultilingualImage() ?: 'cta-block__card--no-image' }}">
+    <div class="cta-block__card {{ 'cta-block__card--'.$cardWidth }} {{ $block->hasMultilingualImage() ? '' : 'cta-block__card--no-image' }}">
       <x-blocks.content-wrapper :block="$block">
         @if($block->hasMultilingualImage() && in_array($imagePosition, ['top', 'left']))
           <x-blocks.image :block="$block" />

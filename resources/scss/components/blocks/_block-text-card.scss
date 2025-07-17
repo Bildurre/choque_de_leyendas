@@ -38,9 +38,9 @@
     }
   }
   
-  .block__subtitle {
+  .block__label{
     position: absolute;
-    top: -$spacing-xs;
+    top: $spacing-xs;
     right: $spacing-lg;
     font-size: .9rem;
     color: var(--random-accent-color);

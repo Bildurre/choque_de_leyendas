@@ -14,8 +14,11 @@ export default function initTextImageHeight() {
     
     // Find all text blocks with side images
     const textBlocks = document.querySelectorAll('.block--text');
+
     
     textBlocks.forEach(textBlock => {
+      if (textBlock.classList.contains('no-height-limit')) return;
+
       const contentWrapper = textBlock.querySelector('.block__content-wrapper');
       if (!contentWrapper) return;
       

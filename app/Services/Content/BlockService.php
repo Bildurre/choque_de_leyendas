@@ -165,6 +165,9 @@ class BlockService
         
       case 'relateds':
         return $this->processRelatedsContent($data);
+
+      case 'text-card':
+        return $this->processTextCardContent($data);
         
       default:
         return $data;
@@ -209,6 +212,30 @@ class BlockService
       foreach ($locales as $locale) {
         $processedContent[$locale] = [
           'button_text' => $data['content']['button_text'][$locale] ?? ''
+        ];
+      }
+      
+      $data['content'] = $processedContent;
+    }
+    
+    return $data;
+  }
+
+  /**
+   * Process Text Card content structure
+   */
+  protected function processTextCardContent(array $data): array
+  {
+    if (isset($data['content']['text']) && 
+        isset($data['content']['label'])) {
+      
+      $processedContent = [];
+      $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
+      
+      foreach ($locales as $locale) {
+        $processedContent[$locale] = [
+          'text' => $data['content']['text'][$locale] ?? '',
+          'label' => $data['content']['label'][$locale] ?? ''
         ];
       }
       
