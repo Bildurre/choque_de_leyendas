@@ -3,6 +3,9 @@
   :metaDescription="__('pdf.downloads_page_description')"
   ogType="website"
 >
+  
+  <x-page-background :image="asset('storage/images/pages/downloads-bg.jpeg')" />
+
   {{-- Header Block --}}
   @php
     $titleTranslations = [];

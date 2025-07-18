@@ -23,19 +23,29 @@
   }
   
   // Sizes
+  &--xs {
+    width: 1rem;
+    height: 1cm;
+  }
+  
   &--sm {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  &--md {
     width: 1.75rem;
     height: 1.75rem;
   }
   
-  &--md {
-    width: 2rem;
-    height: 2rem;
+  &--lg {
+    width: 2.25rem;
+    height: 2.25rem;
   }
   
-  &--lg {
-    width: 2.5rem;
-    height: 2.5rem;
+  &--xl {
+    width: 3.25rem;
+    height: 3.25rem;
   }
   
   &--view {
@@ -59,7 +69,9 @@
   
   &--edit,
   &--restore,
-  &--publish {
+  &--publish,
+  &--download
+   {
     color: $color-green;
     
     & > .icon,

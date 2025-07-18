@@ -34,7 +34,7 @@
       @if($title) title="{{ $title }}" @endif
     >
       @if($icon)
-        <x-icon :name="$icon" size="sm" class="action-button__icon" />
+        <x-icon :name="$icon" size="$size" class="action-button__icon" />
       @endif
       
       <span class="action-button__text">{{ $slot }}</span>
@@ -49,7 +49,7 @@
     {!! $targetAttr !!}
   >
     @if($icon)
-      <x-icon :name="$icon" size="sm" class="action-button__icon" />
+      <x-icon :name="$icon" size="$size" class="action-button__icon" />
     @endif
     
     <span class="action-button__text">{{ $slot }}</span>

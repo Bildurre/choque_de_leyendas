@@ -179,17 +179,6 @@ export default function initPdfProgress() {
     return `
       <div class="pdf-item" data-pdf-temp-id="${tempId}">
         <div class="pdf-item__header">
-          <div class="pdf-item__status">
-            <span class="badge badge--warning badge--md">
-              <span class="icon icon--clock icon--xs">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-              </span>
-            </span>
-          </div>
-
           <h3 class="pdf-item__title">${displayName}</h3>
           
           <div class="pdf-item__info">
@@ -225,17 +214,6 @@ export default function initPdfProgress() {
     return `
       <div class="pdf-item" data-pdf-id="${pdf.id}">
         <div class="pdf-item__header">
-          <div class="pdf-item__status">
-            <span class="badge badge--success badge--md">
-              <span class="icon icon--check-circle icon--xs">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </span>
-            </span>
-          </div>
-
           <h3 class="pdf-item__title">${pdf.display_name}</h3>
           
           <div class="pdf-item__info">

@@ -10,18 +10,6 @@
 
 <div class="pdf-item">
   <div class="pdf-item__header">
-    <div class="pdf-item__status">
-      @if($pdfExists)
-        <x-badge variant="success">
-          <x-icon name="check-circle" size="xs" />
-        </x-badge>
-      @else
-        <x-badge variant="warning">
-          <x-icon name="clock" size="xs" />
-        </x-badge>
-      @endif
-    </div>
-
     <h3 class="pdf-item__title">{{ $displayName }}</h3>
     
     @if($pdfExists)
@@ -42,22 +30,20 @@
       {{-- Download button --}}
       <x-action-button
         :href="route('public.pdf-collection.download', $pdf)"
-        variant="primary"
-        size="sm"
+        variant="download"
         icon="pdf-download"
+        size="md"
         download
-      >
-      </x-action-button>
+      />
       
       {{-- View button --}}
       <x-action-button
         :href="route('public.pdf-collection.view', $pdf)"
         target="_blank"
         variant="view"
-        size="sm"
+        size="md"
         icon="eye"
-      >
-      </x-action-button>
+      />
       
       {{-- Delete button (only for temporary PDFs) --}}
       @if($showDelete && !$pdf->is_permanent)
@@ -65,11 +51,10 @@
           :route="route('public.pdf-collection.destroy', $pdf)"
           method="DELETE"
           variant="delete"
-          size="sm"
           icon="trash"
+          size="md"
           :confirmMessage="__('pdf.confirm_delete')"
-        >
-        </x-action-button>
+        />
       @endif
     @endif
   </div>

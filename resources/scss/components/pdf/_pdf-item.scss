@@ -1,11 +1,12 @@
 @use '../../abstracts/all' as *;
 
 .pdf-item {
-  background-color: var(--color-card-bg);
+  background-color: var(--color-theme-card-bg);
   border: 1px solid var(--color-card-border);
   border-radius: $border-radius-md;
-  padding: $spacing-lg;
-  display: flex;
+  padding: $spacing-sm $spacing-md;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: $spacing-lg;
   transition: all $transition-fast ease-in-out;
@@ -16,54 +17,38 @@
   }
   
   &__header {
-    flex: 1;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
-    gap: $spacing-lg;
-    
-    @include responsive(mobile) {
-      flex-wrap: nowrap;
-    }
   }
   
   &__title {
     margin: 0;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-text-primary);
     line-height: 1.4;
     min-width: 0;
     flex-shrink: 1;
-  }
-  
-  &__status {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
-    
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: $spacing-xs;
-    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   &__info {
-    flex-shrink: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
     align-items: center;
     gap: $spacing-sm;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: var(--color-text-secondary);
-    
-    @media (max-width: #{$breakpoint-tablet - 0.0625rem}) {
-      display: none;
+
+    & * {
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     }
-  }
-  
-  &__separator {
-    opacity: 0.5;
   }
   
   &__actions {
@@ -76,20 +61,18 @@
     .action-button-form {
       display: inline-flex;
     }
-    
-    // En móviles muy pequeños, stack vertical
-    @media (max-width: #{$breakpoint-small - 0.0625rem}) {
-      flex-direction: column;
-      
-      .action-button,
-      .action-button-form {
-        width: 100%;
-        
-        .action-button {
-          width: 100%;
-          justify-content: center;
-        }
-      }
-    }
+  }
+}
+
+
+.pdf-item--admin {
+  grid-template-columns: auto 1fr auto;
+  .pdf-item__status {
+    display: flex;
+    align-items: center;
+  }
+  .badge {
+    padding: 0;
+    background-color: transparent;
   }
 }

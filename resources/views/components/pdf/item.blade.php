@@ -12,20 +12,20 @@
   $pdfExists = $hasExistingPdf && $existingPdf->exists();
 @endphp
 
-<div class="pdf-item">
-  <div class="pdf-item__header">
-    <div class="pdf-item__status">
-      @if($hasExistingPdf)
-        <x-badge variant="success">
-          <x-icon name="check-circle" size="xs" />
-        </x-badge>
-      @else
-        <x-badge variant="danger">
-          <x-icon name="x-circle" size="xs" />
-        </x-badge>
-      @endif
-    </div>
+<div class="pdf-item pdf-item--admin">
+  <div class="pdf-item__status">
+    @if($hasExistingPdf)
+      <x-badge variant="success">
+        <x-icon name="check-circle" size="md" />
+      </x-badge>
+    @else
+      <x-badge variant="danger">
+        <x-icon name="x-circle" size="md" />
+      </x-badge>
+    @endif
+  </div>
 
+  <div class="pdf-item__header">
     <h3 class="pdf-item__title">{{ $title }}</h3>
     
     @if($hasExistingPdf && $pdfExists)
@@ -50,8 +50,7 @@
         size="sm"
         icon="{{ $hasExistingPdf ? 'refresh' : 'pdf-add' }}"
         :confirmMessage="$hasExistingPdf ? __('pdf.confirm_regenerate') : null"
-      >
-      </x-action-button>
+      />
     @endif
     
     @if($hasExistingPdf && $pdfExists)
@@ -61,8 +60,7 @@
         variant="view"
         size="sm"
         icon="eye"
-      >
-      </x-action-button>
+      />
     @endif
     
     @if($hasExistingPdf && $deleteRoute)
@@ -73,8 +71,7 @@
         size="sm"
         icon="trash"
         :confirmMessage="__('pdf.confirm_delete')"
-      >
-      </x-action-button>
+      />
     @endif
   </div>
 </div>
