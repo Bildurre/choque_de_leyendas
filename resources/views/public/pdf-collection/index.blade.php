@@ -97,7 +97,7 @@
         </div>
         
         {{-- Temporary Collection (Bottom Section) --}}
-        @include('public.pdf-collection._temporary-collection')
+        @include('public/pdf-collection._temporary-collection')
         
       </div>
     </div>

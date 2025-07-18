@@ -41,6 +41,11 @@ export default function initPdfCollectionController() {
       document.addEventListener('collection:updated', () => {
         this.loadCollectionItems();
       });
+      
+      // Listen for collection cleared event
+      document.addEventListener('collection:cleared', () => {
+        this.clearCollection();
+      });
     }
     
     setupEventListeners() {
@@ -176,6 +181,19 @@ export default function initPdfCollectionController() {
         console.error('Error updating copies:', error);
         this.showNotification('Error updating copies', 'error');
       }
+    }
+    
+    clearCollection() {
+      // Clear items
+      this.renderItems([]);
+      
+      // Update UI
+      this.updateUI({ hasItems: false, count: 0, totalCards: 0 });
+      
+      // Update header counter
+      document.dispatchEvent(new CustomEvent('collection:countUpdated', {
+        detail: { count: 0 }
+      }));
     }
     
     renderItems(items) {

@@ -2,6 +2,7 @@
 import initPdfAddButton from './pdf-add-button';
 import initPdfCollectionController from './pdf-collection-controller';
 import initPdfCollectionCounter from './pdf-collection-counter';
+import initPdfProgress from './pdf-progress';
 
 export default function initPdfCollection() {
   // Inicializar el contador del header
@@ -17,6 +18,7 @@ export default function initPdfCollection() {
   const pdfCollection = document.querySelector('[data-collection-content]');
   if (pdfCollection) {
     initPdfCollectionController();
+    initPdfProgress(); // Inicializar el progress handler
   }
   
   // Listener global para añadir elementos

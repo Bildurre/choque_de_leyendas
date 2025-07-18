@@ -5,6 +5,10 @@
   </h2>
   
   <div class="temporary-collection">
+    
+    {{-- PDF Progress (integrated in the section) --}}
+    @include('public/pdf-collection._pdf-progress')
+
     {{-- Actions at the top --}}
     <div class="temporary-collection__actions" data-collection-actions style="display: none;">
       <form action="{{ route('public.pdf-collection.clear') }}" method="POST" class="temporary-collection__form">
@@ -20,7 +24,7 @@
         </x-button>
       </form>
       
-      <form action="{{ route('public.pdf-collection.generate') }}" method="POST" class="temporary-collection__form">
+      <form action="{{ route('public.pdf-collection.generate') }}" method="POST" class="temporary-collection__form" id="generate-pdf-form">
         @csrf
         <x-button 
           type="submit" 

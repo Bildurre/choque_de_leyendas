@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\GeneratePdfJob;
 use App\Models\GeneratedPdf;
 use App\Services\Pdf\TemporaryCollectionService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TemporaryCollectionController extends Controller
 {
+  private const MAX_COLLECTION_ITEMS = 100;
+  
   public function __construct(
     private TemporaryCollectionService $collectionService
   ) {}
@@ -28,6 +31,15 @@ class TemporaryCollectionController extends Controller
     ]);
     
     $copies = $validated['copies'] ?? 1;
+    
+    // Check if adding would exceed limit
+    $currentTotal = $this->collectionService->getTotalCardsCount();
+    if ($currentTotal + $copies > self::MAX_COLLECTION_ITEMS) {
+      return response()->json([
+        'success' => false,
+        'message' => __('pdf.collection.max_items_exceeded', ['max' => self::MAX_COLLECTION_ITEMS]),
+      ], 400);
+    }
     
     $success = $this->collectionService->addEntity(
       $validated['type'],
@@ -91,6 +103,18 @@ class TemporaryCollectionController extends Controller
       'copies' => 'required|integer|min:1|max:10',
     ]);
     
+    // Check if update would exceed limit
+    $currentCopies = $this->collectionService->getCopies($validated['type'], $validated['entity_id']);
+    $difference = $validated['copies'] - $currentCopies;
+    $currentTotal = $this->collectionService->getTotalCardsCount();
+    
+    if ($currentTotal + $difference > self::MAX_COLLECTION_ITEMS) {
+      return response()->json([
+        'success' => false,
+        'message' => __('pdf.collection.max_items_exceeded', ['max' => self::MAX_COLLECTION_ITEMS]),
+      ], 400);
+    }
+    
     $success = $this->collectionService->updateCopies(
       $validated['type'],
       $validated['entity_id'],
@@ -123,14 +147,25 @@ class TemporaryCollectionController extends Controller
   }
   
   /**
-   * Generate PDF from the collection
+   * Generate PDF from the collection (AJAX for progress tracking)
    */
-  public function generate(): RedirectResponse
+  public function generate(): JsonResponse
   {
     // Check if collection has items
     if (!$this->collectionService->hasItems()) {
-      return redirect()->route('public.pdf-collection.index')
-        ->with('error', __('pdf.collection.no_items'));
+      return response()->json([
+        'success' => false,
+        'message' => __('pdf.collection.no_items'),
+      ], 400);
+    }
+    
+    // Check total items limit
+    $totalCards = $this->collectionService->getTotalCardsCount();
+    if ($totalCards > self::MAX_COLLECTION_ITEMS) {
+      return response()->json([
+        'success' => false,
+        'message' => __('pdf.collection.max_items_exceeded', ['max' => self::MAX_COLLECTION_ITEMS]),
+      ], 400);
     }
     
     // Get items from collection
@@ -152,22 +187,69 @@ class TemporaryCollectionController extends Controller
       'expires_at' => now()->addHours(24),
     ]);
     
-    // Dispatch job to generate PDF
-    GeneratePdfJob::dispatch(
-      $generatedPdf,
-      'pdfs.collection',
-      [
-        'items' => $items,
+    try {
+      // Process items to expand copies
+      $expandedItems = collect();
+      
+      foreach ($items as $item) {
+        $copies = $item['copies'] ?? 1;
+        
+        for ($i = 0; $i < $copies; $i++) {
+          $expandedItems->push([
+            'type' => $item['type'],
+            'entity' => $item['entity'],
+          ]);
+        }
+      }
+      
+      // Generate PDF synchronously
+      $pdf = PDF::loadView('pdfs.collection', [
+        'items' => $expandedItems,
         'locale' => $locale,
         'title' => __('pdf.collection.custom_collection'),
-      ]
-    );
-    
-    // Clear the collection after generating
-    $this->collectionService->clearCollection();
-    
-    return redirect()->route('public.pdf-collection.index')
-      ->with('success', __('pdf.collection.generation_started'));
+      ]);
+      
+      $pdf->setPaper('a4', 'portrait');
+      
+      // PDF options
+      $pdf->setOptions([
+        'isHtml5ParserEnabled' => true,
+        'isRemoteEnabled' => true,
+        'isPhpEnabled' => false,
+        'defaultFont' => 'sans-serif',
+        'dpi' => 150,
+        'enable_font_subsetting' => false,
+      ]);
+      
+      // Save PDF
+      $content = $pdf->output();
+      Storage::disk('public')->put($generatedPdf->path, $content);
+      
+      // Clear the collection after generating
+      $this->collectionService->clearCollection();
+      
+      return response()->json([
+        'success' => true,
+        'message' => __('pdf.collection.generated_successfully'),
+        'pdf_id' => $generatedPdf->id,
+        'download_url' => route('public.pdf-collection.download', $generatedPdf),
+        'view_url' => route('public.pdf-collection.view', $generatedPdf),
+      ]);
+      
+    } catch (\Exception $e) {
+      \Log::error('Failed to generate temporary PDF', [
+        'pdf_id' => $generatedPdf->id,
+        'error' => $e->getMessage(),
+      ]);
+      
+      // Delete the PDF record if generation failed
+      $generatedPdf->delete();
+      
+      return response()->json([
+        'success' => false,
+        'message' => __('pdf.collection.generation_failed'),
+      ], 500);
+    }
   }
   
   /**
@@ -179,6 +261,7 @@ class TemporaryCollectionController extends Controller
       'count' => $this->collectionService->getItemsCount(),
       'totalCards' => $this->collectionService->getTotalCardsCount(),
       'hasItems' => $this->collectionService->hasItems(),
+      'maxItems' => self::MAX_COLLECTION_ITEMS,
     ]);
   }
   
@@ -199,9 +282,10 @@ class TemporaryCollectionController extends Controller
     });
     
     return response()->json([
-      'items' => $items->values()->toArray(), // Asegurar que sea un array indexado
+      'items' => $items->values()->toArray(),
       'count' => $items->count(),
       'totalCards' => $this->collectionService->getTotalCardsCount(),
+      'maxItems' => self::MAX_COLLECTION_ITEMS,
     ]);
   }
 }
