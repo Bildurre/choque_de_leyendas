@@ -40,10 +40,16 @@ class PdfCollectionController extends Controller
    */
   public function view(GeneratedPdf $pdf)
   {
-    // Get current locale
-    $currentLocale = app()->getLocale();
+    // For temporary PDFs, always serve the actual file regardless of locale
+    if (!$pdf->is_permanent && $pdf->exists()) {
+      return response()->file(storage_path('app/public/' . $pdf->path), [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="' . $pdf->filename . '"',
+      ]);
+    }
     
-    // Get the appropriate PDF for viewing
+    // For permanent PDFs, use the existing logic
+    $currentLocale = app()->getLocale();
     $pdfToView = $this->pdfExportService->getPdfForViewing($pdf, $currentLocale);
     
     if (!$pdfToView) {

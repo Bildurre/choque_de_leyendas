@@ -9,7 +9,19 @@ use App\Http\Controllers\Public\DownloadsController;
 use App\Http\Controllers\Public\CollectionController;
 use App\Http\Controllers\Public\FactionDeckController;
 use App\Http\Controllers\Public\PdfCollectionController;
+use App\Http\Controllers\Public\TemporaryCollectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+// Temporary Collection Routes (AJAX - no localization needed)
+Route::prefix('pdf-collection')->name('public.pdf-collection.')->group(function () {
+    Route::post('/add', [TemporaryCollectionController::class, 'add'])->name('add');
+    Route::post('/remove', [TemporaryCollectionController::class, 'remove'])->name('remove');
+    Route::post('/update-copies', [TemporaryCollectionController::class, 'updateCopies'])->name('update-copies');
+    Route::delete('/clear', [TemporaryCollectionController::class, 'clear'])->name('clear');
+    Route::post('/generate', [TemporaryCollectionController::class, 'generate'])->name('generate');
+    Route::get('/status', [TemporaryCollectionController::class, 'status'])->name('status');
+    Route::get('/items', [TemporaryCollectionController::class, 'items'])->name('items');
+});
 
 // Grupo de rutas con localización
 Route::group([

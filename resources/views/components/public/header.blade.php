@@ -1,9 +1,5 @@
 @php
-  $collectionCount = 0;
-  if (session()->has('print_collection')) {
-    $collection = session('print_collection');
-    $collectionCount = count($collection['heroes'] ?? []) + count($collection['cards'] ?? []);
-  }
+  $collectionCount = app(\App\Services\Pdf\TemporaryCollectionService::class)->getTotalCardsCount();
 @endphp
 
 <header class="public-header">
@@ -27,7 +23,7 @@
 
           <a href="{{ route('public.pdf-collection.index') }}" 
             class="collection-icon"
-            title="{{ __('public.downloads_and_collection') }}">
+            title="{{ __('public.menu.downloads') }}">
             <x-icon name="layers" />
             <span class="collection-counter" 
                   data-collection-count="{{ $collectionCount }}"

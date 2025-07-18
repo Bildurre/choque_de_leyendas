@@ -10,7 +10,7 @@
   data-collection-add
   data-entity-type="{{ $entityType }}"
   data-entity-id="{{ $entityId }}"
-  title="{{ __('components.add_button.title') }}"
+  title="{{ __('pdf.collection.add_button_title') }}"
 >
   <x-icon name="pdf-add" />
 </button>

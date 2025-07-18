@@ -7,10 +7,9 @@
 <div class="entity-public-card" data-type="{{ $type }}">
   <div class="entity-public-card__actions">
     <x-pdf.add-button
-      data-entity-type="{{ $type }}"
-      data-entity-id="{{ $entity->id }}"
-    >
-    </x-pdf.add-button>
+      :entityType="$type"
+      :entityId="$entity->id"
+    />
   </div>
 
   <a href="{{ $viewRoute }}" class="entity-public-card__link">

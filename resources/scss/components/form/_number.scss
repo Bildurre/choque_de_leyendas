@@ -1,0 +1,109 @@
+@use '../../abstracts/all' as *;
+
+// Number input wrapper
+.number-input-wrapper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  
+  // The input in the middle
+  .form-input {
+    flex: 1;
+    text-align: center;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    margin: 0;
+    
+    // Remove native spinners
+    -moz-appearance: textfield;
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    // Adjust focus styles when in wrapper
+    &:focus {
+      z-index: 1;
+    }
+  }
+}
+
+// Number input buttons
+.number-input__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $spacing-sm;
+  min-width: 2.5rem;
+  background: var(--color-card-bg);
+  border: 0.0625rem solid var(--color-card-border);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  &:hover:not(:disabled) {
+    background: var(--random-accent-color-bg-light);
+    color: var(--random-accent-color);
+    border-color: var(--random-accent-color);
+    z-index: 2;
+  }
+  
+  &:active:not(:disabled) {
+    background: var(--random-accent-color-bg-semi);
+  }
+  
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  &--decrement {
+    border-radius: $border-radius-sm 0 0 $border-radius-sm;
+    border-right: 0;
+  }
+  
+  &--increment {
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+    border-left: 0;
+  }
+}
+
+// When the wrapper is focused, highlight all borders
+.number-input-wrapper:focus-within {
+  .form-input {
+    border-color: var(--random-accent-color);
+  }
+  
+  .number-input__button {
+    border-color: var(--random-accent-color);
+  }
+}
+
+// Compact variant for small spaces (like collection cards)
+.entity-collection-card {
+  .number-input-wrapper {
+    .form-input {
+      padding: $spacing-xs;
+      font-size: 0.875rem;
+      min-width: 3rem;
+    }
+    
+    .number-input__button {
+      min-width: 2rem;
+      padding: 0 $spacing-xs;
+      
+      svg {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+    }
+  }
+}

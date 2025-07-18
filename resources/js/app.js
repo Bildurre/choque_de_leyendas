@@ -14,6 +14,7 @@ import initCollapsibleSections from './components/collapsible-section';
 import initAccordions from './components/accordion';
 import initConditionalField from './components/conditional-fields';
 import initImageUpload from './components/image-upload';
+import initNumberInputController from './components/number-input-controller';
 import initMultilingualImageUpload from './components/multilingual-image-upload';
 import initAttributeConfigForm from './components/attribute-config-form';
 import initCostInput from './components/cost-input';
@@ -24,6 +25,7 @@ import initAdminFilters from './components/filters';
 import initCostFilters from './components/filter-cost';
 import initCtaImageHeight from './components/block-cta';
 import initTextImageHeight from './components/block-text';
+import initPdfCollection from './components/pdf-collection-index';
 
 
 
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWysiwygEditor();
   initReorderableLists();
   initImageUpload();
+  initNumberInputController();
   initMultilingualImageUpload();
   initAttributeConfigForm(); 
   initCostInput();
@@ -47,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCostFilters();
   initCtaImageHeight();
   initTextImageHeight();
+  initPdfCollection();
   
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();
