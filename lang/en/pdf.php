@@ -89,8 +89,23 @@ return [
     'removed_successfully' => 'Removed from collection',
     'updated_successfully' => 'Copies updated',
     'cleared_successfully' => 'Collection cleared',
-    'generation_started' => 'Generating PDF... Refresh the page in a few seconds',
+    'generated_successfully' => 'PDF generated successfully',
     'no_items' => 'No items in collection',
+    'max_items_exceeded' => 'You have reached the maximum limit of :max cards in the collection',
+    
+    // Progress messages
+    'generating' => 'Generating...',
+    'generating_pdf' => 'Generating PDF',
+    'please_wait' => 'Please wait while we generate your PDF...',
+    'generation_warning' => 'Please do not reload the page while the PDF is being generated',
+    'generation_complete' => 'PDF generated successfully!',
+    'pdf_added_to_list' => 'The PDF has been added to the list above',
+    'generation_failed' => 'Failed to generate PDF',
+    'close' => 'Close',
+    
+    // Form elements
+    'copies' => 'Copies',
+    'remove_from_collection' => 'Remove from collection',
     
     // Errors
     'add_failed' => 'Failed to add to collection',

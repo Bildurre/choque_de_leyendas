@@ -1,96 +1,31 @@
 /**
  * PDF Progress Handler
- * Manages the PDF generation progress UI integrated in the page
+ * Manages the PDF generation progress UI integrated in the PDF item
  */
 
 export default function initPdfProgress() {
   const form = document.getElementById('generate-pdf-form');
   if (!form) return;
   
-  const progressElement = document.getElementById('pdf-progress');
-  if (!progressElement) return;
-  
-  const progressBar = progressElement.querySelector('.pdf-progress__bar-fill');
-  const resultSection = progressElement.querySelector('.pdf-progress__result');
-  const errorSection = progressElement.querySelector('.pdf-progress__error');
-  const errorMessage = progressElement.querySelector('.pdf-progress__error-message');
-  const downloadBtn = progressElement.querySelector('.pdf-progress__download-btn');
-  const viewBtn = progressElement.querySelector('.pdf-progress__view-btn');
-  
-  // Make updateTemporaryPdfsList available in the scope
-  const updateTemporaryPdfsList = async (data) => {
-    try {
-      // Look for existing temporary PDFs section
-      let temporarySection = null;
-      const sections = document.querySelectorAll('.pdf-collection__section');
-      
-      // Find the section that contains "Tus PDFs Generados"
-      sections.forEach(section => {
-        const title = section.querySelector('.pdf-collection__section-title');
-        if (title && (title.textContent.includes('Tus PDFs Generados') || title.textContent.includes('Your Generated PDFs'))) {
-          temporarySection = section;
-        }
-      });
-      
-      if (!temporarySection) {
-        // Create the section if it doesn't exist
-        temporarySection = createTemporaryPdfsSection();
-        
-        // Insert before the collection section
-        const collectionSection = document.querySelector('.pdf-collection__section--temporary');
-        if (collectionSection && collectionSection.parentElement) {
-          collectionSection.parentElement.insertBefore(temporarySection, collectionSection);
-        }
-      }
-      
-      // Get the filename from the response or generate one
-      const now = new Date();
-      const timestamp = `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}${now.getHours().toString().padStart(2, '0')}${now.getMinutes().toString().padStart(2, '0')}${now.getSeconds().toString().padStart(2, '0')}`;
-      const locale = document.documentElement.lang || 'es';
-      const filename = `custom_collection_${timestamp}_${locale}.pdf`;
-      
-      // Create the new PDF item
-      const pdfItem = createPdfItem({
-        id: data.pdf_id,
-        display_name: filename,
-        download_url: data.download_url,
-        view_url: data.view_url,
-        created_at: now,
-        size: '---'
-      });
-      
-      // Find the list container
-      const listContainer = temporarySection.querySelector('.pdf-list__items');
-      
-      if (listContainer) {
-        // Add the new item at the beginning
-        listContainer.insertAdjacentHTML('afterbegin', pdfItem);
-      }
-      
-      // Remove empty state if exists
-      const emptyState = temporarySection.querySelector('.pdf-collection__empty');
-      if (emptyState) {
-        emptyState.remove();
-      }
-      
-      // Clear the collection
-      document.dispatchEvent(new CustomEvent('collection:cleared'));
-      
-    } catch (error) {
-      console.error('Error updating PDFs list:', error);
-    }
-  };
-  
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Show progress section
-    progressElement.style.display = 'block';
-    resultSection.style.display = 'none';
-    errorSection.style.display = 'none';
-    progressBar.style.width = '0%';
+    // Generate temporary ID and filename
+    const tempId = `temp-${Date.now()}`;
+    const now = new Date();
+    const timestamp = `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}${now.getHours().toString().padStart(2, '0')}${now.getMinutes().toString().padStart(2, '0')}${now.getSeconds().toString().padStart(2, '0')}`;
+    const locale = document.documentElement.lang || 'es';
+    const filename = `${timestamp}_${locale}.pdf`;
     
-    // Start animated progress (fake progress until we get real response)
+    // Add item with progress bar immediately
+    const pdfItem = createPdfItemWithProgress(tempId, filename);
+    addPdfToList(pdfItem);
+    
+    // Get the progress bar element from the newly added item
+    const itemElement = document.querySelector(`[data-pdf-temp-id="${tempId}"]`);
+    const progressBar = itemElement.querySelector('.pdf-progress-inline__bar-fill');
+    
+    // Start animated progress
     let progress = 0;
     const progressInterval = setInterval(() => {
       progress += Math.random() * 15;
@@ -120,46 +55,115 @@ export default function initPdfProgress() {
         // Complete the progress bar
         progressBar.style.width = '100%';
         
-        // Update download and view links
-        if (downloadBtn && data.download_url) {
-          downloadBtn.href = data.download_url;
-        }
-        if (viewBtn && data.view_url) {
-          viewBtn.href = data.view_url;
-        }
-        
-        // Show result section after animation completes
+        // After a short delay, replace the item with the final version
         setTimeout(() => {
-          resultSection.style.display = 'block';
+          const finalPdfItem = createPdfItem({
+            id: data.pdf_id,
+            display_name: filename,
+            download_url: data.download_url,
+            view_url: data.view_url,
+            created_at: now,
+            size: data.size || '---'  // Añadir el tamaño desde la respuesta
+          });
           
-          // Update the temporary PDFs list dynamically
-          updateTemporaryPdfsList(data);
+          // Replace the temporary item with the final one
+          itemElement.outerHTML = finalPdfItem;
+          
+          // Clear the collection
+          document.dispatchEvent(new CustomEvent('collection:cleared'));
+          
+          // Show notification
+          if (window.showNotification) {
+            window.showNotification(window.translations?.pdf?.collection?.generation_complete || 'PDF generado correctamente', 'success');
+          }
         }, 500);
         
       } else {
-        // Show error
-        errorMessage.textContent = data.message || window.translations?.pdf?.collection?.generation_failed || 'Error al generar el PDF';
-        errorSection.style.display = 'block';
+        // Show error in the item
+        const progressElement = itemElement.querySelector('.pdf-progress-inline');
+        progressElement.innerHTML = `
+          <span class="pdf-progress-inline__error">
+            ${data.message || window.translations?.pdf?.collection?.generation_failed || 'Error al generar el PDF'}
+          </span>
+        `;
+        
+        // Remove the item after 3 seconds
+        setTimeout(() => {
+          itemElement.remove();
+        }, 3000);
       }
       
     } catch (error) {
       clearInterval(progressInterval);
       console.error('Error generating PDF:', error);
-      errorMessage.textContent = window.translations?.pdf?.collection?.generation_failed || 'Error al generar el PDF';
-      errorSection.style.display = 'block';
+      
+      // Show error in the item
+      const progressElement = itemElement.querySelector('.pdf-progress-inline');
+      progressElement.innerHTML = `
+        <span class="pdf-progress-inline__error">
+          ${window.translations?.pdf?.collection?.generation_failed || 'Error al generar el PDF'}
+        </span>
+      `;
+      
+      // Remove the item after 3 seconds
+      setTimeout(() => {
+        itemElement.remove();
+      }, 3000);
     }
   });
+  
+  /**
+   * Add PDF to the list
+   */
+  const addPdfToList = (pdfItemHtml) => {
+    // Look for existing temporary PDFs section
+    let temporarySection = null;
+    const sections = document.querySelectorAll('.pdf-collection__section');
+    
+    // Find the section that contains "Tus PDFs Generados"
+    sections.forEach(section => {
+      const title = section.querySelector('.pdf-collection__section-title');
+      if (title && (title.textContent.includes('Tus PDFs Generados') || title.textContent.includes('Your Generated PDFs'))) {
+        temporarySection = section;
+      }
+    });
+    
+    if (!temporarySection) {
+      // Create the section if it doesn't exist
+      temporarySection = createTemporaryPdfsSection();
+      
+      // Insert before the collection section
+      const collectionSection = document.querySelector('.pdf-collection__section--temporary');
+      if (collectionSection && collectionSection.parentElement) {
+        collectionSection.parentElement.insertBefore(temporarySection, collectionSection);
+      }
+    }
+    
+    // Find the list container
+    const listContainer = temporarySection.querySelector('.pdf-list__items');
+    
+    if (listContainer) {
+      // Add the new item at the beginning
+      listContainer.insertAdjacentHTML('afterbegin', pdfItemHtml);
+    }
+    
+    // Remove empty state if exists
+    const emptyState = temporarySection.querySelector('.pdf-collection__empty');
+    if (emptyState) {
+      emptyState.remove();
+    }
+  };
   
   /**
    * Create temporary PDFs section HTML
    */
   const createTemporaryPdfsSection = () => {
     const section = document.createElement('div');
-    section.className = 'pdf-collection__section pdf-collection__section--temporary-pdfs';
+    section.className = 'pdf-collection__section';
     section.innerHTML = `
-      <h2 class="pdf-collection__section-title">${window.translations?.pdf?.collection?.your_pdfs || 'Your Generated PDFs'}</h2>
+      <h2 class="pdf-collection__section-title">${window.translations?.pdf?.collection?.your_pdfs || 'Tus PDFs Generados'}</h2>
       <p class="pdf-collection__section-description">
-        ${window.translations?.pdf?.collection?.temporary_description || 'These PDFs will be automatically deleted after 24 hours'}
+        ${window.translations?.pdf?.collection?.temporary_description || 'Estos PDFs se eliminarán automáticamente después de 24 horas'}
       </p>
       <div class="pdf-list pdf-list--temporary">
         <div class="pdf-list__items"></div>
@@ -169,7 +173,44 @@ export default function initPdfProgress() {
   };
   
   /**
-   * Create a PDF item HTML
+   * Create a PDF item with progress bar
+   */
+  const createPdfItemWithProgress = (tempId, displayName) => {
+    return `
+      <div class="pdf-item" data-pdf-temp-id="${tempId}">
+        <div class="pdf-item__header">
+          <div class="pdf-item__status">
+            <span class="badge badge--warning badge--md">
+              <span class="icon icon--clock icon--xs">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </span>
+            </span>
+          </div>
+
+          <h3 class="pdf-item__title">${displayName}</h3>
+          
+          <div class="pdf-item__info">
+            <div class="pdf-progress-inline">
+              <div class="pdf-progress-inline__bar">
+                <div class="pdf-progress-inline__bar-fill"></div>
+              </div>
+              <span class="pdf-progress-inline__text">${window.translations?.pdf?.collection?.generating || 'Generando...'}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pdf-item__actions">
+          <!-- No actions while generating -->
+        </div>
+      </div>
+    `;
+  };
+  
+  /**
+   * Create a final PDF item HTML
    */
   const createPdfItem = (pdf) => {
     const date = new Date(pdf.created_at);
@@ -182,7 +223,7 @@ export default function initPdfProgress() {
     const deleteUrl = `/${locale}/descargas/eliminar/${pdf.id}`;
     
     return `
-      <div class="pdf-item">
+      <div class="pdf-item" data-pdf-id="${pdf.id}">
         <div class="pdf-item__header">
           <div class="pdf-item__status">
             <span class="badge badge--success badge--md">
@@ -198,6 +239,8 @@ export default function initPdfProgress() {
           <h3 class="pdf-item__title">${pdf.display_name}</h3>
           
           <div class="pdf-item__info">
+            <span class="pdf-item__size">${pdf.size}</span>
+            <span class="pdf-item__separator">•</span>
             <span class="pdf-item__date">${formattedDate}</span>
           </div>
         </div>

@@ -5,9 +5,6 @@
   </h2>
   
   <div class="temporary-collection">
-    
-    {{-- PDF Progress (integrated in the section) --}}
-    @include('public/pdf-collection._pdf-progress')
 
     {{-- Actions at the top --}}
     <div class="temporary-collection__actions" data-collection-actions style="display: none;">

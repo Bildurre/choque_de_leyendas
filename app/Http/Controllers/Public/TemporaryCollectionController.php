@@ -174,7 +174,7 @@ class TemporaryCollectionController extends Controller
     // Prepare filename
     $locale = app()->getLocale();
     $timestamp = now()->format('YmdHis');
-    $filename = "custom_collection_{$timestamp}_{$locale}.pdf";
+    $filename = "{$timestamp}_{$locale}.pdf";
     
     // Create GeneratedPdf record
     $generatedPdf = GeneratedPdf::create([
@@ -225,6 +225,9 @@ class TemporaryCollectionController extends Controller
       $content = $pdf->output();
       Storage::disk('public')->put($generatedPdf->path, $content);
       
+      // Get file size for the response
+      $sizeInBytes = strlen($content);
+
       // Clear the collection after generating
       $this->collectionService->clearCollection();
       
@@ -234,6 +237,7 @@ class TemporaryCollectionController extends Controller
         'pdf_id' => $generatedPdf->id,
         'download_url' => route('public.pdf-collection.download', $generatedPdf),
         'view_url' => route('public.pdf-collection.view', $generatedPdf),
+        'size' => $this->formatBytes($sizeInBytes), // Devolver el tamaño formateado
       ]);
       
     } catch (\Exception $e) {
@@ -287,5 +291,21 @@ class TemporaryCollectionController extends Controller
       'totalCards' => $this->collectionService->getTotalCardsCount(),
       'maxItems' => self::MAX_COLLECTION_ITEMS,
     ]);
+  }
+
+  /**
+   * Format bytes to human readable format
+   */
+  private function formatBytes($bytes, $precision = 2) 
+  {
+    $units = ['B', 'KB', 'MB', 'GB'];
+    
+    $bytes = max($bytes, 0);
+    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+    $pow = min($pow, count($units) - 1);
+    
+    $bytes /= pow(1024, $pow);
+    
+    return round($bytes, $precision) . ' ' . $units[$pow];
   }
 }
