@@ -25,12 +25,18 @@ import initAdminFilters from './components/filters';
 import initCostFilters from './components/filter-cost';
 import initCtaImageHeight from './components/block-cta';
 import initTextImageHeight from './components/block-text';
-import initPdfCollection from './components/pdf-collection-index';
+import initPdfCollection from './pdf-collection/index';
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Primero los que no dependen de otros
+  // Inicializar los collapsibles antes que los acordeones
+  initCollapsibleSections();
+  // Después inicializar los acordeones (dependen de los collapsibles)
+  setTimeout(() => {
+    initAccordions();
+  }, 50);
+
   initThemeSwitcher();
   initRandomAccentColor();
   initConfirmActions();
@@ -51,13 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCtaImageHeight();
   initTextImageHeight();
   initPdfCollection();
-  
-  // Inicializar los collapsibles antes que los acordeones
-  initCollapsibleSections();
-  // Después inicializar los acordeones (dependen de los collapsibles)
-  setTimeout(() => {
-    initAccordions();
-  }, 0);
 
   // Inicializar campos condicionales
 

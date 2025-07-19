@@ -1,11 +1,9 @@
-/**
- * PDF Collection Counter
- * Manages the collection counter in the header
- */
-
-class PdfCollectionCounter {
-  constructor() {
+// resources/js/components/pdf-collection/modules/CollectionCounter.js
+export default class CollectionCounter {
+  constructor(apiService) {
+    this.apiService = apiService;
     this.counter = document.querySelector('.collection-counter');
+    
     if (!this.counter) return;
     
     this.init();
@@ -18,7 +16,7 @@ class PdfCollectionCounter {
       this.updateCounter(count);
     });
     
-    // Check initial status on page load
+    // Check initial status
     this.checkInitialStatus();
   }
   
@@ -27,31 +25,16 @@ class PdfCollectionCounter {
     this.counter.dataset.collectionCount = count;
     
     // Show/hide based on count
-    if (count > 0) {
-      this.counter.style.display = '';
-    } else {
-      this.counter.style.display = 'none';
-    }
+    this.counter.style.display = count > 0 ? '' : 'none';
   }
   
   async checkInitialStatus() {
     try {
-      const response = await fetch('/pdf-collection/status', {
-        headers: {
-          'Accept': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        }
-      });
-      
-      const data = await response.json();
+      const data = await this.apiService.getCollectionStatus();
       const count = data.totalCards || data.count || 0;
       this.updateCounter(count);
     } catch (error) {
       console.error('Error checking collection status:', error);
     }
   }
-}
-
-export default function initPdfCollectionCounter() {
-  new PdfCollectionCounter();
 }

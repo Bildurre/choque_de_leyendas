@@ -1,0 +1,12 @@
+@use '../abstracts/all' as *;
+
+.pdf-collection {
+  &__section {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__section-title {
+    font-size: 1.25rem;
+    margin-bottom: $spacing-xs;
+  }
+}
