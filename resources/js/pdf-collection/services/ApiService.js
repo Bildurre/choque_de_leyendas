@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/services/ApiService.js
+// resources/js/pdf-collection/services/ApiService.js
 export default class ApiService {
   constructor() {
     this.baseHeaders = {

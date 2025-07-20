@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/modules/PdfGenerator.js
+// resources/js/pdf-collection/modules/PdfGenerator.js
 import PdfListManager from './PdfListManager';
 import PdfRenderer from '../utils/PdfRenderer';
 import ProgressAnimator from '../utils/ProgressAnimator';

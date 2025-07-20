@@ -218,4 +218,18 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   {
     return $this->heroes->sum('pivot.copies');
   }
+
+  /**
+   * Get the available PDF for a specific locale
+   */
+  public function getAvailablePdf(string $locale = null): ?GeneratedPdf
+  {
+    $locale = $locale ?? app()->getLocale();
+    
+    return GeneratedPdf::where('type', 'deck')
+      ->where('deck_id', $this->id)
+      ->where('locale', $locale)
+      ->where('is_permanent', true)
+      ->first();
+  }
 }

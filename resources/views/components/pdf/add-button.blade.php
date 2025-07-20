@@ -6,7 +6,7 @@
 
 <button 
   type="button"
-  class="add-button {{ $class }}"
+  class="pdf-action-button {{ $class }}"
   data-collection-add
   data-entity-type="{{ $entityType }}"
   data-entity-id="{{ $entityId }}"

@@ -1,6 +1,11 @@
 <?php
 
 return [
+
+  'download' => 'Download',
+  'view' => 'View',
+  'delete' => 'Delete',
+  
   // Main navigation
   'menu' => [
     'home' => 'Home',

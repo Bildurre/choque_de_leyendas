@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/utils/PdfRenderer.js
+// resources/js/pdf-collection/utils/PdfRenderer.js
 export default class PdfRenderer {
   createProgressItem(tempId, displayName) {
     return `

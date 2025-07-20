@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/modules/AddButtonHandler.js
+// resources/js/pdf-collection/modules/AddButtonHandler.js
 export default class AddButtonHandler {
   constructor() {
     this.init();

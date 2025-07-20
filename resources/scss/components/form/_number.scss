@@ -86,24 +86,3 @@
     border-color: var(--random-accent-color);
   }
 }
-
-// Compact variant for small spaces (like collection cards)
-.entity-collection-card {
-  .number-input-wrapper {
-    .form-input {
-      padding: $spacing-xs;
-      font-size: 0.875rem;
-      min-width: 3rem;
-    }
-    
-    .number-input__button {
-      min-width: 2rem;
-      padding: 0 $spacing-xs;
-      
-      svg {
-        width: 0.75rem;
-        height: 0.75rem;
-      }
-    }
-  }
-}

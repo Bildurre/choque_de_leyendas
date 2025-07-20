@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/modules/CollectionCounter.js
+// resources/js/pdf-collection/modules/CollectionCounter.js
 export default class CollectionCounter {
   constructor(apiService) {
     this.apiService = apiService;

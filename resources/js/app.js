@@ -26,10 +26,12 @@ import initCostFilters from './components/filter-cost';
 import initCtaImageHeight from './components/block-cta';
 import initTextImageHeight from './components/block-text';
 import initPdfCollection from './pdf-collection/index';
-
-
+import initNotificationService from './services/notification-service';
+import initPdfDownloader from './components/pdf-downloader';
 
 document.addEventListener('DOMContentLoaded', () => {
+  initNotificationService();
+
   // Inicializar los collapsibles antes que los acordeones
   initCollapsibleSections();
   // Después inicializar los acordeones (dependen de los collapsibles)
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCtaImageHeight();
   initTextImageHeight();
   initPdfCollection();
+  initPdfDownloader();
 
   // Inicializar campos condicionales
 

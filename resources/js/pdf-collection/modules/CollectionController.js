@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/modules/CollectionController.js
+// resources/js/pdf-collection/modules/CollectionController.js
 import CollectionRenderer from '../utils/CollectionRenderer';
 
 export default class CollectionController {
@@ -160,7 +160,7 @@ export default class CollectionController {
     if (hasItems) {
       this.updateEmptyState(false);
       if (this.actionsElement) {
-        this.actionsElement.style.display = 'flex';
+        this.actionsElement.style.display = 'grid';
       }
     } else {
       this.updateEmptyState(true);

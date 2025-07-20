@@ -1,0 +1,17 @@
+@use '../../abstracts/all' as *;
+
+.pdf-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: none;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--random-accent-color);
+  }
+}

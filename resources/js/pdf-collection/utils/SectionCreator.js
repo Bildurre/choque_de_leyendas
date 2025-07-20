@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/utils/SectionCreator.js
+// resources/js/pdf-collection/utils/SectionCreator.js
 export default class SectionCreator {
   createTemporaryPdfsSection() {
     // Buscar el acordeón por ID específico

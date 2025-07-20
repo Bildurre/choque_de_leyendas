@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/utils/ProgressAnimator.js
+// resources/js/pdf-collection/utils/ProgressAnimator.js
 export default class ProgressAnimator {
   startProgress(progressBar) {
     let progress = 0;

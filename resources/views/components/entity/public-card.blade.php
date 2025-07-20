@@ -6,10 +6,17 @@
 
 <div class="entity-public-card" data-type="{{ $type }}">
   <div class="entity-public-card__actions">
-    <x-pdf.add-button
-      :entityType="$type"
-      :entityId="$entity->id"
-    />
+    @if(in_array($type, ['deck', 'faction']))
+      <x-pdf.download-button
+        :entity="$entity"
+        :entityType="$type"
+      />
+    @else
+      <x-pdf.add-button
+        :entityType="$type"
+        :entityId="$entity->id"
+      />
+    @endif
   </div>
 
   <a href="{{ $viewRoute }}" class="entity-public-card__link">

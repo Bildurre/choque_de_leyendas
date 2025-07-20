@@ -73,7 +73,7 @@ return [
     'add_button_title' => 'Add to collection',
     'title' => 'PDF Library',
     'description' => 'Download official PDFs or create your own custom collection',
-    'temporary_collection' => 'Your Temporary Collection',
+    'temporary_collection' => 'Your Collection',
     'empty_collection' => 'Your collection is empty',
     'add_hint' => 'Add heroes and cards from faction pages',
     'clear' => 'Clear collection',
@@ -118,4 +118,11 @@ return [
   
   // View state
   'wrong_locale_view' => 'This PDF was generated in another language',
+
+  'download' => [
+    'button_title' => 'Download PDF',
+    'not_available' => 'PDF not available',
+    'success' => ':type :name downloaded successfully',
+    'error' => 'Error downloading PDF',
+  ],
 ];

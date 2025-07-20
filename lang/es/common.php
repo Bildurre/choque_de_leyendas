@@ -22,6 +22,7 @@ return [
   'restore' => 'Restaurar',
   'publish' => 'Publicar',
   'unpublish' => 'Despublicar',
+  'close' => 'Cerrar',
   
   // Estados
   'active' => 'Activo',

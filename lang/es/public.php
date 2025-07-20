@@ -1,6 +1,11 @@
 <?php
 
 return [
+
+  'download' => 'Descargar',
+  'view' => 'Ver',
+  'delete' => 'Borrar',
+
   // Navegación principal
   'menu' => [
     'home' => 'Inicio',

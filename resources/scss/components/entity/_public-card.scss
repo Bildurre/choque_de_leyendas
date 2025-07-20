@@ -24,17 +24,9 @@
   
   &__actions {
     display: flex;
-    justify-content: center;
-    gap: $spacing-sm;
-  }
-  
-
-
-  &__actions {
-    display: flex;
     gap: $spacing-sm;
     padding: $spacing-sm;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
 

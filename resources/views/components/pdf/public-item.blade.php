@@ -34,6 +34,7 @@
         icon="pdf-download"
         size="md"
         download
+        :title="__('public.download')"
       />
       
       {{-- View button --}}
@@ -43,6 +44,7 @@
         variant="view"
         size="md"
         icon="eye"
+        :title="__('public.view')"
       />
       
       {{-- Delete button (only for temporary PDFs) --}}
@@ -54,6 +56,7 @@
           icon="trash"
           size="md"
           :confirmMessage="__('pdf.confirm_delete')"
+          :title="__('public.delete')"
         />
       @endif
     @endif

@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/utils/CollectionRenderer.js
+// resources/js/pdf-collection/utils/CollectionRenderer.js
 export default class CollectionRenderer {
   renderCollectionItems(items) {
     return items.map(item => this.renderCollectionItem(item)).join('');
@@ -26,13 +26,13 @@ export default class CollectionRenderer {
           
           <button 
             type="button"
-            class="action-button action-button--delete action-button--sm entity-collection-card__remove"
+            class="pdf-action-button"
             data-remove-item
             data-entity-type="${item.type}"
             data-entity-id="${item.entity_id}"
             title="${window.translations?.pdf?.collection?.remove_from_collection || 'Remove from collection'}"
           >
-            <span class="icon icon--trash icon--sm action-button__icon">
+            <span class="icon icon--trash icon--md">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="3 6 5 6 21 6"></polyline>
                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -40,7 +40,6 @@ export default class CollectionRenderer {
                 <line x1="14" y1="11" x2="14" y2="17"></line>
               </svg>
             </span>
-            <span class="action-button__text"></span>
           </button>
         </div>
         
@@ -58,9 +57,7 @@ export default class CollectionRenderer {
     const emptyDiv = document.createElement('div');
     emptyDiv.className = 'entity-list__empty';
     emptyDiv.innerHTML = `
-      <svg class="icon icon--lg"><use href="#icon-inbox"></use></svg>
       <p>${window.translations?.pdf?.collection?.empty_collection || 'Your collection is empty'}</p>
-      <p class="temporary-collection__hint">${window.translations?.pdf?.collection?.add_hint || 'Add heroes and cards from faction pages'}</p>
     `;
     return emptyDiv;
   }

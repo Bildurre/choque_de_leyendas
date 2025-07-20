@@ -1,6 +1,12 @@
 <?php
 
 return [
+  
+  'faction' => 'Faction',
+  'deck' => 'Deck', 
+  'card' => 'Card',
+  'hero' => 'Hero',
+
   // Factions
   'factions' => [
     'index_page_title' => 'Alanda Factions - All factions',

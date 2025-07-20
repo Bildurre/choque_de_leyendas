@@ -35,16 +35,10 @@
 
   @component('content.blocks.header', ['block' => $headerBlock])
     @slot('actions')
-      <x-button
-        type="button"
-        variant="primary"
-        icon="pdf-add"
-        data-entity-type="faction"
-        data-entity-id="{{ $faction->id }}"
-        class="print-collection-add"
-      >
-        {{ __('public.collection.add_to_pdf') }}
-      </x-button>
+      <x-pdf.download-button
+        :entity="$faction"
+        entityType="faction"
+      />
     @endslot
   @endcomponent
 

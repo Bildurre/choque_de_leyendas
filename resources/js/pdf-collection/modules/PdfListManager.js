@@ -1,4 +1,4 @@
-// resources/js/components/pdf-collection/modules/PdfListManager.js
+// resources/js/pdf-collection/modules/PdfListManager.js
 import SectionCreator from '../utils/SectionCreator';
 import ScrollManager from '../utils/ScrollManager';
 

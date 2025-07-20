@@ -1,6 +1,12 @@
 <?php
 
 return [
+  
+  'faction' => 'Facción',
+  'deck' => 'Mazo',
+  'card' => 'Carta',
+  'hero' => 'Héroe',
+
   // Facciones
   'factions' => [
     'index_page_title' => 'Facciones de Alanda - Todos los bandos',

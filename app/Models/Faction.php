@@ -214,4 +214,18 @@ class Faction extends Model implements LocalizedUrlRoutable
   {
     return $this->hasMany(FactionDeck::class);
   }
+
+  /**
+   * Get the available PDF for a specific locale
+   */
+  public function getAvailablePdf(string $locale = null): ?GeneratedPdf
+  {
+    $locale = $locale ?? app()->getLocale();
+    
+    return GeneratedPdf::where('type', 'faction')
+      ->where('faction_id', $this->id)
+      ->where('locale', $locale)
+      ->where('is_permanent', true)
+      ->first();
+  }
 }
