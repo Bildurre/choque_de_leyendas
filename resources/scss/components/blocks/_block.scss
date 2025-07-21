@@ -30,19 +30,29 @@
   }
 
   &-header {
-    grid-template-columns: 1fr auto;
-    
-    .add-button {
-      .icon {
-        width: 2rem;
-        height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: $spacing-lg;
 
-        @include responsive(tablet) {
-          width: 2.5rem;
-          height: 2.5rem;
-        }
+    @include responsive(mobile) {
+      grid-template-columns: 1fr auto;
+    }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md;
+    direction: rtl;
+
+    button {
+      width: 100%;
+      height: 100%;
+
+      @include responsive(mobile) {
+        height: fit-content;
       }
     }
+  }
   }
   
   // Common title styles

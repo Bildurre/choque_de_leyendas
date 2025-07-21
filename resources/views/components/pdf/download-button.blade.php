@@ -1,7 +1,8 @@
 @props([
   'entity',
   'entityType' => '',
-  'class' => ''
+  'class' => '',
+  'type' => null
 ])
 
 @php
@@ -11,7 +12,7 @@
 @if($pdf)
   <button 
     type="button"
-    class="pdf-action-button {{ $class }}"
+    class="pdf-action-button {{ $type ? 'pdf-action-button--'.$type : '' }} {{ $class }}"
     data-download-pdf
     data-pdf-id="{{ $pdf->id }}"
     data-entity-name="{{ $entity->name }}"
@@ -24,7 +25,7 @@
 @else
   <button 
     type="button"
-    class="pdf-action-button pdf-action-button--disabled {{ $class }}"
+    class="pdf-action-button pdf-action-button--disabled {{ $type ? 'pdf-action-button--'.$type : '' }} {{ $class }}"
     title="{{ __('pdf.download.not_available') }}"
     disabled
   >

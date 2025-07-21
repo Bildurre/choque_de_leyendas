@@ -52,10 +52,15 @@
       }
     }
   }
+
+  // .icon {
+  //   width: 1.75rem;
+  //   height: 1.75rem;
+  // }
   
   &__text {
     display: none;
-    @include responsive(small) {
+    @include responsive(mobile) {
       display: inline;
     }
   }

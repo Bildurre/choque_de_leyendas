@@ -18,7 +18,7 @@
 @endphp
 
 <section 
-  id="block-{{ $block->order }}"
+  {{ $block->order ? 'id=block-'.$block->order : '' }}
   class="block block--{{ $blockType }} text-{{ $textAlignment }} {{ (!$limitHeight && $block->hasMultilingualImage()) ? 'no-height-limit' : '' }}" 
   @if($backgroundColor !== 'none') 
     data-background="{{ $backgroundColor }}"

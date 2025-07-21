@@ -1,12 +1,12 @@
 <x-public-layout
-:title="__('entities.faction_decks.page_title', ['name' => $factionDeck->name])"
+  :title="__('entities.faction_decks.page_title', ['name' => $factionDeck->name])"
   :metaDescription="__('entities.faction_decks.page_description', [
     'name' => $factionDeck->name,
     'faction' => $factionDeck->faction->name,
     'description' => Str::limit(strip_tags($factionDeck->gameMode->name), 100)
   ])"
   ogType="article"
-  :ogImage="$factionDeck->faction->getImageUrl() ?? $factionDeck->faction->getImageUrl()"
+  :ogImage="$factionDeck->hasImage() ? $factionDeck->getImageUrl() : $factionDeck->faction->getImageUrl()"
 >
   {{-- Page background with deck icon or faction icon --}}
   @if($factionDeck->hasImage())
@@ -15,15 +15,14 @@
     <x-page-background :image="$factionDeck->faction->getImageUrl()" />
   @endif
 
-  {{-- Header Block --}}
+  {{-- Header Block con acciones --}}
   @php
     $titleTranslations = [];
     $subtitleTranslations = [];
     
     foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
       $titleTranslations[$locale] = $factionDeck->getTranslation('name', $locale);
-      // Add faction name as subtitle
-      $subtitleTranslations[$locale] = $factionDeck->faction->getTranslation('name', $locale);
+      $subtitleTranslations[$locale] = $factionDeck->faction->getTranslation('name', $locale) . ' - ' . $factionDeck->gameMode->getTranslation('name', $locale);
     }
     
     $headerBlock = new \App\Models\Block([
@@ -32,51 +31,252 @@
       'subtitle' => $subtitleTranslations,
       'background_color' => 'none',
       'settings' => [
-        'text_alignment' => 'center'
+        'text_alignment' => 'justify'
       ]
     ]);
   @endphp
-  {!! $headerBlock->render() !!}
 
-  {{-- Action Buttons --}}
+  @component('content.blocks.header', ['block' => $headerBlock])
+    @slot('actions')
+      <x-pdf.download-button
+        :entity="$factionDeck"
+        entityType="deck"
+        type="outlined"
+      >
+      {{ __('pdf.download.button_title') }}
+      </x-pdf.download-button>
+    @endslot
+  @endcomponent
+
+  {{-- Content Tabs --}}
   <section class="block">
     <div class="block__inner">
-      <div class="deck-actions">
-        <button 
-          type="button" 
-          class="print-collection-add"
-          data-entity-type="deck"
-          data-entity-id="{{ $factionDeck->id }}"
-        >
-          <x-icon name="plus" />
-          {{ __('public.add_deck_to_collection') }}
-        </button>
-      </div>
+      <x-tabs>
+        <x-slot:header>
+          <x-tab-item 
+            id="info" 
+            :active="request()->get('tab', 'info') === 'info'" 
+            :href="route('public.faction-decks.show', ['factionDeck' => $factionDeck, 'tab' => 'info'])"
+            icon="info"
+          >
+            {{ __('entities.faction_decks.tabs.info') }}
+          </x-tab-item>
+          
+          <x-tab-item 
+            id="heroes" 
+            :active="request()->get('tab') === 'heroes'" 
+            :href="route('public.faction-decks.show', ['factionDeck' => $factionDeck, 'tab' => 'heroes'])"
+            icon="heroes"
+            :count="$statistics['totalHeroes']"
+          >
+            {{ __('entities.faction_decks.tabs.heroes') }}
+          </x-tab-item>
+          
+          <x-tab-item 
+            id="cards" 
+            :active="request()->get('tab') === 'cards'" 
+            :href="route('public.faction-decks.show', ['factionDeck' => $factionDeck, 'tab' => 'cards'])"
+            icon="cards"
+            :count="$statistics['totalCards']"
+          >
+            {{ __('entities.faction_decks.tabs.cards') }}
+          </x-tab-item>
+        </x-slot:header>
+        
+        <x-slot:content>
+          @php
+            $tab = request()->get('tab', 'info');
+          @endphp
+          
+          @if($tab === 'info')
+            {{-- Information Tab with all statistics --}}
+            <div class="tab-content">
+              <div class="deck-stats-wrapper">
+                {{-- Basic Information --}}
+                <x-entity-show.info-block title="public.faction_decks.basic_info">
+                  <x-entity-show.info-list>
+                    <x-entity-show.info-list-item 
+                      label="{{ __('entities.faction_decks.name') }}" 
+                      :value="$factionDeck->name" 
+                    />
+
+                    <x-entity-show.info-list-item 
+                      label="{{ __('entities.game_modes.singular') }}" 
+                      :value="$factionDeck->gameMode->name" 
+                    />
+                    
+                    <x-entity-show.info-list-item 
+                      label="{{ __('entities.heroes.plural') }}" 
+                      :value="$statistics['totalHeroes'] . ' (' . $statistics['uniqueHeroes'] . ' ' . __('public.unique') . ')'" 
+                    />
+
+                    <x-entity-show.info-list-item 
+                      label="{{ __('entities.cards.plural') }}" 
+                      :value="$statistics['totalCards'] . ' (' . $statistics['uniqueCards'] . ' ' . __('public.unique') . ')'" 
+                    />
+                  </x-entity-show.info-list>
+                </x-entity-show.info-block>
+
+                {{-- Dice Distribution --}}
+                @if($statistics['cardsByDiceCount']->count() > 0)
+                  <x-entity-show.info-block title="public.faction_decks.dice_distribution">
+                    <x-entity-show.info-list>
+                      @foreach($statistics['cardsByDiceCount']->sortKeys() as $diceCount => $cardCount)
+                        <x-entity-show.info-list-item 
+                          label="{{ $diceCount == 0 ? __('public.faction_decks.no_dice') : ($diceCount == 1 ? __('public.faction_decks.dice_count_singular', ['count' => $diceCount]) : __('public.faction_decks.dice_count_plural', ['count' => $diceCount])) }}" 
+                          :value="$cardCount" 
+                        />
+                      @endforeach
+                      
+                      <x-entity-show.info-list-item 
+                        label="{{ __('public.faction_decks.average_dice_count') }}" 
+                        :value="number_format($statistics['averageDiceCount'], 2)" 
+                      />
+                    </x-entity-show.info-list>
+                  </x-entity-show.info-block>
+                @endif
+
+                {{-- Symbol Distribution --}}
+                <x-entity-show.info-block title="public.faction_decks.symbol_distribution">
+                  <x-entity-show.info-list>
+                    @if($statistics['symbolCounts']['R'] > 0)
+                      <x-entity-show.info-list-item :value="$statistics['symbolCounts']['R']">
+                        <x-slot:label>
+                          <x-icon-dice type="red" />
+                        </x-slot:label>
+                      </x-entity-show.info-list-item>
+                    @endif
+                    
+                    @if($statistics['symbolCounts']['G'] > 0)
+                      <x-entity-show.info-list-item :value="$statistics['symbolCounts']['G']">
+                        <x-slot:label>
+                          <x-icon-dice type="green" />
+                        </x-slot:label>
+                      </x-entity-show.info-list-item>
+                    @endif
+                    
+                    @if($statistics['symbolCounts']['B'] > 0)
+                      <x-entity-show.info-list-item :value="$statistics['symbolCounts']['B']">
+                        <x-slot:label>
+                          <x-icon-dice type="blue" />
+                        </x-slot:label>
+                      </x-entity-show.info-list-item>
+                    @endif
+                  </x-entity-show.info-list>
+                </x-entity-show.info-block>
+
+                {{-- Card Type Breakdown --}}
+                <x-entity-show.info-block title="public.faction_decks.card_type_breakdown">
+                  <x-entity-show.info-list>
+                    @foreach($statistics['cardsByType'] as $type => $copies)
+                      @if($copies > 0)
+                        @php
+                          $label = str_starts_with($type, 'equipment_') 
+                            ? __('entities.equipment_types.categories.' . str_replace('equipment_', '', $type))
+                            : $type;
+                        @endphp
+                        <x-entity-show.info-list-item 
+                          label="{{ $label }}" 
+                          :value="$copies" 
+                        />
+                      @endif
+                    @endforeach          
+                  </x-entity-show.info-list>
+                </x-entity-show.info-block>
+
+                {{-- Hero Superclass Breakdown --}}
+                <x-entity-show.info-block title="public.faction_decks.hero_superclass_breakdown">
+                  <x-entity-show.info-list>
+                    @foreach($statistics['heroesBySuperclass'] as $superclass => $copies)
+                      @if($copies > 0)
+                        <x-entity-show.info-list-item 
+                          label="{{ $superclass }}" 
+                          :value="$copies" 
+                        />
+                      @endif
+                    @endforeach          
+                  </x-entity-show.info-list>
+                </x-entity-show.info-block>
+
+                {{-- Hero Class Breakdown --}}
+                <x-entity-show.info-block title="public.faction_decks.hero_class_breakdown">
+                  <x-entity-show.info-list>
+                    @foreach($statistics['heroesByClass'] as $class => $copies)
+                      @if($copies > 0)
+                        <x-entity-show.info-list-item 
+                          label="{{ $class }}" 
+                          :value="$copies" 
+                        />
+                      @endif
+                    @endforeach          
+                  </x-entity-show.info-list>
+                </x-entity-show.info-block>
+              </div>
+            </div>
+            
+          @elseif($tab === 'heroes')
+            {{-- Heroes Tab Content --}}
+            @php
+              $heroes = $factionDeck->heroes->sortBy('name');
+            @endphp
+            
+            <x-entity.list
+              :items="$heroes"
+              :showHeader="false"
+              emptyMessage="{{ __('public.faction_decks.no_heroes') }}"
+              :wide=true
+            >
+              @foreach($heroes as $hero)
+                <x-entity.public-card 
+                  :entity="$hero"
+                  type="hero"
+                  :view-route="route('public.heroes.show', $hero)"
+                >
+                  <x-slot:extra>
+                    @if($hero->pivot->copies > 1)
+                      <div class="card-quantity">
+                        <span>x{{ $hero->pivot->copies }}</span>
+                      </div>
+                    @endif
+                  </x-slot:extra>
+                </x-entity.public-card>
+              @endforeach
+            </x-entity.list>
+            
+          @elseif($tab === 'cards')
+            {{-- Cards Tab Content --}}
+            @php
+              $cards = $factionDeck->cards->sortBy([
+                ['cost', 'asc'],
+                ['name', 'asc']
+              ]);
+            @endphp
+            
+            <x-entity.list
+              :items="$cards"
+              :showHeader="false"
+              emptyMessage="{{ __('public.faction_decks.no_cards') }}"
+              :wide=true
+            >
+              @foreach($cards as $card)
+                <x-entity.public-card 
+                  :entity="$card"
+                  type="card"
+                  :view-route="route('public.cards.show', $card)"
+                >
+                  <x-slot:extra>
+                    @if($card->pivot->copies > 1)
+                      <div class="card-quantity">
+                        <span>x{{ $card->pivot->copies }}</span>
+                      </div>
+                    @endif
+                  </x-slot:extra>
+                </x-entity.public-card>
+              @endforeach
+            </x-entity.list>
+          @endif
+        </x-slot:content>
+      </x-tabs>
     </div>
   </section>
-
-  {{-- Statistics Card --}}
-  <section class="block">
-    <div class="block__inner">
-      <div class="deck-stats-card">
-        <h2 class="deck-stats-card__title">{{ __('public.faction_decks.statistics') }}</h2>
-        <div class="deck-stats-card__grid">
-          <div class="deck-stats-card__item">
-            <span class="deck-stats-card__value">{{ $factionDeck->gameMode->name }}</span>
-            <span class="deck-stats-card__label">{{ __('entities.game_modes.singular') }}</span>
-          </div>
-          <div class="deck-stats-card__item">
-            <span class="deck-stats-card__value">{{ $factionDeck->totalHeroes }}</span>
-            <span class="deck-stats-card__label">{{ __('entities.heroes.plural') }}</span>
-          </div>
-          <div class="deck-stats-card__item">
-            <span class="deck-stats-card__value">{{ $factionDeck->totalCards }}</span>
-            <span class="deck-stats-card__label">{{ __('entities.cards.plural') }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {{-- Content Tabs y resto del contenido sin cambios --}}
 </x-public-layout>

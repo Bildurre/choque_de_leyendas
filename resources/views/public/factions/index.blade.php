@@ -2,6 +2,9 @@
   :title="__('entities.factions.index_page_title')"
   :metaDescription="__('entities.factions.index_page_description')"
 >
+
+  <x-page-background :image="asset('storage/images/pages/factions-bg.jpeg')" />
+
   {{-- Header Block --}}
   @php
     $titleTranslations = [];

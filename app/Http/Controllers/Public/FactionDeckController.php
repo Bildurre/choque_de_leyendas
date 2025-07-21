@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\FactionDeck;
 use App\Services\Public\FactionDeckService;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class FactionDeckController extends Controller
@@ -19,10 +20,18 @@ class FactionDeckController extends Controller
   /**
    * Display the specified faction deck
    */
-  public function show(FactionDeck $factionDeck): View
+  public function show(Request $request, FactionDeck $factionDeck): View
   {
     $factionDeck = $this->factionDeckService->getPublishedFactionDeck($factionDeck);
     
-    return view('public.faction-decks.show', compact('factionDeck'));
+    // Validate tab parameter
+    $request->validate([
+      'tab' => 'nullable|in:info,heroes,cards'
+    ]);
+    
+    // Get deck statistics
+    $statistics = $this->factionDeckService->getDeckStatistics($factionDeck);
+    
+    return view('public.faction-decks.show', compact('factionDeck', 'statistics'));
   }
 }

@@ -23,7 +23,7 @@ export default class CollectionController {
       const contentDiv = this.listElement.querySelector('.entity-list__content');
       if (contentDiv) {
         contentElement = document.createElement('div');
-        contentElement.className = 'entity-list__items';
+        contentElement.className = 'entity-list__items entity-list__items--wide';
         contentDiv.appendChild(contentElement);
       }
     }

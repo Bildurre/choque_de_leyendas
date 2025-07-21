@@ -5,6 +5,9 @@ return [
   'download' => 'Descargar',
   'view' => 'Ver',
   'delete' => 'Borrar',
+  'unique' => 'únicas',
+  'statistics_tab' => 'Estadísticas',
+  'info_tab' => 'Información',
 
   // Navegación principal
   'menu' => [
@@ -113,10 +116,20 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
+    'basic_info' => 'Información básica',
     'statistics' => 'Estadísticas',
     'back_to_faction' => 'Volver a :faction',
     'other_decks' => 'Otros mazos',
     'no_heroes' => 'Este mazo no tiene héroes',
     'no_cards' => 'Este mazo no tiene cartas',
+    'dice_distribution' => 'Coste de las sartas',
+    'symbol_distribution' => 'Distribución de dados',
+    'card_type_breakdown' => 'Tipos de cartas',
+    'hero_superclass_breakdown' => 'Superclases de héroes',
+    'hero_class_breakdown' => 'Clases de héroes',
+    'average_dice_count' => 'Promedio',
+    'dice_count_singular' => ':count dado',
+    'dice_count_plural' => ':count dados',
+    'no_dice' => 'Sin coste',
   ],
 ];

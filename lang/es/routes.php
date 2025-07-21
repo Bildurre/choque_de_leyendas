@@ -8,7 +8,7 @@ return [
   'cards' => 'cartas',
   'card_show' => 'cartas/{card}',
   'faction_decks' => 'mazos',
-  'faction_deck_show' => 'mazos/{faction_deck}',
+  'faction_deck_show' => 'mazos/{factionDeck}',
   'page_show' => '{page?}',
   'downloads' => 'descargas',
   'pdf_view' => 'ver/{pdf}',

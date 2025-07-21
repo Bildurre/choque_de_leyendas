@@ -5,8 +5,6 @@ use App\Http\Controllers\Public\CardController;
 use App\Http\Controllers\Public\HeroController;
 use App\Http\Controllers\Content\PageController;
 use App\Http\Controllers\Public\FactionController;
-use App\Http\Controllers\Public\DownloadsController;
-use App\Http\Controllers\Public\CollectionController;
 use App\Http\Controllers\Public\FactionDeckController;
 use App\Http\Controllers\Public\PdfCollectionController;
 use App\Http\Controllers\Public\TemporaryCollectionController;

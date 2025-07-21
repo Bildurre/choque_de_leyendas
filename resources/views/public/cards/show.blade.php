@@ -36,13 +36,15 @@
     @endphp
 
     @component('content.blocks.header', ['block' => $headerBlock])
-        @slot('actions')
-            <x-pdf.add-button
-                data-entity-type="card"
-                data-entity-id="{{ $card->id }}"
-            >
-            </x-pdf.add-button>
-        @endslot
+      @slot('actions')
+        <x-pdf.add-button
+            data-entity-type="card"
+            data-entity-id="{{ $card->id }}"
+            type="outlined"
+          >
+            {{ __('pdf.collection.add_button_title') }}
+        </x-pdf.add-button>
+      @endslot
     @endcomponent
 
     {{-- Card Details Section --}}
@@ -59,22 +61,22 @@
                     {{-- Basic Info Block --}}
                     <x-entity-show.info-block title="public.cards.basic_info">
                         <x-entity-show.info-list>
-                            <x-entity-show.info-list-item label="entities.cards.name" :value="$card->name" />
+                            <x-entity-show.info-list-item label="{{ __('entities.cards.name') }}" :value="$card->name" />
                             
-                            <x-entity-show.info-list-item label="entities.factions.singular">
+                            <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
                                 <x-entity-show.info-link :href="route('public.factions.show', $card->faction)">
                                     {{ $card->faction->name }}
                                 </x-entity-show.info-link>
                             </x-entity-show.info-list-item>
                             
-                            <x-entity-show.info-list-item label="entities.card_types.singular">
+                            <x-entity-show.info-list-item label="{{ __('entities.card_types.singular') }}">
                                 <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [$card->card_type_id]])">
                                     {{ $card->cardType->name }}
                                 </x-entity-show.info-link>
                             </x-entity-show.info-list-item>
 
                             @if($card->cardType->heroSuperclass)
-                                <x-entity-show.info-list-item label="entities.hero_superclasses.singular">
+                                <x-entity-show.info-list-item label="{{ __('entities.hero_superclasses.singular') }}">
                                     <x-entity-show.info-link :href="route('public.heroes.index') . '?' . http_build_query(['heroClass_hero_superclass_id' => [$card->cardType->hero_superclass_id]])">
                                         {{ $card->cardType->heroSuperclass->name }}
                                     </x-entity-show.info-link>
@@ -82,14 +84,14 @@
                             @endif
                             
                             @if($card->cardType->id == 1 && $card->equipmentType) {{-- Equipment type --}}
-                                <x-entity-show.info-list-item label="entities.equipment_types.singular">
+                                <x-entity-show.info-list-item label="{{ __('entities.equipment_types.singular') }}">
                                     <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [1], 'equipment_type_id' => [$card->equipment_type_id]])">
                                         {{ $card->equipmentType->name }}
                                     </x-entity-show.info-link>
                                 </x-entity-show.info-list-item>
                                 
                                 @if($card->equipmentType->category == 'weapon' && $card->hands)
-                                    <x-entity-show.info-list-item label="entities.cards.hands_required">
+                                    <x-entity-show.info-list-item label="{{ __('entities.cards.hands_required') }}">
                                         {{ $card->hands }} 
                                         {{ $card->hands > 1 ? __('entities.cards.hands') : __('entities.cards.hand') }}
                                     </x-entity-show.info-list-item>
@@ -97,7 +99,7 @@
                             @endif
                             
                             @if($card->cost)
-                                <x-entity-show.info-list-item label="entities.cards.cost">
+                                <x-entity-show.info-list-item label="{{ __('entities.cards.cost') }}">
                                     <x-cost-display :cost="$card->cost" />
                                 </x-entity-show.info-list-item>
                             @endif
@@ -109,7 +111,7 @@
                         <x-entity-show.info-block title="public.cards.attack_info">
                             <x-entity-show.info-list>
                                 @if($card->attackRange)
-                                    <x-entity-show.info-list-item label="entities.attack_ranges.singular">
+                                    <x-entity-show.info-list-item label="{{ __('entities.attack_ranges.singular') }}">
                                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attack_range_id' => [$card->attack_range_id]])">
                                             {{ $card->attackRange->name }}
                                         </x-entity-show.info-link>
@@ -117,13 +119,13 @@
                                 @endif
                                 
                                 @if($card->attackSubtype)
-                                    <x-entity-show.info-list-item label="entities.attack_subtypes.type">
+                                    <x-entity-show.info-list-item label="{{ __('entities.attack_subtypes.type') }}">
                                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attackSubtype_type' => $card->attackSubtype->type])">
                                             {{ __('entities.attack_subtypes.types.' . $card->attackSubtype->type) }}
                                         </x-entity-show.info-link>
                                     </x-entity-show.info-list-item>
                                     
-                                    <x-entity-show.info-list-item label="entities.attack_subtypes.singular">
+                                    <x-entity-show.info-list-item label="{{ __('entities.attack_subtypes.singular') }}">
                                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attack_subtype_id' => [$card->attack_subtype_id]])">
                                             {{ $card->attackSubtype->name }}
                                         </x-entity-show.info-link>
@@ -131,7 +133,7 @@
                                 @endif
                                 
                                 @if($card->area)
-                                    <x-entity-show.info-list-item label="entities.cards.area">
+                                    <x-entity-show.info-list-item label="{{ __('entities.cards.area') }}">
                                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'area' => 1])">
                                             {{ __('common.yes') }}
                                         </x-entity-show.info-link>

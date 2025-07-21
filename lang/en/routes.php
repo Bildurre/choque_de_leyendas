@@ -8,7 +8,7 @@ return [
   'cards' => 'cards',
   'card_show' => 'cards/{card}',
   'faction_decks' => 'decks',
-  'faction_deck_show' => 'decks/{faction_deck}',
+  'faction_deck_show' => 'decks/{factionDeck}',
   'page_show' => '{page?}',
   'downloads' => 'downloads',
   'pdf_view' => 'view/{pdf}',

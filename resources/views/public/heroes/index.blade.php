@@ -2,6 +2,9 @@
   :title="__('entities.heroes.index_page_title')"
   :metaDescription="__('entities.heroes.index_page_description')"
 >
+
+  <x-page-background :image="asset('storage/images/pages/heroes-bg.jpeg')" />
+
   {{-- Header Block --}}
   @php
     $titleTranslations = [];

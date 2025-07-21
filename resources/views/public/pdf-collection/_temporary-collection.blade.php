@@ -4,7 +4,7 @@
       {{ __('pdf.collection.temporary_collection') }}
     </h2>
 
-    <div class="temporary-collection__actions" data-collection-actions style="display: none;">
+    <div class="block-header__actions" data-collection-actions style="display: none;">
       <form action="{{ route('public.pdf-collection.clear') }}" method="POST" class="temporary-collection__form">
         @csrf
         @method('DELETE')
@@ -39,6 +39,7 @@
       :emptyMessage="__('pdf.collection.empty_collection')"
       class="temporary-collection__list"
       data-collection-content
+      :wide=true
     >
       {{-- Items will be loaded here via JavaScript directly into entity-list__items --}}
     </x-entity.list>

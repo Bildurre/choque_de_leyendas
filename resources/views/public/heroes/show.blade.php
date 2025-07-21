@@ -39,7 +39,9 @@
       <x-pdf.add-button
         data-entity-type="hero"
         data-entity-id="{{ $hero->id }}"
+        type="outlined"
       >
+        {{ __('pdf.collection.add_button_title') }}
       </x-pdf.add-button>
     @endslot
   @endcomponent
@@ -58,29 +60,29 @@
           {{-- Basic Info Block --}}
           <x-entity-show.info-block title="public.heroes.basic_info">
             <x-entity-show.info-list>
-              <x-entity-show.info-list-item label="entities.heroes.name" :value="$hero->name" />
+              <x-entity-show.info-list-item label="{{ __('entities.heroes.name') }}" :value="$hero->name" />
               
-              <x-entity-show.info-list-item label="entities.factions.singular">
+              <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
                 <x-entity-show.info-link :href="route('public.factions.show', $hero->faction)">
                   {{ $hero->faction->name }}
                 </x-entity-show.info-link>
               </x-entity-show.info-list-item>
               
-              <x-entity-show.info-list-item label="entities.hero_races.singular">
+              <x-entity-show.info-list-item label="{{ __('entities.hero_races.singular') }}">
                 <x-entity-show.info-link :href="route('public.heroes.index') . '?' . http_build_query(['hero_race_id' => [$hero->hero_race_id]])">
                   {{ $hero->getGenderizedRaceName() }}
                 </x-entity-show.info-link>
               </x-entity-show.info-list-item>
               
-              <x-entity-show.info-list-item label="entities.heroes.gender" :value="__('entities.heroes.genders.' . $hero->gender)" />
+              <x-entity-show.info-list-item label="{{ __('entities.heroes.gender') }}" :value="__('entities.heroes.genders.' . $hero->gender)" />
               
-              <x-entity-show.info-list-item label="entities.hero_classes.singular">
+              <x-entity-show.info-list-item label="{{ __('entities.hero_classes.singular') }}">
                 <x-entity-show.info-link :href="route('public.heroes.index') . '?' . http_build_query(['hero_class_id' => [$hero->hero_class_id]])">
                   {{ $hero->getGenderizedClassName() }}
                 </x-entity-show.info-link>
               </x-entity-show.info-list-item>
               
-              <x-entity-show.info-list-item label="entities.hero_superclasses.singular">
+              <x-entity-show.info-list-item label="{{ __('entities.hero_superclasses.singular') }}">
                 <x-entity-show.info-link :href="route('public.heroes.index') . '?' . http_build_query(['heroClass_hero_superclass_id' => [$hero->heroClass->hero_superclass_id]])">
                   {{ $hero->getGenderizedSuperclassName() }}
                 </x-entity-show.info-link>

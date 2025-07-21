@@ -5,6 +5,9 @@ return [
   'download' => 'Download',
   'view' => 'View',
   'delete' => 'Delete',
+  'unique' => 'unique',
+  'statistics_tab' => 'Statistics',
+  'info_tab' => 'Information',
   
   // Main navigation
   'menu' => [
@@ -110,10 +113,20 @@ return [
   
   // Faction decks
   'faction_decks' => [
+    'basic_info' => 'Basic Information',
     'statistics' => 'Statistics',
     'back_to_faction' => 'Back to :faction',
     'other_decks' => 'Other decks',
     'no_heroes' => 'This deck has no heroes',
     'no_cards' => 'This deck has no cards',
+    'dice_distribution' => 'Cards cost',
+    'symbol_distribution' => 'Dice distribution',
+    'card_type_breakdown' => 'Card types',
+    'hero_superclass_breakdown' => 'Hero superclasses',
+    'hero_class_breakdown' => 'Hero classes',
+    'average_dice_count' => 'Average',
+    'dice_count_singular' => ':count die',
+    'dice_count_plural' => ':count dice',
+    'no_dice' => 'No cost',
   ],
 ];

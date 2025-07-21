@@ -13,7 +13,8 @@
   'activeCount' => null,
   'trashedCount' => null,
   'baseRoute' => null,
-  'showHeader' => true
+  'showHeader' => true,
+  'wide' => null
 ])
 
 <div {{ $attributes->merge(['class' => 'entity-list']) }}>
@@ -99,7 +100,7 @@
                 </div>
               @endif
               
-              <div class="entity-list__items {{ $isReorderable ? 'entity-list__items--reorderable' : '' }}" 
+              <div class="entity-list__items {{ $isReorderable ? 'entity-list__items--reorderable' : '' }} {{ $wide ? 'entity-list__items--wide' : '' }}" 
                   @if($isReorderable) id="reorderable-items" data-reorder-url="{{ $reorderUrl }}" data-id-field="{{ $reorderItemIdField }}" @endif>
                 {{ $slot }}
               </div>
@@ -180,7 +181,7 @@
           </div>
         @endif
 
-        <div class="entity-list__items {{ $isReorderable ? 'entity-list__items--reorderable' : '' }}" 
+        <div class="entity-list__items {{ $isReorderable ? 'entity-list__items--reorderable' : '' }} {{ $wide ? 'entity-list__items--wide' : '' }}" 
              @if($isReorderable) id="reorderable-items" data-reorder-url="{{ $reorderUrl }}" data-id-field="{{ $reorderItemIdField }}" @endif>
           {{ $slot }}
         </div>

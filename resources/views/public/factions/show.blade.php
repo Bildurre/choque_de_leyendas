@@ -38,7 +38,10 @@
       <x-pdf.download-button
         :entity="$faction"
         entityType="faction"
-      />
+        type="outlined"
+      >
+      {{ __('pdf.download.button_title') }}
+      </x-pdf.download-button>
     @endslot
   @endcomponent
 

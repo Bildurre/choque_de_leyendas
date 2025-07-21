@@ -298,6 +298,12 @@ return [
     'card_type_distribution' => 'Card type distribution',
     'confirm_delete' => 'Are you sure you want to delete this deck?',
     'confirm_force_delete' => 'Are you sure you want to permanently delete this deck?',
+    'tabs' => [
+      'info' => 'Information',
+      'statistics' => 'Statistics',
+      'heroes' => 'Heroes',
+      'cards' => 'Cards',
+    ],
   ],
   
   // Game modes

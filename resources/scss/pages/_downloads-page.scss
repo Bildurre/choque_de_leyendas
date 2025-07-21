@@ -11,33 +11,6 @@
   }
 }
 
-.pdf-collection__section--temporary {
-  .block-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    margin-bottom: $spacing-lg;
-
-    @include responsive(mobile) {
-      grid-template-columns: 1fr auto;
-    }
-  }
-
-  .temporary-collection__actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-md;
-
-    .btn {
-      width: 100%;
-      height: 100%;
-
-      @include responsive(mobile) {
-        height: auto;
-      }
-    }
-  }
-}
-
 .entity-collection-card {
   &__controls {
     display: flex;
@@ -58,10 +31,6 @@
 }
 
 .pdf-collection__section {
-
-  .entity-list__items {
-    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-  }
   .entity-list__empty {
     background-color: var( --color-theme-border-bg);
   }

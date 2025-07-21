@@ -298,6 +298,12 @@ return [
     'card_type_distribution' => 'Distribución por tipo de carta',
     'confirm_delete' => '¿Estás seguro de que deseas eliminar este mazo?',
     'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente este mazo?',
+    'tabs' => [
+      'info' => 'Información',
+      'statistics' => 'Estadísticas',
+      'heroes' => 'Héroes',
+      'cards' => 'Cartas',
+    ],
   ],
   
   // Modos de juego

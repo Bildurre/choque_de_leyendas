@@ -39,6 +39,7 @@
   
   &__items {
     display: grid;
+    
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: $spacing-md;
 
@@ -46,6 +47,10 @@
       display: grid;
       grid-template-columns: 1fr; // Forzar una columna para reordenamiento
       gap: $spacing-md;
+    }
+
+    &--wide {
+      grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
     }
   }
   

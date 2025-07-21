@@ -3,7 +3,7 @@
     'value' => null
 ])
 
-<dt>{{ __($label) }}</dt>
+<dt>{{ $label }}</dt>
 <dd>
     @if($value !== null)
         {{ $value }}

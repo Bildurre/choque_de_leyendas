@@ -47,7 +47,7 @@
         <ul class="nav-list">
           @auth
             @if(Auth::user()->isAdmin())
-              <li class="nav-item nav-item--admin">
+              <li class="nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link nav-link--admin">
                   {{ __('public.menu.admin_panel') }}
                 </a>
@@ -72,6 +72,13 @@
           </li>
           
           <x-public.page-menu />
+
+
+          <li class="nav-item">
+            <a href="{{ route('public.pdf-collection.index') }}" class="nav-link {{ request()->routeIs('public.pdf-collection.*') ? 'nav-link--active' : '' }}">
+              {{ __('public.menu.downloads') }}
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

@@ -232,4 +232,93 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
       ->where('is_permanent', true)
       ->first();
   }
+
+  /**
+   * Get a breakdown of card copies by type
+   * Equipment cards are further broken down by their category
+   * 
+   * @return \Illuminate\Support\Collection Collection with card types as keys and copy counts as values
+   */
+  public function getCardCopiesBreakdown(): \Illuminate\Support\Collection
+  {
+
+    $cards = $this->cards()->with(['equipmentType', 'cardType'])->get();
+    
+    $breakdown = collect();
+    
+    // Group non-equipment cards by type
+    $nonEquipmentCards = $cards->where('card_type_id', '!=', '1');
+    $nonEquipmentBreakdown = $nonEquipmentCards
+      ->groupBy(function ($card) {
+        return $card->cardType ? $card->cardType->name : 'uncategorized';
+      })
+      ->map(function ($cards) {
+        return $cards->sum('pivot.copies');
+      });
+    
+    // Merge non-equipment breakdown
+    $breakdown = $breakdown->merge($nonEquipmentBreakdown);
+    
+    // Handle equipment cards separately
+    $equipmentCards = $cards->where('card_type_id', '1');
+    
+    if ($equipmentCards->isNotEmpty()) {
+      // Group equipment cards by category
+      $equipmentBreakdown = $equipmentCards
+        ->groupBy(function ($card) {
+          return $card->equipmentType ? $card->equipmentType->category : 'equipment_other';
+        })
+        ->map(function ($cards) {
+          return $cards->sum('pivot.copies');
+        });
+      
+      // Add equipment breakdown with prefixed keys
+      $equipmentBreakdown->each(function ($count, $category) use ($breakdown) {
+        $key = $category === 'equipment_other' ? 'equipment_other' : 'equipment_' . $category;
+        $breakdown->put($key, $count);
+      });
+    }
+    
+    return $breakdown;
+  }
+
+  /**
+   * Get a breakdown of hero copies by their superclass
+   * 
+   * @return \Illuminate\Support\Collection Collection with hero superclass names as keys and copy counts as values
+   */
+  public function getHeroCopiesBreakdown(): \Illuminate\Support\Collection
+  {
+    $heroes = $this->heroes()->with('heroClass.heroSuperclass')->get();
+    
+    $breakdown = $heroes->groupBy(function ($hero) {
+      // Check if hero has a class and that class has a superclass
+      if ($hero->heroClass && $hero->heroClass->heroSuperclass) {
+        return $hero->heroClass->heroSuperclass->name;
+      }
+      return 'uncategorized'; // For heroes without class or superclass
+    })->map(function ($heroes) {
+      return $heroes->sum('pivot.copies');
+    });
+    
+    return $breakdown;
+  }
+
+  /**
+   * Get a breakdown of hero copies by their specific class
+   * 
+   * @return \Illuminate\Support\Collection Collection with hero class names as keys and copy counts as values
+   */
+  public function getHeroCopiesByClassBreakdown(): \Illuminate\Support\Collection
+  {
+    $heroes = $this->heroes()->with('heroClass')->get();
+    
+    $breakdown = $heroes->groupBy(function ($hero) {
+      return $hero->heroClass ? $hero->heroClass->name : 'uncategorized';
+    })->map(function ($heroes) {
+      return $heroes->sum('pivot.copies');
+    });
+    
+    return $breakdown;
+  }  
 }

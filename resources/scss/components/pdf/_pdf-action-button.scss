@@ -4,14 +4,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-secondary);
+  background-color: transparent;
   color: var(--color-text-primary);
   border: none;
   cursor: pointer;
   transition: all $transition-fast;
   text-decoration: none;
+  gap: $spacing-sm;
   
   &:hover {
     color: var(--random-accent-color);
+  }
+
+  &--outlined {
+    font-weight: 600;
+    background-color: var(--color-card-bg);
+    border: 0.0625rem solid var(--color-text-primary);
+    border-radius: $border-radius-md;
+    padding: $spacing-sm $spacing-md;
+    line-height: 1;
+
+    &:hover {
+      color: var(--random-accent-color-hover);
+      border-color: var(--random-accent-color-hover);
+    }
   }
 }
