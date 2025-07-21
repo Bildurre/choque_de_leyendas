@@ -2,11 +2,12 @@
 
 namespace App\Services\Content;
 
+use App\Models\Card;
+use App\Models\Hero;
 use App\Models\Block;
 use App\Models\Counter;
-use App\Models\Hero;
-use App\Models\Card;
 use App\Models\Faction;
+use App\Models\GameMode;
 
 class BlockDataService
 {
@@ -19,6 +20,7 @@ class BlockDataService
       'counters-list' => $this->getCounterListData($block),
       'relateds' => $this->getRelatedsData($block),
       'automatic-index' => $this->getAutomaticIndexData($block),
+      'game-modes' => $this->getGameModesData($block),
       default => []
     };
   }
@@ -97,6 +99,16 @@ class BlockDataService
       'indexableBlocks' => $indexableBlocks,
       'isCompact' => $block->settings['compact'] ?? false,
       'isNumbered' => $block->settings['numbered'] ?? false,
+    ];
+  }
+
+  /**
+   * Get automatic index block data
+   */
+  protected function getGameModesData(Block $block): array
+  {
+    return [
+      'gameModes' => GameMode::with(['deckConfiguration', 'factionDecks'])->get()
     ];
   }
 }

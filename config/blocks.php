@@ -138,6 +138,13 @@ return [
         ],
       ],
     ],
+    'game-modes' => [
+      'name' => 'Game Modes Block',
+      'view' => 'content.blocks.game-modes',
+      'icon' => 'decks',
+      'allows_image' => false,
+      'allows_clearfix_image' => false,
+    ],
       // Podemos añadir más tipos después
   ],
 

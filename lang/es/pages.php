@@ -54,7 +54,8 @@ return [
       'relateds' => 'Contenido relacionado',
       'cta' => 'Llamada a la Acción',
       'automatic-index' => 'Índice Automático',
-      'counters-list' => 'Lista de Contadores'
+      'counters-list' => 'Lista de Contadores',
+      'game-modes' => 'Modos de Juego,'
     ],
     'singular' => 'Bloque',
     'plural' => 'Bloques',
@@ -149,6 +150,9 @@ return [
     'counter_list' => [
       'image_alt' => 'Imagen del contador :name',
       'no_counters' => 'No se encontraron contadores de tipo :type.',
+    ],
+    'game_modes' => [
+      'faction_decks' => 'Numero de mazos',
     ],
     'confirm_delete' => '¿Estás seguro de que deseas eliminar este bloque?',
     'created_successfully' => 'Bloque creado con exito',

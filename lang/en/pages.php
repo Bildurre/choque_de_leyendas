@@ -54,7 +54,8 @@ return [
       'relateds' => 'Related content',
       'cta' => 'Call to Action',
       'automatic-index' => 'Automatic Index',
-      'counters-list' => 'Counters List'
+      'counters-list' => 'Counters List',
+      'game-modes' => 'Game Modes'
     ],
     'singular' => 'Block',
     'plural' => 'Blocks',
@@ -149,6 +150,9 @@ return [
     'counter_list' => [
       'image_alt' => ':name counter image',
       'no_counters' => ':type type counters not found',
+    ],
+    'game_modes' => [
+      'faction_decks' => 'Number of decks',
     ],
     'confirm_delete' => 'Are you sure you want to delete this block?',
     'created_successfully' => 'Bloque created successfully',

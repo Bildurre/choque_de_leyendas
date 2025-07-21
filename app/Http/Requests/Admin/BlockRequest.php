@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\BlockRules\TextRules;
 use App\Http\Requests\Admin\BlockRules\HeaderRules;
 use App\Http\Requests\Admin\BlockRules\RelatedsRules;
 use App\Http\Requests\Admin\BlockRules\TextCardRules;
+use App\Http\Requests\Admin\BlockRules\GameModesRules;
 use App\Http\Requests\Admin\BlockRules\CountersListRules;
 
 class BlockRequest extends FormRequest
@@ -102,6 +103,7 @@ class BlockRequest extends FormRequest
       'cta' => CtaRules::getRules(),
       'relateds' => RelatedsRules::getRules(),
       'counters-list' => CountersListRules::getRules(),
+      'game-modes' => GameModesRules::getRules(),
       default => [],
     };
   }

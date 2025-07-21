@@ -25,13 +25,23 @@
     display: inline-block;
     position: relative;
     font-size: .75rem;
-    font-weight: 400;
+    font-weight: 700;
     padding: 0 $spacing-sm;
     margin-left: $spacing-xs;
     margin-bottom: 0;
-    background-color: var(--color-background);
     transform: translateY(50%);
     z-index: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: $spacing-sm;
+      bottom: .375rem;
+      width: calc(100% - 2 * $spacing-sm);
+      height: 4px;
+      background-color: var(--color-background);
+      z-index: -1;
+    }
   }
 
   ::placeholder {
