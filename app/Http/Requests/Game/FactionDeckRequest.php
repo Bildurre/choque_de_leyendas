@@ -29,6 +29,8 @@ class FactionDeckRequest extends FormRequest
     $rules = [
       'name' => ['required', 'array'],
       'name.es' => ['required', 'string', 'max:255'],
+      'description' => ['nullable', 'array'],
+      'epic_quote' => ['nullable', 'array'],
       'faction_id' => ['required', 'exists:factions,id'],
       'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_icon' => ['nullable', 'boolean'],

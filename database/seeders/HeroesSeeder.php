@@ -22,6 +22,7 @@ class HeroesSeeder extends Seeder
       $hero = new Hero();
       $hero->name = $heroData['name'];
       $hero->lore_text = $heroData['lore_text'];
+      $hero->epic_quote = $heroData['epic_quote'];
       $hero->passive_name = $heroData['passive_name'];
       $hero->passive_description = $heroData['passive_description'];
       $hero->faction_id = $heroData['faction_id'];

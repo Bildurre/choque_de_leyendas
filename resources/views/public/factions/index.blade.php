@@ -62,25 +62,55 @@
     </div>
   </section>
 
+  {{-- CTA Block --}}
+  @php
+    $ctaBlock = new \App\Models\Block([
+      'type' => 'cta',
+      'title' => ['es' => 'Las reglas del juego', 'en' => 'Game Rules'],
+      'image' => null,
+      'subtitle' => ['es' => 'Aprende los fundamentos del combate en Alanda: Choque de Leyendas, desde la preparación hasta la victoria', 'en' => 'Learn the fundamentals of combat in Alanda: Clash of Legends, from preparation to victory'],
+      'background_color' => 'theme-card',
+      'content' => [
+        'en' => [
+          'button_text' => 'Read Rules',
+          'button_link' => '/en/game-rules'
+        ],
+        'es' => [
+          'button_text' => 'Leer Reglas',
+          'button_link' => '/es/reglas-del-juego'
+        ]
+      ],
+      'settings' => [
+        'button_variant' => 'primary',
+        'button_size' => 'lg',
+        'width' => 'md',
+        'text_alignment' => 'center'
+      ]
+    ]);
+  @endphp
+  {!! $ctaBlock->render() !!}
+
   {{-- Related Heroes Block --}}
   @php
     $heroesBlock = new \App\Models\Block([
       'type' => 'relateds',
-      'title' => ['es' => 'Héroes', 'en' => 'Heroes'],
+      'title' => null,
       'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
       'background_color' => 'theme-card',
       'content' => [
         'en' => [
-          'button_text' => __('View all Heroes'),
+          'button_text' => 'View all Heroes',
         ],
         'es' => [
-          'button_text' => __('Ver todos los Héroes'),
+          'button_text' => 'Ver todos los Héroes',
         ]
       ],
       'settings' => [
         'model_type' => 'hero',
         'display_type' => 'random',
-        'text_alignment' => 'left'
+        'text_alignment' => 'left',
+        'button_size' => 'md',
+        'button_variant' => 'secondary',
       ]
     ]);
   @endphp
@@ -90,7 +120,7 @@
   @php
     $cardsBlock = new \App\Models\Block([
       'type' => 'relateds',
-      'title' => ['es' => 'Cartas', 'en' => 'Cards'],
+      'title' => null,
       'subtitle' => ['es' => 'Descubre las cartas del juego', 'en' => 'Discover the game cards'],
       'background_color' => 'none',
       'content' => [
@@ -104,7 +134,9 @@
       'settings' => [
         'model_type' => 'card',
         'display_type' => 'random',
-        'text_alignment' => 'left'
+        'text_alignment' => 'left',
+        'button_size' => 'md',
+        'button_variant' => 'secondary',
       ]
     ]);
   @endphp

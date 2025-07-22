@@ -16,6 +16,7 @@ return new class extends Migration
       $table->json('name');
       $table->json('slug');
       $table->json('lore_text')->nullable();
+      $table->json('epic_quote')->nullable();
       $table->string('color', 7);
       $table->string('icon')->nullable();
       $table->boolean('text_is_dark')->default(false);

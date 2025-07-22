@@ -83,11 +83,39 @@
     </div>
   </section>
 
+  {{-- CTA Block --}}
+  @php
+    $ctaBlock = new \App\Models\Block([
+      'type' => 'cta',
+      'title' => ['es' => 'Modos de Juego', 'en' => 'Game Modes'],
+      'image' => null,
+      'subtitle' => ['es' => 'Explora los distintos modos de juego y descubre nuevas formas de vivir la experiencia de Alanda: Choque de Leyendas', 'en' => 'Explore the different game modes and discover new ways to experience Alanda: Clash of Legends'],
+      'background_color' => 'theme-card',
+      'content' => [
+        'en' => [
+          'button_text' => 'Ver Modos de Juego',
+          'button_link' => '/en/game-modes'
+        ],
+        'es' => [
+          'button_text' => 'View Game Modes',
+          'button_link' => '/es/modos-de-juego'
+        ]
+      ],
+      'settings' => [
+        'button_variant' => 'primary',
+        'button_size' => 'lg',
+        'width' => 'md',
+        'text_alignment' => 'center'
+      ]
+    ]);
+  @endphp
+  {!! $ctaBlock->render() !!}
+
   {{-- Related Heroes Block --}}
   @php
     $heroesBlock = new \App\Models\Block([
       'type' => 'relateds',
-      'title' => ['es' => 'Héroes', 'en' => 'Heroes'],
+      'title' => null,
       'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
       'background_color' => 'theme-card',
       'content' => [
@@ -101,7 +129,9 @@
       'settings' => [
         'model_type' => 'hero',
         'display_type' => 'random',
-        'text_alignment' => 'left'
+        'text_alignment' => 'left',
+        'button_size' => 'md',
+        'button_variant' => 'secondary',
       ]
     ]);
   @endphp
@@ -111,7 +141,7 @@
   @php
     $cardsBlock = new \App\Models\Block([
       'type' => 'relateds',
-      'title' => ['es' => 'Cartas', 'en' => 'Cards'],
+      'title' => null,
       'subtitle' => ['es' => 'Descubre las cartas del juego', 'en' => 'Discover the game cards'],
       'background_color' => 'none',
       'content' => [
@@ -125,7 +155,9 @@
       'settings' => [
         'model_type' => 'card',
         'display_type' => 'random',
-        'text_alignment' => 'left'
+        'text_alignment' => 'left',
+        'button_size' => 'md',
+        'button_variant' => 'secondary',
       ]
     ]);
   @endphp

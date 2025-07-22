@@ -57,7 +57,7 @@
   
   // Common title styles
   &__title {
-    margin: 0 0 $spacing-lg !important;
+    margin: 0;
     font-size: 1.75rem;
     font-weight: 800;
     color: var(--color-text-primary);
@@ -75,7 +75,7 @@
 
   // Common subtitle styles
   &__subtitle {
-    margin: 0 0 $spacing-md !important;
+    margin: 0;
     font-size: 1.25rem;
     font-family: 'roboto';
     font-weight: 500;

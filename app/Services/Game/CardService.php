@@ -11,7 +11,7 @@ class CardService
 {
   use HandlesTranslations;
   
-  protected $translatableFields = ['name', 'lore_text', 'effect', 'restriction'];
+  protected $translatableFields = ['name', 'lore_text', 'epic_quote', 'effect', 'restriction'];
 
   /**
    * Get all cards with optional filtering and pagination

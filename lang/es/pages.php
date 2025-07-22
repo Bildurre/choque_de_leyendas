@@ -55,7 +55,8 @@ return [
       'cta' => 'Llamada a la Acción',
       'automatic-index' => 'Índice Automático',
       'counters-list' => 'Lista de Contadores',
-      'game-modes' => 'Modos de Juego,'
+      'game-modes' => 'Modos de Juego',
+      'quote' => 'Cita',
     ],
     'singular' => 'Bloque',
     'plural' => 'Bloques',
@@ -161,6 +162,7 @@ return [
     'create_error' => 'Error al crear el bloque',
     'back_to_page' => 'Volver a la Página',
     'printable' => 'Imprimible',
+    'quote_text' => 'Autor',
     'cta_text' => 'Texto',
     'cta_button_text' => 'Texto del Botón',
     'cta_button_link' => 'Enlace',

@@ -31,6 +31,7 @@ class HeroRequest extends FormRequest
       'name' => ['required', 'array'],
       'name.es' => ['required', 'string', 'max:255'],
       'lore_text' => ['nullable', 'array'],
+      'epic_quote' => ['nullable', 'array'],
       'passive_name' => ['nullable', 'array'],
       'passive_description' => ['nullable', 'array'],
       'faction_id' => ['nullable', 'exists:factions,id'],

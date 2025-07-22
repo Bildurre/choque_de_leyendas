@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Admin\BlockRules\CtaRules;
 use App\Http\Requests\Admin\BlockRules\TextRules;
+use App\Http\Requests\Admin\BlockRules\QuoteRules;
 use App\Http\Requests\Admin\BlockRules\HeaderRules;
 use App\Http\Requests\Admin\BlockRules\RelatedsRules;
 use App\Http\Requests\Admin\BlockRules\TextCardRules;
@@ -104,6 +105,7 @@ class BlockRequest extends FormRequest
       'relateds' => RelatedsRules::getRules(),
       'counters-list' => CountersListRules::getRules(),
       'game-modes' => GameModesRules::getRules(),
+      'quote' => QuoteRules::getRules(),
       default => [],
     };
   }

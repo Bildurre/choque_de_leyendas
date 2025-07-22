@@ -178,11 +178,29 @@
       </div>
     </section>
 
+    {{-- epic quote --}}
+    @php
+      $epicText = new \App\Models\Block([
+        'type' => 'quote',
+        'title' => null,
+        'subtitle' => [
+          'es' => "<p>" . $card->getTranslation('epic_quote', 'es') . "</p>", 
+          'en' => "<p>" . $card->getTranslation('epic_quote', 'en') . "</p>"
+        ],
+        'background_color' => 'theme-border',
+        'content' => null,
+        'settings' => [
+          'text_alignment' => 'center'
+        ]
+      ]);
+    @endphp
+    {!! $epicText->render() !!}
+
     {{-- Related Cards Block --}}
     @php
       $relatedCardsBlock = new \App\Models\Block([
         'type' => 'relateds',
-        'title' => ['es' => 'Otras Cartas', 'en' => 'Other Cards'],
+        'title' => null,
         'subtitle' => ['es' => 'Descubre más cartas del juego', 'en' => 'Discover more game cards'],
         'background_color' => 'none',
         'content' => [
@@ -196,7 +214,9 @@
         'settings' => [
           'model_type' => 'card',
           'display_type' => 'random',
-          'text_alignment' => 'left'
+          'text_alignment' => 'left',
+          'button_size' => 'md',
+          'button_variant' => 'secondary',
         ]
       ]);
     @endphp

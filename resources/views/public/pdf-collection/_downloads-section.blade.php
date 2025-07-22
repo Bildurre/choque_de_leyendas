@@ -64,9 +64,8 @@
     
     {{-- Empty state for downloads --}}
     @if($factionPdfs->isEmpty() && $deckPdfs->isEmpty() && $otherPdfs->isEmpty() && $temporaryPdfs->isEmpty())
-      <div class="pdf-collection__empty">
-        <x-icon name="file-x" size="lg" />
-        <p>{{ __('pdf.collection.no_available') }}</p>
+      <div class="entity-list__empty">
+        {{ __('pdf.collection.no_available') }}
       </div>
     @endif
   </div>        

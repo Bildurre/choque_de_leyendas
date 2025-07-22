@@ -56,6 +56,18 @@
           :values="isset($factionDeck) ? $factionDeck->getTranslations('name') : []"
           required
         />
+
+        <x-form.multilingual-wysiwyg
+          name="description"
+          :label="__('entities.faction_decks.description')"
+          :values="isset($card) ? $card->getTranslations('description') : []"
+        />
+
+        <x-form.multilingual-wysiwyg
+          name="epic_quote"
+          :label="__('entities.faction_decks.epic_quote')"
+          :values="isset($card) ? $card->getTranslations('epic_quote') : []"
+        />
         
         <!-- Campo para seleccionar facción -->
         <x-form.select

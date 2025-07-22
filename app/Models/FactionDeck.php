@@ -30,6 +30,8 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
    */
   protected $fillable = [
     'name',
+    'description',
+    'epic_quote',
     'slug',
     'icon',
     'faction_id',
@@ -54,6 +56,8 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
    */
   public $translatable = [
     'name',
+    'description',
+    'epic_quote',
     'slug',
   ];
 

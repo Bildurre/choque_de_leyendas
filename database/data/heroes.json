@@ -8,6 +8,10 @@
       "en": "Annithare Arain, Paladin of Terik, rides with the grace of legend. Her armor shines like a beacon, and her sword and magic inspire allies and terrify enemies. Embodying the honor of the Arain family, her courage is unwavering. Where she goes, victory follows.",
       "es": "Annithare Arain, Paladina de Terik, cabalga con la gracia de una leyenda. Su armadura brilla como un faro, y su espada y magia inspiran aliados y aterran enemigos. Encarnando el honor de los Arain, su valentía es inquebrantable. Donde ella va, la victoria la sigue."
     },
+    "epic_quote": {
+      "en": "\"Where light falters, I shall be the dawn.\"",
+      "es": "\"Donde la luz vacila, yo seré el amanecer.\""
+    },
     "passive_name": {
       "en": "Exalted Hero",
       "es": "Héroe Exaltado"
@@ -35,6 +39,10 @@
     "lore_text": {
       "en": "Astheriel Estei, with bow in hand, is the shadow stalking the enemies of Terik. Inspired by her cousin Bronthar and guided by the honor her father instilled in her, she dreams of becoming a knight. Each arrow she fires is another step toward the glory of House Estei.",
       "es": "Astheriel Estei, con su arco en mano, es la sombra que acecha a los enemigos de Terik. Inspirada por su primo Bronthar y guiada por el honor que su padre le inculcó, sueña con ser caballera. Cada flecha que dispara es un paso más hacia la gloria de los Estei."
+    },
+    "epic_quote": {
+      "en": "Each arrow finds its mark; honor demands nothing less.",
+      "es": "Cada flecha encuentra su destino; el honor no exige menos."
     },
     "passive_name": {
       "en": "Unerring Instinct",
@@ -64,6 +72,10 @@
       "en": "Belain Thalier, youngest son of the Thalier family, grew up in anonymity. Skilled in strategy and combat, he excelled in knightly tournaments, earning the respect of his peers. Now, as a Defender of Terik, he protects the city with determination, carrying his family's honor into every battle.",
       "es": "Belain Thalier, hijo menor de los Thalier, creció en el anonimato. Con habilidad en estrategia y combate, destacó en torneos de caballería, ganándose el respeto de sus pares. Ahora, como Defensor de Terik, protege la ciudad con determinación, llevando el honor de su familia a cada batalla."
     },
+    "epic_quote": {
+      "en": "From anonymity rises the fiercest loyalty.",
+      "es": "Del anonimato surge la lealtad más feroz."
+    },
     "passive_name": {
       "en": "Inspiring Hero",
       "es": "Héroe Inspirador"
@@ -91,6 +103,10 @@
     "lore_text": {
       "en": "Bostar Asfareth, commander of the Defenders of Terik, is a natural leader. His talent for justice and command earned him prestige, but also enemies. On the battlefield or in the halls of power, his unwavering integrity makes him a symbol of order and strength. Admired and feared, he protects Terik with a firm hand.",
       "es": "Bostar Asfareth, comandante de los Defensores de Terik, es un líder nato. Su talento para la justicia y el mando le otorgó prestigio, pero también enemigos. En el campo de batalla o en los salones de poder, su integridad inquebrantable lo convierte en un símbolo de orden y fuerza. Admirado y temido, protege Terik con mano firme."
+    },
+    "epic_quote": {
+      "en": "Justice wields no blade sharper than integrity.",
+      "es": "La justicia no empuña hoja más afilada que la integridad."
     },
     "passive_name": {
       "en": "Radiant Strikes",
@@ -120,6 +136,10 @@
       "en": "Bronthar Estei, paladin of Terik, is the indomitable force of the Estei. With hammer in hand and courage in heart, he has won countless battles. Though lacking in cunning, his ferocity in combat and unwavering loyalty make him a feared defender and a symbol of his house's strength.",
       "es": "Bronthar Estei, paladín de Terik, es la fuerza indomable de los Estei. Con el martillo en mano y coraje en el corazón, ha ganado innumerables batallas. Aunque carece de astucia, su ferocidad en combate y lealtad inquebrantable lo convierten en un defensor temido y un símbolo de la fuerza de su casa."
     },
+    "epic_quote": {
+      "en": "The hammer speaks truths that cunning cannot.",
+      "es": "El martillo habla verdades que la astucia no puede."
+    },
     "passive_name": {
       "en": "Vital Radiance",
       "es": "Resplandor Vital"
@@ -147,6 +167,10 @@
     "lore_text": {
       "en": "Esthalia Bannai, born in the humble quarters of Terik, carved her path with courage and effort. Her combat skills and indomitable spirit led her to the Defenders. Now, she fights to prove that honor is not only for the nobles. Her dream: to become a knight and achieve greatness through her own merit.",
       "es": "Esthalia Bannai, nacida en los barrios humildes de Terik, se abrió paso con valentía y esfuerzo. Sus habilidades en combate y espíritu indomable la llevaron a los Defensores. Ahora, lucha por demostrar que el honor no es solo para los nobles. Su sueño: convertirse en caballera y alcanzar la grandeza por mérito propio."
+    },
+    "epic_quote": {
+      "en": "Noble blood flows not in veins, but in deeds.",
+      "es": "La sangre noble no fluye en las venas, sino en los actos."
     },
     "passive_name": {
       "en": "Armor Adjustment",
@@ -176,6 +200,10 @@
       "en": "Golden Thorun, of humble origin, forged his path with wooden swords and dreams of greatness. Master of dual-sword combat, his morality and skill brought him to the guard of Terik. Now, he protects the city, proving that courage is not measured by lineage, but by actions.",
       "es": "Golden Thorun, de origen humilde, forjó su camino con espadas de madera y sueños de grandeza. Maestro del combate con dos espadas, su moralidad y destreza lo llevaron a la guardia de Terik. Ahora, protege la ciudad, demostrando que el valor no se mide por el linaje, sino por las acciones."
     },
+    "epic_quote": {
+      "en": "Two blades, one purpose: honor beyond birthright.",
+      "es": "Dos hojas, un propósito: honor más allá del linaje."
+    },
     "passive_name": {
       "en": "Master Swordsman",
       "es": "Maestro Espadachín"
@@ -203,6 +231,10 @@
     "lore_text": {
       "en": "Jonthar Arain, the youngest son of the Arain family, admires his sister Annithare and dreams of matching her bravery. As her squire, he studies tactics and history and trains with dedication. With each step, Jonthar comes closer to his dream: becoming a hero worthy of his lineage.",
       "es": "Jonthar Arain, el hijo menor de los Arain, admira a su hermana Annithare y sueña con igualar su valentía. Como su escudero, estudia tácticas e historia y entrena con dedicación. Con cada paso, Jonthar se acerca a su sueño: convertirse en un héroe digno de su linaje."
+    },
+    "epic_quote": {
+      "en": "In her shadow, I forge my own legend.",
+      "es": "En su sombra, forjo mi propia leyenda."
     },
     "passive_name": {
       "en": "Diligent Squire",
@@ -232,6 +264,10 @@
       "en": "Aélenar, Lightning Blade, is the fury of the forest made flesh. His sword, charged with electrical energy, cuts like lightning in the night. Raised among the trees of Thenân, his connection to storms makes him an unstoppable warrior. Where he steps, the ground trembles and enemies flee. He is the guardian who illuminates darkness with his wrath.",
       "es": "Aélenar, Cuchilla Relámpago, es la furia del bosque hecha carne. Su espada, cargada de energía eléctrica, corta como un rayo en la noche. Criado entre los árboles de Thenân, su conexión con las tormentas lo convierte en un guerrero imparable. Donde pisa, el suelo tiembla y los enemigos huyen. Es el guardián que ilumina la oscuridad con su ira."
     },
+    "epic_quote": {
+      "en": "Thunder bows to no storm but mine.",
+      "es": "El trueno no se inclina ante tormenta alguna sino la mía."
+    },
     "passive_name": {
       "en": "Overcharged Shield",
       "es": "Escudo Sobrecargado"
@@ -259,6 +295,10 @@
     "lore_text": {
       "en": "Aenthar, Fallen Star, is a prodigy of electrical magic. With his spear, he channels the wrath of the skies, summoning lightning that illuminates the forest. Blessed by an ancestral spirit, his power is as unpredictable as a storm. In Thenân, his name evokes respect and fear. No one challenges the one who controls thunder.",
       "es": "Aenthar, Estrella Caída, es un prodigio de la magia eléctrica. Con su lanza, canaliza la ira de los cielos, convocando relámpagos que iluminan el bosque. Bendecido por un espíritu ancestral, su poder es tan impredecible como una tormenta. En Thenân, su nombre evoca respeto y temor. Nadie desafía a quien controla el trueno."
+    },
+    "epic_quote": {
+      "en": "From heaven's heights, lightning obeys my call.",
+      "es": "Desde las alturas celestiales, el rayo obedece mi llamado."
     },
     "passive_name": {
       "en": "Stellar Spark",
@@ -288,6 +328,10 @@
       "en": "Ayranel, Crow's Cloak, is the shadow watching over Thenân. With her network of crows, nothing escapes her gaze. She moves silently, like a breeze through trees, striking with deadly precision. To intruders, she is the harbinger of their end. Where crows gather, she is near, ready to act.",
       "es": "Ayranel, Capa de Cuervo, es la sombra que vigila Thenân. Con su red de cuervos, nada escapa a su mirada. Se mueve en silencio, como una brisa entre los árboles, y ataca con precisión mortal. Para los intrusos, es el presagio de su fin. Donde hay cuervos, ella está cerca, lista para actuar."
     },
+    "epic_quote": {
+      "en": "A thousand eyes watch; one blade strikes.",
+      "es": "Mil ojos vigilan; una hoja golpea."
+    },
     "passive_name": {
       "en": "Cloak of Darkness",
       "es": "Manto de Oscuridad"
@@ -315,6 +359,10 @@
     "lore_text": {
       "en": "Eldéin, Sharpened Cyclone, is the dance of death. With her elven blades, she spins and cuts like a windstorm, leaving enemies breathless. Unencumbered by armor, her agility is legendary. In Thenân, her name is synonymous with lethal grace and flawless combat. Where she advances, only silence remains.",
       "es": "Eldéin, Ciclón Afilado, es la danza de la muerte. Con sus espadas élficas, gira y corta como un vendaval, dejando a sus enemigos sin aliento. Sin armadura que la restrinja, su agilidad es legendaria. En Thenân, su nombre es sinónimo de gracia letal y combate impecable. Donde ella avanza, solo queda silencio."
+    },
+    "epic_quote": {
+      "en": "Death dances on elven steel.",
+      "es": "La muerte danza sobre acero élfico."
     },
     "passive_name": {
       "en": "Death Dance",
@@ -344,6 +392,10 @@
       "en": "Elendire, Sharpened Fist, is the unbreakable strength of Thenân. With fists that strike like hammers and unwavering loyalty, he leads the Rangers into epic battles. His presence on the battlefield commands respect and fear. To enemies of the forest, he is the wall that never falls.",
       "es": "Elendire, Puño Afilado, es la fuerza inquebrantable de Thenân. Con puños que golpean como martillos y una lealtad inquebrantable, lidera a los Guardabosques en batallas épicas. Su presencia en el campo de batalla impone respeto y temor. Para los enemigos del bosque, es el muro que nunca cae."
     },
+    "epic_quote": {
+      "en": "The forest's strength flows through these fists.",
+      "es": "La fuerza del bosque fluye por estos puños."
+    },
     "passive_name": {
       "en": "Avenging Fist",
       "es": "Puño Vengador"
@@ -371,6 +423,10 @@
     "lore_text": {
       "en": "Elíara, Winged Lightning, is the storm that never ceases. With her magical bow, she shoots lightning-enchanted arrows, illuminating the forest of Thenân. Her courage and skill are legendary, and her connection to electric magic makes her a tireless protector. To intruders, she is the lightning that shows no mercy.",
       "es": "Elíara, Rayo Alado, es la tormenta que nunca cesa. Con su arco mágico, dispara flechas encantadas con relámpagos, iluminando el bosque de Thenân. Su valentía y destreza son legendarias, y su conexión con la magia eléctrica la convierte en una protectora incansable. Para los intrusos, es el rayo que no perdona."
+    },
+    "epic_quote": {
+      "en": "My arrows carry the storm's fury.",
+      "es": "Mis flechas portan la furia de la tormenta."
     },
     "passive_name": {
       "en": "Piercing Lightning",
@@ -400,6 +456,10 @@
       "en": "Ilnare, known as Hidden Blade, was born in the deep forests of Thenân. Expert at moving unseen and tracking creatures, her agility and cunning make her lethal in ambushes. Though ethereal and delicate, her determination in combat is feared. She values nature's harmony and fights tirelessly for the balance of her beloved forest.",
       "es": "Ilnare, conocida como Hoja Oculta, nació en los profundos bosques de Thenân. Experta en moverse sin ser vista y rastrear criaturas, su agilidad y astucia la hacen letal en emboscadas. Aunque etérea y delicada, su determinación en combate es temida. Valora la armonía de la naturaleza y lucha incansablemente por el equilibrio de su bosque amado."
     },
+    "epic_quote": {
+      "en": "Harmony whispers through silent strikes.",
+      "es": "La armonía susurra a través de golpes silenciosos."
+    },
     "passive_name": {
       "en": "Fleeting Shadow",
       "es": "Sombra Fugaz"
@@ -427,6 +487,10 @@
     "lore_text": {
       "en": "Irianel, Deadly Wind, is the gust that devastates her enemies. With speed that defies sight and combat prowess that leaves one breathless, she protects Thenân with ferocity. To intruders, she is the wind that cuts like a sword, announcing their end before they can react.",
       "es": "Irianel, Viento Mortal, es la ráfaga que arrasa a sus enemigos. Con una velocidad que desafía la vista y una destreza en combate que deja sin aliento, protege Thenân con ferocidad. Para los intrusos, es el viento que corta como una espada, anunciando su fin antes de que puedan reaccionar."
+    },
+    "epic_quote": {
+      "en": "I am the gust that heralds the end.",
+      "es": "Soy la ráfaga que anuncia el final."
     },
     "passive_name": {
       "en": "Mental Peace",
@@ -456,6 +520,10 @@
       "en": "Antral knows no honor, only hunger. His sword makes no distinction between bone and flesh, and his laughter echoes with each torn victim. For him, war is not a means, but a feast. Every massacre is a poem written in blood, every battle, a celebration of annihilation.",
       "es": "Antral no conoce el honor, solo el hambre. Su espada no distingue entre huesos y carne, y su risa resuena con cada víctima desgarrada. Para él, la guerra no es un medio, es un banquete. Cada masacre es un poema escrito en sangre, cada batalla, una celebración de la aniquilación."
     },
+    "epic_quote": {
+      "en": "Each massacre, a verse in blood's dark poetry.",
+      "es": "Cada masacre, un verso en la oscura poesía de la sangre."
+    },
     "passive_name": {
       "en": "<p>Bloody Tribute</p>",
       "es": "<p>Tributo Sangriento</p>"
@@ -483,6 +551,10 @@
     "lore_text": {
       "en": "Arila doesn't walk, she drags storms. Where she steps, the earth spits ash. Her cunning is a knife in the enemy's ribs; her strength, a hammer that crushes skulls. There is no legend, only warning: if you see her silhouette against the fire, it's already too late. The Furious Flame forgives not... and she is its worst punishment.",
       "es": "Arila no camina, arrastra tormentas. Donde pisa, la tierra escupe ceniza. Su astucia es un cuchillo en las costillas del enemigo; su fuerza, un martillo que aplasta cráneos. No hay leyenda, solo advertencia: si ves su silueta contra el fuego, ya es demasiado tarde. La Llama Furiosa no perdona… y ella es su peor castigo."
+    },
+    "epic_quote": {
+      "en": "Ash follows my footsteps; death rides in my wake.",
+      "es": "La ceniza sigue mis pasos; la muerte cabalga en mi estela."
     },
     "passive_name": {
       "en": "Harassment",
@@ -512,6 +584,10 @@
       "en": "Eistanaak knows no fear, only the roar of battle. His muscles, hardened in the fire of a thousand raids, shatter bones like dry branches. No cry stops him, no shield withstands his onslaught. The blood of his enemies feeds the earth, but his thirst is never quenched. He is fury made flesh and will not rest until the world burns at his feet.",
       "es": "Eistanaak no conoce el miedo, solo el rugido de la batalla. Sus músculos, curtidos en el fuego de mil saqueos, destrozan huesos como ramas secas. No hay grito que lo detenga, ni escudo que resista sus embates. La sangre de sus enemigos alimenta la tierra, pero su sed nunca se sacia. Es la furia hecha carne y no descansará hasta que el mundo arda a sus pies."
     },
+    "epic_quote": {
+      "en": "Bones break like promises before my rage.",
+      "es": "Los huesos se rompen como promesas ante mi furia."
+    },
     "passive_name": {
       "en": "Intimidating Presence",
       "es": "Presencia Intimidante"
@@ -539,6 +615,10 @@
     "lore_text": {
       "en": "Elreik knows no mercy, only the pleasure of carnage. Her hands are stained with dried blood, her smile is a promise of pain. Where she steps, fear blossoms. She is not a warrior, but a hurricane of broken bones and torn flesh. Around the Fire Mountains, her name is whispered like a curse.",
       "es": "Elreik no conoce la piedad, solo el placer de la carnicería. Sus manos están teñidas de sangre seca, su sonrisa es una promesa de dolor. Donde pisa, el miedo florece. No es una guerrera, es un huracán de huesos rotos y carne desgarrada. En los alrededores de las Montañas de Fuego, su nombre se susurra como una maldición."
+    },
+    "epic_quote": {
+      "en": "Fear blooms where mercy dies.",
+      "es": "El miedo florece donde muere la piedad."
     },
     "passive_name": {
       "en": "Savage Impetus",
@@ -568,6 +648,10 @@
       "en": "Erdel doesn't shoot arrows, he sows agony. Each projectile pierces eyes, throats, entrails, leaving prey alive but broken. He lurks from the darkness, laughing as the wounded drag their bodies. He is not an archer, but a butcher at a distance, turning hunting into a spectacle of blood and despair.",
       "es": "Erdel no dispara flechas, siembra agonía. Cada proyectil perfora ojos, gargantas, entrañas, dejando a las presas vivas pero rotas. Acecha desde la oscuridad, riendo mientras los heridos arrastran sus cuerpos. No es un arquero, es un carnicero a distancia, que convierte la caza en un espectáculo de sangre y desesperación."
     },
+    "epic_quote": {
+      "en": "Distance matters not when agony is the prize.",
+      "es": "La distancia no importa cuando la agonía es el premio."
+    },
     "passive_name": {
       "en": "Preying on the Weak",
       "es": "Ensañarse con el débil"
@@ -595,6 +679,10 @@
     "lore_text": {
       "en": "Erinla's bone bow demands death. Each arrow is a lightning bolt that pierces hearts at a hundred paces. There is no escape, no mercy. She trains until her fingers bleed, because in the Furious Flame, to fail is to rot in the desert. She does not fail. She only accumulates corpses.",
       "es": "El arco de hueso de Erinla exige muerte. Cada flecha es un relámpago que perfora corazones a cien pasos. No hay fuga, no hay clemencia. Entrena hasta que sus dedos sangran, porque en la Llama Furiosa, fallar es pudrirse en el desierto. Ella no falla. Solo acumula cadáveres."
+    },
+    "epic_quote": {
+      "en": "Failure feeds the desert; I feed it enemies.",
+      "es": "El fracaso alimenta al desierto; yo lo alimento con enemigos."
     },
     "passive_name": {
       "en": "The Taste of Fear",
@@ -624,6 +712,10 @@
       "en": "Granaak does not rule, he dominates. His sword, forged with iron from defeated enemies, crushes skulls like shells. He ascended bathed in his predecessor's blood, and since then the Furious Flame burns beyond the mountains. He doesn't lead with words, but with broken bones and villages reduced to ashes. His legend is a warning: to resist is to burn.",
       "es": "Granaak no gobierna, domina. Su espada, forjada con el hierro de enemigos derrotados, aplasta cráneos como cáscaras. Ascendió bañado en la sangre de su predecesor, y desde entonces la Llama Furiosa quema más allá de las montañas. No lidera con palabras, sino con huesos rotos y aldeas reducidas a cenizas. Su leyenda es una advertencia: resistirse es arder."
     },
+    "epic_quote": {
+      "en": "To resist is to burn; to submit is to serve ashes.",
+      "es": "Resistir es arder; someterse es servir a las cenizas."
+    },
     "passive_name": {
       "en": "Oppressive Pressure",
       "es": "Presión Opresiva"
@@ -651,6 +743,10 @@
     "lore_text": {
       "en": "Grendel doesn't speak, doesn't laugh, doesn't play. She only stalks. Her victims never see her coming; they only feel the cold steel sinking into their backs. No warnings, no provocations, no theater. Only quick, silent death. In the Furious Flame, she is the shadow everyone fears... because when you notice her, it's already too late.",
       "es": "Grendel no habla, no ríe, no juega. Solo acecha. Sus víctimas nunca la ven llegar; solo sienten el frío del acero al hundirse en sus espaldas. No hay advertencias, ni provocaciones, ni teatro. Solo muerte rápida y silenciosa. En la Llama Furiosa, es la sombra que todos temen… porque cuando la notas, ya es demasiado tarde."
+    },
+    "epic_quote": {
+      "en": "Silence speaks louder than screams.",
+      "es": "El silencio habla más alto que los gritos."
     },
     "passive_name": {
       "en": "Furtive Shadow",

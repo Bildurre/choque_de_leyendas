@@ -15,6 +15,8 @@ return new class extends Migration
       $table->id();
       $table->foreignId('game_mode_id')->nullable()->constrained('game_modes');
       $table->json('name');
+      $table->json('description')->nullable();
+      $table->json('epic_quote')->nullable();
       $table->json('slug');
       $table->text('icon')->nullable();
       $table->foreignId('faction_id')->constrained('factions');

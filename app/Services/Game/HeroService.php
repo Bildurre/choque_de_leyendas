@@ -12,7 +12,7 @@ class HeroService
 {
   use HandlesTranslations;
   
-  protected $translatableFields = ['name', 'lore_text', 'passive_name', 'passive_description'];
+  protected $translatableFields = ['name', 'lore_text', 'epic_quote', 'passive_name', 'passive_description'];
 
   /**
    * Get all heroes with optional filtering and pagination

@@ -287,11 +287,29 @@
     </div>
   </section>
 
+  {{-- epic quote --}}
+  @php
+    $epicText = new \App\Models\Block([
+      'type' => 'quote',
+      'title' => null,
+      'subtitle' => [
+        'es' => "<p>" . $factionDeck->getTranslation('epic_quote', 'es') . "</p>", 
+        'en' => "<p>" . $factionDeck->getTranslation('epic_quote', 'en') . "</p>"
+      ],
+      'background_color' => 'theme-border',
+      'content' => null,
+      'settings' => [
+        'text_alignment' => 'center'
+      ]
+    ]);
+  @endphp
+  {!! $epicText->render() !!}
+
   {{-- Related Factions Block --}}
   @php
     $relatedDecksBlock = new \App\Models\Block([
       'type' => 'relateds',
-      'title' => ['es' => 'Otros Mazos', 'en' => 'Other Decks'],
+      'title' => null,
       'subtitle' => ['es' => 'Explora otros mazos del juego', 'en' => 'Explore other game decks'],
       'background_color' => 'none',
       'content' => [
@@ -305,7 +323,9 @@
       'settings' => [
         'model_type' => 'deck',
         'display_type' => 'random',
-        'text_alignment' => 'left'
+        'text_alignment' => 'left',
+        'button_size' => 'md',
+        'button_variant' => 'secondary',
       ]
     ]);
   @endphp

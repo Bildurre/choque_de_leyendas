@@ -29,6 +29,7 @@ class FactionRequest extends FormRequest
       'name' => ['required', 'array'],
       'name.es' => ['required', 'string', 'max:255'],
       'lore_text' => ['nullable', 'array'],
+      'epic_quote' => ['nullable', 'array'],
       'color' => ['required', 'string', 'regex:/^#[a-fA-F0-9]{6}$/'],
       'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_icon' => ['nullable', 'boolean'],

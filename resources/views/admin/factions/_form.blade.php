@@ -26,6 +26,12 @@
         :label="__('entities.factions.lore_text')"
         :values="isset($faction) ? $faction->getTranslations('lore_text') : []"
       />
+
+      <x-form.multilingual-wysiwyg
+        name="epic_quote"
+        :label="__('entities.factions.epic_quote')"
+        :values="isset($card) ? $card->getTranslations('epic_quote') : []"
+      />
     
       <x-form.color-picker
         name="color"

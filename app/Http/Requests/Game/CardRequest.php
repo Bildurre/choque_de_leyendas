@@ -29,6 +29,7 @@ class CardRequest extends FormRequest
       'name' => ['required', 'array'],
       'name.es' => ['required', 'string', 'max:255'],
       'lore_text' => ['nullable', 'array'],
+      'epic_quote' => ['nullable', 'array'],
       'faction_id' => ['nullable', 'exists:factions,id'],
       'card_type_id' => ['required', 'exists:card_types,id'],
       'equipment_type_id' => ['nullable', 'exists:equipment_types,id'],

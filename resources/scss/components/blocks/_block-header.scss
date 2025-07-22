@@ -9,7 +9,6 @@
   // Títulos más grandes para headers
   .block__title {
     font-size: 2rem;
-    margin-bottom: $spacing-sm;
     
     @include responsive(tablet) {
       font-size: 2.375rem;
@@ -22,7 +21,6 @@
   
   .block__subtitle {
     font-size: 1.4rem;
-    margin-bottom: 0;
     
     @include responsive(tablet) {
       font-size: 1.55rem;

@@ -55,7 +55,8 @@ return [
       'cta' => 'Call to Action',
       'automatic-index' => 'Automatic Index',
       'counters-list' => 'Counters List',
-      'game-modes' => 'Game Modes'
+      'game-modes' => 'Game Modes',
+      'quote' => 'Quote',
     ],
     'singular' => 'Block',
     'plural' => 'Blocks',
@@ -161,6 +162,7 @@ return [
     'create_error' => 'Error creating the block',
     'back_to_page' => 'Back to Page',
     'printable' => 'Printable',
+    'quote_text' => 'Author',
     'cta_text' => 'Text',
     'cta_button_text' => 'Button Text',
     'cta_button_link' => 'Link',

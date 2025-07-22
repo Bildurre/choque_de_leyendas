@@ -21,7 +21,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/home-text-es.jpeg"},
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
   },
   {
     "page_reference": 0,
@@ -33,7 +33,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/home-cta-es.jpeg"},
-    "settings": {"width": "md", "button_size": "lg", "button_variant": "primary", "image_position": "right", "text_alignment": "center", "image_scale_mode": "cover", "column_proportions": "4-1"}
+    "settings": {"width": "md", "button_size": "lg", "limit_height": true, "button_variant": "primary", "image_position": "right", "text_alignment": "center", "image_scale_mode": "cover", "column_proportions": "4-1"}
   },
   {
     "page_reference": 0,
@@ -45,7 +45,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
     "page_reference": 0,
@@ -69,7 +69,7 @@
     "is_printable": true,
     "background_color": "theme-border",
     "image": {"es": "images/blocks/home-text-2-es.jpeg"},
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
   },
   {
     "page_reference": 0,
@@ -81,7 +81,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
     "page_reference": 0,
@@ -105,7 +105,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
     "page_reference": 0,
@@ -129,7 +129,7 @@
     "is_printable": true,
     "background_color": "theme-border",
     "image": {"es": "images/blocks/home-text-3-es.jpeg"},
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "1-2"}
   },
   {
     "page_reference": 0,
@@ -141,7 +141,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/home-cta-2-es.jpeg"},
-    "settings": {"width": "md", "button_size": "lg", "button_variant": "primary", "image_position": "right", "text_alignment": "center", "image_scale_mode": "cover", "column_proportions": "4-1"}
+    "settings": {"width": "md", "button_size": "lg", "limit_height": true, "button_variant": "primary", "image_position": "right", "text_alignment": "center", "image_scale_mode": "cover", "column_proportions": "4-1"}
   },
   {
     "page_reference": 1,
@@ -153,7 +153,7 @@
     "is_printable": true,
     "background_color": "theme-card",
     "image": null,
-    "settings": {"text_alignment": "justify"}
+    "settings": {"text_alignment": "left"}
   },
   {
     "page_reference": 1,
@@ -165,7 +165,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/how-to-play-cta-es.jpeg"},
-    "settings": {"width": "lg", "button_size": "lg", "button_variant": "primary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "4-1"}
+    "settings": {"width": "lg", "button_size": "lg", "limit_height": true, "button_variant": "primary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "4-1"}
   },
   {
     "page_reference": 1,
@@ -177,7 +177,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/how-to-play-cta-2-es.jpeg"},
-    "settings": {"width": "lg", "button_size": "lg", "button_variant": "primary", "image_position": "left", "text_alignment": "right", "image_scale_mode": "cover", "column_proportions": "1-4"}
+    "settings": {"width": "lg", "button_size": "lg", "limit_height": true, "button_variant": "primary", "image_position": "left", "text_alignment": "right", "image_scale_mode": "cover", "column_proportions": "1-4"}
   },
   {
     "page_reference": 1,
@@ -189,103 +189,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/how-to-play-cta-3-es.jpeg"},
-    "settings": {"width": "lg", "button_size": "lg", "button_variant": "primary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "4-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "header",
-    "title": {"en": "The Rules", "es": "Las Reglas"},
-    "subtitle": {"en": "<p>From setup to victory. Discover how a game unfolds, turn by turn, action by action.</p>", "es": "<p>Desde la preparación hasta la victoria. Descubre cómo se desarrolla una partida, turno a turno, acción por acción.</p>"},
-    "content": {"es": null},
-    "order": 0,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"text_alignment": "justify"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"en": "Introduction", "es": "Introducción"},
-    "subtitle": {"es": null},
-    "content": {"en": "<p>Welcome to the rules of <strong>Alanda: Clash of Legends</strong>. A game is structured in two main blocks: <strong>Setup</strong>, where you'll build your initial strategy, and <strong>Battle Rounds</strong>, where the fate of the confrontation will be decided. Each block has its own phases with crucial decisions. Discover step by step how to prepare and develop an epic game.</p><p>The rules presented in this section correspond to the Standard game format, which constitutes the fundamental basis of the game. Although these rules generally apply to all game modes, some specific formats may introduce particular variations or exceptions. To learn about the modifications specific to each format, please refer to the section dedicated to each one.</p>", "es": "<p>Bienvenido a las reglas de <strong>Alanda: Choque de Leyendas</strong>. Una partida se estructura en dos grandes bloques: la <strong>Preparación</strong>, donde construirás tu estrategia inicial, y las <strong>Rondas de Batalla</strong>, donde se decidirá el destino del enfrentamiento. Cada bloque tiene sus propias fases con decisiones cruciales. Descubre paso a paso cómo preparar y desarrollar una partida épica.</p><p>Las reglas presentadas en esta sección corresponden al formato de juego Estándar, que constituye la base fundamental del juego. Aunque estas reglas se aplican de manera general en todas las modalidades, algunos formatos específicos pueden introducir variaciones o excepciones particulares. Para conocer las modificaciones propias de cada formato, consulta la sección dedicada a cada uno de ellos.</p>"},
-    "order": 1,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"en": "Preparation", "es": "Preparación"},
-    "subtitle": {"es": null},
-    "content": {"en": "<h3>Faction Selection, Heroes, and Action Deck Building</h3><p>Before starting to play, each player must select a faction. Selecting this faction will restrict the action cards available for building the action deck and the selection of heroes: the available action cards and heroes will be those belonging to said faction and, also, the action cards and heroes from the Mercenaries faction (which will always be available to combine with all factions).</p><p>Once the faction selection is made, each player selects 5 heroes to form their hero list. The only restriction for selecting them is their faction restriction (all must belong to the same faction or to the Mercenaries faction).</p><p>Likewise, action cards must also be selected to form an action deck of at least 30 cards. In addition to respecting the faction limitation when selecting these action cards, it must also be taken into account that for each action card there can only be a maximum of 2 identical copies in each action deck.</p><p>The selection of action cards and heroes must be done privately, without players having knowledge of their rivals' choices.</p>", "es": "<h3 id=\"selection\">Selección de Facción,  Héroes y construcción del Mazo de Acción</h3><p>Antes de empezar a jugar, cada jugador ha de seleccionar una facción. La selección de esta facción restringirá las cartas de acción disponibles para la construcción del mazo de acción y la selección de héroes: las cartas de acción y héroes disponibles serán los que pertenezcan a dicha facción y, también, las cartas de acción y héroes de la facción Mercenarios (que siempre estarán disponibles para combinar con todas las facciones).</p><p>Una vez hecha la selección de facción, cada jugador selecciona 5 héroes para que formen su lista de héroes. La única restricción para seleccionarlos es la restricción de facción de los mismos (todos han de pertenecer a la misma facción o a la facción Mercenarios).</p><p>Así mismo, también habrá que seleccionar las cartas de acción para formar un mazo de acción de, al menos, 30 cartas. Además de respetar la limitación de facción a la hora de seleccionar estas cartas de acción, también hay que tener en cuenta que por cada carta de acción solo puede haber un máximo de 2 copias iguales en cada mazo de acción.</p><p>La selección de las cartas de acción y de héroes hay que hacerla en privado, sin que los jugadores tengan conocimiento de las elecciones de sus rivales.</p>"},
-    "order": 2,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"es": null},
-    "subtitle": {"es": null},
-    "content": {"en": "<h3>Hero Draft</h3><p>Although each player starts with a selection of 5 heroes, <strong>Alanda: Clash of Legends</strong> matches are played in 3 versus 3 skirmishes.</p><p>In this phase, each player reveals the 5 heroes from their hero list to their rival. Once the rival has been able to read and check each of them, each player hides the 5 heroes again. Without the rival knowing which ones they are, privately, each player chooses 3 of their heroes to compete in the skirmish and discards the other two.</p>", "es": "<h3>Draft de Héroes</h3><p>Aunque cada jugador empieza con una selección de 5 héroes, las partidas de <strong>Alanda: Choque de Leyendas</strong> se hacen en escaramuzas de 3 contra 3.</p><p>En esta fase, cada jugador revela los 5 héroes de su lista de héroes a su rival. Una vez que el rival ha podido leer y comprobar cada uno de ellos, cada jugador vuelve a ocultar a los 5 héroes. Sin que el rival sepa cuáles son, de forma privada, cada jugador elige 3 de sus héroes para que disputen la escaramuza y descarta los otros dos.</p>"},
-    "order": 3,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"es": null},
-    "subtitle": {"es": null},
-    "content": {"en": "<h3>Initial Hand Draw</h3><p> </p><p>Both players shuffle their action deck and draw the first 5 action cards to form their initial hand.</p><p>Each player may now discard any number of action cards from their hand and draw as many as they have discarded. This discard and draw of action cards can only be done once and all action cards that are to be replaced must be discarded before drawing the new cards.</p><p>Each player will form with the discarded action cards a pile visible to both players where they will place, face up, visible and in order, the action cards they use or discard. We will call this pile the graveyard. Any player may look at, at any time, the action cards in their graveyard or their rival's graveyard.</p><p>Although you start with an initial hand of 5 action cards, the maximum number of action cards you can have in your hand is 7. At the end of each singular combat you will have to discard as many action cards as necessary to meet this condition.</p>", "es": "<h3 id=\"hand\">Robo de Mano Inicial</h3><p>Ambos jugadores barajan su mazo de acción y roban las 5 primeras cartas de acción para formar su mano inicial.</p><p>Cada jugador puede descartar ahora cualquier número de cartas de acción de su mano y robar tantas como haya descartado. Solo se puede hacer este descarte y robo de cartas de acción una única vez y todas las cartas de acción que se quieran reemplazar han de descartarse antes de robar las cartas nuevas.</p><p>Cada jugador formará con las cartas de acción descartadas una pila visible para ambos jugadores donde irá colocando, boca arriba, visibles y en orden, las cartas de acción que vaya usando o descartando. Llamaremos a esta pila cementerio. Cualquier jugador puede mirar, en cualquier momento, las cartas de acción de su cementerio o del cementerio del rival.</p><p>Aunque se empieza con una mano inicial de 5 cartas de acción, la cantidad máxima de cartas de acción que se puede tener en la mano es de 7. Al final de cada combate singular habrá que descartar tantas cartas de acción como sea necesario para cumplir esta condición.</p>"},
-    "order": 4,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"en": "Battle Rounds", "es": "Rondas de Batalla"},
-    "subtitle": {"es": null},
-    "content": {"en": "<p>Once all preparations are made, with the heroes who will compete in the skirmish selected and the initial hand prepared, it is time to play the skirmish.</p><p><strong>Alanda: Clash of Legends</strong> represents a small skirmish between champions. This skirmish is divided into battle rounds and these rounds, in turn, into singular combats. Let's see how each of these phases is divided and completed.</p>", "es": "<p>Una vez hechos todos los preparativos, con los héroes que van a disputar la escaramuza seleccionados y la mano inicial preparada, es hora de jugar la escaramuza.</p><p><strong>Alanda: Choque de Leyendas</strong> representa una pequeña escaramuza entre campeones. Esta escaramuza se divide en rondas de batalla y estas rondas, a su vez, en combates singulares. Veamos cómo se dividen y completan cada una de estas fases.</p>"},
-    "order": 5,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"es": null},
-    "subtitle": {"es": null},
-    "content": {"en": "<h3>Determine Attacker and Defender</h3><p>At the beginning of the first battle round, players will randomly determine who is the attacking player and who is the defending player (for example, by each rolling a die and seeing who gets a higher number). The winner of the draw may decide to be the attacker or the defender.</p><p>Starting from the second battle round, this will not be determined randomly, but will alternate: the player who was the attacking player in the previous round will now be the defending player and the player who was the defending player will now be the attacking player.</p>", "es": "<h3>Determinar Atacante y Defensor</h3><p>Al inicio de la primera ronda de batalla, los jugadores determinarán de forma aleatoria quién es el jugador atacante y quién el jugador defensor (por ejemplo, tirando un dado cada uno y viendo quién saca un número mayor). El ganador del sorteo podrá decidir ser el atacante o el defensor.</p><p>A partir de la segunda ronda de batalla esto no se determinará de forma aleatoria, sino que se irá alternando: el jugador que la ronda anterior fue el jugador atacante ahora será el jugador defensor y el jugador que fue el jugador defensor ahora será el jugador atacante.</p>"},
-    "order": 6,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
-  },
-  {
-    "page_reference": 2,
-    "type": "text",
-    "title": {"es": null},
-    "subtitle": {"es": null},
-    "content": {"en": "<h3>Pairings</h3><p>After determining initiative, players will pair each of their heroes with a rival hero to fight in singular combats. To make the pairings, the following sequence must be followed:</p><ol><li>If it is the first battle round, both players reveal the 3 heroes they have selected in the draft step.</li><li>The attacking player pairs one of their heroes with one of the defending player's to determine the first singular combat.</li><li>Now the defending player pairs one of their heroes with one of the attacking player's to determine the second singular combat.</li><li>The third singular combat is determined by the remaining heroes.</li></ol><p>The paired heroes are placed face to face and each pairing is placed following the previous one, in the center of the play area.</p><p>The hero with which another hero is paired is called the paired hero.</p><p>Heroes immediately adjacent to a pairing are called adjacent heroes (adjacent rivals or adjacent allies). Thus, the heroes adjacent to the heroes of the first pairing are the heroes of the second pairing, the heroes adjacent to the heroes of the second pairing are the heroes of the first and third pairing, and the heroes adjacent to the heroes of the third pairing are the heroes of the second pairing.</p><p>Pairings that have not yet been played (not counting the current pairing) are called subsequent pairings and those that have already been played are called previous pairings.</p>", "es": "<h3>Emparejamientos</h3><p>Tras determinar la iniciativa, los jugadores emparejarán a cada uno de sus héroes con un héroe rival para que luchen en combates singulares. Para hacer los emparejamientos hay que seguir la siguiente secuencia:</p><ol><li>Si es la primera ronda de batalla, ambos jugadores revelan los 3 héroes que han seleccionado en el paso de draft.</li><li>El jugador atacante empareja uno de sus héroes con otro del jugador defensor para determinar el primer combate singular.</li><li>Ahora el jugador defensor empareja uno de sus héroes con otro del jugador atacante para determinar el segundo combate singular.</li><li>El tercer combate singular queda determinado por los héroes restantes.</li></ol><p>Los héroes emparejados se colocan frente a frente y cada emparejamiento se coloca seguido del anterior, en el centro de la zona de juego.</p><p>Al héroe con el que otro héroe está emparejado se le llama héroe emparejado.</p><p>A los héroes inmediatamente adyacentes a un emparejamiento se les llama héroes adyacentes (rivales adyacentes o aliados adyacentes). Así, los héroes adyacentes a los héroes del primer emparejamiento son los héroes del segundo emparejamiento, los héroes adyacentes a los héroes del segundo emparejamiento son los héroes del primer y tercer emparejamiento y los héroes adyacentes a los héroes del tercer emparejamiento son los héroes del segundo emparejamiento.</p><p>A los emparejamientos que aún no se han jugado (sin contar el emparejamiento actual) se les llama emparejamientos posteriores y a los que ya se han jugado emparejamientos anteriores.</p>"},
-    "order": 7,
-    "is_printable": true,
-    "background_color": "none",
-    "image": null,
-    "settings": {"image_position": "clearfix-left", "text_alignment": "left", "image_scale_mode": "contain", "column_proportions": "1-1"}
+    "settings": {"width": "lg", "button_size": "lg", "limit_height": true, "button_variant": "primary", "image_position": "right", "text_alignment": "left", "image_scale_mode": "cover", "column_proportions": "4-1"}
   },
   {
     "page_reference": 1,
@@ -297,7 +201,7 @@
     "is_printable": true,
     "background_color": "none",
     "image": {"es": "images/blocks/hot-to-play-cta-4-es.jpeg"},
-    "settings": {"width": "lg", "button_size": "lg", "button_variant": "primary", "image_position": "left", "text_alignment": "right", "image_scale_mode": "cover", "column_proportions": "1-4"}
+    "settings": {"width": "lg", "button_size": "lg", "limit_height": true, "button_variant": "primary", "image_position": "left", "text_alignment": "right", "image_scale_mode": "cover", "column_proportions": "1-4"}
   },
   {
     "page_reference": 1,
@@ -309,11 +213,11 @@
     "is_printable": true,
     "background_color": "none",
     "image": null,
-    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
   },
   {
     "page_reference": 1,
-    "type": "text",
+    "type": "quote",
     "title": {"es": null},
     "subtitle": {"en": "<p>Knowledge is power. Power forges legends.</p>", "es": "<p>El conocimiento es poder. El poder forja leyendas.</p>"},
     "content": {"es": null},
@@ -321,7 +225,7 @@
     "is_printable": true,
     "background_color": "theme-border",
     "image": null,
-    "settings": {"image_position": "left", "text_alignment": "center", "image_scale_mode": "contain", "column_proportions": "1-1"}
+    "settings": {"text_alignment": "center"}
   },
   {
     "page_reference": 1,
@@ -333,6 +237,570 @@
     "is_printable": true,
     "background_color": "theme-border",
     "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "header",
+    "title": {"en": "The Rules", "es": "Las Reglas"},
+    "subtitle": {"en": "<p>From setup to victory. Discover how a game unfolds, turn by turn, action by action.</p>", "es": "<p>Desde la preparación hasta la victoria. Descubre cómo se desarrolla una partida, turno a turno, acción por acción.</p>"},
+    "content": {"es": null},
+    "order": 0,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"text_alignment": "left"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>A game of <strong>Alanda: Clash of Legends </strong>is structured in two main blocks: Setup, where you'll build your initial strategy, and Battle Rounds, where the fate of the confrontation will be decided. Each block has its own phases with crucial decisions. Discover step by step how to prepare and develop an epic game.</p>\r\n<p>The rules presented in this section correspond to the Standard game format, which constitutes the fundamental basis of the game. Although these rules generally apply to all game modes, some specific formats may introduce particular variations or exceptions. To learn about the modifications specific to each format, please refer to the section dedicated to each one.</p>", "es": "<p>Una partida de <strong>Alanda: Choque de Leyendas </strong>se estructura en dos grandes bloques: la Preparación, donde construirás tu estrategia inicial, y las Rondas de Batalla, donde se decidirá el destino del enfrentamiento. Cada bloque tiene sus propias fases con decisiones cruciales. Descubre paso a paso cómo preparar y desarrollar una partida épica.</p>\r\n<p>Las reglas presentadas en esta sección corresponden al formato de juego Estándar, que constituye la base fundamental del juego. Aunque estas reglas se aplican de manera general en todas las modalidades, algunos formatos específicos pueden introducir variaciones o excepciones particulares. Para conocer las modificaciones propias de cada formato, consulta la sección dedicada a cada uno de ellos.</p>"},
+    "order": 1,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"es": "images/blocks/game-rules-text-es.jpeg"},
+    "settings": {"limit_height": "1", "image_position": "right", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "3-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Faction, Heroes, and Action Deck Selection</h3>\r\n<p>Before starting to play, each player must select a faction. Selecting this faction will restrict the action cards available for building the action deck and the selection of heroes: the available action cards and heroes will be those belonging to said faction and, also, the action cards and heroes from the Mercenaries faction (which will always be available to combine with all factions).</p>\r\n<p>Once the faction selection is made, each player selects 5 heroes to form their hero list. The only restriction for selecting them is their faction restriction (all must belong to the same faction or to the Mercenaries faction).</p>\r\n<p>Likewise, action cards must also be selected to form an action deck of at least 30 cards. In addition to respecting the faction limitation when selecting these action cards, it must also be taken into account that for each action card there can only be a maximum of 2 identical copies in each action deck.</p>\r\n<p>The selection of action cards and heroes must be done privately, without players having knowledge of their rivals' choices.</p>", "es": "<h3 id=\"selection\">Selección de Facción, Héroes y  Mazo de Acción</h3>\r\n<p>Antes de empezar a jugar, cada jugador ha de seleccionar una facción. La selección de esta facción restringirá las cartas de acción disponibles para la construcción del mazo de acción y la selección de héroes: las cartas de acción y héroes disponibles serán los que pertenezcan a dicha facción y, también, las cartas de acción y héroes de la facción Mercenarios (que siempre estarán disponibles para combinar con todas las facciones).</p>\r\n<p>Una vez hecha la selección de facción, cada jugador selecciona 5 héroes para que formen su lista de héroes. La única restricción para seleccionarlos es la restricción de facción de los mismos (todos han de pertenecer a la misma facción o a la facción Mercenarios).</p>\r\n<p>Así mismo, también habrá que seleccionar las cartas de acción para formar un mazo de acción de, al menos, 30 cartas. Además de respetar la limitación de facción a la hora de seleccionar estas cartas de acción, también hay que tener en cuenta que por cada carta de acción solo puede haber un máximo de 2 copias iguales en cada mazo de acción.</p>\r\n<p>La selección de las cartas de acción y de héroes hay que hacerla en privado, sin que los jugadores tengan conocimiento de las elecciones de sus rivales.</p>"},
+    "order": 4,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": "1", "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Hero Draft</h3>\r\n<p>Although each player starts with a selection of 5 heroes, <strong>Alanda: Clash of Legends</strong> matches are played in 3 versus 3 skirmishes.</p>\r\n<p>In this phase, each player reveals the 5 heroes from their hero list to their rival. Once the rival has been able to read and check each of them, each player hides the 5 heroes again. Without the rival knowing which ones they are, privately, each player chooses 3 of their heroes to compete in the skirmish and discards the other two.</p>", "es": "<h3>Draft de Héroes</h3>\r\n<p>Aunque cada jugador empieza con una selección de 5 héroes, las partidas de <strong>Alanda: Choque de Leyendas</strong> se hacen en escaramuzas de 3 contra 3.</p>\r\n<p>En esta fase, cada jugador revela los 5 héroes de su lista de héroes a su rival. Una vez que el rival ha podido leer y comprobar cada uno de ellos, cada jugador vuelve a ocultar a los 5 héroes. Sin que el rival sepa cuáles son, de forma privada, cada jugador elige 3 de sus héroes para que disputen la escaramuza y descarta los otros dos.</p>"},
+    "order": 5,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Initial Hand Draw</h3>\r\n<p>Both players shuffle their action deck and draw the first 5 action cards to form their initial hand.</p>\r\n<p>Each player may now discard any number of action cards from their hand and draw as many as they have discarded. This discard and draw of action cards can only be done once and all action cards that are to be replaced must be discarded before drawing the new cards.</p>\r\n<p>Each player will form with the discarded action cards a pile visible to both players where they will place, face up, visible and in order, the action cards they use or discard. We will call this pile the graveyard. Any player may look at, at any time, the action cards in their graveyard or their rival's graveyard.</p>\r\n<p>Although you start with an initial hand of 5 action cards, the maximum number of action cards you can have in your hand is 7. At the end of each singular combat you will have to discard as many action cards as necessary to meet this condition.</p>", "es": "<h3 id=\"hand\">Robo de Mano Inicial</h3>\r\n<p>Ambos jugadores barajan su mazo de acción y roban las 5 primeras cartas de acción para formar su mano inicial.</p>\r\n<p>Cada jugador puede descartar ahora cualquier número de cartas de acción de su mano y robar tantas como haya descartado. Solo se puede hacer este descarte y robo de cartas de acción una única vez y todas las cartas de acción que se quieran reemplazar han de descartarse antes de robar las cartas nuevas.</p>\r\n<p>Cada jugador formará con las cartas de acción descartadas una pila visible para ambos jugadores donde irá colocando, boca arriba, visibles y en orden, las cartas de acción que vaya usando o descartando. Llamaremos a esta pila cementerio. Cualquier jugador puede mirar, en cualquier momento, las cartas de acción de su cementerio o del cementerio del rival.</p>\r\n<p>Aunque se empieza con una mano inicial de 5 cartas de acción, la cantidad máxima de cartas de acción que se puede tener en la mano es de 7. Al final de cada combate singular habrá que descartar tantas cartas de acción como sea necesario para cumplir esta condición.</p>"},
+    "order": 6,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"en": "Battle Rounds", "es": "Rondas de Batalla"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>Once all preparations are made, with the heroes who will compete in the skirmish selected and the initial hand prepared, it is time to play the skirmish.</p>\r\n<p><strong>Alanda: Clash of Legends</strong> represents a small skirmish between champions. This skirmish is divided into battle rounds and these rounds, in turn, into singular combats. Let's see how each of these phases is divided and completed.</p>", "es": "<p>Una vez hechos todos los preparativos, con los héroes que van a disputar la escaramuza seleccionados y la mano inicial preparada, es hora de jugar la escaramuza.</p>\r\n<p><strong>Alanda: Choque de Leyendas</strong> representa una pequeña escaramuza entre campeones. Esta escaramuza se divide en rondas de batalla y estas rondas, a su vez, en combates singulares. Veamos cómo se dividen y completan cada una de estas fases.</p>"},
+    "order": 8,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Determine Attacker and Defender</h3>\r\n<p>At the beginning of the first battle round, players will randomly determine who is the attacking player and who is the defending player (for example, by each rolling a die and seeing who gets a higher number). The winner of the draw may decide to be the attacker or the defender.</p>\r\n<p>Starting from the second battle round, this will not be determined randomly, but will alternate: the player who was the attacking player in the previous round will now be the defending player and the player who was the defending player will now be the attacking player.</p>", "es": "<h3>Determinar Atacante y Defensor</h3>\r\n<p>Al inicio de la primera ronda de batalla, los jugadores determinarán de forma aleatoria quién es el jugador atacante y quién el jugador defensor (por ejemplo, tirando un dado cada uno y viendo quién saca un número mayor). El ganador del sorteo podrá decidir ser el atacante o el defensor.</p>\r\n<p>A partir de la segunda ronda de batalla esto no se determinará de forma aleatoria, sino que se irá alternando: el jugador que la ronda anterior fue el jugador atacante ahora será el jugador defensor y el jugador que fue el jugador defensor ahora será el jugador atacante.</p>"},
+    "order": 9,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Pairings</h3>\r\n<p>After determining initiative, players will pair each of their heroes with a rival hero to fight in singular combats. To make the pairings, the following sequence must be followed:</p>\r\n<ol>\r\n<li>If it is the first battle round, both players reveal the 3 heroes they have selected in the draft step.</li>\r\n<li>The attacking player pairs one of their heroes with one of the defending player's to determine the first singular combat.</li>\r\n<li>Now the defending player pairs one of their heroes with one of the attacking player's to determine the second singular combat.</li>\r\n<li>The third singular combat is determined by the remaining heroes.</li>\r\n</ol>\r\n<p>The paired heroes are placed face to face and each pairing is placed following the previous one, in the center of the play area.</p>\r\n<p>The hero with which another hero is paired is called the paired hero.</p>\r\n<p>Heroes immediately adjacent to a pairing are called adjacent heroes (adjacent rivals or adjacent allies). Thus, the heroes adjacent to the heroes of the first pairing are the heroes of the second pairing, the heroes adjacent to the heroes of the second pairing are the heroes of the first and third pairing, and the heroes adjacent to the heroes of the third pairing are the heroes of the second pairing.</p>\r\n<p>Pairings that have not yet been played (not counting the current pairing) are called subsequent pairings and those that have already been played are called previous pairings.</p>", "es": "<h3>Emparejamientos</h3>\r\n<p>Tras determinar la iniciativa, los jugadores emparejarán a cada uno de sus héroes con un héroe rival para que luchen en combates singulares. Para hacer los emparejamientos hay que seguir la siguiente secuencia:</p>\r\n<ol>\r\n<li>Si es la primera ronda de batalla, ambos jugadores revelan los 3 héroes que han seleccionado en el paso de draft.</li>\r\n<li>El jugador atacante empareja uno de sus héroes con otro del jugador defensor para determinar el primer combate singular.</li>\r\n<li>Ahora el jugador defensor empareja uno de sus héroes con otro del jugador atacante para determinar el segundo combate singular.</li>\r\n<li>El tercer combate singular queda determinado por los héroes restantes.</li>\r\n</ol>\r\n<p>Los héroes emparejados se colocan frente a frente y cada emparejamiento se coloca seguido del anterior, en el centro de la zona de juego.</p>\r\n<p>Al héroe con el que otro héroe está emparejado se le llama héroe emparejado.</p>\r\n<p>A los héroes inmediatamente adyacentes a un emparejamiento se les llama héroes adyacentes (rivales adyacentes o aliados adyacentes). Así, los héroes adyacentes a los héroes del primer emparejamiento son los héroes del segundo emparejamiento, los héroes adyacentes a los héroes del segundo emparejamiento son los héroes del primer y tercer emparejamiento y los héroes adyacentes a los héroes del tercer emparejamiento son los héroes del segundo emparejamiento.</p>\r\n<p>A los emparejamientos que aún no se han jugado (sin contar el emparejamiento actual) se les llama emparejamientos posteriores y a los que ya se han jugado emparejamientos anteriores.</p>"},
+    "order": 10,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/pairings-en.png", "es": "images/blocks/pairings-es.png"},
+    "settings": {"limit_height": true, "image_position": "clearfix-left", "text_alignment": "left", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3 class=\"whitespace-pre-wrap break-words\">Singular Combats</h3>\r\n<p class=\"whitespace-pre-wrap break-words\">Once the pairings are made, we proceed to the resolution of the Singular Combats.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">We will call active heroes the heroes participating in the Singular Combat we are resolving at that moment and inactive heroes the rest.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">Starting with the first one, to resolve each of the Singular Combats we will have to perform the following subphases:</p>", "es": "<h3 class=\"whitespace-pre-wrap break-words\">Combates Singulares</h3>\r\n<p class=\"whitespace-pre-wrap break-words\">Una vez hechos los emparejamientos se procede a la resolución de los Combates Singulares.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">Llamaremos héroes activos a los héroes que participen en el Combate Singular que estemos resolviendo en ese momento y héroes inactivos al resto.</p>\r\n<p class=\"whitespace-normal break-words\">Comenzando con el primero, para resolver cada uno de los Combates Singulares tendremos que realizar las siguientes subfases:</p>"},
+    "order": 11,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4>Prepare Action Dice</h4>\r\n<p>Each player has a reserve of Action Dice with which they can pay for cards and abilities. The reserve consists of 5 colored dice as a base, and this amount can be modified by abilities or other effects from heroes or cards.</p>\r\n<p>Starting with the attacking player, each player rolls their reserve of Action Dice.</p>\r\n<p>Once the first roll is made, the player can decide to reroll any number of dice, keeping in mind that they must keep at least 1 of the results (if they rolled 5 dice they can reroll 1, 2, 3 or 4 dice, but not all 5). This reroll must be done at once: choose how many dice to reroll and roll them all at once.</p>\r\n<p>If due to some effect or ability the player could make more rerolls, these rerolls will be done in the same way as the first reroll, but keeping in mind that in each reroll they must keep, at minimum, 1 more die than in the previous one.</p>\r\n<p>After making these rolls each player will keep their dice as a reserve of Prepared Dice. We will also say that we have prepared our Action Dice.</p>", "es": "<h4>Preparar Dados de Acción</h4>\r\n<p>Cada jugador tiene una reserva de Dados de Acción con la que podrá pagar cartas y habilidades. La reserva se compone de 5 dados de colores de base, pudiendo verse modificada esta cantidad por habilidades u otros efectos de héroes o cartas.</p>\r\n<p>Empezando por el jugador atacante, cada jugador tira su reserva de Dados de Acción.</p>\r\n<p>Una vez hecho el primer lanzamiento, el jugador puede decidir volver a repetir cualquier número de dados, teniendo en cuenta que ha de guardarse al menos 1 de los resultados (si ha tirado 5 dados podrá repetir 1, 2, 3 o 4 dados, pero no los 5). Esta repetición de dados hay que hacerla de una vez: se eligen cuántos dados se quieren repetir y se lanzan todos a la vez.</p>\r\n<p>Si por algún efecto o habilidad el jugador pudiera volver a hacer más repeticiones, estas repeticiones se harán de la misma manera que la primera repetición, pero teniendo en cuenta que en cada repetición habrá que guardar, mínimo, 1 dado más que en la anterior.</p>\r\n<p>Después de haber hecho estos lanzamientos cada jugador guardará sus dados como reserva de Dados Preparados. También diremos que hemos preparado nuestros Dados de Acción.</p>"},
+    "order": 12,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4>Determine Initiative</h4>\r\n<p>Both players roll 1d6 and add the result to their active hero's Agility, also taking into account the different modifiers, abilities or effects that may influence. The player with the highest sum will be the player with Initiative for this Singular Combat.</p>\r\n<p>In case of a tie, the player whose hero has more Agility will win the combat's Initiative. If there is still a tie, the attacking player will win Initiative.</p>", "es": "<h4>Determinar la Iniciativa</h4>\r\n<p>Ambos jugadores tiran 1d6 y suman el resultado a la Agilidad de su héroe activo, teniendo en cuenta también los distintos modificadores, habilidades o efectos que puedan influir. El jugador con mayor suma será el jugador con la Iniciativa para este Combate Singular.</p>\r\n<p>En caso de empate será el jugador cuyo héroe tenga más Agilidad quien gane la Iniciativa del combate. Si sigue habiendo empate, será el jugador atacante quien gane la Iniciativa.</p>"},
+    "order": 14,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4>Counter Cleanup</h4>\r\n<p>Each player removes from their active hero 1 counter of each type they have on them. This way, if a hero had, for example, 1 bane counter: Poisoned and 2 boon counters: Swiftness they will be left with 1 boon counter: Swiftness and no bane counter: Poisoned.</p>", "es": "<h4>Limpieza de Contadores</h4>\r\n<p>Cada jugador remueve de su héroe activo 1 contador de cada uno de los tipos que tenga encima. De esta manera, si un héroe tenía, por ejemplo, 1 contador de perjuicio: Envenenado y 2 contadores de beneficio: Presteza se quedará con 1 contador de beneficio: Presteza y ninguno de perjuicio: Envenenado.</p>"},
+    "order": 15,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4>Action Resolution</h4>\r\n<p>Once both players have prepared their Action Dice, Initiative has been determined and the corresponding counters have been cleaned, action resolution will begin (resolution of cards and abilities), the phase in which active heroes will try to knock their rivals out of combat and protect their allies.</p>\r\n<p>An action is playing a card from hand, activating a hero or equipment ability or using the special action Draw a Card.</p>\r\n<p>Starting with the player with Initiative and alternating, players will take turns to have the opportunity to pay the cost of an ability or card and resolve its effects. To pay the cost of said ability or card they will have to discard dice from their reserve of Prepared Dice so that they equal in number and color the cost of the ability or card they want to play and, then, its effects will be resolved.</p>\r\n<p>Dice used to pay costs are considered Spent Dice.</p>\r\n<p>In this way, players alternate resolving actions until neither can, or wants to, resolve more actions. Even if one of the heroes is knocked out of combat, the player whose hero is still active can continue spending their Prepared Dice to play cards or abilities, with the exception that they cannot play those that directly target the paired rival hero.</p>\r\n<p>Some cards or abilities can be played reacting to Singular Combat situations. If any action or other effect is played or must be resolved at the same time as another, the last effect to come into play is resolved first (effects, abilities and cards are put in a resolution stack and the stack is resolved from last to first). Actions that have been put on the stack are resolved even if their caster has been knocked out of combat before they begin to resolve.</p>\r\n<p>If two actions or effects want to be put on the stack simultaneously, the player whose turn is being played will choose in what order they are put and when an action or effect begins to resolve, all its text will be resolved, in order, before another can begin to resolve or another action or effect can be put on the resolution stack.</p>", "es": "<h4 class=\"whitespace-normal break-words\">Resolución de Acciones</h4>\r\n<p class=\"whitespace-normal break-words\">Una vez ambos jugadores tengan preparados sus Dados de Acción, se haya determinado la Iniciativa y se hayan limpiado los contadores correspondientes, comenzará la resolución de acciones (resolución de cartas y habilidades), la fase en la que los héroes activos intentarán dejar fuera de combate a sus rivales y proteger a sus aliados.</p>\r\n<p class=\"whitespace-normal break-words\">Una acción es jugar una carta de la mano, activar una habilidad de héroe o de equipo o usar la acción especial Robar una Carta.</p>\r\n<p class=\"whitespace-normal break-words\">Empezando por el jugador con la Iniciativa y de forma alterna, los jugadores se irán pasando el turno para tener la oportunidad de pagar el coste de una habilidad o carta y resolver sus efectos. Para pagar el coste de dicha habilidad o carta tendrán que descartar dados de su reserva de Dados Preparados de forma que se iguale en número y color al coste de la habilidad o carta que se quiera jugar y, a continuación, se resolverán sus efectos.</p>\r\n<p class=\"whitespace-normal break-words\">Los dados usados para pagar costes se consideran Dados Gastados.</p>\r\n<p class=\"whitespace-normal break-words\">De esta forma, los jugadores se van alternando resolviendo acciones hasta que ninguno pueda, o quiera, resolver más acciones. Incluso si uno de los héroes queda fuera de combate, el jugador cuyo héroe aún esté activo podrá seguir gastando sus Dados Preparados para jugar cartas o habilidades, con la excepción de que no podrá jugar aquellas que hagan objetivo directo al héroe rival emparejado.</p>\r\n<p class=\"whitespace-normal break-words\">Algunas cartas o habilidades se pueden jugar reaccionando a situaciones del Combate Singular. Si alguna acción u otro efecto se juega o ha de resolverse a la vez que otra, el último efecto en entrar en juego se resuelve primero (los efectos, habilidades y cartas se ponen en una pila de resolución y la pila se resuelve de última a primera). Las acciones que hayan sido puestas en la pila se resuelven incluso si su lanzador ha quedado fuera de combate antes de que se empiecen a resolver.</p>\r\n<p class=\"whitespace-normal break-words\">Si dos acciones o efectos quieren ponerse en la pila de forma simultánea el jugador cuyo turno se esté jugando será quien elija en qué orden se pongan y cuando una acción o efecto comience a resolverse se resolverá todo su texto, en orden, antes de que se pueda empezar a resolver otro u otra acción o efecto se pueda poner en la pila de resolución.</p>"},
+    "order": 16,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4 class=\"whitespace-pre-wrap break-words\">Resolving Attacks</h4>\r\n<p class=\"whitespace-pre-wrap break-words\">Some cards and hero abilities can deal damage to other heroes. We call these actions attacks.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">To resolve attacks, in addition to taking into account their description, you must take into account other characteristics of both the action itself and the attributes of the rival hero, in a closely related way.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">As we can see in the hero card description, they have the attributes Will and Armor that represent strength against magical and physical attacks, respectively.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">Translating this to the game rules, you must look at whether the damage action or attack is a magical attack or physical attack. If it is a magical attack we subtract from the damage specified in the action description the Will of the hero receiving the attack. If it is a physical attack we subtract the Armor of the hero receiving the attack.</p>", "es": "<h4 class=\"whitespace-pre-wrap break-words\">Resolviendo Ataques</h4>\r\n<p class=\"whitespace-pre-wrap break-words\">Algunas cartas y habilidades de héroe pueden causar daño a otros héroes. A estas acciones les llamamos ataques.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">Para resolver ataques, además de tener en cuenta la descripción de los mismos, hay que tener en cuenta otras características tanto de la propia acción como de los atributos del héroe rival, de forma muy relacionada.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">Como podemos ver en la descripción de las cartas de héroe, estos tienen los atributos Voluntad y Armadura que representan la fortaleza frente a ataques mágicos y físicos, respectivamente.</p>\r\n<p class=\"whitespace-pre-wrap break-words\">Traduciendo esto a las reglas del juego, hay que mirar si la acción de daño o ataque es un ataque mágico o ataque físico. Si es un ataque mágico restamos al daño especificado en la descripción de la acción la Voluntad del héroe que recibe el ataque. Si es un ataque físico restamos la Armadura del héroe que recibe el ataque.</p>"},
+    "order": 18,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4>Let's see it with an example:</h4>\r\n<p>Suppose Belain Thalier faces Ayranel, Capa de Cuervo in Singular Combat. Belain uses her first active ability, Cuchillada Precisa, of physical type. The description says this ability deals 3 + Strength damage to the paired rival hero. Belain's Strength is 3, so she will deal 3 + 3 = 6 base damage in total.</p>\r\n<p>Since the ability is physical, from this damage we have to subtract Ayranel's Armor, which is 3. This way, the ability Cuchillada Precisa will deal 6 (base damage) – 3 (Armor) = 3 (final damage) damage, subtracting a total of 3 life points from Ayranel's total.</p>", "es": "<h4>Veámoslo con un ejemplo</h4>\r\n<p>Supongamos que Belain Thalier se enfrenta en Combate Singular con Ayranel, Capa de Cuervo. Belain usa su primera habilidad activa, Cuchillada Precisa, de tipo físico. La descripción dice que esta habilidad hace 3 + Fuerza de daño al héroe rival emparejado. La Fuerza de Belain es de 3, por lo que hará 3 + 3 = 6 de daño base en total.</p>\r\n<p>Como la habilidad es física, a este daño tenemos que restar la Armadura de Ayranel, que es de 3. De esta manera, la habilidad Cuchillada Precisa le hará 6 (daño base) – 3 (Armadura) = 3 (daño final) de daño, restando un total de 3 puntos de vida del total de Ayranel.</p>"},
+    "order": 19,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": {"en": "images/blocks/attacks-en.png", "es": "images/blocks/attacks-es.png"},
+    "settings": {"limit_height": true, "image_position": "clearfix-right", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text-card",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": {"text": "<h4>Draw a Card</h4>\r\n<p>All heroes have the universal action Draw a Card available. This action is a universal support-type action, costing 1 <img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red-green-blue.svg\" alt=\"Dado Rojo-Verde-Azul\"> die and whose effect is to draw a card from the library. It can only be done once per Singular Combat.</p>", "label": "Universal action"}, "es": {"text": "<h4>Robar una Carta</h4>\r\n<p>Todos los héroes tienen disponible la acción universal Robar una Carta. Esta acción es una acción universal de tipo apoyo, de coste 1 dado <img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red-green-blue.svg\" alt=\"Dado Rojo-Verde-Azul\"> y cuyo efecto es robar una carta de la biblioteca. Solo puede hacerse una vez por Combate Singular.</p>", "label": "Acción universal"}},
+    "order": 17,
+    "is_printable": true,
+    "background_color": "theme-card",
+    "image": null,
+    "settings": {"text_alignment": "justify"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text-card",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": {"text": "<h4>Fixing a color</h4>\r\n<p>Before rolling the dice, each player can discard a card from their hand to keep a die of the color of their choice, from among the colors in that card's cost, as a Prepared Die.</p>", "label": "Special action"}, "es": {"text": "<h4>Fijando un color</h4>\r\n<p>Antes de tirar los dados, cada jugador puede descartar una carta de su mano para guardar un dado del color de su elección, de entre los colores del coste de dicha carta, como Dado Preparado.</p>", "label": "Acción especial"}},
+    "order": 13,
+    "is_printable": true,
+    "background_color": "theme-card",
+    "image": null,
+    "settings": {"text_alignment": "justify"}
+  },
+  {
+    "page_reference": 2,
+    "type": "automatic-index",
+    "title": null,
+    "subtitle": null,
+    "content": null,
+    "order": 2,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"compact": "1", "numbered": "1", "text_alignment": "left"}
+  },
+  {
+    "page_reference": 2,
+    "type": "text",
+    "title": {"en": "Preparation", "es": "Preparación"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>Before starting a game of Alanda: Clash of Legends, players must complete several preliminary steps.</p>\r\n<p>During this phase, players select their faction, choose the heroes that will participate in the skirmish, and build their action deck. These steps determine the resources available to each player during the game.</p>", "es": "<p>Antes de comenzar una partida de <strong>Alanda: Choque de Leyendas</strong>, los jugadores deben completar varios pasos de previos.</p>\r\n<p>Durante esta fase se selecciona la facción, se eligen los héroes que participarán en la escaramuza y se construye el mazo de acción. Estos pasos determinan los recursos disponibles para cada jugador durante la partida.</p>"},
+    "order": 3,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 2,
+    "type": "quote",
+    "title": {"es": null},
+    "subtitle": {"en": "<p>In every choice before combat lies the seed of glory or defeat.</p>", "es": "<p>En cada elección antes del combate yace la semilla de la gloria o la derrota.</p>"},
+    "content": {"es": null},
+    "order": 7,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"text_alignment": "center"}
+  },
+  {
+    "page_reference": 3,
+    "type": "header",
+    "title": {"en": "The Components", "es": "Los Componentes"},
+    "subtitle": {"en": "<p class=\"whitespace-normal break-words\"><em><strong>Learn about every game element: heroes, action cards, and everything you need to master the battlefield.</strong></em></p>", "es": "<p>Conoce cada elemento del juego: héroes, cartas de acción y todo lo que necesitas para dominar el campo de batalla.</p>"},
+    "content": null,
+    "order": 0,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"text_alignment": "left"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<p class=\"whitespace-normal break-words\">In this section you will learn about the two fundamental elements of the game: Heroes, who will lead your forces on the battlefield, and Action Cards, which will provide you with strategic resources during combat. Each component has specific characteristics that define its use and function within the game system. From basic attributes to the most complex abilities, each element has been designed to offer multiple tactical and strategic options.</p>\r\n<p class=\"whitespace-normal break-words\">Learn to identify each element, understand their limitations and possibilities, and discover how they interact with each other to master all facets of the game. A deep understanding of these components will allow you to develop more effective strategies and make the most of the synergies between heroes and cards.</p>", "es": "<p class=\"whitespace-normal break-words\">En esta sección conocerás los dos elementos fundamentales del juego: los Héroes, que liderarán tus fuerzas en el campo de batalla, y las Cartas de Acción, que te proporcionarán recursos estratégicos durante el combate. Cada componente tiene características específicas que definen su uso y función dentro del sistema de juego. Desde los atributos básicos hasta las habilidades más complejas, cada elemento ha sido diseñado para ofrecer múltiples opciones tácticas y estratégicas.</p>\r\n<p class=\"whitespace-normal break-words\">Aprende a identificar cada elemento, comprende sus limitaciones y posibilidades, y descubre cómo interactúan entre sí para dominar todas las facetas del juego. Una comprensión profunda de estos componentes te permitirá desarrollar estrategias más efectivas y aprovechar al máximo las sinergias entre héroes y cartas.</p>"},
+    "order": 1,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/components-text-en.jpeg"},
+    "settings": {"limit_height": "1", "image_position": "right", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "3-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "automatic-index",
+    "title": null,
+    "subtitle": null,
+    "content": null,
+    "order": 2,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"compact": "1", "numbered": "1", "text_alignment": "left"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"en": "Action Dice", "es": "Dados de Acción"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>The dice in <strong>Alanda: Clash of Legends</strong> are special 6-sided dice. Instead of numbers, each face shows a color: three red faces, two green faces, and one blue face. These colors represent the different types of energy available to heroes. During combat, the results obtained from rolling these dice will form your action dice reserve, your resource pool, which you'll use to activate hero abilities and pay the cost of action cards.</p>", "es": "<p>Los dados de <strong>Alanda: Choque de Leyendas</strong> son dados de 6 caras especiales. En lugar de números, cada cara muestra un color: tres caras rojas, dos caras verdes y una cara azul. Estos colores representan los diferentes tipos de energía disponibles para los héroes. Durante el combate, los resultados obtenidos al lanzar estos dados formarán tu reserva de dados de acción, tus recursos, que utilizarás para activar habilidades de héroe y pagar el coste de las cartas de acción.</p>"},
+    "order": 3,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"en": "Hero Cards", "es": "Cartas de Héroe"},
+    "subtitle": null,
+    "content": {"en": "<p>Heroes are the fundamental pieces of each game. These cards represent the champions who will fight for you on the battlefield. Each hero card contains all the necessary information to use that character in the game: from their combat attributes to their special abilities. Below, we'll explore in detail each element that makes up a hero card and its function during the game.</p>", "es": "<p>Los héroes son las piezas fundamentales de cada partida. Estas cartas representan a los campeones que lucharán por ti en el campo de batalla. Cada carta de héroe contiene toda la información necesaria para usar ese personaje en el juego: desde sus atributos de combate hasta sus habilidades especiales. A continuación, exploraremos en detalle cada elemento que compone una carta de héroe y su función durante la partida.</p>"},
+    "order": 4,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Name</strong>: The hero's identity.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Race, Class, and Superclass</strong>: These elements define the hero's capabilities. Race and class can affect abilities, modify attacks, or restrict which equipment can be used. The superclass determines what type of action cards can be played:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Fighter: Techniques</li>\r\n<li class=\"whitespace-normal break-words\">Chosen: Litanies</li>\r\n<li class=\"whitespace-normal break-words\">Saboteur: Subterfuges</li>\r\n<li class=\"whitespace-normal break-words\">Spellcaster:; Spells</li>\r\n</ul>\r\n</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Faction Icon</strong>: Symbol identifying the hero's faction. The card's border color corresponds to the same faction.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Illustration</strong>: Visual representation of the hero.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Combat Attributes</strong> (from left to right):\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Agility</strong>: Determines speed and action order in combat</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Mind</strong>: Empowers magical attacks</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Will</strong>: Resistance against magical attacks</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Strength</strong>: Empowers physical attacks</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Armor</strong>: Resistance against physical attacks</li>\r\n</ul>\r\n</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Life Points</strong>: Total damage resistance. When reaching 0, the hero is knocked out of combat.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Passive Abilities</strong>: Permanent effects during combat. Each hero has a class passive and a personal one.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Active Abilities</strong>: Special actions that include:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Ability name</li>\r\n<li class=\"whitespace-normal break-words\">Characteristics (range, attack type, damage type, area of effect)</li>\r\n<li class=\"whitespace-normal break-words\">Dice cost</li>\r\n<li class=\"whitespace-normal break-words\">Effects when activated</li>\r\n</ul>\r\n</li>\r\n</ol>", "es": "<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Nombre</strong>: La identidad del héroe.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Raza, Clase y Superclase</strong>: Estos elementos definen las capacidades del héroe. La raza y clase pueden afectar habilidades, modificar ataques o restringir qué equipos puede usar. La superclase determina qué tipo de cartas de acción puede jugar:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Combatiente: Técnicas</li>\r\n<li class=\"whitespace-normal break-words\">Elegido: Letanías</li>\r\n<li class=\"whitespace-normal break-words\">Saboteador: Subterfugios</li>\r\n<li class=\"whitespace-normal break-words\">Conjurador: Hechizos</li>\r\n</ul>\r\n</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Icono de Facción</strong>: Símbolo que identifica la facción del héroe. El color del borde de la carta corresponde a la misma facción.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ilustración</strong>: Representación visual del héroe.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Atributos de Combate</strong> (de izquierda a derecha):\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Agilidad</strong>: Determina la rapidez y el orden de actuación en combate</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Mente</strong>: Potencia los ataques mágicos</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Voluntad</strong>: Resistencia contra ataques mágicos</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Fuerza</strong>: Potencia los ataques físicos</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Armadura</strong>: Resistencia contra ataques físicos</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Puntos de Vida</strong>: Resistencia total al daño. Cuando llegan a 0, el héroe queda fuera de combate.</li>\r\n</ul>\r\n</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Habilidades Pasivas</strong>: Efectos permanentes durante el combate. Cada héroe posee una pasiva de clase y otra personal.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Habilidades Activas</strong>: Acciones especiales que incluyen:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Nombre de la habilidad</li>\r\n<li class=\"whitespace-normal break-words\">Características (rango, tipo de ataque, tipo de daño, área de efecto)</li>\r\n<li class=\"whitespace-normal break-words\">Coste en dados</li>\r\n<li class=\"whitespace-normal break-words\">Efectos al activarse</li>\r\n</ul>\r\n</li>\r\n</ol>"},
+    "order": 5,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/hero-en.png", "es": "images/blocks/hero-es.png"},
     "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"en": "Action Cards", "es": "Cartas de Acción"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>Action cards represent the tactical arsenal available to your heroes during battle. These cards are divided into several types, each with specific functions: equipment that enhances your heroes' capabilities, techniques and spells that unleash powerful instant effects, tricks that allow you to react to your opponent's moves or supports that provide strategic advantages. Mastering the use of these cards and their synergies with your heroes is key to victory.</p>", "es": "<p>Las cartas de acción representan el arsenal táctico a disposición de tus héroes durante la batalla. Estas cartas se dividen en varios tipos, cada uno con funciones específicas: equipos que mejoran las capacidades de tus héroes, técnicas y hechizos que desatan poderosos efectos instantáneos, ardides que te permiten reaccionar a las jugadas del rival o apoyos que proporcionan ventajas estratégicas. Dominar el uso de estas cartas y sus sinergias con tus héroes es clave para la victoria.</p>"},
+    "order": 6,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3 class=\"whitespace-normal break-words\">Equipments</h3>\r\n<p class=\"whitespace-normal break-words\">Equipment represents the physical arsenal that heroes can carry into battle. These permanent cards have the type \"Equipment\" and are classified according to their function: armor improves defense and is identified by protecting specific body parts (helmet, breastplate, boots, etc.), while weapons increase offensive power and are characterized by requiring one or two hands. Each piece of equipment has a dice cost that must be paid to attach it to the active hero. Once attached, the equipment remains with the hero throughout the game, unless a specific effect removes or discards it.</p>\r\n<p class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Restriction System:</strong> Each hero has limitations on how much equipment they can carry simultaneously:</p>\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong>Armor</strong>: Can only wear one piece protecting each body part (helmet, breastplate, boots, gauntlets, etc.). If you try to equip armor that protects a body part the hero already has covered, you must choose which to keep and discard the other.</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Weapons</strong>: Are limited by the number of hands they require. A hero has two hands available, so they cannot carry weapons whose total hand requirement exceeds this limit. When equipping a new weapon that would exceed the limit, you must discard the necessary weapons to meet this restriction.</li>\r\n</ul>\r\n<p class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ability Activation:</strong> A crucial aspect of equipment is that their abilities, both active and passive, are not immediately available. For a hero to benefit from an equipment's abilities, it must have been attached since the beginning of the current singular combat. This mechanic represents the time needed for the hero to adapt to the equipment and use it effectively in battle.</p>", "es": "<h3 class=\"whitespace-normal break-words\">Equipos</h3>\r\n<p class=\"whitespace-normal break-words\">Los equipos representan el arsenal físico que los héroes pueden portar en batalla. Estas cartas permanentes tienen el tipo \"Equipo\" y se clasifican según su función: las armaduras mejoran la defensa y se identifican por proteger partes específicas del cuerpo (yelmo, peto, botas, etc.), mientras que las armas aumentan el poder ofensivo y se caracterizan por requerir una o dos manos. Cada equipo tiene un coste en dados que debe pagarse para anexarlo al héroe activo. Una vez anexado, el equipo permanece con el héroe durante toda la partida, a menos que algún efecto específico lo remueva o descarte.</p>\r\n<p class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Sistema de Restricciones:</strong> Cada héroe tiene limitaciones sobre cuánto equipamiento puede portar simultáneamente:</p>\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong>Armaduras</strong>: Solo puede llevar una pieza que proteja cada parte del cuerpo (yelmo, peto, botas, guantes, etc.). Si intentas equipar una armadura que proteja una parte del cuerpo que el héroe ya tiene cubierta, deberás elegir cuál conservar y descartar la otra.</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Armas</strong>: Están limitadas por el número de manos que requieren. Un héroe dispone de dos manos, por lo que no puede portar armas cuya suma de manos exceda este límite. Al equipar un arma nueva que sobrepase el límite, deberás descartar las armas necesarias para cumplir esta restricción.</li>\r\n</ul>\r\n<p class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Activación de Habilidades:</strong> Un aspecto crucial de los equipos es que sus habilidades, tanto activas como pasivas, no están disponibles inmediatamente. Para que un héroe pueda beneficiarse de las habilidades de un equipo, este debe haber estado anexado desde el comienzo del combate singular en curso. Esta mecánica representa el tiempo necesario para que el héroe se adapte al equipo y pueda utilizarlo eficazmente en batalla.</p>"},
+    "order": 7,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4 class=\"whitespace-normal break-words\"><strong>Armor</strong></h4>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Name</strong>: The armor's identity.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Type and Subtype</strong>: Indicates it's an Equipment type Armor subtype card and specifies the body part it protects (helmet, breastplate, boots, gauntlets, etc.). Remember you can only have one armor protecting each body part.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Faction Icon</strong>: Symbol identifying the faction it belongs to. The border color corresponds to the same faction.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Cost</strong>: The dice needed to attach the armor to a hero.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Illustration</strong>: Visual representation of the armor.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Abilities and Effects</strong>: Armor can provide:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Effects when played (resolved once when attaching the armor)</li>\r\n<li class=\"whitespace-normal break-words\">Passive abilities (continuous effects while attached)</li>\r\n<li class=\"whitespace-normal break-words\">Active abilities (with the same characteristics as hero abilities: name, characteristics, cost, and effect)</li>\r\n</ul>\r\n</li>\r\n</ol>", "es": "<h4 class=\"whitespace-normal break-words\">Armaduras</h4>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Nombre</strong>: La identidad de la armadura.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Tipo y Subtipo</strong>: Indica que es una carta de tipo Equipo, subtipo Armadura y especifica la parte del cuerpo que protege (yelmo, peto, botas, guantes, etc.). Recuerda que solo puedes tener una armadura que proteja cada parte del cuerpo.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Icono de Facción</strong>: Símbolo que identifica la facción a la que pertenece. El color del borde corresponde a la misma facción.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Coste</strong>: Los dados necesarios para anexar la armadura a un héroe.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ilustración</strong>: Representación visual de la armadura.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Habilidades y Efectos</strong>: Las armaduras pueden proporcionar:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Efectos al ser jugadas (se resuelven una vez al anexar la armadura)</li>\r\n<li class=\"whitespace-normal break-words\">Habilidades pasivas (efectos continuos mientras esté anexada)</li>\r\n<li class=\"whitespace-normal break-words\">Habilidades activas (con las mismas características que las habilidades de héroe: nombre, características, coste y efecto)</li>\r\n</ul>\r\n</li>\r\n</ol>"},
+    "order": 8,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/armor-en.png", "es": "images/blocks/armor-es.png"},
+    "settings": {"image_position": "right", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "2-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h4 class=\"whitespace-normal break-words\">Weapons</h4>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Name</strong>: The weapon's identity.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Type and Subtype</strong>: Indicates it's an Equipment type card, Weapon subtype. It also specifies the weapon class (sword, axe, bow, staff, etc.) and the number of hands required to wield it (1 or 2 hands). Remember you cannot exceed the two-hand limit in total.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Faction Icon</strong>: Symbol identifying the faction it belongs to. The border color corresponds to the same faction.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Cost</strong>: The dice needed to attach the weapon to a hero.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Illustration</strong>: Visual representation of the weapon.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Abilities and Effects</strong>: Weapons can provide:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Effects when played (resolved once when attaching the weapon)</li>\r\n<li class=\"whitespace-normal break-words\">Passive abilities (continuous effects while attached)</li>\r\n<li class=\"whitespace-normal break-words\">Active abilities (with the same characteristics as hero abilities: name, characteristics, cost, and effect)</li>\r\n</ul>\r\n</li>\r\n</ol>", "es": "<h4 class=\"whitespace-normal break-words\">Armas</h4>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Nombre</strong>: La identidad del arma.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Tipo y Subtipo</strong>: Indica que es una carta de tipo Equipo, subtipo Arma. También especifica la clase de arma (espada, hacha, arco, bastón, etc.) y el número de manos que requiere para empuñarla (1 o 2 manos). Recuerda que no puedes exceder el límite de dos manos en total.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Icono de Facción</strong>: Símbolo que identifica la facción a la que pertenece. El color del borde corresponde a la misma facción.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Coste</strong>: Los dados necesarios para anexar el arma a un héroe.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ilustración</strong>: Representación visual del arma.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Habilidades y Efectos</strong>: Las armas pueden proporcionar:\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\">Efectos al ser jugadas (se resuelven una vez al anexar el arma)</li>\r\n<li class=\"whitespace-normal break-words\">Habilidades pasivas (efectos continuos mientras esté anexada)</li>\r\n<li class=\"whitespace-normal break-words\">Habilidades activas (con las mismas características que las habilidades de héroe: nombre, características, coste y efecto)</li>\r\n</ul>\r\n</li>\r\n</ol>"},
+    "order": 9,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/weapon-en.png", "es": "images/blocks/weapon-es.png"},
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-2"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3 class=\"whitespace-normal break-words\">Superclass Cards</h3>\r\n<p class=\"whitespace-normal break-words\">Superclass cards are Techniques, Spells, Subterfuges, and Litanies. These cards represent specialized single-use abilities, each exclusive to a specific superclass:</p>\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong>Techniques</strong>: Can only be used by Fighter superclass heroes</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Spells</strong>: Can only be used by Spellcaster superclass heroes</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Subterfuges</strong>: Can only be used by Saboteur superclass heroes</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Litanies</strong>: Can only be used by Chosen superclass heroes</li>\r\n</ul>\r\n<p class=\"whitespace-normal break-words\">Unlike equipment that remains in play, these cards are discarded immediately after resolving their effects. They function similarly to heroes' active abilities: they have dice costs, attack characteristics (if applicable), and specific effects.</p>\r\n<p class=\"whitespace-normal break-words\">To play them, you must reveal the card from your hand, pay its cost, and resolve its effects. Once this process is complete, the card goes directly to the discard pile or graveyard.</p>", "es": "<h3 class=\"whitespace-normal break-words\">Cartas de Superclase</h3>\r\n<p class=\"whitespace-normal break-words\">Las cartas de superclase son Técnicas, Hechizos, Subterfugios y Letanías. Estas cartas representan habilidades especializadas de un solo uso, cada una exclusiva de una superclase específica:</p>\r\n<ul class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong>Técnicas</strong>: Solo pueden ser usadas por héroes de superclase Combatiente</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Hechizos</strong>: Solo pueden ser usadas por héroes de superclase Conjurador</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Subterfugios</strong>: Solo pueden ser usadas por héroes de superclase Saboteador</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Letanías</strong>: Solo pueden ser usadas por héroes de superclase Elegido</li>\r\n</ul>\r\n<p class=\"whitespace-normal break-words\">A diferencia de los equipos que permanecen en juego, estas cartas se descartan inmediatamente después de resolver sus efectos. Funcionan de manera similar a las habilidades activas de los héroes: tienen coste en dados, características de ataque (si aplica) y efectos específicos.</p>\r\n<p class=\"whitespace-normal break-words\">Para jugarlas, debes mostrar la carta desde tu mano, pagar su coste y resolver sus efectos. Una vez completado este proceso, la carta va directamente a la pila de descartes o cementerio.</p>"},
+    "order": 10,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Name</strong>: The identity of the technique, spell, subterfuge, or litany.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Type and Superclass</strong>: Indicates the card type (Technique, Spell, Subterfuge, or Litany) and the superclass that can use it (Fighter, Spellcaster, Saboteur, or Chosen respectively).</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Faction Icon</strong>: Symbol identifying the faction it belongs to. The border color corresponds to the same faction.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Cost</strong>: The dice needed to play the card.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Illustration</strong>: Visual representation of the card.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Characteristics</strong>: The attack or effect characteristics (range, attack type, damage type, area of effect), only if the card includes an attack.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Effects</strong>: The complete description of what the card does when played.</li>\r\n</ol>", "es": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Nombre</strong>: La identidad de la técnica, hechizo, subterfugio o letanía.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Tipo y Superclase</strong>: Indica el tipo de carta (Técnica, Hechizo, Subterfugio o Letanía) y la superclase que puede usarla (Combatiente, Conjurador, Saboteador o Elegido respectivamente).</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Icono de Facción</strong>: Símbolo que identifica la facción a la que pertenece. El color del borde corresponde a la misma facción.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Coste</strong>: Los dados necesarios para jugar la carta.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ilustración</strong>: Representación visual de la carta.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Características</strong>: Las características del ataque o efecto (rango, tipo de ataque, tipo de daño, área de efecto), solo si la carta incluye un ataque.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Efectos</strong>: La descripción completa de lo que hace la carta cuando se juega.</li>\r\n</ol>"},
+    "order": 11,
+    "is_printable": false,
+    "background_color": "none",
+    "image": {"en": "images/blocks/class-en.png", "es": "images/blocks/class-es.png"},
+    "settings": {"image_position": "right", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "2-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3 class=\"whitespace-normal break-words\">Tricks</h3>\r\n<p class=\"whitespace-normal break-words\">Tricks are reactive cards designed to change the course of combat at critical moments. These versatile cards allow you to respond to opponent's actions, enhance your own attacks, or defend against imminent threats when you need it most.</p>\r\n<p class=\"whitespace-normal break-words\">What makes Tricks unique is their ability to be played outside the normal flow of the game. While other cards can only be activated during your turn, Tricks can be played in response to specific situations, even during your opponent's turn. This flexibility makes them fundamental strategic tools for countering enemy plans or seizing unexpected opportunities.</p>\r\n<p class=\"whitespace-normal break-words\">Each Trick clearly specifies in its text when it can be played: \"When an allied hero is attacked\", \"After rolling dice\", \"At the beginning of singular combat\", among others. It's crucial to respect these conditions, as a Trick can only be activated at the exact moment indicated in its description.</p>", "es": "<h3 class=\"whitespace-normal break-words\">Ardides</h3>\r\n<p class=\"whitespace-normal break-words\">Los Ardides son cartas reactivas diseñadas para cambiar el curso del combate en momentos críticos. Estas cartas versátiles te permiten responder a las acciones del oponente, potenciar tus propios ataques o defenderte de amenazas inminentes cuando más lo necesitas.</p>\r\n<p class=\"whitespace-normal break-words\">Lo que hace únicos a los Ardides es su capacidad de jugarse fuera del flujo normal del juego. Mientras que otras cartas solo pueden activarse durante tu turno, los Ardides pueden jugarse en respuesta a situaciones específicas, incluso durante el turno del rival. Esta flexibilidad los convierte en herramientas estratégicas fundamentales para contrarrestar los planes enemigos o aprovechar oportunidades inesperadas.</p>\r\n<p class=\"whitespace-normal break-words\">Cada Ardid especifica claramente en su texto cuándo puede ser jugado: \"Cuando un héroe aliado sea atacado\", \"Después de lanzar los dados\", \"Al inicio del combate singular\", entre otros. Es crucial respetar estas condiciones, ya que un Ardid solo puede activarse en el momento exacto que indica su descripción.</p>"},
+    "order": 12,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Name</strong>: The trick's identity.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Type</strong>: Indicates it's a Trick card.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Faction Icon</strong>: Symbol identifying the faction it belongs to. The border color corresponds to the same faction.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Cost</strong>: The dice needed to play the trick.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Illustration</strong>: Visual representation of the trick.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Condition</strong>: Specifies the exact moment or specific situation when the trick can be activated (for example: \"When an allied hero takes damage\", \"At the beginning of combat\", \"After playing a Technique\").</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Effect</strong>: The complete description of what the trick does when activated.</li>\r\n</ol>", "es": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Nombre</strong>: La identidad del ardid.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Tipo</strong>: Indica que es una carta de Ardid.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Icono de Facción</strong>: Símbolo que identifica la facción a la que pertenece. El color del borde corresponde a la misma facción.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Coste</strong>: Los dados necesarios para jugar el ardid.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ilustración</strong>: Representación visual del ardid.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Condición</strong>: Especifica el momento exacto o la situación específica en la que puede activarse el ardid (por ejemplo: \"Cuando un héroe aliado reciba daño\", \"Al inicio del combate\", \"Después de jugar una Técnica\").</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Efecto</strong>: La descripción completa de lo que hace el ardid cuando se activa.</li>\r\n</ol>"},
+    "order": 13,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/trick-en.png", "es": "images/blocks/trick-es.png"},
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-2"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": null,
+    "subtitle": null,
+    "content": {"en": "<h4 class=\"whitespace-normal break-words\">Supports</h4>\r\n<p class=\"whitespace-normal break-words\">Support cards are strategic tools that improve your position in combat through indirect but significant means. While they don't deal direct damage or provide immediate defenses, their value lies in the tactical advantage they offer.</p>\r\n<p class=\"whitespace-normal break-words\">These versatile resources allow you to manipulate key game elements: reroll dice for better results, remove hindrance counters that limit your heroes, draw additional cards to expand your options, or reorganize the battlefield in your favor. Supports are the oil that lubricates your war machine, allowing your strategies to develop smoothly.</p>\r\n<p class=\"whitespace-normal break-words\">Underestimating Support cards is a common mistake among novice players. Although their effects may seem modest compared to a devastating attack or impenetrable armor, it's precisely these small adjustments that often make the difference between victory and defeat.</p>", "es": "<h4 class=\"whitespace-normal break-words\">Apoyos</h4>\r\n<p class=\"whitespace-normal break-words\">Las cartas de Apoyo son herramientas estratégicas que mejoran tu posición en el combate de formas indirectas pero significativas. Aunque no infligen daño directo ni proporcionan defensas inmediatas, su valor radica en la ventaja táctica que ofrecen.</p>\r\n<p class=\"whitespace-normal break-words\">Estos recursos versátiles te permiten manipular elementos clave del juego: repetir tiradas de dados para obtener mejores resultados, eliminar contadores de perjuicio que limitan a tus héroes, robar cartas adicionales para ampliar tus opciones, o reorganizar el campo de batalla a tu favor. Los Apoyos son el aceite que lubrica tu maquinaria de guerra, facilitando que tus estrategias se desarrollen sin contratiempos.</p>\r\n<p class=\"whitespace-normal break-words\">Subestimar las cartas de Apoyo es un error común entre jugadores novatos. Aunque sus efectos puedan parecer modestos comparados con un ataque devastador o una armadura impenetrable, son precisamente estos pequeños ajustes los que a menudo marcan la diferencia entre la victoria y la derrota.</p>"},
+    "order": 14,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": true, "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Name</strong>: The support's identity.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Type</strong>: Indicates it's a Support card.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Faction Icon</strong>: Symbol identifying the faction it belongs to. The border color corresponds to the same faction.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Cost</strong>: The dice needed to play the support.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Illustration</strong>: Visual representation of the support.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Effect</strong>: The complete description of what the support does when played.</li>\r\n</ol>", "es": "<ol>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Nombre</strong>: La identidad del apoyo.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Tipo</strong>: Indica que es una carta de Apoyo.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Icono de Facción</strong>: Símbolo que identifica la facción a la que pertenece. El color del borde corresponde a la misma facción.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Coste</strong>: Los dados necesarios para jugar el apoyo.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Ilustración</strong>: Representación visual del apoyo.</li>\r\n<li class=\"whitespace-normal break-words\"><strong class=\"accent-colored\">Efecto</strong>: La descripción completa de lo que hace el apoyo cuando se juega.</li>\r\n</ol>"},
+    "order": 15,
+    "is_printable": true,
+    "background_color": "none",
+    "image": {"en": "images/blocks/support-en.png", "es": "images/blocks/support-es.png"},
+    "settings": {"image_position": "right", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "2-1"}
+  },
+  {
+    "page_reference": 3,
+    "type": "text",
+    "title": {"en": "Boon and Bane Counters", "es": "Contadores de Beneficio y Perjuicio"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p class=\"whitespace-normal break-words\">Counters are tokens placed on hero cards to represent temporary states that modify their capabilities during battle. These states are applied by various cards, hero abilities, and game effects.</p>\r\n<p class=\"whitespace-normal break-words\">Counters are classified based on whether their effects are beneficial or detrimental to the hero they are placed on.</p>\r\n<p style=\"padding-left: 40px;\"><strong class=\"accent-colored\">Boon Counters</strong>: Represent positive states that enhance the hero's capabilities. They are visually identified by their bluish color.</p>\r\n<p style=\"padding-left: 40px;\"><strong class=\"accent-colored\">Bane Counters</strong>: Represent negative states that limit or penalize the hero. They are visually identified by their reddish color.</p>\r\n<p class=\"whitespace-normal break-words\">A hero can have multiple counters of the same type on their card. While effects don't stack (having three Swiftness counters grants the same benefit as having one), the number of counters determines how long that state will remain active.</p>\r\n<p class=\"whitespace-normal break-words\">During the Counter Cleanup phase, which occurs at the beginning of each Singular Combat after determining initiative, each hero removes exactly one counter of each different type they have. For example, if a hero has 3 Swiftness counters and 1 Inspired counter, after cleanup they will have 2 Swiftness and no Inspired.</p>\r\n<p class=\"whitespace-normal break-words\">For specific effects of each counter, see the <a href=\"../../../../../en/appendices-and-references\">Complete Counter Reference</a> in the Appendix.</p>", "es": "<p class=\"whitespace-normal break-words\">Los contadores son fichas que se colocan sobre las cartas de héroe para representar estados temporales que modifican sus capacidades durante la batalla. Estos estados son aplicados por diversas cartas, habilidades de héroe y efectos del juego.</p>\r\n<p class=\"whitespace-normal break-words\">Los contadores se clasifican según si sus efectos son beneficiosos o perjudiciales para el héroe sobre el que se encuentran.</p>\r\n<p style=\"padding-left: 40px;\"><strong class=\"accent-colored\">Contadores de Beneficio</strong>: Representan estados positivos que mejoran las capacidades del héroe. Se identifican visualmente por su color azulado.</p>\r\n<p style=\"padding-left: 40px;\"><strong class=\"accent-colored\">Contadores de Perjuicio</strong>: Representan estados negativos que limitan o penalizan al héroe. Se identifican visualmente por su color rojizo.</p>\r\n<p class=\"whitespace-normal break-words\">Un héroe puede tener múltiples contadores del mismo tipo sobre su carta. Aunque los efectos no se acumulan (tener tres contadores de Presteza otorga el mismo beneficio que tener uno), la cantidad de contadores determina cuánto tiempo permanecerá activo ese estado.</p>\r\n<p class=\"whitespace-normal break-words\">Durante la fase de Limpieza de Contadores, que ocurre al inicio de cada Combate Singular después de determinar la iniciativa, cada héroe remueve exactamente un contador de cada tipo diferente que tenga. Por ejemplo, si un héroe tiene 3 contadores de Presteza y 1 de Inspirado, después de la limpieza tendrá 2 de Presteza y ninguno de Inspirado.</p>\r\n<p class=\"whitespace-normal break-words\">Para consultar el efecto específico de cada contador, ver la <a href=\"../../../../../es/anexos-y-referencias\">Referencia Completa de Contadores</a> en los Anexos.</p>"},
+    "order": 16,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 4,
+    "type": "counters-list",
+    "title": {"en": "Boons", "es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Boons</h3>", "es": "<h3>Beneficios</h3>"},
+    "order": 4,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"counter_type": "boon", "text_alignment": "justify"}
+  },
+  {
+    "page_reference": 4,
+    "type": "counters-list",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Banes</h3>", "es": "<h3>Perjuicios</h3>"},
+    "order": 5,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"counter_type": "bane", "text_alignment": "justify"}
+  },
+  {
+    "page_reference": 4,
+    "type": "header",
+    "title": {"en": "The Appendix", "es": "Los Anexos"},
+    "subtitle": {"en": "<p>Quick reference and consultation material</p>", "es": "<p>Material de referencia rápida y consulta</p>"},
+    "content": null,
+    "order": 0,
+    "is_printable": false,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"text_alignment": "left"}
+  },
+  {
+    "page_reference": 4,
+    "type": "text",
+    "title": {"es": null},
+    "subtitle": {"es": null},
+    "content": {"en": "<p class=\"whitespace-normal break-words\">Here you'll find all the reference information you'll need during your games of <strong>Alanda: Clash of Legends</strong>. In these pages you'll discover detailed explanations of specific mechanics, quick reference tables, and supplementary material designed to resolve doubts without interrupting the game flow.</p>\r\n<p class=\"whitespace-normal break-words\">The appendix is thematically organized to facilitate consultation during gameplay. From the complete list of counter effects to summarized game sequences, each section has been designed with practicality and quick access in mind. There's no need to memorize all this information: its purpose is to serve as support when specific questions arise about interactions, timing, or particular effects. Keep this appendix handy during your games and consult it whenever needed to ensure a smooth, uninterrupted gaming experience.</p>", "es": "<p class=\"whitespace-normal break-words\">Aquí se reúne toda la información de referencia que necesitarás durante tus partidas de <strong>Alanda: Choque de Leyendas</strong>. En estas páginas encontrarás explicaciones detalladas de mecánicas específicas, tablas de consulta rápida y material complementario diseñado para resolver dudas sin interrumpir el flujo del juego.</p>\r\n<p class=\"whitespace-normal break-words\">Los anexos están organizados de forma temática para facilitar su consulta durante la partida. Desde el listado completo de efectos de contadores hasta las secuencias de juego resumidas, cada sección ha sido diseñada pensando en la practicidad y la rapidez de acceso. No es necesario memorizar toda esta información: su propósito es servir como apoyo cuando surjan dudas específicas sobre interacciones, timing o efectos particulares. Mantén estos anexos a mano durante tus partidas y consúltalos siempre que lo necesites para garantizar una experiencia de juego fluida y sin interrupciones.</p>"},
+    "order": 1,
+    "is_printable": false,
+    "background_color": "none",
+    "image": {"es": "images/blocks/appendix-text-es.jpeg"},
+    "settings": {"limit_height": "1", "image_position": "right", "text_alignment": "justify", "image_scale_mode": "cover", "column_proportions": "3-1"}
+  },
+  {
+    "page_reference": 4,
+    "type": "automatic-index",
+    "title": null,
+    "subtitle": null,
+    "content": null,
+    "order": 2,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"compact": "1", "numbered": "1", "text_alignment": "left"}
+  },
+  {
+    "page_reference": 4,
+    "type": "text",
+    "title": {"en": "Boon and Bane Counters", "es": "Contadores de Beneficio y Perjuicio"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>Below you'll find the complete effect of each counter in the game, organized by type.</p>", "es": "<p>A continuación se detalla el efecto completo de cada contador del juego, organizados por tipo.</p>"},
+    "order": 3,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": "1", "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 4,
+    "type": "text",
+    "title": {"en": "Game Sequence Summary", "es": "Resumen de Secuencia de Juego"},
+    "subtitle": {"es": null},
+    "content": {"en": "<h3>Preparation</h3>\r\n<ol>\r\n<li><strong>Faction, Heroes and Deck Selection: </strong><br>Each player chooses faction, 5 heroes and builds a 30+ card deck</li>\r\n<li><strong>Hero Draft: </strong><br>Reveal 5 heroes, then secretly choose 3 for the skirmish</li>\r\n<li><strong>Initial Hand Draw: </strong><br>Shuffle deck, draw 5 cards with option for partial mulligan</li>\r\n</ol>\r\n<h3>Battle Rounds</h3>\r\n<ol>\r\n<li><strong>Determine Attacker/Defender</strong>:<br>First round random, then alternates</li>\r\n<li><strong>Pairings</strong>:<br>Attacker pairs first, defender second, third is determined</li>\r\n<li><strong>Singular Combats</strong> <em>(resolved in order)</em>:\r\n<ul>\r\n<li><strong>Prepare Action Dice</strong>:<br>Roll 5 dice, option to reroll keeping minimum 1\r\n<ul>\r\n<li><em>Special Action</em>: Discard card to fix one die of the cost's color</li>\r\n</ul>\r\n</li>\r\n<li><strong>Determine Initiative</strong>:<br>1d6 + hero's Agility</li>\r\n<li><strong>Counter Cleanup</strong>:<br>Remove 1 counter of each type</li>\r\n<li><strong>Action Resolution</strong>:<br>Alternating turns, pay costs and resolve effects\r\n<ul>\r\n<li><em>Universal Action</em>: Draw a Card (cost: 1 die any color, once per combat)</li>\r\n</ul>\r\n</li>\r\n<li><strong>Resolving Attacks</strong>:<br>Base damage minus Armor (physical) or Will (magical)</li>\r\n</ul>\r\n</li>\r\n</ol>", "es": "<h3>Preparación</h3>\r\n<ol>\r\n<li><strong>Selección de Facción, Héroes y Mazo</strong>:<br>Cada jugador elige facción, 5 héroes y construye un mazo de 30+ cartas</li>\r\n<li><strong>Draft de Héroes</strong>:<br>Se revelan los 5 héroes, luego se eligen 3 en secreto para la escaramuza</li>\r\n<li><strong>Robo de Mano Inicial</strong>:<br>Se baraja el mazo, se roban 5 cartas con opción a un mulligan parcial</li>\r\n</ol>\r\n<h3>Rondas de Batalla</h3>\r\n<ol class=\"[&:not(:last-child)_ul]:pb-1 [&:not(:last-child)_ol]:pb-1 list-disc space-y-1.5 pl-7\">\r\n<li class=\"whitespace-normal break-words\"><strong>Determinar Atacante/Defensor</strong>:<br>Primera ronda al azar, luego se alterna</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Emparejamientos</strong>:<br>Atacante empareja primero, defensor segundo, tercero queda determinado</li>\r\n<li class=\"whitespace-normal break-words\"><strong>Combates Singulares</strong> <em>(se resuelven en orden)</em>:</li>\r\n</ol>\r\n<ul>\r\n<li style=\"list-style-type: none;\">\r\n<ul>\r\n<li><strong>Preparar Dados de Acción</strong>:<br>Tirar 5 dados, opción de repetir guardando mínimo 1\r\n<ul>\r\n<li><em>Acción Especial</em>: Descartar carta para fijar un dado del color del coste</li>\r\n</ul>\r\n</li>\r\n<li><strong>Determinar Iniciativa</strong>:<br>1d6 + Agilidad del héroe</li>\r\n<li><strong>Limpieza de Contadores</strong>:<br>Remover 1 contador de cada tipo</li>\r\n<li><strong>Resolución de Acciones</strong>:<br>Por turnos alternos, pagar costes y resolver efectos\r\n<ul>\r\n<li><em>Acción Universal</em>: Robar una Carta (coste: 1 dado cualquiera, 1 vez por combate)</li>\r\n</ul>\r\n</li>\r\n<li><strong>Resolviendo Ataques</strong>:<br>Daño base menos Armadura (físico) o Voluntad (mágico)</li>\r\n</ul>\r\n</li>\r\n</ul>"},
+    "order": 6,
+    "is_printable": true,
+    "background_color": "theme-border",
+    "image": null,
+    "settings": {"limit_height": "1", "image_position": "left", "text_alignment": "left", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 4,
+    "type": "text",
+    "title": {"es": "Tablas de probabilidades"},
+    "subtitle": {"es": null},
+    "content": {"en": "<p>The following tables show the probabilities of obtaining different color combinations when rolling and preparing your action dice. This information will help you better plan your strategies and evaluate risk when deciding which abilities or cards to attempt to play. Remember that each die has 3 red faces, 2 green faces, and 1 blue face.</p>\r\n<table>\r\n<thead>\r\n<tr class=\"truncate-text\">\r\n<th>Combination</th>\r\n<th>No Rerolls</th>\r\n<th>1 Reroll</th>\r\n<th>2 Rerolls</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"></td>\r\n<td>96.87%</td>\r\n<td>99.80%</td>\r\n<td>99.98%</td>\r\n</tr>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>86.83%</td>\r\n<td>97.40%</td>\r\n<td>99.23%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>59.81%</td>\r\n<td>80.62%</td>\r\n<td>88.78%</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>\r\n<table>\r\n<thead>\r\n<tr class=\"truncate-text\">\r\n<th>Combination</th>\r\n<th>No Rerolls</th>\r\n<th>1 Reroll</th>\r\n<th>2 Rerolls</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>83.72%</td>\r\n<td>97.20%</td>\r\n<td>99.20%</td>\r\n</tr>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"></td>\r\n<td>81.25%</td>\r\n<td>98.05%</td>\r\n<td>99.68%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>57.10%</td>\r\n<td>80.43%</td>\r\n<td>88.76%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>53.91%</td>\r\n<td>85.69%</td>\r\n<td>94.60%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td>&nbsp;<img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>49.77%</td>\r\n<td>78.21%</td>\r\n<td>88.04%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>19.62%</td>\r\n<td>45.73%</td>\r\n<td>61.87%</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>\r\n<table>\r\n<thead>\r\n<tr class=\"truncate-text\">\r\n<th>Combination</th>\r\n<th>No Rerolls</th>\r\n<th>1 Reroll</th>\r\n<th>2 Rerolls</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>68.29%</td>\r\n<td>93.68%</td>\r\n<td>98.69%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>50.93%</td>\r\n<td>83.29%</td>\r\n<td>94.30%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"></td>\r\n<td>50.00%</td>\r\n<td>89.06%</td>\r\n<td>97.83%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>47.07%</td>\r\n<td>75.40%</td>\r\n<td>87.64%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>44.56%</td>\r\n<td>76.12%</td>\r\n<td>88.10%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>27.26%</td>\r\n<td>62.89%</td>\r\n<td>81.60%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>20.99%</td>\r\n<td>59.03%</td>\r\n<td>80.92%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>17.94%</td>\r\n<td>43.50%</td>\r\n<td>61.54%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>14.79%</td>\r\n<td>40.06%</td>\r\n<td>59.30%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>3.55%</td>\r\n<td>16.28%</td>\r\n<td>31.36%</td>\r\n</tr>\r\n</tbody>\r\n</table>", "es": "<p class=\"whitespace-normal break-words\">Las siguientes tablas muestran las probabilidades de obtener diferentes combinaciones de colores al lanzar y preparar tus dados de acción. Esta información te ayudará a planificar mejor tus estrategias y evaluar el riesgo al decidir qué habilidades o cartas intentar jugar. Recuerda que cada dado tiene 3 caras rojas, 2 verdes y 1 azul.</p>\r\n<table>\r\n<thead>\r\n<tr>\r\n<th>Combinación</th>\r\n<th>Sin Repeticiones</th>\r\n<th>1 Repetición</th>\r\n<th>2 Repeticiones</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"></td>\r\n<td>96.87%</td>\r\n<td>99.80%</td>\r\n<td>99.98%</td>\r\n</tr>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>86.83%</td>\r\n<td>97.40%</td>\r\n<td>99.23%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>59.81%</td>\r\n<td>80.62%</td>\r\n<td>88.78%</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>\r\n<table>\r\n<thead>\r\n<tr>\r\n<th>Combinación</th>\r\n<th>Sin Repeticiones</th>\r\n<th>1 Repetición</th>\r\n<th>2 Repeticiones</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>83.72%</td>\r\n<td>97.20%</td>\r\n<td>99.20%</td>\r\n</tr>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"></td>\r\n<td>81.25%</td>\r\n<td>98.05%</td>\r\n<td>99.68%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>57.10%</td>\r\n<td>80.43%</td>\r\n<td>88.76%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>53.91%</td>\r\n<td>85.69%</td>\r\n<td>94.60%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>49.77%</td>\r\n<td>78.21%</td>\r\n<td>88.04%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>19.62%</td>\r\n<td>45.73%</td>\r\n<td>61.87%</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>\r\n<table>\r\n<thead>\r\n<tr>\r\n<th>Combinación</th>\r\n<th>Sin Repeticiones</th>\r\n<th>1 Repetición</th>\r\n<th>2 Repeticiones</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr class=\"green-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>68.29%</td>\r\n<td>93.68%</td>\r\n<td>98.69%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>50.93%</td>\r\n<td>83.29%</td>\r\n<td>94.30%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"></td>\r\n<td>50.00%</td>\r\n<td>89.06%</td>\r\n<td>97.83%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>47.07%</td>\r\n<td>75.40%</td>\r\n<td>87.64%</td>\r\n</tr>\r\n<tr class=\"yellow-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>44.56%</td>\r\n<td>76.12%</td>\r\n<td>88.10%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>27.26%</td>\r\n<td>62.89%</td>\r\n<td>81.60%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"></td>\r\n<td>20.99%</td>\r\n<td>59.03%</td>\r\n<td>80.92%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-red.svg\" alt=\"Dado Rojo\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>17.94%</td>\r\n<td>43.50%</td>\r\n<td>61.54%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-green.svg\" alt=\"Dado Verde\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>14.79%</td>\r\n<td>40.06%</td>\r\n<td>59.30%</td>\r\n</tr>\r\n<tr class=\"red-bg\">\r\n<td><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"><img style=\"width: 24px; height: 24px;\" src=\"../../../../../storage/images/dices/dice-blue.svg\" alt=\"Dado Azul\"></td>\r\n<td>3.55%</td>\r\n<td>16.28%</td>\r\n<td>31.36%</td>\r\n</tr>\r\n</tbody>\r\n</table>"},
+    "order": 7,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"limit_height": "1", "image_position": "left", "text_alignment": "justify", "image_scale_mode": "contain", "column_proportions": "1-1"}
+  },
+  {
+    "page_reference": 5,
+    "type": "header",
+    "title": {"en": "Game Modes", "es": "Modos de Juego"},
+    "subtitle": null,
+    "content": null,
+    "order": 0,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"text_alignment": "justify"}
+  },
+  {
+    "page_reference": 5,
+    "type": "game-modes",
+    "title": null,
+    "subtitle": null,
+    "content": null,
+    "order": 1,
+    "is_printable": true,
+    "background_color": "none",
+    "image": null,
+    "settings": {"text_alignment": "justify"}
   }
 ]

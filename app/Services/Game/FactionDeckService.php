@@ -16,7 +16,7 @@ class FactionDeckService
 {
   use HandlesTranslations;
   
-  protected $translatableFields = ['name'];
+  protected $translatableFields = ['name', 'description', 'epic_quote'];
   protected $deckAttributesConfigurationService;
 
   /**

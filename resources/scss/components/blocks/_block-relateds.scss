@@ -4,14 +4,14 @@
   .relateds-block__header {
     display: grid;
     grid-template-columns: 1fr;
-    column-gap: $spacing-md;
+    gap: $spacing-md;
     margin-bottom: $spacing-xxl;
-    align-items: start;
     
     @include responsive(mobile) {
       grid-template-columns: 1fr auto;
       align-items: center;
     }
+    
   }
   
   .relateds-block__title-wrapper {
@@ -19,11 +19,14 @@
   }
   
   .relateds-block__action {
+    display: grid;
     width: 100%;
     .btn {
       width: 100%;
 
     @include responsive(small) {
+
+      margin-left: auto;
       width: auto;
     }
     }

@@ -11,6 +11,10 @@
       "en": "The cry echoes through the marketplace: 'Thief! Thief!' A child, with a piece of bread in trembling hands, is dragged toward the square. The crowd murmurs, but no one intervenes. In Terik, justice makes no distinction between ages or motives. The punishment will be public, a cruel reminder that the walls protect, but also demand obedience.",
       "es": "El grito resuena en el mercado: '¡Al ladrón!'. Un niño, con un trozo de pan en manos temblorosas, es arrastrado hacia la plaza. La multitud murmura, pero nadie interviene. En Terik, la justicia no distingue edades ni motivos. El castigo será público, un recordatorio cruel de que las murallas protegen, pero también exigen obediencia."
     },
+    "epic_quote": {
+      "en": "Even the smallest crime echoes through Terik's walls.",
+      "es": "Hasta el crimen más pequeño resuena entre las murallas de Terik."
+    },
     "effect": {
       "en": "<p>The played Weapon activates immediately.</p>",
       "es": "<p>El Arma jugada se activa de forma inmediata.</p>"
@@ -34,6 +38,10 @@
     {
       "en": "The cry 'Raise the Guard!' echoes across the walls of Terik. Shields clash, armor gleams under the sun, and the defenders unite as an unbreakable wall. Inspired by heroes of the past, they stand with renewed strength. Together, they protect their home and honor, ready to face any threat.",
       "es": "El grito '¡Alzar la Guardia!' retumba en las murallas de Terik. Escudos chocan, corazas brillan bajo el sol y los defensores se unen como un muro inquebrantable. Inspirados por los héroes del pasado, resisten con fuerza renovada. Juntos, protegen su hogar y honor, listos para enfrentar cualquier amenaza."
+    },
+    "epic_quote": {
+      "en": "United shields form an unbreakable wall of honor.",
+      "es": "Escudos unidos forman un muro inquebrantable de honor."
     },
     "effect": {
       "en": "<p>That attack deals -1 damage.</p><p>If the active allied hero has at least 1 Weapon attached, deal 2 Direct damage to the paired rival hero.</p>",
@@ -59,6 +67,10 @@
       "en": "The Celestial Aegis Amulet, a masterpiece crafted by Elthan and Aranithus, shines with a blue tourmaline that seems to contain the sky itself. Its light protects the bearer with an invisible shield, deflecting both swords and spells alike. More than a talisman, it is a symbol of power and status for the Asther family.",
       "es": "El Amuleto de Aegis Celeste, obra maestra de Elthan y Aranithus, brilla con una turmalina azul que parece contener el cielo. Su luz protege al portador con un escudo invisible, desviando espadas y hechizos por igual. Más que un talismán, es un símbolo de poder y estatus para la familia Asther."
     },
+    "epic_quote": {
+      "en": "Sky's blessing worn as protection against all darkness.",
+      "es": "La bendición del cielo portada como protección contra toda oscuridad."
+    },
     "effect": {
       "en": "<p>When you attach this Equipment, draw 1 Card.</p><p>The attached hero takes -1 Physical and Magical damage.</p>",
       "es": "<p>Cuando anexes este Equipo, roba 1 Carta.</p><p>El héroe anexado recibe -1 de daño Físico y Mágico.</p>"
@@ -76,6 +88,10 @@
     "lore_text": {
       "en": "The Aggressive Armor, forged for Calbert of Miaram, is a symbol of fury and power. Its sharp spikes tear into those who dare attack. Calbert, unstoppable in battle, fell to Elian Arain, and now the armor is an Arain family relic, reminding of both their triumph and the price of war.",
       "es": "La Armadura Agresiva, forjada para Calbert de Miaram, es un símbolo de furia y poder. Sus púas afiladas desgarran a quienes osan atacar. Calbert, imparable en batalla, cayó ante Elian Arain, y ahora la armadura es una reliquia de los Arain, recordando tanto su triunfo como el precio de la guerra."
+    },
+    "epic_quote": {
+      "en": "Calbert's fury lives on in every spike and plate.",
+      "es": "La furia de Calbert pervive en cada púa y placa."
     },
     "effect": {
       "en": "<p>When the attached hero is targeted by 1 Melee Attack, the attacking hero suffers 2 Direct damage.</p>",
@@ -95,6 +111,10 @@
       "en": "The Luminis Armor, forged with luminous metal, shines like a star in the night. Created for Althein Estei, it deflects spells and protects with ancestral power. Passed down through generations, it is more than armor: it is the eternal symbol of the honor and courage of the Estei.",
       "es": "La Armadura de Luminis, forjada con metal luminoso, brilla como una estrella en la noche. Creada para Althein Estei, desvía hechizos y protege con poder ancestral. Pasada de generación en generación, es más que una armadura: es el símbolo eterno del honor y la valentía de los Estei."
     },
+    "epic_quote": {
+      "en": "Starlight forged into steel guards the Estei bloodline.",
+      "es": "Luz estelar forjada en acero guarda el linaje Estei."
+    },
     "effect": {
       "en": "<p>When you attach this Equipment, draw 1 Card.</p><p>The attached hero takes -1 Magical damage.</p>",
       "es": "<p>Cuando anexes este Equipo, roba 1 Carta.</p><p>El héroe anexado recibe -1 de daño Mágico.</p>"
@@ -113,6 +133,10 @@
       "en": "Each link of the armor was forged with precision, each plate polished to shine like a mirror. It's not just metal, but a second skin protecting the Defenders of Terik. In the heat of battle, this armor is the wall separating life from death, the symbol that the city never falls.",
       "es": "Cada anilla de la armadura fue forjada con precisión, cada placa pulida hasta brillar como un espejo. No es solo metal, es una segunda piel que protege a los Defensores de Terik. En el fragor de la batalla, esta armadura es el muro que separa la vida de la muerte, el símbolo de que la ciudad nunca cae."
     },
+    "epic_quote": {
+      "en": "Each polished link carries the weight of duty.",
+      "es": "Cada anilla pulida carga el peso del deber."
+    },
     "effect": {
       "en": "<p>The attached hero takes -1 Physical damage.</p>",
       "es": "<p>El héroe anexado recibe -1 de daño Físico.</p>"
@@ -130,6 +154,10 @@
     "lore_text": {
       "en": "In the workshops of Terik, hammers strike metal with perfect rhythm. Each armor, adorned with ancestral runes and rare metals, is a masterpiece. It doesn't just protect, but inspires. The Defenders, wrapped in this second skin, advance without fear, knowing that the expertise of their blacksmiths supports them in every battle.",
       "es": "En los talleres de Terik, los martillos golpean el metal con ritmo perfecto. Cada armadura, adornada con runas ancestrales y metales raros, es una obra maestra. No solo protege, sino que inspira. Los Defensores, envueltos en esta segunda piel, avanzan sin miedo, sabiendo que la pericia de sus herreros los respalda en cada batalla."
+    },
+    "epic_quote": {
+      "en": "Master smiths forge victory before battles begin.",
+      "es": "Maestros herreros forjan la victoria antes que comiencen las batallas."
     },
     "effect": {
       "en": "<p>That attack deals -1 damage.</p><p>If the active allied hero has at least 1 Equipment attached, instead, reduce the damage dealt by that Attack by half (rounding up).</p>",
@@ -152,6 +180,10 @@
     "lore_text": {
       "en": "A sacred whisper travels through the air as the paladin extends their hands. The light of blessing illuminates the warriors' eyes, revealing hidden tactics and invisible dangers. With each movement, the battle becomes clear, precise. In Terik, knowledge is as sharp as a sword, and as vital as a shield.",
       "es": "Un susurro sagrado recorre el aire mientras el paladín extiende sus manos. La luz de la bendición ilumina los ojos de los guerreros, desvelando tácticas ocultas y peligros invisibles. Con cada movimiento, la batalla se vuelve clara, precisa. En Terik, el conocimiento es tan afilado como una espada, y tan vital como un escudo."
+    },
+    "epic_quote": {
+      "en": "Divine wisdom reveals paths hidden to mortal eyes.",
+      "es": "La sabiduría divina revela senderos ocultos a ojos mortales."
     },
     "effect": {
       "en": "<p>Draw 2 Cards.</p>",
@@ -176,6 +208,10 @@
     "lore_text": {
       "en": "The paladin raises their hands, and a golden light descends like a celestial mantle. Warriors feel the warmth of divine protection enveloping them, an invisible shield that defies swords and spells. With each heartbeat, their hearts grow stronger, ready to fight with unbreakable courage. In Terik, faith is as strong as steel.",
       "es": "El paladín alza sus manos, y una luz dorada desciende como un manto celestial. Los guerreros sienten el calor de la protección divina envolviéndolos, un escudo invisible que desafía espadas y hechizos. Con cada latido, sus corazones se fortalecen, listos para luchar con coraje inquebrantable. En Terik, la fe es tan fuerte como el acero."
+    },
+    "epic_quote": {
+      "en": "Golden light descends where faith stands firm.",
+      "es": "Luz dorada desciende donde la fe permanece firme."
     },
     "effect": {
       "en": "<p>Until the end of the Battle Round, each allied hero from subsequent pairings takes -1 Physical damage.</p>",
@@ -203,6 +239,10 @@
       "en": "Through smoke and battle clamor, Ersthan burst into the armory. Among dusty weapons, his eyes found an ancient spear, its edge still gleaming. As he grasped it, he felt the echo of past heroes. With the spear in hand, he returned to battle, ready to write his own legend.",
       "es": "Entre el humo y el clamor de la batalla, Ersthan irrumpió en la armería. Entre armas polvorientas, sus ojos encontraron una lanza antigua, su filo aún brillante. Al empuñarla, sintió el eco de héroes pasados. Con la lanza en mano, regresó al combate, listo para escribir su propia leyenda."
     },
+    "epic_quote": {
+      "en": "Ancient weapons await those brave enough to claim them.",
+      "es": "Armas ancestrales esperan a quienes sean valientes para reclamarlas."
+    },
     "effect": {
       "en": "<p>Reveal the top 4 Cards of your Deck. Put any Equipment Cards you want from among the revealed Cards into your Hand and put the rest on the bottom of your Deck in any order.</p>",
       "es": "<p>Revela las 4 primeras Cartas de tu Biblioteca. Pon todas las Cartas de Equipo que quieras de entre las Cartas reveladas en tu Mano y pon el resto en el fondo de la Biblioteca en cualquier orden.</p>"
@@ -219,6 +259,10 @@
     "lore_text": {
       "en": "The Luminar Champion advances, his armor shining like the dawn. Each step radiates divine power, each strike resonates with the strength of the sun. His allies are strengthened, his enemies retreat. With a touch, he heals wounds; with his presence, he inspires courage. In darkness, he is the light guiding Terik to victory.",
       "es": "El Campeón Luminar avanza, su armadura brillando como el amanecer. Cada paso irradia poder divino, cada golpe resuena con la fuerza del sol. Sus aliados se fortalecen, sus enemigos retroceden. Con un toque, cura heridas; con su presencia, inspira valor. En la oscuridad, él es la luz que guía a Terik hacia la victoria."
+    },
+    "epic_quote": {
+      "en": "Where champions tread, darkness cannot follow.",
+      "es": "Donde pisan los campeones, la oscuridad no puede seguir."
     },
     "effect": {
       "en": "<p>Heal 2 health to the active allied hero. If the hero playing this Litany is a Paladin hero, place 1 boon counter: Exalted on the active allied hero.</p>",
@@ -239,6 +283,10 @@
       "en": "In an instant, the Defender of Terik moves like lightning. His hand grabs the attacker's wrist, twisting it with precision. The weapon falls to the ground, and the threat vanishes. There is no unnecessary violence, only control. In Terik, true strength lies not in striking, but in protecting.",
       "es": "En un instante, el Defensor de Terik se mueve como un relámpago. Su mano agarra la muñeca del atacante, torciéndola con precisión. El arma cae al suelo, y la amenaza se desvanece. No hay violencia innecesaria, solo control. En Terik, la verdadera fuerza no está en golpear, sino en proteger."
     },
+    "epic_quote": {
+      "en": "True strength lies in ending fights before they begin.",
+      "es": "La verdadera fuerza yace en terminar las luchas antes de empezar."
+    },
     "effect": {
       "en": "<p>The paired rival hero detaches (and discards) a Weapon of your choice.</p><p>If the hero playing this Support is a Warrior hero, they may attach that Weapon by paying its cost instead of discarding it.</p>",
       "es": "<p>El héroe rival emparejado desanexa (y descarta) un Arma a tu elección.</p><p>Si el héroe que juega este Apoyo es un héroe Guerrero, puede anexarse dicha Arma pagando su coste en vez de descartarla.</p>"
@@ -256,6 +304,10 @@
       "en": "Annithare Arain stands before the Defenders, her voice resonating like thunder. 'Today we fight not as separate houses, but as one,' she declares. Her words ignite a flame in every heart, transforming fear into courage. Under her leadership, Terik becomes a single fist, ready to strike.",
       "es": "Annithare Arain se yergue ante los Defensores, su voz resonando como un trueno. 'Hoy no luchamos como casas separadas, sino como uno solo', declara. Sus palabras encienden una llama en cada corazón, transformando el miedo en coraje. Bajo su liderazgo, Terik se convierte en un solo puño, listo para golpear."
     },
+    "epic_quote": {
+      "en": "Words of courage forge armies from scattered souls.",
+      "es": "Palabras de valor forjan ejércitos de almas dispersas."
+    },
     "effect": {
       "en": "<p>Place 1 boon counter: Inspired on 1 adjacent allied hero.</p><p>If the hero playing this Support is a Knight hero, instead place 1 boon counter: Inspired on each adjacent allied hero.</p>",
       "es": "<p>Coloca 1 contador de beneficio: Inspirado sobre 1 héroe aliado adyacente.</p><p>Si el héroe que juega este Apoyo es un héroe Caballero, en vez de eso coloca 1 contador de beneficio: Inspirado sobre cada héroe aliado adyacente.</p>"
@@ -272,6 +324,10 @@
     "lore_text": {
       "en": "Those Chosen by the Light are not mere warriors; they are beacons in the darkness. With every movement, they channel divine light, healing wounds and defeating shadows. Their mere presence inspires the people of Terik, reminding them that, even in the darkest times, justice shines with unstoppable force.",
       "es": "Los Elegidos por la Luz no son simples guerreros; son faros en la oscuridad. Con cada movimiento, canalizan la luz divina, sanando heridas y derrotando a las sombras. Su mera presencia inspira a los habitantes de Terik, recordándoles que, incluso en los tiempos más oscuros, la justicia brilla con fuerza imparable."
+    },
+    "epic_quote": {
+      "en": "Destiny calls, and the chosen answer with radiance.",
+      "es": "El destino llama, y los elegidos responden con resplandor."
     },
     "effect": {
       "en": "<p>Place 1 boon counter: Exalted on the active allied hero.</p><p>Draw 1 Card.</p><p>If the hero playing this Spell is a Paladin hero, place 1 boon counter: Exalted on 1 adjacent allied hero of your choice.</p>",
@@ -292,6 +348,10 @@
       "en": "The Guard Shield is not just a barrier, it is an extension of the warrior. Forged in wood and metal, it withstands strikes and arrows without yielding. Light yet unbreakable, it allows for agile movements, turning defense into art. In the hands of a Defender of Terik, it is the wall that never falls.",
       "es": "El Escudo de la Guardia no es solo una barrera, es una extensión del guerrero. Forjado en madera y metal, resiste embates y flechas sin ceder. Ligero pero inquebrantable, permite movimientos ágiles, convirtiendo la defensa en arte. En manos de un Defensor de Terik, es el muro que nunca cae."
     },
+    "epic_quote": {
+      "en": "Wood and metal become extensions of the warrior's will.",
+      "es": "Madera y metal se vuelven extensiones de la voluntad del guerrero."
+    },
     "effect": {
       "en": "<p>The attached hero takes -1 damage from Ranged Attacks.</p>",
       "es": "<p>El héroe anexado recibe -1 de daño de Ataques a Distancia.</p>"
@@ -310,6 +370,10 @@
     "lore_text": {
       "en": "The Regulation Shield is more than metal: it is a symbol of honor. Each Defender of Terik wields it with mastery, combining defense and attack in a lethal dance. Only the most skilled master it, proving that protecting the city is not just a duty, but an art. In their hands, the shield is a promise of security.",
       "es": "El Escudo Reglamentario es más que metal: es un símbolo de honor. Cada Defensor de Terik lo empuña con maestría, combinando defensa y ataque en un baile letal. Solo los más hábiles lo dominan, demostrando que proteger la ciudad no es solo un deber, sino un arte. En sus manos, el escudo es una promesa de seguridad."
+    },
+    "epic_quote": {
+      "en": "Standard issue, extraordinary results in skilled hands.",
+      "es": "Emisión estándar, resultados extraordinarios en manos hábiles."
     },
     "effect": {
       "en": "<p>The attached hero gains the following Ability:</p>",
@@ -331,6 +395,10 @@
       "en": "The Regulation Sword is not just a weapon, it is an oath. Each Defender of Terik wields it with precision, its blade shining as a reflection of their discipline. Only the most dedicated master it, proving that true strength lies not in steel, but in the heart of the wielder. With it, they protect the city and their honor.",
       "es": "La Espada Reglamentaria no es solo un arma, es un juramento. Cada Defensor de Terik la empuña con precisión, su hoja brillando como un reflejo de su disciplina. Solo los más dedicados la dominan, demostrando que la verdadera fuerza no está en el acero, sino en el corazón de quien la blande. Con ella, protegen la ciudad y su honor."
     },
+    "epic_quote": {
+      "en": "An oath of steel carried by every defender.",
+      "es": "Un juramento de acero portado por cada defensor."
+    },
     "effect": {
       "en": "<p>The attached hero deals +1 damage with Physical Slashing Single-Target Melee Attacks.</p>",
       "es": "<p>El héroe anexado hace +1 de daño con los Ataques Melee Físicos Cortantes de 1 Objetivo.</p>"
@@ -349,6 +417,10 @@
     "lore_text": {
       "en": "The paladin raises their hands, and an orb of pure light forms, shining like a miniature sun. With a precise gesture, they hurl it toward the enemies. The burst is blinding, an explosion of divine energy that burns and disorients. In Terik, light doesn't just illuminate, it also purges and protects with celestial fury.",
       "es": "El paladín alza sus manos, y un orbe de luz pura se forma, brillando como un sol en miniatura. Con un gesto preciso, lo lanza hacia los enemigos. El estallido es cegador, una explosión de energía divina que quema y desorienta. En Terik, la luz no solo ilumina, también purga y protege con furia celestial."
+    },
+    "epic_quote": {
+      "en": "Miniature suns burn away the shadows of evil.",
+      "es": "Soles en miniatura queman las sombras del mal."
     },
     "effect": {
       "en": "<p>Deal 2 + Mental damage to the paired rival hero and 1 + Mental damage to 1 random adjacent rival hero.</p><p>Place 1 bane counter: Stunned on each hero damaged this way.</p>",
@@ -370,6 +442,10 @@
       "en": "The banner waves high, its colors shining under the sun. Each warrior of Terik looks at it, feeling the weight of honor and unity. In the hands of the bravest, it becomes a beacon of hope. Where the banner advances, the Defenders follow, ready to fight and die for their home.",
       "es": "El estandarte ondea alto, sus colores brillando bajo el sol. Cada guerrero de Terik lo mira, sintiendo el peso del honor y la unidad. En manos del más valiente, se convierte en un faro de esperanza. Donde el estandarte avanza, los Defensores siguen, listos para luchar y morir por su hogar."
     },
+    "epic_quote": {
+      "en": "Under this standard, many hearts beat as one.",
+      "es": "Bajo este estandarte, muchos corazones laten como uno."
+    },
     "effect": {
       "en": "<p>When preparing Action Dice, adjacent allied heroes can prepare 1 extra die and can keep 1 <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> Dice before making any rolls.</p>",
       "es": "<p>A la hora de preparar los Dados de Acción, los héroes aliados adyacentes pueden preparar 1 dado extra y pueden guardar 1 dado <img src='../../storage/images/dices/dice-red-blue.svg' alt='Dice Red Blue' width='20' height='20'> antes de hacer ninguna tirada.</p>"
@@ -388,6 +464,10 @@
     "lore_text": {
       "en": "Your dagger strikes like lightning, piercing the enemy's flank. A cry of pain, a moment of hesitation. Before they can react, the dagger falls and your main sword is already in motion. The battle shifts in an instant, and victory tilts in your favor.",
       "es": "Tu daga sale como un rayo, clavándose en el flanco del enemigo. Un grito de dolor, un momento de vacilación. Antes de que reaccione, la daga cae y tu espada principal ya está en movimiento. La batalla cambia en un instante, y la victoria se inclina a tu favor."
+    },
+    "epic_quote": {
+      "en": "Lightning strikes twice when skill guides the blade.",
+      "es": "El rayo golpea dos veces cuando la habilidad guía la hoja."
     },
     "effect": {
       "en": "<p>Deal 2 + Strength damage to the paired rival hero.</p><p> If the hero playing this Technique is a Warrior hero, you may roll 1 of your Spent Dice and keep it as a Prepared Dice.</p>",
@@ -408,6 +488,10 @@
       "en": "The 'Iron Star' shines with the light of a thousand suns. Forged with celestial metals, its blade cuts through the air like lightning, leaving enemies defenseless. To wield it is to brandish the power of the stars, a reminder that even in darkness, the light of Terik prevails.",
       "es": "La 'Estrella de Hierro' brilla con la luz de mil soles. Forjada con metales celestiales, su hoja corta el aire como un rayo, dejando a los enemigos sin defensa. Empuñarla es blandir el poder de los astros, un recordatorio de que incluso en la oscuridad, la luz de Terik prevalece."
     },
+    "epic_quote": {
+      "en": "Celestial metal sings the song of victory.",
+      "es": "Metal celestial canta la canción de la victoria."
+    },
     "effect": {
       "en": "<p>The attached hero deals +2 damage with Physical Slashing Melee Attacks.</p>",
       "es": "<p>El héroe anexado hace +2 de daño con los Ataques Melee Físicos Cortantes.</p>"
@@ -425,6 +509,10 @@
     "lore_text": {
       "en": "Divine light descends, enveloping the paladin in a golden radiance. Each movement becomes faster, each strike more lethal. Celestial energy flows through their weapon, striking down enemies with relentless precision. In that moment, the paladin is not just a warrior, but the embodiment of Terik's justice.",
       "es": "La luz divina desciende, envolviendo al paladín en un resplandor dorado. Cada movimiento se vuelve más rápido, cada golpe más letal. La energía celestial fluye a través de su arma, derribando enemigos con precisión implacable. En ese momento, el paladín no es solo un guerrero, es la encarnación de la justicia de Terik."
+    },
+    "epic_quote": {
+      "en": "Divine energy transforms warriors into instruments of justice.",
+      "es": "Energía divina transforma guerreros en instrumentos de justicia."
     },
     "effect": {
       "en": "<p>Until the end of the Singular Combat, Light Attacks and Effects activated by the active allied hero deal +1 damage and healing.</p>",
@@ -450,6 +538,10 @@
       "en": "Silver Justice shines like the moon in the night. Forged for Joner Esthei, its blade is a tribute to his bravery in the War of Houses. Each strike is an echo of his loyalty, and each victory, a reminder that the honor of the Esthei never fades.",
       "es": "La Justicia Plateada brilla como la luna en la noche. Forjada para Joner Esthei, su hoja es un tributo a su valentía en la Guerra de las Casas. Cada golpe es un eco de su lealtad, y cada victoria, un recordatorio de que el honor de los Esthei nunca se desvanece."
     },
+    "epic_quote": {
+      "en": "Joner's legacy: loyalty sharper than any blade.",
+      "es": "El legado de Joner: lealtad más afilada que cualquier hoja."
+    },
     "effect": {
       "en": "<p>The attached hero deals +1 damage with Physical Slashing Single-Target Melee Attacks.</p><p>The first Physical Slashing Melee Attack initiated by the attached hero in each Singular Combat, in addition to its effect, places 1 boon counter: Inspired on the attached hero or on a random adjacent allied hero.</p>",
       "es": "<p>El héroe anexado hace +1 de daño con los Ataques Melee Físicos Cortantes de 1 Objetivo.</p><p>El primer Ataque Melee Físico Cortante que inicie el héroe anexado en cada Combate Singular, además de su efecto, coloca 1 contador de beneficio: Inspirado sobre el héroe anexado o sobre un héroe aliado adyacente aleatorio.</p>"
@@ -468,6 +560,10 @@
     "lore_text": {
       "en": "The hammer Eternal Light shines with the fire of a fallen star. In the hands of Joner Esthei, its light purged enemies and strengthened allies. Each strike was a roar of justice, changing the fate of battles. Today, it is a sacred symbol, a reminder of the heroism that protected Terik.",
       "es": "El martillo Luz Eterna resplandece con el fuego de una estrella caída. En manos de Joner Esthei, su luz purgó a los enemigos y fortaleció a los aliados. Cada golpe era un rugido de justicia, cambiando el destino de las batallas. Hoy, es un símbolo sagrado, un recordatorio del heroísmo que protegió Terik."
+    },
+    "epic_quote": {
+      "en": "Fallen stars forge hammers that shape destiny.",
+      "es": "Estrellas caídas forjan martillos que moldean el destino."
     },
     "effect": {
       "en": "<p>The attached hero deals +1 damage with Physical Crushing Single-Target Melee Attacks.</p><p>All Physical Crushing Melee Attacks initiated by the attached hero, in addition to their effect, places 1 bane counter: Stunned on each hero they damage.</p>",
@@ -488,6 +584,10 @@
       "en": "The paladin extends their hands, and a golden radiance envelops the wounded. Wounds close, pain fades away. The Healing Light not only cures bodies, but also souls, restoring strength and courage to warriors. In Terik, this light is a reminder: hope never dies.",
       "es": "El paladín extiende sus manos, y un resplandor dorado envuelve a los heridos. Las heridas se cierran, el dolor se desvanece. La Luz Sanadora no solo cura cuerpos, sino también almas, devolviendo la fuerza y el coraje a los guerreros. En Terik, esta luz es un recordatorio: la esperanza nunca muere."
     },
+    "epic_quote": {
+      "en": "Hope made manifest mends both flesh and spirit.",
+      "es": "Esperanza hecha manifiesta repara tanto carne como espíritu."
+    },
     "effect": {
       "en": "<p>Heal 3 health to 1 adjacent allied hero of your choice.</p>",
       "es": "<p>Cura 3 de vida a 1 héroe aliado adyacente a tu elección.</p>"
@@ -507,6 +607,10 @@
       "en": "Luminaris, the sacred mace, shines with the fury of an eternal storm. Forged by Elerith, only those of pure heart can wield it. In the hands of a paladin, its light illuminates the darkness and its rays purge enemies. It is a reminder that light always conquers shadows.",
       "es": "Luminaris, la maza sagrada, resplandece con la furia de una tormenta eterna. Forjada por Elerith, solo los de corazón puro pueden empuñarla. En manos de un paladín, su luz ilumina la oscuridad y sus rayos purgan a los enemigos. Es un recordatorio de que la luz siempre vence a las sombras."
     },
+    "epic_quote": {
+      "en": "Only the pure may wield storms of righteousness.",
+      "es": "Solo los puros pueden empuñar tormentas de rectitud."
+    },
     "effect": {
       "en": "<p>The attached hero gains the following Ability:</p>",
       "es": "<p>El héroe anexado gana la siguiente Habilidad:</p>"
@@ -525,6 +629,10 @@
     "lore_text": {
       "en": "The warrior leans forward, muscles tense like springs. With a shout, they launch into attack, ignoring defense. Each strike is a hurricane of fury, breaking ranks and sowing chaos. In Terik, this stance is feared: there is no shield that holds when the offensive is relentless.",
       "es": "El guerrero se inclina hacia adelante, sus músculos tensos como resortes. Con un grito, se lanza al ataque, ignorando la defensa. Cada golpe es un huracán de furia, rompiendo filas y sembrando el caos. En Terik, esta postura es temida: no hay escudo que aguante cuando la ofensiva es implacable."
+    },
+    "epic_quote": {
+      "en": "Fortune favors those who strike without hesitation.",
+      "es": "La fortuna favorece a quienes golpean sin dudar."
     },
     "effect": {
       "en": "<p>Until the end of Singular Combat, the active allied hero deals +1 Physical and Magical damage.</p><p>Until the end of Singular Combat, the active allied hero takes +1 Physical and Magical damage.</p><p>If the active allied hero has at least 1 Weapon attached, draw 1 Card.</p>",
@@ -546,6 +654,10 @@
     "lore_text": {
       "en": "The warrior lowers their center of gravity, moving with caution. Their arms protect vital points, and each dodge is calculated. Although not attacking with force, their resistance is unbreakable. In Terik, this stance is a strategy: survive today to fight tomorrow.",
       "es": "El guerrero baja su centro de gravedad, moviéndose con cautela. Sus brazos protegen puntos vitales, y cada esquive es calculado. Aunque no ataca con fuerza, su resistencia es inquebrantable. En Terik, esta postura es una estrategia: sobrevivir hoy para luchar mañana."
+    },
+    "epic_quote": {
+      "en": "Patience and steel: tomorrow's victory born today.",
+      "es": "Paciencia y acero: la victoria del mañana nacida hoy."
     },
     "effect": {
       "en": "<p>Until the end of Singular Combat, the active allied hero deals -1 Physical and Magical damage.</p><p>Until the end of Singular Combat, the active allied hero takes -1 Physical and Magical damage.</p><p>If the active allied hero has at least 1 Armor attached, draw 1 Card.</p>",
@@ -569,6 +681,10 @@
       "en": "The Defender spins around, their sword tracing a lethal arc. The spinning slash cuts through the air, reaching all who dare to surround them. Each movement is pure precision, each turn a demonstration of mastery. In Terik, mastering this technique is the mark of a true warrior.",
       "es": "El Defensor gira sobre sí mismo, su espada trazando un arco letal. El tajo giratorio corta el aire, alcanzando a todos los que se atreven a rodearlo. Cada movimiento es precisión pura, cada giro una demostración de maestría. En Terik, dominar esta técnica es la marca de un verdadero guerrero."
     },
+    "epic_quote": {
+      "en": "Death dances in circles of sharpened steel.",
+      "es": "La muerte danza en círculos de acero afilado."
+    },
     "effect": {
       "en": "<p>Deal 3 + Strength damage to the paired rival hero and 2 + Strength damage to each adjacent rival hero.</p>",
       "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado y 2 + Fuerza de daño a cada héroe rival adyacente.</p>"
@@ -588,6 +704,10 @@
     "lore_text": {
       "en": "The Helm of Enduring Light shone on the head of Elara Alain, a paladin who healed and protected her allies in the darkest days. With its light, she purged evils and united the noble houses. Her legacy is not just a helm, but a symbol of peace and unity in Terik.",
       "es": "El Yelmo de Luz Perdurable brilló en la cabeza de Elara Alain, una paladina que sanó y protegió a sus aliados en los días más oscuros. Con su luz, purgó males y unió a las casas nobles. Su legado no es solo un yelmo, sino un símbolo de paz y unidad en Terik."
+    },
+    "epic_quote": {
+      "en": "Elara's wisdom illuminates paths through darkest hours.",
+      "es": "La sabiduría de Elara ilumina senderos en las horas más oscuras."
     },
     "effect": {
       "en": "<p>The first time you spend 1 <img src='../../storage/images/dices/dice-blue.svg' alt='Dice Blue' width='20' height='20'> die in each Singular Combat, you can keep it as a Prepared <img src='../../storage/images/dices/dice-red.svg' alt='Dice Red' width='20' height='20'> Dice.</p>",

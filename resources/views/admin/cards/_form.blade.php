@@ -41,7 +41,13 @@
         name="lore_text"
         :label="__('entities.cards.lore_text')"
         :values="isset($card) ? $card->getTranslations('lore_text') : []"
-        />
+      />
+
+      <x-form.multilingual-wysiwyg
+        name="epic_quote"
+        :label="__('entities.cards.epic_quote')"
+        :values="isset($card) ? $card->getTranslations('epic_quote') : []"
+      />
         
       <x-form.multilingual-wysiwyg
         name="effect"

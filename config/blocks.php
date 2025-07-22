@@ -146,6 +146,15 @@ return [
       'allows_image' => false,
       'allows_clearfix_image' => false,
     ],
+    'quote' => [
+      'name' => 'Quote Block',
+      'view' => 'content.blocks.quote',
+      'icon' => 'list-item',
+      'allows_image' => false,
+      'allows_clearfix_image' => false,
+      'settings' => [
+      ],
+    ],
       // Podemos añadir más tipos después
   ],
 

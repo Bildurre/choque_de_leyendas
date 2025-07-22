@@ -12,7 +12,7 @@ class FactionService
 {
   use HandlesTranslations;
   
-  protected $translatableFields = ['name', 'lore_text'];
+  protected $translatableFields = ['name', 'lore_text', 'epic_quote'];
 
   /**
    * Get all factions with optional filtering and pagination

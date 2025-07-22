@@ -30,6 +30,12 @@
         :values="isset($hero) ? $hero->getTranslations('lore_text') : []"
       />
 
+      <x-form.multilingual-wysiwyg
+        name="epic_quote"
+        :label="__('entities.heroes.epic_quote')"
+        :values="isset($card) ? $card->getTranslations('epic_quote') : []"
+      />
+
       <x-form.multilingual-input
         name="passive_name"
         :label="__('entities.heroes.passive_name')"

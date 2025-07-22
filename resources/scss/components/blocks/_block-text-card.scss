@@ -27,7 +27,6 @@
     // Títulos más pequeños para headers
   .block__title {
     font-size: 1.54rem;
-    margin-bottom: $spacing-sm;
     
     @include responsive(tablet) {
       font-size: 1.76rem;
@@ -40,7 +39,7 @@
   
   .block__label{
     position: absolute;
-    top: $spacing-xs;
+    top: $spacing-sm;
     right: $spacing-lg;
     font-size: .9rem;
     color: var(--random-accent-color);

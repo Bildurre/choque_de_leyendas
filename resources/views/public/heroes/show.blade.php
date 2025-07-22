@@ -147,11 +147,29 @@
     </div>
   </section>
 
+  {{-- epic quote --}}
+  @php
+    $epicText = new \App\Models\Block([
+      'type' => 'quote',
+      'title' => null,
+      'subtitle' => [
+        'es' => "<p>" . $hero->getTranslation('epic_quote', 'es') . "</p>", 
+        'en' => "<p>" . $hero->getTranslation('epic_quote', 'en') . "</p>"
+      ],
+      'background_color' => 'theme-border',
+      'content' => null,
+      'settings' => [
+        'text_alignment' => 'center'
+      ]
+    ]);
+  @endphp
+  {!! $epicText->render() !!}
+
   {{-- Related Heroes Block --}}
   @php
     $relatedHeroesBlock = new \App\Models\Block([
       'type' => 'relateds',
-      'title' => ['es' => 'Otros Héroes', 'en' => 'Other Heroes'],
+      'title' => null,
       'subtitle' => ['es' => 'Descubre más héroes del juego', 'en' => 'Discover more game heroes'],
       'background_color' => 'none',
       'content' => [
@@ -165,7 +183,9 @@
       'settings' => [
         'model_type' => 'hero',
         'display_type' => 'random',
-        'text_alignment' => 'left'
+        'text_alignment' => 'left',
+        'button_size' => 'md',
+        'button_variant' => 'secondary',
       ]
     ]);
   @endphp

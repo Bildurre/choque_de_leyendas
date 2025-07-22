@@ -38,6 +38,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'image',
     'preview_image',
     'lore_text',
+    'epic_quote',
     'faction_id',
     'card_type_id',
     'equipment_type_id',
@@ -74,6 +75,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'name',
     'slug',
     'lore_text',
+    'epic_quote',
     'effect',
     'restriction'
   ];

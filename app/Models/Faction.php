@@ -34,6 +34,7 @@ class Faction extends Model implements LocalizedUrlRoutable
     'name',
     'slug',
     'lore_text',
+    'epic_quote',
     'color',
     'icon',
     'text_is_dark',
@@ -59,7 +60,8 @@ class Faction extends Model implements LocalizedUrlRoutable
   public $translatable = [
     'name',
     'slug',
-    'lore_text'
+    'lore_text',
+    'epic_quote',
   ];
 
   /**
