@@ -96,14 +96,21 @@
                 <x-entity-show.info-block title="public.faction_decks.basic_info">
                   <x-entity-show.info-list>
                     <x-entity-show.info-list-item 
-                      label="{{ __('entities.faction_decks.name') }}" 
+                      label="{{ __('entities.faction_decks.name') }}"
                       :value="$factionDeck->name" 
                     />
 
-                    <x-entity-show.info-list-item 
-                      label="{{ __('entities.game_modes.singular') }}" 
-                      :value="$factionDeck->gameMode->name" 
-                    />
+                    <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
+                      <x-entity-show.info-link :href="route('public.factions.show', [$factionDeck->faction])">
+                        {{ $factionDeck->faction->name }}
+                      </x-entity-show.info-link>
+                    </x-entity-show.info-list-item>
+                    
+                    <x-entity-show.info-list-item label="{{ __('entities.game_modes.singular') }}">
+                      <x-entity-show.info-link :href="route('public.faction-decks.index', ['tab' => $factionDeck->gameMode])">
+                        {{ $factionDeck->gameMode->name }}
+                      </x-entity-show.info-link>
+                    </x-entity-show.info-list-item>
                     
                     <x-entity-show.info-list-item 
                       label="{{ __('entities.heroes.plural') }}" 
@@ -279,4 +286,28 @@
       </x-tabs>
     </div>
   </section>
+
+  {{-- Related Factions Block --}}
+  @php
+    $relatedDecksBlock = new \App\Models\Block([
+      'type' => 'relateds',
+      'title' => ['es' => 'Otros Mazos', 'en' => 'Other Decks'],
+      'subtitle' => ['es' => 'Explora otros mazos del juego', 'en' => 'Explore other game decks'],
+      'background_color' => 'none',
+      'content' => [
+        'en' => [
+          'button_text' => __('View all Decks'),
+        ],
+        'es' => [
+          'button_text' => __('Ver todos los Mazos'),
+        ]
+      ],
+      'settings' => [
+        'model_type' => 'deck',
+        'display_type' => 'random',
+        'text_alignment' => 'left'
+      ]
+    ]);
+  @endphp
+  {!! $relatedDecksBlock->render() !!}
 </x-public-layout>

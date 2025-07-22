@@ -153,6 +153,8 @@ return [
     ],
     'game_modes' => [
       'faction_decks' => 'Number of decks',
+      'no_modes' => 'No game modes available.',
+      'view_decks' => 'View decks',
     ],
     'confirm_delete' => 'Are you sure you want to delete this block?',
     'created_successfully' => 'Bloque created successfully',

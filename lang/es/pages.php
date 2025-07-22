@@ -153,6 +153,8 @@ return [
     ],
     'game_modes' => [
       'faction_decks' => 'Numero de mazos',
+      'no_modes' => 'No hay modos de juego disponibles.',
+      'view_decks' => 'Ver mazos',
     ],
     'confirm_delete' => '¿Estás seguro de que deseas eliminar este bloque?',
     'created_successfully' => 'Bloque creado con exito',

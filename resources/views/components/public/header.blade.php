@@ -70,6 +70,11 @@
               {{ __('public.menu.cards') }}
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('public.faction-decks.index') }}" class="nav-link {{ request()->routeIs('public.faction-decks.*') ? 'nav-link--active' : '' }}">
+              {{ __('public.menu.faction_decks') }}
+            </a>
+          </li>
           
           <x-public.page-menu />
 

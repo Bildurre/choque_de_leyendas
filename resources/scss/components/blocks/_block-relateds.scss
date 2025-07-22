@@ -34,22 +34,54 @@
   
   .relateds-block__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: $spacing-md;
     
+    @include responsive(mobile) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
     @include responsive(tablet) {
-      grid-template-columns: repeat(4, 1fr);
-      gap: $spacing-lg;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
     
     @include responsive(desktop) {
-      gap: $spacing-xl;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
   }
 
   .relateds-block__item {
     display: block;
     width: 100%;
+
+    &:nth-of-type(5) {
+      display: none;
+
+      @include responsive(mobile) {
+        display: block;
+      }
+
+      @include responsive(tablet) {
+        display: none;
+      }
+
+      @include responsive(desktop) {
+        display: block;
+      }
+    }
+    &:nth-of-type(6) {
+      display: none;
+
+      @include responsive(mobile) {
+        display: block;
+      }
+
+      @include responsive(tablet) {
+        display: none;
+      }
+    }
+
+
   }
 
   .relateds-block__link {

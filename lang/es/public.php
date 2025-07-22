@@ -19,6 +19,7 @@ return [
     'downloads' => 'Descargas',
     'admin_panel' => 'Panel de administración',
     'toggle' => 'Alternar menú',
+    'faction_decks' => 'Mazos',
   ],
   
   // Página de bienvenida
@@ -116,6 +117,11 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
+    'title' => 'Mazos de Facción',
+    'description' => 'Descubre los mazos prediseñados para cada facción y modo de juego. Estos mazos están equilibrados y listos para jugar.',
+    'no_decks' => 'No hay mazos disponibles.',
+    'no_decks_for_mode' => 'No hay mazos disponibles para :mode.',
+    'no_game_modes' => 'No hay modos de juego disponibles.',
     'basic_info' => 'Información básica',
     'statistics' => 'Estadísticas',
     'back_to_faction' => 'Volver a :faction',

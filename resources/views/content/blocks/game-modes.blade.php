@@ -12,8 +12,7 @@
         @foreach($gameModes as $mode)
           <article class="game-modes-list__item">
             <x-entity-show.info-block :title="$mode->name" class="game-modes-list__block">
-              <x-icon name="decks" class="game-modes-list__icon" />
-              
+                            
               @if($mode->description)
                 <x-entity-show.effect-section>
                   {!! $mode->description !!}
@@ -49,8 +48,14 @@
               
               @if($mode->factionDecks->isNotEmpty())
                 <div class="game-modes-list__decks">
-                  <span class="game-modes-list__decks-label">{{ __('pages.blocks.game_modes.faction_decks') }}:</span>
-                  <span class="game-modes-list__decks-count">{{ $mode->factionDecks->count() }}</span>
+                  <div>
+                    <span class="game-modes-list__decks-label">{{ __('pages.blocks.game_modes.faction_decks') }}:</span>
+                    <span class="game-modes-list__decks-count">{{ $mode->factionDecks->count() }}</span>
+                  </div>
+                  <a href="{{ route('public.faction-decks.index', ['tab' => $mode->id]) }}" class="game-modes-list__decks-link">
+                    {{ __('pages.blocks.game_modes.view_decks') }}
+                    <x-icon name="link" size="sm" class="game-modes-list__decks-link-icon" />
+                  </a>
                 </div>
               @endif
             </x-entity-show.info-block>

@@ -43,6 +43,8 @@ Route::group([
         ->name('public.cards.index');
     Route::get(LaravelLocalization::transRoute('routes.card_show'), [CardController::class, 'show'])
         ->name('public.cards.show');
+    Route::get(LaravelLocalization::transRoute('routes.faction_decks'), [FactionDeckController::class, 'index'])
+        ->name('public.faction-decks.index');
     Route::get(LaravelLocalization::transRoute('routes.faction_deck_show'), [FactionDeckController::class, 'show'])
         ->name('public.faction-decks.show');
 

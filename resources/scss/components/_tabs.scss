@@ -18,7 +18,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: $spacing-xs;
+    gap: $spacing-sm;
     white-space: nowrap;
     border-radius: $border-radius-sm $border-radius-sm 0 0;
     transition: background-color $transition-fast, color $transition-fast;
@@ -53,10 +53,19 @@
     }
   }
 
-  // .icon {
-  //   width: 1.75rem;
-  //   height: 1.75rem;
-  // }
+ &__initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all $transition-fast ease;
+    flex-shrink: 0;
+  }
   
   &__text {
     display: none;
@@ -66,7 +75,6 @@
   }
 
   &__count {
-    margin-left: $spacing-xs;
     font-size: 0.85em;
   }
   

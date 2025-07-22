@@ -4,20 +4,27 @@
   'href' => '#',
   'icon' => null,
   'count' => null,
-  'iconSize' => 'lg'
+  'useInitial' => false,
 ])
 
-<a href="{{ $href }}" class="tabs__item {{ $active ? 'tabs__item--active' : '' }}" id="tab-{{ $id }}">
-  @if($icon)
-    <x-icon :name="$icon" size="{{ $iconSize }}" class="tabs__icon" />
+@php
+  $initial = $useInitial ? mb_strtoupper(mb_substr(trim($slot), 0, 1)) : null;
+@endphp
+
+<a 
+  href="{{ $href }}" 
+  class="tabs__item {{ $active ? 'tabs__item--active' : '' }}"
+  data-tab-id="{{ $id }}"
+>
+  @if($useInitial && $initial)
+    <span class="tabs__initial">{{ $initial }}</span>
+  @elseif($icon)
+    <x-icon :name="$icon" size="sm" class="tabs__icon" />
   @endif
   
-  <span class="tabs__text">
-    {{ $slot }}
-  </span>
-
-
-  @if(!is_null($count))
-  <span class="tabs__count">({{ $count }})</span>
+  <span class="tabs__text">{{ $slot }}</span>
+  
+  @if($count !== null)
+    <span class="tabs__count">({{ $count }})</span>
   @endif
 </a>

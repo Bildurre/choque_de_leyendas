@@ -9,108 +9,48 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: $spacing-md;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    &__item {
-      // Los estilos de borde y fondo los maneja info-block
-    }
 
     &__block {
       position: relative;
       height: 100%;
-      
-      // Override info-block padding para hacer espacio para el icono
-      padding-top: $spacing-xl;
-    }
-
-    &__icon {
-      position: absolute;
-      top: $spacing-md;
-      right: $spacing-md;
-      width: 1.5rem;
-      height: 1.5rem;
-      color: var(--random-accent-color);
-      opacity: 0.6;
     }
 
     &__decks {
-      display: flex;
+      display: grid;
       align-items: center;
-      gap: $spacing-xs;
-      margin-top: $spacing-sm;
-      padding-top: $spacing-sm;
-    }
-
-    &__decks-label {
-      font-size: 0.8125rem;
-      color: var(--color-text-secondary);
+      gap: $spacing-sm;
     }
 
     &__decks-count {
       font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 1.5rem;
+      width: auto;
+      aspect-ratio: 1;
       font-weight: 600;
       color: var(--random-accent-color);
-      background-color: var(--random-accent-color-bg-light);
-      padding: $spacing-xxs $spacing-xs;
-      border-radius: $border-radius-sm;
-    }
-  }
-
-  // Ajustes a los componentes reutilizados dentro del contexto
-  .info-block {
-    &__title {
-      font-size: 1.25rem;
-      margin-bottom: $spacing-sm;
-    }
-  }
-  
-  .effect-section {
-    &:not(:last-child) {
-      margin-bottom: $spacing-sm;
-      padding-bottom: $spacing-sm;
-    }
-    
-    &__title {
-      font-size: 1rem;
-      margin-bottom: $spacing-xs;
-    }
-  }
-  
-  .info-list {
-    gap: $spacing-xs;
-    
-    dt {
-      font-size: 0.8125rem;
-    }
-    
-    dd {
-      font-size: 0.875rem;
-      font-weight: 600;
-      background-color: var(--color-bg-transparent-light);
-      padding: $spacing-xxs $spacing-sm;
-      border-radius: $border-radius-sm;
-      min-width: 2.5rem;
-      text-align: center;
-    }
-  }
-
-  .block__empty {
-    text-align: center;
-    padding: $spacing-xl;
-    color: var(--color-text-secondary);
-
-    &-icon {
-      width: 3rem;
-      height: 3rem;
-      margin: 0 auto $spacing-md;
-      opacity: 0.5;
+      border: 1px solid var(--random-accent-color-bg-light);
+      padding: $spacing-xxs;
+      border-radius: 50%;
     }
 
-    p {
-      margin: 0;
-      font-size: 1rem;
+    &__decks-link {
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      gap: $spacing-sm;
+      transition: color 0.3s ease;
+    }
+
+    &__block {
+      &:hover {
+        .game-modes-list__decks-link {
+          color: var(--random-accent-color);
+        }
+      }
     }
   }
 }

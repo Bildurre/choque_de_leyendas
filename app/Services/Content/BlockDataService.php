@@ -7,6 +7,7 @@ use App\Models\Hero;
 use App\Models\Block;
 use App\Models\Counter;
 use App\Models\Faction;
+use App\Models\FactionDeck;
 use App\Models\GameMode;
 
 class BlockDataService
@@ -44,7 +45,7 @@ class BlockDataService
   /**
    * Get relateds block data
    */
-  protected function getRelatedsData(Block $block): array
+  protected function getRelatedsData(Block $block, $currentModel = null): array
   {
     $relatedsContent = $block->getTranslation('content', app()->getLocale());
     $modelType = $block->settings['model_type'] ?? 'hero';
@@ -55,6 +56,7 @@ class BlockDataService
       'faction' => Faction::class,
       'hero' => Hero::class,
       'card' => Card::class,
+      'deck' => FactionDeck::class,
       default => Hero::class,
     };
     
@@ -62,15 +64,30 @@ class BlockDataService
       'faction' => route('public.factions.index'),
       'hero' => route('public.heroes.index'),
       'card' => route('public.cards.index'),
+      'deck' => route('public.faction-decks.index'),
       default => route('public.heroes.index'),
     };
     
     $query = $modelClass::published();
+
+    // Auto-detect current model from route parameters
+    $currentModel = $this->detectCurrentModel($modelClass);
+
+    // Exclude current model if found
+    if ($currentModel) {
+      $query->where('id', '!=', $currentModel->id);
+    }
     
+    // Exclude current model if provided and types match
+    if ($currentModel && get_class($currentModel) === $modelClass) {
+      $query->where('id', '!=', $currentModel->id);
+    }
+    
+    // Apply display type
     if ($displayType === 'random') {
-      $items = $query->inRandomOrder()->limit(4)->get();
+      $items = $query->inRandomOrder()->limit(6)->get();
     } else {
-      $items = $query->latest()->limit(4)->get();
+      $items = $query->latest()->limit(6)->get();
     }
     
     return [
@@ -110,5 +127,32 @@ class BlockDataService
     return [
       'gameModes' => GameMode::with(['deckConfiguration', 'factionDecks'])->get()
     ];
+  }
+
+  /**
+   * Detect current model from route parameters
+   *
+   * @param string $modelClass
+   * @return mixed|null
+   */
+  protected function detectCurrentModel(string $modelClass)
+  {
+    $route = request()->route();
+    
+    if (!$route) {
+      return null;
+    }
+    
+    // Get all route parameters
+    $parameters = $route->parameters();
+    
+    // Check each parameter to find matching model instance
+    foreach ($parameters as $parameter) {
+      if (is_object($parameter) && get_class($parameter) === $modelClass) {
+        return $parameter;
+      }
+    }
+    
+    return null;
   }
 }

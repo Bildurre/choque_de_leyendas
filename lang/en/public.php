@@ -19,6 +19,7 @@ return [
     'downloads' => 'Downloads',
     'admin_panel' => 'Admin Panel',
     'toggle' => 'Toggle menu',
+    'faction_decks' => 'Decks',
   ],
   
   // Welcome page
@@ -113,6 +114,12 @@ return [
   
   // Faction decks
   'faction_decks' => [
+    'title' => 'Faction Decks',
+    'description' => 'Discover pre-built decks for each faction and game mode. These decks are balanced and ready to play.',
+    'no_decks' => 'No decks available.',
+    'no_decks_for_mode' => 'No decks available for :mode.',
+    'no_game_modes' => 'No game modes available.',
+    'title' => 'Faction Decks',
     'basic_info' => 'Basic Information',
     'statistics' => 'Statistics',
     'back_to_faction' => 'Back to :faction',

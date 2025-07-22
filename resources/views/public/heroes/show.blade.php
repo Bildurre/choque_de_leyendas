@@ -170,28 +170,4 @@
     ]);
   @endphp
   {!! $relatedHeroesBlock->render() !!}
-
-  {{-- Related Cards Block --}}
-  @php
-    $relatedCardsBlock = new \App\Models\Block([
-      'type' => 'relateds',
-      'title' => ['es' => 'Cartas Relacionadas', 'en' => 'Related Cards'],
-      'subtitle' => ['es' => 'Explora las cartas del juego', 'en' => 'Explore the game cards'],
-      'background_color' => 'none',
-      'content' => [
-        'en' => [
-          'button_text' => __('View all Cards'),
-        ],
-        'es' => [
-          'button_text' => __('Ver todas las Cartas'),
-        ]
-      ],
-      'settings' => [
-        'model_type' => 'card',
-        'display_type' => 'random',
-        'text_alignment' => 'left'
-      ]
-    ]);
-  @endphp
-  {!! $relatedCardsBlock->render() !!}
 </x-public-layout>

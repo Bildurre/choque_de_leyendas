@@ -255,6 +255,8 @@ return [
   
   // Faction decks
   'faction_decks' => [
+    'index_page_title' => 'Faction Decks - Alanda: Clash of Legends',
+    'index_page_description' => 'Explore all pre-built faction decks for each game mode in Alanda: Clash of Legends',
     'page_title' => ':name - Preset deck | Alanda',
     'page_description' => ':name deck from :faction faction. :description',
     'singular' => 'Faction deck',

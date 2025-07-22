@@ -32,6 +32,7 @@ return [
             'faction' => 'Factions',
             'hero' => 'Heroes',
             'card' => 'Cards',
+            'deck' => 'Decks'
           ],
         ],
         'display_type' => [

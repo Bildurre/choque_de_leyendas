@@ -255,6 +255,8 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
+    'index_page_title' => 'Mazos de Facción - Alanda: Choque de Leyendas',
+    'index_page_description' => 'Explora todos los mazos de facción prediseñados para cada modo de juego de Alanda: Choque de Leyendas',
     'page_title' => ':name - Mazo predeterminado | Alanda',
     'page_description' => 'Mazo :name de la facción :faction. :description',
     'singular' => 'Mazo de facción',
