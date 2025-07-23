@@ -23,10 +23,9 @@ use App\Http\Controllers\Game\HeroSuperclassController;
 use App\Http\Controllers\Game\DeckAttributesConfigurationController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
-Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
   Route::get('/', [DashboardController::class, 'view'])->name('dashboard');
-  // Route::get('/dashboard', [DashboardController::class, 'view'])->name('dashboard');
 
   // Hero Attributes Configuration
   Route::get('hero-attributes-configurations/edit', [HeroAttributesConfigurationController::class, 'edit'])->name('hero-attributes-configurations.edit');
@@ -131,17 +130,21 @@ Route::middleware(['auth', EnsureIsAdmin::class])->prefix('admin')->name('admin.
   Route::post('counters/{counter}/toggle-published', [CounterController::class, 'togglePublished'])->name('counters.toggle-published');
 
   
-  // PDF Export
+  // PDF Export - Rutas de visualización (siempre disponibles)
   Route::prefix('pdf-export')->name('pdf-export.')->group(function () {
     Route::get('/', [PdfExportController::class, 'index'])->name('index');
     Route::get('/view/{pdf}', [PdfExportController::class, 'view'])->name('view');
-    Route::post('/faction/{faction}/generate', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
-    Route::post('/deck/{deck}/generate', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
-    Route::post('/page/{page}/generate', [PdfExportController::class, 'generatePage'])->name('generate-page');
-    Route::post('/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
-    Route::post('/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
-    Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
     Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
+    
+    // Rutas de generación (solo en local)
+    if (app()->environment('local')) {
+      Route::post('/faction/{faction}/generate', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
+      Route::post('/deck/{deck}/generate', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
+      Route::post('/page/{page}/generate', [PdfExportController::class, 'generatePage'])->name('generate-page');
+      Route::post('/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
+      Route::post('/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
+      Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
+    }
   });
 
   // Icons

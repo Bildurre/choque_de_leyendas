@@ -12,20 +12,23 @@ trait HasPreviewImage
    */
   public static function bootHasPreviewImage()
   {
-    // After creating a model
-    static::created(function ($model) {
-      $model->dispatchPreviewGeneration();
-    });
-    
-    // After updating a model
-    static::updated(function ($model) {
-      // Check if we should regenerate preview
-      if ($model->shouldRegeneratePreview()) {
+    // Solo ejecutar en entorno local
+    if (app()->environment('local')) {
+      // After creating a model
+      static::created(function ($model) {
         $model->dispatchPreviewGeneration();
-      }
-    });
-    
-    // Before deleting, clean up preview images
+      });
+      
+      // After updating a model
+      static::updated(function ($model) {
+        // Check if we should regenerate preview
+        if ($model->shouldRegeneratePreview()) {
+            $model->dispatchPreviewGeneration();
+        }
+      });
+    }
+      
+    // Before deleting, clean up preview images (esto sí en todos los entornos)
     static::deleting(function ($model) {
       $model->deletePreviewImage();
     });
@@ -177,7 +180,10 @@ trait HasPreviewImage
    */
   public function dispatchPreviewGeneration(): void
   {
-    GeneratePreviewImage::dispatch($this);
+    // Solo despachar en local
+    if (app()->environment('local')) {
+      GeneratePreviewImage::dispatch($this);
+    }
   }
   
   /**

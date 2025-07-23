@@ -1,23 +1,69 @@
-/.phpunit.cache
+# Laravel
 /node_modules
-/public/build
 /public/hot
 /public/storage
 /storage/*.key
-/storage/pail
 /vendor
 .env
 .env.backup
+.env.local
 .env.production
-.phpactor.json
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/auth.json
-/.fleet
 /.idea
-/.nova
 /.vscode
-/.zed
+.DS_Store
+
+# Logs
+/storage/logs/*
+!/storage/logs/.gitignore
+
+# Cache
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+# Debugbar
+/storage/debugbar/*
+
+# Mix/Vite
+/public/css/app.css
+/public/js/app.js
+/public/mix-manifest.json
+/public/build
+/public/hot
+
+# Storage - Ignorar archivos subidos pero mantener estructura
+/storage/app/public/*
+!/storage/app/public/.gitignore
+!/storage/app/public/images/.gitignore
+!/storage/app/public/pdfs/.gitignore
+
+# Temporales
+*.log
+*.tmp
+*.temp
+.sass-cache
+
+# Backups
+*.sql
+*.zip
+*.tar.gz
+/backups
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Scripts de deployment local
+deploy.sh
+deploy-storage.sh
+sync-*.sh

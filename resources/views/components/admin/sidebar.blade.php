@@ -146,12 +146,14 @@
                 </a>
               </li>
 
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.pdf-export.index') }}" 
-                  class="admin-sidebar__link {{ request()->routeIs('admin.pdf-export.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('pdf.plural') }}</span>
-                </a>
-              </li>
+              @env('local')
+                <li class="admin-sidebar__item">
+                  <a href="{{ route('admin.pdf-export.index') }}" 
+                    class="admin-sidebar__link {{ request()->routeIs('admin.pdf-export.*') ? 'admin-sidebar__link--active' : '' }}">
+                    <span class="admin-sidebar__text">{{ __('pdf.plural') }}</span>
+                  </a>
+                </li>
+              @endenv
             </ul>
           </x-collapsible-section>
         </x-accordion>
