@@ -94,12 +94,7 @@ class PdfCollectionService
       ->orderBy('created_at', 'desc')
       ->get()
       ->map(function ($pdf) {
-        // Add deck name to PDF for display
-        if ($pdf->deck) {
-          $pdf->display_name = $pdf->deck->name . ' (' . $pdf->deck->faction->name . ')';
-        } else {
-          $pdf->display_name = $pdf->filename;
-        }
+        $pdf->display_name = $pdf->deck->name . ' (' . $pdf->deck->faction->name . ')';
         return $pdf;
       });
   }
@@ -115,22 +110,24 @@ class PdfCollectionService
         $query->where('locale', $locale)
               ->orWhereNull('locale');
       })
+      ->with('page') // Always eager load since we might need it
       ->orderBy('type')
       ->orderBy('created_at', 'desc')
       ->get()
       ->map(function ($pdf) {
-        // Add display name based on type
-        $displayNames = [
-          'counters-list' => __('pdf.counters_list'),
-          'cut-out-counters' => __('pdf.cut_out_counters'),
-          'rules' => __('pdf.types.rules'),
-          'tokens' => __('pdf.types.tokens'),
-          // Add more types here as needed
-        ];
-        
-        $pdf->display_name = $displayNames[$pdf->type] ?? ucfirst(str_replace('-', ' ', $pdf->type));
+        $pdf->display_name = $this->getPdfDisplayName($pdf);
         return $pdf;
       });
+  }
+
+  private function getPdfDisplayName(GeneratedPdf $pdf): string
+  {
+    return match($pdf->type) {
+      'counters-list' => __('pdf.counters_list'),
+      'cut-out-counters' => __('pdf.cut_out_counters'),
+      'page' => $pdf->page?->title ?? __('pdf.page_not_found'),
+      default => ucfirst(str_replace('-', ' ', $pdf->type))
+    };
   }
   
   /**

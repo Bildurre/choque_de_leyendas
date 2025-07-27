@@ -110,7 +110,7 @@
     body {
       font-family: 'roboto', sans-serif;
       font-size: 12pt;
-      line-height: 1.6;
+      line-height: 1.2;
       color: #000;
       background: #fff;
       padding: 2cm;
@@ -198,9 +198,6 @@
   </style>
 </head>
 <body>
-  {{-- Page Title --}}
-  <h1>{{ $title }}</h1>
-  
   {{-- Render blocks --}}
   @foreach($blocks as $block)
     @if($block->type === 'header')
