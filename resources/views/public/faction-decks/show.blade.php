@@ -29,23 +29,25 @@
       'type' => 'header',
       'title' => $titleTranslations,
       'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
+      'background_color' => 'theme-border',
       'settings' => [
-        'text_alignment' => 'justify'
+        'text_alignment' => 'left'
       ]
     ]);
   @endphp
 
   @component('content.blocks.header', ['block' => $headerBlock])
-    @slot('actions')
-      <x-pdf.download-button
-        :entity="$factionDeck"
-        entityType="deck"
-        type="outlined"
-      >
-      {{ __('pdf.download.button_title') }}
-      </x-pdf.download-button>
-    @endslot
+    @env('local')
+      @slot('actions')
+        <x-pdf.download-button
+          :entity="$factionDeck"
+          entityType="deck"
+          type="outlined"
+        >
+        {{ __('pdf.download.button_title') }}
+        </x-pdf.download-button>
+      @endslot
+    @endenv
   @endcomponent
 
   {{-- Content Tabs --}}

@@ -19,6 +19,9 @@ return [
   'deleted_at' => 'Eliminado el :date',
   'update' => 'Actualizar',
   'create' => 'Crear',
+  'cancel' => 'Cancelar',
+  'move_up' => 'Mover arriba',
+  'move_down' => 'Mover abajo',
   
   // Mensajes genéricos
   'back_to_list' => 'Volver al listado',
@@ -26,6 +29,7 @@ return [
   'reorder' => 'Reordenar',
   'drag_to_reorder' => 'Arrastra para reordenar',
   'select_option' => 'Selecciona una opción',
+  'no_records' => 'No se encontraron registros',
   
   // Filtros
   'filters' => [
@@ -56,4 +60,13 @@ return [
   // Mensajes de éxito específicos
   'order_saved' => 'Orden guardado correctamente',
   'status_toggled' => 'Estado actualizado correctamente',
+
+  // Acciones
+  'view' => 'Ver',
+  'edit' => 'Editar',
+  'delete' => 'Eliminar',
+  'restore' => 'Restaurar',
+  'publish' => 'Publicar',
+  'unpublish' => 'Despublicar',
+  'confirm_delete' => '¿Estás seguro de que deseas eliminar este elemento?',
 ];

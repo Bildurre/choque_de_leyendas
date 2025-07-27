@@ -19,6 +19,9 @@ return [
   'deleted_at' => 'Deleted on :date',
   'update' => 'Update',
   'create' => 'Create',
+  'cancel' => 'Cancel',
+  'move_up' => 'Move up',
+  'move_down' => 'Move down',
   
   // Generic messages
   'back_to_list' => 'Back to list',
@@ -26,6 +29,7 @@ return [
   'reorder' => 'Reorder',
   'drag_to_reorder' => 'Drag to reorder',
   'select_option' => 'Select an option',
+  'no_records' => 'No records found',
   
   // Filters
   'filters' => [
@@ -56,4 +60,13 @@ return [
   // Specific success messages
   'order_saved' => 'Order saved successfully',
   'status_toggled' => 'Status updated successfully',
+
+  // Actions
+  'view' => 'View',
+  'edit' => 'Edit',
+  'delete' => 'Delete',
+  'restore' => 'Restore',
+  'publish' => 'Publish',
+  'unpublish' => 'Unpublish',
+  'confirm_delete' => 'Are you sure you want to delete this item?',
 ];

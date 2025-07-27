@@ -21,7 +21,7 @@
       'type' => 'header',
       'title' => $titleTranslations,
       'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
+      'background_color' => 'theme-border',
       'settings' => [
         'text_alignment' => 'left'
       ]
@@ -69,7 +69,7 @@
       'title' => ['es' => 'Conoce los componentes', 'en' => 'Know the Components'],
       'image' => null,
       'subtitle' => ['es' => 'Descubre cada elemento que da vida al juego: héroes, cartas de acción, contadores de beneficio y perjuicio y el sistema de dados de acción', 'en' => 'Discover every element that brings the game to life: heroes, action cards, boon and bane counters and the action dice system'],
-      'background_color' => 'theme-card',
+      'background_color' => 'theme-border',
       'content' => [
         'en' => [
           'button_text' => 'Explore Components',

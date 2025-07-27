@@ -21,7 +21,7 @@
       'type' => 'header',
       'title' => $titleTranslations,
       'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
+      'background_color' => 'theme-border',
       'settings' => [
         'text_alignment' => 'left'
       ]
@@ -69,7 +69,7 @@
       'title' => ['es' => 'Las reglas del juego', 'en' => 'Game Rules'],
       'image' => null,
       'subtitle' => ['es' => 'Aprende los fundamentos del combate en Alanda: Choque de Leyendas, desde la preparación hasta la victoria', 'en' => 'Learn the fundamentals of combat in Alanda: Clash of Legends, from preparation to victory'],
-      'background_color' => 'theme-card',
+      'background_color' => 'theme-border',
       'content' => [
         'en' => [
           'button_text' => 'Read Rules',
@@ -96,7 +96,7 @@
       'type' => 'relateds',
       'title' => null,
       'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
-      'background_color' => 'theme-card',
+      'background_color' => 'none',
       'content' => [
         'en' => [
           'button_text' => 'View all Heroes',

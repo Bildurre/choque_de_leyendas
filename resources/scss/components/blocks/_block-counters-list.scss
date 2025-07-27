@@ -63,31 +63,3 @@
     }
   }
 }
-
-
-.block.block--counters-list {
-  background-color: transparent;
-}
-
-.block.block--counters-list {
-  // Solid background colors
-  &[data-background="red"] { .counter-list__item { background-color: var(--color-block-bg-red); }}
-  &[data-background="orange"] { .counter-list__item { background-color: var(--color-block-bg-orange); }}
-  &[data-background="lime"] { .counter-list__item { background-color: var(--color-block-bg-lime); }}
-  &[data-background="green"] { .counter-list__item { background-color: var(--color-block-bg-green); }}
-  &[data-background="teal"] { .counter-list__item { background-color: var(--color-block-bg-teal); }}
-  &[data-background="cyan"] { .counter-list__item { background-color: var(--color-block-bg-cyan); }}
-  &[data-background="blue"] { .counter-list__item { background-color: var(--color-block-bg-blue); }}
-  &[data-background="purple"] { .counter-list__item { background-color: var(--color-block-bg-purple); }}
-  &[data-background="magenta"] { .counter-list__item { background-color: var(--color-block-bg-magenta); }}
-  
-  // Accent colors
-  &[data-background="accent-primary"] { .counter-list__item { background-color: var(--random-accent-color-bg-light); }}
-  &[data-background="accent-secondary"] { .counter-list__item { background-color: var(--random-accent-color-secondary-bg-light); }}
-  &[data-background="accent-tertiary"] { .counter-list__item { background-color: var(--random-accent-color-tertiary-bg-light); }}
-  
-  // Theme colors
-  &[data-background="theme-card"] { .counter-list__item { background-color: var(--color-theme-card-bg); }}
-  &[data-background="theme-border"] { .counter-list__item { background-color: var(--color-theme-border-bg); }}
-  &[data-background="theme-header"] { .counter-list__item { background-color: var(--color-theme-header-bg); }}
-}

@@ -13,54 +13,106 @@ export default function initReorderableLists() {
   let initialOrder = [];
   let initialPositions = [];
   
-  // Obtener todos los elementos reordenables
+  // Get all reorderable items
   const reorderableItems = container.children;
   
-  // Guardar el orden inicial y las posiciones
+  // Save initial order and positions
   initialOrder = Array.from(reorderableItems)
     .map(item => item.dataset[toCamelCase(idField)]);
   
-  // Guardar las posiciones iniciales para poder restaurarlas
+  // Save initial positions to restore if needed
   initialPositions = saveElementPositions(reorderableItems);
+  
+  // Add arrow buttons functionality
+  addArrowButtonsListeners();
   
   const sortable = Sortable.create(container, {
     animation: 150,
     ghostClass: 'entity-list-card--ghost',
     chosenClass: 'entity-list-card--chosen',
     dragClass: 'entity-list-card--drag',
-    handle: '.entity-list-card__header', // Usar el encabezado como selector para arrastrar
+    handle: '.entity-list-card__handle', // Changed to use specific handle
     filter: '.action-button, button, a, input, textarea',
     preventOnFilter: true,
     onEnd: function() {
-      // Comprobar si el orden ha cambiado
-      const currentOrder = Array.from(reorderableItems)
-        .map(item => item.dataset[toCamelCase(idField)]);
-        
-      // Compara si el orden actual es diferente del inicial
-      orderChanged = !arraysEqual(initialOrder, currentOrder);
-      
-      // Mostrar u ocultar los botones de reordenamiento según corresponda
-      toggleReorderButtons(orderChanged);
+      checkOrderChanged();
     }
   });
   
-  // Inicialmente ocultar los botones
+  // Initially hide buttons
   if (reorderButtons) {
     toggleReorderButtons(false);
     
-    // Agregar evento al botón de guardar
+    // Add event to save button
     if (saveOrderButton) {
       saveOrderButton.addEventListener('click', function() {
         updateItemsOrder();
       });
     }
     
-    // Agregar evento al botón de cancelar
+    // Add event to cancel button
     if (cancelOrderButton) {
       cancelOrderButton.addEventListener('click', function() {
         cancelReorder();
       });
     }
+  }
+  
+  function addArrowButtonsListeners() {
+    container.addEventListener('click', function(e) {
+      const upButton = e.target.closest('.entity-list-card__move-up');
+      const downButton = e.target.closest('.entity-list-card__move-down');
+      
+      if (upButton) {
+        e.preventDefault();
+        moveItem(upButton.closest('.entity-list-card'), 'up');
+      } else if (downButton) {
+        e.preventDefault();
+        moveItem(downButton.closest('.entity-list-card'), 'down');
+      }
+    });
+  }
+  
+  function moveItem(item, direction) {
+    const sibling = direction === 'up' 
+      ? item.previousElementSibling 
+      : item.nextElementSibling;
+    
+    if (!sibling) return;
+    
+    if (direction === 'up') {
+      container.insertBefore(item, sibling);
+    } else {
+      container.insertBefore(sibling, item);
+    }
+    
+    checkOrderChanged();
+    updateArrowButtons();
+  }
+  
+  function updateArrowButtons() {
+    const items = Array.from(container.children);
+    
+    items.forEach((item, index) => {
+      const upButton = item.querySelector('.entity-list-card__move-up');
+      const downButton = item.querySelector('.entity-list-card__move-down');
+      
+      if (upButton) {
+        upButton.disabled = index === 0;
+      }
+      
+      if (downButton) {
+        downButton.disabled = index === items.length - 1;
+      }
+    });
+  }
+  
+  function checkOrderChanged() {
+    const currentOrder = Array.from(reorderableItems)
+      .map(item => item.dataset[toCamelCase(idField)]);
+      
+    orderChanged = !arraysEqual(initialOrder, currentOrder);
+    toggleReorderButtons(orderChanged);
   }
   
   function toggleReorderButtons(show) {
@@ -86,10 +138,13 @@ export default function initReorderableLists() {
   }
   
   function cancelReorder() {
-    // Restaurar el orden original
+    // Restore original order
     restoreOriginalOrder(reorderableItems, initialPositions);
     
-    // Ocultar los botones
+    // Update arrow buttons state
+    updateArrowButtons();
+    
+    // Hide buttons
     toggleReorderButtons(false);
   }
   
@@ -101,10 +156,10 @@ export default function initReorderableLists() {
   }
   
   function restoreOriginalOrder(elements, originalPositions) {
-    // Crear una copia ordenada según las posiciones originales
+    // Create a sorted copy according to original positions
     const orderedElements = Array.from(elements);
     
-    // Ordenar según las posiciones originales
+    // Sort by original positions
     orderedElements.sort((a, b) => {
       const aId = a.dataset[toCamelCase(idField)];
       const bId = b.dataset[toCamelCase(idField)];
@@ -115,7 +170,7 @@ export default function initReorderableLists() {
       return aPos - bPos;
     });
     
-    // Reinsertarlos en el orden correcto
+    // Reinsert in correct order
     const parent = elements[0].parentNode;
     orderedElements.forEach(element => {
       parent.appendChild(element);
@@ -130,8 +185,11 @@ export default function initReorderableLists() {
     return true;
   }
   
-  // Función auxiliar para convertir kebab-case o snake_case a camelCase
+  // Helper function to convert kebab-case or snake_case to camelCase
   function toCamelCase(str) {
     return str.replace(/[-_]([a-z])/g, (g) => g[1].toUpperCase());
   }
+  
+  // Initialize arrow buttons state
+  updateArrowButtons();
 }

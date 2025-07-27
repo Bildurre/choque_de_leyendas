@@ -54,29 +54,3 @@
     }
   }
 }
-
-// Background colors - aplicados al info-block dentro de cada item
-.block.block--game-modes {
-  background-color: transparent;
-
-  // Solid background colors
-  &[data-background="red"] { .info-block { background-color: var(--color-block-bg-red); }}
-  &[data-background="orange"] { .info-block { background-color: var(--color-block-bg-orange); }}
-  &[data-background="lime"] { .info-block { background-color: var(--color-block-bg-lime); }}
-  &[data-background="green"] { .info-block { background-color: var(--color-block-bg-green); }}
-  &[data-background="teal"] { .info-block { background-color: var(--color-block-bg-teal); }}
-  &[data-background="cyan"] { .info-block { background-color: var(--color-block-bg-cyan); }}
-  &[data-background="blue"] { .info-block { background-color: var(--color-block-bg-blue); }}
-  &[data-background="purple"] { .info-block { background-color: var(--color-block-bg-purple); }}
-  &[data-background="magenta"] { .info-block { background-color: var(--color-block-bg-magenta); }}
-  
-  // Accent colors
-  &[data-background="accent-primary"] { .info-block { background-color: var(--random-accent-color-bg-light); }}
-  &[data-background="accent-secondary"] { .info-block { background-color: var(--random-accent-color-secondary-bg-light); }}
-  &[data-background="accent-tertiary"] { .info-block { background-color: var(--random-accent-color-tertiary-bg-light); }}
-  
-  // Theme colors
-  &[data-background="theme-card"] { .info-block { background-color: var(--color-theme-card-bg); }}
-  &[data-background="theme-border"] { .info-block { background-color: var(--color-theme-border-bg); }}
-  &[data-background="theme-header"] { .info-block { background-color: var(--color-theme-header-bg); }}
-}

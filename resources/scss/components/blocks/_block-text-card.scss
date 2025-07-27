@@ -9,6 +9,7 @@
   }
 
   .text-card-block__card {
+    background-color: var(--color-bg-transparent-semi);
     position: relative;
     box-shadow: 0 0 10px 1px var(--random-accent-color);
     border-radius: $spacing-sm;
@@ -80,31 +81,4 @@
       }
     }
   }
-}
-
-.block.block--text-card {
-  background-color: transparent;
-}
-
-.block.block--text-card {
-  // Solid background colors
-  &[data-background="red"] { .text-card-block__card{ background-color: var(--color-block-bg-red); }}
-  &[data-background="orange"] { .text-card-block__card { background-color: var(--color-block-bg-orange); }}
-  &[data-background="lime"] { .text-card-block__card { background-color: var(--color-block-bg-lime); }}
-  &[data-background="green"] { .text-card-block__card { background-color: var(--color-block-bg-green); }}
-  &[data-background="teal"] { .text-card-block__card { background-color: var(--color-block-bg-teal); }}
-  &[data-background="cyan"] { .text-card-block__card { background-color: var(--color-block-bg-cyan); }}
-  &[data-background="blue"] { .text-card-block__card { background-color: var(--color-block-bg-blue); }}
-  &[data-background="purple"] { .text-card-block__card { background-color: var(--color-block-bg-purple); }}
-  &[data-background="magenta"] { .text-card-block__card { background-color: var(--color-block-bg-magenta); }}
-  
-  // Accent colors
-  &[data-background="accent-primary"] { .text-card-block__card { background-color: var(--random-accent-color-bg-light); }}
-  &[data-background="accent-secondary"] { .text-card-block__card { background-color: var(--random-accent-color-secondary-bg-light); }}
-  &[data-background="accent-tertiary"] { .text-card-block__card { background-color: var(--random-accent-color-tertiary-bg-light); }}
-  
-  // Theme colors
-  &[data-background="theme-card"] { .text-card-block__card { background-color: var(--color-theme-card-bg); }}
-  &[data-background="theme-border"] { .text-card-block__card { background-color: var(--color-theme-border-bg); }}
-  &[data-background="theme-header"] { .text-card-block__card { background-color: var(--color-theme-header-bg); }}
 }

@@ -2,7 +2,7 @@
 
 // Base block styles
 .block {
-  padding: $spacing-lg 0;
+  padding: $spacing-xl 0;
   
   @include responsive(tablet) {
     padding: $spacing-xxl 0;

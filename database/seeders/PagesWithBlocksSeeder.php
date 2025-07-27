@@ -21,7 +21,7 @@ class PagesWithBlocksSeeder extends Seeder
     $blocksJson = File::get(database_path('data/blocks.json'));
     $blocksData = json_decode($blocksJson, true);
     
-    // Store created pages for parent reference
+    // Store created pages for reference
     $createdPages = [];
     
     // Create pages
@@ -55,7 +55,10 @@ class PagesWithBlocksSeeder extends Seeder
       $createdPages[$index] = $page;
     }
     
-    // Create blocks
+    // Store blocks by page and order for parent-child relationships
+    $blocksByPageAndOrder = [];
+    
+    // First pass: Create all blocks without parent_id
     foreach ($blocksData as $blockData) {
       // Get the page reference
       if (isset($blockData['page_reference']) && isset($createdPages[$blockData['page_reference']])) {
@@ -68,11 +71,42 @@ class PagesWithBlocksSeeder extends Seeder
         $block->content = $blockData['content'] ?? null;
         $block->order = $blockData['order'] ?? 0;
         $block->is_printable = $blockData['is_printable'] ?? false;
+        $block->is_indexable = $blockData['is_indexable'] ?? true;
         $block->background_color = $blockData['background_color'] ?? 'none';
         $block->settings = $blockData['settings'] ?? null;
         $block->image = $blockData['image'] ?? null;
+        $block->parent_id = null; // Set to null initially
         
         $block->save();
+        
+        // Store block reference by page_id and order
+        if (!isset($blocksByPageAndOrder[$block->page_id])) {
+          $blocksByPageAndOrder[$block->page_id] = [];
+        }
+        $blocksByPageAndOrder[$block->page_id][$block->order] = $block;
+      }
+    }
+    
+    // Second pass: Update parent_id for blocks with block_reference
+    foreach ($blocksData as $blockData) {
+      if (isset($blockData['block_reference']) && isset($blockData['page_reference'])) {
+        $pageId = $createdPages[$blockData['page_reference']]->id;
+        $currentBlockOrder = $blockData['order'] ?? 0;
+        $parentBlockOrder = $blockData['block_reference'];
+        
+        // Find the current block
+        if (isset($blocksByPageAndOrder[$pageId][$currentBlockOrder])) {
+          $currentBlock = $blocksByPageAndOrder[$pageId][$currentBlockOrder];
+          
+          // Find the parent block
+          if (isset($blocksByPageAndOrder[$pageId][$parentBlockOrder])) {
+            $parentBlock = $blocksByPageAndOrder[$pageId][$parentBlockOrder];
+            
+            // Update parent_id
+            $currentBlock->parent_id = $parentBlock->id;
+            $currentBlock->save();
+          }
+        }
       }
     }
     

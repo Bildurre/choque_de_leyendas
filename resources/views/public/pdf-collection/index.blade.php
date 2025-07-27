@@ -22,7 +22,7 @@
       'type' => 'header',
       'title' => $titleTranslations,
       'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
+      'background_color' => 'theme-border',
       'settings' => [
         'text_alignment' => 'left'
       ]

@@ -28,23 +28,25 @@
         'type' => 'header',
         'title' => $titleTranslations,
         'subtitle' => $subtitleTranslations,
-        'background_color' => 'none',
+        'background_color' => 'theme-border',
         'settings' => [
-          'text_alignment' => 'justify'
+          'text_alignment' => 'left'
         ]
       ]);
     @endphp
 
     @component('content.blocks.header', ['block' => $headerBlock])
-      @slot('actions')
-        <x-pdf.add-button
-          data-entity-type="card"
-          data-entity-id="{{ $card->id }}"
-          type="outlined"
-        >
-          {{ __('pdf.collection.add_button_title') }}
-        </x-pdf.add-button>
-      @endslot
+      @env('local')
+        @slot('actions')
+          <x-pdf.add-button
+            data-entity-type="card"
+            data-entity-id="{{ $card->id }}"
+            type="outlined"
+          >
+            {{ __('pdf.collection.add_button_title') }}
+          </x-pdf.add-button>
+        @endslot
+      @endenv
     @endcomponent
 
     {{-- Card Details Section --}}

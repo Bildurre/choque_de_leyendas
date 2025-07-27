@@ -25,6 +25,7 @@
       :edit-route="route('admin.pages.blocks.edit', [$page, $block])"
       :delete-route="route('admin.pages.blocks.destroy', [$page, $block])"
       :confirm-message="__('pages.blocks.confirm_delete')"
+      :is-reorderable="true"
       data-block-id="{{ $block->id }}"
     >
       <x-slot:badges>

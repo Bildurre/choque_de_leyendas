@@ -20,7 +20,7 @@
       'type' => 'header',
       'title' => $titleTranslations,
       'subtitle' => $subtitleTranslations,
-      'background_color' => 'none',
+      'background_color' => 'theme-border',
       'settings' => [
         'text_alignment' => 'left'
       ]
@@ -90,7 +90,7 @@
       'title' => ['es' => 'Modos de Juego', 'en' => 'Game Modes'],
       'image' => null,
       'subtitle' => ['es' => 'Explora los distintos modos de juego y descubre nuevas formas de vivir la experiencia de Alanda: Choque de Leyendas', 'en' => 'Explore the different game modes and discover new ways to experience Alanda: Clash of Legends'],
-      'background_color' => 'theme-card',
+      'background_color' => 'theme-border',
       'content' => [
         'en' => [
           'button_text' => 'Ver Modos de Juego',
@@ -117,7 +117,7 @@
       'type' => 'relateds',
       'title' => null,
       'subtitle' => ['es' => 'Conoce a los héroes del juego', 'en' => 'Meet the game heroes'],
-      'background_color' => 'theme-card',
+      'background_color' => 'none',
       'content' => [
         'en' => [
           'button_text' => __('View all Heroes'),

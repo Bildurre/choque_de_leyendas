@@ -78,7 +78,7 @@
   gap: $spacing-xs;
 
   @include responsive(small) {
-    flex-direction: row;;
+    flex-direction: row;
   }
 
   .btn {
