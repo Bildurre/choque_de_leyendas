@@ -2,6 +2,8 @@
 
 .entity-selector {
   width: 100%;
+  container-type: inline-size;
+  container-name: entity-list;
   
   &__controls {
     margin-bottom: $spacing-md;
@@ -48,9 +50,8 @@
     grid-template-columns: 1fr;
     gap: $spacing-md;
     
-    @include responsive(tablet) {
-      grid-template-columns: 1fr 1fr; // Ambas cajas con la misma anchura
-      gap: $spacing-lg;
+    @include container-responsive(entity-list, mobile) {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   
@@ -158,8 +159,7 @@
   
   &__header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-start;
     margin-bottom: $spacing-xs;
   }
   
@@ -169,10 +169,12 @@
   }
   
   &__type {
-    font-size: 0.875rem;
+    color: var(--random-accent-color);
+    font-size: 0.75rem;
     padding: $spacing-xs $spacing-sm;
     border-radius: $border-radius-sm;
     background-color: var(--color-bg-secondary);
+    margin-right: $spacing-lg;
   }
   
   &__details {
@@ -241,14 +243,7 @@
       box-shadow: 0 0 0 1px var(--random-accent-color-bg);
     }
     
-    &.is-selected {
-      background-color: var(--random-accent-color-bg);
-      border-color: var(--random-accent-color);
-      
-      &:hover {
-        background-color: var(--random-accent-color-bg-semi);
-      }
-      
+    &.is-selected {      
       &:not(.in-selected-list) {
         display: none; // Ocultar de la lista original si está seleccionado
       }
@@ -280,26 +275,24 @@
       background-color: var(--color-danger-bg);
     }
   }
-  
-  // Modificaciones para diferentes tipos de entidades
-  &[data-entity-type="hero"] {
-    .entity-selector__type {
-      color: var(--color-primary);
-      background-color: var(--color-primary-bg);
+
+
+  .card-details {
+    &__cost {
+      .icon-dice {
+        height: 1rem;
+        width: 1rem;
+      }
     }
-  }
-  
-  &[data-entity-type="card"] {
-    .entity-selector__type {
-      color: var(--color-warning);
-      background-color: var(--color-warning-bg);
+    &__meta {
+      display: inline-block;
+      color: var(--color-text-secondary);
+      font-size: .75rem;
+      margin-bottom: $spacing-xs;
     }
-  }
-  
-  &[data-entity-type="ability"] {
-    .entity-selector__type {
-      color: var(--color-info);
-      background-color: var(--color-info-bg);
+
+    &__effect {
+      font-size: .8125rem;
     }
   }
 }

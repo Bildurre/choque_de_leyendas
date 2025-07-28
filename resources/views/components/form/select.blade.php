@@ -9,7 +9,7 @@
   'size' => null
 ])
 
-<div class="form-field">
+<div class="form-field" id="{{ 'form-field--'.$name }}">
   @if($label)
     <x-form.label :for="$name" :required="$required">{{ $label }}</x-form.label>
   @endif

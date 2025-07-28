@@ -5,7 +5,7 @@
   'value' => '1'
 ])
 
-<div class="form-checkbox">
+<div class="form-checkbox" id="{{ 'form-field--'.$name }}">
   <input 
     type="checkbox"
     name="{{ $name }}"

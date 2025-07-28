@@ -168,5 +168,12 @@ return [
     'cta_button_link' => 'Link',
     'text_card_text' => 'Text',
     'text_card_label' => 'Label',
+    'fields' => [
+      'common_settings' => 'Block Settings',
+      'titles' => 'Titles',
+      'block_settings' => ':type Block Settings',
+      'block_fields' =>':type Block Fields',
+      'image_fields' => 'Image Settings'
+    ]
   ],
 ];

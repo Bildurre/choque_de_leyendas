@@ -67,6 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initConditionalField('card_type_id-filter', 'equipment_type_id-filter', '1');
   initConditionalField('card_type_id-filter', ['attack_range_id-filter', 'attack_subtype_id-filter', 'area-filter'], ['4', '5', '6', '7']);
+
+  initConditionalField('card_type_id', 'form-field--equipment_type_id', '1')
+  initConditionalField('equipment_type_id', ['form-field--hands', 'form-field--hero_ability_id'], ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
+  initConditionalField('card_type_id', ['form-field--attack_range_id', 'form-field--attack_subtype_id', 'form-field--area'], ['4', '5', '6', '7']);
+
+
   
   // Inicializar componentes específicos si existen en la página
   const header = document.querySelector('.public-header');

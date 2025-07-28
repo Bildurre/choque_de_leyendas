@@ -29,7 +29,6 @@
       
       <!-- Vista previa a la derecha -->
       <div class="cost-input__preview">
-        <div class="cost-input__preview-label">{{ __('game.cost.preview') }}:</div>
         <div class="cost-input__dice-container"></div>
       </div>
     </div>
@@ -54,10 +53,6 @@
         </svg>
       </button>
     </div>
-    
-    @if($help)
-      <div class="form-help">{{ $help }}</div>
-    @endif
   </div>
   
   <x-form.error :name="$name" />

@@ -15,12 +15,12 @@
 
 @php
   // Traducir los textos según el tipo de entidad
-  $entityTypePlural = __("form.entity_selector.{$entityType}s");
-  $searchPlaceholder = __("form.entity_selector.search_{$entityType}s");
-  $availableLabel = __("form.entity_selector.available_{$entityType}s");
-  $selectedLabel = __("form.entity_selector.selected_{$entityType}s");
-  $noEntitiesSelected = __("form.entity_selector.no_{$entityType}s_selected");
-  $noEntitiesAvailable = __("form.entity_selector.no_{$entityType}s_available");
+  $entityTypePlural = __("forms.entity_selector.{$entityType}s");
+  $searchPlaceholder = __("forms.entity_selector.search_{$entityType}s");
+  $availableLabel = __("forms.entity_selector.available_{$entityType}s");
+  $selectedLabel = __("forms.entity_selector.selected_{$entityType}s");
+  $noEntitiesSelected = __("forms.entity_selector.no_{$entityType}s_selected");
+  $noEntitiesAvailable = __("forms.entity_selector.no_{$entityType}s_available");
 @endphp
 
 <div class="form-field">
@@ -133,7 +133,7 @@
                 
                 @if($showCopies)
                   <div class="entity-selector__copies">
-                    <label class="entity-selector__copies-label">{{ __('form.entity_selector.copies') }}:</label>
+                    <label class="entity-selector__copies-label">{{ __('forms.entity_selector.copies') }}:</label>
                     <div class="entity-selector__copies-controls">
                       <button type="button" class="entity-selector__copies-btn entity-selector__copies-btn--decrease" {{ $copies <= 1 ? 'disabled' : '' }} data-max-copies="{{ $maxCopies }}">-</button>
                       {{-- Input sin name para que no se envíe directamente --}}

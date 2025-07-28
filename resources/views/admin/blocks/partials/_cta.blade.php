@@ -12,23 +12,26 @@
   }
 @endphp
 
-<x-form.multilingual-wysiwyg
-  name="content[text]"
-  :label="__('pages.blocks.cta_text')"
-  :values="$textValues"
-  type="textarea"
-/>
+<x-form.fieldset :legend="__('pages.blocks.fields.block_fields', ['type' => $blockName])">
+  <x-form.multilingual-wysiwyg
+    name="content[text]"
+    :label="__('pages.blocks.cta_text')"
+    :values="$textValues"
+    type="textarea"
+  />
+  <div>
+    <x-form.multilingual-input
+      name="content[button_text]"
+      :label="__('pages.blocks.cta_button_text')"
+      :values="$buttonTextValues"
+      required
+    />
 
-<x-form.multilingual-input
-  name="content[button_text]"
-  :label="__('pages.blocks.cta_button_text')"
-  :values="$buttonTextValues"
-  required
-/>
-
-<x-form.multilingual-input
-  name="content[button_link]"
-  :label="__('pages.blocks.cta_button_link')"
-  :values="$buttonLinkValues"
-  required
-/>
+    <x-form.multilingual-input
+      name="content[button_link]"
+      :label="__('pages.blocks.cta_button_link')"
+      :values="$buttonLinkValues"
+      required
+  />
+  </div>
+</x-form.fieldset>

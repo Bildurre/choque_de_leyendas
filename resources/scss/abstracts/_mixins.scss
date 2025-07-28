@@ -24,6 +24,28 @@
   }
 }
 
+// Mixin para container queries con nombre del contenedor
+@mixin container-responsive($container-name, $breakpoint) {
+  @if $breakpoint == small {
+    @container #{$container-name} (min-width: #{$breakpoint-small}) { @content; }
+  }
+  @else if $breakpoint == mobile {
+    @container #{$container-name} (min-width: #{$breakpoint-mobile}) { @content; }
+  }
+  @else if $breakpoint == tablet {
+    @container #{$container-name} (min-width: #{$breakpoint-tablet}) { @content; }
+  }
+  @else if $breakpoint == desktop {
+    @container #{$container-name} (min-width: #{$breakpoint-desktop}) { @content; }
+  }
+  @else if $breakpoint == wide {
+    @container #{$container-name} (min-width: #{$breakpoint-wide}) { @content; }
+  }
+  @else if $breakpoint == ultrawide {
+    @container #{$container-name} (min-width: #{$breakpoint-ultrawide}) { @content; }
+  }
+}
+
 @mixin text-stroke($width: 2px, $color: #000) {
  -webkit-text-stroke: $width $color;
  text-stroke: $width $color;

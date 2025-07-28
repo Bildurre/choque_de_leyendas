@@ -31,12 +31,6 @@
     min-width: 8rem; // Ancho mínimo para que se vea bien
   }
   
-  &__preview-label {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    white-space: nowrap;
-  }
-  
   &__dice-container {
     display: flex;
     gap: $spacing-xs;

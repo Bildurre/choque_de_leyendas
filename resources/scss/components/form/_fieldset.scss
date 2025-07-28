@@ -1,0 +1,32 @@
+@use '../../abstracts/all' as *;
+
+.form-fieldset {
+  border: 2px solid var(--color-card-border);
+  padding: $spacing-md $spacing-sm $spacing-sm;
+  margin-bottom: $spacing-lg;
+
+  legend {
+    padding: 0 $spacing-sm;
+    color: $color-text-muted;
+  }
+
+  .form-grid {
+    margin-bottom: 0;
+  }
+  
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+
+  margin-bottom: $spacing-lg;
+  
+    @include container-responsive(form-card, mobile) {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+}

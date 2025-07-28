@@ -45,57 +45,37 @@
 
     grid-template-columns: 1fr;
     gap: $spacing-md;
+  
 
-    // @include responsive(mobile) {
-    //   grid-template-columns: 1fr 1fr;
-    // }
-
-    // @include responsive(tablet) {
-    //   grid-template-columns: 1fr 1fr 1fr;
-    // }
-
-    // @include responsive(desktop) {
-    //   grid-template-columns: 1fr 1fr 1fr 1fr;
-    // }
-
-    @container entity-list (min-width: 480px) {
+    @include container-responsive(entity-list, mobile) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
-    @container entity-list (min-width: 768px) {
+    @include container-responsive(entity-list, tablet) {
       grid-template-columns: repeat(3, 1fr);
     }
-    
-    @container entity-list (min-width: 1024px) {
+    @include container-responsive(entity-list, desktop) {
       grid-template-columns: repeat(4, 1fr);
-    }
-    
-    @container entity-list (min-width: 1280px) {
-      grid-template-columns: repeat(5, 1fr);
     }
 
     &--wide {
-    @container entity-list (min-width: 480px) {
-      grid-template-columns: 1fr;
-    }
-    
-    @container entity-list (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @container entity-list (min-width: 1280px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-    &--reorderable {
-      display: grid;
-      grid-template-columns: 1fr; // Forzar una columna para reordenamiento
-      gap: $spacing-md;
+      @include container-responsive(entity-list, small) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include container-responsive(entity-list, mobile) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @include container-responsive(entity-list, tablet) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      @include container-responsive(entity-list, desktop) {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
 
-    // &--wide {
-    //   grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    // &--reorderable {
+    //   display: grid;
+    //   grid-template-columns: 1fr;
+    //   gap: $spacing-md;
     // }
   }
 

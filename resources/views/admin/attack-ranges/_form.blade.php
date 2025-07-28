@@ -13,13 +13,11 @@
   @endif
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.attack-ranges.index')">
-    <div class="form-grid">
-      <x-form.multilingual-input
-        name="name"
-        :label="__('entities.attack_ranges.name')"
-        :values="isset($attackRange) ? $attackRange->getTranslations('name') : []"
-        required
-      />
-    </div>
+    <x-form.multilingual-input
+      name="name"
+      :label="__('entities.attack_ranges.name')"
+      :values="isset($attackRange) ? $attackRange->getTranslations('name') : []"
+      required
+    />
   </x-form.card>
 </form>

@@ -14,26 +14,30 @@
   @endif
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.hero-classes.index')">    
-    <x-form.multilingual-input
-      name="name"
-      :label="__('entities.hero_classes.name')"
-      :values="isset($heroClass) ? $heroClass->getTranslations('name') : []"
-      required
-    />
+    <div class="form-grid">
+      <div>
+        <x-form.multilingual-input
+          name="name"
+          :label="__('entities.hero_classes.name')"
+          :values="isset($heroClass) ? $heroClass->getTranslations('name') : []"
+          required
+        />
+        
+        <x-form.select
+          name="hero_superclass_id"
+          :label="__('entities.hero_superclasses.singular')"
+          :options="$superclassOptions"
+          :selected="old('hero_superclass_id', isset($heroClass) ? $heroClass->hero_superclass_id : '')"
+          :placeholder="__('admin.select_option')"
+          required
+        />
+      </div>
     
-    <x-form.select
-      name="hero_superclass_id"
-      :label="__('entities.hero_superclasses.singular')"
-      :options="$superclassOptions"
-      :selected="old('hero_superclass_id', isset($heroClass) ? $heroClass->hero_superclass_id : '')"
-      :placeholder="__('admin.select_option')"
-      required
-    />
-    
-    <x-form.multilingual-wysiwyg
-      name="passive"
-      :label="__('entities.hero_classes.passive')"
-      :values="isset($heroClass) ? $heroClass->getTranslations('passive') : []"
-    />
+      <x-form.multilingual-wysiwyg
+        name="passive"
+        :label="__('entities.hero_classes.passive')"
+        :values="isset($heroClass) ? $heroClass->getTranslations('passive') : []"
+      />
+    </div>
   </x-form.card>
 </form>

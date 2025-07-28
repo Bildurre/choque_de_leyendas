@@ -3,60 +3,71 @@ export default function initFactionDeckForm() {
   const form = document.querySelector('#faction-deck-form');
   if (!form) return;
   
-  // Obtener los elementos relevantes
+  // Get relevant elements
   const gameModeId = form.querySelector('input[name="game_mode_id"]');
   const deckConfigElement = form.querySelector('#deck-config-data');
   const factionSelect = form.querySelector('select[name="faction_id"]');
   
   if (!gameModeId || !deckConfigElement) return;
   
-  // Leer la configuración del elemento de datos
+  // Read configuration from data element
   const deckConfig = JSON.parse(deckConfigElement.textContent);
   
-  // Variables para contadores
+  // Variables for counters
   let totalCards = 0;
   let totalHeroes = 0;
   
-  // Elementos de la interfaz
-  const statsContainer = form.querySelector('.deck-stats');
+  // Interface elements
   const cardSelector = form.querySelector('.entity-selector[data-entity-type="card"]');
   const heroSelector = form.querySelector('.entity-selector[data-entity-type="hero"]');
   
-  // Escuchar eventos de cambios en selección de cartas
+  // Find fieldset legends to update counters
+  const cardFieldset = cardSelector?.closest('fieldset');
+  const heroFieldset = heroSelector?.closest('fieldset');
+  const cardLegend = cardFieldset?.querySelector('legend');
+  const heroLegend = heroFieldset?.querySelector('legend');
+  
+  // Store original legend texts
+  const originalCardLegendText = cardLegend?.textContent.replace(/\s*\d+\/.*$/, '') || '';
+  const originalHeroLegendText = heroLegend?.textContent.replace(/\s*\d+\/.*$/, '') || '';
+  
+  // Listen for card selection change events
   if (cardSelector) {
-    // Inicializar contador de cartas al cargar
+    // Initialize card counter on load
     totalCards = getInitialCount(cardSelector);
+    updateCardCounter();
     
     cardSelector.addEventListener('entity-selection-changed', function(e) {
-      // Actualizar contador con el total proporcionado en el evento
+      // Update counter with total provided in event
       totalCards = e.detail.totalCount;
-      updateStats();
+      updateCardCounter();
     });
     
     cardSelector.addEventListener('entity-copies-changed', function(e) {
       totalCards = e.detail.totalCount;
-      updateStats();
+      updateCardCounter();
     });
   }
   
-  // Escuchar eventos de cambios en selección de héroes
+  // Listen for hero selection change events
   if (heroSelector) {
-    // Inicializar contador de héroes al cargar
+    // Initialize hero counter on load
     totalHeroes = getInitialCount(heroSelector);
+    updateHeroCounter();
     
     heroSelector.addEventListener('entity-selection-changed', function(e) {
-      // Actualizar contador con el total proporcionado en el evento
+      // Update counter with total provided in event
       totalHeroes = e.detail.totalCount;
-      updateStats();
+      updateHeroCounter();
     });
     
     heroSelector.addEventListener('entity-copies-changed', function(e) {
       totalHeroes = e.detail.totalCount;
-      updateStats();
+      updateHeroCounter();
     });
   }
   
-  // Función para obtener el conteo inicial de entidades
+  // Function to get initial entity count
   function getInitialCount(selector) {
     const selectedCheckboxes = selector.querySelectorAll('.entity-selector__checkbox:checked');
     let count = 0;
@@ -75,13 +86,43 @@ export default function initFactionDeckForm() {
     return count;
   }
   
-  // Manejar cambio de facción
+  // Function to update card counter in legend
+  function updateCardCounter() {
+    if (!cardLegend) return;
+    
+    const counterText = ` ${totalCards}/${deckConfig.min_cards}-${deckConfig.max_cards}`;
+    cardLegend.textContent = originalCardLegendText + counterText;
+    
+    // Add visual validation classes
+    if (totalCards < deckConfig.min_cards || totalCards > deckConfig.max_cards) {
+      cardLegend.classList.add('legend--invalid');
+    } else {
+      cardLegend.classList.remove('legend--invalid');
+    }
+  }
+  
+  // Function to update hero counter in legend
+  function updateHeroCounter() {
+    if (!heroLegend) return;
+    
+    const counterText = ` ${totalHeroes}/${deckConfig.required_heroes}`;
+    heroLegend.textContent = originalHeroLegendText + counterText;
+    
+    // Add visual validation classes
+    if (deckConfig.required_heroes > 0 && totalHeroes !== parseInt(deckConfig.required_heroes)) {
+      heroLegend.classList.add('legend--invalid');
+    } else {
+      heroLegend.classList.remove('legend--invalid');
+    }
+  }
+  
+  // Handle faction change
   if (factionSelect) {
-    // Aplicar filtro inicial si hay una facción seleccionada
+    // Apply initial filter if faction is selected
     if (factionSelect.value) {
       filterEntitiesByFaction(factionSelect.value);
     } else {
-      // Si no hay facción seleccionada, ocultar todos los items
+      // If no faction selected, hide all items
       hideAllEntityItems();
     }
     
@@ -94,21 +135,20 @@ export default function initFactionDeckForm() {
         hideAllEntityItems();
       }
       
-      // Resetear selecciones y contadores
+      // Reset selections and counters
       resetSelections();
     });
   }
   
-  // Función para filtrar entidades por facción
+  // Function to filter entities by faction
   function filterEntitiesByFaction(factionId) {
-    // Convertir a número para comparación segura
+    // Convert to number for safe comparison
     const factionIdNum = parseInt(factionId, 10);
     
-    // Filtrar items de cartas
+    // Filter card items
     if (cardSelector) {
       const cardItems = cardSelector.querySelectorAll('.entity-selector__item:not(.in-selected-list)');
       cardItems.forEach(item => {
-        // Buscar el ID de facción en el atributo data o dentro del contenido
         const entityId = parseInt(item.getAttribute('data-entity-id'), 10);
         const card = findCardById(entityId);
         
@@ -120,7 +160,7 @@ export default function initFactionDeckForm() {
       });
     }
     
-    // Filtrar items de héroes
+    // Filter hero items
     if (heroSelector) {
       const heroItems = heroSelector.querySelectorAll('.entity-selector__item:not(.in-selected-list)');
       heroItems.forEach(item => {
@@ -135,33 +175,31 @@ export default function initFactionDeckForm() {
       });
     }
     
-    // Actualizar mensajes de vacío
+    // Update empty messages
     updateEmptyMessages();
   }
   
-  // Función para encontrar una carta por su ID
+  // Function to find a card by ID
   function findCardById(id) {
-    // Aquí necesitamos acceso a los datos de las cartas
-    // Podemos añadir un script con los datos en la vista
     return window.entityData?.cards?.find(card => card.id === id);
   }
   
-  // Función para encontrar un héroe por su ID
+  // Function to find a hero by ID
   function findHeroById(id) {
     return window.entityData?.heroes?.find(hero => hero.id === id);
   }
   
-  // Función para ocultar todos los items de entidades
+  // Function to hide all entity items
   function hideAllEntityItems() {
     document.querySelectorAll('.entity-selector[data-faction-filter="true"] .entity-selector__item:not(.in-selected-list)').forEach(item => {
       item.style.display = 'none';
     });
     
-    // Actualizar mensajes de vacío
+    // Update empty messages
     updateEmptyMessages();
   }
   
-  // Función para actualizar los mensajes de vacío
+  // Function to update empty messages
   function updateEmptyMessages() {
     document.querySelectorAll('.entity-selector[data-faction-filter="true"]').forEach(selector => {
       const visibleItems = selector.querySelectorAll('.entity-selector__item:not(.in-selected-list):not([style*="display: none"])');
@@ -175,15 +213,15 @@ export default function initFactionDeckForm() {
     });
   }
   
-  // Función para resetear las selecciones
+  // Function to reset selections
   function resetSelections() {
-    // Desmarcar todos los checkboxes y resetear copias
+    // Uncheck all checkboxes and reset copies
     document.querySelectorAll('.entity-selector__checkbox:checked').forEach(checkbox => {
       checkbox.checked = false;
       const item = checkbox.closest('.entity-selector__item');
       item.classList.remove('is-selected');
       
-      // Deshabilitar inputs de copias
+      // Disable copy inputs
       const copiesInput = item.querySelector('.entity-selector__copies-input');
       
       if (copiesInput) {
@@ -192,66 +230,31 @@ export default function initFactionDeckForm() {
       }
     });
     
-    // Limpiar los inputs ocultos generados
+    // Clear generated hidden inputs
     document.querySelectorAll('.entity-selector__form-inputs').forEach(container => {
       container.innerHTML = '';
     });
     
-    // Limpiar listas de seleccionados
+    // Clear selected lists
     document.querySelectorAll('.entity-selector__selected-list').forEach(list => {
       const placeholder = list.closest('.entity-selector').querySelector('.entity-selector__placeholder');
       list.querySelectorAll('.entity-selector__item.in-selected-list').forEach(item => item.remove());
       if (placeholder) placeholder.style.display = 'block';
     });
     
-    // Resetear contadores
+    // Reset counters
     totalCards = 0;
     totalHeroes = 0;
-    updateStats();
+    updateCardCounter();
+    updateHeroCounter();
   }
   
-  // Inicializar estadísticas
-  if (statsContainer) {
-    updateStats();
-  }
-  
-  // Función para actualizar estadísticas
-  function updateStats() {
-    if (!statsContainer) return;
-    
-    const cardStatsElement = statsContainer.querySelector('.deck-stats__cards');
-    const heroStatsElement = statsContainer.querySelector('.deck-stats__heroes');
-    
-    if (cardStatsElement) {
-      cardStatsElement.textContent = `${totalCards}/${deckConfig.min_cards}-${deckConfig.max_cards}`;
-      
-      // Añadir clase para validación visual
-      if (totalCards < deckConfig.min_cards || totalCards > deckConfig.max_cards) {
-        cardStatsElement.classList.add('invalid');
-      } else {
-        cardStatsElement.classList.remove('invalid');
-      }
-    }
-    
-    if (heroStatsElement) {
-      const requiredHeroes = deckConfig.required_heroes;
-      heroStatsElement.textContent = `${totalHeroes}/${requiredHeroes}`;
-      
-      // Añadir clase para validación visual
-      if (requiredHeroes > 0 && totalHeroes !== parseInt(requiredHeroes)) {
-        heroStatsElement.classList.add('invalid');
-      } else {
-        heroStatsElement.classList.remove('invalid');
-      }
-    }
-  }
-  
-  // Validar el formulario antes de enviarlo
+  // Validate form before submission
   form.addEventListener('submit', function(e) {
-    // Primero comprobamos si hay errores en los campos básicos
+    // First check for errors in basic fields
     let valid = true;
     
-    // Validar nombre
+    // Validate name
     const nameInputs = form.querySelectorAll('input[name^="name["]');
     let hasName = false;
     
@@ -263,33 +266,33 @@ export default function initFactionDeckForm() {
     
     if (!hasName) {
       valid = false;
-      alert(window.translations?.faction_decks?.name_required || 'Por favor, introduce un nombre para el mazo.');
+      alert(window.translations?.faction_decks?.name_required || 'Please enter a name for the deck.');
     }
     
-    // Validar facción
+    // Validate faction
     if (!factionSelect || !factionSelect.value) {
       valid = false;
-      alert(window.translations?.faction_decks?.faction_required || 'Por favor, selecciona una facción.');
+      alert(window.translations?.faction_decks?.faction_required || 'Please select a faction.');
     }
     
-    // Validar mazos
+    // Validate decks
     if (valid && deckConfig) {
-      // Validar cartas
+      // Validate cards
       if (totalCards < deckConfig.min_cards) {
         valid = false;
         alert(window.translations?.faction_decks?.min_cards_error || 
-          `El mazo debe tener al menos ${deckConfig.min_cards} cartas.`);
+          `The deck must have at least ${deckConfig.min_cards} cards.`);
       } else if (totalCards > deckConfig.max_cards) {
         valid = false;
         alert(window.translations?.faction_decks?.max_cards_error || 
-          `El mazo no puede tener más de ${deckConfig.max_cards} cartas.`);
+          `The deck cannot have more than ${deckConfig.max_cards} cards.`);
       }
       
-      // Validar héroes
+      // Validate heroes
       if (deckConfig.required_heroes > 0 && totalHeroes !== parseInt(deckConfig.required_heroes)) {
         valid = false;
         alert(window.translations?.faction_decks?.required_heroes_error || 
-          `El mazo debe tener exactamente ${deckConfig.required_heroes} héroes.`);
+          `The deck must have exactly ${deckConfig.required_heroes} heroes.`);
       }
     }
     

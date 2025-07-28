@@ -1,47 +1,25 @@
 <div class="card-details">
-  @if($entity->effect)
-    <div class="card-details__item card-details__effect">
-      <div class="card-details__effect-text">{{ strip_tags($entity->effect) }}</div>
-    </div>
-  @endif
-  
-  <div class="card-details__meta">
+
     @if($entity->cost)
       <div class="card-details__cost">
         <x-cost-display :cost="$entity->cost" />
       </div>
     @endif
-    
+
     @if($entity->equipmentType)
-      <div class="card-details__item">
-        <span class="card-details__label">{{ __('entities.equipment_types.singular') }}:</span>
-        <span class="card-details__value">{{ $entity->equipmentType->name }}</span>
-      </div>
+      <span class="card-details__meta">{{ $entity->equipmentType->name }}</span>
     @endif
     
-    @if($entity->attackRange)
-      <div class="card-details__item">
-        <span class="card-details__label">{{ __('entities.attack_ranges.singular') }}:</span>
-        <span class="card-details__value">{{ $entity->attackRange->name }}</span>
-      </div>
+    @if($entity->attackRange && $entity->attackSubtype)
+      <span class="card-details__meta">
+        {{ __('entities.attack_subtypes.types.'. $entity->attackSubtype->type) .' - '. $entity->attackRange->name .' - '. $entity->attackSubtype->name . ($entity->area ? ' - '. __('entities.cards.area') : '') }}
+      </span>
     @endif
-    
-    @if($entity->attackSubtype)
-      <div class="card-details__item">
-        <span class="card-details__label">{{ __('entities.attack_subtypes.singular') }}:</span>
-        <span class="card-details__value {{ $entity->attackSubtype->type }}">
-          {{ $entity->attackSubtype->name }}
-        </span>
-      </div>
-    @endif
-    
-    @if(isset($entity->area) && $entity->area)
-      <div class="card-details__item">
-        <span class="card-details__label">{{ __('cards.type') }}:</span>
-        <span class="card-details__value">
-          {{ __('entities.cards.area') }}
-        </span>
-      </div>
-    @endif
-  </div>
+
+
+  @if($entity->effect)
+    <div class="card-details__effect">{{ mb_strimwidth(strip_tags($entity->restriction). ' ' .strip_tags($entity->effect), 0, 150, '...') }}</div>
+  @endif
+  
+  
 </div>

@@ -13,14 +13,38 @@
   @endif
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.factions.index')">
-    <div class="form-grid">
-      <x-form.multilingual-input
-        name="name"
-        :label="__('entities.factions.name')"
-        :values="isset($faction) ? $faction->getTranslations('name') : []"
-        required
+    <x-form.fieldset :legend="__('entities.factions.basic_info')">
+      <div>
+        <x-form.multilingual-input
+          name="name"
+          :label="__('entities.factions.name')"
+          :values="isset($faction) ? $faction->getTranslations('name') : []"
+          required
+        />
+
+        <x-form.color-picker
+          name="color"
+          :label="__('entities.factions.color')"
+          :value="old('color', isset($faction) ? $faction->color : '#000000')"
+          required
+        />
+
+        <x-form.checkbox
+          name="is_published"
+          :label="__('admin.published')"
+          :checked="old('is_published', isset($faction) ? $faction->is_published : false)"
+        />
+      </div>
+
+      <x-form.image-upload
+        name="icon"
+        :label="__('entities.factions.icon')"
+        :current-image="isset($faction) && $faction->icon ? $faction->getImageUrl() : null"
+        :remove-name="isset($faction) ? 'remove_icon' : null"
       />
-      
+    </x-form.fieldset>
+
+    <x-form.fieldset :legend="__('entities.factions.lore')">
       <x-form.multilingual-wysiwyg
         name="lore_text"
         :label="__('entities.factions.lore_text')"
@@ -30,28 +54,8 @@
       <x-form.multilingual-wysiwyg
         name="epic_quote"
         :label="__('entities.factions.epic_quote')"
-        :values="isset($card) ? $card->getTranslations('epic_quote') : []"
+        :values="isset($faction) ? $faction->getTranslations('epic_quote') : []"
       />
-    
-      <x-form.color-picker
-        name="color"
-        :label="__('entities.factions.color')"
-        :value="old('color', isset($faction) ? $faction->color : '#000000')"
-        required
-      />
-      
-      <x-form.image-upload
-        name="icon"
-        :label="__('entities.factions.icon')"
-        :current-image="isset($faction) && $faction->icon ? $faction->getImageUrl() : null"
-        :remove-name="isset($faction) ? 'remove_icon' : null"
-      />
-
-      <x-form.checkbox
-        name="is_published"
-        :label="__('admin.published')"
-        :checked="old('is_published', isset($faction) ? $faction->is_published : false)"
-      />
-    </div>
+    </x-form.fieldset>
   </x-form.card>
 </form>

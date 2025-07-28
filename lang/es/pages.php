@@ -168,5 +168,12 @@ return [
     'cta_button_link' => 'Enlace',
     'text_card_text' => 'Texto',
     'text_card_label' => 'Etiqueta',
+    'fields' => [
+      'common_settings' => 'Opciones del Bloque',
+      'titles' => 'Títulos',
+      'block_settings' => 'Opciones del Bloque :type',
+      'block_fields' =>'Campos del Bloque :type',
+      'image_fields' => 'Opciones de Imagen'
+    ]
   ],
 ];

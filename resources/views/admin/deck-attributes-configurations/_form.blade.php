@@ -17,7 +17,7 @@
     <div class="form-grid">
       <x-form.select
         name="game_mode_id"
-        :label="__('game_modes.singular')"
+        :label="__('entities.game_modes.singular')"
         :options="$gameModes->pluck('name', 'id')->toArray()"
         :selected="old('game_mode_id', isset($configuration) ? $configuration->game_mode_id : '')"
         :placeholder="__('entities.deck_attributes.select_game_mode')"

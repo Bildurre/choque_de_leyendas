@@ -8,16 +8,12 @@ return [
       'icon' => 'text',
       'allows_image' => true,
       'allows_clearfix_image' => true,
-      'settings' => [
-      ],
     ],
     'header' => [
       'name' => 'Header Block',
       'view' => 'content.blocks.header',
       'icon' => 'heading',
       'allows_image' => false,
-      'settings' => [
-      ],
     ],
     'relateds' => [
       'name' => 'Related Items Block',
@@ -101,9 +97,6 @@ return [
       'view' => 'content.blocks.text-card',
       'icon' => 'pdf',
       'allows_image' => false,
-      'allows_clearfix_image' => false,
-      'settings' => [
-      ],
     ],
     'automatic-index' => [
       'name' => 'Automatic Index Block',
@@ -152,8 +145,6 @@ return [
       'icon' => 'list-item',
       'allows_image' => false,
       'allows_clearfix_image' => false,
-      'settings' => [
-      ],
     ],
       // Podemos añadir más tipos después
   ],

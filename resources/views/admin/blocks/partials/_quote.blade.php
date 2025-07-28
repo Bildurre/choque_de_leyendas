@@ -10,9 +10,11 @@
   }
 @endphp
 
-<x-form.multilingual-wysiwyg
-  name="content"
-  :label="__('pages.blocks.quote_text')"
-  :values="$textValues"
-  required
-/>
+<x-form.fieldset :legend="__('pages.blocks.fields.block_fields', ['type' => $blockName])"> 
+  <x-form.multilingual-wysiwyg
+    name="content"
+    :label="__('pages.blocks.quote_text')"
+    :values="$textValues"
+    required
+  />
+</x-form.fieldset>

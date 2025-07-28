@@ -23,6 +23,9 @@ export default function initReorderableLists() {
   // Save initial positions to restore if needed
   initialPositions = saveElementPositions(reorderableItems);
   
+  // Initialize order indicators
+  initializeOrderIndicators();
+  
   // Add arrow buttons functionality
   addArrowButtonsListeners();
   
@@ -31,11 +34,12 @@ export default function initReorderableLists() {
     ghostClass: 'entity-list-card--ghost',
     chosenClass: 'entity-list-card--chosen',
     dragClass: 'entity-list-card--drag',
-    handle: '.entity-list-card__handle', // Changed to use specific handle
+    handle: '.entity-list-card__handle',
     filter: '.action-button, button, a, input, textarea',
     preventOnFilter: true,
     onEnd: function() {
       checkOrderChanged();
+      updateOrderIndicators();
     }
   });
   
@@ -56,6 +60,53 @@ export default function initReorderableLists() {
         cancelReorder();
       });
     }
+  }
+  
+  function initializeOrderIndicators() {
+    Array.from(reorderableItems).forEach((item, index) => {
+      const orderIndicator = item.querySelector('.entity-list-card__order-indicator');
+      const currentOrderSpan = item.querySelector('.entity-list-card__order-current');
+      const newOrderSpan = item.querySelector('.entity-list-card__order-new');
+      
+      if (orderIndicator && currentOrderSpan && newOrderSpan) {
+        // Store original position (1-based for user-friendly display)
+        item.dataset.originalPosition = index + 1;
+        currentOrderSpan.textContent = index + 1;
+        newOrderSpan.textContent = index + 1;
+      }
+    });
+  }
+  
+  function updateOrderIndicators() {
+    Array.from(reorderableItems).forEach((item, currentIndex) => {
+      const orderIndicator = item.querySelector('.entity-list-card__order-indicator');
+      const currentOrderSpan = item.querySelector('.entity-list-card__order-current');
+      const newOrderSpan = item.querySelector('.entity-list-card__order-new');
+      
+      if (orderIndicator && currentOrderSpan && newOrderSpan) {
+        const originalPosition = parseInt(item.dataset.originalPosition);
+        const newPosition = currentIndex + 1;
+        
+        currentOrderSpan.textContent = originalPosition;
+        newOrderSpan.textContent = newPosition;
+        
+        // Show/hide indicator based on whether position changed
+        if (originalPosition !== newPosition) {
+          orderIndicator.style.display = 'flex';
+          // Add classes for styling based on direction
+          if (newPosition < originalPosition) {
+            orderIndicator.classList.add('entity-list-card__order-indicator--moved-up');
+            orderIndicator.classList.remove('entity-list-card__order-indicator--moved-down');
+          } else {
+            orderIndicator.classList.add('entity-list-card__order-indicator--moved-down');
+            orderIndicator.classList.remove('entity-list-card__order-indicator--moved-up');
+          }
+        } else {
+          orderIndicator.style.display = 'none';
+          orderIndicator.classList.remove('entity-list-card__order-indicator--moved-up', 'entity-list-card__order-indicator--moved-down');
+        }
+      }
+    });
   }
   
   function addArrowButtonsListeners() {
@@ -88,6 +139,7 @@ export default function initReorderableLists() {
     
     checkOrderChanged();
     updateArrowButtons();
+    updateOrderIndicators();
   }
   
   function updateArrowButtons() {
@@ -143,6 +195,9 @@ export default function initReorderableLists() {
     
     // Update arrow buttons state
     updateArrowButtons();
+    
+    // Reset order indicators
+    updateOrderIndicators();
     
     // Hide buttons
     toggleReorderButtons(false);

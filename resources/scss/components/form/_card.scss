@@ -2,6 +2,8 @@
 
 .form-card {
   width: 100%;
+  container-type: inline-size;
+  container-name: form-card;
   margin: 0 auto;
   background-color: var(--color-card-bg);
   border-radius: $border-radius-md;
@@ -36,15 +38,5 @@
       grid-template-columns: auto auto;
       justify-content: flex-end;
     }
-  }
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: $spacing-lg;
-  
-  @include responsive(tablet) {
-    gap: $spacing-xl;
   }
 }

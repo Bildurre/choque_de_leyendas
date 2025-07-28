@@ -34,6 +34,11 @@
           <x-icon name="chevron-down" />
         </button>
       </div>
+      <div class="entity-list-card__order-indicator" style="display: none;">
+        <span class="entity-list-card__order-current"></span>
+        <x-icon name="arrow-right" class="entity-list-card__order-arrow" />
+        <span class="entity-list-card__order-new"></span>
+      </div>
     </div>
   @endif
   
