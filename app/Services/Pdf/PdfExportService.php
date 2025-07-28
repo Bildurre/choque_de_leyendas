@@ -8,7 +8,7 @@ use App\Models\Page;
 use App\Models\GeneratedPdf;
 use App\Services\Pdf\ExportServices\FactionExportService;
 use App\Services\Pdf\ExportServices\DeckExportService;
-use App\Services\Pdf\ExportServices\CountersListExportService;
+// use App\Services\Pdf\ExportServices\CountersListExportService;
 use App\Services\Pdf\ExportServices\CutOutCountersExportService;
 use App\Services\Pdf\ExportServices\PagesExportService;
 use Illuminate\Support\Collection;
@@ -18,7 +18,7 @@ class PdfExportService
 {
   protected FactionExportService $factionExportService;
   protected DeckExportService $deckExportService;
-  protected CountersListExportService $countersListExportService;
+  // protected CountersListExportService $countersListExportService;
   protected CutOutCountersExportService $cutOutCountersExportService;
   protected PagesExportService $pagesExportService;
   
@@ -28,13 +28,13 @@ class PdfExportService
   public function __construct(
     FactionExportService $factionExportService,
     DeckExportService $deckExportService,
-    CountersListExportService $countersListExportService,
+    // CountersListExportService $countersListExportService,
     CutOutCountersExportService $cutOutCountersExportService,
     PagesExportService $pagesExportService
   ) {
     $this->factionExportService = $factionExportService;
     $this->deckExportService = $deckExportService;
-    $this->countersListExportService = $countersListExportService;
+    // $this->countersListExportService = $countersListExportService;
     $this->cutOutCountersExportService = $cutOutCountersExportService;
     $this->pagesExportService = $pagesExportService;
   }
@@ -74,7 +74,7 @@ class PdfExportService
         
       case 'others':
         $data['existingPdfs']['others'] = array_merge(
-          $this->countersListExportService->getExistingPdfs(),
+          // $this->countersListExportService->getExistingPdfs(),
           $this->cutOutCountersExportService->getExistingPdfs()
         );
         break;
@@ -102,10 +102,10 @@ class PdfExportService
   /**
    * Generate counters list PDF (delegates to CountersListExportService)
    */
-  public function generateCountersListPdf(): void
-  {
-    $this->countersListExportService->generatePdfs();
-  }
+  // public function generateCountersListPdf(): void
+  // {
+  //   $this->countersListExportService->generatePdfs();
+  // }
   
   /**
    * Generate cut-out counters PDF (delegates to CutOutCountersExportService)
@@ -142,10 +142,10 @@ class PdfExportService
   /**
    * Delete all counters list PDFs (delegates to CountersListExportService)
    */
-  public function deleteCountersListPdfs(): void
-  {
-    $this->countersListExportService->deletePdfs();
-  }
+  // public function deleteCountersListPdfs(): void
+  // {
+  //   $this->countersListExportService->deletePdfs();
+  // }
   
   /**
    * Delete all cut-out counters PDFs (delegates to CutOutCountersExportService)

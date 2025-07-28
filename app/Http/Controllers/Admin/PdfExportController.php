@@ -122,8 +122,8 @@ class PdfExportController extends Controller
         $this->pdfExportService->deleteFactionPdfs($pdf->faction_id);
       } elseif ($pdf->type === 'deck' && $pdf->deck_id) {
         $this->pdfExportService->deleteDeckPdfs($pdf->deck_id);
-      } elseif ($pdf->type === 'counters-list') {
-        $this->pdfExportService->deleteCountersListPdfs();
+      // } elseif ($pdf->type === 'counters-list') {
+      //   $this->pdfExportService->deleteCountersListPdfs();
       } elseif ($pdf->type === 'cut-out-counters') {
         $this->pdfExportService->deleteCutOutCountersPdfs();
       } elseif ($pdf->type === 'page' && $pdf->page_id) {
@@ -149,22 +149,22 @@ class PdfExportController extends Controller
   /**
    * Generate counters list PDF
    */
-  public function generateCountersList(): RedirectResponse
-  {
-    try {
-      $this->pdfExportService->generateCountersListPdf();
+  // public function generateCountersList(): RedirectResponse
+  // {
+  //   try {
+  //     $this->pdfExportService->generateCountersListPdf();
       
-      return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
-        ->with('success', __('admin.pdf_generation_started', ['name' => __('pdf.counters_list')]));
-    } catch (\Exception $e) {
-      \Log::error('Failed to generate counters list PDF', [
-        'error' => $e->getMessage(),
-      ]);
+  //     return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
+  //       ->with('success', __('admin.pdf_generation_started', ['name' => __('pdf.counters_list')]));
+  //   } catch (\Exception $e) {
+  //     \Log::error('Failed to generate counters list PDF', [
+  //       'error' => $e->getMessage(),
+  //     ]);
       
-      return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
-        ->with('error', __('admin.pdf_generation_failed'));
-    }
-  }
+  //     return redirect()->route('admin.pdf-export.index', ['tab' => 'others'])
+  //       ->with('error', __('admin.pdf_generation_failed'));
+  //   }
+  // }
   
   /**
    * Generate cut-out counters PDF

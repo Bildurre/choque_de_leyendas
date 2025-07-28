@@ -2,6 +2,8 @@
 
 .entity-list {
   width: 100%;
+  container-type: inline-size;
+  container-name: entity-list;
 
   &__header {
     display: flex;
@@ -39,21 +41,52 @@
 
   &__items {
     display: grid;
+    gap: $spacing-md;
 
     grid-template-columns: 1fr;
     gap: $spacing-md;
 
-    @include responsive(mobile) {
-      grid-template-columns: 1fr 1fr;
+    // @include responsive(mobile) {
+    //   grid-template-columns: 1fr 1fr;
+    // }
+
+    // @include responsive(tablet) {
+    //   grid-template-columns: 1fr 1fr 1fr;
+    // }
+
+    // @include responsive(desktop) {
+    //   grid-template-columns: 1fr 1fr 1fr 1fr;
+    // }
+
+    @container entity-list (min-width: 480px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @container entity-list (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @container entity-list (min-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    @container entity-list (min-width: 1280px) {
+      grid-template-columns: repeat(5, 1fr);
     }
 
-    @include responsive(tablet) {
-      grid-template-columns: 1fr 1fr 1fr;
+    &--wide {
+    @container entity-list (min-width: 480px) {
+      grid-template-columns: 1fr;
     }
-
-    @include responsive(desktop) {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+    @container entity-list (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
     }
+    
+    @container entity-list (min-width: 1280px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 
     &--reorderable {
       display: grid;
@@ -61,9 +94,9 @@
       gap: $spacing-md;
     }
 
-    &--wide {
-      grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-    }
+    // &--wide {
+    //   grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    // }
   }
 
   &__reorder-buttons {

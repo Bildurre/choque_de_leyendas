@@ -39,7 +39,6 @@
   
   <div class="entity-list-card__main">
     <div class="entity-list-card__header">
-      <h3 class="entity-list-card__title">{{ $title }}</h3>
       
       <div class="entity-list-card__actions">
         @if($viewRoute)
@@ -99,6 +98,8 @@
         
         {{ $actions ?? '' }}
       </div>
+      
+      <h3 class="entity-list-card__title">{{ $title }}</h3>
     </div>
     
     <div class="entity-list-card__content">

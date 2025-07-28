@@ -32,7 +32,6 @@
     padding: $spacing-xs;
     cursor: grab;
     color: var(--color-text-secondary);
-    border-bottom: 0.0625rem solid var(--color-card-border);
     height: 61px;
     padding: $spacing-md;
     
@@ -97,10 +96,9 @@
   }
   
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: $spacing-md;
+    display: grid;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
     border-bottom: 0.0625rem solid var(--color-card-border);
   }
   
@@ -116,8 +114,13 @@
   
   &__actions {
     display: flex;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
     flex-shrink: 0;
+    justify-content: flex-end;
+
+    .action-button {
+      padding: $spacing-md;
+    }
   }
   
   &__content {
