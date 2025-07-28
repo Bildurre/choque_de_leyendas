@@ -9,6 +9,10 @@
     font-size: 1.25rem;
     margin-bottom: $spacing-xs;
   }
+
+  &__downloads {
+    margin-bottom: $spacing-xl;
+  }
 }
 
 .entity-collection-card {
@@ -30,8 +34,3 @@
   }
 }
 
-.pdf-collection__section {
-  .entity-list__empty {
-    background-color: var( --color-theme-border-bg);
-  }
-}
