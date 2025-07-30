@@ -525,8 +525,8 @@
       "es": "Cada masacre, un verso en la oscura poesía de la sangre."
     },
     "passive_name": {
-      "en": "<p>Bloody Tribute</p>",
-      "es": "<p>Tributo Sangriento</p>"
+      "en": "Bloody Tribute",
+      "es": "Tributo Sangriento"
     },
     "passive_description": {
       "en": "Each time the Opponent player discards 1 Card while this hero is the active allied hero, this hero deals 1 Direct damage to 1 random adjacent enemy hero.",
