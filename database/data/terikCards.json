@@ -566,8 +566,8 @@
       "es": "Estrellas caídas forjan martillos que moldean el destino."
     },
     "effect": {
-      "en": "<p>The attached hero deals +1 damage with Physical Crushing Single-Target Melee Attacks.</p><p>All Physical Crushing Melee Attacks initiated by the attached hero, in addition to their effect, places 1 bane counter: Stunned on each hero they damage.</p>",
-      "es": "<p>El héroe anexado hace +1 de daño con los Ataques Melee Físicos Contundentes de 1 Objetivo.</p><p>Todos los Ataques Melee Físicos Contundentes que inicie el héroe anexado, además de su efecto, colocan 1 contador de perjuicio: Aturdido sobre cada héroe al que hagan daño.</p>"
+      "en": "<p>The attached hero deals +1 damage with Physical Crushing Single-Target Melee Attacks.</p><p>The attached hero deals +1 damage with Magical Light Single-Target Melee Attacks.</p><p>If you discard this Equipment due to any effect draw 1 Card.</p>",
+      "es": "<p>El héroe anexado hace +1 de daño con los Ataques Melee Físicos Contundentes de 1 Objetivo.</p><p>El héroe anexado hace +1 de daño con los Ataques Melee Mágicos Luz de 1 Objetivo.</p><p>Si descartas este Equipo por cualquier efecto roba 1 Carta.</p>"
     },
     "card_type_id": 1,
     "equipment_type_id": 3,

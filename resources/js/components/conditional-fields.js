@@ -15,8 +15,25 @@ export default function initConditionalField(triggerId, targetIds, checkValues =
   
   if (targetElements.length === 0) return;
   
+  // Store original display values for each target
+  const originalDisplays = new Map();
+  
   // Check if this is a Choices.js element
   const isChoicesElement = trigger.hasAttribute('data-choices');
+  
+  // Store original display values and set initial visibility
+  targetElements.forEach(element => {
+    const targetContainer = element.hasAttribute('data-choices') 
+      ? element.closest('.filter-select') || element.closest('.choices')
+      : element;
+      
+    if (targetContainer) {
+      // Get computed display value from CSS
+      const computedStyle = window.getComputedStyle(targetContainer);
+      const originalDisplay = computedStyle.display;
+      originalDisplays.set(targetContainer, originalDisplay);
+    }
+  });
   
   // Set initial visibility
   updateVisibility();
@@ -67,7 +84,14 @@ export default function initConditionalField(triggerId, targetIds, checkValues =
         : element;
         
       if (targetContainer) {
-        targetContainer.style.display = shouldShow ? 'block' : 'none';
+        if (shouldShow) {
+          // Restore original display value
+          const originalDisplay = originalDisplays.get(targetContainer);
+          targetContainer.style.display = originalDisplay === 'none' ? '' : originalDisplay;
+        } else {
+          // Hide element
+          targetContainer.style.display = 'none';
+        }
       }
     });
   }

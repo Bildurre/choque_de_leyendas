@@ -319,6 +319,17 @@ return [
       'heroes' => 'Héroes',
       'cards' => 'Cartas',
     ],
+    'dice_distribution' => 'Distribución de dados',
+    'no_dice' => 'Sin dados',
+    'dice_count_singular' => ':count dado',
+    'dice_count_plural' => ':count dados',
+    'average_dice_count' => 'Promedio de dados',
+    'symbol_distribution' => 'Distribución de símbolos',
+    'card_type_breakdown' => 'Desglose por tipo de carta',
+    'hero_superclass_breakdown' => 'Desglose por superclase de héroe',
+    'hero_class_breakdown' => 'Desglose por clase de héroe',
+    'no_decks_for_mode' => 'No hay mazos para el modo :mode',
+    'no_game_modes' => 'No hay modos de juego disponibles',
   ],
   
   // Modos de juego

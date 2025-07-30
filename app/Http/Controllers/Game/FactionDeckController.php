@@ -141,12 +141,22 @@ class FactionDeckController extends Controller
   /**
    * Display the specified faction deck.
    */
-  public function show(FactionDeck $factionDeck)
+  public function show(Request $request, FactionDeck $factionDeck)
   {
-    // Cargar el mazo con todas sus relaciones
+    // Validate tab parameter
+    $request->validate([
+        'tab' => 'nullable|in:info,heroes,cards'
+    ]);
+    
+    $tab = $request->get('tab', 'info');
+    
+    // Load relations
     $factionDeck = $this->factionDeckService->getFactionDeckWithRelations($factionDeck);
     
-    return view('admin.faction-decks.show', compact('factionDeck'));
+    // Get deck statistics
+    $statistics = $this->factionDeckService->getDeckStatistics($factionDeck);
+    
+    return view('admin.faction-decks.show', compact('factionDeck', 'statistics', 'tab'));
   }
 
   /**

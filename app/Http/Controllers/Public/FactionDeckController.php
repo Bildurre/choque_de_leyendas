@@ -42,7 +42,7 @@ class FactionDeckController extends Controller
     if ($selectedGameMode) {
       $factionDecks = FactionDeck::where('game_mode_id', $selectedGameMode->id)
         ->published()
-        ->with(['faction', 'heroes', 'cards'])
+        ->with(['faction', 'heroes', 'cards', 'gameMode'])
         ->orderBy('name')
         ->paginate(12)
         ->appends(['tab' => $activeTab]);

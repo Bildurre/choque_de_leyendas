@@ -114,6 +114,7 @@ public function getAllFactionDecks(
       'cards.attackRange',
       'cards.attackSubtype',
       'cards.equipmentType',
+      'cards.faction',
       'heroes.heroClass',
       'heroes.heroRace',
       'heroes.faction'
@@ -411,5 +412,60 @@ public function getAllFactionDecks(
     $factionDeck->heroes()->detach();
     
     return $factionDeck->forceDelete();
+  }
+
+  public function getDeckStatistics(FactionDeck $factionDeck): array
+  {
+    $cards = $factionDeck->cards;
+    $totalCards = $cards->sum('pivot.copies');
+    
+    // Group cards by dice count (cost length)
+    $cardsByDiceCount = collect();
+    $totalDiceCount = 0;
+    
+    // Count total symbols
+    $symbolCounts = [
+      'R' => 0,
+      'G' => 0,
+      'B' => 0
+    ];
+      
+    foreach ($cards as $card) {
+      $diceCount = strlen($card->cost);
+      $copies = $card->pivot->copies;
+      
+      // Count cards by dice count
+      if ($cardsByDiceCount->has($diceCount)) {
+        $cardsByDiceCount[$diceCount] += $copies;
+      } else {
+        $cardsByDiceCount[$diceCount] = $copies;
+      }
+      
+      // Count total dice for average
+      $totalDiceCount += $diceCount * $copies;
+      
+      // Count individual symbols
+      if (!empty($card->cost)) {
+        $symbols = str_split(strtoupper($card->cost));
+        foreach ($symbols as $symbol) {
+          if (isset($symbolCounts[$symbol])) {
+            $symbolCounts[$symbol] += $copies;
+          }
+        }
+      }
+    }
+    
+    return [
+      'totalCards' => $totalCards,
+      'uniqueCards' => $cards->count(),
+      'cardsByDiceCount' => $cardsByDiceCount->sortKeys(),
+      'averageDiceCount' => $totalCards > 0 ? round($totalDiceCount / $totalCards, 2) : 0,
+      'symbolCounts' => $symbolCounts,
+      'cardsByType' => $factionDeck->getCardCopiesBreakdown(),
+      'totalHeroes' => $factionDeck->heroes->sum('pivot.copies'),
+      'uniqueHeroes' => $factionDeck->heroes->count(),
+      'heroesByClass' => $factionDeck->getHeroCopiesByClassBreakdown(),
+      'heroesBySuperclass' => $factionDeck->getHeroCopiesBreakdown()
+    ];
   }
 }

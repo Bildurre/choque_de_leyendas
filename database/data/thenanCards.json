@@ -88,8 +88,8 @@
       "es": "Calma ancestral protege lo que la furia moderna no puede perforar."
     },
     "effect": {
-      "en": "<p>When you attach this Equipment draw 1 Card.</p><p>You may detach and discard this Equipment to completely ignore all damage from 1 Single-Target Attack affecting the attached hero.</p>",
-      "es": "<p>Cuando anexes este Equipo roba 1 Carta.</p><p>Puedes desanexar y descartar este Equipo para ignorar completamente todo el daño de 1 Ataque de 1 Objetivo que afecte al héroe anexado.</p>"
+      "en": "<p>When you attach this Equipment draw 1 Card.</p><p>You may detach this Equipment at any time to completely ignore all damage from 1 Single-Target Attack affecting the attached hero.</p>",
+      "es": "<p>Cuando anexes este Equipo roba 1 Carta.</p><p>Puedes desanexar este Equipo en cualquier momento para ignorar completamente todo el daño de 1 Ataque de 1 Objetivo que afecte al héroe anexado.</p>"
     },
     "card_type_id": 1,
     "equipment_type_id": 15,
@@ -551,7 +551,7 @@
     "image": "images/cards/informacion-vital.jpeg"
   },
   {
-    "cost": "",
+    "cost": "RB",
     "name": 
     {
       "en": "Sherilom's Chestplate",
@@ -614,8 +614,8 @@
       "es": "El alba trae disciplina; el crepúsculo trae victoria."
     },
     "effect": {
-      "en": "<p>The next Physical Attack performed by the active allied hero during this Singular Combat deals +1 damage.</p><p>If the hero playing this Support is a Fighter hero place 1 boon counter: Swiftness on this hero and the next Physical Attack they receive during this Singular Combat deals -1 damage.</p>",
-      "es": "<p>El siguiente Ataque Físico que realice el héroe aliado activo durante este Combate Singular hace +1 de daño.</p><p>Si el héroe que juega este Apoyo es un héroe Combatiente coloca 1 contador de beneficio: Presteza sobre este héroe y el siguiente Ataque Físico que reciba durante este Combate Singular hace -1 de daño.</p>"
+      "en": "<p>The next Physical Attack performed by the active allied hero during this Singular Combat deals +1 damage.</p><p>If the hero playing this Support is a Warrior hero place 1 boon counter: Swiftness on this hero and the next Physical Attack they receive during this Singular Combat deals -1 damage.</p>",
+      "es": "<p>El siguiente Ataque Físico que realice el héroe aliado activo durante este Combate Singular hace +1 de daño.</p><p>Si el héroe que juega este Apoyo es un héroe Guerrero coloca 1 contador de beneficio: Presteza sobre este héroe y el siguiente Ataque Físico que reciba durante este Combate Singular hace -1 de daño.</p>"
     },
     "card_type_id": 2,
     "image": "images/cards/preparado-para-el-combate.jpeg"

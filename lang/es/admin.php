@@ -23,6 +23,7 @@ return [
   'cancel' => 'Cancelar',
   'move_up' => 'Mover arriba',
   'move_down' => 'Mover abajo',
+  'unique' => 'Únicos',
   
   // Mensajes genéricos
   'back_to_list' => 'Volver al listado',

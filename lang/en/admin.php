@@ -23,6 +23,7 @@ return [
   'cancel' => 'Cancel',
   'move_up' => 'Move up',
   'move_down' => 'Move down',
+  'unique' => 'Unique',
   
   // Generic messages
   'back_to_list' => 'Back to list',
