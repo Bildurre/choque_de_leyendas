@@ -19,9 +19,9 @@
 
         <x-accordion id="admin-sidebar-accordion" :is-sidebar="true">
           <!-- Sección Game Components -->
-          <x-collapsible-section 
+          <x-collapsible-section
             id="game-components-section" 
-            title="{{ __('admin.game') }}"
+            title="{{ __('admin.components') }}"
           >
             <ul class="admin-sidebar__submenu">
               <li class="admin-sidebar__item">
@@ -39,6 +39,11 @@
                   <span class="admin-sidebar__text">{{ __('entities.cards.plural') }}</span>
                 </a>
               </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.faction-decks.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.faction-decks.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.faction_decks.plural') }}</span>
+                </a>
+              </li>
             </ul>
           </x-collapsible-section>
 
@@ -54,13 +59,13 @@
                 </a>
               </li>
               <li class="admin-sidebar__item">
-                <a href="{{ route('admin.hero-superclasses.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.hero-superclasses.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.hero_superclasses.plural') }}</span>
+                <a href="{{ route('admin.hero-classes.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.hero-classes.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.hero_classes.plural') }}</span>
                 </a>
               </li>
               <li class="admin-sidebar__item">
-                <a href="{{ route('admin.hero-classes.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.hero-classes.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.hero_classes.plural') }}</span>
+                <a href="{{ route('admin.hero-superclasses.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.hero-superclasses.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.hero_superclasses.plural') }}</span>
                 </a>
               </li>
               <li class="admin-sidebar__item">
@@ -71,35 +76,6 @@
               <li class="admin-sidebar__item">
                 <a href="{{ route('admin.hero-attributes-configurations.edit') }}" class="admin-sidebar__link {{ request()->routeIs('admin.hero-attributes-configurations.*') ? 'admin-sidebar__link--active' : '' }}">
                   <span class="admin-sidebar__text">{{ __('entities.hero_attributes.config') }}</span>
-                </a>
-              </li>
-            </ul>
-          </x-collapsible-section>
-
-          <!-- Sección Game Components -->
-          <x-collapsible-section
-            title="{{ __('admin.game') }}"
-            id="game-section" 
-          >
-            <ul class="admin-sidebar__submenu">
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.faction-decks.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.faction-decks.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.faction_decks.plural') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.game-modes.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.game-modes.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.game_modes.plural') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.deck-attributes-configurations.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.deck-attributes-configurations.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.deck_attributes.plural') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.counters.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.counters.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.counters.plural') }}</span>
                 </a>
               </li>
             </ul>
@@ -129,6 +105,30 @@
               <li class="admin-sidebar__item">
                 <a href="{{ route('admin.attack-ranges.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.attack-ranges.*') ? 'admin-sidebar__link--active' : '' }}">
                   <span class="admin-sidebar__text">{{ __('entities.attack_ranges.plural') }}</span>
+                </a>
+              </li>
+            </ul>
+          </x-collapsible-section>
+
+          <!-- Sección Game Components -->
+          <x-collapsible-section
+            title="{{ __('admin.game_system') }}"
+            id="game-section" 
+          >
+            <ul class="admin-sidebar__submenu">
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.game-modes.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.game-modes.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.game_modes.plural') }}</span>
+                </a>
+              </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.deck-attributes-configurations.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.deck-attributes-configurations.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.deck_attributes.plural') }}</span>
+                </a>
+              </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.counters.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.counters.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.counters.plural') }}</span>
                 </a>
               </li>
             </ul>

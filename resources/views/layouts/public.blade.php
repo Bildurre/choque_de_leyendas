@@ -16,7 +16,7 @@
   <meta property="og:description" content="{{ $ogDescription ?? $metaDescription ?? 'Explora el mundo de Alanda - Choque de Leyendas' }}">
   <meta property="og:type" content="{{ $ogType ?? 'website' }}">
   <meta property="og:url" content="{{ url()->current() }}">
-  <meta property="og:image" content="{{ $ogImage ?? asset('storage/images/logos/full_logo_'.strtolower(app()->getLocale()).'.png')" }}">
+  <meta property="og:image" content="{{ $ogImage ?? asset('storage/images/logos/full_logo_'.strtolower(app()->getLocale()).'.png') }}">
   
   {{-- Additional meta tags --}}
   {{ $metaTags ?? '' }}

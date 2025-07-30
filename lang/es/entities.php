@@ -203,7 +203,7 @@ return [
   // Tipos de cartas
   'card_types' => [
     'singular' => 'Tipo de carta',
-    'plural' => 'Tipos de cartas',
+    'plural' => 'Tipos de carta',
     'create' => 'Crear tipo de carta',
     'edit' => 'Editar tipo de carta',
     'name' => 'Nombre',

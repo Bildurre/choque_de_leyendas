@@ -5,11 +5,12 @@ return [
   'dashboard' => 'Panel de control',
   'home' => 'Inicio',
   'admin_panel' => 'Panel de administración',
-  'game' => 'Componentes del juego',
+  'components' => 'Componentes',
   'content' => 'Contenido',
   'settings' => 'Configuración',
   'logout' => 'Cerrar sesión',
   'toggle_sidebar' => 'Alternar barra lateral',
+  'game_system' => 'Sistema de juego',
   
   // Estados y acciones
   'active_items' => 'Elementos activos',

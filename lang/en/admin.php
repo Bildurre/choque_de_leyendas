@@ -5,11 +5,12 @@ return [
   'dashboard' => 'Dashboard',
   'home' => 'Home',
   'admin_panel' => 'Admin Panel',
-  'game' => 'Game Components',
+  'components' => 'Components',
   'content' => 'Content',
   'settings' => 'Settings',
   'logout' => 'Logout',
   'toggle_sidebar' => 'Toggle sidebar',
+  'game_system' => 'Game system',
   
   // States and actions
   'active_items' => 'Active items',

@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
     User::create([
       'name' => 'Bildurre',
       'email' => 'bildurre@universoalanda.com',
-      'password' => Hash::make('152egUoi971'),
+      'password' => Hash::make('152eGuoi971'),
       'is_admin' => true,
     ]);
     // User::create([
