@@ -62,13 +62,13 @@
       <x-form.multilingual-wysiwyg
         name="description"
         :label="__('entities.faction_decks.description')"
-        :values="isset($card) ? $card->getTranslations('description') : []"
+        :values="isset($factionDeck) ? $factionDeck->getTranslations('description') : []"
       />
 
       <x-form.multilingual-wysiwyg
         name="epic_quote"
         :label="__('entities.faction_decks.epic_quote')"
-        :values="isset($card) ? $card->getTranslations('epic_quote') : []"
+        :values="isset($factionDeck) ? $factionDeck->getTranslations('epic_quote') : []"
       />
                       
       <x-form.image-upload
