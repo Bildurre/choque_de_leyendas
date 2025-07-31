@@ -1,0 +1,10 @@
+@use '../../abstracts/all' as *;
+
+.dashboard-chart {
+  position: relative;
+  width: 100%;
+  
+  canvas {
+    width: 100% !important;
+  }
+}

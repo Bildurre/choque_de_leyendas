@@ -84,6 +84,12 @@
 @use 'components/entity-show/info-link';
 @use 'components/entity-show/info-list';
 
+// Dashboard Modules
+@use 'components/dashboard/dashboard-chart';
+@use 'components/dashboard/dashboard-info-line';
+@use 'components/dashboard/dashboard-module';
+@use 'components/dashboard/dashboard-stat-item';
+
 // Pages
 @use 'pages/login';
 @use 'pages/hero-detail';
@@ -92,6 +98,7 @@
 @use 'pages/admin-page-archive';
 @use 'pages/downloads-page';
 @use 'pages/icons';
+@use 'pages/dashboard';
 
 // Bloques
 @use 'components/blocks/block';

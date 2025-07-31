@@ -28,6 +28,7 @@ import initTextImageHeight from './components/block-text';
 import initPdfCollection from './pdf-collection/index';
 import initNotificationService from './services/notification-service';
 import initPdfDownloader from './components/pdf-downloader';
+import initDashboardCharts from './components/dashboard-charts';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNotificationService();
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTextImageHeight();
   initPdfCollection();
   initPdfDownloader();
+  initDashboardCharts();
 
   // Inicializar campos condicionales
 

@@ -1,0 +1,178 @@
+@use '../abstracts/all' as *;
+
+.dashboard {
+  &__header {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    
+    @include responsive(tablet) {
+      font-size: 2rem;
+    }
+  }
+  
+  &__content {
+    // Content wrapper
+  }
+  
+  &__modules {
+    display: grid;
+    gap: $spacing-lg;
+    grid-template-columns: 1fr;
+  }
+  
+  &__module-wrapper {
+    width: 100%;
+  }
+}
+
+// Dashboard module container query support
+.dashboard-module {
+  container-type: inline-size;
+  container-name: module;
+}
+
+// Dashboard components utilities
+.dashboard-stats-grid {
+  display: grid;
+  gap: $spacing-sm;
+  grid-template-columns: 1fr;
+  margin-bottom: $spacing-lg;
+  
+  @include container-responsive(module, mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include container-responsive(module, tablet) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dashboard-section {
+  margin-top: $spacing-lg;
+  
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 $spacing-sm 0;
+    
+    @include container-responsive(module, tablet) {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Faction cards grid
+.dashboard-factions-grid {
+  display: grid;
+  gap: $spacing-sm;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  
+  @include container-responsive(module, mobile) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  @include container-responsive(module, tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+// Individual faction card
+.dashboard-faction-card {
+  position: relative;
+  background: var(--color-bg-transparent-light);
+  border-radius: $border-radius-md;
+  padding: $spacing-sm;
+  transition: all $transition-fast ease;
+  
+  &:hover {
+    background: var(--color-bg-transparent-semi);
+  }
+  
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacing-xs;
+    align-items: center;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  &__color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  
+  &__chart {
+    margin: 0 (-$spacing-xs); // Compensar el padding para maximizar el espacio del gráfico
+  }
+  
+  &__badge {
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+    background: var(--color-text-secondary);
+    color: var(--color-background);
+    font-size: 0.625rem;
+    padding: 2px 6px;
+    border-radius: $border-radius-sm;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+.dashboard-rankings-grid {
+  display: grid;
+  gap: $spacing-md;
+  grid-template-columns: 1fr;
+  
+  @include container-responsive(module, mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include container-responsive(module, desktop) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dashboard-ranking {
+  &__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin: 0 0 $spacing-xs 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.dashboard-distribution-grid {
+  display: grid;
+  gap: $spacing-md;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  
+  @include container-responsive(module, mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include container-responsive(module, tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

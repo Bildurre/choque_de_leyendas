@@ -25,7 +25,7 @@ use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
 Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
   // Dashboard
-  Route::get('/', [DashboardController::class, 'view'])->name('dashboard');
+  Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
   // Hero Attributes Configuration
   Route::get('hero-attributes-configurations/edit', [HeroAttributesConfigurationController::class, 'edit'])->name('hero-attributes-configurations.edit');

@@ -54,6 +54,7 @@ return [
   'from' => 'from',
   'showing' => 'Showing',
   'per_page' => 'per page',
+  'other' => 'Other',
   
   // Confirmations
   'confirm_delete' => 'Are you sure you want to delete this item?',

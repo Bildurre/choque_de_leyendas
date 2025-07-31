@@ -54,6 +54,7 @@ return [
   'from' => 'desde',
   'showing' => 'Mostrando',
   'per_page' => 'por página',
+  'other' => 'Otro',
   
   // Confirmaciones
   'confirm_delete' => '¿Estás seguro de que deseas eliminar este elemento?',

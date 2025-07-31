@@ -1,0 +1,39 @@
+@use '../../abstracts/all' as *;
+
+.dashboard-info-line {
+  margin-bottom: $spacing-sm;
+  
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $spacing-md;
+    align-items: center;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__label {
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  &__value {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  &__bar {
+    height: 4px;
+    background: var(--color-bg-transparent-light);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  &__bar-fill {
+    height: 100%;
+    background: var(--random-accent-color);
+    transition: width $transition-medium ease;
+  }
+}

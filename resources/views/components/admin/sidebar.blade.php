@@ -13,7 +13,7 @@
         <li class="admin-sidebar__item">
           <a href="{{ route('admin.dashboard') }}" class="admin-sidebar__link {{ request()->routeIs('admin.dashboard') ? 'admin-sidebar__link--active' : '' }}">
             <x-icon name="dashboard" />
-            <span class="admin-sidebar__text">{{ __('admin.dashboard') }}</span>
+            <span class="admin-sidebar__text">{{ __('admin.dashboard.title') }}</span>
           </a>
         </li>
 
