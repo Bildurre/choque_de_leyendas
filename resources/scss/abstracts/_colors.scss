@@ -134,7 +134,8 @@ $color-text-dark-dim: #2a2a2a;
   
   // Text colors
   --color-text-primary: #{$color-text-light};
-  --color-text-secondary: #{$color-text-muted};
+  --color-text-muted: #{$color-text-muted};
+  --color-text-secondary: #{$color-text-light-dim};
 
   // Game colors
   --color-game-red: #{$color-red};

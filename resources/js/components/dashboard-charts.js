@@ -10,7 +10,7 @@ export default function initDashboardCharts() {
     const computedStyle = getComputedStyle(document.documentElement);
     return {
       textColor: computedStyle.getPropertyValue('--color-text-primary').trim(),
-      gridColor: computedStyle.getPropertyValue('--color-card-border').trim(),
+      gridColor: computedStyle.getPropertyValue('--color-text-muted').trim(),
       gameBlue: computedStyle.getPropertyValue('--color-game-blue').trim(),
       gameGreen: computedStyle.getPropertyValue('--color-game-green').trim(),
       gameRed: computedStyle.getPropertyValue('--color-game-red').trim(),
@@ -26,6 +26,15 @@ export default function initDashboardCharts() {
     const ctx = canvas.getContext('2d');
     const colors = getThemeColors();
     
+    // Add border configuration to datasets for bar charts
+    if (type === 'bar' && data.datasets) {
+      data.datasets = data.datasets.map(dataset => ({
+        ...dataset,
+        borderColor: colors.textSecondary,
+        borderWidth: 1
+      }));
+    }
+    
     // Common options for all charts
     const commonOptions = {
       responsive: true,
@@ -38,7 +47,7 @@ export default function initDashboardCharts() {
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
           titleColor: '#fff',
           bodyColor: '#fff',
-          borderColor: '#333',
+          borderColor: colors.gridColor,
           borderWidth: 1,
           padding: 10,
           cornerRadius: 4,
@@ -57,19 +66,27 @@ export default function initDashboardCharts() {
           x: {
             grid: {
               color: colors.gridColor,
-              display: false
+              display: false,
+              borderColor: colors.gridColor
             },
             ticks: {
               color: colors.textColor,
               font: {
                 size: isSmallChart ? 10 : 12
               }
+            },
+            border: {
+              color: colors.gridColor,
+              display: true
             }
           },
           y: {
             grid: {
               color: colors.gridColor,
-              display: !isSmallChart
+              display: !isSmallChart,
+              borderColor: colors.gridColor,
+              drawTicks: true,
+              tickColor: colors.gridColor
             },
             ticks: {
               color: colors.textColor,
@@ -78,6 +95,10 @@ export default function initDashboardCharts() {
                 size: isSmallChart ? 10 : 12
               },
               display: !isSmallChart
+            },
+            border: {
+              color: colors.gridColor,
+              display: true
             }
           }
         },
@@ -99,20 +120,48 @@ export default function initDashboardCharts() {
           x: {
             grid: {
               color: colors.gridColor,
-              display: false
+              display: false,
+              borderColor: colors.gridColor
             },
             ticks: {
               color: colors.textColor
+            },
+            border: {
+              color: colors.gridColor,
+              display: true
             }
           },
           y: {
             grid: {
-              color: colors.gridColor
+              color: colors.gridColor,
+              borderColor: colors.gridColor,
+              drawTicks: true,
+              tickColor: colors.gridColor
             },
             ticks: {
               color: colors.textColor,
               beginAtZero: true
+            },
+            border: {
+              color: colors.gridColor,
+              display: true
             }
+          }
+        }
+      },
+      doughnut: {
+        elements: {
+          arc: {
+            borderColor: colors.textColor,
+            borderWidth: 1
+          }
+        }
+      },
+      pie: {
+        elements: {
+          arc: {
+            borderColor: colors.textColor,
+            borderWidth: 1
           }
         }
       }
@@ -151,12 +200,36 @@ export default function initDashboardCharts() {
         chart.options.plugins.legend.labels.color = colors.textColor;
       }
       
+      // Update tooltip border
+      if (chart.options.plugins.tooltip) {
+        chart.options.plugins.tooltip.borderColor = colors.textColor;
+      }
+      
       // Update scales colors
       if (chart.options.scales) {
         Object.values(chart.options.scales).forEach(scale => {
           if (scale.ticks) scale.ticks.color = colors.textColor;
-          if (scale.grid) scale.grid.color = colors.gridColor;
+          if (scale.grid) {
+            scale.grid.color = colors.gridColor;
+            scale.grid.borderColor = colors.gridColor;
+            scale.grid.tickColor = colors.gridColor;
+          }
+          if (scale.border) scale.border.color = colors.gridColor;
         });
+      }
+      
+      // Update dataset borders for bar charts
+      if (chart.config.type === 'bar' && chart.data.datasets) {
+        chart.data.datasets.forEach(dataset => {
+          dataset.borderColor = colors.textColor;
+          dataset.borderWidth = 1;
+        });
+      }
+      
+      // Update arc borders for doughnut/pie charts
+      if ((chart.config.type === 'doughnut' || chart.config.type === 'pie') && chart.options.elements?.arc) {
+        chart.options.elements.arc.borderColor = colors.textColor;
+        chart.options.elements.arc.borderWidth = 1;
       }
       
       chart.update();
