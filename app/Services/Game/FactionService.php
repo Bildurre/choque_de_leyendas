@@ -21,13 +21,17 @@ class FactionService
    * @param int|null $perPage Number of items per page (null for no pagination)
    * @param bool $withTrashed Include trashed items
    * @param bool $onlyTrashed Only show trashed items
+   * @param bool $onlyPublished Only show published items
+   * @param bool $onlyUnpublished Only show unpublished items
    * @return mixed Collection or LengthAwarePaginator
    */
   public function getAllFactions(
     ?Request $request = null,
     ?int $perPage = null, 
     bool $withTrashed = false, 
-    bool $onlyTrashed = false
+    bool $onlyTrashed = false,
+    bool $onlyPublished = false,
+    bool $onlyUnpublished = false
   ): mixed {
     // Base query with relationship counts
     $query = Faction::withCount(['heroes', 'cards']);
@@ -37,6 +41,13 @@ class FactionService
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
+    }
+    
+    // Apply published filters
+    if ($onlyPublished) {
+      $query->where('is_published', true);
+    } elseif ($onlyUnpublished) {
+      $query->where('is_published', false);
     }
     
     // Count total records (before filtering)
@@ -153,7 +164,7 @@ class FactionService
   public function getFactionDecks(Faction $faction, int $perPage = 8)
   {
     return $faction->factionDecks()
-      ->with(['gameMode'])
+      ->with(['gameMode', 'faction'])
       ->paginate($perPage);
   }
   

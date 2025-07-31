@@ -1,12 +1,18 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.deck_attributes.configurations') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.deck_attributes.configurations')">
+    <x-slot:actions>
+      <x-button-link
+        :href="route('admin.deck-attributes-configurations.create')"
+        variant="primary"
+        icon="plus"
+      >
+        {{ __('entities.deck_attributes.create') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
     <x-entity.list 
-      :create-route="route('admin.deck-attributes-configurations.create')"
-      :create-label="__('entities.deck_attributes.create')"
       :items="$configurations"
       :emptyMessage="__('entities.deck_attributes.no_configurations')"
     >

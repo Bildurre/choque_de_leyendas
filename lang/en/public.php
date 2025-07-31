@@ -45,6 +45,8 @@ return [
   
   // Factions
   'factions' => [
+    'back' => 'Back to Factions',
+    'go' => 'Go to Factions',
     'title' => 'Factions',
     'description' => 'Explore the different game factions',
     'empty' => 'No factions available',
@@ -59,6 +61,8 @@ return [
   
   // Heroes
   'heroes' => [
+    'back' => 'Back to Heroes',
+    'go' => 'Go to Heroes',
     'title' => 'Heroes',
     'description' => 'Discover all the heroes of Alanda: Clash of Legends',
     'no_heroes' => 'No heroes available',
@@ -74,6 +78,8 @@ return [
   
   // Cards
   'cards' => [
+    'back' => 'Back to Cards',
+    'go' => 'Go to Cards',
     'title' => 'Cards',
     'description' => 'Explore all the game cards',
     'no_cards' => 'No cards available',
@@ -114,6 +120,8 @@ return [
   
   // Faction decks
   'faction_decks' => [
+    'back' => 'Back to Decks',
+    'go' => 'Go to Decks',
     'title' => 'Faction Decks',
     'description' => 'Discover pre-built decks for each faction and game mode. These decks are balanced and ready to play.',
     'no_decks' => 'No decks available.',

@@ -18,7 +18,8 @@ return [
         'sacerdote' => 'sacerdotisa',
         'hechicero' => 'hechicera',
         'ladrón' => 'ladrona',
-        'ilusionista' => 'ilusionista',  // Sin cambio
+        'ilusionista' => 'ilusionista',
+        'explorador' => 'exploradora'
     ],
     
     'hero_races' => [

@@ -14,8 +14,16 @@
   'trashedCount' => null,
   'baseRoute' => null,
   'showHeader' => true,
-  'wide' => null
+  'wide' => null,
+  'extraTabs' => null, // For additional tabs
+  'currentTab' => null // To track current active tab
 ])
+
+@php
+  // Determine current tab from request
+  $currentTab = $currentTab ?? request()->get('tab', $activeTabId);
+  $isTrashTab = $currentTab === $trashedTabId;
+@endphp
 
 <div {{ $attributes->merge(['class' => 'entity-list']) }}>
   @if($withTabs)
@@ -24,7 +32,7 @@
         <x-slot:header>
           <x-tab-item 
             :id="$activeTabId"
-            :active="!$trashed" 
+            :active="$currentTab === $activeTabId" 
             :href="route($baseRoute)"
             icon="list"
             :count="$activeCount"
@@ -32,17 +40,17 @@
             {{ __('admin.active_items') }}
           </x-tab-item>
           
+          {{ $extraTabs ?? '' }}
+          
           <x-tab-item 
             :id="$trashedTabId"
-            :active="$trashed" 
-            :href="route($baseRoute, ['trashed' => 1])"
+            :active="$currentTab === $trashedTabId" 
+            :href="route($baseRoute, ['tab' => $trashedTabId])"
             icon="trash"
             :count="$trashedCount"
           >
             {{ __('admin.trashed_items') }}
           </x-tab-item>
-          
-          {{ $extraTabs ?? '' }}
         </x-slot:header>
         
         <x-slot:content>
@@ -70,7 +78,7 @@
                   </div>
                 @endif
                 
-                @if($createRoute && !$trashed)
+                @if($createRoute && !$isTrashTab)
                   <x-button-link
                     :href="$createRoute"
                     variant="primary"
@@ -158,7 +166,7 @@
               icon="plus"
             >
               {{ $createLabel }}
-            </x-buttton-link>
+            </x-button-link>
           @endif
           
           {{ $actions ?? '' }}

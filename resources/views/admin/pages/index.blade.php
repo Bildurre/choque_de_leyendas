@@ -1,5 +1,17 @@
 <x-admin-layout>
-  <x-admin.page-header :title="__('pages.plural')" />
+  <x-admin.page-header :title="__('pages.plural')">
+    <x-slot:actions>
+      @if(!$trashed)
+        <x-button-link
+          :href="route('admin.pages.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('pages.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
 
@@ -27,9 +39,7 @@
       </form>
     @endif
     
-    <x-entity.list 
-      :create-route="!$trashed ? route('admin.pages.create') : null"
-      :create-label="__('pages.create')"
+    <x-entity.list
       :items="$pages"
       :withTabs="true"
       :trashed="$trashed"

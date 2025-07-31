@@ -1,3 +1,7 @@
+
+@php
+  $tab = request()->get('tab', 'info');
+@endphp
 <x-public-layout
   :title="__('entities.faction_decks.page_title', ['name' => $factionDeck->name])"
   :metaDescription="__('entities.faction_decks.page_description', [
@@ -37,8 +41,8 @@
   @endphp
 
   @component('content.blocks.header', ['block' => $headerBlock])
-    @env('local')
-      @slot('actions')
+    @slot('actions')
+      @env('local')
         <x-pdf.download-button
           :entity="$factionDeck"
           entityType="deck"
@@ -46,8 +50,35 @@
         >
         {{ __('pdf.download.button_title') }}
         </x-pdf.download-button>
-      @endslot
-    @endenv
+      @endenv
+
+      @env('production')
+        <x-button-link
+          :href="route('public.faction-decks.index')"
+          variant="secondary"
+          icon="arrow-left"
+        >
+          {{ __('public.faction_decks.back') }}
+        </x-button-link>
+        @if ($tab === 'heroes')
+          <x-button-link
+            :href="route('public.heroes.index')"
+            variant="secondary"
+            icon="arrow-left"
+          >
+            {{ __('public.heroes.go') }}
+          </x-button-link>
+        @elseif ($tab === 'cards')
+          <x-button-link
+            :href="route('public.cards.index')"
+            variant="secondary"
+            icon="arrow-left"
+          >
+            {{ __('public.cards.go') }}
+          </x-button-link>
+        @endif
+      @endenv
+    @endslot
   @endcomponent
 
   {{-- Content Tabs --}}
@@ -85,15 +116,11 @@
           </x-tab-item>
         </x-slot:header>
         
-        <x-slot:content>
-          @php
-            $tab = request()->get('tab', 'info');
-          @endphp
-          
+        <x-slot:content>          
           @if($tab === 'info')
             {{-- Information Tab with all statistics --}}
             <div class="tab-content">
-              <div class="deck-stats-wrapper">
+              <div class="info-blocks-grid">
                 {{-- Basic Information --}}
                 <x-entity-show.info-block title="public.faction_decks.basic_info">
                   <x-entity-show.info-list>

@@ -39,6 +39,19 @@ return [
     'tabs' => [
       'details' => 'Detalles',
     ],
+    'created_successfully' => 'La facción :name ha sido creada exitosamente.',
+    'updated_successfully' => 'La facción :name ha sido actualizada exitosamente.',
+    'deleted_successfully' => 'La facción :name ha sido eliminada exitosamente.',
+    'restored_successfully' => 'La facción :name ha sido restaurada exitosamente.',
+    'force_deleted_successfully' => 'La facción :name ha sido eliminada permanentemente.',
+    'published_successfully' => 'La facción :name ha sido publicada exitosamente.',
+    'unpublished_successfully' => 'La facción :name ha sido despublicada exitosamente.',
+    'errors' => [
+      'has_heroes' => 'No se puede eliminar esta facción porque tiene héroes asociados.',
+      'has_cards' => 'No se puede eliminar esta facción porque tiene cartas asociadas.',
+      'force_delete_has_heroes' => 'No se puede eliminar permanentemente esta facción porque tiene héroes asociados (incluso eliminados).',
+      'force_delete_has_cards' => 'No se puede eliminar permanentemente esta facción porque tiene cartas asociadas (incluso eliminadas).',
+    ],
   ],
   
   // Héroes
@@ -84,6 +97,15 @@ return [
       'armor' => 'Armadura',
       'health' => 'Vida',
     ],
+    'created_successfully' => 'El héroe :name ha sido creado exitosamente.',
+    'updated_successfully' => 'El héroe :name ha sido actualizado exitosamente.',
+    'deleted_successfully' => 'El héroe :name ha sido eliminado exitosamente.',
+    'restored_successfully' => 'El héroe :name ha sido restaurado exitosamente.',
+    'force_deleted_successfully' => 'El héroe :name ha sido eliminado permanentemente.',
+    'published_successfully' => 'El héroe :name ha sido publicado exitosamente.',
+    'unpublished_successfully' => 'El héroe :name ha sido despublicado exitosamente.',
+    'passive_abilities' => 'Habilidades pasivas',
+    'active_abilities' => 'Habilidades activas',
   ],
   
   // Cartas
@@ -241,6 +263,7 @@ return [
     'edit' => 'Editar subtipo de ataque',
     'name' => 'Nombre',
     'type' => 'Tipo',
+    'damage_type' => 'Tipo de daño',
     'types' => [
       'physical' => 'Físico',
       'magical' => 'Mágico',
@@ -367,7 +390,7 @@ return [
     'singular' => 'Contador',
     'plural' => 'Contadores',
     'create' => 'Crear contador',
-    'edit' => 'Editar :name',
+    'edit' => 'Editar Contador',
     'create_with_type' => 'Crear contador de :type',
     'name' => 'Nombre',
     'type' => 'Tipo',

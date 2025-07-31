@@ -53,7 +53,6 @@
             variant="view"
             size="sm"
             :title="__('admin.view')"
-            target="_blank"
           />
         @endif
         

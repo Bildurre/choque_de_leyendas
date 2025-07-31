@@ -1,47 +1,59 @@
 <x-admin-layout>
-  <div class="page-header">
-    <div class="page-header__content">
-      <h1 class="page-title">{{ $factionDeck->name }}</h1>
-      <p class="page-subtitle">{{ $factionDeck->faction->name }} - {{ $factionDeck->gameMode->name }}</p>
-      
-      <div class="page-header__actions">
-        <x-button-link
-          :href="route('admin.faction-decks.index', ['tab' => $factionDeck->game_mode_id])"
-          variant="secondary"
-          icon="arrow-left"
-        >
-          {{ __('admin.back_to_list') }}
-        </x-button-link>
-        
-        <x-button-link
-          :href="route('admin.faction-decks.edit', $factionDeck)"
-          variant="primary"
-          icon="edit"
-        >
-          {{ __('admin.edit') }}
-        </x-button-link>
-        
-        <x-button
-          :action="route('admin.faction-decks.toggle-published', $factionDeck)"
-          method="PUT"
-          :variant="$factionDeck->isPublished() ? 'warning' : 'success'"
-          :icon="$factionDeck->isPublished() ? 'eye-off' : 'eye'"
-        >
-          {{ $factionDeck->isPublished() ? __('admin.unpublish') : __('admin.publish') }}
-        </x-button>
-        
-        <x-button
-          :action="route('admin.faction-decks.destroy', $factionDeck)"
-          method="DELETE"
-          variant="danger"
-          icon="trash"
-          :confirm-message="__('entities.faction_decks.confirm_delete')"
-        >
-          {{ __('admin.delete') }}
-        </x-button>
-      </div>
-    </div>
-  </div>
+  <x-admin.page-header :title="$factionDeck->name">
+    <x-slot:actionButtons>
+      <x-action-button
+        :href="route('admin.faction-decks.edit', $factionDeck)"
+        icon="edit"
+        variant="edit"
+        size="lg"
+        :title="__('admin.edit')"
+      />
+    
+      @if (!$factionDeck->trashed())
+        <x-action-button
+          :route="route('admin.faction-decks.toggle-published', $factionDeck)"
+          :icon="$factionDeck->is_published ? 'globe-slash' : 'globe'"
+          :variant="$factionDeck->is_published ? 'unpublish' : 'publish'"
+          size="lg"
+          method="POST"
+          :title="$factionDeck->is_published ? __('admin.unpublish') : __('admin.publish')"
+        />
+      @else
+        <x-action-button
+          :route="route('admin.faction-decks.restore', $factionDeck->id)"
+          icon="refresh"
+          variant="restore"
+          size="lg"
+          method="POST"
+          :title="__('admin.restore')"
+        />
+      @endif
+    
+      <x-action-button
+        :route="$factionDeck->trashed()
+            ? route('admin.faction-decks.force-delete', $factionDeck->id) 
+            : route('admin.faction-decks.destroy', $factionDeck)"
+        icon="trash"
+        variant="delete"
+        size="lg"
+        method="DELETE"
+        :confirm-message="$factionDeck->trashed()
+            ? __('entities.faction_decks.confirm_force_delete') 
+            : __('entities.faction_decks.confirm_delete')"
+        :title="__('admin.delete')"
+      />
+    </x-slot:actionButtons>
+
+    <x-slot:actions>
+       <x-button-link
+        :href="route('admin.faction-decks.index')"
+        variant="secondary"
+        icon="arrow-left"
+      >
+        {{ __('admin.back_to_list') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
     <x-tabs>
@@ -80,7 +92,7 @@
         @if($tab === 'info')
           {{-- Information Tab --}}
           <div class="tab-content">
-            <div class="deck-stats-wrapper">
+            <div class="info-blocks-grid">
               {{-- Basic Information --}}
               <x-entity-show.info-block title="entities.faction_decks.basic_info">
                 <x-entity-show.info-list>

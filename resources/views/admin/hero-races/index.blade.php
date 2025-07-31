@@ -1,8 +1,18 @@
 <!-- resources/views/admin/hero-races/index.blade.php -->
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.hero_races.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.hero_races.plural')">
+    <x-slot:actions>
+      @if(!$trashed)
+        <x-button-link
+          :href="route('admin.hero-races.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.hero_races.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
 
@@ -15,8 +25,6 @@
     />
 
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.hero-races.create') : null"
-      :create-label="__('entities.hero_races.create')"
       :items="$heroRaces"
       :withTabs="true"
       :trashed="$trashed"

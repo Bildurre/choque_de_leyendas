@@ -1,7 +1,17 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.card_types.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.card_types.plural')">
+    <x-slot:actions>
+      @if(!$trashed)
+        <x-button-link
+          :href="route('admin.card-types.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.card_types.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
 
@@ -14,8 +24,6 @@
     />
 
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.card-types.create') : null"
-      :create-label="__('entities.card_types.create')"
       :items="$cardTypes"
       :withTabs="true"
       :trashed="$trashed"

@@ -1,10 +1,19 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.cards.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.cards.plural')">
+    <x-slot:actions>
+      @if($tab !== 'trashed')
+        <x-button-link
+          :href="route('admin.cards.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.cards.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
-
     <x-filters.card 
       :model="$cardModel" 
       :request="$request" 
@@ -14,15 +23,28 @@
     />
 
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.cards.create') : null"
-      :create-label="__('entities.cards.create')"
       :items="$cards"
       :withTabs="true"
+      :activeTabId="'published'"
+      :trashedTabId="'trashed'"
       :trashed="$trashed"
-      :activeCount="$activeCount ?? null"
-      :trashedCount="$trashedCount ?? null"
+      :activeCount="$publishedCount"
+      :trashedCount="$trashedCount"
+      :currentTab="$tab"
       baseRoute="admin.cards.index"
     >
+      <x-slot:extraTabs>
+        <x-tab-item 
+          id="unpublished"
+          :active="$tab === 'unpublished'" 
+          :href="route('admin.cards.index', ['tab' => 'unpublished'])"
+          icon="edit"
+          :count="$unpublishedCount"
+        >
+          {{ __('admin.draft') }}
+        </x-tab-item>
+      </x-slot:extraTabs>
+
       @foreach($cards as $card)
         <x-entity.list-card 
           :title="$card->name"
@@ -37,62 +59,7 @@
           :confirm-message="$trashed 
             ? __('entities.cards.confirm_force_delete') 
             : __('entities.cards.confirm_delete')"
-        >
-          <x-slot:badges>
-            <x-badge variant="primary">
-              {{ $card->cardType->name }}
-            </x-badge>
-          
-            <x-badge 
-              :variant="$card->faction->text_is_dark ? 'light' : 'dark'" 
-              style="background-color: {{ $card->faction->color }};"
-            >
-              {{ $card->faction->name }}
-            </x-badge>
-            
-            @if($card->equipmentType)
-              <x-badge variant="info">
-                {{ $card->equipmentType->name }} 
-                @if($card->hands)
-                  ({{ $card->hands }} {{ trans_choice('entities.cards.hands_count', $card->hands) }})
-                @endif
-              </x-badge>
-            @endif
-            
-            @if($card->attackSubtype)
-              <x-badge variant="{{ $card->attackSubtype->type === 'physical' ? 'warning' : 'success' }}">
-                {{ $card->attackSubtype->name }}
-                @if($card->area)
-                  ({{ __('entities.cards.area') }})
-                @endif
-              </x-badge>
-            @endif
-            
-            @if($card->cost)
-              <div class="badge-with-icons">
-                <span class="badge-with-icons__cost">
-                  <x-cost-display :cost="$card->cost" />
-                </span>
-              </div>
-            @endif
-            
-            @if($card->isPublished())
-              <x-badge variant="success">
-                {{ __('admin.published') }}
-              </x-badge>
-            @else
-              <x-badge variant="warning">
-                {{ __('admin.draft') }}
-              </x-badge>
-            @endif
-            
-            @if($trashed)
-              <x-badge variant="danger">
-                {{ __('admin.deleted_at', ['date' => $card->deleted_at->format('d/m/Y H:i')]) }}
-              </x-badge>
-            @endif
-          </x-slot:badges>
-          
+        >          
           <div class="card-details">
             <x-previews.preview-image :entity="$card" type="card"/>
           </div>
@@ -101,7 +68,7 @@
       
       @if(method_exists($cards, 'links'))
         <x-slot:pagination>
-          {{ $cards->appends(['trashed' => $trashed ? 1 : null])->links() }}
+          {{ $cards->appends(['tab' => $tab])->links() }}
         </x-slot:pagination>
       @endif
     </x-entity.list>

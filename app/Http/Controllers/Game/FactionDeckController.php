@@ -36,25 +36,32 @@ class FactionDeckController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published'); // Default to published
     
-    // Obtener contadores para tabs
-    $counts = $this->factionDeckService->getFactionDecksCount();
-    $activeCount = $counts['active'];
-    $trashedCount = $counts['trashed'];
+    // Get counters for tabs
+    $publishedCount = FactionDeck::where('is_published', true)->count();
+    $unpublishedCount = FactionDeck::where('is_published', false)->count();
+    $trashedCount = FactionDeck::onlyTrashed()->count();
     
-    // Obtener los faction decks con paginación y filtrado
+    // Determine filters based on tab
+    $trashed = ($tab === 'trashed');
+    $onlyPublished = ($tab === 'published');
+    $onlyUnpublished = ($tab === 'unpublished');
+    
+    // Get faction decks with pagination and filtering
     $factionDecks = $this->factionDeckService->getAllFactionDecks(
-      $request, // request para filtros
-      12,       // perPage
-      false,    // withTrashed
-      $trashed  // onlyTrashed
+      $request,         // request for filters
+      12,               // perPage
+      false,            // withTrashed
+      $trashed,         // onlyTrashed
+      $onlyPublished,   // onlyPublished
+      $onlyUnpublished  // onlyUnpublished
     );
     
-    // Crear instancia de modelo para componente de filtros
+    // Create instance of model for filter component
     $factionDeckModel = new FactionDeck();
     
-    // Obtener conteos de la respuesta paginada
+    // Get counts from paginated response
     $totalCount = $factionDecks->totalCount ?? 0;
     $filteredCount = $factionDecks->filteredCount ?? 0;
 
@@ -62,8 +69,10 @@ class FactionDeckController extends Controller
     
     return view('admin.faction-decks.index', compact(
       'factionDecks', 
+      'tab',
       'trashed', 
-      'activeCount', 
+      'publishedCount',
+      'unpublishedCount',
       'trashedCount',
       'factionDeckModel',
       'request',
@@ -243,7 +252,7 @@ class FactionDeckController extends Controller
       $this->factionDeckService->restore($id);
       $factionDeck = FactionDeck::find($id);
       
-      return redirect()->route('admin.faction-decks.index', ['trashed' => 1])
+      return redirect()->route('admin.faction-decks.index', ['tab' => 'trashed'])
         ->with('success', __('faction_decks.restored_successfully', ['name' => $factionDeck->name]));
     } catch (\Exception $e) {
       return back()
@@ -262,7 +271,7 @@ class FactionDeckController extends Controller
       
       $this->factionDeckService->forceDelete($id);
       
-      return redirect()->route('admin.faction-decks.index', ['trashed' => 1])
+      return redirect()->route('admin.faction-decks.index', ['tab' => 'trashed'])
         ->with('success', __('faction_decks.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
       return back()
@@ -281,6 +290,10 @@ class FactionDeckController extends Controller
       ? __('faction_decks.published_successfully', ['name' => $factionDeck->name])
       : __('faction_decks.unpublished_successfully', ['name' => $factionDeck->name]);
 
-    return back()->with('success', $statusMessage);
+    // Redirect to appropriate tab based on new status
+    $tab = $factionDeck->isPublished() ? 'published' : 'unpublished';
+    
+    return redirect()->route('admin.faction-decks.index', ['tab' => $tab])
+      ->with('success', $statusMessage);
   }
 }

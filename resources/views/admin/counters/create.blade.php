@@ -1,7 +1,15 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('counters.create_with_type', ['type' => __('entities.counters.types.' . $type)]) }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.counters.create')">
+    <x-slot:actions>
+      <x-button-link
+        :href="route('admin.counters.index')"
+        variant="primary"
+        icon="arrow-left"
+      >
+        {{ __('admin.back_to_list') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
     @include('admin.counters._form', [

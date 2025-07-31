@@ -37,18 +37,26 @@ class HeroController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published'); // Default to published
     
-    // Get counters for tabs directly using Eloquent
-    $activeCount = Hero::count();
+    // Get counters for tabs
+    $publishedCount = Hero::where('is_published', true)->count();
+    $unpublishedCount = Hero::where('is_published', false)->count();
     $trashedCount = Hero::onlyTrashed()->count();
+    
+    // Determine filters based on tab
+    $trashed = ($tab === 'trashed');
+    $onlyPublished = ($tab === 'published');
+    $onlyUnpublished = ($tab === 'unpublished');
     
     // Get heroes with all filtering applied
     $heroes = $this->heroService->getAllHeroes(
-      12,       // perPage
-      $request, // request para filtros
-      false,    // withTrashed
-      $trashed  // onlyTrashed
+      12,               // perPage
+      $request,         // request for filters
+      false,            // withTrashed
+      $trashed,         // onlyTrashed
+      $onlyPublished,   // onlyPublished
+      $onlyUnpublished  // onlyUnpublished
     );
     
     // Create a Hero instance for filter component
@@ -60,8 +68,10 @@ class HeroController extends Controller
     
     return view('admin.heroes.index', compact(
       'heroes', 
+      'tab',
       'trashed', 
-      'activeCount', 
+      'publishedCount',
+      'unpublishedCount',
       'trashedCount', 
       'heroModel', 
       'request',
@@ -207,7 +217,7 @@ class HeroController extends Controller
       $this->heroService->restore($id);
       $hero = Hero::find($id);
       
-      return redirect()->route('admin.heroes.index', ['trashed' => 1])
+      return redirect()->route('admin.heroes.index', ['tab' => 'trashed'])
         ->with('success', __('heroes.restored_successfully', ['name' => $hero->name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.restore', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage());
@@ -225,7 +235,7 @@ class HeroController extends Controller
       
       $this->heroService->forceDelete($id);
       
-      return redirect()->route('admin.heroes.index', ['trashed' => 1])
+      return redirect()->route('admin.heroes.index', ['tab' => 'trashed'])
         ->with('success', __('heroes.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.heroes.singular')]) . ' ' . $e->getMessage());
@@ -243,6 +253,10 @@ class HeroController extends Controller
       ? __('heroes.published_successfully', ['name' => $hero->name])
       : __('heroes.unpublished_successfully', ['name' => $hero->name]);
 
-    return back()->with('success', $statusMessage);
+    // Redirect to appropriate tab based on new status
+    $tab = $hero->isPublished() ? 'published' : 'unpublished';
+    
+    return redirect()->route('admin.heroes.index', ['tab' => $tab])
+      ->with('success', $statusMessage);
   }
 }

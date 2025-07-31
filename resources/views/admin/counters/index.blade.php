@@ -1,7 +1,22 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.counters.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.counters.plural')">
+    <x-slot:actions>
+      @if($tab !== 'trashed')
+        <x-dropdown 
+          :label="__('entities.counters.create')" 
+          icon="plus"
+          variant="primary"
+        >
+          <x-dropdown-item :href="route('admin.counters.create', ['type' => 'boon'])">
+            {{ __('entities.counters.types.boon') }}
+          </x-dropdown-item>
+          <x-dropdown-item :href="route('admin.counters.create', ['type' => 'bane'])">
+            {{ __('entities.counters.types.bane') }}
+          </x-dropdown-item>
+        </x-dropdown>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
     <x-filters.card 
@@ -13,31 +28,27 @@
     />
 
     <x-entity.list 
-      :create-route="null"
-      :create-label="__('entities.counters.create')"
       :items="$counters"
       :withTabs="true"
+      :activeTabId="'published'"
+      :trashedTabId="'trashed'"
       :trashed="$trashed"
-      :activeCount="$activeCount ?? null"
-      :trashedCount="$trashedCount ?? null"
+      :activeCount="$publishedCount"
+      :trashedCount="$trashedCount"
+      :currentTab="$tab"
       baseRoute="admin.counters.index"
     >
-      <x-slot:actions>
-        @if(!$trashed)
-          <x-dropdown 
-            :label="__('entities.counters.create')" 
-            icon="plus"
-            variant="primary"
-          >
-            <x-dropdown-item :href="route('admin.counters.create', ['type' => 'boon'])">
-              {{ __('entities.counters.types.boon') }}
-            </x-dropdown-item>
-            <x-dropdown-item :href="route('admin.counters.create', ['type' => 'bane'])">
-              {{ __('entities.counters.types.bane') }}
-            </x-dropdown-item>
-          </x-dropdown>
-        @endif
-      </x-slot:actions>
+      <x-slot:extraTabs>
+        <x-tab-item 
+          id="unpublished"
+          :active="$tab === 'unpublished'" 
+          :href="route('admin.counters.index', ['tab' => 'unpublished'])"
+          icon="edit"
+          :count="$unpublishedCount"
+        >
+          {{ __('admin.draft') }}
+        </x-tab-item>
+      </x-slot:extraTabs>
       
       @foreach($counters as $counter)
         <x-entity.list-card 
@@ -58,14 +69,16 @@
               {{ $counter->type_name }}
             </x-badge>
             
-            @if($counter->isPublished())
-              <x-badge variant="success">
-                {{ __('admin.published') }}
-              </x-badge>
-            @else
-              <x-badge variant="warning">
-                {{ __('admin.draft') }}
-              </x-badge>
+            @if(!$trashed)
+              @if($counter->isPublished())
+                <x-badge variant="success">
+                  {{ __('admin.published') }}
+                </x-badge>
+              @else
+                <x-badge variant="warning">
+                  {{ __('admin.draft') }}
+                </x-badge>
+              @endif
             @endif
             
             @if($trashed)
@@ -91,7 +104,7 @@
       
       @if(method_exists($counters, 'links'))
         <x-slot:pagination>
-          {{ $counters->appends(['trashed' => $trashed ? 1 : null])->links() }}
+          {{ $counters->appends(['tab' => $tab])->links() }}
         </x-slot:pagination>
       @endif
     </x-entity.list>

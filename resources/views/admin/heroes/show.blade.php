@@ -1,214 +1,242 @@
 <x-admin-layout>
-  <div class="page-header">
-    <div class="page-header__content">
-      <h1 class="page-title">{{ $hero->name }}</h1>
-      
-      <div class="page-header__actions">
-        <x-button-link
-          :href="route('admin.heroes.index')"
-          variant="secondary"
-          icon="arrow-left"
-        >
-          {{ __('admin.back_to_list') }}
-        </x-button-link>
-        
-        <x-button-link
-          :href="route('admin.heroes.edit', $hero)"
-          variant="primary"
-          icon="edit"
-        >
-          {{ __('admin.edit') }}
-        </x-button-link>
-      </div>
-    </div>
-  </div>
+  <x-admin.page-header :title="$hero->name">
+    <x-slot:actionButtons>
+      <x-action-button
+        :href="route('admin.heroes.edit', $hero)"
+        icon="edit"
+        variant="edit"
+        size="lg"
+        :title="__('admin.edit')"
+      />
+    
+      @if (!$hero->trashed())
+        <x-action-button
+          :route="route('admin.heroes.toggle-published', $hero)"
+          :icon="$hero->is_published ? 'globe-slash' : 'globe'"
+          :variant="$hero->is_published ? 'unpublish' : 'publish'"
+          size="lg"
+          method="POST"
+          :title="$hero->is_published ? __('admin.unpublish') : __('admin.publish')"
+        />
+      @else
+        <x-action-button
+          :route="route('admin.heroes.restore', $hero->id)"
+          icon="refresh"
+          variant="restore"
+          size="lg"
+          method="POST"
+          :title="__('admin.restore')"
+        />
+      @endif
+    
+      <x-action-button
+        :route="$hero->trashed()
+            ? route('admin.heroes.force-delete', $hero->id) 
+            : route('admin.heroes.destroy', $hero)"
+        icon="trash"
+        variant="delete"
+        size="lg"
+        method="DELETE"
+        :confirm-message="$hero->trashed()
+            ? __('entities.heroes.confirm_force_delete') 
+            : __('entities.heroes.confirm_delete')"
+        :title="__('admin.delete')"
+      />
+    </x-slot:actionButtons>
+
+    <x-slot:actions>
+      <x-button-link
+        :href="route('admin.heroes.index')"
+        variant="secondary"
+        icon="arrow-left"
+      >
+        {{ __('admin.back_to_list') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
-    <div class="hero-view">
-      <div class="hero-view__container">
-        <div class="hero-view__header">
-          {{-- <div class="hero-view__badges">
-            @if($hero->faction)
-              <x-badge 
-                :variant="$hero->faction->text_is_dark ? 'light' : 'dark'" 
-                style="background-color: {{ $hero->faction->color }};"
-              >
-                {{ $hero->faction->name }}
-              </x-badge>
-            @endif
-            
-            @if($hero->heroRace)
-              <x-badge variant="info">
-                {{ $hero->heroRace->name }}
-              </x-badge>
-            @endif
-            
-            @if($hero->heroClass)
-              <x-badge variant="primary">
-                {{ $hero->heroClass->name }}
-              </x-badge>
-            @endif
-            
-            <x-badge variant="{{ $hero->gender === 'male' ? 'success' : 'warning' }}">
-              {{ __('entities.heroes.genders.' . $hero->gender) }}
-            </x-badge>
-          </div> --}}
+    <div class="hero-details-wrapper">
+      {{-- Hero Information --}}
+      <div class="info-blocks-grid">
+
+        {{-- Hero Preview --}}
+        <div class="hero-preview-section">
+          <x-previews.preview-image :entity="$hero" type="hero"/>
         </div>
-        
-        <div class="hero-view__content">
-          <div class="hero-view__main">
-            {{-- <div class="hero-view__image-container">
-              @if($hero->image)
-                <img src="{{ $hero->getImageUrl() }}" alt="{{ $hero->name }}" class="hero-view__image">
+        {{-- Basic Information --}}
+        <x-entity-show.info-block title="entities.heroes.basic_info">
+          <x-entity-show.info-list>
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.name') }}"
+              :value="$hero->name" 
+            />
+
+            <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
+              @if($hero->faction)
+                <x-entity-show.info-link :href="route('admin.factions.show', [$hero->faction])">
+                  {{ $hero->faction->name }}
+                </x-entity-show.info-link>
               @else
-                <div class="hero-view__image-placeholder">
-                  <div class="hero-view__image-placeholder-icon">
-                    <x-icon name="image" size="xl" />
-                  </div>
-                  <p>{{ __('entities.heroes.no_image') }}</p>
-                </div>
+                {{ __('entities.heroes.no_faction') }}
               @endif
-            </div> --}}
-
-            <x-previews.hero :hero="$hero" />
+            </x-entity-show.info-list-item>
             
-            {{-- <div class="hero-view__details">
-              <div class="hero-view__section">
-                <h2 class="hero-view__section-title">{{ __('entities.heroes.attributes.title') }}</h2>
-                
-                <div class="hero-view__attribute-grid">
-                  <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.agility') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->agility }}</span>
-                  </div>
-                  
-                  <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.mental') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->mental }}</span>
-                  </div>
-                  
-                  <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.will') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->will }}</span>
-                  </div>
-                  
-                  <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.strength') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->strength }}</span>
-                  </div>
-                  
-                  <div class="hero-view__attribute">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.armor') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->armor }}</span>
-                  </div>
-                  
-                  <div class="hero-view__attribute hero-view__attribute--total">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.attributes.health') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->health }}</span>
-                  </div>
-                  
-                  <div class="hero-view__attribute hero-view__attribute--total">
-                    <span class="hero-view__attribute-label">{{ __('entities.heroes.total_attributes') }}:</span>
-                    <span class="hero-view__attribute-value">{{ $hero->total_attributes }}</span>
-                  </div>
-                </div>
-              </div>
-              
-              @if($hero->passive_name)
-                <div class="hero-view__section">
-                  <h2 class="hero-view__section-title">{{ __('entities.heroes.passive_ability') }}</h2>
-                  
-                  <div class="hero-view__passive">
-                    <h3 class="hero-view__passive-name">{{ $hero->passive_name }}</h3>
-                    
-                    @if($hero->passive_description)
-                      <div class="hero-view__passive-description">
-                        {!! $hero->passive_description !!}
-                      </div>
-                    @endif
-                  </div>
-                </div>
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.hero_races.singular') }}"
+              :value="$hero->getGenderizedRaceName()"
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.gender') }}"
+              :value="__('entities.heroes.genders.' . $hero->gender)" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.hero_classes.singular') }}"
+              :value="$hero->getGenderizedClassName()"
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.hero_superclasses.singular') }}"
+              :value="$hero->getGenderizedSuperclassName()"
+            />
+            
+            <x-entity-show.info-list-item label="{{ __('admin.status') }}">
+              @if($hero->isPublished())
+                <x-badge variant="success">{{ __('admin.published') }}</x-badge>
+              @else
+                <x-badge variant="warning">{{ __('admin.draft') }}</x-badge>
               @endif
-              
-              @if($hero->lore_text)
-                <div class="hero-view__section">
-                  <h2 class="hero-view__section-title">{{ __('entities.heroes.lore_text') }}</h2>
-                  <div class="hero-view__text-content">
-                    {!! $hero->lore_text !!}
-                  </div>
-                </div>
-              @endif
-            </div> --}}
-          </div>
-        </div>
-      </div>
+            </x-entity-show.info-list-item>
 
-      {{-- @if($hero->heroAbilities->count() > 0)
-        <div class="hero-view__abilities">
-          <h2 class="hero-view__section-title">{{ __('entities.hero_abilities.plural') }}</h2>
-          
-          <div class="hero-abilities-grid">
-            @foreach($hero->heroAbilities as $ability)
-              <div class="hero-ability-card">
-                <div class="hero-ability-card__header">
-                  <h3 class="hero-ability-card__name">{{ $ability->name }}</h3>
-                  
-                  <div class="hero-ability-card__cost">
-                    @if($ability->cost)
-                      <div class="hero-ability-card__cost-icons">
-                        <x-cost-display :cost="$ability->cost" />
-                      </div>
-                    @endif
-                  </div>
-                </div>
-                
-                <div class="hero-ability-card__details">
-                  @if($ability->attackRange)
-                    <div class="hero-ability-card__attribute">
-                      <span class="hero-ability-card__attribute-label">{{ __('entities.attack_ranges.singular') }}:</span>
-                      <span class="hero-ability-card__attribute-value">{{ $ability->attackRange->name }}</span>
-                    </div>
-                  @endif
-                  
-                  @if($ability->attackSubtype)
-                    <div class="hero-ability-card__attribute">
-                      <span class="hero-ability-card__attribute-label">{{ __('entities.attack_subtypes.singular') }}:</span>
-                      <span class="hero-ability-card__attribute-value {{ $ability->attackSubtype->type }}">
-                        {{ $ability->attackSubtype->name }}
-                      </span>
-                    </div>
-                  @endif
-                  
-                  @if($ability->area)
-                    <div class="hero-ability-card__attribute">
-                      <span class="hero-ability-card__attribute-label">{{ __('entities.hero_abilities.type') }}:</span>
-                      <span class="hero-ability-card__attribute-value">
-                        {{ __('entities.hero_abilities.area') }}
-                      </span>
-                    </div>
-                  @endif
-                </div>
-                
-                @if($ability->description)
-                  <div class="hero-ability-card__description">
-                    {!! $ability->description !!}
-                  </div>
-                @endif
-                
-                <div class="hero-ability-card__footer">
-                  <x-button-link
-                    :href="route('admin.hero-abilities.edit', $ability)"
-                    variant="secondary"
-                    size="sm"
-                  >
-                    {{ __('admin.view') }}
-                  </x-button-link>
-                </div>
-              </div>
-            @endforeach
-          </div>
-        </div>
-      @endif --}}
+            @if($hero->trashed())
+              <x-entity-show.info-list-item 
+                label="{{ __('admin.deleted_at') }}"
+                :value="$hero->deleted_at->format('d/m/Y H:i')" 
+              />
+            @endif
+          </x-entity-show.info-list>
+        </x-entity-show.info-block>
+
+        {{-- Hero Image --}}
+        @if($hero->hasImage())
+          <x-entity-show.info-block title="entities.heroes.image">
+            <div class="hero-image">
+              <img src="{{ $hero->getImageUrl() }}" alt="{{ $hero->name }}">
+            </div>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Attributes --}}
+        <x-entity-show.info-block title="entities.heroes.attributes.title">
+          <x-entity-show.info-list>
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.attributes.agility') }}"
+              :value="$hero->agility" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.attributes.mental') }}"
+              :value="$hero->mental" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.attributes.will') }}"
+              :value="$hero->will" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.attributes.strength') }}"
+              :value="$hero->strength" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.attributes.armor') }}"
+              :value="$hero->armor" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.attributes.health') }}"
+              :value="$hero->health" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.heroes.total_attributes') }}"
+              :value="$hero->total_attributes" 
+            />
+          </x-entity-show.info-list>
+        </x-entity-show.info-block>
+
+        {{-- Passive Abilities --}}
+        <x-entity-show.info-block title="entities.heroes.passive_abilities">
+          {{-- Class Passive --}}
+            <x-entity-show.ability-card
+              variant="passive"
+              :name="$hero->heroClass->name"
+              :description="$hero->heroClass->passive"
+            />
+            
+            {{-- Hero Passive --}}
+            <x-entity-show.ability-card
+              variant="passive"
+              :name="$hero->passive_name"
+              :description="$hero->passive_description"
+            />
+        </x-entity-show.info-block>
+
+        {{-- Active Abilities --}}
+        @if($hero->heroAbilities->count() > 0)
+          <x-entity-show.info-block title="entities.heroes.active_abilities">
+            <div class="abilities-list">
+              @foreach($hero->heroAbilities as $ability)
+                <x-entity-show.ability-card
+                  variant="active"
+                  :name="$ability->name"
+                  :description="$ability->description"
+                  :cost="$ability->cost"
+                  :attack-range="$ability->attackRange"
+                  :attack-subtype="$ability->attackSubtype"
+                  :area="$ability->area"
+                />
+              @endforeach
+            </div>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Lore Text --}}
+        @if($hero->lore_text)
+          <x-entity-show.info-block title="entities.heroes.lore_text">
+            <div class="prose">
+              {!! $hero->lore_text !!}
+            </div>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Epic Quote --}}
+        @if($hero->epic_quote)
+          <x-entity-show.info-block title="entities.heroes.epic_quote">
+            <blockquote class="epic-quote">
+              {!! $hero->epic_quote !!}
+            </blockquote>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Timestamps --}}
+        <x-entity-show.info-block title="admin.timestamps">
+          <x-entity-show.info-list>
+            <x-entity-show.info-list-item 
+              label="{{ __('admin.created_at') }}"
+              :value="$hero->created_at->format('d/m/Y H:i')" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('admin.updated_at') }}"
+              :value="$hero->updated_at->format('d/m/Y H:i')" 
+            />
+          </x-entity-show.info-list>
+        </x-entity-show.info-block>
+      </div>
     </div>
   </div>
 </x-admin-layout>

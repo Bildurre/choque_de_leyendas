@@ -1,10 +1,19 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.hero_abilities.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.hero_abilities.plural')">
+    <x-slot:actions>
+      @if(!$trashed)
+        <x-button-link
+          :href="route('admin.hero-abilities.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.hero_abilities.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
-
     <x-filters.card 
       :model="$heroAbilityModel" 
       :request="$request" 
@@ -14,8 +23,6 @@
     />
 
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.hero-abilities.create') : null"
-      :create-label="__('entities.hero_abilities.create')"
       :items="$heroAbilities"
       :withTabs="true"
       :trashed="$trashed"

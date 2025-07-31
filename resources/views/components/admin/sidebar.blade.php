@@ -44,6 +44,11 @@
                   <span class="admin-sidebar__text">{{ __('entities.faction_decks.plural') }}</span>
                 </a>
               </li>
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.counters.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.counters.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.counters.plural') }}</span>
+                </a>
+              </li>
             </ul>
           </x-collapsible-section>
 
@@ -124,11 +129,6 @@
               <li class="admin-sidebar__item">
                 <a href="{{ route('admin.deck-attributes-configurations.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.deck-attributes-configurations.*') ? 'admin-sidebar__link--active' : '' }}">
                   <span class="admin-sidebar__text">{{ __('entities.deck_attributes.plural') }}</span>
-                </a>
-              </li>
-              <li class="admin-sidebar__item">
-                <a href="{{ route('admin.counters.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.counters.*') ? 'admin-sidebar__link--active' : '' }}">
-                  <span class="admin-sidebar__text">{{ __('entities.counters.plural') }}</span>
                 </a>
               </li>
             </ul>

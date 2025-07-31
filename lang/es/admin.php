@@ -24,6 +24,12 @@ return [
   'move_up' => 'Mover arriba',
   'move_down' => 'Mover abajo',
   'unique' => 'Únicos',
+  'status' => 'Estado',
+  'timestamps' => 'Marcas de tiempo',
+  'created_at' => 'Creado el',
+  'updated_at' => 'Actualizado el',
+  'deleted_at' => 'Eliminado el',
+  'publication_status' => 'Estado de publicación',
   
   // Mensajes genéricos
   'back_to_list' => 'Volver al listado',

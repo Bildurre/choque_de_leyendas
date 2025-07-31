@@ -1,3 +1,8 @@
+
+@php
+  $tab = request()->get('tab', 'heroes');
+@endphp
+
 <x-public-layout
   :title="__('entities.factions.page_title', ['name' => $faction->name])"
   :metaDescription="__('entities.factions.page_description', [
@@ -34,8 +39,8 @@
   @endphp
 
   @component('content.blocks.header', ['block' => $headerBlock])
-    @env('local')
-      @slot('actions')
+    @slot('actions')
+      @env('local')
         <x-pdf.download-button
           :entity="$faction"
           entityType="faction"
@@ -43,8 +48,44 @@
         >
         {{ __('pdf.download.button_title') }}
         </x-pdf.download-button>
-      @endslot
-    @endenv
+      @endenv
+
+      @env('production')
+        <x-button-link
+          :href="route('public.factions.index')"
+          variant="secondary"
+          icon="arrow-left"
+        >
+          {{ __('public.factions.back') }}
+        </x-button-link>
+
+        @if ($tab === 'heroes')
+          <x-button-link
+            :href="route('public.heroes.index')"
+            variant="secondary"
+            icon="arrow-left"
+          >
+            {{ __('public.heroes.go') }}
+          </x-button-link>
+        @elseif ($tab === 'cards')
+          <x-button-link
+            :href="route('public.cards.index')"
+            variant="secondary"
+            icon="arrow-left"
+          >
+            {{ __('public.cards.go') }}
+          </x-button-link>
+        @elseif ($tab == 'decks')
+          <x-button-link
+            :href="route('public.faction-decks.index')"
+            variant="secondary"
+            icon="arrow-left"
+          >
+            {{ __('public.faction_decks.go') }}
+          </x-button-link>
+        @endif
+      @endenv
+    @endslot
   @endcomponent
 
   {{-- Content Tabs --}}
@@ -83,11 +124,7 @@
           </x-tab-item>
         </x-slot:header>
         
-        <x-slot:content>
-          @php
-            $tab = request()->get('tab', 'heroes');
-          @endphp
-          
+        <x-slot:content>          
           @if($tab === 'heroes')
             {{-- Heroes Tab Content --}}
             @php
@@ -147,7 +184,7 @@
             {{-- Decks Tab Content --}}
             @php
               $decks = $faction->factionDecks()->published()
-                ->with(['gameMode', 'heroes.heroClass', 'cards.cardType'])
+                ->with(['gameMode', 'heroes.heroClass', 'cards.cardType', 'faction'])
                 ->orderBy('name')
                 ->paginate(12);
             @endphp

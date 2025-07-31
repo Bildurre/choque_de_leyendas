@@ -1,189 +1,219 @@
 <x-admin-layout>
-  <div class="page-header">
-    <div class="page-header__content">
-      <h1 class="page-title">{{ $card->name }}</h1>
-      
-      <div class="page-header__actions">
-        <x-button-link
-          :href="route('admin.cards.index')"
-          variant="secondary"
-          icon="arrow-left"
-        >
-          {{ __('admin.back_to_list') }}
-        </x-button-link>
-        
-        <x-button-link
-          :href="route('admin.cards.edit', $card)"
-          variant="primary"
-          icon="edit"
-        >
-          {{ __('admin.edit') }}
-        </x-button-link>
-      </div>
-    </div>
-  </div>
+  <x-admin.page-header :title="$card->name">
+    <x-slot:actionButtons>
+      <x-action-button
+        :href="route('admin.cards.edit', $card)"
+        icon="edit"
+        variant="edit"
+        size="lg"
+        :title="__('admin.edit')"
+      />
+    
+      @if (!$card->trashed())
+        <x-action-button
+          :route="route('admin.cards.toggle-published', $card)"
+          :icon="$card->is_published ? 'globe-slash' : 'globe'"
+          :variant="$card->is_published ? 'unpublish' : 'publish'"
+          size="lg"
+          method="POST"
+          :title="$card->is_published ? __('admin.unpublish') : __('admin.publish')"
+        />
+      @else
+        <x-action-button
+          :route="route('admin.cards.restore', $card->id)"
+          icon="refresh"
+          variant="restore"
+          size="lg"
+          method="POST"
+          :title="__('admin.restore')"
+        />
+      @endif
+    
+      <x-action-button
+        :route="$card->trashed()
+            ? route('admin.cards.force-delete', $card->id) 
+            : route('admin.cards.destroy', $card)"
+        icon="trash"
+        variant="delete"
+        size="lg"
+        method="DELETE"
+        :confirm-message="$card->trashed()
+            ? __('entities.cards.confirm_force_delete') 
+            : __('entities.cards.confirm_delete')"
+        :title="__('admin.delete')"
+      />
+    </x-slot:actionButtons>
+
+    <x-slot:actions>
+      <x-button-link
+        :href="route('admin.cards.index')"
+        variant="secondary"
+        icon="arrow-left"
+      >
+        {{ __('admin.back_to_list') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
-    <div class="card-view">
-      <div class="card-view__container">
-        <div class="card-view__header">
-          <div class="card-view__badges">
-            @if($card->cardType)
-              <x-badge variant="primary">
-                {{ $card->cardType->name }}
-              </x-badge>
+    <div class="card-details-wrapper">
+      <div class="info-blocks-grid">
+        {{-- Card Preview --}}
+        <div class="card-preview-section">
+          <x-previews.preview-image :entity="$card" type="card"/>
+        </div>
+        {{-- Basic Information --}}
+        <x-entity-show.info-block title="entities.cards.basic_info">
+          <x-entity-show.info-list>
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.cards.name') }}"
+              :value="$card->name" 
+            />
+
+            <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
+              @if($card->faction)
+                <x-entity-show.info-link :href="route('admin.factions.show', [$card->faction])">
+                  {{ $card->faction->name }}
+                </x-entity-show.info-link>
+              @else
+                {{ __('entities.cards.no_faction') }}
+              @endif
+            </x-entity-show.info-list-item>
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('entities.card_types.singular') }}"
+              :value="$card->cardType->name"
+            />
+
+            @if($card->equipmentType)
+              <x-entity-show.info-list-item 
+                label="{{ __('entities.equipment_types.singular') }}"
+                value="{{ __('entities.equipment_types.categories.' . $card->equipmentType->category) }}"
+              />
+              <x-entity-show.info-list-item 
+                label="{{ __('entities.equipment_types.category') }}"
+                :value="$card->equipmentType->name"
+              />
+              
+              @if($card->hands)
+                <x-entity-show.info-list-item 
+                  label="{{ __('entities.cards.hands_required') }}"
+                  :value="$card->hands == 1 ? __('entities.cards.one_hand') : __('entities.cards.two_hands')" 
+                />
+              @endif
             @endif
             
-            @if($card->faction)
-              <x-badge 
-                :variant="$card->faction->text_is_dark ? 'light' : 'dark'" 
-                style="background-color: {{ $card->faction->color }};"
-              >
-                {{ $card->faction->name }}
-              </x-badge>
+            @if($card->attackRange)
+              <x-entity-show.info-list-item 
+                label="{{ __('entities.attack_ranges.singular') }}"
+                :value="$card->attackRange->name"
+              />
+            @endif
+            
+            @if($card->attackSubtype)
+              <x-entity-show.info-list-item 
+                :label="__('entities.attack_subtypes.damage_type')"
+                value="{{ __('entities.attack_subtypes.types.'.$card->attackSubtype->type) }}"
+              />
+              <x-entity-show.info-list-item 
+                label="{{ __('entities.attack_subtypes.singular') }}"
+                :value="$card->attackSubtype->name"
+              />
+            @endif
+            
+            @if($card->area)
+              <x-entity-show.info-list-item 
+                label="{{ __('entities.cards.is_area_attack') }}"
+                :value="__('common.yes')" 
+              />
             @endif
             
             @if($card->cost)
-              <div class="badge-with-icons">
-                <span class="badge-with-icons__cost">
-                  <x-cost-display :cost="$card->cost" />
-                </span>
-              </div>
+              <x-entity-show.info-list-item label="{{ __('entities.cards.cost') }}">
+                <x-cost-display :cost="$card->cost" />
+              </x-entity-show.info-list-item>
             @endif
-          </div>
-        </div>
-        
-        <div class="card-view__content">
-          <div class="card-view__main">
-            <div class="card-view__image-container">
-              @if($card->image)
-                <img src="{{ $card->getImageUrl() }}" alt="{{ $card->name }}" class="card-view__image">
-              @else
-                <div class="card-view__image-placeholder">
-                  <div class="card-view__image-placeholder-icon">
-                    <x-icon name="image" size="xl" />
-                  </div>
-                  <p>{{ __('entities.cards.no_image') }}</p>
-                </div>
-              @endif
-            </div>
             
-            <div class="card-view__details">
-              <div class="card-view__section">
-                <h2 class="card-view__section-title">{{ __('entities.cards.details') }}</h2>
-                
-                <div class="card-view__info-grid">
-                  <!-- Card Type -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.card_types.singular') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->cardType ? $card->cardType->name : __('admin.none') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Faction -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.factions.singular') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->faction ? $card->faction->name : __('admin.none') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Equipment Type -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.equipment_types.singular') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->equipmentType ? $card->equipmentType->name : __('admin.none') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Hands (if applicable) -->
-                  @if($card->equipmentType && $card->equipmentType->category === 'weapon' && $card->hands)
-                    <div class="card-view__info-item">
-                      <span class="card-view__info-label">{{ __('entities.cards.hands') }}:</span>
-                      <span class="card-view__info-value">
-                        {{ $card->hands }} {{ trans_choice('entities.cards.hands_count', $card->hands) }}
-                      </span>
-                    </div>
-                  @endif
-                  
-                  <!-- Attack Range -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.attack_ranges.singular') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->attackRange ? $card->attackRange->name : __('admin.none') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Attack Subtype -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.attack_subtypes.singular') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->attackSubtype ? $card->attackSubtype->name : __('admin.none') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Area Attack -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.cards.area') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->area ? __('admin.yes') : __('admin.no') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Hero Ability -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.hero_abilities.singular') }}:</span>
-                    <span class="card-view__info-value">
-                      {{ $card->heroAbility ? $card->heroAbility->name : __('admin.none') }}
-                    </span>
-                  </div>
-                  
-                  <!-- Cost -->
-                  <div class="card-view__info-item">
-                    <span class="card-view__info-label">{{ __('entities.cards.cost') }}:</span>
-                    <span class="card-view__info-value">
-                      @if($card->cost)
-                        <div class="card-view__dice-cost">
-                          <x-cost-display :cost="$card->cost" />
-                        </div>
-                      @else
-                        {{ __('admin.none') }}
-                      @endif
-                    </span>
-                  </div>
-                </div>
-              </div>
-              
-              @if($card->lore_text)
-                <div class="card-view__section">
-                  <h2 class="card-view__section-title">{{ __('entities.cards.lore_text') }}</h2>
-                  <div class="card-view__text-content">
-                    {!! $card->lore_text !!}
-                  </div>
-                </div>
+            <x-entity-show.info-list-item label="{{ __('admin.status') }}">
+              @if($card->isPublished())
+                <x-badge variant="success">{{ __('admin.published') }}</x-badge>
+              @else
+                <x-badge variant="warning">{{ __('admin.draft') }}</x-badge>
               @endif
-              
-              @if($card->effect)
-                <div class="card-view__section">
-                  <h2 class="card-view__section-title">{{ __('entities.cards.effect') }}</h2>
-                  <div class="card-view__text-content">
-                    {!! $card->effect !!}
-                  </div>
-                </div>
-              @endif
-              
-              @if($card->restriction)
-                <div class="card-view__section">
-                  <h2 class="card-view__section-title">{{ __('entities.cards.restriction') }}</h2>
-                  <div class="card-view__text-content">
-                    {!! $card->restriction !!}
-                  </div>
-                </div>
-              @endif
+            </x-entity-show.info-list-item>
+
+            @if($card->trashed())
+              <x-entity-show.info-list-item 
+                label="{{ __('admin.deleted_at') }}"
+                :value="$card->deleted_at->format('d/m/Y H:i')" 
+              />
+            @endif
+          </x-entity-show.info-list>
+        </x-entity-show.info-block>
+
+        {{-- Card Image --}}
+        @if($card->hasImage())
+          <x-entity-show.info-block title="entities.cards.image">
+            <div class="card-image">
+              <img src="{{ $card->getImageUrl() }}" alt="{{ $card->name }}">
             </div>
-          </div>
-        </div>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Effect --}}
+        @if($card->effect || $card->restriction || $card->heroAbility)
+          <x-entity-show.info-block title="entities.cards.effect">
+            <div class="prose">
+              {!! $card->restriction !!}
+              {!! $card->effect !!}
+            </div>
+
+            @if($card->heroAbility)
+              <x-entity-show.ability-card
+                variant="active"
+                :name="$card->heroAbility->name"
+                :description="$card->heroAbility->description"
+                :cost="$card->heroAbility->cost"
+                :attack-range="$card->heroAbility->attackRange"
+                :attack-subtype="$card->heroAbility->attackSubtype"
+                :area="$card->heroAbility->area"
+              />
+            @endif
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Lore Text --}}
+        @if($card->lore_text)
+          <x-entity-show.info-block title="entities.cards.lore_text">
+            <div class="prose">
+              {!! $card->lore_text !!}
+            </div>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Epic Quote --}}
+        @if($card->epic_quote)
+          <x-entity-show.info-block title="entities.cards.epic_quote">
+            <blockquote class="epic-quote">
+              {!! $card->epic_quote !!}
+            </blockquote>
+          </x-entity-show.info-block>
+        @endif
+
+        {{-- Timestamps --}}
+        <x-entity-show.info-block title="admin.timestamps">
+          <x-entity-show.info-list>
+            <x-entity-show.info-list-item 
+              label="{{ __('admin.created_at') }}"
+              :value="$card->created_at->format('d/m/Y H:i')" 
+            />
+            
+            <x-entity-show.info-list-item 
+              label="{{ __('admin.updated_at') }}"
+              :value="$card->updated_at->format('d/m/Y H:i')" 
+            />
+          </x-entity-show.info-list>
+        </x-entity-show.info-block>
       </div>
     </div>
   </div>

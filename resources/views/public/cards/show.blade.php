@@ -36,8 +36,8 @@
     @endphp
 
     @component('content.blocks.header', ['block' => $headerBlock])
-      @env('local')
-        @slot('actions')
+      @slot('actions')
+        @env('local')
           <x-pdf.add-button
             data-entity-type="card"
             data-entity-id="{{ $card->id }}"
@@ -45,8 +45,17 @@
           >
             {{ __('pdf.collection.add_button_title') }}
           </x-pdf.add-button>
-        @endslot
-      @endenv
+        @endenv
+        @env('production')
+          <x-button-link
+            :href="route('public.cards.index')"
+            variant="secondary"
+            icon="arrow-left"
+          >
+            {{ __('public.cards.back') }}
+          </x-button-link>
+        @endenv
+      @endslot
     @endcomponent
 
     {{-- Card Details Section --}}

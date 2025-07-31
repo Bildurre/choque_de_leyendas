@@ -33,18 +33,26 @@ class CardController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published'); // Default to published
     
-    // Get counters for tabs directly using Eloquent
-    $activeCount = Card::count();
+    // Get counters for tabs
+    $publishedCount = Card::where('is_published', true)->count();
+    $unpublishedCount = Card::where('is_published', false)->count();
     $trashedCount = Card::onlyTrashed()->count();
+    
+    // Determine filters based on tab
+    $trashed = ($tab === 'trashed');
+    $onlyPublished = ($tab === 'published');
+    $onlyUnpublished = ($tab === 'unpublished');
     
     // Get cards with filtering and pagination
     $cards = $this->cardService->getAllCards(
-      $request, // request para filtros
-      12,       // perPage
-      false,    // withTrashed
-      $trashed  // onlyTrashed
+      $request,         // request for filters
+      12,               // perPage
+      false,            // withTrashed
+      $trashed,         // onlyTrashed
+      $onlyPublished,   // onlyPublished
+      $onlyUnpublished  // onlyUnpublished
     );
     
     // Create a Card instance for filter component
@@ -56,8 +64,10 @@ class CardController extends Controller
     
     return view('admin.cards.index', compact(
       'cards', 
+      'tab',
       'trashed', 
-      'activeCount', 
+      'publishedCount',
+      'unpublishedCount',
       'trashedCount',
       'cardModel',
       'request',
@@ -195,7 +205,7 @@ class CardController extends Controller
       $this->cardService->restore($id);
       $card = Card::find($id);
       
-      return redirect()->route('admin.cards.index', ['trashed' => 1])
+      return redirect()->route('admin.cards.index', ['tab' => 'trashed'])
         ->with('success', __('cards.restored_successfully', ['name' => $card->name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.restore', ['entity' => __('entities.cards.singular')]));
@@ -213,7 +223,7 @@ class CardController extends Controller
       
       $this->cardService->forceDelete($id);
       
-      return redirect()->route('admin.cards.index', ['trashed' => 1])
+      return redirect()->route('admin.cards.index', ['tab' => 'trashed'])
         ->with('success', __('cards.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.cards.singular')]));
@@ -231,6 +241,10 @@ class CardController extends Controller
       ? __('cards.published_successfully', ['name' => $card->name])
       : __('cards.unpublished_successfully', ['name' => $card->name]);
 
-    return back()->with('success', $statusMessage);
+    // Redirect to appropriate tab based on new status
+    $tab = $card->isPublished() ? 'published' : 'unpublished';
+    
+    return redirect()->route('admin.cards.index', ['tab' => $tab])
+      ->with('success', $statusMessage);
   }
 }

@@ -1,7 +1,17 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.attack_subtypes.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.attack_subtypes.plural')">
+    <x-slot:actions>
+      @if(!$trashed)
+        <x-button-link
+          :href="route('admin.attack-subtypes.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.attack_subtypes.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
 
@@ -14,8 +24,6 @@
     />
 
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.attack-subtypes.create') : null"
-      :create-label="__('entities.attack_subtypes.create')"
       :items="$attackSubtypes"
       :withTabs="true"
       :trashed="$trashed"

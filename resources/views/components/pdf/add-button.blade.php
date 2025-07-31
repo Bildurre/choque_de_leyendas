@@ -13,6 +13,6 @@
   data-entity-id="{{ $entityId }}"
   title="{{ __('pdf.collection.add_button_title') }}"
 >
-  {{ $slot }}
   <x-icon name="pdf-add" />
+  {{ $slot }}
 </button>

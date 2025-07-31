@@ -3,6 +3,8 @@
 
 .tabs {
   width: 100%;
+  container-type: inline-size;
+  container-name: tabs;
   
   &__header {
     display: flex;
@@ -12,13 +14,12 @@
   
   &__item {
     padding: $spacing-sm $spacing-md;
-    margin-right: $spacing-sm; // Aumentamos la separación entre pestañas
     color: var(--color-text-secondary);
     text-decoration: none;
     position: relative;
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
     white-space: nowrap;
     border-radius: $border-radius-sm $border-radius-sm 0 0;
     transition: background-color $transition-fast, color $transition-fast;
@@ -69,7 +70,8 @@
   
   &__text {
     display: none;
-    @include responsive(mobile) {
+    font-size: .9rem;
+    @include container-responsive(tabs, mobile) {
       display: inline;
     }
   }

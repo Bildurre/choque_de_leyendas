@@ -30,61 +30,72 @@ class FactionDeckService
   }
 
   /**
- * Get all faction decks with optional filtering and pagination
- * 
- * @param Request|null $request Request object for filtering
- * @param int|null $perPage Number of items per page (null for no pagination)
- * @param bool $withTrashed Include trashed items
- * @param bool $onlyTrashed Only show trashed items
- * @return mixed Collection or LengthAwarePaginator
- */
-public function getAllFactionDecks(
-  ?Request $request = null,
-  ?int $perPage = null, 
-  bool $withTrashed = false, 
-  bool $onlyTrashed = false
-): mixed {
-  // Base query with relationships and counts
-  $query = FactionDeck::with(['faction', 'gameMode'])
-    ->withCount(['cards', 'heroes']);
-  
-  // Apply trash filters
-  if ($onlyTrashed) {
-    $query->onlyTrashed();
-  } elseif ($withTrashed) {
-    $query->withTrashed();
-  }
-  
-  // Count total records (before filtering)
-  $totalCount = $query->count();
-  
-  // Apply admin filters if request is provided
-  if ($request) {
-    $query->applyAdminFilters($request);
-  }
-  
-  // Count filtered records
-  $filteredCount = $query->count();
-  
-  // Apply default ordering only if no sort parameter is provided
-  if (!$request || !$request->has('sort')) {
-    $query->orderBy('faction_id')->orderBy('id');
-  }
-  
-  // Paginate if needed
-  if ($perPage) {
-    $result = $query->paginate($perPage)->withQueryString();
+   * Get all faction decks with optional filtering and pagination
+   * 
+   * @param Request|null $request Request object for filtering
+   * @param int|null $perPage Number of items per page (null for no pagination)
+   * @param bool $withTrashed Include trashed items
+   * @param bool $onlyTrashed Only show trashed items
+   * @param bool $onlyPublished Only show published items
+   * @param bool $onlyUnpublished Only show unpublished items
+   * @return mixed Collection or LengthAwarePaginator
+   */
+  public function getAllFactionDecks(
+    ?Request $request = null,
+    ?int $perPage = null, 
+    bool $withTrashed = false, 
+    bool $onlyTrashed = false,
+    bool $onlyPublished = false,
+    bool $onlyUnpublished = false
+  ): mixed {
+    // Base query with relationships and counts
+    $query = FactionDeck::with(['faction', 'gameMode'])
+      ->withCount(['cards', 'heroes']);
     
-    // Add metadata to the pagination result
-    $result->totalCount = $totalCount;
-    $result->filteredCount = $filteredCount;
+    // Apply trash filters
+    if ($onlyTrashed) {
+      $query->onlyTrashed();
+    } elseif ($withTrashed) {
+      $query->withTrashed();
+    }
     
-    return $result;
+    // Apply published filters
+    if ($onlyPublished) {
+      $query->where('is_published', true);
+    } elseif ($onlyUnpublished) {
+      $query->where('is_published', false);
+    }
+    
+    // Count total records (before filtering)
+    $totalCount = $query->count();
+    
+    // Apply admin filters if request is provided
+    if ($request) {
+      $query->applyAdminFilters($request);
+    }
+    
+    // Count filtered records
+    $filteredCount = $query->count();
+    
+    // Apply default ordering only if no sort parameter is provided
+    if (!$request || !$request->has('sort')) {
+      $query->orderBy('faction_id')->orderBy('id');
+    }
+    
+    // Paginate if needed
+    if ($perPage) {
+      $result = $query->paginate($perPage)->withQueryString();
+      
+      // Add metadata to the pagination result
+      $result->totalCount = $totalCount;
+      $result->filteredCount = $filteredCount;
+      
+      return $result;
+    }
+    
+    // Return collection if no pagination
+    return $query->get();
   }
-  
-  // Return collection if no pagination
-  return $query->get();
-}
 
   /**
    * Get counts for active and trashed faction decks

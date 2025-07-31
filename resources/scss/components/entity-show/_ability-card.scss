@@ -2,7 +2,7 @@
 
 .ability-item {
   padding: $spacing-md;
-  background-color: var(--color-bg-transparent-semi);
+  background-color: var(--color-theme-border-bg);
   border-radius: $border-radius-sm;
   
   &:not(:last-child) {
@@ -20,21 +20,20 @@
   .ability-header {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: $spacing-md;
+    column-gap: $spacing-md;
     margin-bottom: $spacing-sm;
-    align-items: start;
+    align-items: center;
+
+    .ability-name {
+      margin-bottom: 0;
+    }
   }
-  
-  .ability-info {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-xs;
-  }
-  
+
   .ability-name {
     font-size: 1.125rem;
     font-weight: 600;
     margin: 0;
+    margin-bottom: $spacing-sm;
     color: var(--color-text-primary);
   }
   
@@ -42,6 +41,7 @@
     font-size: 0.875rem;
     color: var(--color-text-secondary);
     font-style: italic;
+    grid-column: span 2;
   }
   
   .ability-description {
@@ -54,6 +54,12 @@
       &:not(:last-child) {
         margin-bottom: $spacing-sm;
       }
+    }
+
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+      transform: translateY(15%);
     }
   }
   

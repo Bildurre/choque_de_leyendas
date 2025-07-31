@@ -1,7 +1,17 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.attack_ranges.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.attack_ranges.plural')">
+    <x-slot:actions>
+      @if(!$trashed)
+        <x-button-link
+          :href="route('admin.attack-ranges.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.attack_ranges.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
 
@@ -13,9 +23,7 @@
       :filteredCount="$filteredCount"
     />
 
-    <x-entity.list 
-      :create-route="!$trashed ? route('admin.attack-ranges.create') : null"
-      :create-label="__('entities.attack_ranges.create')"
+    <x-entity.list
       :items="$attackRanges"
       :withTabs="true"
       :trashed="$trashed"

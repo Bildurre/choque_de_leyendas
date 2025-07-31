@@ -21,13 +21,17 @@ class HeroService
    * @param Request $request Request object for filtering
    * @param bool $withTrashed Include trashed items
    * @param bool $onlyTrashed Only show trashed items
+   * @param bool $onlyPublished Only show published items
+   * @param bool $onlyUnpublished Only show unpublished items
    * @return mixed Collection or LengthAwarePaginator
    */
   public function getAllHeroes(
     ?int $perPage = null, 
     ?Request $request = null, 
     bool $withTrashed = false, 
-    bool $onlyTrashed = false
+    bool $onlyTrashed = false,
+    bool $onlyPublished = false,
+    bool $onlyUnpublished = false
   ): mixed {
     // Base query with relationships
     $query = Hero::with([
@@ -44,6 +48,13 @@ class HeroService
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
+    }
+    
+    // Apply published filters
+    if ($onlyPublished) {
+      $query->where('is_published', true);
+    } elseif ($onlyUnpublished) {
+      $query->where('is_published', false);
     }
     
     // Count total records (before filtering)

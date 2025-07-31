@@ -27,18 +27,26 @@ class FactionController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published'); // Default to published
     
     // Get counters for tabs
-    $activeCount = Faction::count();
+    $publishedCount = Faction::where('is_published', true)->count();
+    $unpublishedCount = Faction::where('is_published', false)->count();
     $trashedCount = Faction::onlyTrashed()->count();
+    
+    // Determine filters based on tab
+    $trashed = ($tab === 'trashed');
+    $onlyPublished = ($tab === 'published');
+    $onlyUnpublished = ($tab === 'unpublished');
     
     // Get factions with related counts, filtering and pagination
     $factions = $this->factionService->getAllFactions(
-      $request, // request para filtros
-      12,       // perPage
-      false,    // withTrashed
-      $trashed  // onlyTrashed
+      $request,         // request for filters
+      12,               // perPage
+      false,            // withTrashed
+      $trashed,         // onlyTrashed
+      $onlyPublished,   // onlyPublished
+      $onlyUnpublished  // onlyUnpublished
     );
     
     // Create a Faction instance for filter component
@@ -50,8 +58,10 @@ class FactionController extends Controller
     
     return view('admin.factions.index', compact(
       'factions', 
+      'tab',
       'trashed', 
-      'activeCount', 
+      'publishedCount',
+      'unpublishedCount',
       'trashedCount',
       'factionModel',
       'request',
@@ -149,7 +159,7 @@ class FactionController extends Controller
       $this->factionService->restore($id);
       $faction = Faction::find($id);
       
-      return redirect()->route('admin.factions.index', ['trashed' => 1])
+      return redirect()->route('admin.factions.index', ['tab' => 'trashed'])
         ->with('success', __('factions.restored_successfully', ['name' => $faction->name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.restore', ['entity' => __('entities.factions.singular')]));
@@ -167,7 +177,7 @@ class FactionController extends Controller
       
       $this->factionService->forceDelete($id);
       
-      return redirect()->route('admin.factions.index', ['trashed' => 1])
+      return redirect()->route('admin.factions.index', ['tab' => 'trashed'])
         ->with('success', __('factions.force_deleted_successfully', ['name' => $name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.force_delete', ['entity' => __('entities.factions.singular')]));
@@ -185,6 +195,10 @@ class FactionController extends Controller
       ? __('factions.published_successfully', ['name' => $faction->name])
       : __('factions.unpublished_successfully', ['name' => $faction->name]);
 
-    return back()->with('success', $statusMessage);
+    // Redirect to appropriate tab based on new status
+    $tab = $faction->isPublished() ? 'published' : 'unpublished';
+    
+    return redirect()->route('admin.factions.index', ['tab' => $tab])
+      ->with('success', $statusMessage);
   }
 }

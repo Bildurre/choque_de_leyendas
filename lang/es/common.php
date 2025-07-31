@@ -98,4 +98,12 @@ return [
   'loading' => 'Cargando...',
   'no_results' => 'No se encontraron resultados',
   'confirm_action' => '¿Estás seguro?',
+
+  'errors' => [
+    'create' => 'Error creating :entity',
+    'update' => 'Error updating :entity',
+    'delete' => 'Error deleting :entity',
+    'restore' => 'Error restoring :entity',
+    'force_delete' => 'Error permanently deleting :entity',
+  ],
 ];

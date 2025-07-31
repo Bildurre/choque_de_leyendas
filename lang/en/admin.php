@@ -23,6 +23,12 @@ return [
   'move_up' => 'Move up',
   'move_down' => 'Move down',
   'unique' => 'Unique',
+  'status' => 'Status',
+  'timestamps' => 'Timestamps', 
+  'created_at' => 'Created at',
+  'updated_at' => 'Updated at',
+  'deleted_at' => 'Deleted at',
+  'publication_status' => 'Publication status',
   
   // Generic messages
   'back_to_list' => 'Back to list',

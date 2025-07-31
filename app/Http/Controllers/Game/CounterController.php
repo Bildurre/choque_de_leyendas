@@ -27,18 +27,26 @@ class CounterController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published'); // Default to published
     
-    // Get counters for tabs directly using Eloquent
-    $activeCount = Counter::count();
+    // Get counters for tabs
+    $publishedCount = Counter::where('is_published', true)->count();
+    $unpublishedCount = Counter::where('is_published', false)->count();
     $trashedCount = Counter::onlyTrashed()->count();
+    
+    // Determine filters based on tab
+    $trashed = ($tab === 'trashed');
+    $onlyPublished = ($tab === 'published');
+    $onlyUnpublished = ($tab === 'unpublished');
     
     // Get counters with filtering and pagination
     $counters = $this->counterService->getAllCounters(
-      $request, // request para filtros
-      12,       // perPage
-      false,    // withTrashed
-      $trashed  // onlyTrashed
+      $request,         // request for filters
+      12,               // perPage
+      false,            // withTrashed
+      $trashed,         // onlyTrashed
+      $onlyPublished,   // onlyPublished
+      $onlyUnpublished  // onlyUnpublished
     );
     
     // Create a Counter instance for filter component
@@ -50,8 +58,10 @@ class CounterController extends Controller
     
     return view('admin.counters.index', compact(
       'counters', 
+      'tab',
       'trashed', 
-      'activeCount', 
+      'publishedCount',
+      'unpublishedCount',
       'trashedCount',
       'counterModel',
       'request',
@@ -85,9 +95,8 @@ class CounterController extends Controller
 
     try {
       $counter = $this->counterService->create($validated);
-      $tab = $counter->type === 'boon' ? 'boons' : 'banes';
       
-      return redirect()->route('admin.counters.index', ['tab' => $tab])
+      return redirect()->route('admin.counters.index')
         ->with('success', __('counters.created_successfully', [
           'name' => $counter->name,
           'type' => $counter->type_name
@@ -120,9 +129,7 @@ class CounterController extends Controller
       $oldType = $counter->type;
       $this->counterService->update($counter, $validated);
       
-      $tab = $counter->type === 'boon' ? 'boons' : 'banes';
-      
-      return redirect()->route('admin.counters.index', ['tab' => $tab])
+      return redirect()->route('admin.counters.index')
         ->with('success', __('counters.updated_successfully', [
           'name' => $counter->name,
           'type' => $counter->type_name
@@ -142,11 +149,10 @@ class CounterController extends Controller
     try {
       $counterName = $counter->name;
       $counterType = $counter->type_name;
-      $tab = $counter->type === 'boon' ? 'boons' : 'banes';
       
       $this->counterService->delete($counter);
       
-      return redirect()->route('admin.counters.index', ['tab' => $tab])
+      return redirect()->route('admin.counters.index')
         ->with('success', __('counters.deleted_successfully', [
           'name' => $counterName,
           'type' => $counterType
@@ -165,9 +171,8 @@ class CounterController extends Controller
     try {
       $this->counterService->restore($id);
       $counter = Counter::find($id);
-      $tab = $counter->type === 'boon' ? 'boons' : 'banes';
       
-      return redirect()->route('admin.counters.index', ['tab' => $tab])
+      return redirect()->route('admin.counters.index', ['tab' => 'trashed'])
         ->with('success', __('counters.restored_successfully', [
           'name' => $counter->name,
           'type' => $counter->type_name
@@ -212,6 +217,10 @@ class CounterController extends Controller
       ? __('counters.published_successfully', ['name' => $counter->name])
       : __('counters.unpublished_successfully', ['name' => $counter->name]);
 
-    return back()->with('success', $statusMessage);
+    // Redirect to appropriate tab based on new status
+    $tab = $counter->isPublished() ? 'published' : 'unpublished';
+    
+    return redirect()->route('admin.counters.index', ['tab' => $tab])
+      ->with('success', $statusMessage);
   }
 }

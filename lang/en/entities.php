@@ -39,6 +39,19 @@ return [
     'tabs' => [
       'details' => 'Details',
     ],
+    'created_successfully' => 'The faction :name has been created successfully.',
+    'updated_successfully' => 'The faction :name has been updated successfully.',
+    'deleted_successfully' => 'The faction :name has been deleted successfully.',
+    'restored_successfully' => 'The faction :name has been restored successfully.',
+    'force_deleted_successfully' => 'The faction :name has been permanently deleted.',
+    'published_successfully' => 'The faction :name has been published successfully.',
+    'unpublished_successfully' => 'The faction :name has been unpublished successfully.',
+    'errors' => [
+      'has_heroes' => 'Cannot delete this faction because it has associated heroes.',
+      'has_cards' => 'Cannot delete this faction because it has associated cards.',
+      'force_delete_has_heroes' => 'Cannot permanently delete this faction because it has associated heroes (even deleted ones).',
+      'force_delete_has_cards' => 'Cannot permanently delete this faction because it has associated cards (even deleted ones).',
+    ],
   ],
   
   // Heroes
@@ -84,6 +97,16 @@ return [
       'armor' => 'Armor',
       'health' => 'Health',
     ],
+    'created_successfully' => 'The hero :name has been created successfully.',
+    'updated_successfully' => 'The hero :name has been updated successfully.',
+    'deleted_successfully' => 'The hero :name has been deleted successfully.',
+    'restored_successfully' => 'The hero :name has been restored successfully.',
+    'force_deleted_successfully' => 'The hero :name has been permanently deleted.',
+    'published_successfully' => 'The hero :name has been published successfully.',
+    'unpublished_successfully' => 'The hero :name has been unpublished successfully.',
+    
+    'passive_abilities' => 'Passive abilities',
+    'active_abilities' => 'Active abilities',
   ],
   
   // Cards
@@ -241,6 +264,7 @@ return [
     'edit' => 'Edit attack subtype',
     'name' => 'Name',
     'type' => 'Type',
+    'damage_type' => 'Damage type',
     'types' => [
       'physical' => 'Physical',
       'magical' => 'Magical',
@@ -356,7 +380,7 @@ return [
     'singular' => 'Counter',
     'plural' => 'Counters',
     'create' => 'Create counter',
-    'edit' => 'Edit :name',
+    'edit' => 'Edit Counter',
     'create_with_type' => 'Create :type counter',
     'name' => 'Name',
     'type' => 'Type',

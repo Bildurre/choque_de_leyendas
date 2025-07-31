@@ -45,6 +45,8 @@ return [
   
   // Facciones
   'factions' => [
+    'back' => 'Volver a las Facciones',
+    'go' => 'Ir a las Facciones',
     'title' => 'Facciones',
     'description' => 'Explora las diferentes facciones del juego',
     'empty' => 'No hay facciones disponibles',
@@ -59,6 +61,8 @@ return [
   
   // Héroes
   'heroes' => [
+    'back' => 'Volver a las Héroes',
+    'go' => 'Ir a las Héroes',
     'title' => 'Héroes',
     'description' => 'Descubre todos los héroes de Alanda: Choque de Leyendas',
     'no_heroes' => 'No hay héroes disponibles',
@@ -74,6 +78,8 @@ return [
   
   // Cartas
   'cards' => [
+    'back' => 'Volver a las Cartas',
+    'go' => 'Ir a las Cartas',
     'title' => 'Cartas',
     'description' => 'Explora todas las cartas del juego',
     'no_cards' => 'No hay cartas disponibles',
@@ -117,6 +123,8 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
+    'back' => 'Volver a los Mazos',
+    'go' => 'Ir a los Mazos',
     'title' => 'Mazos de Facción',
     'description' => 'Descubre los mazos prediseñados para cada facción y modo de juego. Estos mazos están equilibrados y listos para jugar.',
     'no_decks' => 'No hay mazos disponibles.',

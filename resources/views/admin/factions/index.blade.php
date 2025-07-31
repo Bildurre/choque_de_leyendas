@@ -1,10 +1,19 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('entities.factions.plural') }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.factions.plural')">
+    <x-slot:actions>
+      @if($tab !== 'trashed')
+        <x-button-link
+          :href="route('admin.factions.create')"
+          variant="primary"
+          icon="plus"
+        >
+          {{ __('entities.factions.create') }}
+        </x-button-link>
+      @endif
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
-
     <x-filters.card 
       :model="$factionModel" 
       :request="$request" 
@@ -14,15 +23,28 @@
     />
 
     <x-entity.list 
-      :create-route="!$trashed ? route('admin.factions.create') : null"
-      :create-label="__('entities.factions.create')"
       :items="$factions"
       :withTabs="true"
+      :activeTabId="'published'"
+      :trashedTabId="'trashed'"
       :trashed="$trashed"
-      :activeCount="$activeCount ?? null"
-      :trashedCount="$trashedCount ?? null"
+      :activeCount="$publishedCount"
+      :trashedCount="$trashedCount"
+      :currentTab="$tab"
       baseRoute="admin.factions.index"
     >
+      <x-slot:extraTabs>
+        <x-tab-item 
+          id="unpublished"
+          :active="$tab === 'unpublished'" 
+          :href="route('admin.factions.index', ['tab' => 'unpublished'])"
+          icon="edit"
+          :count="$unpublishedCount"
+        >
+          {{ __('admin.draft') }}
+        </x-tab-item>
+      </x-slot:extraTabs>
+      
       @foreach($factions as $faction)
         <x-entity.list-card 
           :title="$faction->name"
@@ -38,58 +60,15 @@
             ? __('entities.factions.confirm_force_delete') 
             : __('entities.factions.confirm_delete')"
         >
-          <x-slot:badges>
-            <x-badge 
-              :variant="$faction->text_is_dark ? 'light' : 'dark'" 
-              style="background-color: {{ $faction->color }};"
-            >
-              {{ $faction->color }}
-            </x-badge>
-            
-            <x-badge variant="info">
-              {{ __('entities.factions.heroes_count', ['count' => $faction->heroes_count]) }}
-            </x-badge>
-            
-            <x-badge variant="primary">
-              {{ __('entities.factions.cards_count', ['count' => $faction->cards_count]) }}
-            </x-badge>
-            
-            @if($faction->isPublished())
-              <x-badge variant="success">
-                {{ __('admin.published') }}
-              </x-badge>
-            @else
-              <x-badge variant="warning">
-                {{ __('admin.draft') }}
-              </x-badge>
-            @endif
-            
-            @if($trashed)
-              <x-badge variant="danger">
-                {{ __('admin.deleted_at', ['date' => $faction->deleted_at->format('d/m/Y H:i')]) }}
-              </x-badge>
-            @endif
-          </x-slot:badges>
-          
-          @if($faction->icon)
-            <div class="faction-icon">
-              <img src="{{ $faction->getImageUrl() }}" alt="{{ $faction->name }}" class="faction-icon__image">
-            </div>
-          @endif
-          
-          @if($faction->lore_text)
-            <div class="faction-lore">
-              <div class="faction-lore__excerpt">
-                {{ Str::limit(strip_tags($faction->lore_text), 150) }}
-              </div>
-            </div>
-          @endif
+          <div class="faction-details">
+            <x-previews.preview-image :entity="$faction" type="faction"/>
+          </div>
         </x-entity.list-card>
       @endforeach
       
       @if(method_exists($factions, 'links'))
         <x-slot:pagination>
-          {{ $factions->appends(['trashed' => $trashed ? 1 : null])->links() }}
+          {{ $factions->appends(['tab' => $tab])->links() }}
         </x-slot:pagination>
       @endif
     </x-entity.list>

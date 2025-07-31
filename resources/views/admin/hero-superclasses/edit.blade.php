@@ -1,7 +1,15 @@
 <x-admin-layout>
-  <div class="page-header">
-    <h1 class="page-title">{{ __('hero_superclasses.edit') }}: {{ $heroSuperclass->name }}</h1>
-  </div>
+  <x-admin.page-header :title="__('entities.hero_superclasses.edit')">
+    <x-slot:actions>
+      <x-button-link
+        :href="route('admin.hero-superclasses.index')"
+        variant="primary"
+        icon="arrow-left"
+      >
+        {{ __('admin.back_to_list') }}
+      </x-button-link>
+    </x-slot:actions>
+  </x-admin.page-header>
   
   <div class="page-content">
     @include('admin.hero-superclasses._form', [
