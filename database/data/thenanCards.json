@@ -19,7 +19,7 @@
       "en": "<p>Deals 2 + Strength damage to the paired enemy hero and to 1 random adjacent enemy hero.</p><p>If the hero playing this Technique is a Saboteur hero, place 1 bane counter: Numbed on each hero damaged this way.</p>",
       "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado y a 1 héroe rival adyacente aleatorio.</p><p>Si el héroe que juega esta Técnica es un héroe Pícaro, coloca 1 contador de perjuicio: Entumecido sobre cada héroe dañado de esta manera.</p>"
     },
-    "card_type_id": 6,
+    "card_type_id": 4,
     "attack_range_id": 2,
     "attack_subtype_id": 2,
     "area": true,
@@ -367,14 +367,14 @@
       "es": "Entre un latido y el siguiente, solo quedan sombras."
     },
     "effect": {
-      "en": "<p>Discard from the Stack all Actions that remain to be resolved once this Subterfuge is resolved.</p><p>Restart the Singular Combat from the Prepare Action Dice phase.</p><p>Draw 1 Card.</p><p> If you discard this Trick due to any effect draw 1 Card.</p>",
-      "es": "<p>Descarta de la Pila todas las Acciones que falten por resolverse una vez resuelto este Ardid.</p><p>Reinicia el Combate Singular desde la fase de Preparar Dados de Acción.</p><p>Roba 1 Carta.</p><p>Si descartas este Ardid por cualquier efecto roba 1 Carta.</p>"
+      "en": "<p>Discard from the Stack all Actions that remain to be resolved once this Technique is resolved.</p><p>Restart the Singular Combat from the Prepare Action Dice phase.</p><p>Draw 1 Card.</p><p> If you discard this Trick due to any effect draw 1 Card.</p>",
+      "es": "<p>Descarta de la Pila todas las Acciones que falten por resolverse una vez resuelta este Ardid.</p><p>Reinicia el Combate Singular desde la fase de Preparar Dados de Acción.</p><p>Roba 1 Carta.</p><p>Si descartas este Ardid por cualquier efecto roba 1 Carta.</p>"
     },
     "restriction": {
-      "en": "<p>This Subterfuge can only be played by a Rogue hero.</p><p>Play this Subterfige at any time.</p>",
-      "es": "<p>Este Subterfugio solo puede jugarlo un héroe Pícaro.</p><p>Juega este Subterfugio en cualquier momento.</p>"
+      "en": "<p>This Technique can only be played by a Rogue hero.</p><p>Play this Technique at any time.</p>",
+      "es": "<p>Este Técnica solo puede jugarlo un héroe Pícaro.</p><p>Juega este Técnica en cualquier momento.</p>"
     },
-    "card_type_id": 6,
+    "card_type_id": 4,
     "image": "images/cards/esfumarse.jpeg"
   },
   {
@@ -521,10 +521,10 @@
       "es": "De la oscuridad viene la justicia del bosque."
     },
     "effect": {
-      "en": "<p>Deals 1 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Subterfuge is a Rogue hero deals +1 damage and places 1 bane counter: Numbed on them.</p>",
-      "es": "<p>Hace 1 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega este Subterfugio es un héroe Pícaro hace +1 de daño y le coloca 1 contador de perjuicio: Entumecido.</p>"
+      "en": "<p>Deals 1 + Strength damage to the paired enemy hero.</p><p>If the hero playing this Technique is a Rogue hero deals +1 damage and places 1 bane counter: Numbed on them.</p>",
+      "es": "<p>Hace 1 + Fuerza de daño al héroe rival emparejado.</p><p>Si el héroe que juega este Técnica es un héroe Pícaro hace +1 de daño y le coloca 1 contador de perjuicio: Entumecido.</p>"
     },
-    "card_type_id": 6,
+    "card_type_id": 4,
     "image": "images/cards/golpe-desde-las-sombras.jpeg"
   },
   {
@@ -544,8 +544,8 @@
       "es": "Los cuervos portan secretos que valen más que el oro."
     },
     "effect": {
-      "en": "<p>Draw 1 Card.</p><p>If the hero playing this Support is a Saboteur hero, draw 1 Card.</p>",
-      "es": "<p>Roba 1 Carta.</p><p>Si el héroe que juega este Apoyo es un héroe Saboteador, roba 1 Carta.</p>"
+      "en": "<p>Draw 1 Card.</p><p>If the hero playing this Support is a Rogue hero, draw 1 Card.</p>",
+      "es": "<p>Roba 1 Carta.</p><p>Si el héroe que juega este Apoyo es un héroe Pícaro, roba 1 Carta.</p>"
     },
     "card_type_id": 2,
     "image": "images/cards/informacion-vital.jpeg"

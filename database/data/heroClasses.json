@@ -36,7 +36,7 @@
       "en": "<p>This hero takes -1 damage from Area Attacks</p>",
       "es": "<p>Este héroe recibe -1 de daño de Ataques de Área.</p>"
     },
-    "hero_superclass_id": 3
+    "hero_superclass_id": 1
   },
   {
     "name":
@@ -49,7 +49,7 @@
       "en": "<p>When making Pairings, the opposing player cannot choose this hero if other heros are available</p>",
       "es": "<p>Al realizar los Emparejamientos, el jugador rival no puede elegir a este héroe si hay otros héroes disponibles.</p>"
     },
-    "hero_superclass_id": 3
+    "hero_superclass_id": 1
   },
   {
     "name":
@@ -62,7 +62,7 @@
       "en": "<p>This hero can only play Light Litanies. This hero can play Techniques.</p>",
       "es": "<p>Este héroe solo puede jugar Letanías Luz. Este héroe puede jugar Técnicas.</p>"
     },
-    "hero_superclass_id": 4
+    "hero_superclass_id": 1
   },
   {
     "name":
@@ -75,7 +75,7 @@
       "en": "<p>Each Single-Target Litany played by this hero deals +1 Healing or Damage.</p>",
       "es": "<p>Cada Letanía de 1 Objetivo que juegue este héroe hace +1 de Sanación o de Daño.</p>"
     },
-    "hero_superclass_id": 4
+    "hero_superclass_id": 2
   },
   {
     "name":

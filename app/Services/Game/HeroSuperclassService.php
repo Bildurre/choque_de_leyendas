@@ -120,6 +120,8 @@ class HeroSuperclassService
    */
   public function delete(HeroSuperclass $heroSuperclass): bool
   {
+
+    
     // Check for related hero classes
     if ($heroSuperclass->heroClasses()->count() > 0) {
       throw new \Exception("__('entities.hero_superclasses.errors.has_classes')");
@@ -129,7 +131,6 @@ class HeroSuperclassService
     if ($heroSuperclass->cardType()->exists()) {
       throw new \Exception("__('entities.hero_superclasses.errors.has_card_type')");
     }
-    
     return $heroSuperclass->delete();
   }
 

@@ -15,8 +15,6 @@ class HeroSuperclassesSeeder extends Seeder
     $heroSuperclasses = [
       ['name' => ["en" => "Fighter", "es" => "Combatiente"]],
       ['name' => ["en" => "Caster", "es" => "Conjurador"]],
-      ['name' => ["en" => "Saboteur", "es" => "Saboteador"]],
-      ['name' => ["en" => "Chosen", "es" => "Elegido"]],
     ];
 
     foreach ($heroSuperclasses as $heroSuperclass) {

@@ -23,15 +23,7 @@ class CardTypesSeeder extends Seeder
       [
         'name' => ["en" => "Spell", "es" => "Hechizo"],
         'hero_superclass_id' => 2
-      ],
-      [
-        'name' => ["en" => "Subterfuge", "es" => "Subterfugio"],
-        'hero_superclass_id' => 3
-      ],
-      [
-        'name' => ["en" => "Litany", "es" => "Letanía"],
-        'hero_superclass_id' => 4
-      ],
+      ]
     ];
 
     foreach ($types as $type) {

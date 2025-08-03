@@ -44,7 +44,7 @@
       "es": "Escudos unidos forman un muro inquebrantable de honor."
     },
     "effect": {
-      "en": "<p>That attack deals -1 damage.</p><p>If the active allied hero has at least 1 Weapon attached, deal 2 Direct damage to the paired rival hero.</p>",
+      "en": "<p>That attack deals -1 damage.</p><p>If the active allied hero has at least 1 Weapon attached, deal 2 Direct damage to the paired enemy hero.</p>",
       "es": "<p>Dicho ataque hace -1 de daño.</p><p>Si el héroe aliado activo tiene anexada almenos 1 Arma hace 2 de daño Directo al héroe rival emparejado.</p>"
     },
     "restriction":
@@ -191,10 +191,10 @@
     },
     "restriction":
     {
-      "en": "<p>This Litany can only be played by a Paladin hero</p>",
-      "es": "<p>Esta Letanía solo puede jugarla un héroe Paladín.</p>"
+      "en": "<p>This Spell can only be played by a Paladin hero</p>",
+      "es": "<p>Este hechizo solo puede jugarla un héroe Paladín.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 5,
     "attack_subtype_id": 10,
     "image": "images/cards/bendicion-de-conocimiento.jpeg"
@@ -219,10 +219,10 @@
     },
     "restriction":
     {
-      "en": "<p>This Litany can only be played by a Paladin hero</p>",
-      "es": "<p>Esta Letanía solo puede jugarla un héroe Paladín.</p>"
+      "en": "<p>This Spell can only be played by a Paladin hero</p>",
+      "es": "<p>Este hechizo solo puede jugarla un héroe Paladín.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 4,
     "attack_subtype_id": 10,
     "area": true,
@@ -265,10 +265,10 @@
       "es": "Donde pisan los campeones, la oscuridad no puede seguir."
     },
     "effect": {
-      "en": "<p>Heal 2 health to the active allied hero. If the hero playing this Litany is a Paladin hero, place 1 boon counter: Exalted on the active allied hero.</p>",
-      "es": "<p>Cura 2 de vida al héroe aliado activo. Si el héroe que juega este Letanía es un héroe Paladín, coloca 1 contador de beneficio: Exaltado sobre el héroe aliado activo.</p>"
+      "en": "<p>Heal 2 health to the active allied hero. If the hero playing this Spell is a Paladin hero, place 1 boon counter: Exalted on the active allied hero.</p>",
+      "es": "<p>Cura 2 de vida al héroe aliado activo. Si el héroe que juega este Hechizo es un héroe Paladín, coloca 1 contador de beneficio: Exaltado sobre el héroe aliado activo.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 5,
     "attack_subtype_id": 10,
     "image": "images/cards/campeon-luminar.jpeg"
@@ -288,7 +288,7 @@
       "es": "La verdadera fuerza yace en terminar las luchas antes de empezar."
     },
     "effect": {
-      "en": "<p>The paired rival hero detaches (and discards) a Weapon of your choice.</p><p>If the hero playing this Support is a Warrior hero, they may attach that Weapon by paying its cost instead of discarding it.</p>",
+      "en": "<p>The paired enemy hero detaches (and discards) a Weapon of your choice.</p><p>If the hero playing this Support is a Warrior hero, they may attach that Weapon by paying its cost instead of discarding it.</p>",
       "es": "<p>El héroe rival emparejado desanexa (y descarta) un Arma a tu elección.</p><p>Si el héroe que juega este Apoyo es un héroe Guerrero, puede anexarse dicha Arma pagando su coste en vez de descartarla.</p>"
     },
     "card_type_id": 2,
@@ -333,7 +333,7 @@
       "en": "<p>Place 1 boon counter: Exalted on the active allied hero.</p><p>Draw 1 Card.</p><p>If the hero playing this Spell is a Paladin hero, place 1 boon counter: Exalted on 1 adjacent allied hero of your choice.</p>",
       "es": "<p>Coloca 1 contador de beneficio: Exaltado sobre el héroe aliado activo.</p><p>Roba 1 Carta.</p><p>Si el héroe que juega este Hechizo es un héroe Paladín, coloca 1 contador de beneficio: Exaltado sobre 1 héroe aliado adyacente a tu elección.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 5,
     "attack_subtype_id": 10,
     "image": "images/cards/elegidos-por-la-luz.jpeg"
@@ -423,10 +423,10 @@
       "es": "Soles en miniatura queman las sombras del mal."
     },
     "effect": {
-      "en": "<p>Deal 2 + Mental damage to the paired rival hero and 1 + Mental damage to 1 random adjacent rival hero.</p><p>Place 1 bane counter: Stunned on each hero damaged this way.</p>",
+      "en": "<p>Deal 2 + Mental damage to the paired enemy hero and 1 + Mental damage to 1 random adjacent enemy hero.</p><p>Place 1 bane counter: Stunned on each hero damaged this way.</p>",
       "es": "<p>Hace 2 + Mental de daño al héroe rival emparejado y 1 + Mental de daño a 1 héroe rival adyacente aleatorio.</p><p>Coloca 1 contador de perjuicio: Aturdido sobre cada héroe dañado de esta forma.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 3,
     "attack_subtype_id": 10,
     "area": true,
@@ -470,7 +470,7 @@
       "es": "El rayo golpea dos veces cuando la habilidad guía la hoja."
     },
     "effect": {
-      "en": "<p>Deal 2 + Strength damage to the paired rival hero.</p><p> If the hero playing this Technique is a Warrior hero, you may roll 1 of your Spent Dice and keep it as a Prepared Dice.</p>",
+      "en": "<p>Deal 2 + Strength damage to the paired enemy hero.</p><p> If the hero playing this Technique is a Warrior hero, you may roll 1 of your Spent Dice and keep it as a Prepared Dice.</p>",
       "es": "<p>Hace 2 + Fuerza de daño al héroe rival emparejado.</p><p> Si el héroe que juega esta Técnica es un héroe Guerrero, puedes lanzar 1 de tus Dados Gastados y guardarlo como Dado Preparado.</p>"
     },
     "card_type_id": 4,
@@ -520,10 +520,10 @@
     },
     "restriction":
     {
-      "en": "<p>This Litany can only be played by a Paladin hero.</p>",
-      "es": "<p>Esta Letanía solo puede jugarlo un héroe Paladín.</p>"
+      "en": "<p>This Spell can only be played by a Paladin hero.</p>",
+      "es": "<p>Este Hechizo solo puede jugarlo un héroe Paladín.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 5,
     "attack_subtype_id": 10,
     "image": "images/cards/fuerza-luminosa.jpeg"
@@ -592,7 +592,7 @@
       "en": "<p>Heal 3 health to 1 adjacent allied hero of your choice.</p>",
       "es": "<p>Cura 3 de vida a 1 héroe aliado adyacente a tu elección.</p>"
     },
-    "card_type_id": 7,
+    "card_type_id": 5,
     "attack_range_id": 2,
     "attack_subtype_id": 10,
     "image": "images/cards/luz-sanadora.jpeg"
@@ -686,7 +686,7 @@
       "es": "La muerte danza en círculos de acero afilado."
     },
     "effect": {
-      "en": "<p>Deal 3 + Strength damage to the paired rival hero and 2 + Strength damage to each adjacent rival hero.</p>",
+      "en": "<p>Deal 3 + Strength damage to the paired enemy hero and 2 + Strength damage to each adjacent enemy hero.</p>",
       "es": "<p>Hace 3 + Fuerza de daño al héroe rival emparejado y 2 + Fuerza de daño a cada héroe rival adyacente.</p>"
     },
     "card_type_id": 4,
