@@ -7,7 +7,7 @@
 
 <div class="entity-collection-card" data-type="{{ $type }}" data-entity-id="{{ $entity->id }}">
   <div class="entity-collection-card__controls">
-    <x-input
+    <x-form.input
       type="number" 
       name="copies_{{ $type }}_{{ $entity->id }}"
       :value="$copies"

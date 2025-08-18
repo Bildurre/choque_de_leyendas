@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('auth.confirm_password_area') }}
     </div>
@@ -24,4 +24,4 @@
             </x-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
