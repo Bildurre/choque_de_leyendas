@@ -1,6 +1,8 @@
 #!/bin/bash
-# Deploy script - Sin cache de rutas para localización
+# Deploy script para Choque de Leyendas - DigitalOcean
+# SIN CACHE DE RUTAS (por Laravel Localization)
 
+# Colores
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -30,6 +32,8 @@ git checkout main
 # Deploy en servidor
 echo -e "${YELLOW}🌐 Desplegando en servidor...${NC}"
 ssh root@68.183.2.184 << 'DEPLOY'
+set -e
+
 cd /var/www/laravel-game-cards
 
 echo "📥 Actualizando código..."
@@ -46,28 +50,32 @@ npm run build
 echo "🗄️ Ejecutando migraciones..."
 php artisan migrate --force
 
-echo "🧹 Limpiando cachés..."
+echo "🧹 Limpiando TODOS los cachés..."
 php artisan config:clear
-php artisan route:clear
+php artisan route:clear    # IMPORTANTE: Limpiar rutas
 php artisan view:clear
 php artisan cache:clear
 
-echo "⚡ Optimizando (SIN cache de rutas)..."
-# Cache de configuración - SÍ
+echo "⚡ Optimizando (SIN cachear rutas)..."
+# Cachear configuración
 php artisan config:cache
 
-# Cache de rutas - NO (problema con localización)
-# php artisan route:cache  # COMENTADO - No cachear rutas
+# NO CACHEAR RUTAS - Comentado por incompatibilidad con Laravel Localization
+# php artisan route:cache
 
-# Cache de vistas - SÍ
-php artisan view:cache
+# Cachear vistas
+php artisan view:cache || {
+    echo "⚠️ No se pudieron cachear vistas, continuando..."
+}
 
-# Optimización general sin rutas
+# Optimizar autoloader
 php artisan optimize:clear
-php artisan optimize --no-cache-routes
+composer dump-autoload --optimize
 
 echo "🔗 Verificando storage link..."
-php artisan storage:link 2>/dev/null || true
+if [ ! -L public/storage ]; then
+    php artisan storage:link
+fi
 
 echo "🔐 Ajustando permisos..."
 chown -R www-data:www-data .
@@ -77,18 +85,37 @@ chmod -R 775 storage bootstrap/cache
 echo "♻️ Reiniciando servicios..."
 systemctl restart php8.3-fpm
 systemctl reload nginx
-supervisorctl restart laravel-worker:* 2>/dev/null || true
 
-echo "✅ Deploy completado"
+# Reiniciar workers si existen
+if command -v supervisorctl &> /dev/null; then
+    supervisorctl restart laravel-worker:* 2>/dev/null || true
+fi
+
+echo "✅ Deploy completado (sin caché de rutas)"
 DEPLOY
 
-echo -e "\n${YELLOW}🔍 Verificando...${NC}"
-sleep 2
+# Verificación
+echo -e "\n${YELLOW}🔍 Verificando sitio...${NC}"
+sleep 3
+
+# Probar varias rutas para confirmar que funcionan
+echo "Probando rutas..."
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://68.183.2.184)
+HTTP_STATUS_ES=$(curl -s -o /dev/null -w "%{http_code}" http://68.183.2.184/es)
+HTTP_STATUS_EN=$(curl -s -o /dev/null -w "%{http_code}" http://68.183.2.184/en)
 
 if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "302" ]; then
-    echo -e "${GREEN}✨ ¡Deploy exitoso!${NC}"
-    echo -e "${GREEN}🔗 http://68.183.2.184${NC}"
-else
-    echo -e "${YELLOW}⚠️ HTTP $HTTP_STATUS - Verificar manualmente${NC}"
+    echo -e "${GREEN}✅ Ruta principal OK (HTTP $HTTP_STATUS)${NC}"
 fi
+
+if [ "$HTTP_STATUS_ES" = "200" ] || [ "$HTTP_STATUS_ES" = "302" ]; then
+    echo -e "${GREEN}✅ Ruta /es OK (HTTP $HTTP_STATUS_ES)${NC}"
+fi
+
+if [ "$HTTP_STATUS_EN" = "200" ] || [ "$HTTP_STATUS_EN" = "302" ]; then
+    echo -e "${GREEN}✅ Ruta /en OK (HTTP $HTTP_STATUS_EN)${NC}"
+fi
+
+echo -e "${GREEN}✨ ¡Deploy completado exitosamente!${NC}"
+echo -e "${GREEN}🔗 http://68.183.2.184${NC}"
+echo -e "${YELLOW}📝 Nota: Las rutas NO están cacheadas (por Laravel Localization)${NC}"
