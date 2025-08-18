@@ -14,9 +14,9 @@
             @csrf
 
             <div>
-                <x-primary-button>
+                <x-button>
                     {{ __('auth.verify_email_sent') }}
-                </x-primary-button>
+                </x-button>
             </div>
         </form>
 

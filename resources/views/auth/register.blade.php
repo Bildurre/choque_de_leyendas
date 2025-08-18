@@ -44,9 +44,9 @@
                 {{ __('auth.already_registered') }}
             </a>
 
-            <x-primary-button class="ms-4">
+            <x-button class="ms-4">
                 {{ __('auth.register') }}
-            </x-primary-button>
+            </x-button>
         </div>
     </form>
 </x-guest-layout>
