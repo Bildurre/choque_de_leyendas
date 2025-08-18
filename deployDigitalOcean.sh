@@ -1,7 +1,7 @@
 #!/bin/bash
 # Deploy script para Choque de Leyendas
 
-echo "Iniciando deployment..."
+echo "🚀 Iniciando deployment..."
 
 # Verificar que estamos en main
 CURRENT_BRANCH=$(git branch --show-current)
@@ -26,28 +26,49 @@ git push origin production
 git checkout main
 
 echo "Conectando al servidor..."
-ssh universoalanda@hl1293.dinaserver.com << 'EOF'
-cd ~/www/choquedeleyendas/laravel_app
+ssh root@68.183.2.184 << 'EOF'
+cd /var/www/laravel-game-cards
 
 echo "Actualizando código..."
 git pull origin production
 
 echo "Instalando dependencias PHP..."
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader --no-interaction
+
+echo "Copiando archivo de configuración si no existe..."
+if [ ! -f .env ]; then
+    cp .env.example .env
+    echo "Archivo .env creado desde .env.example"
+fi
+
+echo "Generando clave de aplicación..."
+php artisan key:generate --force
 
 echo "Ejecutando migraciones..."
 php artisan migrate --force
 
-echo "Limpiando y optimizando..."
-php artisan config:cache
+echo "Limpiando cachés..."
+php artisan config:clear
 php artisan route:clear
+php artisan view:clear
+
+echo "Optimizando para producción..."
+php artisan config:cache
+php artisan route:cache
 
 echo "Compilando assets..."
-npm install
+npm ci --production=false
 npm run build
 
-echo "Copiando assets a public_html..."
-cp -r public/build/* ../public_html/build/
+echo "Configurando permisos..."
+chown -R www-data:www-data /var/www/laravel-game-cards
+chmod -R 755 /var/www/laravel-game-cards
+chmod -R 775 /var/www/laravel-game-cards/storage
+chmod -R 775 /var/www/laravel-game-cards/bootstrap/cache
+
+echo "Reiniciando servicios..."
+systemctl reload nginx
+systemctl restart php8.3-fpm
 
 echo "Deployment completado"
 EOF
