@@ -125,6 +125,10 @@ class GeneratePreviewImage implements ShouldQueue
 
       // Generate image using Browsershot with optimized settings
       Browsershot::html($html)
+        ->setChromePath('/usr/bin/chromium-browser')
+        ->setNodePath('/usr/bin/node')
+        ->setNpmPath('/usr/bin/npm')
+        ->noSandbox()
         ->windowSize(333, 477) // Reduced size: ~66% of original (was 333x477) (220, 315)
         ->deviceScaleFactor(3) // Reduced from 3 to 1 for smaller file size
         ->waitUntilNetworkIdle()

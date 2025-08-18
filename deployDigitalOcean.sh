@@ -54,7 +54,6 @@ php artisan view:clear
 
 echo "Optimizando para producción..."
 php artisan config:cache
-php artisan route:cache
 
 echo "Compilando assets..."
 npm ci --production=false
