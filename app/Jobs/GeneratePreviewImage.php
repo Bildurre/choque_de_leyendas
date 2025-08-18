@@ -2,19 +2,21 @@
 
 namespace App\Jobs;
 
+use App\Traits\ConfiguresBrowsershot;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Env;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class GeneratePreviewImage implements ShouldQueue
 {
-  use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+  use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, ConfiguresBrowsershot;
 
   /**
    * The model instance
@@ -124,16 +126,17 @@ class GeneratePreviewImage implements ShouldQueue
       $fullPath = Storage::disk('public')->path($path);
 
       // Generate image using Browsershot with optimized settings
-      Browsershot::html($html)
-        ->setChromePath('/usr/bin/chromium-browser')
-        ->setNodePath('/usr/bin/node')
-        ->setNpmPath('/usr/bin/npm')
-        ->noSandbox()
+      $browsershot = Browsershot::html($html)
         ->windowSize(333, 477) // Reduced size: ~66% of original (was 333x477) (220, 315)
         ->deviceScaleFactor(3) // Reduced from 3 to 1 for smaller file size
         ->waitUntilNetworkIdle()
-        ->delay(300) // Reduced delay for faster processing
-        ->save($fullPath);
+        ->delay(300); // Reduced delay for faster processing
+
+      // Aplicar configuración de producción
+      $this->configureBrowsershot($browsershot);
+
+      // Guardar
+      $browsershot->save($fullPath);
 
       // Now delete the old image if it exists and is different from the new one
       if ($oldImagePath && $oldImagePath !== $path && Storage::disk('public')->exists($oldImagePath)) {
