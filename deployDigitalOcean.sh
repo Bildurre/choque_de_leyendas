@@ -1,75 +1,90 @@
 #!/bin/bash
-# Deploy script para Choque de Leyendas
+# Deploy script para Choque de Leyendas - DigitalOcean
 
-echo "🚀 Iniciando deployment..."
+# Colores para output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}🚀 Iniciando deployment...${NC}"
 
 # Verificar que estamos en main
 CURRENT_BRANCH=$(git branch --show-current)
 if [ "$CURRENT_BRANCH" != "main" ]; then
-    echo "Error: No estás en la rama main. Actual: $CURRENT_BRANCH"
+    echo -e "${RED}❌ Error: No estás en la rama main. Actual: $CURRENT_BRANCH${NC}"
     exit 1
 fi
 
-# Confirmar cambios en main
-echo "Confirmando cambios en main..."
+# 1. PUSH DE CAMBIOS LOCALES
+echo -e "${YELLOW}📝 Subiendo cambios...${NC}"
 git add .
-git commit -m "Update: $(date +%Y-%m-%d_%H:%M:%S)" || echo "No hay cambios nuevos"
+git commit -m "Deploy: $(date +%Y-%m-%d_%H:%M:%S)" || echo "Sin cambios nuevos"
 git push origin main
 
 # Merge main → production
-echo "Mergeando main → production..."
 git checkout production
 git merge main -m "Deploy: $(date +%Y-%m-%d_%H:%M:%S)"
 git push origin production
-
-# Volver a main
 git checkout main
 
-echo "Conectando al servidor..."
-ssh root@68.183.2.184 << 'EOF'
+# 2. DEPLOY EN EL SERVIDOR
+echo -e "${YELLOW}🌐 Conectando al servidor...${NC}"
+ssh root@68.183.2.184 << 'DEPLOY'
+set -e  # Salir si hay errores
+
 cd /var/www/laravel-game-cards
 
-echo "Actualizando código..."
-git pull origin production
+echo "📥 Actualizando código..."
+# Forzar actualización (descarta cambios locales del servidor)
+git fetch origin production
+git reset --hard origin/production
 
-echo "Instalando dependencias PHP..."
+echo "📦 Instalando dependencias..."
 composer install --no-dev --optimize-autoloader --no-interaction
+npm ci --production=false
 
-echo "Copiando archivo de configuración si no existe..."
-if [ ! -f .env ]; then
-    cp .env.example .env
-    echo "Archivo .env creado desde .env.example"
-fi
+echo "🎨 Compilando assets..."
+npm run build
 
-echo "Generando clave de aplicación..."
-php artisan key:generate --force
-
-echo "Ejecutando migraciones..."
+echo "🗄️ Migraciones..."
 php artisan migrate --force
 
-echo "Limpiando cachés..."
+echo "⚡ Optimizando..."
+# Limpiar todo primero
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
+php artisan cache:clear
 
-echo "Optimizando para producción..."
+# Cachear todo
 php artisan config:cache
+php artisan route:cache
+php artisan view:cache || true  # No fallar si hay problemas con vistas
 
-echo "Compilando assets..."
-npm ci --production=false
-npm run build
+# Storage link
+php artisan storage:link || true
 
-echo "Configurando permisos..."
-chown -R www-data:www-data /var/www/laravel-game-cards
-chmod -R 755 /var/www/laravel-game-cards
-chmod -R 775 /var/www/laravel-game-cards/storage
-chmod -R 775 /var/www/laravel-game-cards/bootstrap/cache
+echo "🔐 Permisos..."
+chown -R www-data:www-data .
+chmod -R 755 .
+chmod -R 775 storage bootstrap/cache
 
-echo "Reiniciando servicios..."
+echo "♻️ Reiniciando servicios..."
 systemctl reload nginx
 systemctl restart php8.3-fpm
+supervisorctl restart laravel-worker:* || true
 
-echo "Deployment completado"
-EOF
+echo "✅ Deploy completado"
+DEPLOY
 
-echo "¡Deploy finalizado con éxito!"
+# Verificar que el sitio responde
+echo -e "\n${YELLOW}🔍 Verificando sitio...${NC}"
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://68.183.2.184)
+
+if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "302" ]; then
+    echo -e "${GREEN}✨ ¡Deploy exitoso!${NC}"
+    echo -e "${GREEN}🔗 Sitio disponible en: http://68.183.2.184${NC}"
+else
+    echo -e "${RED}⚠️ Advertencia: El sitio devolvió código HTTP $HTTP_STATUS${NC}"
+fi

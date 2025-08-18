@@ -136,15 +136,12 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
     Route::get('/view/{pdf}', [PdfExportController::class, 'view'])->name('view');
     Route::delete('/{pdf}', [PdfExportController::class, 'destroy'])->name('destroy');
     
-    // Rutas de generación (solo en local)
-    if (app()->environment('local')) {
-      Route::post('/faction/{faction}/generate', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
-      Route::post('/deck/{deck}/generate', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
-      Route::post('/page/{page}/generate', [PdfExportController::class, 'generatePage'])->name('generate-page');
-      // Route::post('/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
-      Route::post('/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
-      Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
-    }
+    Route::post('/faction/{faction}/generate', [PdfExportController::class, 'generateFaction'])->name('generate-faction');
+    Route::post('/deck/{deck}/generate', [PdfExportController::class, 'generateDeck'])->name('generate-deck');
+    Route::post('/page/{page}/generate', [PdfExportController::class, 'generatePage'])->name('generate-page');
+    // Route::post('/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
+    Route::post('/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
+    Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
   });
 
   // Icons
