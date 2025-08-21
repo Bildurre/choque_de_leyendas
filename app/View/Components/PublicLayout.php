@@ -69,12 +69,12 @@ class PublicLayout extends Component
     $ogImage = null,
     $metaTags = null
   ) {
-    $this->title = $title ?? config('app.name', 'Alanda - Choque de Leyendas');
-    $this->metaDescription = $metaDescription ?? 'Explora el mundo de Alanda - Choque de Leyendas. Descubre todas las cartas, héroes y facciones del juego de cartas estratégico.';
+    $this->title = $title ?? config('app.name', 'Choque de Leyendas');
+    $this->metaDescription = $metaDescription ?? 'Explora el mundo de Espadas de Ceniza: Choque de Leyendas. Descubre todas las cartas, héroes y facciones del juego de cartas estratégico.';
     $this->ogTitle = $ogTitle ?? $this->title;
     $this->ogDescription = $ogDescription ?? $this->metaDescription;
     $this->ogType = $ogType;
-    $this->ogImage = $ogImage ?? asset('images/og-default.jpg');
+    $this->ogImage = $ogImage ?? asset('storage/images/logos/_logo_'.strtolower(app()->getLocale()).'.png');
     $this->metaTags = $metaTags;
   }
 

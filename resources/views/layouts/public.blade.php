@@ -6,17 +6,17 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   {{-- Dynamic title --}}
-  <title>{{ $title ?? config('app.name', 'Alanda - Choque de Leyendas') }}</title>
+  <title>{{ $title ?? __('common.full_title') }}</title>
   
   {{-- Dynamic meta description --}}
-  <meta name="description" content="{{ $metaDescription ?? 'Explora el mundo de Alanda - Choque de Leyendas. Descubre todas las cartas, héroes y facciones del juego de cartas estratégico.' }}">
+  <meta name="description" content="{{ $metaDescription ?? __('common.full_title') }}">
   
   {{-- Open Graph tags for social media --}}
   <meta property="og:title" content="{{ $ogTitle ?? $title ?? config('app.name') }}">
-  <meta property="og:description" content="{{ $ogDescription ?? $metaDescription ?? 'Explora el mundo de Alanda - Choque de Leyendas' }}">
+  <meta property="og:description" content="{{ $ogDescription ?? $metaDescription ?? __('common.full_title') }}">
   <meta property="og:type" content="{{ $ogType ?? 'website' }}">
   <meta property="og:url" content="{{ url()->current() }}">
-  <meta property="og:image" content="{{ $ogImage ?? asset('storage/images/logos/full_logo_'.strtolower(app()->getLocale()).'.png') }}">
+  <meta property="og:image" content="{{ $ogImage ?? asset('storage/images/logos/logo_'.strtolower(app()->getLocale()).'.png') }}">
   
   {{-- Additional meta tags --}}
   {{ $metaTags ?? '' }}

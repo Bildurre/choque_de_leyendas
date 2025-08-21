@@ -17,10 +17,8 @@
       };
       
       // Convert TTF fonts to base64
-      $almendraRegular = $fontToBase64(public_path('fonts/almendra/Almendra-Regular.ttf'));
-      $almendraBold = $fontToBase64(public_path('fonts/almendra/Almendra-Bold.ttf'));
-      $almendraItalic = $fontToBase64(public_path('fonts/almendra/Almendra-Italic.ttf'));
-      $almendraBoldItalic = $fontToBase64(public_path('fonts/almendra/Almendra-BoldItalic.ttf'));
+      $imfellenglishRegular = $fontToBase64(public_path('fonts/imfellenglish/IMFellEnglish-Regular.ttf'));
+      $imfellenglishItalic = $fontToBase64(public_path('fonts/imfellenglish/IMFellEnglish-Italic.ttf'));
       
       $robotoRegular = $fontToBase64(public_path('fonts/roboto/Roboto-Regular.ttf'));
       $robotoBold = $fontToBase64(public_path('fonts/roboto/Roboto-Bold.ttf'));
@@ -28,38 +26,20 @@
       $robotoBoldItalic = $fontToBase64(public_path('fonts/roboto/Roboto-BoldItalic.ttf'));
     @endphp
     
-    @if($almendraRegular)
+    @if($imfellenglishRegular)
     @font-face {
-      font-family: 'almendra';
-      src: url('{{ $almendraRegular }}') format('truetype');
+      font-family: 'imfellenglish';
+      src: url('{{ $imfellenglishRegular }}') format('truetype');
       font-weight: 400;
       font-style: normal;
     }
     @endif
     
-    @if($almendraBold)
+    @if($imfellenglishItalic)
     @font-face {
-      font-family: 'almendra';
-      src: url('{{ $almendraBold }}') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-    @endif
-    
-    @if($almendraItalic)
-    @font-face {
-      font-family: 'almendra';
-      src: url('{{ $almendraItalic }}') format('truetype');
+      font-family: 'imfellenglish';
+      src: url('{{ $imfellenglishItalic }}') format('truetype');
       font-weight: 400;
-      font-style: italic;
-    }
-    @endif
-    
-    @if($almendraBoldItalic)
-    @font-face {
-      font-family: 'almendra';
-      src: url('{{ $almendraBoldItalic }}') format('truetype');
-      font-weight: 700;
       font-style: italic;
     }
     @endif
@@ -162,7 +142,7 @@
     
     /* Page title */
     h1 {
-      font-family: 'almendra', serif;
+      font-family: 'imfellenglish', serif;
       font-size: 21pt;
       text-align: center;
       margin-bottom: 1.5em;
@@ -170,7 +150,7 @@
     
     /* Block titles */
     h2 {
-      font-family: 'almendra', serif;
+      font-family: 'imfellenglish', serif;
       font-size: 19pt;
       margin-top: 1em;
       margin-bottom: 0.5em;
@@ -178,7 +158,7 @@
     }
     
     h3 {
-      font-family: 'almendra', serif;
+      font-family: 'imfellenglish', serif;
       font-size: 17pt;
       margin-top: 0.8em;
       margin-bottom: 0.4em;
@@ -186,7 +166,7 @@
     }
 
     h4 {
-      font-family: 'almendra', serif;
+      font-family: 'imfellenglish', serif;
       font-size: 15pt;
       margin-top: 0.8em;
       margin-bottom: 0.4em;
@@ -194,7 +174,7 @@
     }
 
     h5 {
-      font-family: 'almendra', serif;
+      font-family: 'imfellenglish', serif;
       font-size: 13pt;
       margin-top: 0.8em;
       margin-bottom: 0.4em;
@@ -338,7 +318,7 @@
     
     .block--counters-list .counter-name {
       font-weight: bold;
-      font-family: "almendra";
+      font-family: "imfellenglish";
     }
     
     .block--counters-list .counter-effect {

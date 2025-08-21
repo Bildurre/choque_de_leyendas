@@ -2,8 +2,8 @@
 
 return [
   // Meta
-  'downloads_page_title' => 'Descargas - Alanda: Choque de Leyendas',
-  'downloads_page_description' => 'Descarga los PDFs oficiales de Alanda. Accede a las reglas del juego, hojas de referencia, mazos predeterminados y toda la documentación necesaria para jugar.',
+  'downloads_page_title' => 'Descargas - Espadas de Ceniza: Choque de Leyendas',
+  'downloads_page_description' => 'Descarga los PDFs oficiales de Espadas de Ceniza: Choque de Leyendas. Accede a las reglas del juego, hojas de referencia, mazos predeterminados y toda la documentación necesaria para jugar.',
 
   // Títulos y nombres
   'plural' => 'PDFs',

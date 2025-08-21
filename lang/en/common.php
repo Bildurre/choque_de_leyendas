@@ -1,6 +1,11 @@
 <?php
 
 return [
+
+  'game_title' => 'Blades of Ash',
+  'game_subtitle' => 'Clash of Legends',
+  'full_title' => 'Blades of Ash: Clash of Legends',
+  
   // Basic actions
   'create' => 'Create',
   'edit' => 'Edit',

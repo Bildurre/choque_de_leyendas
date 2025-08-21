@@ -2,8 +2,8 @@
 
 return [
   // Meta
-  'downloads_page_title' => 'Downloads - Alanda: Clash of Legends',
-  'downloads_page_description' => 'Download official Alanda PDFs. Access game rules, reference sheets, preset decks and all the documentation needed to play.',
+  'downloads_page_title' => 'Downloads - Blades of Ash: Clash of Legends',
+  'downloads_page_description' => 'Download official Blades of Ash: Clash of Legends PDFs. Access game rules, reference sheets, preset decks and all the documentation needed to play.',
 
   // Titles and names
   'plural' => 'PDFs',

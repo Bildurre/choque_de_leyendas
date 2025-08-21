@@ -1,6 +1,11 @@
 <?php
 
 return [
+
+  'game_title' => 'Espadas de Ceniza',
+  'game_subtitle' => 'Choque de Leyendas',
+  'full_title' => 'Espadas de Ceniza: Choque de Leyendas',
+
   // Acciones básicas
   'create' => 'Crear',
   'edit' => 'Editar',

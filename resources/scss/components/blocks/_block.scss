@@ -71,7 +71,7 @@
     font-size: 1.75rem;
     font-weight: 800;
     color: var(--color-text-primary);
-    font-family: 'almendra', serif;
+    font-family: 'imfellenglish', serif;
     line-height: 1.2;
     
     @include responsive(tablet) {
@@ -178,7 +178,7 @@
     h1, h2, h3, h4, h5, h6 {
       margin-top: $spacing-lg;
       margin-bottom: $spacing-md;
-      font-family: 'almendra', serif;
+      font-family: 'imfellenglish', serif;
       font-weight: 700;
       line-height: 1.2;
       color: var(--color-text-primary);

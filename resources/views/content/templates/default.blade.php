@@ -1,5 +1,5 @@
 <x-public-layout 
-  :title="$page->meta_title ?: $page->title . ' - Alanda'"
+  :title="$page->meta_title ?: $page->title . ' - ' .  __('common.full_title')"
   :metaDescription="$page->meta_description ?: Str::limit(strip_tags($page->description), 160)"
 >
   @if($page->background_image)

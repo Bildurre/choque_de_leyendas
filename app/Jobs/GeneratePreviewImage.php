@@ -133,7 +133,9 @@ class GeneratePreviewImage implements ShouldQueue
         ->delay(300); // Reduced delay for faster processing
 
       // Aplicar configuración de producción
-      $this->configureBrowsershot($browsershot);
+      if (app()->environment('production')) {
+        $this->configureBrowsershot($browsershot);
+      }
 
       // Guardar
       $browsershot->save($fullPath);

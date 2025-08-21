@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Alanda - Choque de Leyendas') }}</title>
+  <title>{{ __('common.full_title') }}</title>
 
   <!-- Theme Script (debe ir antes de los estilos) -->
   <script>

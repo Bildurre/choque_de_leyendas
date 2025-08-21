@@ -25,7 +25,7 @@ return [
   // Welcome page
   'welcome' => [
     'subtitle' => 'The ultimate collectible card game',
-    'description' => 'Explore the world of Alanda, meet the heroes and discover all the game cards.',
+    'description' => 'Explore the world of Blades of Ash: Clash of Legends, meet the heroes and discover all the game cards.',
     'login' => 'Login',
     'game_art' => 'Game art',
     'section_title_1' => 'About the game',
@@ -64,7 +64,7 @@ return [
     'back' => 'Back to Heroes',
     'go' => 'Go to Heroes',
     'title' => 'Heroes',
-    'description' => 'Discover all the heroes of Alanda: Clash of Legends',
+    'description' => 'Discover all the heroes of Blades of Ash: Clash of Legends',
     'no_heroes' => 'No heroes available',
     'details' => 'Details',
     'lore' => 'Lore',
@@ -113,7 +113,7 @@ return [
   
   // Footer
   'footer' => [
-    'copyright' => '© :year Alanda - Clash of Legends. All rights reserved.',
+    'copyright' => '© :year Blades of Ash: Clash of Legends. All rights reserved.',
     'by' => 'by',
     'under_license' => 'is under license',
   ],

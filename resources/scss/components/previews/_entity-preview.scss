@@ -152,18 +152,18 @@ $color-white-transparent: #ffffffbd;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: .65rem;
-    font-family: 'almendra';
-    font-style: italic;
+    gap: .1rem;
+    font-size: .5rem;
+    font-family: 'imfellenglish';
     font-weight: 600;
     
     span {
-      line-height: 1;
       margin: .25rem 0;
       color: var(--faction-text);
     }
+
     .logo-icon {
-      height: 80%;
+      height: .65rem;
       
       path {
         fill: var(--faction-text);

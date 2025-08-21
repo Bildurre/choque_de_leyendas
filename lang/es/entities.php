@@ -9,10 +9,10 @@ return [
 
   // Facciones
   'factions' => [
-    'index_page_title' => 'Facciones de Alanda - Todos los bandos',
-    'index_page_description' => 'Descubre todas las facciones de Alanda: Choque de Leyendas. Conoce sus historias, estrategias únicas y encuentra tu bando favorito.',
-    'page_title' => ':name - Facción | Alanda',
-    'page_description' => 'Facción :name de Alanda. :description',
+    'index_page_title' => 'Facciones de Espadas de Ceniza: Choque de Leyendas - Todos los bandos',
+    'index_page_description' => 'Descubre todas las facciones de Espadas de Ceniza: Choque de Leyendas. Conoce sus historias, estrategias únicas y encuentra tu bando favorito.',
+    'page_title' => ':name - Facción | Espadas de Ceniza: Choque de Leyendas',
+    'page_description' => 'Facción :name de Espadas de Ceniza: Choque de Leyendas. :description',
     'singular' => 'Facción',
     'plural' => 'Facciones',
     'create' => 'Crear facción',
@@ -56,9 +56,9 @@ return [
   
   // Héroes
   'heroes' => [
-    'index_page_title' => 'Héroes de Alanda - Todos los personajes jugables',
-    'index_page_description' => 'Explora todos los héroes de Alanda: Choque de Leyendas. Descubre sus habilidades únicas, atributos y encuentra el héroe perfecto para tu estrategia.',
-    'page_title' => ':name - Héroe | Alanda',
+    'index_page_title' => 'Héroes de Espadas de Ceniza: Choque de Leyendas - Todos los personajes jugables',
+    'index_page_description' => 'Explora todos los héroes de Espadas de Ceniza: Choque de Leyendas. Descubre sus habilidades únicas, atributos y encuentra el héroe perfecto para tu estrategia.',
+    'page_title' => ':name - Héroe | Espadas de Ceniza: Choque de Leyendas',
     'page_description' => ':name - :faction. :description',
     'singular' => 'Héroe',
     'plural' => 'Héroes',
@@ -110,9 +110,9 @@ return [
   
   // Cartas
   'cards' => [
-    'index_page_title' => 'Cartas de Alanda - Biblioteca completa',
-    'index_page_description' => 'Explora todas las cartas de Alanda: Choque de Leyendas. Busca por facción, tipo, coste y encuentra las cartas perfectas para tu estrategia.',
-    'page_title' => ':name - Carta | Alanda',
+    'index_page_title' => 'Cartas de Espadas de Ceniza: Choque de Leyendas - Biblioteca completa',
+    'index_page_description' => 'Explora todas las cartas de Espadas de Ceniza: Choque de Leyendas. Busca por facción, tipo, coste y encuentra las cartas perfectas para tu estrategia.',
+    'page_title' => ':name - Carta | Espadas de Ceniza: Choque de Leyendas',
     'page_description' => ':name - Carta de :type de :faction. :description',
     'singular' => 'Carta',
     'plural' => 'Cartas',
@@ -289,9 +289,9 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
-    'index_page_title' => 'Mazos de Facción - Alanda: Choque de Leyendas',
-    'index_page_description' => 'Explora todos los mazos de facción prediseñados para cada modo de juego de Alanda: Choque de Leyendas',
-    'page_title' => ':name - Mazo predeterminado | Alanda',
+    'index_page_title' => 'Mazos de Facción - Espadas de Ceniza: Choque de Leyendas',
+    'index_page_description' => 'Explora todos los mazos de facción prediseñados para cada modo de juego de Espadas de Ceniza: Choque de Leyendas',
+    'page_title' => ':name - Mazo predeterminado | Espadas de Ceniza: Choque de Leyendas',
     'page_description' => 'Mazo :name de la facción :faction. :description',
     'singular' => 'Mazo de facción',
     'plural' => 'Mazos de facción',

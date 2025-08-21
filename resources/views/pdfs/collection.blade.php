@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
   <meta charset="UTF-8">
-  <title>Alanda Cards - {{ date('Y-m-d') }}</title>
+  <title>{{ __('common.full_title') }} - {{ date('Y-m-d') }}</title>
   <style>
     * {
       margin: 0;

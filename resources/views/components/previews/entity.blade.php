@@ -34,7 +34,8 @@
   </section>
 
   <footer class="entity-preview__footer">
-    <span>Alanda: Choque de Leyendas</span>
     <x-logo-icon />
+    <span class="logo__title">{{ __('common.game_title') }}: </span>
+    <span class="logo__subtitle">{{ __('common.game_subtitle') }}</span>
   </footer>
 </article>

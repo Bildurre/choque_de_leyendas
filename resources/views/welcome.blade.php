@@ -2,7 +2,7 @@
 <x-public-layout>
   <div class="welcome-container">
     <div class="welcome-content">
-      <h1 class="welcome-title">Alanda - Choque de Leyendas</h1>
+      <h1 class="welcome-title">{{ __('common.full_title') }}</h1>
       <p class="welcome-subtitle">{{ __('public.welcome.subtitle') }}</p>
       
       <div class="welcome-description">

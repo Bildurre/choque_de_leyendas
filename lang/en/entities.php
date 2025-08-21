@@ -9,10 +9,10 @@ return [
 
   // Factions
   'factions' => [
-    'index_page_title' => 'Alanda Factions - All factions',
-    'index_page_description' => 'Discover all factions in Alanda: Clash of Legends. Learn their stories, unique strategies and find your favorite faction.',
-    'page_title' => ':name - Faction | Alanda',
-    'page_description' => ':name faction in Alanda. :description',
+    'index_page_title' => 'Blades of Ash: Clash of Legends Factions - All factions',
+    'index_page_description' => 'Discover all factions in Blades of Ash: Clash of Legends. Learn their stories, unique strategies and find your favorite faction.',
+    'page_title' => ':name - Faction | Blades of Ash: Clash of Legends',
+    'page_description' => ':name faction in Blades of Ash: Clash of Legends. :description',
     'singular' => 'Faction',
     'plural' => 'Factions',
     'create' => 'Create faction',
@@ -56,9 +56,9 @@ return [
   
   // Heroes
   'heroes' => [
-    'index_page_title' => 'Alanda Heroes - All playable characters',
-    'index_page_description' => 'Explore all heroes from Alanda: Clash of Legends. Discover their unique abilities, attributes and find the perfect hero for your strategy.',
-    'page_title' => ':name - Hero | Alanda',
+    'index_page_title' => 'Blades of Ash: Clash of Legends Heroes - All playable characters',
+    'index_page_description' => 'Explore all heroes from Blades of Ash: Clash of Legends. Discover their unique abilities, attributes and find the perfect hero for your strategy.',
+    'page_title' => ':name - Hero | Blades of Ash: Clash of Legends',
     'page_description' => ':name - :faction. :description',
     'singular' => 'Hero',
     'plural' => 'Heroes',
@@ -111,9 +111,9 @@ return [
   
   // Cards
   'cards' => [
-    'index_page_title' => 'Alanda Cards - Complete library',
-    'index_page_description' => 'Explore all cards from Alanda: Clash of Legends. Search by faction, type, cost and find the perfect cards for your strategy.',
-    'page_title' => ':name - Card | Alanda',
+    'index_page_title' => 'Blades of Ash: Clash of Legends Cards - Complete library',
+    'index_page_description' => 'Explore all cards from Blades of Ash: Clash of Legends. Search by faction, type, cost and find the perfect cards for your strategy.',
+    'page_title' => ':name - Card | Blades of Ash: Clash of Legends',
     'page_description' => ':name - :type card from :faction. :description',
     'singular' => 'Card',
     'plural' => 'Cards',
@@ -290,9 +290,9 @@ return [
   
   // Faction decks
   'faction_decks' => [
-    'index_page_title' => 'Faction Decks - Alanda: Clash of Legends',
-    'index_page_description' => 'Explore all pre-built faction decks for each game mode in Alanda: Clash of Legends',
-    'page_title' => ':name - Preset deck | Alanda',
+    'index_page_title' => 'Faction Decks - Blades of Ash: Clash of Legends',
+    'index_page_description' => 'Explore all pre-built faction decks for each game mode in Blades of Ash: Clash of Legends',
+    'page_title' => ':name - Preset deck | Blades of Ash: Clash of Legends',
     'page_description' => ':name deck from :faction faction. :description',
     'singular' => 'Faction deck',
     'plural' => 'Faction decks',

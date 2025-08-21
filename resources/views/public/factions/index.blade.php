@@ -68,7 +68,7 @@
       'type' => 'cta',
       'title' => ['es' => 'Las reglas del juego', 'en' => 'Game Rules'],
       'image' => null,
-      'subtitle' => ['es' => 'Aprende los fundamentos del combate en Alanda: Choque de Leyendas, desde la preparación hasta la victoria', 'en' => 'Learn the fundamentals of combat in Alanda: Clash of Legends, from preparation to victory'],
+      'subtitle' => ['es' => 'Aprende los fundamentos del combate en Espadas de Ceniza: Choque de Leyendas, desde la preparación hasta la victoria', 'en' => 'Learn the fundamentals of combat in Blades of Ash: Clash of Legends, from preparation to victory'],
       'background_color' => 'theme-border',
       'content' => [
         'en' => [

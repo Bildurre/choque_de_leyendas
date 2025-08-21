@@ -89,7 +89,7 @@
       'type' => 'cta',
       'title' => ['es' => 'Modos de Juego', 'en' => 'Game Modes'],
       'image' => null,
-      'subtitle' => ['es' => 'Explora los distintos modos de juego y descubre nuevas formas de vivir la experiencia de Alanda: Choque de Leyendas', 'en' => 'Explore the different game modes and discover new ways to experience Alanda: Clash of Legends'],
+      'subtitle' => ['es' => 'Explora los distintos modos de juego y descubre nuevas formas de vivir la experiencia de Espadas de Ceniza: Choque de Leyendas', 'en' => 'Explore the different game modes and discover new ways to experience Blades of Ash: Clash of Legends'],
       'background_color' => 'theme-border',
       'content' => [
         'en' => [

@@ -1,32 +1,26 @@
 /*
-* ALMENDRA *
+* ITALIANNO *
 */
 @font-face {
-  font-family: 'almendra';
-  src: url('/public/fonts/almendra/almendra-bold-webfont.woff2') format('woff2'),
-       url('/public/fonts/almendra/almendra-bold-webfont.woff') format('woff');
-  font-weight: 700;
+  font-family: 'italianno';
+  src: url('/public/fonts/italianno/italianno-regular-webfont.woff2') format('woff2'),
+       url('/public/fonts/italianno/italianno-regular-webfont.woff') format('woff');
   font-style: normal;
 }
+
+/*
+* IM FELL ENGLISH *
+*/
 @font-face {
-  font-family: 'almendra';
-  src: url('/public/fonts/almendra/almendra-bolditalic-webfont.woff2') format('woff2'),
-       url('/public/fonts/almendra/almendra-bolditalic-webfont.woff') format('woff');
-  font-weight: 700;
+  font-family: 'imfellenglish';
+  src: url('/public/fonts/imfellenglish/imfellenglish-italic-webfont.woff2') format('woff2'),
+       url('/public/fonts/imfellenglish/imfellenglish-italic-webfont.woff') format('woff');
   font-style: italic;
 }
 @font-face {
-  font-family: 'almendra';
-  src: url('/public/fonts/almendra/almendra-italic-webfont.woff2') format('woff2'),
-       url('/public/fonts/almendra/almendra-italic-webfont.woff') format('woff');
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'almendra';
-  src: url('/public/fonts/almendra/almendra-regular-webfont.woff2') format('woff2'),
-       url('/public/fonts/almendra/almendra-regular-webfont.woff') format('woff');
-  font-weight: 400;
+  font-family: 'imfellenglish';
+  src: url('/public/fonts/imfellenglish/imfellenglish-regular-webfont.woff2') format('woff2'),
+       url('/public/fonts/imfellenglish/imfellenglish-regular-webfont.woff') format('woff');
   font-style: normal;
 }
 

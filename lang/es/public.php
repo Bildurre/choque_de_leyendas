@@ -24,8 +24,8 @@ return [
   
   // Página de bienvenida
   'welcome' => [
-    'subtitle' => 'El juego de cartas coleccionables definitivo',
-    'description' => 'Explora el mundo de Alanda, conoce a los héroes y descubre todas las cartas del juego.',
+    'subtitle' => 'El juego de cartas definitivo',
+    'description' => 'Explora el mundo de Espadas de Ceniza: Choque de Leyendas, conoce a los héroes y descubre todas las cartas del juego.',
     'login' => 'Iniciar sesión',
     'game_art' => 'Arte del juego',
     'section_title_1' => 'Sobre el juego',
@@ -64,7 +64,7 @@ return [
     'back' => 'Volver a las Héroes',
     'go' => 'Ir a las Héroes',
     'title' => 'Héroes',
-    'description' => 'Descubre todos los héroes de Alanda: Choque de Leyendas',
+    'description' => 'Descubre todos los héroes de Espadas de Ceniza: Choque de Leyendas',
     'no_heroes' => 'No hay héroes disponibles',
     'details' => 'Detalles',
     'lore' => 'Historia',
@@ -116,7 +116,7 @@ return [
   
   // Pie de página
   'footer' => [
-    'copyright' => '© :year Alanda - Choque de Leyendas. Todos los derechos reservados.',
+    'copyright' => '© :year Espadas de Ceniza: Choque de Leyendas. Todos los derechos reservados.',
     'by' => 'por',
     'under_license' => 'está bajo licencia',
   ],
