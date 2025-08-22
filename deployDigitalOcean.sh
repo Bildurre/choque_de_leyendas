@@ -34,7 +34,7 @@ echo -e "${YELLOW}🌐 Desplegando en servidor...${NC}"
 ssh root@68.183.2.184 << 'DEPLOY'
 set -e
 
-cd /var/www/laravel-game-cards
+cd /var/www/leyendas
 
 echo "📥 Actualizando código..."
 git fetch origin production
