@@ -74,7 +74,7 @@ class PublicLayout extends Component
     $this->ogTitle = $ogTitle ?? $this->title;
     $this->ogDescription = $ogDescription ?? $this->metaDescription;
     $this->ogType = $ogType;
-    $this->ogImage = $ogImage ?? asset('storage/images/logos/_logo_'.strtolower(app()->getLocale()).'.png');
+    $this->ogImage = $ogImage ?? asset('storage/images/logos/logo_'.strtolower(app()->getLocale()).'.png');
     $this->metaTags = $metaTags;
   }
 

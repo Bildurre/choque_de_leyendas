@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="footer-license">
       <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-        <a property="dct:title" rel="cc:attributionURL" href="https://leyendas.espadasdeceniza.gg">
+        <a property="dct:title" rel="cc:attributionURL" href="https://leyendas.espadasdeceniza.com">
           {{ __('common.full_title') }}
         </a>
 
