@@ -38,8 +38,8 @@
     @component('content.blocks.header', ['block' => $headerBlock])
       @slot('actions')
         <x-pdf.add-button
-          data-entity-type="card"
-          data-entity-id="{{ $card->id }}"
+          entityType="card"
+          entityId="{{ $card->id }}"
           type="outlined"
         >
           {{ __('pdf.collection.add_button_title') }}
