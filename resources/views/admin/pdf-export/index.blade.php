@@ -5,11 +5,11 @@
         @csrf
         <x-button
           type="submit"
-          variant="warning"
+          variant="danger"
           icon="trash"
-          onclick="return confirm('{{ __('admin.pdf_export.confirm_cleanup') }}')"
+          onclick="return confirm('{{ __('pdf.confirm_cleanup') }}')"
         >
-          {{ __('admin.pdf_export.cleanup_temporary') }}
+          {{ __('pdf.cleanup_temporary') }}
         </x-button>
       </form>
     </x-slot:actions>

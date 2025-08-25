@@ -36,7 +36,10 @@
   </x-slot:attributes_section>
 
   <x-slot:abilities>
-    <div class="card-preview__types">
+    <div class="card-preview__info">
+      @if ($card->is_unique)
+        <span> {{ __('admin.is_unique') }} </span>
+      @endif
       @if ($card->attackSubtype && $card->attackRange)
         <span> {{ $types }} </span>
       @endif

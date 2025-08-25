@@ -51,6 +51,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'restriction',
     'area',
     'is_published',
+    'is_unique'
   ];
 
   /**
@@ -63,6 +64,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'area' => 'boolean',
     'deleted_at' => 'datetime',
     'is_published' => 'boolean',
+    'is_unique' => 'boolean',
     'preview_image' => 'array'
   ];
 

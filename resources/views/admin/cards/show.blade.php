@@ -62,6 +62,9 @@
         <div class="card-preview-section">
           <x-previews.preview-image :entity="$card" type="card"/>
         </div>
+        {{-- <div class="card-preview-section">
+          <x-previews.card :card="$card"/>
+        </div> --}}
         {{-- Basic Information --}}
         <x-entity-show.info-block title="entities.cards.basic_info">
           <x-entity-show.info-list>
@@ -79,6 +82,13 @@
                 {{ __('entities.cards.no_faction') }}
               @endif
             </x-entity-show.info-list-item>
+
+            @if($card->is_unique)
+              <x-entity-show.info-list-item 
+                label="{{ __('entities.cards.is_unique') }}"
+                :value="__('common.yes')" 
+              />
+            @endif
             
             <x-entity-show.info-list-item 
               label="{{ __('entities.card_types.singular') }}"

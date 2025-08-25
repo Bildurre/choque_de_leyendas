@@ -134,6 +134,7 @@ return [
     'no_image' => 'No image',
     'area' => 'Area',
     'is_area_attack' => 'Is area attack',
+    'is_unique' => 'Is unique',
     'hands' => 'Hands',
     'hands_required' => 'Hands Required',
     'hand' => 'hand',

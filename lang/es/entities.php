@@ -133,6 +133,7 @@ return [
     'no_image' => 'Sin imagen',
     'area' => 'Área',
     'is_area_attack' => 'Es ataque de área',
+    'is_unique' => 'Es única',
     'hands' => 'Manos',
     'hands_required' => 'Manos Requeridas',
     'hand' => 'mano',

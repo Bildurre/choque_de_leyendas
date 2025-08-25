@@ -24,6 +24,7 @@ return [
   'move_up' => 'Mover arriba',
   'move_down' => 'Mover abajo',
   'unique' => 'Únicos',
+  'is_unique'=> 'Única',
   'status' => 'Estado',
   'timestamps' => 'Marcas de tiempo',
   'created_at' => 'Creado el',

@@ -43,6 +43,8 @@ class CardRequest extends FormRequest
       'area' => ['nullable', 'boolean'],
       'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_image' => ['nullable', 'boolean'],
+      'is_published' => ['nullable', 'boolean'],
+      'is_unique' => ['nullable', 'boolean'],
     ];
 
     // Validation for equipment_type_id and hands
@@ -105,7 +107,6 @@ class CardRequest extends FormRequest
       'image.image' => 'El archivo debe ser una imagen válida.',
       'image.mimes' => 'El archivo debe ser de tipo: jpeg, png, jpg, gif, svg.',
       'image.max' => 'La imagen no debe ser mayor de 2MB.',
-      'is_published' => ['nullable', 'boolean'],
     ];
 
     // Messages for uniqueness in each language

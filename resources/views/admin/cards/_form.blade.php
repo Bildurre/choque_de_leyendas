@@ -44,6 +44,12 @@
       </div>
 
       <div>
+        <x-form.checkbox
+          name="is_unique"
+          :label="__('admin.is_unique')"
+          :checked="old('is_unique', isset($card) ? $card->is_unique : false)"
+        />
+
         <x-form.select
           name="card_type_id"
           :label="__('entities.card_types.singular')"

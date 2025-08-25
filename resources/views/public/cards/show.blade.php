@@ -79,6 +79,10 @@
                     {{ $card->faction->name }}
                   </x-entity-show.info-link>
                 </x-entity-show.info-list-item>
+
+                @if ($card->is_unique)
+                  <x-entity-show.info-list-item label="{{ __('entities.cards.is_unique') }}" value="{{ __('common.yes') }}" />
+                @endif
                 
                 <x-entity-show.info-list-item label="{{ __('entities.card_types.singular') }}">
                   <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [$card->card_type_id]])">

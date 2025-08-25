@@ -17,13 +17,13 @@ Route::prefix('pdf-collection')->name('public.pdf-collection.')->group(function 
     Route::get('/items', [TemporaryCollectionController::class, 'items'])->name('items');
     
     // Rutas de modificación y generación (solo en local)
-    if (app()->environment('local')) {
+    // if (app()->environment('local')) {
         Route::post('/add', [TemporaryCollectionController::class, 'add'])->name('add');
         Route::post('/remove', [TemporaryCollectionController::class, 'remove'])->name('remove');
         Route::post('/update-copies', [TemporaryCollectionController::class, 'updateCopies'])->name('update-copies');
         Route::delete('/clear', [TemporaryCollectionController::class, 'clear'])->name('clear');
         Route::post('/generate', [TemporaryCollectionController::class, 'generate'])->name('generate');
-    }
+    // }
 });
 
 // Grupo de rutas con localización
@@ -63,10 +63,10 @@ Route::group([
             ->name('download');
             
         // Ruta de eliminación (solo en local)
-        if (app()->environment('local')) {
+        // if (app()->environment('local')) {
             Route::delete(LaravelLocalization::transRoute('routes.pdf_delete'), [PdfCollectionController::class, 'destroy'])
                 ->name('destroy');
-        }
+        // }
     });
 });
 

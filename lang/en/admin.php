@@ -23,6 +23,7 @@ return [
   'move_up' => 'Move up',
   'move_down' => 'Move down',
   'unique' => 'Unique',
+  'is_unique' => 'Unique',
   'status' => 'Status',
   'timestamps' => 'Timestamps', 
   'created_at' => 'Created at',

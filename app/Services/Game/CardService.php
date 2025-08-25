@@ -178,6 +178,7 @@ class CardService
     
     // Area needs special handling for boolean conversion
     $card->area = isset($data['area']) ? (bool)$data['area'] : false;
+    $card->is_unique = isset($data['is_unique']) ? (bool)$data['is_unique'] : false;
     $card->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
   }
 

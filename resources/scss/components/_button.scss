@@ -50,7 +50,6 @@
 
   &--danger {
     background-color: $color-red;
-    color: $color-text-light;
     
     &:hover {
       background-color: $color-red-dark;
@@ -59,7 +58,6 @@
 
   &--success {
     background-color: $color-green;
-    color: $color-text-light;
     
     &:hover {
       background-color: $color-green-dark;
@@ -68,7 +66,6 @@
 
   &--info {
     background-color: $color-blue;
-    color: $color-text-light;
     
     &:hover {
       background-color: $color-blue-dark;
