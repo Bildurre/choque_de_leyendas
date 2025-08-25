@@ -1,27 +1,25 @@
 @use '../abstracts/all' as *;
 
 .page-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  height: 100lvh;
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-  z-index: -1;
-  opacity: .1;
-  filter: grayscale(60%);
-  background-position: center;
-  background-attachment: fixed;
-
-  transition: opacity $transition-medium ease;
-  [data-theme="dark"] & {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; // Fallback
+    height: 100lvh; // Large viewport height - siempre usa la altura SIN barra
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
     opacity: .1;
-  }
-  
-  [data-theme="light"] & {
-    opacity: .2;
-  }
+    filter: grayscale(60%);
+    transition: opacity $transition-medium ease;
+    
+    [data-theme="dark"] & {
+        opacity: .1;
+    }
+    
+    [data-theme="light"] & {
+        opacity: .2;
+    }
 }
