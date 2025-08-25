@@ -1,0 +1,23 @@
+@use '../abstracts/all' as *;
+
+.collection-icon {
+  position: relative;
+}
+
+.collection-counter {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateX(50%);
+  background-color: var(--random-accent-color);
+  color: var(--color-header-bg);
+  border-radius: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: .75rem;
+  line-height: .75;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
