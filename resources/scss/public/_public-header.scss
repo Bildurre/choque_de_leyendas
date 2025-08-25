@@ -70,7 +70,6 @@
   .header-logo {
 
     padding: $spacing-xs 0;
-    justify-self: center;
     height: 80%;
 
     @include responsive(small) {
