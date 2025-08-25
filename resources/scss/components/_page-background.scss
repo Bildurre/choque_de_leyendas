@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  height: 100dvh;
+  height: 100lvh;
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -14,7 +14,8 @@
   opacity: .1;
   filter: grayscale(60%);
   background-position: center;
-  
+  background-attachment: fixed;
+
   transition: opacity $transition-medium ease;
   [data-theme="dark"] & {
     opacity: .1;
