@@ -5,7 +5,6 @@
 ])
 
 <div class="entity-public-card" data-type="{{ $type }}">
-  @env('local')
     <div class="entity-public-card__actions">
       @if(in_array($type, ['deck', 'faction']))
         <x-pdf.download-button
@@ -19,8 +18,6 @@
         />
       @endif
     </div>
-  @endenv
-
   <a href="{{ $viewRoute }}" class="entity-public-card__link">
     <div class="entity-public-card__preview">
       <x-previews.preview-image :entity="$entity" :type="$type"/>

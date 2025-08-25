@@ -61,7 +61,7 @@ return [
   
   // Héroes
   'heroes' => [
-    'back' => 'Volver a las Héroes',
+    'back' => 'Volver a los Héroes',
     'go' => 'Ir a las Héroes',
     'title' => 'Héroes',
     'description' => 'Descubre todos los héroes de Espadas de Ceniza: Choque de Leyendas',

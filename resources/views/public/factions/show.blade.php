@@ -40,51 +40,14 @@
 
   @component('content.blocks.header', ['block' => $headerBlock])
     @slot('actions')
-      @env('local')
-        <x-pdf.download-button
-          :entity="$faction"
-          entityType="faction"
-          type="outlined"
-        >
-        {{ __('pdf.download.button_title') }}
-        </x-pdf.download-button>
-      @endenv
-
-      @env('production')
-        <x-button-link
-          :href="route('public.factions.index')"
-          variant="secondary"
-          icon="arrow-left"
-        >
-          {{ __('public.factions.back') }}
-        </x-button-link>
-
-        @if ($tab === 'heroes')
-          <x-button-link
-            :href="route('public.heroes.index')"
-            variant="secondary"
-            icon="arrow-left"
-          >
-            {{ __('public.heroes.go') }}
-          </x-button-link>
-        @elseif ($tab === 'cards')
-          <x-button-link
-            :href="route('public.cards.index')"
-            variant="secondary"
-            icon="arrow-left"
-          >
-            {{ __('public.cards.go') }}
-          </x-button-link>
-        @elseif ($tab == 'decks')
-          <x-button-link
-            :href="route('public.faction-decks.index')"
-            variant="secondary"
-            icon="arrow-left"
-          >
-            {{ __('public.faction_decks.go') }}
-          </x-button-link>
-        @endif
-      @endenv
+      <x-pdf.download-button
+        :entity="$faction"
+        entityType="faction"
+        type="outlined"
+      >
+      {{ __('pdf.download.button_title') }}
+      </x-pdf.download-button>
+       
     @endslot
   @endcomponent
 

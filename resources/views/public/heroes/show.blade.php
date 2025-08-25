@@ -36,24 +36,13 @@
 
   @component('content.blocks.header', ['block' => $headerBlock])
     @slot('actions')
-      @env('local')
-        <x-pdf.add-button
-          data-entity-type="hero"
-          data-entity-id="{{ $hero->id }}"
-          type="outlined"
-        >
-          {{ __('pdf.collection.add_button_title') }}
-        </x-pdf.add-button>
-      @endenv
-      @env('production')
-        <x-button-link
-          :href="route('public.heroes.index')"
-          variant="secondary"
-          icon="arrow-left"
-        >
-          {{ __('public.heroes.back') }}
-        </x-button-link>
-      @endenv
+      <x-pdf.add-button
+        data-entity-type="hero"
+        data-entity-id="{{ $hero->id }}"
+        type="outlined"
+      >
+        {{ __('pdf.collection.add_button_title') }}
+      </x-pdf.add-button>
     @endslot
   @endcomponent
 

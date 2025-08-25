@@ -21,19 +21,8 @@
         <div class="header-actions">
           <x-language-selector />
 
-          @env('local')
-            <a href="{{ route('public.pdf-collection.index') }}" 
-              class="collection-icon"
-              title="{{ __('public.menu.downloads') }}">
-              <x-icon name="layers" />
-              <span class="collection-counter" 
-                    data-collection-count="{{ $collectionCount }}"
-                    style="{{ $collectionCount > 0 ? '' : 'display: none;' }}">
-                {{ $collectionCount }}
-              </span>
-            </a>
-          @endenv
-          
+          <x-public.collection-counter :count="$collectionCount"/>
+
           <x-theme-switcher />
         </div>
       </div>

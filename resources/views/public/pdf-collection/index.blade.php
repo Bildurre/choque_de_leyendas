@@ -36,11 +36,9 @@
     </div>
   </section>
 
-  @env('local')
-    <section class="block">
-      <div class="block__inner">
-        @include('public/pdf-collection._temporary-collection')
-      </div>
-    </section>
-  @endenv
+  <section class="block">
+    <div class="block__inner">
+      @include('public/pdf-collection._temporary-collection')
+    </div>
+  </section>
 </x-public-layout>
