@@ -39,7 +39,6 @@
       :emptyMessage="__('pdf.collection.empty_collection')"
       class="temporary-collection__list"
       data-collection-content
-      :wide=true
     >
       {{-- Items will be loaded here via JavaScript directly into entity-list__items --}}
     </x-entity.list>

@@ -27,37 +27,40 @@
 
   &-header {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: $spacing-md;
     align-items: top;
     justify-content: space-between;
     width: 100%;
 
     @include responsive(tablet) {
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto;
     }
 
     &__actions {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      // flex-direction: column;
       gap: $spacing-sm;
       justify-content: flex-end;
       align-items: center;
-      grid-column: span 2;
       margin-bottom: $spacing-lg;
 
-      @include responsive(tablet) {
-        grid-column: auto;
-      }
-
       & > * {
-        width: 100%;
+        flex: 1;
+        height: 100%;
 
-        @include responsive(small) {
-          width: 49%;
-          width: fit-content
+        @include responsive(mobile) {
+          flex: 0;
+        }
+
+        button {
+          width: 100%;
+          height: 100%;
+
+          @include responsive(mobile) {
+            width: max-content;
+          }
         }
       }
     }

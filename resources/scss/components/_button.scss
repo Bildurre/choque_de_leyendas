@@ -75,17 +75,17 @@
   // Sizes
   &--sm {
     font-size: 0.875rem;
-    padding: $spacing-xs $spacing-sm;
+    padding: $spacing-sm $spacing-md;
   }
   
   &--md {
     font-size: 1rem;
-    padding: $spacing-sm $spacing-md;
+    padding: $spacing-md $spacing-lg;
   }
   
   &--lg {
     font-size: 1.125rem;
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-lg $spacing-xl;
   }
   
   // States

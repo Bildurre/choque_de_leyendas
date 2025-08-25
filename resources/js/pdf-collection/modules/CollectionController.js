@@ -23,7 +23,7 @@ export default class CollectionController {
       const contentDiv = this.listElement.querySelector('.entity-list__content');
       if (contentDiv) {
         contentElement = document.createElement('div');
-        contentElement.className = 'entity-list__items entity-list__items--wide';
+        contentElement.className = 'entity-list__items entity-list__items';
         contentDiv.appendChild(contentElement);
       }
     }
@@ -160,7 +160,7 @@ export default class CollectionController {
     if (hasItems) {
       this.updateEmptyState(false);
       if (this.actionsElement) {
-        this.actionsElement.style.display = 'grid';
+        this.actionsElement.style.display = 'flex';
       }
     } else {
       this.updateEmptyState(true);
