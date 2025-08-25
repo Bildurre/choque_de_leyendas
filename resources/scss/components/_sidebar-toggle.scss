@@ -1,0 +1,79 @@
+@use '../abstracts/all' as *;
+
+.sidebar-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.25rem;
+  height: 1.6875rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  
+  @include responsive(tablet) {
+    opacity: 0;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+  &__bar {
+    display: block;
+    width: 100%;
+    height: 0.1875rem;
+    background-color: var(--random-accent-color);
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+  }
+
+  &:hover {
+    .sidebar-toggle__bar {
+      background-color: var(--random-accent-color-hover);
+    }
+  }
+  
+  // Estado activo - se aplica mediante JavaScript añadiendo clase
+  &--active {
+    .sidebar-toggle__bar:nth-child(1) {
+      transform: translateY(0.75rem) rotate(45deg);
+    }
+    
+    .sidebar-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .sidebar-toggle__bar:nth-child(3) {
+      transform: translateY(-0.75rem) rotate(-45deg);
+    }
+  }
+  
+  // Fallback: Animación cuando el sidebar del admin está abierto (mantener compatibilidad)
+  .sidebar-visible & {
+    .sidebar-toggle__bar:nth-child(1) {
+      transform: translateY(0.75rem) rotate(45deg);
+    }
+    
+    .sidebar-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .sidebar-toggle__bar:nth-child(3) {
+      transform: translateY(-0.75rem) rotate(-45deg);
+    }
+  }
+  
+  // Fallback: Animación cuando el menú público está abierto
+  .header-nav.is-open ~ .header-main-container & {
+    .sidebar-toggle__bar:nth-child(1) {
+      transform: translateY(0.75rem) rotate(45deg);
+    }
+    
+    .sidebar-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .sidebar-toggle__bar:nth-child(3) {
+      transform: translateY(-0.75rem) rotate(-45deg);
+    }
+  }
+}

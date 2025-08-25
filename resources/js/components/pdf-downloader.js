@@ -51,8 +51,6 @@ export default function initPdfDownloader() {
       
       if (window.notificationService) {
         window.notificationService.success(message);
-      } else {
-        console.log('PDF descargado:', message);
       }
       
     } catch (error) {

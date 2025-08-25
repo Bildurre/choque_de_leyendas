@@ -3,11 +3,7 @@
     <div class="admin-header__top-container">
       <div class="admin-header__top">
         <div class="admin-header__left">
-          <button class="sidebar-toggle" id="sidebar-toggle" aria-label="{{ __('admin.toggle_sidebar') }}">
-            <span class="sidebar-toggle__bar"></span>
-            <span class="sidebar-toggle__bar"></span>
-            <span class="sidebar-toggle__bar"></span>
-          </button>
+          <x-sidebar-toggle />
           
           <a href="{{ route('admin.dashboard') }}" class="admin-header__logo">
             <x-logo />

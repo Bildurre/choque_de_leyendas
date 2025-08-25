@@ -6,13 +6,7 @@
   <div class="header-container">
     <div class="header-main-container">
       <div class="header-main">
-        <button class="mobile-menu-toggle" aria-label="{{ __('public.menu.toggle') }}" aria-expanded="false">
-          <span class="mobile-menu-toggle__icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </button>
+        <x-sidebar-toggle />
         
         <a href="{{ route('welcome') }}" class="header-logo logo-link">
           <x-logo />
