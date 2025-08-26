@@ -1,9 +1,9 @@
 <section>
   <table class="dice-values">
     <tr>
-      <th>1 dado</th>
-      <th>2 dados</th>
-      <th>3 dados</th>
+      <th>{{ __('admin.dice_values.1_dice') }}</th>
+      <th>{{ __('admin.dice_values.2_dice') }}</th>
+      <th>{{ __('admin.dice_values.3_dice') }}</th>
     </tr>
     <tr>
       <td>
@@ -132,77 +132,77 @@
 
   <table class="effect-values">
     <tr>
-      <th colspan="2">Efecto único</th>
-      <th colspan="2">Efecto permanente</th>
+      <th colspan="2">{{ __('admin.dice_values.unique_effect') }}</th>
+      <th colspan="2">{{ __('admin.dice_values.permanent_effect') }}</th>
     </tr>
     <tr>
-      <td>Aumento de daño</td>
-      <td class="effect-values__value">Base</td>
-      <td>Aumento de daño</td>
-      <td class="effect-values__value">Base * 2</td>
+      <td>{{ __('admin.dice_values.damage_plus') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }}</td>
+      <td>{{ __('admin.dice_values.damage_plus') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} * 2</td>
     </tr>
     <tr>
-      <td>Reduccion de daño</td>
-      <td class="effect-values__value">Base</td>
-      <td>Reduccion de daño</td>
-      <td class="effect-values__value">Base * 2</td>
+      <td>{{ __('admin.dice_values.damage_minus') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }}</td>
+      <td>{{ __('admin.dice_values.damage_minus') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} * 2</td>
     </tr>
     <tr>
-      <td>Contador</td>
-      <td class="effect-values__value">Base (exaltado-exhausto e inspirado-aterrado 2, resto 1)</td>
-      <td>Contador por golpe</td>
-      <td class="effect-values__value">Base * 2 (exaltado-exhausto e inspirado-aterrado 2, resto 1)</td>
+      <td>{{ __('admin.dice_values.counter') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} {{ __('admin.dice_values.counter_aclaration') }}</td>
+      <td>{{ __('admin.dice_values.counter_per_strike') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} * 2 {{ __('admin.dice_values.counter_aclaration') }}</td>
     </tr>
     <tr>
-      <td>Efecto versatil</td>
+      <td>{{ __('admin.dice_values.versatile') }}</td>
       <td class="effect-values__value">+1</td>
-      <td>Contador en 1 golpe por combate</td>
-      <td class="effect-values__value">Base * 1.5 (exaltado-exhausto e inspirado-aterrado 2, resto 1)</td>
+      <td>{{ __('admin.dice_values.counter_once') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} * 1.5 {{ __('admin.dice_values.counter_aclaration') }}</td>
     </tr>
     <tr>
-      <td>Aumento de daño todo el combate o ronda</td>
-      <td class="effect-values__value">Base * 1.5</td>
+      <td>{{ __('admin.dice_values.damage_plus_long') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} * 1.5</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Reducción de daño todo el combate o ronda</td>
-      <td class="effect-values__value">Base * 1.5</td>
+      <td>{{ __('admin.dice_values.damage_minus_long') }}</td>
+      <td class="effect-values__value">{{ __('admin.dice_values.base') }} * 1.5</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Roba 1</td>
+      <td>{{ __('admin.dice_values.draw') }} 1</td>
       <td class="effect-values__value">+2</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Cicla 1</td>
+      <td>{{ __('admin.dice_values.cicle') }} 1</td>
       <td class="effect-values__value">+1</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Ardid (o activa como ardid)</td>
+      <td>{{ __('admin.dice_values.trick') }}</td>
       <td class="effect-values__value">+1</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Restricción (clase,...)</td>
+      <td>{{ __('admin.dice_values.restriction') }}</td>
       <td class="effect-values__value">-1</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Carta Única</td>
+      <td>{{ __('admin.dice_values.unique') }}a</td>
       <td class="effect-values__value">-1</td>
       <td></td>
       <td class="effect-values__value"></td>
     </tr>
     <tr>
-      <td>Efecto de Área</td>
+      <td>{{ __('admin.dice_values.area') }}</td>
       <td class="effect-values__value">+1</td>
       <td></td>
       <td class="effect-values__value"></td>

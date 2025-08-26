@@ -157,4 +157,29 @@ return [
       ],
     ],
   ],
+  
+  'dice_values' => [
+    'title' => 'Effect Values',
+    '1_dice' => '1 Die',
+    '2_dice' => '2 Dice',
+    '3_dice' => '3 Dice',
+    'unique_effect' => 'Unique Effect',
+    'permanent_effect' => 'Permanent Effect',
+    'base' => 'Base',
+    'counter_aclaration' => '(exalted-exhausted and inspired-terrified 2, rest 1)',
+    'damage_plus' => 'Damage Increase',
+    'damage_plus_long' => 'Damage increase for entire combat or round',
+    'damage_minus' => 'Damage Reduction',
+    'damage_minus_long' => 'Damage reduction for entire combat or round',
+    'counter' => 'Counter',
+    'counter_per_strike' => 'Counter per hit',
+    'counter_once' => 'Counter on 1 hit per combat',
+    'versatile' => 'Versatile Effect',
+    'draw' => 'Draw',
+    'cicle' => 'Cycle',
+    'trick' => 'Trick (or activate as trick)',
+    'restriction' => 'Restriction (class,...)',
+    'unique' => 'Unique Card',
+    'area' => 'Area Effect'
+  ]
 ];

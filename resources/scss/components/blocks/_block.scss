@@ -3,6 +3,8 @@
 // Base block styles
 .block {
   padding: $spacing-block 0;
+  container-type: inline-size;
+  container-name: block;
   
   // Block inner container
   &__inner {
@@ -29,38 +31,25 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: $spacing-md;
-    align-items: top;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: $spacing-lg;
 
-    @include responsive(tablet) {
+    @include container-responsive(block, tablet) {
       grid-template-columns: 1fr auto;
     }
 
     &__actions {
       width: 100%;
       display: flex;
-      flex-wrap: wrap;
-      gap: $spacing-sm;
       justify-content: flex-end;
-      align-items: center;
-      margin-bottom: $spacing-lg;
 
       & > * {
-        flex: 1;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
 
-        @include responsive(mobile) {
-          flex: 0;
-        }
-
-        button {
-          width: 100%;
-          height: 100%;
-
-          @include responsive(mobile) {
-            width: max-content;
-          }
+        @include responsive(small) {
+          width: fit-content;
         }
       }
     }
@@ -69,7 +58,6 @@
   // Common title styles
   &__title {
     margin: 0;
-    margin-bottom: $spacing-md;
     font-size: 1.75rem;
     font-weight: 800;
     color: var(--color-text-primary);

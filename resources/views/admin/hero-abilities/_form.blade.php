@@ -6,7 +6,13 @@
   $submitLabel = isset($heroAbility) ? __('admin.update') : __('entities.hero_abilities.create');
 @endphp
 
-@include('admin._dice-values')
+<x-collapsible-section
+  id="dice-values" 
+  title="{{ __('admin.dice_values.title') }}"
+  forceCollapse="true"
+>
+  @include('admin._dice-values')
+</x-collapsible-section>
 
 <form action="{{ $submitRoute }}" method="POST" class="form">
   @csrf

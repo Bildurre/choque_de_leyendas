@@ -6,7 +6,13 @@
   $submitLabel = isset($card) ? __('admin.update') : __('entities.cards.create');
 @endphp
 
-@include('admin._dice-values')
+<x-collapsible-section
+  id="dice-values" 
+  title="{{ __('admin.dice_values.title') }}"
+  forceCollapse="true"
+>
+  @include('admin._dice-values')
+</x-collapsible-section>
 
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
   @csrf

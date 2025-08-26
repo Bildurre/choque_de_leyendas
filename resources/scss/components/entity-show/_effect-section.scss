@@ -14,30 +14,36 @@
     color: var(--random-accent-color);
     font-family: 'imfellenglish', serif;
   }
-}
 
-.effect-content {
-  color: var(--color-text-primary);
-  line-height: 1.6;
-  
-  p {
-    margin: 0;
+  .effect-content {
+    color: var(--color-text-primary);
+    line-height: 1.6;
     
-    &:not(:last-child) {
-      margin-bottom: $spacing-sm;
+    p {
+      margin: 0;
+      
+      &:not(:last-child) {
+        margin-bottom: $spacing-sm;
+      }
     }
-  }
-  
-  ul, ol {
-    margin: 0;
-    padding-left: $spacing-lg;
     
-    &:not(:last-child) {
-      margin-bottom: $spacing-sm;
+    ul, ol {
+      margin: 0;
+      padding-left: $spacing-lg;
+      
+      &:not(:last-child) {
+        margin-bottom: $spacing-sm;
+      }
     }
-  }
-  
-  strong {
-    color: var(--random-accent-color);
+    
+    strong {
+      color: var(--random-accent-color);
+    }
+
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+      transform: translateY(15%);
+    }
   }
 }

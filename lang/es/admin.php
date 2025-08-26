@@ -160,4 +160,29 @@ return [
       ],
     ],
   ],
+
+  'dice_values' => [
+    'title' => 'Valores de Efectos',
+    '1_dice' => '1 Dado',
+    '2_dice' => '2 Dados',
+    '3_dice' => '3 Dados',
+    'unique_effect' => 'Efecto Único',
+    'permanent_effect' => 'Efecto Permanente',
+    'base' => 'Base',
+    'counter_aclaration' => '(exaltado-exhausto e inspirado-aterrado 2, resto 1)',
+    'damage_plus' => 'Aumento de daño',
+    'damage_plus_long' => 'Aumento de daño todo el combate o ronda',
+    'damage_minus' => 'Reducción de daño',
+    'damage_minus_long' => 'Reducción de daño todo el combate o ronda',
+    'counter' => 'Contador',
+    'counter_per_strike' => 'Contador por golpe',
+    'counter_once' => 'Contador en 1 golpe por combate',
+    'versatile' => 'Efecto versatil',
+    'draw' => 'Roba',
+    'cicle' => 'Cicla',
+    'trick' => 'Ardid (o activa como ardid)',
+    'restriction' => 'Restricción (clase,...)',
+    'unique' => 'Carta única',
+    'area' => 'Efecto de área'
+  ]
 ];
