@@ -1,0 +1,90 @@
+@use '../abstracts/all' as *;
+
+
+.dice-values {
+  border: 1px solid var(--color-card-border);
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: $spacing-lg;
+  font-size: .8rem;
+
+  td, th {
+    padding: $spacing-xs;
+    border: 1px solid var(--color-card-border);
+  }
+
+  tr:nth-of-type(2) {
+    background-color: $color-green-transparent-semi;
+  }
+  tr:nth-of-type(3) {
+    background-color: $color-lime-transparent-semi;
+  }
+  tr:nth-of-type(4) {
+    background-color: $color-orange-transparent-semi;
+  }
+  tr:nth-of-type(5) {
+    background-color: $color-red-transparent-semi;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  &__dices {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: auto;
+    & > span {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .icon-dice {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    margin-left: auto;
+  }
+
+  &__percentage {
+    font-size: .75rem;
+    color: var(--color-text-dim);
+  }
+
+  &__value {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+.effect-values {
+  border: 1px solid var(--color-card-border);
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  font-size: .8rem;
+  margin-bottom: $spacing-xxl;
+
+  td, th {
+    padding: $spacing-xs;
+    border: 1px solid var(--color-card-border);
+  }
+
+  tr:nth-of-type(2n) {
+    background-color: var(--color-theme-card-bg);
+  }
+
+  &__value {
+    font-weight: 600;;
+  }
+}

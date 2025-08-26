@@ -15,6 +15,9 @@
 @use 'admin/admin-sidebar';
 @use 'admin/page-header';
 
+// Miscelaneous
+@use 'admin/dice-values';
+
 // Components
 @use 'components/icon';
 @use 'components/icon-dice';
@@ -113,7 +116,6 @@
 @use 'components/blocks/block-counters-list';
 @use 'components/blocks/block-game-modes';
 @use 'components/blocks/block-quote';
-
 
 // Vendors
 @import 'choices.js/public/assets/styles/choices.min.css';

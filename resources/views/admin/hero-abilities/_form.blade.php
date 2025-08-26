@@ -6,6 +6,8 @@
   $submitLabel = isset($heroAbility) ? __('admin.update') : __('entities.hero_abilities.create');
 @endphp
 
+@include('admin._dice-values')
+
 <form action="{{ $submitRoute }}" method="POST" class="form">
   @csrf
   @if($submitMethod === 'PUT')

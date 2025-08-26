@@ -6,6 +6,8 @@
   $submitLabel = isset($card) ? __('admin.update') : __('entities.cards.create');
 @endphp
 
+@include('admin._dice-values')
+
 <form action="{{ $submitRoute }}" method="POST" enctype="multipart/form-data" class="form">
   @csrf
   @if($submitMethod === 'PUT')
