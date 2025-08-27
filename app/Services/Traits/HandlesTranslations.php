@@ -53,7 +53,7 @@ trait HandlesTranslations
    * @param array $translatableFields List of translatable fields
    * @return void
    */
-  protected function applyTranslations($model, array $data, array $translatableFields, bool $allowEmpty = false): void
+  protected function applyTranslations($model, array $data, array $translatableFields, bool $allowEmpty = true): void
   {
     $availableLocales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
     
