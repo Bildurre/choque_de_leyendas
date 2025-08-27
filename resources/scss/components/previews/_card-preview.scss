@@ -41,6 +41,15 @@
       color: var(--faction-text);
     }
   }
+
+  &__unique {
+    font-size: .75rem;
+  }
+  
+  &__types {
+    margin-left: auto;
+  }
+
   
   &__effects {
     font-size: 65%;
