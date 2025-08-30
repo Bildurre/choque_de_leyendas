@@ -1,0 +1,56 @@
+@use '../../abstracts/all' as *;
+
+.preview-management-card {
+  padding: $spacing-lg;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  transition: all $transition-fast ease-in-out;
+  container-type: inline-size;
+  container-name: management-card;
+  
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: $spacing-md;
+  }
+  
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: $spacing-xs;
+    column-gap: $spacing-md;
+
+    @include container-responsive(management-card, smaller) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .btn {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .preview-management--wrapper {
+    display: grid;
+    gap: $spacing-xs;
+  }
+
+  &--form {
+    .preview-management-card__content {
+      grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: $spacing-xs;
+      column-gap: $spacing-md;
+
+      @include container-responsive(management-card, smaller) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+}

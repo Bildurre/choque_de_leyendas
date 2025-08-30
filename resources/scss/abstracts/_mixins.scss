@@ -26,6 +26,9 @@
 
 // Mixin para container queries con nombre del contenedor
 @mixin container-responsive($container-name, $breakpoint) {
+  @if $breakpoint == smaller {
+    @container #{$container-name} (min-width: #{$breakpoint-smaller}) { @content; }
+  }
   @if $breakpoint == small {
     @container #{$container-name} (min-width: #{$breakpoint-small}) { @content; }
   }

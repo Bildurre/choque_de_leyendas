@@ -2,7 +2,7 @@
 
 ## Descripción General
 
-El comando `preview:manage` es una herramienta completa para gestionar las imágenes de preview de héroes y cartas. Permite generar, regenerar, limpiar y verificar el estado de todas las preview images del sistema.
+El comando `preview:manage` es una herramienta completa para gestionar las imágenes de preview de héroes y cartas. Permite generar, regenerar, limpiar, eliminar y verificar el estado de todas las preview images del sistema, con soporte para operaciones por facción.
 
 ## Sintaxis Básica
 
@@ -109,7 +109,162 @@ php artisan preview:manage generate --model=hero --id=1 --force --sync
 - Testing y depuración
 - Regeneración selectiva
 
-### 5. `clean` - Limpiar Imágenes Huérfanas
+### 5. `generate-faction` - Generar Previews de una Facción
+
+Genera las preview images de todos los elementos de una facción específica.
+
+```bash
+# Generar previews de toda la facción (héroes y cartas)
+php artisan preview:manage generate-faction --faction=1 --sync
+
+# Solo héroes de la facción
+php artisan preview:manage generate-faction --faction=1 --type=heroes --sync
+
+# Solo cartas de la facción
+php artisan preview:manage generate-faction --faction=1 --type=cards --sync
+
+# Forzar regeneración aunque existan
+php artisan preview:manage generate-faction --faction=1 --force --sync
+```
+
+**Parámetros requeridos:**
+- `--faction`: ID de la facción
+
+**Parámetros opcionales:**
+- `--type`: Tipo de elementos (`all`, `heroes`, `cards`). Por defecto: `all`
+- `--force`: Regenerar aunque ya existan las previews
+- `--sync`: Ejecutar síncronamente
+- `--dry-run`: Ver qué se haría sin ejecutar
+
+**Casos de uso:**
+- Generar previews después de añadir una nueva facción
+- Regenerar tras cambios en el diseño de facción
+- Actualización selectiva por facción
+
+### 6. `regenerate-faction` - Regenerar Previews de una Facción
+
+Fuerza la regeneración de todas las preview images de una facción.
+
+```bash
+# Regenerar toda la facción
+php artisan preview:manage regenerate-faction --faction=1 --sync
+
+# Solo héroes
+php artisan preview:manage regenerate-faction --faction=1 --type=heroes --sync
+
+# Solo cartas
+php artisan preview:manage regenerate-faction --faction=1 --type=cards --sync
+```
+
+**Nota:** Esta acción es equivalente a `generate-faction` con `--force`
+
+### 7. `delete` - Eliminar Preview Específica
+
+Elimina las preview images de un héroe o carta específica.
+
+```bash
+# Eliminar preview de un héroe
+php artisan preview:manage delete --model=hero --id=1
+
+# Eliminar preview de una carta
+php artisan preview:manage delete --model=card --id=42
+
+# Ver qué se eliminaría sin hacerlo
+php artisan preview:manage delete --model=hero --id=1 --dry-run
+```
+
+**Parámetros requeridos:**
+- `--model`: Tipo de modelo (`hero` o `card`)
+- `--id`: ID del modelo
+
+**Casos de uso:**
+- Limpiar previews de elementos eliminados
+- Forzar regeneración completa de un elemento
+- Liberar espacio de elementos específicos
+
+### 8. `delete-all` - Eliminar TODAS las Previews
+
+Elimina todas las preview images del sistema.
+
+```bash
+# Eliminar todas las previews (pedirá confirmación)
+php artisan preview:manage delete-all
+
+# Ver qué se eliminaría
+php artisan preview:manage delete-all --dry-run
+```
+
+**⚠️ PRECAUCIÓN:** Esta acción es destructiva y eliminará TODAS las imágenes de preview.
+
+**Casos de uso:**
+- Limpieza completa antes de cambio mayor en el sistema
+- Reset total del sistema de previews
+- Liberación masiva de espacio en disco
+
+### 9. `delete-heroes` - Eliminar Todas las Previews de Héroes
+
+Elimina todas las preview images de héroes.
+
+```bash
+# Eliminar todas las previews de héroes
+php artisan preview:manage delete-heroes
+
+# Ver qué se eliminaría
+php artisan preview:manage delete-heroes --dry-run
+```
+
+**Casos de uso:**
+- Regeneración completa de héroes
+- Cambios en el diseño específico de héroes
+- Limpieza selectiva por tipo
+
+### 10. `delete-cards` - Eliminar Todas las Previews de Cartas
+
+Elimina todas las preview images de cartas.
+
+```bash
+# Eliminar todas las previews de cartas
+php artisan preview:manage delete-cards
+
+# Ver qué se eliminaría
+php artisan preview:manage delete-cards --dry-run
+```
+
+**Casos de uso:**
+- Regeneración completa de cartas
+- Cambios en el diseño específico de cartas
+- Limpieza selectiva por tipo
+
+### 11. `delete-faction` - Eliminar Previews de una Facción
+
+Elimina las preview images de todos los elementos de una facción.
+
+```bash
+# Eliminar todas las previews de la facción
+php artisan preview:manage delete-faction --faction=1
+
+# Solo héroes de la facción
+php artisan preview:manage delete-faction --faction=1 --type=heroes
+
+# Solo cartas de la facción
+php artisan preview:manage delete-faction --faction=1 --type=cards
+
+# Ver qué se eliminaría
+php artisan preview:manage delete-faction --faction=1 --dry-run
+```
+
+**Parámetros requeridos:**
+- `--faction`: ID de la facción
+
+**Parámetros opcionales:**
+- `--type`: Tipo de elementos (`all`, `heroes`, `cards`). Por defecto: `all`
+
+**Casos de uso:**
+- Limpieza tras eliminar una facción
+- Regeneración completa de una facción
+- Mantenimiento selectivo por facción
+
+### 12. `clean` - Limpiar Imágenes Huérfanas
 
 Detecta y elimina archivos de preview que no están asociados a ningún modelo.
 
@@ -155,6 +310,7 @@ php artisan preview:manage generate-all --force
 **Aplica a:**
 - `generate-all`: Regenera incluso las existentes
 - `generate`: Regenera la preview específica
+- `generate-faction`: Regenera las de la facción
 
 ### `--dry-run`
 Simula la operación sin ejecutar cambios reales.
@@ -167,6 +323,61 @@ php artisan preview:manage clean --dry-run
 - Ver qué cambios se harían
 - Verificar antes de operaciones destructivas
 - Testing de comandos
+
+### `--faction`
+Especifica el ID de la facción para operaciones por facción.
+
+```bash
+php artisan preview:manage generate-faction --faction=1
+```
+
+**Usado en:**
+- `generate-faction`
+- `regenerate-faction`
+- `delete-faction`
+
+### `--type`
+Filtra el tipo de elementos en operaciones de facción.
+
+```bash
+php artisan preview:manage generate-faction --faction=1 --type=heroes
+```
+
+**Valores válidos:**
+- `all`: Héroes y cartas (por defecto)
+- `heroes`: Solo héroes
+- `cards`: Solo cartas
+
+**Usado en:**
+- `generate-faction`
+- `regenerate-faction`
+- `delete-faction`
+
+### `--model`
+Especifica el tipo de modelo para operaciones específicas.
+
+```bash
+php artisan preview:manage generate --model=hero --id=1
+```
+
+**Valores válidos:**
+- `hero`: Héroe
+- `card`: Carta
+
+**Usado en:**
+- `generate`
+- `delete`
+
+### `--id`
+Especifica el ID del modelo para operaciones específicas.
+
+```bash
+php artisan preview:manage generate --model=card --id=42
+```
+
+**Usado en:**
+- `generate`
+- `delete`
 
 ## Workflows Comunes
 
@@ -186,40 +397,71 @@ php artisan queue:work
 php artisan preview:manage status
 ```
 
-### Workflow 2: Después de Cambios de Diseño
+### Workflow 2: Mantenimiento por Facción
 
 ```bash
-# 1. Regenerar todas las previews
-php artisan preview:manage regenerate --sync
+# 1. Ver estado de la facción (manual por ahora)
+php artisan preview:manage status
 
-# 2. Limpiar archivos antiguos si cambiaron nombres
+# 2. Regenerar toda la facción
+php artisan preview:manage regenerate-faction --faction=1 --sync
+
+# 3. Verificar resultado
+php artisan preview:manage status
+```
+
+### Workflow 3: Actualización de Facción Específica
+
+```bash
+# 1. Eliminar previews antiguas de la facción
+php artisan preview:manage delete-faction --faction=2
+
+# 2. Generar nuevas previews
+php artisan preview:manage generate-faction --faction=2 --sync
+
+# 3. Limpiar huérfanos si es necesario
 php artisan preview:manage clean
 ```
 
-### Workflow 3: Mantenimiento Regular
+### Workflow 4: Reset Completo de Cartas
 
 ```bash
-# 1. Verificar estado
+# 1. Eliminar todas las previews de cartas
+php artisan preview:manage delete-cards
+
+# 2. Regenerar todas las cartas
+php artisan preview:manage generate-all --type=cards --sync
+
+# 3. Verificar estado
 php artisan preview:manage status
-
-# 2. Generar faltantes
-php artisan preview:manage generate-all
-
-# 3. Limpiar huérfanos
-php artisan preview:manage clean --dry-run
-php artisan preview:manage clean  # Si hay huérfanos
 ```
 
-### Workflow 4: Debugging de Preview Específica
+### Workflow 5: Limpieza y Optimización
 
 ```bash
-# 1. Generar preview de un héroe problemático
+# 1. Ver estado actual y espacio usado
+php artisan preview:manage status
+
+# 2. Detectar huérfanos
+php artisan preview:manage clean --dry-run
+
+# 3. Limpiar si hay huérfanos
+php artisan preview:manage clean
+
+# 4. Generar faltantes
+php artisan preview:manage generate-all
+```
+
+### Workflow 6: Debugging de Preview Específica
+
+```bash
+# 1. Eliminar preview problemática
+php artisan preview:manage delete --model=hero --id=25
+
+# 2. Regenerar con sincronía para ver errores
 php artisan preview:manage generate --model=hero --id=25 --sync
 
-# 2. Si no funciona, forzar regeneración
-php artisan preview:manage generate --model=hero --id=25 --force --sync
-
-# 3. Verificar en el sistema de archivos
+# 3. Si persiste el problema, verificar en el sistema
 ls -la storage/app/public/images/previews/heroes/es/
 ```
 
@@ -290,15 +532,30 @@ php artisan preview:manage regenerate --force --sync
 # O añadir versioning a las URLs
 ```
 
+### Problema: Facción no genera previews
+
+**Solución:**
+```bash
+# Verificar que la facción existe
+php artisan tinker
+> \App\Models\Faction::find(ID)
+
+# Eliminar y regenerar
+php artisan preview:manage delete-faction --faction=ID
+php artisan preview:manage generate-faction --faction=ID --sync
+```
+
 ## Mejores Prácticas
 
 1. **Usa Queue para Operaciones Masivas**
    - Más de 50 elementos → usar queue
    - Menos de 50 → puede usar --sync
 
-2. **Dry Run Antes de Limpiar**
+2. **Dry Run Antes de Eliminar**
    ```bash
-   php artisan preview:manage clean --dry-run
+   # Siempre verificar antes de eliminar
+   php artisan preview:manage delete-all --dry-run
+   php artisan preview:manage delete-faction --faction=1 --dry-run
    ```
 
 3. **Monitorea el Espacio en Disco**
@@ -315,7 +572,11 @@ php artisan preview:manage regenerate --force --sync
    0 3 * * 0 cd /path/to/project && php artisan preview:manage clean
    ```
 
-5. **Logs y Debugging**
+5. **Mantenimiento por Facción**
+   - Trabajar con facciones individualmente para mejor control
+   - Útil cuando se actualiza el diseño de una facción específica
+
+6. **Logs y Debugging**
    ```bash
    # Ver logs de generación
    tail -f storage/logs/laravel.log | grep -i preview
@@ -323,43 +584,52 @@ php artisan preview:manage regenerate --force --sync
 
 ## Ejemplos Avanzados
 
-### Generar solo para un idioma específico
-
-Aunque el comando no tiene opción de idioma, puedes modificar temporalmente la configuración:
-
-```php
-// En tinker
-config(['laravellocalization.supportedLocales' => ['es' => []]]);
-// Luego ejecutar el comando
-```
-
-### Script de Regeneración Completa
+### Regenerar Solo una Facción con Verificación
 
 ```bash
 #!/bin/bash
-echo "Iniciando regeneración completa de previews..."
+FACTION_ID=3
 
-# Limpiar queue
-php artisan queue:flush
+echo "Regenerando facción $FACTION_ID"
 
-# Regenerar todas
-php artisan preview:manage regenerate
+# Verificar estado antes
+echo "Estado inicial:"
+php artisan preview:manage status
 
-# Iniciar workers
-for i in {1..4}; do
-    php artisan queue:work --daemon --tries=3 --timeout=120 &
-done
+# Eliminar previews actuales
+php artisan preview:manage delete-faction --faction=$FACTION_ID
 
-# Esperar a que terminen
-while [ $(php artisan queue:monitor | grep -c "pending") -gt 0 ]; do
-    sleep 10
-done
+# Generar nuevas
+php artisan preview:manage generate-faction --faction=$FACTION_ID --sync
 
-# Limpiar huérfanos
+# Verificar resultado
+echo "Estado final:"
+php artisan preview:manage status
+```
+
+### Script de Mantenimiento Completo
+
+```bash
+#!/bin/bash
+echo "=== Mantenimiento de Previews ==="
+
+# 1. Estado inicial
+php artisan preview:manage status > /tmp/preview_status_before.txt
+
+# 2. Limpiar huérfanos
 php artisan preview:manage clean
 
-# Mostrar estado final
-php artisan preview:manage status
+# 3. Generar faltantes
+php artisan preview:manage generate-all
+
+# 4. Procesar queue
+timeout 300 php artisan queue:work --stop-when-empty
+
+# 5. Estado final
+php artisan preview:manage status > /tmp/preview_status_after.txt
+
+# 6. Mostrar diferencias
+diff /tmp/preview_status_before.txt /tmp/preview_status_after.txt
 ```
 
 ## Consideraciones de Rendimiento
@@ -368,9 +638,11 @@ php artisan preview:manage status
 - **Con Queue**: Puede procesar en paralelo
 - **Memoria**: ~50-100MB por proceso de generación
 - **Disco**: ~200-500KB por preview image
+- **Por Facción**: Reduce la carga procesando grupos más pequeños
 
 ## Seguridad
 
 - El comando requiere acceso CLI (no disponible vía web)
 - Verificar permisos de escritura en `storage/app/public/images/previews/`
+- Las operaciones de eliminación siempre piden confirmación (excepto con --dry-run)
 - Las imágenes huérfanas se confirman antes de eliminar

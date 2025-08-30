@@ -1,0 +1,19 @@
+@use '../../abstracts/all' as *;
+
+.preview-management-stat-item {
+  padding: $spacing-sm;
+  border: 1px solid var(--color-card-border);
+  border-radius: $border-radius-md;
+  display: flex;
+  justify-content: space-between;
+  font-size: .9rem;
+
+  &--disk {
+    border: none;
+  }
+}
+
+.preview-management-stat-value {
+  color: var(--random-accent-color);
+  font-weight: 600;
+}

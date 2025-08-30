@@ -49,6 +49,25 @@
   }
   
   &--view {
+    color: $color-teal;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-teal;
+    }
+    
+    & svg,
+    & svg * {
+      stroke: $color-teal;
+      fill: none;
+    }
+    
+    &:hover {
+      background-color: $color-teal-transparent-light;
+    }
+  }
+  
+  &--edit {
     color: $color-blue;
     
     & > .icon,
@@ -66,12 +85,27 @@
       background-color: $color-blue-transparent-light;
     }
   }
+
+  &--restore {
+    color: $color-purple;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-purple;
+    }
+    
+    & svg,
+    & svg * {
+      stroke: $color-purple;
+      fill: none;
+    }
+    
+    &:hover {
+      background-color: $color-purple-transparent-light;
+    }
+  }
   
-  &--edit,
-  &--restore,
-  &--publish,
-  &--download
-   {
+  &--publish {
     color: $color-green;
     
     & > .icon,
@@ -89,9 +123,27 @@
       background-color: $color-green-transparent-light;
     }
   }
-  
-  &--delete,
-  &--unpublish {
+
+  &--download {
+    color: $color-magenta;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-magenta;
+    }
+    
+    & svg,
+    & svg * {
+      stroke: $color-magenta;
+      fill: none;
+    }
+    
+    &:hover {
+      background-color: $color-magenta-transparent-light;
+    }
+  }
+
+  &--delete {
     color: $color-red;
     
     & > .icon,
@@ -109,7 +161,64 @@
       background-color: $color-red-transparent-light;
     }
   }
-  
+
+  &--unpublish {
+    color: $color-lime;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-lime;
+    }
+    
+    & svg,
+    & svg * {
+      stroke: $color-lime;
+      fill: none;
+    }
+    
+    &:hover {
+      background-color: $color-lime-transparent-light;
+    }
+  }
+
+  &--info {
+    color: $color-cyan;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-cyan;
+    }
+    
+    & svg,
+    & svg * {
+      stroke: $color-cyan;
+      fill: none;
+    }
+    
+    &:hover {
+      background-color: $color-cyan-transparent-light;
+    }
+  }
+
+  &--warning {
+    color: $color-orange;
+    
+    & > .icon,
+    & > .action-button__icon > .icon {
+      color: $color-orange;
+    }
+    
+    & svg,
+    & svg * {
+      stroke: $color-orange;
+      fill: none;
+    }
+    
+    &:hover {
+      background-color: $color-orange-transparent-light;
+    }
+  }
+
   &__icon {
     display: flex;
     align-items: center;

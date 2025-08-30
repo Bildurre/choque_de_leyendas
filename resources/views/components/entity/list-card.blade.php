@@ -7,8 +7,24 @@
   'togglePublishedRoute' => null,
   'isPublished' => false,
   'confirmMessage' => __('admin.confirm_delete'),
-  'isReorderable' => false
+  'isReorderable' => false,
+  'entity' => null
 ])
+
+@php
+  // Auto-detect entity type and ID from entity
+  $entityType = null;
+  $entityId = null;
+  
+  if ($entity) {
+    $className = class_basename($entity);
+    $entityType = strtolower($className);
+    $entityId = $entity->id;
+  }
+  
+  // Check if this entity type supports preview management
+  $supportsPreview = in_array($entityType, ['hero', 'card', 'faction']);
+@endphp
 
 <div {{ $attributes->merge(['class' => 'entity-list-card' . ($isReorderable ? ' entity-list-card--reorderable' : '')]) }}>
   @if($isReorderable)
@@ -64,6 +80,51 @@
             size="sm"
             :title="__('admin.edit')"
           />
+        @endif
+        
+        {{-- Preview management actions for supported entities --}}
+        @if($supportsPreview && $entity && !$restoreRoute)
+          @if($entityType === 'faction')
+            <x-action-button
+              :route="route('admin.previews.regenerate-faction', ['faction' => $entityId])"
+              icon="refresh"
+              variant="info"
+              size="sm"
+              method="POST"
+              :title="__('previews.regenerate_faction')"
+              :confirm-message="__('previews.confirm_regenerate_faction')"
+            />
+            
+            <x-action-button
+              :route="route('admin.previews.delete-faction', ['faction' => $entityId])"
+              icon="image-slash"
+              variant="warning"
+              size="sm"
+              method="POST"
+              :title="__('previews.delete_faction')"
+              :confirm-message="__('previews.confirm_delete_faction')"
+            />
+          @else
+            <x-action-button
+              :route="route('admin.previews.regenerate', ['model' => $entityType, 'id' => $entityId])"
+              icon="refresh"
+              variant="info"
+              size="sm"
+              method="POST"
+              :title="__('previews.regenerate')"
+              :confirm-message="__('previews.confirm_regenerate')"
+            />
+            
+            <x-action-button
+              :route="route('admin.previews.delete', ['model' => $entityType, 'id' => $entityId])"
+              icon="image-slash"
+              variant="warning"
+              size="sm"
+              method="POST"
+              :title="__('previews.delete')"
+              :confirm-message="__('previews.confirm_delete')"
+            />
+          @endif
         @endif
         
         @if($togglePublishedRoute)

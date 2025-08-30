@@ -30,6 +30,8 @@ return [
   'updated_at' => 'Updated at',
   'deleted_at' => 'Deleted at',
   'publication_status' => 'Publication status',
+
+  'back_to_dashboard' => 'Back to dashboard',
   
   // Generic messages
   'back_to_list' => 'Back to list',

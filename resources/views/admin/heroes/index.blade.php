@@ -46,7 +46,8 @@
       </x-slot:extraTabs>
       
       @foreach($heroes as $hero)
-        <x-entity.list-card 
+        <x-entity.list-card
+          :entity="$hero"
           :title="$hero->name"
           :view-route="!$trashed ? route('admin.heroes.show', $hero) : null"
           :edit-route="!$trashed ? route('admin.heroes.edit', $hero) : null"

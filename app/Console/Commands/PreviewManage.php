@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Hero;
 use App\Models\Card;
+use App\Models\Faction;
 use App\Jobs\GeneratePreviewImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -17,9 +18,11 @@ class PreviewManage extends Command
    * @var string
    */
   protected $signature = 'preview:manage 
-    {action : The action to perform (generate-all, generate, regenerate, clean, status)}
+    {action : The action to perform (generate-all, generate, regenerate, clean, status, generate-faction, regenerate-faction, delete, delete-all, delete-heroes, delete-cards, delete-faction)}
     {--model= : Model type (hero|card) for specific actions}
     {--id= : Model ID for specific actions}
+    {--faction= : Faction ID for faction-specific actions}
+    {--type= : Type filter for faction actions (all|heroes|cards)}
     {--force : Force regeneration even if preview exists}
     {--sync : Execute jobs synchronously instead of queuing}
     {--dry-run : Show what would be done without actually doing it}';
@@ -56,11 +59,413 @@ class PreviewManage extends Command
       case 'status':
         return $this->showStatus();
         
+      case 'generate-faction':
+        return $this->generateFaction();
+        
+      case 'regenerate-faction':
+        return $this->regenerateFaction();
+        
+      case 'delete':
+        return $this->deleteSpecific();
+        
+      case 'delete-all':
+        return $this->deleteAll();
+        
+      case 'delete-heroes':
+        return $this->deleteAllHeroes();
+        
+      case 'delete-cards':
+        return $this->deleteAllCards();
+        
+      case 'delete-faction':
+        return $this->deleteFaction();
+        
       default:
         $this->error("Unknown action: {$action}");
-        $this->line('Available actions: generate-all, generate, regenerate, clean, status');
+        $this->line('Available actions: generate-all, generate, regenerate, clean, status, generate-faction, regenerate-faction, delete, delete-all, delete-heroes, delete-cards, delete-faction');
         return 1;
     }
+  }
+  
+  /**
+   * Generate preview images for a faction
+   */
+  protected function generateFaction(): int
+  {
+    $factionId = $this->option('faction');
+    $type = $this->option('type') ?? 'all';
+    $force = $this->option('force');
+    $sync = $this->option('sync');
+    $dryRun = $this->option('dry-run');
+    
+    if (!$factionId) {
+      $this->error('--faction option is required for generate-faction action');
+      return 1;
+    }
+    
+    $faction = Faction::find($factionId);
+    if (!$faction) {
+      $this->error("No faction found with ID {$factionId}");
+      return 1;
+    }
+    
+    if (!in_array($type, ['all', 'heroes', 'cards'])) {
+      $this->error('--type must be one of: all, heroes, cards');
+      return 1;
+    }
+    
+    $this->info("Generating preview images for faction: {$faction->name}");
+    
+    $heroesCount = 0;
+    $cardsCount = 0;
+    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
+    
+    // Process Heroes
+    if ($type === 'all' || $type === 'heroes') {
+      $heroes = $faction->heroes;
+      
+      if ($heroes->count() > 0) {
+        $bar = $this->output->createProgressBar($heroes->count());
+        $bar->setFormat(' %current%/%max% [%bar%] %percent:3s%% Heroes');
+        
+        foreach ($heroes as $hero) {
+          $needsGeneration = false;
+          
+          foreach ($locales as $locale) {
+            if ($force || !$hero->hasPreviewImage($locale)) {
+              $needsGeneration = true;
+              break;
+            }
+          }
+          
+          if ($needsGeneration) {
+            if (!$dryRun) {
+              if ($sync) {
+                $job = new GeneratePreviewImage($hero);
+                $job->handle();
+              } else {
+                GeneratePreviewImage::dispatch($hero);
+              }
+            }
+            $heroesCount++;
+          }
+          
+          $bar->advance();
+        }
+        
+        $bar->finish();
+        $this->newLine();
+      }
+    }
+    
+    // Process Cards
+    if ($type === 'all' || $type === 'cards') {
+      $cards = $faction->cards;
+      
+      if ($cards->count() > 0) {
+        $bar = $this->output->createProgressBar($cards->count());
+        $bar->setFormat(' %current%/%max% [%bar%] %percent:3s%% Cards');
+        
+        foreach ($cards as $card) {
+          $needsGeneration = false;
+          
+          foreach ($locales as $locale) {
+            if ($force || !$card->hasPreviewImage($locale)) {
+              $needsGeneration = true;
+              break;
+            }
+          }
+          
+          if ($needsGeneration) {
+            if (!$dryRun) {
+              if ($sync) {
+                $job = new GeneratePreviewImage($card);
+                $job->handle();
+              } else {
+                GeneratePreviewImage::dispatch($card);
+              }
+            }
+            $cardsCount++;
+          }
+          
+          $bar->advance();
+        }
+        
+        $bar->finish();
+        $this->newLine();
+      }
+    }
+    
+    $this->newLine();
+    
+    if ($dryRun) {
+      $this->warn('DRY RUN - No images were generated');
+    }
+    
+    $this->info("Heroes needing generation: {$heroesCount}");
+    $this->info("Cards needing generation: {$cardsCount}");
+    
+    if (!$sync && !$dryRun && ($heroesCount + $cardsCount) > 0) {
+      $this->info('Jobs have been queued. Run queue:work to process them.');
+    }
+    
+    return 0;
+  }
+  
+  /**
+   * Regenerate preview images for a faction (force)
+   */
+  protected function regenerateFaction(): int
+  {
+    $this->input->setOption('force', true);
+    return $this->generateFaction();
+  }
+  
+  /**
+   * Delete preview images for specific model
+   */
+  protected function deleteSpecific(): int
+  {
+    $modelType = $this->option('model');
+    $id = $this->option('id');
+    $dryRun = $this->option('dry-run');
+    
+    if (!$modelType || !$id) {
+      $this->error('Both --model and --id options are required for delete action');
+      return 1;
+    }
+    
+    if (!in_array($modelType, ['hero', 'card'])) {
+      $this->error('Model must be either "hero" or "card"');
+      return 1;
+    }
+    
+    $model = $modelType === 'hero' 
+      ? Hero::find($id)
+      : Card::find($id);
+      
+    if (!$model) {
+      $this->error("No {$modelType} found with ID {$id}");
+      return 1;
+    }
+    
+    $this->info("Deleting preview images for {$modelType}: {$model->name}");
+    
+    $images = $model->getAllPreviewImages();
+    $deletedCount = 0;
+    
+    foreach ($images as $imagePath) {
+      if (Storage::disk('public')->exists($imagePath)) {
+        if (!$dryRun) {
+          Storage::disk('public')->delete($imagePath);
+        }
+        $deletedCount++;
+        $this->line("  - Deleted: {$imagePath}");
+      }
+    }
+    
+    if ($dryRun) {
+      $this->warn('DRY RUN - No images were deleted');
+    } else {
+      $this->info("Deleted {$deletedCount} preview images");
+    }
+    
+    return 0;
+  }
+  
+  /**
+   * Delete all preview images
+   */
+  protected function deleteAll(): int
+  {
+    $dryRun = $this->option('dry-run');
+    
+    $this->warn('This will delete ALL preview images!');
+    
+    if (!$dryRun && !$this->option('no-interaction')) {
+      if (!$this->confirm('Are you sure you want to delete ALL preview images?')) {
+        $this->info('Operation cancelled');
+        return 0;
+      }
+    }
+    
+    $directories = [
+      'images/previews/heroes',
+      'images/previews/cards'
+    ];
+    
+    $deletedCount = 0;
+    
+    foreach ($directories as $dir) {
+      if (Storage::disk('public')->exists($dir)) {
+        $files = Storage::disk('public')->allFiles($dir);
+        $deletedCount += count($files);
+        
+        if (!$dryRun) {
+          Storage::disk('public')->deleteDirectory($dir);
+          Storage::disk('public')->makeDirectory($dir);
+        }
+      }
+    }
+    
+    if ($dryRun) {
+      $this->warn("DRY RUN - Would delete {$deletedCount} files");
+    } else {
+      $this->info("Deleted {$deletedCount} preview images");
+    }
+    
+    return 0;
+  }
+  
+  /**
+   * Delete all hero preview images
+   */
+  protected function deleteAllHeroes(): int
+  {
+    $dryRun = $this->option('dry-run');
+    
+    $this->warn('This will delete all HERO preview images!');
+    
+    if (!$dryRun && !$this->option('no-interaction')) {
+      if (!$this->confirm('Are you sure you want to delete all hero preview images?')) {
+        $this->info('Operation cancelled');
+        return 0;
+      }
+    }
+    
+    $directory = 'images/previews/heroes';
+    $deletedCount = 0;
+    
+    if (Storage::disk('public')->exists($directory)) {
+      $files = Storage::disk('public')->allFiles($directory);
+      $deletedCount = count($files);
+      
+      if (!$dryRun) {
+        Storage::disk('public')->deleteDirectory($directory);
+        Storage::disk('public')->makeDirectory($directory);
+      }
+    }
+    
+    if ($dryRun) {
+      $this->warn("DRY RUN - Would delete {$deletedCount} hero preview images");
+    } else {
+      $this->info("Deleted {$deletedCount} hero preview images");
+    }
+    
+    return 0;
+  }
+  
+  /**
+   * Delete all card preview images
+   */
+  protected function deleteAllCards(): int
+  {
+    $dryRun = $this->option('dry-run');
+    
+    $this->warn('This will delete all CARD preview images!');
+    
+    if (!$dryRun && !$this->option('no-interaction')) {
+      if (!$this->confirm('Are you sure you want to delete all card preview images?')) {
+        $this->info('Operation cancelled');
+        return 0;
+      }
+    }
+    
+    $directory = 'images/previews/cards';
+    $deletedCount = 0;
+    
+    if (Storage::disk('public')->exists($directory)) {
+      $files = Storage::disk('public')->allFiles($directory);
+      $deletedCount = count($files);
+      
+      if (!$dryRun) {
+        Storage::disk('public')->deleteDirectory($directory);
+        Storage::disk('public')->makeDirectory($directory);
+      }
+    }
+    
+    if ($dryRun) {
+      $this->warn("DRY RUN - Would delete {$deletedCount} card preview images");
+    } else {
+      $this->info("Deleted {$deletedCount} card preview images");
+    }
+    
+    return 0;
+  }
+  
+  /**
+   * Delete preview images for a faction
+   */
+  protected function deleteFaction(): int
+  {
+    $factionId = $this->option('faction');
+    $type = $this->option('type') ?? 'all';
+    $dryRun = $this->option('dry-run');
+    
+    if (!$factionId) {
+      $this->error('--faction option is required for delete-faction action');
+      return 1;
+    }
+    
+    $faction = Faction::find($factionId);
+    if (!$faction) {
+      $this->error("No faction found with ID {$factionId}");
+      return 1;
+    }
+    
+    if (!in_array($type, ['all', 'heroes', 'cards'])) {
+      $this->error('--type must be one of: all, heroes, cards');
+      return 1;
+    }
+    
+    $this->warn("This will delete preview images for faction: {$faction->name}");
+    
+    if (!$dryRun && !$this->option('no-interaction')) {
+        if (!$this->confirm('Are you sure you want to continue?')) {
+            $this->info('Operation cancelled');
+            return 0;
+        }
+    }
+    
+    $deletedCount = 0;
+    
+    // Delete Heroes previews
+    if ($type === 'all' || $type === 'heroes') {
+      foreach ($faction->heroes as $hero) {
+        $images = $hero->getAllPreviewImages();
+        foreach ($images as $imagePath) {
+          if (Storage::disk('public')->exists($imagePath)) {
+            if (!$dryRun) {
+              Storage::disk('public')->delete($imagePath);
+            }
+            $deletedCount++;
+          }
+        }
+      }
+    }
+    
+    // Delete Cards previews
+    if ($type === 'all' || $type === 'cards') {
+      foreach ($faction->cards as $card) {
+        $images = $card->getAllPreviewImages();
+        foreach ($images as $imagePath) {
+          if (Storage::disk('public')->exists($imagePath)) {
+            if (!$dryRun) {
+              Storage::disk('public')->delete($imagePath);
+            }
+            $deletedCount++;
+          }
+        }
+      }
+    }
+    
+    if ($dryRun) {
+      $this->warn("DRY RUN - Would delete {$deletedCount} preview images");
+    } else {
+      $this->info("Deleted {$deletedCount} preview images from faction {$faction->name}");
+    }
+    
+    return 0;
   }
   
   /**

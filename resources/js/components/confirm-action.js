@@ -1,24 +1,23 @@
 export default function initConfirmActions() {
-  // Obtener todos los botones que necesitan confirmación
-  const confirmButtons = document.querySelectorAll('[data-confirm-message]');
-  
-  // Agregar event listener a cada botón
-  confirmButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-      // Prevenir la acción por defecto
-      event.preventDefault();
-      
+  // Manejar clicks en elementos con confirmación
+  document.addEventListener('click', function(event) {
+    // Buscar si el elemento clickeado o sus padres tienen data-confirm o data-confirm-message
+    const element = event.target.closest('[data-confirm-message], [data-confirm]');
+    
+    if (element) {
       // Obtener el mensaje de confirmación
-      const confirmMessage = this.getAttribute('data-confirm-message');
+      const confirmMessage = element.getAttribute('data-confirm-message') || element.getAttribute('data-confirm');
       
-      // Mostrar diálogo de confirmación
-      if (window.confirm(confirmMessage)) {
-        // Si se confirma, enviar el formulario
-        const form = this.closest('form');
-        if (form) {
-          form.submit();
+      if (confirmMessage) {
+        // Mostrar diálogo de confirmación
+        if (!window.confirm(confirmMessage)) {
+          // Si no se confirma, cancelar la acción
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
         }
+        // Si se confirma, dejar que el evento continúe normalmente
       }
-    });
+    }
   });
 }

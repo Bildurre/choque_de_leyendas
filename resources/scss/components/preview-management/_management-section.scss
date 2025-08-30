@@ -1,0 +1,18 @@
+@use '../../abstracts/all' as *;
+
+.preview-management-section {
+  margin-bottom: $spacing-xl;
+  
+  &__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: $spacing-lg;
+  }
+}

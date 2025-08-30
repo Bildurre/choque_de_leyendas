@@ -20,6 +20,7 @@ use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
+use App\Http\Controllers\Admin\PreviewManagementController;
 use App\Http\Controllers\Game\DeckAttributesConfigurationController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
 
@@ -142,6 +143,25 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
     // Route::post('/generate-counters-list', [PdfExportController::class, 'generateCountersList'])->name('generate-counters-list');
     Route::post('/generate-cut-out-counters', [PdfExportController::class, 'generateCutOutCounters'])->name('generate-cut-out-counters');
     Route::post('/cleanup', [PdfExportController::class, 'cleanup'])->name('cleanup');
+  });
+
+  Route::prefix('previews')->name('previews.')->group(function () {
+    Route::get('/', [PreviewManagementController::class, 'index'])->name('index');
+    
+    // Bulk actions
+    Route::post('/generate-all', [PreviewManagementController::class, 'generateAll'])->name('generate-all');
+    Route::post('/regenerate-all', [PreviewManagementController::class, 'regenerateAll'])->name('regenerate-all');
+    Route::post('/delete-all', [PreviewManagementController::class, 'deleteAll'])->name('delete-all');
+    Route::post('/delete-all-heroes', [PreviewManagementController::class, 'deleteAllHeroes'])->name('delete-all-heroes');
+    Route::post('/delete-all-cards', [PreviewManagementController::class, 'deleteAllCards'])->name('delete-all-cards');
+    Route::post('/clean-orphaned', [PreviewManagementController::class, 'cleanOrphaned'])->name('clean-orphaned');
+
+    // Individual actions
+    Route::post('/individual-hero', [PreviewManagementController::class, 'individualHero'])->name('individual-hero');
+    Route::post('/individual-card', [PreviewManagementController::class, 'individualCard'])->name('individual-card');
+
+    // Faction actions
+    Route::post('/faction-action', [PreviewManagementController::class, 'factionAction'])->name('faction-action');
   });
 
   // Icons

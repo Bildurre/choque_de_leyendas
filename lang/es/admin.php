@@ -31,6 +31,7 @@ return [
   'updated_at' => 'Actualizado el',
   'deleted_at' => 'Eliminado el',
   'publication_status' => 'Estado de publicación',
+  'back_to_dashboard' => 'Volver al panel',
   
   // Mensajes genéricos
   'back_to_list' => 'Volver al listado',
