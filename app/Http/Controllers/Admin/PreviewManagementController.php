@@ -242,4 +242,108 @@ class PreviewManagementController extends Controller
         ->with('error', __($errorKey, ['error' => $e->getMessage()]));
     }
   }
+
+  public function regenerate(string $model, int $id)
+  {
+    if ($model === 'hero') {
+      $hero = Hero::findOrFail($id);
+      try {
+        $this->previewService->handleIndividualHero($hero, 'regenerate');
+        
+        return redirect()->back()
+          ->with('success', __('previews.regenerate_queued', [
+            'type' => __('entities.heroes.singular'),
+            'name' => $hero->name
+          ]));
+      } catch (\Exception $e) {
+        return redirect()->back()
+          ->with('error', __('previews.regenerate_failed', ['error' => $e->getMessage()]));
+      }
+    } elseif ($model === 'card') {
+      $card = Card::findOrFail($id);
+      try {
+        $this->previewService->handleIndividualCard($card, 'regenerate');
+        
+        return redirect()->back()
+          ->with('success', __('previews.regenerate_queued', [
+            'type' => __('entities.cards.singular'),
+            'name' => $card->name
+          ]));
+      } catch (\Exception $e) {
+        return redirect()->back()
+          ->with('error', __('previews.regenerate_failed', ['error' => $e->getMessage()]));
+      }
+    }
+    
+    abort(404, __('previews.invalid_model_type'));
+  }
+
+  public function delete(string $model, int $id)
+  {
+    if ($model === 'hero') {
+      $hero = Hero::findOrFail($id);
+      try {
+        $this->previewService->handleIndividualHero($hero, 'delete');
+        
+        return redirect()->back()
+          ->with('success', __('previews.delete_success', [
+            'type' => __('entities.heroes.singular'),
+            'name' => $hero->name
+          ]));
+      } catch (\Exception $e) {
+        return redirect()->back()
+          ->with('error', __('previews.delete_failed', ['error' => $e->getMessage()]));
+      }
+    } elseif ($model === 'card') {
+      $card = Card::findOrFail($id);
+      try {
+        $this->previewService->handleIndividualCard($card, 'delete');
+        
+        return redirect()->back()
+          ->with('success', __('previews.delete_success', [
+            'type' => __('entities.cards.singular'),
+            'name' => $card->name
+          ]));
+      } catch (\Exception $e) {
+        return redirect()->back()
+          ->with('error', __('previews.delete_failed', ['error' => $e->getMessage()]));
+      }
+    }
+    
+    abort(404, __('previews.invalid_model_type'));
+  }
+
+  public function regenerateFaction(Faction $faction)
+  {
+    $type = request()->input('type', 'all');
+    
+    try {
+      $this->previewService->handleFactionAction($faction, $type, 'regenerate');
+      
+      return redirect()->back()
+        ->with('success', __('previews.regenerate_faction_queued', [
+          'name' => $faction->name
+        ]));
+    } catch (\Exception $e) {
+      return redirect()->back()
+        ->with('error', __('previews.regenerate_faction_failed', ['error' => $e->getMessage()]));
+    }
+  }
+
+  public function deleteFaction(Faction $faction)
+  {
+    $type = request()->input('type', 'all');
+    
+    try {
+      $this->previewService->handleFactionAction($faction, $type, 'delete');
+      
+      return redirect()->back()
+        ->with('success', __('previews.delete_faction_success', [
+          'name' => $faction->name
+        ]));
+    } catch (\Exception $e) {
+      return redirect()->back()
+        ->with('error', __('previews.delete_faction_failed', ['error' => $e->getMessage()]));
+    }
+  }
 }

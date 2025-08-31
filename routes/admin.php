@@ -162,6 +162,11 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
 
     // Faction actions
     Route::post('/faction-action', [PreviewManagementController::class, 'factionAction'])->name('faction-action');
+
+    Route::post('/regenerate/{model}/{id}', [PreviewManagementController::class, 'regenerate'])->name('regenerate');
+    Route::post('/delete/{model}/{id}', [PreviewManagementController::class, 'delete'])->name('delete');
+    Route::post('/regenerate-faction/{faction}', [PreviewManagementController::class, 'regenerateFaction'])->name('regenerate-faction');
+    Route::post('/delete-faction/{faction}', [PreviewManagementController::class, 'deleteFaction'])->name('delete-faction');
   });
 
   // Icons
