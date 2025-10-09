@@ -46,6 +46,14 @@ export default function initWysiwygEditor() {
       plugins: ['autolink', 'lists', 'link', 'visualblocks', 'code'],
       toolbar: 'bold italic underline | h2 h3 h4 h5 | bullist numlist outdent indent | link dice_image | removeformat code',
       
+      content_style: `
+        img[src*="dices/"] {
+          width: 24px;
+          height: 24px;
+          vertical-align: middle;
+        }
+      `,
+
       // Importante: asegurar la sincronización automática con el textarea
       auto_focus: editor.id,
       setup: function(editor) {
@@ -131,7 +139,8 @@ export default function initWysiwygEditor() {
     const imageItems = dialog.querySelectorAll('.image-picker-dialog__item');
     imageItems.forEach(item => {
       item.addEventListener('click', () => {
-        editor.insertContent(`<img src="${item.dataset.url}" alt="${item.querySelector('span').textContent}" style="width: 24px; height: 24px;">`);
+        // editor.insertContent(`<img src="${item.dataset.url}" alt="${item.querySelector('span').textContent}" style="width: 24px; height: 24px;">`);
+        editor.insertContent(`<img src="${item.dataset.url}" alt="${item.querySelector('span').textContent}">`);
         document.body.removeChild(dialog);
         
         // Asegurarse de guardar el contenido después de insertar la imagen
