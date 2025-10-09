@@ -62,9 +62,11 @@
         <div class="card-preview-section">
           <x-previews.preview-image :entity="$card" type="card"/>
         </div>
+
         {{-- <div class="card-preview-section">
           <x-previews.card :card="$card"/>
         </div> --}}
+
         {{-- Basic Information --}}
         <x-entity-show.info-block title="entities.cards.basic_info">
           <x-entity-show.info-list>
