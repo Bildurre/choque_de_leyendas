@@ -98,14 +98,17 @@ $color-white-transparent: #ffffffbd;
     }
 
     img {
-      height: 1.2em;
+      height: 1.1em;
       width: auto;
       aspect-ratio: 1;
-      transform: translateY(25%);
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 0;
+      margin: -0.05em 0;
     }
 
     p {
-      margin-bottom: .25rem;
+      margin-bottom: .15rem;
       &:last-of-type {
         margin-bottom: 0;
       }

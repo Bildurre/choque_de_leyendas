@@ -20,7 +20,7 @@
             @endif
             <div class="counter-list__content">
               <h3 class="counter-list__name">{{ $counter->name }}</h3>
-              <p class="counter-list__effect">{{ $counter->effect }}</p>
+              <div class="counter-list__effect">{!! $counter->effect !!}</div>
             </div>
           </li>
         @endforeach

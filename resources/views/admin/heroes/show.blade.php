@@ -60,6 +60,11 @@
       {{-- Hero Information --}}
       <div class="info-blocks-grid">
 
+        
+        <div class="hero-preview-section">
+          <x-previews.hero :hero="$hero" />
+        </div>
+
         {{-- Hero Preview --}}
         <div class="hero-preview-section">
           <x-previews.preview-image :entity="$hero" type="hero"/>
