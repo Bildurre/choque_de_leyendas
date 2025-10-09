@@ -35,6 +35,12 @@ class CounterRequest extends FormRequest
       'is_published' => ['nullable', 'boolean'],
     ];
 
+    $rules = array_merge(
+      $rules, 
+      $this->uniqueTranslatableRules('counters', 'name', $counterId, $locales)
+    );
+
+
     return $rules;
   }
 
@@ -43,7 +49,7 @@ class CounterRequest extends FormRequest
    */
   public function messages(): array
   {
-    return [
+    $messages = [
       'name.required' => 'El nombre del contador es obligatorio.',
       'name.array' => __('validation.array', ['attribute' => __('common.name')]),
       'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
@@ -54,5 +60,13 @@ class CounterRequest extends FormRequest
       'icon.mimes' => 'El archivo debe ser de tipo: jpeg, png, jpg, gif, svg.',
       'icon.max' => 'La imagen no debe ser mayor de 2MB.',
     ];
+
+    // Messages for uniqueness in each language
+    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
+      $localeName = locale_name($locale);
+      $messages["name.{$locale}.unique"] = "Ya existe un contador con este nombre en {$localeName}.";
+    }
+    
+    return $messages;
   }
 }
