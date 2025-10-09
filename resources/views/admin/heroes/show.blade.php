@@ -61,9 +61,9 @@
       <div class="info-blocks-grid">
 
         
-        <div class="hero-preview-section">
+        {{-- <div class="hero-preview-section">
           <x-previews.hero :hero="$hero" />
-        </div>
+        </div> --}}
 
         {{-- Hero Preview --}}
         <div class="hero-preview-section">
