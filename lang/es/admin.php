@@ -11,6 +11,7 @@ return [
   'logout' => 'Cerrar sesión',
   'toggle_sidebar' => 'Alternar barra lateral',
   'game_system' => 'Sistema de juego',
+  'export' => 'Exportación',
   
   // Estados y acciones
   'active_items' => 'Elementos activos',

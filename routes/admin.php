@@ -20,6 +20,7 @@ use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\PreviewManagementController;
 use App\Http\Controllers\Game\DeckAttributesConfigurationController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
@@ -167,6 +168,15 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
     Route::post('/delete/{model}/{id}', [PreviewManagementController::class, 'delete'])->name('delete');
     Route::post('/regenerate-faction/{faction}', [PreviewManagementController::class, 'regenerateFaction'])->name('regenerate-faction');
     Route::post('/delete-faction/{faction}', [PreviewManagementController::class, 'deleteFaction'])->name('delete-faction');
+  });
+
+  Route::prefix('export')->name('export.')->group(function () {
+    Route::get('/', [ExportController::class, 'index'])->name('index');
+    Route::post('/', [ExportController::class, 'export'])->name('create');
+    Route::get('/download/{filename}', [ExportController::class, 'download'])->name('download');
+    Route::delete('/delete/{filename}', [ExportController::class, 'deleteSingle'])->name('delete-single');
+    Route::delete('/delete-all', [ExportController::class, 'deleteAll'])->name('delete-all');
+    Route::post('/download-all', [ExportController::class, 'downloadAll'])->name('download-all');
   });
 
   // Icons

@@ -10,6 +10,7 @@ return [
   'logout' => 'Logout',
   'toggle_sidebar' => 'Toggle sidebar',
   'game_system' => 'Game system',
+  'export' => 'Export',
   
   // States and actions
   'active_items' => 'Active items',

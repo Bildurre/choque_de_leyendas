@@ -82,6 +82,10 @@
 @use 'components/pdf/pdf-action-button';
 @use 'components/pdf/pdf-progress-inline';
 
+// Export Components
+@use 'components/export/export-list';
+@use 'components/export/export-item';
+
 // Entity Show
 @use 'components/entity-show/ability-card';
 @use 'components/entity-show/attribute-item';

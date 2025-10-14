@@ -8,6 +8,7 @@
   transition: all $transition-fast ease-in-out;
   container-type: inline-size;
   container-name: management-card;
+
   
   &__title {
     font-size: 1.1rem;
@@ -32,9 +33,27 @@
     }
   }
 
+  &--full {
+    .preview-management-card__content {
+      @include container-responsive(management-card, smaller) {
+      grid-template-columns: 1fr;
+    }
+    }
+  }
+
   .preview-management--wrapper {
     display: grid;
     gap: $spacing-xs;
+  }
+
+  .preview-management--grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xs;
+    
+    @include container-responsive(management-card, smaller) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   &--form {

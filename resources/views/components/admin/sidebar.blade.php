@@ -161,6 +161,20 @@
               </li>
             </ul>
           </x-collapsible-section>
+
+          <!-- Export Content -->
+          <x-collapsible-section 
+            id="export-section" 
+            title="{{ __('admin.export') }}"
+          >
+            <ul class="admin-sidebar__submenu">
+              <li class="admin-sidebar__item">
+                <a href="{{ route('admin.export.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.export.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('export.menu_database') }}</span>
+                </a>
+              </li>
+            </ul>
+          </x-collapsible-section>
         </x-accordion>
       </ul>
     </nav>
