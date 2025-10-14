@@ -3,22 +3,24 @@
 namespace App\Services\Content;
 
 use App\Models\Page;
-use App\Services\Traits\HandlesTranslations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use App\Services\Pdf\PdfExportService;
+use App\Services\Traits\HandlesTranslations;
 
 class PageService
 {
   use HandlesTranslations;
   
   protected $translatableFields = ['title', 'description', 'meta_title', 'meta_description', 'slug'];
+  protected $pdfExportService;
 
   /**
    * Create a new service instance.
    */
-  public function __construct()
+  public function __construct(PdfExportService $pdfExportService)
   {
-    // Sin dependencia de ImageService
+    $this->pdfExportService = $pdfExportService;
   }
 
   /**
@@ -86,6 +88,9 @@ class PageService
    */
   public function delete(Page $page): bool
   {
+    // Delete associated PDFs first
+    $this->pdfExportService->deletePagePdfs($page->id);
+
     // Delete background image if exists using HasImageAttribute trait
     if ($page->hasImage()) {
       $page->deleteImage();
@@ -120,6 +125,9 @@ class PageService
   {
     $page = Page::onlyTrashed()->findOrFail($id);
     $title = $page->title;
+
+    // Delete associated PDFs first
+    $this->pdfExportService->deletePagePdfs($page->id);
     
     if ($page->hasImage()) {
       $page->deleteImage();
