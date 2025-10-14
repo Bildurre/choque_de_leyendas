@@ -110,23 +110,56 @@ class CardService
 
   private function setCardFields(Card $card, array $data): void
   {
-    $fields = [
-      'faction_id', 'card_type_id', 'card_subtype_id', 'equipment_type_id',
-      'attack_range_id', 'attack_subtype_id', 'hero_ability_id',
-      'hands', 'cost', 'attack_type'
-    ];
+    $cardTypeId = $data['card_type_id'] ?? null;
+    $equipmentTypeCategory = null;
     
-    $fillable = [];
-    
-    foreach ($fields as $field) {
-      if (isset($data[$field])) {
-        $fillable[$field] = $data[$field];
-      }
+    // Get equipment type category if exists
+    if (isset($data['equipment_type_id']) && $data['equipment_type_id']) {
+      $equipmentType = \App\Models\EquipmentType::find($data['equipment_type_id']);
+      $equipmentTypeCategory = $equipmentType?->category;
     }
     
-    $card->fill($fillable);
+    // Initialize all fields
+    $fields = [
+      'faction_id' => $data['faction_id'] ?? null,
+      'card_type_id' => $cardTypeId,
+      'card_subtype_id' => null,
+      'equipment_type_id' => null,
+      'hero_ability_id' => null,
+      'hands' => null,
+      'attack_range_id' => null,
+      'attack_type' => null,
+      'attack_subtype_id' => null,
+      'cost' => $data['cost'] ?? null,
+    ];
     
-    $card->area = isset($data['area']) ? (bool)$data['area'] : false;
+    // Apply logic based on card type
+    if (in_array($cardTypeId, [2, 3])) {
+      // Ardid (2) or Apoyo (3) - all special fields remain null
+      // No action needed, already set to null
+    } elseif ($cardTypeId == 1) {
+      // Equipment type
+      $fields['equipment_type_id'] = $data['equipment_type_id'] ?? null;
+      
+      // Only weapons can have hands and hero abilities
+      if ($equipmentTypeCategory === 'weapon') {
+        $fields['hands'] = $data['hands'] ?? null;
+        $fields['hero_ability_id'] = $data['hero_ability_id'] ?? null;
+      }
+    } elseif (in_array($cardTypeId, [Card::TECHNIQUE_TYPE_ID, Card::SPELL_TYPE_ID])) {
+      // Technique (4) or Spell (5)
+      $fields['card_subtype_id'] = $data['card_subtype_id'] ?? null;
+      $fields['attack_range_id'] = $data['attack_range_id'] ?? null;
+      $fields['attack_type'] = $data['attack_type'] ?? null;
+      $fields['attack_subtype_id'] = $data['attack_subtype_id'] ?? null;
+    }
+    
+    $card->fill($fields);
+    
+    // Boolean fields
+    $card->area = (in_array($cardTypeId, [Card::TECHNIQUE_TYPE_ID, Card::SPELL_TYPE_ID]) && isset($data['area'])) 
+      ? (bool)$data['area'] 
+      : false;
     $card->is_unique = isset($data['is_unique']) ? (bool)$data['is_unique'] : false;
     $card->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
   }

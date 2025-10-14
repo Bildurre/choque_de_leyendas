@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initConditionalField('card_type_id-filter', ['attack_range_id-filter', 'attack_subtype_id-filter', 'area-filter'], ['4', '5', '6', '7']);
 
   initConditionalField('card_type_id', 'form-field--equipment_type_id', '1');
+  initConditionalField('card_type_id', 'form-field--hero_ability_id', '1');
+  initConditionalField('card_type_id', 'form-field--hands', '1');
   initConditionalField('card_type_id', 'form-field--card_subtype_id', ['4', '5']);
   initConditionalField('card_type_id', 'form-field--attack_type', ['4', '5']);
   initConditionalField('equipment_type_id', ['form-field--hands', 'form-field--hero_ability_id'], ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])

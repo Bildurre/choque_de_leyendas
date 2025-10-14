@@ -52,6 +52,34 @@ export default function initConditionalField(triggerId, targetIds, checkValues =
     trigger.addEventListener('change', updateVisibility);
   }
   
+  function clearFieldValue(element) {
+    // Find the actual select/input within the container
+    let inputElement = element;
+    
+    // If element is a container (form-field), find the actual input/select inside
+    if (!element.tagName.match(/^(INPUT|SELECT|TEXTAREA)$/)) {
+      inputElement = element.querySelector('select, input, textarea');
+    }
+    
+    if (!inputElement) return;
+    
+    // Clear based on element type
+    if (inputElement.type === 'checkbox') {
+      inputElement.checked = false;
+    } else if (inputElement.hasAttribute('data-choices')) {
+      // For Choices.js elements
+      const choicesInstance = inputElement.choices;
+      if (choicesInstance) {
+        choicesInstance.setChoiceByValue('');
+      } else {
+        inputElement.value = '';
+      }
+    } else {
+      // For regular inputs and selects
+      inputElement.value = '';
+    }
+  }
+  
   function updateVisibility() {
     let shouldShow = false;
     
@@ -91,6 +119,8 @@ export default function initConditionalField(triggerId, targetIds, checkValues =
         } else {
           // Hide element
           targetContainer.style.display = 'none';
+          // Clear the value
+          clearFieldValue(targetContainer);
         }
       }
     });
