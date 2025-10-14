@@ -151,6 +151,23 @@ return [
     'confirm_delete' => 'Are you sure you want to delete this card?',
     'confirm_force_delete' => 'Are you sure you want to permanently delete this card?',
     'count' => ':count cards',
+    'no_card_subtype' => 'No subtype',
+    'validation' => [
+      'subtype_only_for_spell_or_technique' => 'Card subtype can only be used for spells or techniques.',
+      'hands_required_for_weapon' => 'Hands are required for weapons.',
+      'hands_only_for_weapon' => 'Hands can only be specified for weapons.',
+      'hands_must_be_1_or_2' => 'Number of hands must be 1 or 2.',
+      'attack_range_and_subtype_together' => 'Attack range and subtype must be selected together.',
+      'cost_format' => 'Cost can only contain the characters R, G and B.',
+      'name_unique' => 'A card with this name already exists in :locale.',
+      'attack_type_only_for_spell_or_technique' => 'Attack type can only be used for spells or techniques.',
+    ],
+    'attack_type' => 'Attack type',
+    'no_attack_type' => '-- No attack type --',
+    'attack_types' => [
+      'physical' => 'Physical',
+      'magical' => 'Magical',
+    ],
   ],
   
   // Hero races
@@ -203,10 +220,34 @@ return [
     'area' => 'Area',
     'is_area_attack' => 'Is area attack',
     'type' => 'Type',
+    'attack_type' => 'Attack type',
+    'no_attack_type' => '-- No attack type --',
     'no_attack_range' => 'No attack range',
     'no_attack_subtype' => 'No attack subtype',
+    'attack_types' => [
+      'physical' => 'Physical',
+      'magical' => 'Magical',
+    ],
     'confirm_delete' => 'Are you sure you want to delete this ability?',
     'confirm_force_delete' => 'Are you sure you want to permanently delete this ability?',
+    'created_successfully' => 'Ability :name has been created successfully.',
+    'updated_successfully' => 'Ability :name has been updated successfully.',
+    'deleted_successfully' => 'Ability :name has been deleted successfully.',
+    'restored_successfully' => 'Ability :name has been restored successfully.',
+    'force_deleted_successfully' => 'Ability :name has been permanently deleted.',
+    'validation' => [
+      'attack_type_requires_range_and_subtype' => 'If you specify an attack type, you must also select an attack range and subtype.',
+      'range_and_subtype_require_attack_type' => 'If you specify an attack range or subtype, you must also select the attack type.',
+      'attack_range_and_subtype_together' => 'Attack range and subtype must be selected together.',
+      'cost_format' => 'Cost can only contain the characters R, G and B.',
+      'name_unique' => 'An ability with this name already exists in :locale.',
+    ],
+    'errors' => [
+      'has_heroes' => 'Cannot delete this ability because it has associated heroes.',
+      'has_cards' => 'Cannot delete this ability because it has associated cards.',
+      'force_delete_has_heroes' => 'Cannot permanently delete this ability because it has associated heroes (even deleted ones).',
+      'force_delete_has_cards' => 'Cannot permanently delete this ability because it has associated cards (even deleted ones).',
+    ],
   ],
   
   // Hero attributes
@@ -237,6 +278,27 @@ return [
     'select_superclass' => 'Select superclass',
     'confirm_delete' => 'Are you sure you want to delete this card type?',
     'confirm_force_delete' => 'Are you sure you want to permanently delete this card type?',
+  ],
+
+  // Card subtypes
+  'card_subtypes' => [
+    'singular' => 'Card subtype',
+    'plural' => 'Card subtypes',
+    'create' => 'Create card subtype',
+    'edit' => 'Edit card subtype',
+    'name' => 'Name',
+    'cards_count' => ':count cards',
+    'confirm_delete' => 'Are you sure you want to delete this card subtype?',
+    'confirm_force_delete' => 'Are you sure you want to permanently delete this card subtype?',
+    'created_successfully' => 'Card subtype :name has been created successfully.',
+    'updated_successfully' => 'Card subtype :name has been updated successfully.',
+    'deleted_successfully' => 'Card subtype :name has been deleted successfully.',
+    'restored_successfully' => 'Card subtype :name has been restored successfully.',
+    'force_deleted_successfully' => 'Card subtype :name has been permanently deleted.',
+    'errors' => [
+      'has_cards' => 'Cannot delete this subtype because it has associated cards.',
+      'force_delete_has_cards' => 'Cannot permanently delete this subtype because it has associated cards (even deleted ones).',
+    ],
   ],
   
   // Equipment types

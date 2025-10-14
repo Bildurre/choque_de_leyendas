@@ -68,7 +68,7 @@ class HeroAbilityController extends Controller
   public function create()
   {
     $attackRanges = AttackRange::orderBy('id')->get();
-    $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
+    $attackSubtypes = AttackSubtype::orderBy('id')->get();
     
     return view('admin.hero-abilities.create', compact(
       'attackRanges',
@@ -100,7 +100,7 @@ class HeroAbilityController extends Controller
   public function edit(HeroAbility $heroAbility)
   {
     $attackRanges = AttackRange::orderBy('id')->get();
-    $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
+    $attackSubtypes = AttackSubtype::orderBy('id')->get();
     
     return view('admin.hero-abilities.edit', compact(
       'heroAbility',

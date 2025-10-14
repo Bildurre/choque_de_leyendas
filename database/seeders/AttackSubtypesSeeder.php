@@ -16,48 +16,37 @@ class AttackSubtypesSeeder extends Seeder
     
     $subtypes = [
       [
-        'name' => ["en" => "Slashing", "es" => "Cortante"],
-        'type' => 'physical'
+        'name' => ["en" => "Slashing", "es" => "Cortante"]
       ],
       [
-        'name' => ["en" => "Piercing", "es" => "Perforante"],
-        'type' => 'physical'
+        'name' => ["en" => "Piercing", "es" => "Perforante"]
       ],
       [
-        'name' => ["en" => "Crushing", "es" => "Contundente"],
-        'type' => 'physical'
+        'name' => ["en" => "Crushing", "es" => "Contundente"]
       ],
       [
-        'name' => ["en" => "Rending", "es" => "Lacerante"],
-        'type' => 'physical'
+        'name' => ["en" => "Rending", "es" => "Lacerante"]
       ],
       [
-        'name' => ["en" => "Fire", "es" => "Fuego"],
-        'type' => 'magical'
+        'name' => ["en" => "Fire", "es" => "Fuego"]
       ],
       [
-        'name' => ["en" => "Lightning", "es" => "Electricidad"],
-        'type' => 'magical'
+        'name' => ["en" => "Lightning", "es" => "Electricidad"]
       ],
       [
-        'name' => ["en" => "Water", "es" => "Agua"],
-        'type' => 'magical'
+        'name' => ["en" => "Water", "es" => "Agua"]
       ],
       [
-        'name' => ["en" => "Earth", "es" => "Tierra"],
-        'type' => 'magical'
+        'name' => ["en" => "Earth", "es" => "Tierra"]
       ],
       [
-        'name' => ["en" => "Air", "es" => "Aire"],
-        'type' => 'magical'
+        'name' => ["en" => "Air", "es" => "Aire"]
       ],
       [
-        'name' => ["en" => "Light", "es" => "Luz"],
-        'type' => 'magical'
+        'name' => ["en" => "Light", "es" => "Luz"]
       ],
       [
-        'name' => ["en" => "Darkness", "es" => "Oscuridad"],
-        'type' => 'magical'
+        'name' => ["en" => "Darkness", "es" => "Oscuridad"]
       ],
     ];
 

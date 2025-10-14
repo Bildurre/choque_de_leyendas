@@ -13,21 +13,11 @@
   @endif
   
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.attack-subtypes.index')">    
-    <div class="form-grid">
-      <x-form.multilingual-input
-        name="name"
-        :label="__('entities.attack_subtypes.name')"
-        :values="isset($attackSubtype) ? $attackSubtype->getTranslations('name') : []"
-        required
-      />
-      
-      <x-form.select
-        name="type"
-        :label="__('entities.attack_subtypes.type')"
-        :options="$types"
-        :selected="old('type', isset($attackSubtype) ? $attackSubtype->type : '')"
-        required
-      />
-    </div>
+    <x-form.multilingual-input
+      name="name"
+      :label="__('entities.attack_subtypes.name')"
+      :values="isset($attackSubtype) ? $attackSubtype->getTranslations('name') : []"
+      required
+    />
   </x-form.card>
 </form>

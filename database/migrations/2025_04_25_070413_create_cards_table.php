@@ -21,7 +21,9 @@ return new class extends Migration
       $table->json('epic_quote')->nullable();
       $table->foreignId('faction_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('card_type_id')->constrained()->onDelete('restrict');
+      $table->foreignId('card_subtype_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('equipment_type_id')->nullable()->constrained()->onDelete('set null');
+      $table->enum('attack_type', ['physical', 'magical'])->nullable();
       $table->foreignId('attack_range_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('attack_subtype_id')->nullable()->constrained()->onDelete('set null');
       $table->foreignId('hero_ability_id')->nullable()->constrained()->onDelete('set null');

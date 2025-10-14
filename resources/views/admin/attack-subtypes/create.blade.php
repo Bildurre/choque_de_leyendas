@@ -12,8 +12,6 @@
   </x-admin.page-header>
   
   <div class="page-content">
-    @include('admin.attack-subtypes._form', [
-      'types' => $types
-    ])
+    @include('admin.attack-subtypes._form')
   </div>
 </x-admin-layout>

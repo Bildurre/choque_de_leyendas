@@ -43,11 +43,7 @@
             ? __('entities.attack_subtypes.confirm_force_delete') 
             : __('entities.attack_subtypes.confirm_delete')"
         >
-          <x-slot:badges>
-            <x-badge variant="{{ $attackSubtype->type === 'physical' ? 'warning' : 'success' }}">
-              {{ $attackSubtype->type_name }}
-            </x-badge>
-            
+          <x-slot:badges>            
             <x-badge variant="info">
               {{ __('entities.attack_subtypes.hero_abilities_count', ['count' => $attackSubtype->hero_abilities_count]) }}
             </x-badge>

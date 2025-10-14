@@ -6,6 +6,7 @@ use App\Http\Controllers\Game\CardController;
 use App\Http\Controllers\Game\HeroController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BlockController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Game\CounterController;
 use App\Http\Controllers\Game\FactionController;
 use App\Http\Controllers\Game\CardTypeController;
@@ -15,12 +16,12 @@ use App\Http\Controllers\Game\HeroClassController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PdfExportController;
 use App\Http\Controllers\Game\AttackRangeController;
+use App\Http\Controllers\Game\CardSubtypeController;
 use App\Http\Controllers\Game\FactionDeckController;
 use App\Http\Controllers\Game\HeroAbilityController;
 use App\Http\Controllers\Game\AttackSubtypeController;
 use App\Http\Controllers\Game\EquipmentTypeController;
 use App\Http\Controllers\Game\HeroSuperclassController;
-use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\PreviewManagementController;
 use App\Http\Controllers\Game\DeckAttributesConfigurationController;
 use App\Http\Controllers\Game\HeroAttributesConfigurationController;
@@ -57,6 +58,11 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
   Route::resource('card-types', CardTypeController::class);
   Route::post('card-types/{id}/restore', [CardTypeController::class, 'restore'])->name('card-types.restore');
   Route::delete('card-types/{id}/force-delete', [CardTypeController::class, 'forceDelete'])->name('card-types.force-delete');
+
+  // Card Subtypes
+  Route::resource('card-subtypes', CardSubtypeController::class);
+  Route::post('card-subtypes/{id}/restore', [CardSubtypeController::class, 'restore'])->name('card-subtypes.restore');
+  Route::delete('card-subtypes/{id}/force-delete', [CardSubtypeController::class, 'forceDelete'])->name('card-subtypes.force-delete');
 
   // Equipment Types
   Route::resource('equipment-types', EquipmentTypeController::class);

@@ -50,7 +50,7 @@ class AttackSubtypeService
     
     // Apply default ordering only if no sort parameter is provided
     if (!$request || !$request->has('sort')) {
-      $query->orderBy('type')->orderBy('id');
+      $query->orderBy('id');
     }
     
     // Paginate if needed
@@ -85,9 +85,6 @@ class AttackSubtypeService
     // Apply translations
     $this->applyTranslations($attackSubtype, $data, $this->translatableFields);
     
-    // Set non-translatable fields
-    $attackSubtype->type = $data['type'];
-    
     $attackSubtype->save();
     
     return $attackSubtype;
@@ -108,11 +105,6 @@ class AttackSubtypeService
     
     // Apply translations
     $this->applyTranslations($attackSubtype, $data, $this->translatableFields);
-    
-    // Update non-translatable fields
-    if (isset($data['type'])) {
-      $attackSubtype->type = $data['type'];
-    }
     
     $attackSubtype->save();
     

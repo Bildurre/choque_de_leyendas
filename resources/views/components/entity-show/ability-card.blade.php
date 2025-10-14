@@ -4,6 +4,7 @@
     'variant' => 'active', // active, passive
     'cost' => null,
     'attackRange' => null,
+    'attackType' => null,
     'attackSubtype' => null,
     'area' => false
 ])
@@ -22,7 +23,7 @@
         @if($attackRange && $attackSubtype)
           <div class="ability-types">
             {{ $attackRange->name }} - 
-            {{ __('entities.attack_subtypes.types.' . $attackSubtype->type) }} - 
+            {{ __('entities.attack_subtypes.types.' . $attackType) }} - 
             {{ $attackSubtype->name }}
             @if($area)
               - {{ __('entities.hero_abilities.area') }}

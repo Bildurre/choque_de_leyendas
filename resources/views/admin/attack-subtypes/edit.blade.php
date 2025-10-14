@@ -14,7 +14,6 @@
   <div class="page-content">
     @include('admin.attack-subtypes._form', [
       'attackSubtype' => $attackSubtype,
-      'types' => $types
     ])
   </div>
 </x-admin-layout>

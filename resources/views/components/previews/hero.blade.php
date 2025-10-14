@@ -5,7 +5,7 @@
 <x-previews.entity :entity="$hero" type="hero">
   <x-slot:header>
     <h2 class="entity-preview__name">{{ $hero->name }}</h2>
-    <h3 class="entity-preview__class">{{ $hero->getGenderizedRaceName() . ' - ' . $hero->getGenderizedClassName() . ' - ' . $hero->getGenderizedSuperclassName() }}</h3>
+    <h3 class="entity-preview__class">{{ $hero->getGenderizedRaceName() . ' • ' . $hero->getGenderizedClassName() . ' • ' . $hero->getGenderizedSuperclassName() }}</h3>
   </x-slot:header>
   
   <x-slot:attributes_section>
@@ -61,9 +61,9 @@
               <span class="entity-preview__active-name">{{ $ability->name }}</span>
               <span class="entity-preview__active-types">
                 {{ $ability->attackRange->name . 
-                  ' - ' . __('entities.attack_subtypes.types.'.$ability->attackSubtype->type) . 
-                  ' - ' . $ability->attackSubtype->name . 
-                  ($ability->area ? ' - '.__('entities.hero_abilities.area') : '')
+                  ' • ' . __('entities.attack_subtypes.types.'.$ability->attack_type) . 
+                  ' • ' . $ability->attackSubtype->name . 
+                  ($ability->area ? ' • '.__('entities.hero_abilities.area') : '')
                 }}
               </span>
             </div>

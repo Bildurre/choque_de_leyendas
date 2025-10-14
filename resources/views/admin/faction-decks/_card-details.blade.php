@@ -12,7 +12,7 @@
     
     @if($entity->attackRange && $entity->attackSubtype)
       <span class="card-details__meta">
-        {{ __('entities.attack_subtypes.types.'. $entity->attackSubtype->type) .' - '. $entity->attackRange->name .' - '. $entity->attackSubtype->name . ($entity->area ? ' - '. __('entities.cards.area') : '') }}
+        {{ __('entities.attack_subtypes.types.'. $entity->attack_type) .' - '. $entity->attackRange->name .' - '. $entity->attackSubtype->name . ($entity->area ? ' - '. __('entities.cards.area') : '') }}
       </span>
     @endif
 

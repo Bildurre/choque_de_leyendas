@@ -15,6 +15,7 @@ return new class extends Migration
       $table->id();
       $table->json('name');
       $table->json('description')->nullable();
+      $table->enum('attack_type', ['physical', 'magical'])->nullable();
       $table->foreignId('attack_range_id')->nullable()->constrained()->nullOnDelete();
       $table->foreignId('attack_subtype_id')->nullable()->constrained()->nullOnDelete();
       $table->boolean('area')->default(false);

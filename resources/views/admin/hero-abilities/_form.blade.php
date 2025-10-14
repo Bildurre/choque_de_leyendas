@@ -36,6 +36,13 @@
           :value="old('cost', isset($heroAbility) ? $heroAbility->cost : '')"
           required
         />
+
+        <x-form.select
+          name="attack_type"
+          :label="__('entities.hero_abilities.attack_type')"
+          :options="['' => __('entities.hero_abilities.no_attack_type')] + \App\Models\HeroAbility::getAttackTypes()"
+          :selected="old('attack_type', isset($heroAbility) ? $heroAbility->attack_type : '')"
+        />
           
         <x-form.select
           name="attack_range_id"

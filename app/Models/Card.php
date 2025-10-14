@@ -27,11 +27,6 @@ class Card extends Model implements LocalizedUrlRoutable
   use HasPublishedAttribute;
   use HasPreviewImage;
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array<int, string>
-   */
   protected $fillable = [
     'name',
     'slug',
@@ -41,6 +36,7 @@ class Card extends Model implements LocalizedUrlRoutable
     'epic_quote',
     'faction_id',
     'card_type_id',
+    'card_subtype_id',
     'equipment_type_id',
     'attack_range_id',
     'attack_subtype_id',
@@ -51,14 +47,10 @@ class Card extends Model implements LocalizedUrlRoutable
     'restriction',
     'area',
     'is_published',
-    'is_unique'
+    'is_unique',
+    'attack_type'
   ];
 
-  /**
-   * The attributes that should be cast.
-   *
-   * @var array<string, string>
-   */
   protected $casts = [
     'hands' => 'integer',
     'area' => 'boolean',
@@ -68,11 +60,6 @@ class Card extends Model implements LocalizedUrlRoutable
     'preview_image' => 'array'
   ];
 
-  /**
-   * The attributes that are translatable.
-   *
-   * @var array
-   */
   public $translatable = [
     'name',
     'slug',
@@ -83,30 +70,31 @@ class Card extends Model implements LocalizedUrlRoutable
   ];
 
   /**
-   * Get fields that can be searched in admin
-   *
-   * @return array
+   * Card type IDs that support subtypes (Spell and Technique)
    */
+  const SPELL_TYPE_ID = 5;
+  const TECHNIQUE_TYPE_ID = 4;
+
+  /**
+   * Check if this card's type supports subtypes
+   *
+   * @return bool
+   */
+  public function supportsSubtype(): bool
+  {
+    return in_array($this->card_type_id, [self::SPELL_TYPE_ID, self::TECHNIQUE_TYPE_ID]);
+  }
+
   public function getAdminSearchable(): array
   {
     return ['lore_text', 'effect', 'restriction'];
   }
 
-  /**
-   * Get fields that can be searched in public
-   *
-   * @return array
-   */
   public function getPublicSearchable(): array
   {
     return ['lore_text', 'effect', 'restriction'];
   }
   
-  /**
-   * Get fields that can be filtered in admin
-   *
-   * @return array
-   */
   public function getAdminFilterable(): array
   {
     return [
@@ -123,6 +111,14 @@ class Card extends Model implements LocalizedUrlRoutable
         'field' => 'card_type_id',
         'relation' => 'cardType',
         'label' => __('entities.card_types.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
+      [
+        'type' => 'relation',
+        'field' => 'card_subtype_id',
+        'relation' => 'cardSubtype',
+        'label' => __('entities.card_subtypes.singular'),
         'option_label' => 'name',
         'option_value' => 'id'
       ],
@@ -175,11 +171,6 @@ class Card extends Model implements LocalizedUrlRoutable
     ];
   }
 
-  /**
-   * Get fields that can be filtered in public
-   *
-   * @return array
-   */
   public function getPublicFilterable(): array
   {
     return [
@@ -199,15 +190,14 @@ class Card extends Model implements LocalizedUrlRoutable
         'option_label' => 'name',
         'option_value' => 'id'
       ],
-      // [
-      //   'type' => 'nested_relation',
-      //   'field' => 'cardType.hero_superclass_id',
-      //   'through' => ['cardType', 'heroSuperclass'],
-      //   'label' => __('entities.hero_superclasses.singular'),
-      //   'option_model' => \App\Models\HeroSuperclass::class,
-      //   'option_label' => 'name',
-      //   'option_value' => 'id'
-      // ],
+      [
+        'type' => 'relation',
+        'field' => 'card_subtype_id',
+        'relation' => 'cardSubtype',
+        'label' => __('entities.card_subtypes.singular'),
+        'option_label' => 'name',
+        'option_value' => 'id'
+      ],
       [
         'type' => 'relation',
         'field' => 'equipment_type_id',
@@ -273,11 +263,6 @@ class Card extends Model implements LocalizedUrlRoutable
     ];
   }
   
-  /**
-   * Get fields that can be sorted in admin
-   *
-   * @return array
-   */
   public function getAdminSortable(): array
   {
     return [
@@ -310,11 +295,6 @@ class Card extends Model implements LocalizedUrlRoutable
     ];
   }
 
-  /**
-   * Get fields that can be sorted in public
-   *
-   * @return array
-   */
   public function getPublicSortable(): array
   {
     return [
@@ -335,17 +315,9 @@ class Card extends Model implements LocalizedUrlRoutable
         'label' => __('common.total_cost'),
         'custom_sort' => 'cost_total'
       ],
-      // [
-      //   'field' => 'cost_order',
-      //   'label' => __('common.cost_order'),
-      //   'custom_sort' => 'cost_order'
-      // ],
     ];
   }
 
-  /**
-   * Get the options for generating the slug.
-   */
   public function getSlugOptions(): SlugOptions
   {
     return SlugOptions::create()
@@ -353,100 +325,76 @@ class Card extends Model implements LocalizedUrlRoutable
       ->saveSlugsTo('slug');
   }
 
-  /**
-   * Get the route key for the model.
-   */
   public function getRouteKeyName(): string
   {
     return 'slug';
   }
 
-  /**
-   * Get the localized route key for a specific locale.
-   *
-   * @param string $locale
-   * @return string|null
-   */
   public function getLocalizedRouteKey($locale)
   {
     return $this->getTranslation('slug', $locale, false);
   }
 
-  /**
-   * Get the directory for storing images for this model
-   * 
-   * @return string
-   */
   public function getImageDirectory(): string
   {
     return 'images/cards';
   }
 
-  /**
-   * Get the field name for storing images for this model
-   * 
-   * @return string
-   */
   public function getImageField(): string
   {
     return 'image';
   }
 
-  /**
-   * Get the faction that owns the card.
-   */
   public function faction()
   {
     return $this->belongsTo(Faction::class);
   }
 
-  /**
-   * Get the card type that owns the card.
-   */
   public function cardType()
   {
     return $this->belongsTo(CardType::class);
   }
 
-  /**
-   * Get the equipment type that owns the card.
-   */
+  public function cardSubtype()
+  {
+    return $this->belongsTo(CardSubtype::class);
+  }
+
   public function equipmentType()
   {
     return $this->belongsTo(EquipmentType::class);
   }
 
-  /**
-   * Get the attack range that owns the card.
-   */
   public function attackRange()
   {
     return $this->belongsTo(AttackRange::class);
   }
 
-  /**
-   * Get the attack subtype that owns the card.
-   */
   public function attackSubtype()
   {
     return $this->belongsTo(AttackSubtype::class);
   }
 
-  /**
-   * Get the hero ability that this card is linked to (if any).
-   */
   public function heroAbility()
   {
     return $this->belongsTo(HeroAbility::class);
   }
 
-    /**
-   * Get the directory for storing preview images
-   * 
-   * @return string
-   */
   public function getPreviewImageDirectory(): string
   {
     return 'images/previews/cards';
+  }
+
+    /**
+   * Get available attack types
+   *
+   * @return array
+   */
+  public static function getAttackTypes(): array
+  {
+    return [
+      'physical' => __('entities.cards.attack_types.physical'),
+      'magical' => __('entities.cards.attack_types.magical'),
+    ];
   }
 }

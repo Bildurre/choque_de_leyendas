@@ -29,7 +29,6 @@ class AttackSubtype extends Model
    */
   protected $fillable = [
     'name',
-    'type',
   ];
 
   /**
@@ -58,15 +57,6 @@ class AttackSubtype extends Model
   public function getAdminFilterable(): array
   {
     return [
-      [
-        'type' => 'enum',
-        'field' => 'type',
-        'label' => __('entities.attack_subtypes.type'),
-        'options' => [
-          'physical' => __('entities.attack_subtypes.types.physical'),
-          'magical' => __('entities.attack_subtypes.types.magical'),
-        ]
-      ]
     ];
   }
 
@@ -81,10 +71,6 @@ class AttackSubtype extends Model
       [
         'field' => 'name',
         'label' => __('entities.attack_subtypes.name')
-      ],
-      [
-        'field' => 'type',
-        'label' => __('entities.attack_subtypes.type')
       ],
       [
         'field' => 'created_at',
@@ -107,29 +93,5 @@ class AttackSubtype extends Model
   public function cards()
   {
     return $this->hasMany(Card::class);
-  }
-
-  /**
-   * Get available types.
-   * 
-   * @return array
-   */
-  public static function getTypes(): array
-  {
-    return [
-      'physical' => __('entities.attack_subtypes.types.physical'),
-      'magical' => __('entities.attack_subtypes.types.magical'),
-    ];
-  }
-
-  /**
-   * Get the type name.
-   * 
-   * @return string
-   */
-  public function getTypeNameAttribute(): string
-  {
-    $types = self::getTypes();
-    return $types[$this->type] ?? $this->type;
   }
 }

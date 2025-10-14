@@ -6,12 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-   * Run the migrations.
-   */
   public function up(): void
   {
-    Schema::create('attack_subtypes', function (Blueprint $table) {
+    Schema::create('card_subtypes', function (Blueprint $table) {
       $table->id();
       $table->json('name');
       $table->datetimes();
@@ -19,11 +16,8 @@ return new class extends Migration
     });
   }
 
-  /**
-   * Reverse the migrations.
-   */
   public function down(): void
   {
-    Schema::dropIfExists('attack_subtypes');
+    Schema::dropIfExists('card_subtypes');
   }
 };

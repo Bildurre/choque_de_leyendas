@@ -13,17 +13,6 @@ class CardService
   
   protected $translatableFields = ['name', 'lore_text', 'epic_quote', 'effect', 'restriction'];
 
-  /**
-   * Get all cards with optional filtering and pagination
-   * 
-   * @param Request|null $request Request object for filtering
-   * @param int|null $perPage Number of items per page (null for no pagination)
-   * @param bool $withTrashed Include trashed items
-   * @param bool $onlyTrashed Only show trashed items
-   * @param bool $onlyPublished Only show published items
-   * @param bool $onlyUnpublished Only show unpublished items
-   * @return mixed Collection or LengthAwarePaginator
-   */
   public function getAllCards(
     ?Request $request = null,
     ?int $perPage = null, 
@@ -32,11 +21,11 @@ class CardService
     bool $onlyPublished = false,
     bool $onlyUnpublished = false
   ): mixed {
-    // Base query with relationships
     $query = Card::with([
       'faction', 
       'cardType',
       'cardType.heroSuperclass',
+      'cardSubtype',
       'equipmentType', 
       'attackRange', 
       'attackSubtype',
@@ -45,72 +34,52 @@ class CardService
       'heroAbility.attackSubtype'
     ]);
     
-    // Apply trash filters
     if ($onlyTrashed) {
       $query->onlyTrashed();
     } elseif ($withTrashed) {
       $query->withTrashed();
     }
     
-    // Apply published filters
     if ($onlyPublished) {
       $query->where('is_published', true);
     } elseif ($onlyUnpublished) {
       $query->where('is_published', false);
     }
     
-    // Count total records (before filtering)
     $totalCount = $query->count();
     
-    // Apply admin filters if request is provided
     if ($request) {
       $query->applyAdminFilters($request);
     }
     
-    // Count filtered records
     $filteredCount = $query->count();
     
-    // Apply default ordering only if no sort parameter is provided
     if (!$request || !$request->has('sort')) {
       $query->orderBy('card_type_id')->orderBy('id');
     }
-    
-    // Paginate if needed
+
     if ($perPage) {
       $result = $query->paginate($perPage)->withQueryString();
       
-      // Add metadata to the pagination result
       $result->totalCount = $totalCount;
       $result->filteredCount = $filteredCount;
       
       return $result;
     }
     
-    // Return collection if no pagination
     return $query->get();
   }
 
-  /**
-   * Create a new card
-   *
-   * @param array $data
-   * @return Card
-   * @throws \Exception
-   */
   public function create(array $data): Card
   {
     $card = new Card();
     
-    // Process translatable fields
     $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    // Apply translations
     $this->applyTranslations($card, $data, $this->translatableFields);
     
-    // Set regular fields
     $this->setCardFields($card, $data);
     
-    // Handle image upload
     if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
       $card->storeImage($data['image']);
     }
@@ -120,26 +89,14 @@ class CardService
     return $card;
   }
 
-  /**
-   * Update an existing card
-   *
-   * @param Card $card
-   * @param array $data
-   * @return Card
-   * @throws \Exception
-   */
   public function update(Card $card, array $data): Card
   {
-    // Process translatable fields
     $data = $this->processTranslatableFields($data, $this->translatableFields);
     
-    // Apply translations
     $this->applyTranslations($card, $data, $this->translatableFields);
     
-    // Set regular fields
     $this->setCardFields($card, $data);
     
-    // Handle image updates
     if (isset($data['remove_image']) && $data['remove_image']) {
       $card->deleteImage();
     } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
@@ -151,19 +108,12 @@ class CardService
     return $card;
   }
 
-  /**
-   * Set the card fields from data array
-   *
-   * @param Card $card
-   * @param array $data
-   * @return void
-   */
   private function setCardFields(Card $card, array $data): void
   {
     $fields = [
-      'faction_id', 'card_type_id', 'equipment_type_id',
+      'faction_id', 'card_type_id', 'card_subtype_id', 'equipment_type_id',
       'attack_range_id', 'attack_subtype_id', 'hero_ability_id',
-      'hands', 'cost'
+      'hands', 'cost', 'attack_type'
     ];
     
     $fillable = [];
@@ -176,49 +126,26 @@ class CardService
     
     $card->fill($fillable);
     
-    // Area needs special handling for boolean conversion
     $card->area = isset($data['area']) ? (bool)$data['area'] : false;
     $card->is_unique = isset($data['is_unique']) ? (bool)$data['is_unique'] : false;
     $card->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
   }
 
-  /**
-   * Delete a card (soft delete)
-   *
-   * @param Card $card
-   * @return bool
-   * @throws \Exception
-   */
   public function delete(Card $card): bool
   {
     return $card->delete();
   }
 
-  /**
-   * Restore a deleted card
-   *
-   * @param int $id
-   * @return bool
-   * @throws \Exception
-   */
   public function restore(int $id): bool
   {
     $card = Card::onlyTrashed()->findOrFail($id);
     return $card->restore();
   }
 
-  /**
-   * Force delete a card permanently
-   *
-   * @param int $id
-   * @return bool
-   * @throws \Exception
-   */
   public function forceDelete(int $id): bool
   {
     $card = Card::onlyTrashed()->findOrFail($id);
     
-    // Delete image if exists
     if ($card->hasImage()) {
       $card->deleteImage();
     }

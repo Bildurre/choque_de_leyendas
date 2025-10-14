@@ -43,10 +43,19 @@
             : __('entities.hero_abilities.confirm_delete')"
         >
           <x-slot:badges>
+            @if($heroAbility->attack_type)
+              <x-badge variant="{{ $heroAbility->attack_type === 'physical' ? 'warning' : 'info' }}">
+                {{ __('entities.hero_abilities.attack_types.' . $heroAbility->attack_type) }}
+              </x-badge>
+            @endif
+
+            @if($heroAbility->attackRange)
               <x-badge variant="primary">
                 {{ $heroAbility->attackRange->name }}
               </x-badge>
+            @endif
 
+            @if($heroAbility->attackSubtype)
               <x-badge variant="primary">
                 {{ $heroAbility->attackSubtype->type }}
               </x-badge>
@@ -54,12 +63,13 @@
               <x-badge variant="primary">
                 {{ $heroAbility->attackSubtype->name }}
               </x-badge>
+            @endif
 
-              @if($heroAbility->area)
-                <x-badge variant="primary">
-                  ({{ __('entities.hero_abilities.area') }})
-                </x-badge>
-              @endif
+            @if($heroAbility->area)
+              <x-badge variant="primary">
+                ({{ __('entities.hero_abilities.area') }})
+              </x-badge>
+            @endif
             
             @if($heroAbility->cost)
               <div class="badge-with-icons">

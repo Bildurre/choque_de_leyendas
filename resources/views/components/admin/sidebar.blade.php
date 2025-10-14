@@ -98,6 +98,11 @@
                 </a>
               </li>
               <li class="admin-sidebar__item">
+                <a href="{{ route('admin.card-subtypes.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.card-subtypes.*') ? 'admin-sidebar__link--active' : '' }}">
+                  <span class="admin-sidebar__text">{{ __('entities.card_subtypes.plural') }}</span>
+                </a>
+              </li>
+              <li class="admin-sidebar__item">
                 <a href="{{ route('admin.equipment-types.index') }}" class="admin-sidebar__link {{ request()->routeIs('admin.equipment-types.*') ? 'admin-sidebar__link--active' : '' }}">
                   <span class="admin-sidebar__text">{{ __('entities.equipment_types.plural') }}</span>
                 </a>

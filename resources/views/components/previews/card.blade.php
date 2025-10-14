@@ -3,22 +3,39 @@
 ])
 
 @php
+
   $class = $card->cardType->name;
   if ($card->cardType->id == 1) {
-    $class .= ' - ' . __('entities.equipment_types.categories.' . $card->equipmentType->category) . ' - ' . $card->equipmentType->name;
+    $class .= ' • ' . __('entities.equipment_types.categories.' . $card->equipmentType->category) . ' • ' . $card->equipmentType->name;
     if ($card->equipmentType->category == 'weapon') {
-      $class .= ' - ' . $card->hands . ' ' . ($card->hands > 1 ? __('entities.cards.hands') : __('entities.cards.hand'));
+      $class .= ' • ' . $card->hands . ' ' . ($card->hands > 1 ? __('entities.cards.hands') : __('entities.cards.hand'));
     }
   } elseif ($card->cardType->heroSuperclass != null) {
-    $class .= ' - ' . $card->cardType->heroSuperclass->name;
+    $class .= $card->cardSubtype ? ' • ' . $card->cardSubtype->name : '';
+    $class .= ' • ' . $card->cardType->heroSuperclass->name;
   }
 
   $types = '';
-  if ($card->attackRange && $card->attackSubtype) {
-    $types = $card->attackRange->name . 
-              ' - ' . __('entities.attack_subtypes.types.' . $card->attackSubtype->type) . 
-              ' - ' . $card->attackSubtype->name . 
-              ($card->area ? ' - '.__('entities.hero_abilities.area') : '');
+  $typeParts = [];
+
+  if ($card->attackRange) {
+    $typeParts[] = $card->attackRange->name;
+  }
+
+  if ($card->attack_type) {
+    $typeParts[] = __('entities.cards.attack_types.' . $card->attack_type);
+  }
+
+  if ($card->attackSubtype) {
+    $typeParts[] = $card->attackSubtype->name;
+  }
+
+  if ($card->area) {
+    $typeParts[] = __('entities.cards.area');
+  }
+
+  if (!empty($typeParts)) {
+    $types = implode(' • ', $typeParts);
   }
   
 @endphp
@@ -61,9 +78,9 @@
             <span class="entity-preview__active-name">{{ $card->heroAbility->name }}</span>
             <span class="entity-preview__active-types">
               {{ $card->heroAbility->attackRange->name . 
-                ' - ' . __('entities.attack_subtypes.types.'.$card->heroAbility->attackSubtype->type) . 
-                ' - ' . $card->heroAbility->attackSubtype->name . 
-                ($card->heroAbility->area ? ' - '.__('entities.hero_abilities.area') : '')
+                ' • ' . __('entities.attack_subtypes.types.'.$card->heroAbility->attack_type) . 
+                ' • ' . $card->heroAbility->attackSubtype->name . 
+                ($card->heroAbility->area ? ' • '.__('entities.hero_abilities.area') : '')
               }}
             </span>
           </div>

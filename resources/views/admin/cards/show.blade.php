@@ -63,9 +63,9 @@
           <x-previews.preview-image :entity="$card" type="card"/>
         </div>
 
-        {{-- <div class="card-preview-section">
+        <div class="card-preview-section">
           <x-previews.card :card="$card"/>
-        </div> --}}
+        </div>
 
         {{-- Basic Information --}}
         <x-entity-show.info-block title="entities.cards.basic_info">
@@ -125,7 +125,7 @@
             @if($card->attackSubtype)
               <x-entity-show.info-list-item 
                 :label="__('entities.attack_subtypes.damage_type')"
-                value="{{ __('entities.attack_subtypes.types.'.$card->attackSubtype->type) }}"
+                value="{{ __('entities.cards.attack_types.' . $card->attack_type) }}"
               />
               <x-entity-show.info-list-item 
                 label="{{ __('entities.attack_subtypes.singular') }}"
@@ -187,6 +187,7 @@
                 :description="$card->heroAbility->description"
                 :cost="$card->heroAbility->cost"
                 :attack-range="$card->heroAbility->attackRange"
+                :attack-type="$card->heroAbility->attack_type"
                 :attack-subtype="$card->heroAbility->attackSubtype"
                 :area="$card->heroAbility->area"
               />

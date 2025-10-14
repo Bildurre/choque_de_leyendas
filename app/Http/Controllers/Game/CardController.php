@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Game;
 use App\Models\Card;
 use App\Models\Faction;
 use App\Models\CardType;
+use App\Models\CardSubtype;
 use App\Models\AttackRange;
 use App\Models\AttackSubtype;
 use App\Models\EquipmentType;
@@ -18,47 +19,34 @@ class CardController extends Controller
 {
   protected $cardService;
 
-  /**
-   * Create a new controller instance.
-   *
-   * @param CardService $cardService
-   */
   public function __construct(CardService $cardService)
   {
     $this->cardService = $cardService;
   }
 
-  /**
-   * Display a listing of cards.
-   */
   public function index(Request $request)
   {
-    $tab = $request->get('tab', 'published'); // Default to published
+    $tab = $request->get('tab', 'published');
     
-    // Get counters for tabs
     $publishedCount = Card::where('is_published', true)->count();
     $unpublishedCount = Card::where('is_published', false)->count();
     $trashedCount = Card::onlyTrashed()->count();
     
-    // Determine filters based on tab
     $trashed = ($tab === 'trashed');
     $onlyPublished = ($tab === 'published');
     $onlyUnpublished = ($tab === 'unpublished');
     
-    // Get cards with filtering and pagination
     $cards = $this->cardService->getAllCards(
-      $request,         // request for filters
-      12,               // perPage
-      false,            // withTrashed
-      $trashed,         // onlyTrashed
-      $onlyPublished,   // onlyPublished
-      $onlyUnpublished  // onlyUnpublished
+      $request,
+      12,
+      false,
+      $trashed,
+      $onlyPublished,
+      $onlyUnpublished
     );
     
-    // Create a Card instance for filter component
     $cardModel = new Card();
     
-    // Get counts from the paginated result
     $totalCount = $cards->totalCount ?? 0;
     $filteredCount = $cards->filteredCount ?? 0;
     
@@ -76,16 +64,14 @@ class CardController extends Controller
     ));
   }
 
-  /**
-   * Show the form for creating a new card.
-   */
   public function create(Request $request)
   {
     $factions = Faction::orderBy('id')->get();
     $cardTypes = CardType::orderBy('id')->get();
+    $cardSubtypes = CardSubtype::orderBy('id')->get();
     $equipmentTypes = EquipmentType::orderBy('category')->orderBy('id')->get();
     $attackRanges = AttackRange::orderBy('id')->get();
-    $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
+    $attackSubtypes = AttackSubtype::orderBy('id')->get();
     $heroAbilities = HeroAbility::orderBy('id')->get();
     
     $selectedFactionId = $request->query('faction_id');
@@ -93,6 +79,7 @@ class CardController extends Controller
     return view('admin.cards.create', compact(
       'factions',
       'cardTypes',
+      'cardSubtypes',
       'equipmentTypes',
       'attackRanges',
       'attackSubtypes',
@@ -101,9 +88,6 @@ class CardController extends Controller
     ));
   }
 
-  /**
-   * Store a newly created card in storage.
-   */
   public function store(CardRequest $request)
   {
     $validated = $request->validated();
@@ -119,16 +103,13 @@ class CardController extends Controller
     }
   }
 
-  /**
-   * Display the specified card.
-   */
   public function show(Card $card)
   {
-    // Carga las relaciones necesarias en caso de que no estén cargadas
     if (!$card->relationLoaded('faction')) {
       $card->load([
         'faction', 
-        'cardType', 
+        'cardType',
+        'cardSubtype',
         'equipmentType', 
         'attackRange', 
         'attackSubtype',
@@ -139,22 +120,21 @@ class CardController extends Controller
     return view('admin.cards.show', compact('card'));
   }
 
-  /**
-   * Show the form for editing the specified card.
-   */
   public function edit(Card $card)
   {
     $factions = Faction::orderBy('id')->get();
     $cardTypes = CardType::orderBy('id')->get();
+    $cardSubtypes = CardSubtype::orderBy('id')->get();
     $equipmentTypes = EquipmentType::orderBy('category')->orderBy('id')->get();
     $attackRanges = AttackRange::orderBy('id')->get();
-    $attackSubtypes = AttackSubtype::orderBy('type')->orderBy('id')->get();
+    $attackSubtypes = AttackSubtype::orderBy('id')->get();
     $heroAbilities = HeroAbility::orderBy('id')->get();
     
     return view('admin.cards.edit', compact(
       'card',
       'factions',
       'cardTypes',
+      'cardSubtypes',
       'equipmentTypes',
       'attackRanges',
       'attackSubtypes',
@@ -162,9 +142,6 @@ class CardController extends Controller
     ));
   }
 
-  /**
-   * Update the specified card in storage.
-   */
   public function update(CardRequest $request, Card $card)
   {
     $validated = $request->validated();
@@ -180,9 +157,6 @@ class CardController extends Controller
     }
   }
 
-  /**
-   * Remove the specified card from storage.
-   */
   public function destroy(Card $card)
   {
     try {
@@ -196,9 +170,6 @@ class CardController extends Controller
     }
   }
 
-  /**
-   * Restore the specified card from trash.
-   */
   public function restore($id)
   {
     try {
@@ -212,9 +183,6 @@ class CardController extends Controller
     }
   }
 
-  /**
-   * Force delete the specified card from storage.
-   */
   public function forceDelete($id)
   {
     try {
@@ -230,9 +198,6 @@ class CardController extends Controller
     }
   }
 
-  /**
-   * Toggle the published status of the specified card.
-   */
   public function togglePublished(Card $card)
   {
     $card->togglePublished();
@@ -241,7 +206,6 @@ class CardController extends Controller
       ? __('cards.published_successfully', ['name' => $card->name])
       : __('cards.unpublished_successfully', ['name' => $card->name]);
 
-    // Redirect to appropriate tab based on new status
     $tab = $card->isPublished() ? 'published' : 'unpublished';
     
     return redirect()->route('admin.cards.index', ['tab' => $tab])

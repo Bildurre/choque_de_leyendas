@@ -65,8 +65,7 @@ class AttackSubtypeController extends Controller
    */
   public function create()
   {
-    $types = AttackSubtype::getTypes();
-    return view('admin.attack-subtypes.create', compact('types'));
+    return view('admin.attack-subtypes.create');
   }
 
   /**
@@ -79,7 +78,7 @@ class AttackSubtypeController extends Controller
     try {
       $attackSubtype = $this->attackSubtypeService->create($validated);
       return redirect()->route('admin.attack-subtypes.index')
-        ->with('success', __('attack_subtypes.created_successfully', ['name' => $attackSubtype->name]));
+        ->with('success', __('entities.attack_subtypes.created_successfully', ['name' => $attackSubtype->name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.create', ['entity' => __('entities.attack_subtypes.singular')]))
         ->withInput();
@@ -91,8 +90,7 @@ class AttackSubtypeController extends Controller
    */
   public function edit(AttackSubtype $attackSubtype)
   {
-    $types = AttackSubtype::getTypes();
-    return view('admin.attack-subtypes.edit', compact('attackSubtype', 'types'));
+    return view('admin.attack-subtypes.edit', compact('attackSubtype'));
   }
 
   /**
@@ -105,7 +103,7 @@ class AttackSubtypeController extends Controller
     try {
       $this->attackSubtypeService->update($attackSubtype, $validated);
       return redirect()->route('admin.attack-subtypes.index')
-        ->with('success', __('attack_subtypes.updated_successfully', ['name' => $attackSubtype->name]));
+        ->with('success', __('entities.attack_subtypes.updated_successfully', ['name' => $attackSubtype->name]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.update', ['entity' => __('entities.attack_subtypes.singular')]))
         ->withInput();
@@ -122,7 +120,7 @@ class AttackSubtypeController extends Controller
       $this->attackSubtypeService->delete($attackSubtype);
       
       return redirect()->route('admin.attack-subtypes.index')
-        ->with('success', __('attack_subtypes.deleted_successfully', ['name' => $attackSubtypeName]));
+        ->with('success', __('entities.attack_subtypes.deleted_successfully', ['name' => $attackSubtypeName]));
     } catch (\Exception $e) {
       return back()->with('error', __('common.errors.delete', ['entity' => __('entities.attack_subtypes.singular')]));
     }

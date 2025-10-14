@@ -79,6 +79,14 @@
                   </x-entity-show.info-link>
                 </x-entity-show.info-list-item>
 
+                @if($card->cardSubtype)
+                  <x-entity-show.info-list-item label="{{ __('entities.hero_superclasses.singular') }}">
+                    <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_subtype_id' => [$card->card_subtype_id]])">
+                      {{ $card->cardSubtype->name }}
+                    </x-entity-show.info-link>
+                  </x-entity-show.info-list-item>
+                @endif
+
                 @if($card->cardType->heroSuperclass)
                   <x-entity-show.info-list-item label="{{ __('entities.hero_superclasses.singular') }}">
                     <x-entity-show.info-link :href="route('public.heroes.index') . '?' . http_build_query(['heroClass_hero_superclass_id' => [$card->cardType->hero_superclass_id]])">
@@ -125,7 +133,7 @@
                     @if($card->attackSubtype)
                       <x-entity-show.info-list-item label="{{ __('entities.attack_subtypes.type') }}">
                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attackSubtype_type' => $card->attackSubtype->type])">
-                          {{ __('entities.attack_subtypes.types.' . $card->attackSubtype->type) }}
+                          {{ __('entities.attack_subtypes.types.' . $card->attack_type) }}
                         </x-entity-show.info-link>
                       </x-entity-show.info-list-item>
                       
@@ -170,6 +178,7 @@
                       :description="$card->heroAbility->description"
                       :cost="$card->heroAbility->cost"
                       :attack-range="$card->heroAbility->attackRange"
+                      :attack-type="$card->heroAbility->attack_type"
                       :attack-subtype="$card->heroAbility->attackSubtype"
                       :area="$card->heroAbility->area"
                     />

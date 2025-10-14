@@ -150,6 +150,23 @@ return [
     'confirm_delete' => '¿Estás seguro de que deseas eliminar esta carta?',
     'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente esta carta?',
     'count' => ':count cartas',
+    'no_card_subtype' => 'Sin subtipo',
+    'validation' => [
+      'subtype_only_for_spell_or_technique' => 'El subtipo de carta solo puede usarse para hechizos o técnicas.',
+      'hands_required_for_weapon' => 'Las manos son obligatorias para armas.',
+      'hands_only_for_weapon' => 'Las manos solo pueden especificarse para armas.',
+      'hands_must_be_1_or_2' => 'El número de manos debe ser 1 o 2.',
+      'attack_range_and_subtype_together' => 'El rango y subtipo de ataque deben seleccionarse juntos.',
+      'cost_format' => 'El coste solo puede contener los caracteres R, G y B.',
+      'name_unique' => 'Ya existe una carta con este nombre en :locale.',
+      'attack_type_only_for_spell_or_technique' => 'El tipo de ataque solo puede usarse para hechizos o técnicas.',
+    ],
+    'attack_type' => 'Tipo de ataque',
+    'no_attack_type' => '-- Sin tipo de ataque --',
+    'attack_types' => [
+      'physical' => 'Físico',
+      'magical' => 'Mágico',
+    ],
   ],
   
   // Razas de héroes
@@ -202,10 +219,34 @@ return [
     'area' => 'Área',
     'is_area_attack' => 'Es ataque de área',
     'type' => 'Tipo',
+    'attack_type' => 'Tipo de ataque',
+    'no_attack_type' => '-- Sin tipo de ataque --',
     'no_attack_range' => 'Sin rango de ataque',
     'no_attack_subtype' => 'Sin subtipo de ataque',
+    'attack_types' => [
+      'physical' => 'Físico',
+      'magical' => 'Mágico',
+    ],
     'confirm_delete' => '¿Estás seguro de que deseas eliminar esta habilidad?',
     'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente esta habilidad?',
+    'created_successfully' => 'La habilidad :name ha sido creada exitosamente.',
+    'updated_successfully' => 'La habilidad :name ha sido actualizada exitosamente.',
+    'deleted_successfully' => 'La habilidad :name ha sido eliminada exitosamente.',
+    'restored_successfully' => 'La habilidad :name ha sido restaurada exitosamente.',
+    'force_deleted_successfully' => 'La habilidad :name ha sido eliminada permanentemente.',
+    'validation' => [
+      'attack_type_requires_range_and_subtype' => 'Si especificas un tipo de ataque, debes seleccionar también un rango y un subtipo de ataque.',
+      'range_and_subtype_require_attack_type' => 'Si especificas un rango o subtipo de ataque, debes seleccionar también el tipo de ataque.',
+      'attack_range_and_subtype_together' => 'El rango y subtipo de ataque deben seleccionarse juntos.',
+      'cost_format' => 'El coste solo puede contener los caracteres R, G y B.',
+      'name_unique' => 'Ya existe una habilidad con este nombre en :locale.',
+    ],
+    'errors' => [
+      'has_heroes' => 'No se puede eliminar esta habilidad porque tiene héroes asociados.',
+      'has_cards' => 'No se puede eliminar esta habilidad porque tiene cartas asociadas.',
+      'force_delete_has_heroes' => 'No se puede eliminar permanentemente esta habilidad porque tiene héroes asociados (incluso eliminados).',
+      'force_delete_has_cards' => 'No se puede eliminar permanentemente esta habilidad porque tiene cartas asociadas (incluso eliminadas).',
+    ],
   ],
   
   // Atributos de héroes
@@ -236,6 +277,27 @@ return [
     'select_superclass' => 'Seleccionar superclase',
     'confirm_delete' => '¿Estás seguro de que deseas eliminar este tipo de carta?',
     'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente este tipo de carta?',
+  ],
+
+  // Subtipos de carta
+  'card_subtypes' => [
+    'singular' => 'Subtipo de carta',
+    'plural' => 'Subtipos de carta',
+    'create' => 'Crear subtipo de carta',
+    'edit' => 'Editar subtipo de carta',
+    'name' => 'Nombre',
+    'cards_count' => ':count cartas',
+    'confirm_delete' => '¿Estás seguro de que deseas eliminar este subtipo de carta?',
+    'confirm_force_delete' => '¿Estás seguro de que deseas eliminar permanentemente este subtipo de carta?',
+    'created_successfully' => 'El subtipo de carta :name ha sido creado exitosamente.',
+    'updated_successfully' => 'El subtipo de carta :name ha sido actualizado exitosamente.',
+    'deleted_successfully' => 'El subtipo de carta :name ha sido eliminado exitosamente.',
+    'restored_successfully' => 'El subtipo de carta :name ha sido restaurado exitosamente.',
+    'force_deleted_successfully' => 'El subtipo de carta :name ha sido eliminado permanentemente.',
+    'errors' => [
+      'has_cards' => 'No se puede eliminar este subtipo porque tiene cartas asociadas.',
+      'force_delete_has_cards' => 'No se puede eliminar permanentemente este subtipo porque tiene cartas asociadas (incluso eliminadas).',
+    ],
   ],
   
   // Tipos de equipo

@@ -64,6 +64,15 @@
           :options="$cardTypes->pluck('name', 'id')->toArray()"
           :selected="old('card_type_id', isset($card) ? $card->card_type_id : '')"
           required
+          id="card_type_id"
+        />
+
+        <x-form.select
+          name="card_subtype_id"
+          :label="__('entities.card_subtypes.singular')"
+          :options="['' => __('entities.cards.no_card_subtype')] + $cardSubtypes->pluck('name', 'id')->toArray()"
+          :selected="old('card_subtype_id', isset($card) ? $card->card_subtype_id : '')"
+          id="card_subtype_id"
         />
         
         <x-form.select
@@ -71,6 +80,7 @@
           :label="__('entities.equipment_types.singular')"
           :options="['' => __('entities.cards.no_equipment_type')] + $equipmentTypes->pluck('name', 'id')->toArray()"
           :selected="old('equipment_type_id', isset($card) ? $card->equipment_type_id : '')"
+          id="equipment_type_id"
         />
 
         <x-form.select
@@ -93,7 +103,15 @@
           :options="['' => __('entities.cards.no_attack_range')] + $attackRanges->pluck('name', 'id')->toArray()"
           :selected="old('attack_range_id', isset($card) ? $card->attack_range_id : '')"
         />
-              
+
+        <x-form.select
+          name="attack_type"
+          :label="__('entities.cards.attack_type')"
+          :options="['' => __('entities.cards.no_attack_type')] + \App\Models\Card::getAttackTypes()"
+          :selected="old('attack_type', isset($card) ? $card->attack_type : '')"
+          id="attack_type"
+        />
+                      
         <x-form.select
           name="attack_subtype_id"
           :label="__('entities.attack_subtypes.singular')"
