@@ -8,6 +8,7 @@ return [
   'table_count' => 'Number of Tables',
   'total_size' => 'Total Size',
   'database' => 'Database',
+  'json' => 'JSON',
   'new_export' => 'New Export',
   'other_exports' => 'Other Exports',
   'include_data' => 'Include data',

@@ -13,8 +13,8 @@
   
   <div class="page-content">
     @include('admin.export._database')
-    
-    <x-preview-management.section :title="__('export.database')">
+
+    <x-preview-management.section :title="__('export.json')">
       @include('admin.export._cards')
       @include('admin.export._heroes')
       @include('admin.export._counters')

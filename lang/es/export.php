@@ -8,6 +8,7 @@ return [
   'table_count' => 'Número de Tablas',
   'total_size' => 'Tamaño Total',
   'database' => 'Base de Datos',
+  'json' => 'JSON',
   'new_export' => 'Nueva Exportación',
   'other_exports' => 'Otras Exportaciones',
   'include_data' => 'Incluir datos',
