@@ -43,31 +43,40 @@
             : __('entities.hero_abilities.confirm_delete')"
         >
           <x-slot:badges>
-            @if($heroAbility->attack_type)
-              <x-badge variant="{{ $heroAbility->attack_type === 'physical' ? 'warning' : 'info' }}">
-                {{ __('entities.hero_abilities.attack_types.' . $heroAbility->attack_type) }}
-              </x-badge>
-            @endif
 
             @if($heroAbility->attackRange)
-              <x-badge variant="primary">
+              <x-badge variant="outlined">
                 {{ $heroAbility->attackRange->name }}
               </x-badge>
             @endif
 
-            @if($heroAbility->attackSubtype)
-              <x-badge variant="primary">
-                {{ $heroAbility->attackSubtype->type }}
+            @if($heroAbility->attack_type)
+              <x-badge variant="outlined">
+                {{ __('entities.hero_abilities.attack_types.' . $heroAbility->attack_type) }}
               </x-badge>
+            @endif
 
-              <x-badge variant="primary">
+            @if($heroAbility->attackSubtype)
+              <x-badge variant="outlined">
                 {{ $heroAbility->attackSubtype->name }}
               </x-badge>
             @endif
 
             @if($heroAbility->area)
-              <x-badge variant="primary">
+              <x-badge variant="outlined">
                 ({{ __('entities.hero_abilities.area') }})
+              </x-badge>
+            @endif
+
+            @if($heroAbility->heroes_count > 0)
+              <x-badge variant="secondary">
+                {{ trans_choice('entities.heroes.count', $heroAbility->heroes_count, ['count' => $heroAbility->heroes_count]) }}
+              </x-badge>
+            @endif
+
+            @if($heroAbility->cards_count > 0)
+              <x-badge variant="tertiary">
+                {{ trans_choice('entities.cards.count', $heroAbility->cards_count, ['count' => $heroAbility->cards_count]) }}
               </x-badge>
             @endif
             

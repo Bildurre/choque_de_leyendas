@@ -25,10 +25,26 @@
     background-color: var(--random-accent-color-bg);
     color: var(--random-accent-color);
   }
-  
   &--secondary {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-secondary);
+    background-color: var(--random-accent-color-secondary-bg);
+    color: var(--random-accent-color-secondary);
+  }
+  &--tertiary {
+    background-color: var(--random-accent-color-tertiary-bg);
+    color: var(--random-accent-color-tertiary);
+  }
+
+  &--outlined {
+    color: var(--random-accent-color);
+    border: 1px solid var(--random-accent-color-bg);
+  }
+  &--outlined-secondary {
+    color: var(--random-accent-color-secondary);
+    border: 1px solid var(--random-accent-color-secondary-bg);
+  }
+  &--outlined-tertiary {
+    color: var(--random-accent-color-tertiary);
+    border: 1px solid var(--random-accent-color-tertiary-bg);
   }
   
   &--success {

@@ -73,6 +73,7 @@ return [
     'image' => 'Image',
     'no_image' => 'No image',
     'gender' => 'Gender',
+    'count' => ':count heroes',
     'genders' => [
       'male' => 'Male',
       'female' => 'Female',
