@@ -177,6 +177,12 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
     Route::delete('/delete/{filename}', [ExportController::class, 'deleteSingle'])->name('delete-single');
     Route::delete('/delete-all', [ExportController::class, 'deleteAll'])->name('delete-all');
     Route::post('/download-all', [ExportController::class, 'downloadAll'])->name('download-all');
+    
+      // JSON Exports
+    Route::post('/cards', [ExportController::class, 'exportCards'])->name('cards');
+    Route::post('/heroes', [ExportController::class, 'exportHeroes'])->name('heroes');
+    Route::post('/counters', [ExportController::class, 'exportCounters'])->name('counters');
+    Route::post('/classes', [ExportController::class, 'exportClasses'])->name('classes');
   });
 
   // Icons

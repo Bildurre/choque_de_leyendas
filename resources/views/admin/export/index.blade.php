@@ -12,99 +12,13 @@
   </x-admin.page-header>
   
   <div class="page-content">
-    {{-- Database Information --}}
-    <x-preview-management.section :title="__('export.database_information')">
-      <x-preview-management.card :title="__('export.current_database')">
-        <x-preview-management.stat-item 
-          :label="__('export.database_name')" 
-          :value="$databaseInfo['database_name']" 
-        />
-        <x-preview-management.stat-item 
-          :label="__('export.table_count')" 
-          :value="$databaseInfo['table_count']" 
-        />
-        <x-preview-management.stat-item 
-          :label="__('export.total_size')" 
-          :value="$databaseInfo['formatted_size']" 
-          variant="disk" 
-        />
-      </x-preview-management.card>
-    </x-preview-management.section>
-
-    {{-- Database Export Section --}}
+    @include('admin.export._database')
+    
     <x-preview-management.section :title="__('export.database')">
-      <x-preview-management.card :title="__('export.new_export')" class="preview-management-card--form">
-        <form action="{{ route('admin.export.create') }}" method="POST">
-          @csrf
-          
-          <x-form.checkbox
-            name="include_data"
-            id="include_data"
-            :label="__('export.include_data')"
-            :help="__('export.include_data_help')"
-            checked
-          />
-          
-          <x-form.checkbox
-            name="compress"
-            id="compress"
-            :label="__('export.compress_file')"
-            :help="__('export.compress_file_help')"
-          />
-          
-          <div class="action-buttons">
-            <x-button type="submit" variant="primary" icon="download">
-              {{ __('export.export_button') }}
-            </x-button>
-          </div>
-        </form>
-      </x-preview-management.card>
-      
-      <x-preview-management.card :title="__('export.other_exports')" class="preview-management-card--full">
-        @if(count($exports) > 0)
-          <div class="preview-management--grid">
-            <form action="{{ route('admin.export.download-all') }}" method="POST">
-              @csrf
-              <x-button 
-                type="submit" 
-                variant="primary" 
-                icon="download"
-              >
-                {{ __('export.download_all') }}
-              </x-button>
-            </form>
-
-            <form action="{{ route('admin.export.delete-all') }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <x-button 
-                type="submit" 
-                variant="danger" 
-                icon="trash"
-                class="confirm-action" 
-                data-confirm="{{ __('export.confirm_delete_all') }}"
-              >
-                {{ __('export.delete_all') }}
-              </x-button>
-            </form>
-          </div>
-
-          <x-export.list :items="collect($exports)">
-            @foreach($exports as $export)
-              <x-export.item
-                :filename="$export['filename']"
-                :size="$export['formatted_size']"
-                :date="$export['formatted_date']"
-                :downloadRoute="route('admin.export.download', ['filename' => $export['filename']])"
-                :deleteRoute="route('admin.export.delete-single', ['filename' => $export['filename']])"
-              />
-            @endforeach
-          </x-export.list>
-        @else
-          <x-export.list :items="collect([])">
-          </x-export.list>
-        @endif
-      </x-preview-management.card>
-    </x-preview-management.section>
+      @include('admin.export._cards')
+      @include('admin.export._heroes')
+      @include('admin.export._counters')
+      @include('admin.export._classes')
+    </x-preview-management-section>
   </div>
 </x-admin-layout>

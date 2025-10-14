@@ -243,4 +243,203 @@ class ExportService
 
     return round($bytes, $precision) . ' ' . $units[$i];
   }
+
+  public function exportCards(): array
+  {
+    try {
+      $cards = \App\Models\Card::with([
+        'faction',
+        'cardType.heroSuperclass',
+        'equipmentType',
+        'attackRange',
+        'attackSubtype',
+        'heroAbility.attackRange',
+        'heroAbility.attackSubtype'
+      ])->get();
+
+      $data = $cards->map(function ($card) {
+        $cardData = [
+          'name' => $card->getTranslations('name'),
+          'faction' => $card->faction ? $card->faction->getTranslations('name') : null,
+          'is_unique' => $card->is_unique,
+          'card_type' => $card->cardType ? $card->cardType->getTranslations('name') : null,
+          'equipment_type' => $card->equipmentType ? $card->equipmentType->getTranslations('name') : null,
+          'equipment_category' => $card->equipmentType ? $card->equipmentType->category : null,
+          'hands' => $card->hands,
+          'attack_range' => $card->attackRange ? $card->attackRange->getTranslations('name') : null,
+          'attack_subtype' => $card->attackSubtype ? $card->attackSubtype->getTranslations('name') : null,
+          'attack_subtype_type' => $card->attackSubtype ? $card->attackSubtype->type : null,
+          'area' => $card->area,
+          'cost' => $card->cost,
+          'restriction' => $card->getTranslations('restriction'),
+          'effect' => $card->getTranslations('effect'),
+          'lore_text' => $card->getTranslations('lore_text'),
+          'epic_quote' => $card->getTranslations('epic_quote'),
+        ];
+
+        if ($card->heroAbility) {
+          $cardData['linked_ability'] = [
+            'name' => $card->heroAbility->getTranslations('name'),
+            'cost' => $card->heroAbility->cost,
+            'attack_range' => $card->heroAbility->attackRange ? $card->heroAbility->attackRange->getTranslations('name') : null,
+            'attack_subtype' => $card->heroAbility->attackSubtype ? $card->heroAbility->attackSubtype->getTranslations('name') : null,
+            'attack_subtype_type' => $card->heroAbility->attackSubtype ? $card->heroAbility->attackSubtype->type : null,
+            'area' => $card->heroAbility->area,
+            'effect' => $card->heroAbility->getTranslations('description'),
+          ];
+        }
+
+        return $cardData;
+      });
+
+      $timestamp = now()->format('Y-m-d_His');
+      $filename = "cards_export_{$timestamp}.json";
+      $filepath = $this->exportPath . '/' . $filename;
+
+      file_put_contents($filepath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+      return [
+        'success' => true,
+        'filename' => $filename,
+        'filepath' => $filepath
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
+  public function exportHeroes(): array
+  {
+    try {
+      $heroes = \App\Models\Hero::with([
+        'faction',
+        'heroRace',
+        'heroClass.heroSuperclass',
+        'heroAbilities.attackRange',
+        'heroAbilities.attackSubtype'
+      ])->get();
+
+      $data = $heroes->map(function ($hero) {
+        return [
+          'name' => $hero->getTranslations('name'),
+          'faction' => $hero->faction ? $hero->faction->getTranslations('name') : null,
+          'race' => $hero->heroRace ? $hero->heroRace->getTranslations('name') : null,
+          'class' => $hero->heroClass ? $hero->heroClass->getTranslations('name') : null,
+          'superclass' => $hero->heroClass && $hero->heroClass->heroSuperclass ? $hero->heroClass->heroSuperclass->getTranslations('name') : null,
+          'gender' => $hero->gender,
+          'attributes' => [
+            'agility' => $hero->agility,
+            'mental' => $hero->mental,
+            'will' => $hero->will,
+            'strength' => $hero->strength,
+            'armor' => $hero->armor,
+            'health' => $hero->health,
+          ],
+          'passive_name' => $hero->getTranslations('passive_name'),
+          'passive_description' => $hero->getTranslations('passive_description'),
+          'lore_text' => $hero->getTranslations('lore_text'),
+          'epic_quote' => $hero->getTranslations('epic_quote'),
+          'abilities' => $hero->heroAbilities->map(function ($ability) {
+            return [
+              'name' => $ability->getTranslations('name'),
+              'cost' => $ability->cost,
+              'attack_range' => $ability->attackRange ? $ability->attackRange->getTranslations('name') : null,
+              'attack_subtype' => $ability->attackSubtype ? $ability->attackSubtype->getTranslations('name') : null,
+              'attack_subtype_type' => $ability->attackSubtype ? $ability->attackSubtype->type : null,
+              'area' => $ability->area,
+              'effect' => $ability->getTranslations('description'),
+            ];
+          })->toArray()
+        ];
+      });
+
+      $timestamp = now()->format('Y-m-d_His');
+      $filename = "heroes_export_{$timestamp}.json";
+      $filepath = $this->exportPath . '/' . $filename;
+
+      file_put_contents($filepath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+      return [
+        'success' => true,
+        'filename' => $filename,
+        'filepath' => $filepath
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
+  public function exportCounters(): array
+  {
+    try {
+      $counters = \App\Models\Counter::all();
+
+      $data = $counters->map(function ($counter) {
+        return [
+          'name' => $counter->getTranslations('name'),
+          'effect' => $counter->getTranslations('effect'),
+          'type' => $counter->type,
+        ];
+      });
+
+      $timestamp = now()->format('Y-m-d_His');
+      $filename = "counters_export_{$timestamp}.json";
+      $filepath = $this->exportPath . '/' . $filename;
+
+      file_put_contents($filepath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+      return [
+        'success' => true,
+        'filename' => $filename,
+        'filepath' => $filepath
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
+  public function exportClasses(): array
+  {
+    try {
+      $classes = \App\Models\HeroClass::with('heroSuperclass')->get();
+
+      $data = $classes->map(function ($class) {
+        return [
+          'name' => $class->getTranslations('name'),
+          'superclass' => $class->heroSuperclass ? $class->heroSuperclass->getTranslations('name') : null,
+          'passive' => $class->getTranslations('passive'),
+        ];
+      });
+
+      $timestamp = now()->format('Y-m-d_His');
+      $filename = "classes_export_{$timestamp}.json";
+      $filepath = $this->exportPath . '/' . $filename;
+
+      file_put_contents($filepath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+      return [
+        'success' => true,
+        'filename' => $filename,
+        'filepath' => $filepath
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
 }

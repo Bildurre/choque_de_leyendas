@@ -33,4 +33,28 @@ return [
   'confirm_delete_single' => 'Are you sure you want to delete this export?',
   'deleted_single_success' => 'Export deleted successfully',
   'delete_error' => 'Error deleting export',
+
+  // Cards
+  'cards' => 'Cards',
+  'export_cards' => 'Export Cards',
+  'export_cards_help' => 'Export all cards in JSON format with all their data and translations',
+  'export_cards_button' => 'Export Cards',
+
+  // Heroes
+  'heroes' => 'Heroes',
+  'export_heroes' => 'Export Heroes',
+  'export_heroes_help' => 'Export all heroes in JSON format with all their data and translations',
+  'export_heroes_button' => 'Export Heroes',
+
+  // Counters
+  'counters' => 'Counters',
+  'export_counters' => 'Export Counters',
+  'export_counters_help' => 'Export all counters in JSON format with all their data and translations',
+  'export_counters_button' => 'Export Counters',
+
+  // Classes
+  'classes' => 'Classes',
+  'export_classes' => 'Export Classes',
+  'export_classes_help' => 'Export all hero classes in JSON format with all their data and translations',
+  'export_classes_button' => 'Export Classes',
 ];

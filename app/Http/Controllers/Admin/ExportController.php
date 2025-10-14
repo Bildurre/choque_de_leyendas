@@ -104,4 +104,48 @@ class ExportController extends Controller
       return redirect()->back()->with('error', __('export.download_error') . ': ' . $exception->getMessage());
     }
   }
+
+  public function exportCards()
+  {
+    $result = $this->exportService->exportCards();
+
+    if ($result['success']) {
+      return response()->download($result['filepath'])->deleteFileAfterSend(true);
+    }
+
+    return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);
+  }
+
+  public function exportHeroes()
+  {
+    $result = $this->exportService->exportHeroes();
+
+    if ($result['success']) {
+      return response()->download($result['filepath'])->deleteFileAfterSend(true);
+    }
+
+    return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);
+  }
+
+  public function exportCounters()
+  {
+    $result = $this->exportService->exportCounters();
+
+    if ($result['success']) {
+      return response()->download($result['filepath'])->deleteFileAfterSend(true);
+    }
+
+    return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);
+  }
+
+  public function exportClasses()
+  {
+    $result = $this->exportService->exportClasses();
+
+    if ($result['success']) {
+      return response()->download($result['filepath'])->deleteFileAfterSend(true);
+    }
+
+    return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);
+  }
 }
