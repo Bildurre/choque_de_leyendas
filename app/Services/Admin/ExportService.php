@@ -143,6 +143,148 @@ class ExportService
     ];
   }
 
+  public function restoreDatabase(string $filename): array
+  {
+    try {
+      $filepath = $this->exportPath . '/' . basename($filename);
+
+      if (!file_exists($filepath)) {
+        return [
+          'success' => false,
+          'error' => 'File not found'
+        ];
+      }
+
+      // Check if it's a ZIP file
+      $isZip = pathinfo($filename, PATHINFO_EXTENSION) === 'zip';
+      
+      if ($isZip) {
+        $sqlFilepath = $this->extractSqlFromZip($filepath);
+        if (!$sqlFilepath) {
+          return [
+            'success' => false,
+            'error' => 'Cannot extract SQL file from ZIP'
+          ];
+        }
+      } else {
+        $sqlFilepath = $filepath;
+      }
+
+      // Read SQL file content
+      $sql = file_get_contents($sqlFilepath);
+
+      if ($sql === false) {
+        return [
+          'success' => false,
+          'error' => 'Cannot read SQL file'
+        ];
+      }
+
+      // Disable foreign key checks
+      \DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+      // Execute SQL statements
+      \DB::unprepared($sql);
+
+      // Re-enable foreign key checks
+      \DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+      // Clean up temporary extracted file if it was a ZIP
+      if ($isZip && $sqlFilepath !== $filepath) {
+        unlink($sqlFilepath);
+      }
+
+      return [
+        'success' => true
+      ];
+
+    } catch (\Exception $exception) {
+      // Re-enable foreign key checks in case of error
+      try {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1');
+      } catch (\Exception $e) {
+        // Ignore if this fails
+      }
+
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
+  private function extractSqlFromZip(string $zipFilepath): ?string
+  {
+    $zip = new ZipArchive();
+    
+    if ($zip->open($zipFilepath) !== true) {
+      return null;
+    }
+
+    // Find .sql file in the ZIP
+    $sqlFilename = null;
+    for ($i = 0; $i < $zip->numFiles; $i++) {
+      $filename = $zip->getNameIndex($i);
+      if (pathinfo($filename, PATHINFO_EXTENSION) === 'sql') {
+        $sqlFilename = $filename;
+        break;
+      }
+    }
+
+    if (!$sqlFilename) {
+      $zip->close();
+      return null;
+    }
+
+    // Extract to temporary location
+    $tempPath = $this->exportPath . '/temp_' . time() . '.sql';
+    $fileContent = $zip->getFromName($sqlFilename);
+    $zip->close();
+
+    if ($fileContent === false) {
+      return null;
+    }
+
+    file_put_contents($tempPath, $fileContent);
+
+    return $tempPath;
+  }
+
+  public function uploadDatabaseFile($file): array
+  {
+    try {
+      $originalName = $file->getClientOriginalName();
+      $extension = $file->getClientOriginalExtension();
+      
+      // Validate extension
+      if (!in_array($extension, ['sql', 'zip'])) {
+        return [
+          'success' => false,
+          'error' => 'Invalid file type. Only .sql and .zip files are allowed.'
+        ];
+      }
+
+      // Generate unique filename
+      $timestamp = now()->format('Y-m-d_His');
+      $filename = "uploaded_backup_{$timestamp}.{$extension}";
+      
+      // Move file to exports directory
+      $file->move($this->exportPath, $filename);
+
+      return [
+        'success' => true,
+        'filename' => $filename,
+        'filepath' => $this->exportPath . '/' . $filename
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
   public function listExports(string $type = 'all'): array
   {
     $files = glob($this->exportPath . '/*');
@@ -154,10 +296,10 @@ class ExportService
         
         // Filter by type if specified
         if ($type !== 'all') {
-          if ($type === 'database' && !str_contains($filename, 'database_backup')) {
+          if ($type === 'database' && !str_contains($filename, 'database_backup') && !str_contains($filename, 'uploaded_backup')) {
             continue;
           }
-          if ($type === 'json' && str_contains($filename, 'database_backup')) {
+          if ($type === 'json' && (str_contains($filename, 'database_backup') || str_contains($filename, 'uploaded_backup'))) {
             continue;
           }
         }
@@ -167,7 +309,9 @@ class ExportService
           'size' => filesize($file),
           'formatted_size' => $this->formatBytes(filesize($file)),
           'created_at' => filemtime($file),
-          'formatted_date' => date('Y-m-d H:i:s', filemtime($file))
+          'formatted_date' => date('Y-m-d H:i:s', filemtime($file)),
+          'is_database' => str_contains($filename, 'database_backup') || str_contains($filename, 'uploaded_backup'),
+          'is_uploaded' => str_contains($filename, 'uploaded_backup')
         ];
       }
     }

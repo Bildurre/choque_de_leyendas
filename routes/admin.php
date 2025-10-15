@@ -180,7 +180,9 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
     // Database export page
     Route::get('/database', [ExportController::class, 'database'])->name('database');
     Route::post('/database', [ExportController::class, 'exportDatabase'])->name('database.create');
-    
+    Route::post('/database/restore/{filename}', [ExportController::class, 'restoreDatabase'])->name('database.restore');
+    Route::post('/database/upload', [ExportController::class, 'uploadDatabase'])->name('database.upload');
+  
     // JSON export page
     Route::get('/json', [ExportController::class, 'json'])->name('json');
     

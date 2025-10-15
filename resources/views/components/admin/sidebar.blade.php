@@ -174,13 +174,13 @@
           >
             <ul class="admin-sidebar__submenu">
               <li class="admin-sidebar__item">
-                <a href="{{ route('admin.export.database') }}" class="admin-sidebar__link {{ request()->routeIs('admin.export.*') ? 'admin-sidebar__link--active' : '' }}">
+                <a href="{{ route('admin.export.database') }}" class="admin-sidebar__link {{ request()->routeIs('admin.export.database') ? 'admin-sidebar__link--active' : '' }}">
                   <span class="admin-sidebar__text">{{ __('export.menu_database') }}</span>
                 </a>
               </li>
 
               <li class="admin-sidebar__item">
-                <a href="{{ route('admin.export.json') }}" class="admin-sidebar__link {{ request()->routeIs('admin.export.*') ? 'admin-sidebar__link--active' : '' }}">
+                <a href="{{ route('admin.export.json') }}" class="admin-sidebar__link {{ request()->routeIs('admin.export.json') ? 'admin-sidebar__link--active' : '' }}">
                   <span class="admin-sidebar__text">{{ __('export.menu_json') }}</span>
                 </a>
               </li>

@@ -118,6 +118,32 @@ class ExportController extends Controller
     }
   }
 
+  public function restoreDatabase(string $filename)
+  {
+    $result = $this->exportService->restoreDatabase($filename);
+
+    if ($result['success']) {
+      return redirect()->back()->with('success', __('export.restore_success'));
+    }
+
+    return redirect()->back()->with('error', __('export.restore_error') . ': ' . $result['error']);
+  }
+
+  public function uploadDatabase(Request $request)
+  {
+    $validated = $request->validate([
+      'database_file' => 'required|file|mimes:sql,zip|max:102400' // 100MB max
+    ]);
+
+    $result = $this->exportService->uploadDatabaseFile($validated['database_file']);
+
+    if ($result['success']) {
+      return redirect()->back()->with('success', __('export.upload_success', ['filename' => $result['filename']]));
+    }
+
+    return redirect()->back()->with('error', __('export.upload_error') . ': ' . $result['error']);
+  }
+
   public function exportCards()
   {
     $result = $this->exportService->exportCards();

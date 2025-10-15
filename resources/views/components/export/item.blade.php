@@ -1,14 +1,17 @@
+{{-- resources/views/components/export/item.blade.php --}}
 @props([
   'filename',
   'size',
   'date',
   'downloadRoute',
   'deleteRoute',
+  'restoreRoute' => null,
 ])
 
 @php
   $isZip = str_ends_with(strtolower($filename), '.zip');
   $icon = $isZip ? 'file-archive' : 'database';
+  $isDatabase = str_contains($filename, 'database_backup') || str_contains($filename, 'uploaded_backup');
 @endphp
 
 <div class="export-item export-item--admin">
@@ -19,7 +22,12 @@
   </div>
 
   <div class="export-item__header">
-    <h3 class="export-item__title">{{ $filename }}</h3>
+    <h3 class="export-item__title">
+      {{ $filename }}
+      @if(str_contains($filename, 'uploaded_backup'))
+        <x-badge variant="info" size="sm">{{ __('export.uploaded') }}</x-badge>
+      @endif
+    </h3>
     
     <div class="export-item__info">
       <span class="export-item__size">{{ $size }}</span>
@@ -29,6 +37,17 @@
   </div>
   
   <div class="export-item__actions">
+    @if($restoreRoute && $isDatabase)
+      <x-action-button
+        :route="$restoreRoute"
+        method="POST"
+        variant="warning"
+        size="sm"
+        icon="rotate-ccw"
+        :confirmMessage="__('export.restore_confirm')"
+      />
+    @endif
+    
     <x-action-button
       :href="$downloadRoute"
       variant="view"

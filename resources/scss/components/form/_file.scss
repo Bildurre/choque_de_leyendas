@@ -1,0 +1,61 @@
+@use '../../abstracts/all' as *;
+
+.form-file {
+  display: block;
+  width: 100%;
+  padding: $spacing-sm;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  border: 0.0625rem solid var(--color-card-border);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: var(--random-accent-color);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--random-accent-color);
+    box-shadow: 0 0 0 0.125rem var(--random-accent-color-bg);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-bg-secondary);
+  }
+
+  // File input button styling
+  &::file-selector-button {
+    padding: $spacing-xs $spacing-md;
+    margin-right: $spacing-md;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-secondary);
+    border: 0.0625rem solid var(--color-card-border);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      background-color: var(--random-accent-color);
+      color: white;
+      border-color: var(--random-accent-color);
+    }
+  }
+
+  // Error state
+  .form-field--error & {
+    border-color: var(--color-game-red);
+
+    &:focus {
+      box-shadow: 0 0 0 0.125rem var(--color-red-transparent-light);
+    }
+  }
+}
