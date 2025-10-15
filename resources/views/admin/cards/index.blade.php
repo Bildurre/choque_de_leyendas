@@ -63,14 +63,6 @@
         >          
           <div class="card-details">
             <x-previews.preview-image :entity="$card" type="card"/>
-            
-            @if($card->cardSubtype)
-              <div class="card-subtype-info">
-                <x-badge variant="secondary">
-                  {{ $card->cardSubtype->name }}
-                </x-badge>
-              </div>
-            @endif
           </div>
         </x-entity.list-card>
       @endforeach
