@@ -164,7 +164,7 @@ return [
       'attack_type_only_for_spell_or_technique' => 'Attack type can only be used for spells or techniques.',
     ],
     'attack_type' => 'Attack type',
-    'no_attack_type' => '-- No attack type --',
+    'no_attack_type' => 'No attack type',
     'attack_types' => [
       'physical' => 'Physical',
       'magical' => 'Magical',
@@ -222,7 +222,7 @@ return [
     'is_area_attack' => 'Is area attack',
     'type' => 'Type',
     'attack_type' => 'Attack type',
-    'no_attack_type' => '-- No attack type --',
+    'no_attack_type' => 'No attack type',
     'no_attack_range' => 'No attack range',
     'no_attack_subtype' => 'No attack subtype',
     'attack_types' => [

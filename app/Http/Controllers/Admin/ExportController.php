@@ -17,18 +17,31 @@ class ExportController extends Controller
     $this->exportService = $exportService;
   }
 
-  public function index(): View
+  public function database(): View
   {
     $databaseInfo = $this->exportService->getDatabaseInfo();
-    $exports = $this->exportService->listExports();
+    $exports = $this->exportService->listExports('database');
     
-    return view('admin.export.index', [
+    return view('admin.export.database', [
       'databaseInfo' => $databaseInfo,
       'exports' => $exports
     ]);
   }
 
-  public function export(Request $request)
+  public function json(): View
+  {
+    $exports = $this->exportService->listExports('json');
+    $factions = \App\Models\Faction::withoutTrashed()
+      ->orderBy('name')
+      ->get();
+    
+    return view('admin.export.json', [
+      'exports' => $exports,
+      'factions' => $factions
+    ]);
+  }
+
+  public function exportDatabase(Request $request)
   {
     $validated = $request->validate([
       'include_data' => 'boolean',
@@ -144,6 +157,40 @@ class ExportController extends Controller
 
     if ($result['success']) {
       return response()->download($result['filepath'])->deleteFileAfterSend(true);
+    }
+
+    return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);
+  }
+
+  public function exportFaction(Request $request)
+  {
+    $validated = $request->validate([
+      'faction_id' => 'required|exists:factions,id'
+    ]);
+
+    $faction = \App\Models\Faction::findOrFail($validated['faction_id']);
+    $result = $this->exportService->exportFaction($faction);
+
+    if ($result['success']) {
+      return response()->download($result['filepath'])->deleteFileAfterSend(true);
+    }
+
+    return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);
+  }
+
+  public function exportAllFactions()
+  {
+    $result = $this->exportService->exportAllFactions();
+
+    if ($result['success']) {
+      if (isset($result['zip'])) {
+        // Multiple factions - download ZIP
+        $response = response()->download($result['filepath'])->deleteFileAfterSend(true);
+        return $response;
+      } else {
+        // Single faction - download JSON directly
+        return response()->download($result['filepath'])->deleteFileAfterSend(true);
+      }
     }
 
     return redirect()->back()->with('error', __('export.export_error') . ': ' . $result['error']);

@@ -163,7 +163,7 @@ return [
       'attack_type_only_for_spell_or_technique' => 'El tipo de ataque solo puede usarse para hechizos o técnicas.',
     ],
     'attack_type' => 'Tipo de ataque',
-    'no_attack_type' => '-- Sin tipo de ataque --',
+    'no_attack_type' => 'Sin tipo de ataque',
     'attack_types' => [
       'physical' => 'Físico',
       'magical' => 'Mágico',
@@ -221,7 +221,7 @@ return [
     'is_area_attack' => 'Es ataque de área',
     'type' => 'Tipo',
     'attack_type' => 'Tipo de ataque',
-    'no_attack_type' => '-- Sin tipo de ataque --',
+    'no_attack_type' => 'Sin tipo de ataque',
     'no_attack_range' => 'Sin rango de ataque',
     'no_attack_subtype' => 'Sin subtipo de ataque',
     'attack_types' => [

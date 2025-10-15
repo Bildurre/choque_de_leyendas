@@ -1,7 +1,8 @@
 <?php
 
 return [
-  'title' => 'Exportación',
+  'database_title' => 'Base de Datos',
+  'json_title' => 'JSON',
   'database_information' => 'Información de la Base de Datos',
   'current_database' => 'Base de Datos Actual',
   'database_name' => 'Nombre de la Base de Datos',
@@ -30,7 +31,8 @@ return [
   'deleted_all_success' => ':count exportación(es) eliminada(s) correctamente',
   'download_error' => 'Error al descargar las exportaciones',
   'no_exports_to_download' => 'No hay exportaciones disponibles para descargar',
-  'menu_database' => 'Exportar Base de Datos',
+  'menu_database' => 'Base de Datos',
+  'menu_json' => 'JSON',
   'confirm_delete_single' => '¿Estás seguro de que quieres eliminar esta exportación?',
   'deleted_single_success' => 'Exportación eliminada correctamente',
   'delete_error' => 'Error al eliminar la exportación',
@@ -58,4 +60,14 @@ return [
   'export_classes' => 'Exportar Clases',
   'export_classes_help' => 'Exporta todas las clases de héroe en formato JSON con todos sus datos y traducciones',
   'export_classes_button' => 'Exportar Clases',
+
+  // Factions
+  'export_faction' => 'Exportar Facción',
+  'export_faction_help' => 'Selecciona una facción para exportar todos sus héroes y cartas en formato JSON.',
+  'select_faction' => 'Seleccionar facción',
+  'select_faction_placeholder' => 'Selecciona una facción',
+  'export_faction_button' => 'Exportar Facción',
+  'export_all_factions' => 'Exportar Todas las Facciones',
+  'export_all_factions_help' => 'Exporta todas las facciones en archivos JSON separados comprimidos en un ZIP.',
+  'export_all_factions_button' => 'Exportar Todas las Facciones',
 ];

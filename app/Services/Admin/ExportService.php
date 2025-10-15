@@ -143,15 +143,27 @@ class ExportService
     ];
   }
 
-  public function listExports(): array
+  public function listExports(string $type = 'all'): array
   {
     $files = glob($this->exportPath . '/*');
     $exports = [];
 
     foreach ($files as $file) {
       if (is_file($file)) {
+        $filename = basename($file);
+        
+        // Filter by type if specified
+        if ($type !== 'all') {
+          if ($type === 'database' && !str_contains($filename, 'database_backup')) {
+            continue;
+          }
+          if ($type === 'json' && str_contains($filename, 'database_backup')) {
+            continue;
+          }
+        }
+        
         $exports[] = [
-          'filename' => basename($file),
+          'filename' => $filename,
           'size' => filesize($file),
           'formatted_size' => $this->formatBytes(filesize($file)),
           'created_at' => filemtime($file),
@@ -250,6 +262,7 @@ class ExportService
       $cards = \App\Models\Card::with([
         'faction',
         'cardType.heroSuperclass',
+        'cardSubtype',
         'equipmentType',
         'attackRange',
         'attackSubtype',
@@ -263,12 +276,13 @@ class ExportService
           'faction' => $card->faction ? $card->faction->getTranslations('name') : null,
           'is_unique' => $card->is_unique,
           'card_type' => $card->cardType ? $card->cardType->getTranslations('name') : null,
+          'card_subtype' => $card->cardSubtype ? $card->cardSubtype->getTranslations('name') : null,
           'equipment_type' => $card->equipmentType ? $card->equipmentType->getTranslations('name') : null,
           'equipment_category' => $card->equipmentType ? $card->equipmentType->category : null,
           'hands' => $card->hands,
           'attack_range' => $card->attackRange ? $card->attackRange->getTranslations('name') : null,
+          'attack_type' => $card->attack_type ? $card->attack_type : null,
           'attack_subtype' => $card->attackSubtype ? $card->attackSubtype->getTranslations('name') : null,
-          'attack_subtype_type' => $card->attackSubtype ? $card->attackSubtype->type : null,
           'area' => $card->area,
           'cost' => $card->cost,
           'restriction' => $card->getTranslations('restriction'),
@@ -282,8 +296,8 @@ class ExportService
             'name' => $card->heroAbility->getTranslations('name'),
             'cost' => $card->heroAbility->cost,
             'attack_range' => $card->heroAbility->attackRange ? $card->heroAbility->attackRange->getTranslations('name') : null,
+            'attack_type' => $card->heroAbility->attack_type ? $card->heroAbility->attack_type : null,
             'attack_subtype' => $card->heroAbility->attackSubtype ? $card->heroAbility->attackSubtype->getTranslations('name') : null,
-            'attack_subtype_type' => $card->heroAbility->attackSubtype ? $card->heroAbility->attackSubtype->type : null,
             'area' => $card->heroAbility->area,
             'effect' => $card->heroAbility->getTranslations('description'),
           ];
@@ -349,7 +363,7 @@ class ExportService
               'cost' => $ability->cost,
               'attack_range' => $ability->attackRange ? $ability->attackRange->getTranslations('name') : null,
               'attack_subtype' => $ability->attackSubtype ? $ability->attackSubtype->getTranslations('name') : null,
-              'attack_subtype_type' => $ability->attackSubtype ? $ability->attackSubtype->type : null,
+              'attack_type' => $ability->attack_type ? $ability->attack_type : null,
               'area' => $ability->area,
               'effect' => $ability->getTranslations('description'),
             ];
@@ -433,6 +447,251 @@ class ExportService
         'success' => true,
         'filename' => $filename,
         'filepath' => $filepath
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
+  public function exportFaction(\App\Models\Faction $faction): array
+  {
+    try {
+      $factionData = \App\Models\Faction::withoutTrashed()
+        ->where('id', $faction->id)
+        ->with([
+          'heroes' => function ($query) {
+            $query->withoutTrashed()->with([
+              'heroRace',
+              'heroClass.heroSuperclass',
+              'heroAbilities' => function ($q) {
+                $q->withoutTrashed();
+              },
+              'heroAbilities.attackRange',
+              'heroAbilities.attackSubtype'
+            ]);
+          },
+          'cards' => function ($query) {
+            $query->withoutTrashed()->with([
+              'cardType.heroSuperclass',
+              'cardSubtype',
+              'equipmentType',
+              'attackRange',
+              'attackSubtype',
+              'heroAbility' => function ($q) {
+                $q->withoutTrashed();
+              },
+              'heroAbility.attackRange',
+              'heroAbility.attackSubtype'
+            ]);
+          }
+        ])
+        ->first();
+
+      if (!$factionData) {
+        return [
+          'success' => false,
+          'error' => 'Faction not found'
+        ];
+      }
+
+      $data = [
+        'name' => $factionData->getTranslations('name'),
+        'lore_text' => $factionData->getTranslations('lore_text'),
+        'epic_quote' => $factionData->getTranslations('epic_quote'),
+        'heroes' => $factionData->heroes->map(function ($hero) {
+          return [
+            'name' => $hero->getTranslations('name'),
+            'race' => $hero->heroRace ? $hero->heroRace->getTranslations('name') : null,
+            'class' => $hero->heroClass ? $hero->heroClass->getTranslations('name') : null,
+            'superclass' => $hero->heroClass && $hero->heroClass->heroSuperclass 
+              ? $hero->heroClass->heroSuperclass->getTranslations('name') 
+              : null,
+            'gender' => $hero->gender,
+            'attributes' => [
+              'agility' => $hero->agility,
+              'mental' => $hero->mental,
+              'will' => $hero->will,
+              'strength' => $hero->strength,
+              'armor' => $hero->armor,
+              'health' => $hero->health,
+            ],
+            'passive_name' => $hero->getTranslations('passive_name'),
+            'passive_description' => $hero->getTranslations('passive_description'),
+            'lore_text' => $hero->getTranslations('lore_text'),
+            'epic_quote' => $hero->getTranslations('epic_quote'),
+            'abilities' => $hero->heroAbilities->map(function ($ability) {
+              return [
+                'name' => $ability->getTranslations('name'),
+                'cost' => $ability->cost,
+                'attack_range' => $ability->attackRange 
+                  ? $ability->attackRange->getTranslations('name') 
+                  : null,
+                'attack_subtype' => $ability->attackSubtype 
+                  ? $ability->attackSubtype->getTranslations('name') 
+                  : null,
+                'attack_type' => $ability->attack_type ? $ability->attack_type : null,
+                'area' => $ability->area,
+                'effect' => $ability->getTranslations('description'),
+              ];
+            })->toArray()
+          ];
+        })->toArray(),
+        'cards' => $factionData->cards->map(function ($card) {
+          $cardData = [
+            'name' => $card->getTranslations('name'),
+            'is_unique' => $card->is_unique,
+            'card_type' => $card->cardType 
+              ? $card->cardType->getTranslations('name') 
+              : null,
+            'card_subtype' => $card->cardSubtype 
+              ? $card->cardSubtype->getTranslations('name') 
+              : null,
+            'equipment_type' => $card->equipmentType 
+              ? $card->equipmentType->getTranslations('name') 
+              : null,
+            'equipment_category' => $card->equipmentType 
+              ? $card->equipmentType->category 
+              : null,
+            'hands' => $card->hands,
+            'attack_range' => $card->attackRange 
+              ? $card->attackRange->getTranslations('name') 
+              : null,
+            'attack_type' => $card->attack_type ? $card->attack_type : null,
+            'attack_subtype' => $card->attackSubtype 
+              ? $card->attackSubtype->getTranslations('name') 
+              : null,
+            'area' => $card->area,
+            'cost' => $card->cost,
+            'restriction' => $card->getTranslations('restriction'),
+            'effect' => $card->getTranslations('effect'),
+            'lore_text' => $card->getTranslations('lore_text'),
+            'epic_quote' => $card->getTranslations('epic_quote'),
+          ];
+
+          if ($card->heroAbility) {
+            $cardData['linked_ability'] = [
+              'name' => $card->heroAbility->getTranslations('name'),
+              'cost' => $card->heroAbility->cost,
+              'attack_range' => $card->heroAbility->attackRange 
+                ? $card->heroAbility->attackRange->getTranslations('name') 
+                : null,
+              'attack_type' => $card->heroAbility->attack_type 
+                ? $card->heroAbility->attack_type 
+                : null,
+              'attack_subtype' => $card->heroAbility->attackSubtype 
+                ? $card->heroAbility->attackSubtype->getTranslations('name') 
+                : null,
+              'area' => $card->heroAbility->area,
+              'effect' => $card->heroAbility->getTranslations('description'),
+            ];
+          }
+
+          return $cardData;
+        })->toArray()
+      ];
+
+      $timestamp = now()->format('Y-m-d_His');
+      $factionSlug = \Illuminate\Support\Str::slug($factionData->name);
+      $filename = "faction_{$factionSlug}_export_{$timestamp}.json";
+      $filepath = $this->exportPath . '/' . $filename;
+
+      file_put_contents(
+        $filepath, 
+        json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+      );
+
+      return [
+        'success' => true,
+        'filename' => $filename,
+        'filepath' => $filepath
+      ];
+
+    } catch (\Exception $exception) {
+      return [
+        'success' => false,
+        'error' => $exception->getMessage()
+      ];
+    }
+  }
+
+  public function exportAllFactions(): array
+  {
+    try {
+      $factions = \App\Models\Faction::withoutTrashed()
+        ->orderBy('name')
+        ->get();
+
+      if ($factions->isEmpty()) {
+        return [
+          'success' => false,
+          'error' => 'No factions found'
+        ];
+      }
+
+      $exportedFiles = [];
+
+      foreach ($factions as $faction) {
+        $result = $this->exportFaction($faction);
+        
+        if ($result['success']) {
+          $exportedFiles[] = $result['filepath'];
+        }
+      }
+
+      if (empty($exportedFiles)) {
+        return [
+          'success' => false,
+          'error' => 'No factions were exported'
+        ];
+      }
+
+      // If only one faction, return it directly
+      if (count($exportedFiles) === 1) {
+        return [
+          'success' => true,
+          'filepath' => $exportedFiles[0]
+        ];
+      }
+
+      // Multiple factions - create ZIP
+      $timestamp = now()->format('Y-m-d_His');
+      $zipFilename = "all_factions_export_{$timestamp}.zip";
+      $zipFilepath = $this->exportPath . '/' . $zipFilename;
+
+      $zip = new ZipArchive();
+      
+      if ($zip->open($zipFilepath, ZipArchive::CREATE) !== true) {
+        return [
+          'success' => false,
+          'error' => 'Cannot create zip file'
+        ];
+      }
+
+      foreach ($exportedFiles as $file) {
+        if (file_exists($file)) {
+          $zip->addFile($file, basename($file));
+        }
+      }
+
+      $zip->close();
+
+      // Delete individual JSON files after adding to ZIP
+      foreach ($exportedFiles as $file) {
+        if (file_exists($file)) {
+          unlink($file);
+        }
+      }
+
+      return [
+        'success' => true,
+        'zip' => true,
+        'filename' => $zipFilename,
+        'filepath' => $zipFilepath,
+        'count' => count($exportedFiles)
       ];
 
     } catch (\Exception $exception) {

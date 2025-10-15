@@ -1,7 +1,8 @@
 <?php
 
 return [
-  'title' => 'Export',
+  'database_title' => 'Database',
+  'json_title' => 'JSON',
   'database_information' => 'Database Information',
   'current_database' => 'Current Database',
   'database_name' => 'Database Name',
@@ -30,7 +31,8 @@ return [
   'deleted_all_success' => ':count export(s) deleted successfully',
   'download_error' => 'Error downloading exports',
   'no_exports_to_download' => 'No exports available to download',
-  'menu_database' => 'Database Export',
+  'menu_database' => 'Database',
+  'menu_json' => 'JSON',
   'confirm_delete_single' => 'Are you sure you want to delete this export?',
   'deleted_single_success' => 'Export deleted successfully',
   'delete_error' => 'Error deleting export',
@@ -58,4 +60,14 @@ return [
   'export_classes' => 'Export Classes',
   'export_classes_help' => 'Export all hero classes in JSON format with all their data and translations',
   'export_classes_button' => 'Export Classes',
+
+  // Faction
+  'export_faction' => 'Export Faction',
+  'export_faction_help' => 'Select a faction to export all its heroes and cards in JSON format.',
+  'select_faction' => 'Select faction',
+  'select_faction_placeholder' => 'Select a faction',
+  'export_faction_button' => 'Export Faction',
+  'export_all_factions' => 'Export All Factions',
+  'export_all_factions_help' => 'Export all factions in separate JSON files compressed in a ZIP.',
+  'export_all_factions_button' => 'Export All Factions',
 ];

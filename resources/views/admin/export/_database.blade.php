@@ -20,7 +20,7 @@
   {{-- Database Export Section --}}
   <x-preview-management.section :title="__('export.database')">
     <x-preview-management.card :title="__('export.new_export')" class="preview-management-card--form">
-      <form action="{{ route('admin.export.create') }}" method="POST">
+      <form action="{{ route('admin.export.database.create') }}" method="POST">
         @csrf
         
         <x-form.checkbox

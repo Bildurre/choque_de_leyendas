@@ -177,18 +177,26 @@ Route::middleware([EnsureIsAdmin::class])->prefix('admin')->name('admin.')->grou
   });
 
   Route::prefix('export')->name('export.')->group(function () {
-    Route::get('/', [ExportController::class, 'index'])->name('index');
-    Route::post('/', [ExportController::class, 'export'])->name('create');
+    // Database export page
+    Route::get('/database', [ExportController::class, 'database'])->name('database');
+    Route::post('/database', [ExportController::class, 'exportDatabase'])->name('database.create');
+    
+    // JSON export page
+    Route::get('/json', [ExportController::class, 'json'])->name('json');
+    
+    // Download and delete operations
     Route::get('/download/{filename}', [ExportController::class, 'download'])->name('download');
     Route::delete('/delete/{filename}', [ExportController::class, 'deleteSingle'])->name('delete-single');
     Route::delete('/delete-all', [ExportController::class, 'deleteAll'])->name('delete-all');
     Route::post('/download-all', [ExportController::class, 'downloadAll'])->name('download-all');
     
-      // JSON Exports
-    Route::post('/cards', [ExportController::class, 'exportCards'])->name('cards');
-    Route::post('/heroes', [ExportController::class, 'exportHeroes'])->name('heroes');
-    Route::post('/counters', [ExportController::class, 'exportCounters'])->name('counters');
-    Route::post('/classes', [ExportController::class, 'exportClasses'])->name('classes');
+    // JSON Exports
+    Route::post('/json/cards', [ExportController::class, 'exportCards'])->name('json.cards');
+    Route::post('/json/heroes', [ExportController::class, 'exportHeroes'])->name('json.heroes');
+    Route::post('/json/counters', [ExportController::class, 'exportCounters'])->name('json.counters');
+    Route::post('/json/classes', [ExportController::class, 'exportClasses'])->name('json.classes');
+    Route::post('/json/faction', [ExportController::class, 'exportFaction'])->name('json.faction');
+    Route::post('/json/all-factions', [ExportController::class, 'exportAllFactions'])->name('json.all-factions');
   });
 
   // Icons

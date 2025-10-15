@@ -69,11 +69,11 @@ return [
   
   // Form labels
   'select_hero' => 'Select Hero',
-  'select_hero_placeholder' => '-- Select a hero --',
+  'select_hero_placeholder' => 'Select a hero',
   'select_card' => 'Select Card',
-  'select_card_placeholder' => '-- Select a card --',
+  'select_card_placeholder' => 'Select a card',
   'select_faction' => 'Select Faction',
-  'select_faction_placeholder' => '-- Select a faction --',
+  'select_faction_placeholder' => 'Select a faction',
   'select_type' => 'Element type',
   'all' => 'All (Heroes and Cards)',
   'only_heroes' => 'Only Heroes',
