@@ -254,7 +254,7 @@ class ExportService
   {
     try {
       $originalName = $file->getClientOriginalName();
-      $extension = $file->getClientOriginalExtension();
+      $extension = strtolower($file->getClientOriginalExtension());
       
       // Validate extension
       if (!in_array($extension, ['sql', 'zip'])) {
@@ -262,6 +262,32 @@ class ExportService
           'success' => false,
           'error' => 'Invalid file type. Only .sql and .zip files are allowed.'
         ];
+      }
+
+      // Additional validation for SQL files
+      if ($extension === 'sql') {
+        // Read first few bytes to verify it's a text file
+        $handle = fopen($file->getRealPath(), 'r');
+        $firstBytes = fread($handle, 1024);
+        fclose($handle);
+        
+        // Check if it contains SQL keywords
+        $sqlKeywords = ['CREATE', 'INSERT', 'DROP', 'ALTER', 'SELECT', 'UPDATE', 'DELETE', 'TABLE', 'DATABASE'];
+        $containsSql = false;
+        
+        foreach ($sqlKeywords as $keyword) {
+          if (stripos($firstBytes, $keyword) !== false) {
+            $containsSql = true;
+            break;
+          }
+        }
+        
+        if (!$containsSql) {
+          return [
+            'success' => false,
+            'error' => 'The uploaded file does not appear to be a valid SQL file.'
+          ];
+        }
       }
 
       // Generate unique filename

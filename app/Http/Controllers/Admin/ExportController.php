@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Services\Admin\ExportService;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Services\Admin\ExportService;
 use Illuminate\Http\RedirectResponse;
 
 class ExportController extends Controller
@@ -123,7 +124,14 @@ class ExportController extends Controller
     $result = $this->exportService->restoreDatabase($filename);
 
     if ($result['success']) {
-      return redirect()->back()->with('success', __('export.restore_success'));
+      // Invalidar la sesión actual ya que los usuarios se han restaurado
+      Auth::logout();
+      request()->session()->invalidate();
+      request()->session()->regenerateToken();
+      
+      // Redirigir al login con mensaje de éxito
+      return redirect()->route('login')
+        ->with('success', __('export.restore_success_logout'));
     }
 
     return redirect()->back()->with('error', __('export.restore_error') . ': ' . $result['error']);
@@ -132,7 +140,41 @@ class ExportController extends Controller
   public function uploadDatabase(Request $request)
   {
     $validated = $request->validate([
-      'database_file' => 'required|file|mimes:sql,zip|max:102400' // 100MB max
+      'database_file' => [
+        'required',
+        'file',
+        'max:102400', // 100MB max
+        function ($attribute, $value, $fail) {
+          $extension = strtolower($value->getClientOriginalExtension());
+          $mimeType = $value->getMimeType();
+          
+          // Aceptar ZIP
+          if ($extension === 'zip') {
+            if (!in_array($mimeType, ['application/zip', 'application/x-zip-compressed', 'application/x-zip'])) {
+              $fail(__('export.invalid_zip_file'));
+            }
+            return;
+          }
+          
+          // Aceptar SQL (los archivos SQL pueden tener varios MIME types)
+          if ($extension === 'sql') {
+            $validMimeTypes = [
+              'application/sql',
+              'application/x-sql',
+              'text/plain',
+              'text/x-sql',
+              'application/octet-stream'
+            ];
+            
+            if (!in_array($mimeType, $validMimeTypes)) {
+              $fail(__('export.invalid_sql_file'));
+            }
+            return;
+          }
+          
+          $fail(__('export.invalid_file_type'));
+        }
+      ]
     ]);
 
     $result = $this->exportService->uploadDatabaseFile($validated['database_file']);
