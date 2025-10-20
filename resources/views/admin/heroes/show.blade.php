@@ -201,6 +201,7 @@
                   :description="$ability->description"
                   :cost="$ability->cost"
                   :attack-range="$ability->attackRange"
+                  :attack-type="$ability->attack_type"
                   :attack-subtype="$ability->attackSubtype"
                   :area="$ability->area"
                 />
