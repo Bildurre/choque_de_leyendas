@@ -74,6 +74,7 @@ class Card extends Model implements LocalizedUrlRoutable
    */
   const SPELL_TYPE_ID = 5;
   const TECHNIQUE_TYPE_ID = 4;
+  const LITANY_TYPE_ID = 6;
 
   /**
    * Check if this card's type supports subtypes
@@ -82,7 +83,7 @@ class Card extends Model implements LocalizedUrlRoutable
    */
   public function supportsSubtype(): bool
   {
-    return in_array($this->card_type_id, [self::SPELL_TYPE_ID, self::TECHNIQUE_TYPE_ID]);
+    return in_array($this->card_type_id, [self::SPELL_TYPE_ID, self::TECHNIQUE_TYPE_ID, self::LITANY_TYPE_ID]);
   }
 
   public function getAdminSearchable(): array

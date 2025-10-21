@@ -49,7 +49,7 @@ class CardRequest extends FormRequest
     $rules['card_subtype_id'][] = function ($attribute, $value, $fail) {
       $cardTypeId = $this->input('card_type_id');
       
-      if ($value !== null && !in_array($cardTypeId, [Card::SPELL_TYPE_ID, Card::TECHNIQUE_TYPE_ID])) {
+      if ($value !== null && !in_array($cardTypeId, [Card::SPELL_TYPE_ID, Card::TECHNIQUE_TYPE_ID, Card::LITANY_TYPE_ID])) {
         $fail(__('entities.cards.validation.subtype_only_for_spell_or_technique'));
       }
     };
@@ -58,7 +58,7 @@ class CardRequest extends FormRequest
     $rules['attack_type'][] = function ($attribute, $value, $fail) {
       $cardTypeId = $this->input('card_type_id');
       
-      if ($value !== null && !in_array($cardTypeId, [Card::SPELL_TYPE_ID, Card::TECHNIQUE_TYPE_ID])) {
+      if ($value !== null && !in_array($cardTypeId, [Card::SPELL_TYPE_ID, Card::TECHNIQUE_TYPE_ID,  Card::LITANY_TYPE_ID])) {
         $fail(__('entities.cards.validation.attack_type_only_for_spell_or_technique'));
       }
     };
