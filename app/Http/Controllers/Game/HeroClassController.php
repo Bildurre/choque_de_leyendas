@@ -28,7 +28,8 @@ class HeroClassController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published');
+    $trashed = ($tab === 'trashed');
     
     // Obtener contadores para las pestañas
     $activeCount = HeroClass::count();

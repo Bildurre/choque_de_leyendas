@@ -27,37 +27,37 @@ class PageController extends Controller
      */
     public function index(Request $request): View
     {
-        $trashed = $request->has('trashed');
-        
-        // Obtener contadores para las pestañas directamente con Eloquent
-        $activeCount = Page::count();
-        $trashedCount = Page::onlyTrashed()->count();
-        
-        $query = Page::with('parent')
-            ->withCount('children');
-        
-        if ($trashed) {
-            $query->onlyTrashed();
-        }
-        
-        $pages = $query->orderBy('order')->paginate(20);
-        
-        // Obtener todas las páginas publicadas para el selector
-        $availablePages = Page::where('is_published', true)
-            ->orderBy('title')
-            ->pluck('title', 'id');
-        
-        // Obtener la página actual establecida como home
-        $currentHomePage = Page::where('is_home', true)->first();
-        
-        return view('admin.pages.index', compact(
-            'pages', 
-            'trashed', 
-            'activeCount', 
-            'trashedCount',
-            'availablePages',
-            'currentHomePage'
-        ));
+      $tab = $request->get('tab', 'published');
+      $trashed = ($tab === 'trashed');
+      
+      // Obtener contadores para las pestañas directamente con Eloquent
+      $activeCount = Page::count();
+      $trashedCount = Page::onlyTrashed()->count();
+      
+      $query = Page::with('parent')
+        ->withCount('children');
+      if ($trashed) {
+        $query->onlyTrashed();
+      }
+      
+      $pages = $query->orderBy('order')->paginate(20);
+      
+      // Obtener todas las páginas publicadas para el selector
+      $availablePages = Page::where('is_published', true)
+        ->orderBy('title')
+        ->pluck('title', 'id');
+      
+      // Obtener la página actual establecida como home
+      $currentHomePage = Page::where('is_home', true)->first();
+      
+      return view('admin.pages.index', compact(
+        'pages', 
+        'trashed', 
+        'activeCount', 
+        'trashedCount',
+        'availablePages',
+        'currentHomePage'
+      ));
     }
 
     /**

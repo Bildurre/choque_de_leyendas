@@ -24,7 +24,8 @@ class HeroSuperclassController extends Controller
 
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published');
+    $trashed = ($tab === 'trashed');
     
     // Get counters for tabs directly using Eloquent
     $activeCount = HeroSuperclass::count();

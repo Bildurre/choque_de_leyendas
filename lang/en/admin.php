@@ -27,9 +27,9 @@ return [
   'is_unique' => 'Unique',
   'status' => 'Status',
   'timestamps' => 'Timestamps', 
-  'created_at' => 'Created at',
-  'updated_at' => 'Updated at',
-  'deleted_at' => 'Deleted at',
+  'created_at' => 'Created at: :date',
+  'updated_at' => 'Updated at: :date',
+  'deleted_at' => 'Deleted at: :date',
   'publication_status' => 'Publication status',
 
   'back_to_dashboard' => 'Back to dashboard',

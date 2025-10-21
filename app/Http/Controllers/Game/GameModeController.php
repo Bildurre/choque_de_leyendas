@@ -27,7 +27,8 @@ class GameModeController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published');
+    $trashed = ($tab === 'trashed');
     
     // Get counters for tabs
     $activeCount = GameMode::count();

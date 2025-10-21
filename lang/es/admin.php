@@ -28,9 +28,9 @@ return [
   'is_unique'=> 'Única',
   'status' => 'Estado',
   'timestamps' => 'Marcas de tiempo',
-  'created_at' => 'Creado el',
-  'updated_at' => 'Actualizado el',
-  'deleted_at' => 'Eliminado el',
+  'created_at' => 'Creado el: :date',
+  'updated_at' => 'Actualizado el: :date',
+  'deleted_at' => 'Eliminado el: :date',
   'publication_status' => 'Estado de publicación',
   'back_to_dashboard' => 'Volver al panel',
   

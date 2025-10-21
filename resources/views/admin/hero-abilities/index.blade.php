@@ -99,7 +99,7 @@
             <div class="ability-details">
               <div class="ability-details__content">
                 <div class="ability-details__section">
-                  <div class="ability-details__text">{{ strip_tags($heroAbility->description) }}</div>
+                  <div class="ability-details__text">{!! strip_tags($heroAbility->description) !!}</div>
                 </div>
               </div>
             </div>

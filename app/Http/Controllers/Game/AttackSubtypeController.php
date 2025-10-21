@@ -26,39 +26,40 @@ class AttackSubtypeController extends Controller
    * Display a listing of attack subtypes.
    */
   public function index(Request $request)
-{
-  $trashed = $request->has('trashed');
-  
-  // Obtener contadores para las pestañas
-  $activeCount = AttackSubtype::count();
-  $trashedCount = AttackSubtype::onlyTrashed()->count();
-  
-  // Obtener attack subtypes con filtros
-  $attackSubtypes = $this->attackSubtypeService->getAllAttackSubtypes(
-    12,       // perPage
-    $request, // request para filtros
-    false,    // withTrashed
-    $trashed  // onlyTrashed
-  );
-  
-  // Crear una instancia del modelo para los filtros
-  $attackSubtypeModel = new AttackSubtype();
-  
-  // Obtener contadores totales y filtrados
-  $totalCount = $attackSubtypes->totalCount ?? AttackSubtype::count();
-  $filteredCount = $attackSubtypes->filteredCount ?? count($attackSubtypes);
-  
-  return view('admin.attack-subtypes.index', compact(
-    'attackSubtypes', 
-    'trashed', 
-    'activeCount', 
-    'trashedCount',
-    'attackSubtypeModel',
-    'request',
-    'totalCount',
-    'filteredCount'
-  ));
-}
+  {
+    $tab = $request->get('tab', 'published');
+    $trashed = ($tab === 'trashed');
+    
+    // Obtener contadores para las pestañas
+    $activeCount = AttackSubtype::count();
+    $trashedCount = AttackSubtype::onlyTrashed()->count();
+    
+    // Obtener attack subtypes con filtros
+    $attackSubtypes = $this->attackSubtypeService->getAllAttackSubtypes(
+      12,       // perPage
+      $request, // request para filtros
+      false,    // withTrashed
+      $trashed  // onlyTrashed
+    );
+    
+    // Crear una instancia del modelo para los filtros
+    $attackSubtypeModel = new AttackSubtype();
+    
+    // Obtener contadores totales y filtrados
+    $totalCount = $attackSubtypes->totalCount ?? AttackSubtype::count();
+    $filteredCount = $attackSubtypes->filteredCount ?? count($attackSubtypes);
+    
+    return view('admin.attack-subtypes.index', compact(
+      'attackSubtypes', 
+      'trashed', 
+      'activeCount', 
+      'trashedCount',
+      'attackSubtypeModel',
+      'request',
+      'totalCount',
+      'filteredCount'
+    ));
+  }
 
   /**
    * Show the form for creating a new attack subtype.

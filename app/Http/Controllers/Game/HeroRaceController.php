@@ -27,11 +27,14 @@ class HeroRaceController extends Controller
    */
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published');
+    $trashed = ($tab === 'trashed');
     
     // Get counters for tabs directly using Eloquent
     $activeCount = HeroRace::count();
     $trashedCount = HeroRace::onlyTrashed()->count();
+
+    
     
     // Get hero races with filtering and pagination
     $heroRaces = $this->heroRaceService->getAllHeroRaces(

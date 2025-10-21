@@ -19,7 +19,8 @@ class CardSubtypeController extends Controller
 
   public function index(Request $request)
   {
-    $trashed = $request->has('trashed');
+    $tab = $request->get('tab', 'published');
+    $trashed = ($tab === 'trashed');
     
     $activeCount = CardSubtype::count();
     $trashedCount = CardSubtype::onlyTrashed()->count();
