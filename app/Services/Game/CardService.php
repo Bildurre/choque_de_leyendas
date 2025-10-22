@@ -146,7 +146,7 @@ class CardService
         $fields['hands'] = $data['hands'] ?? null;
         $fields['hero_ability_id'] = $data['hero_ability_id'] ?? null;
       }
-    } elseif (in_array($cardTypeId, [Card::TECHNIQUE_TYPE_ID, Card::SPELL_TYPE_ID, Card::SPELL_TYPE_ID])) {
+    } elseif (in_array($cardTypeId, [Card::TECHNIQUE_TYPE_ID, Card::SPELL_TYPE_ID, Card::LITANY_TYPE_ID])) {
       // Technique (4) or Spell (5)
       $fields['card_subtype_id'] = $data['card_subtype_id'] ?? null;
       $fields['attack_range_id'] = $data['attack_range_id'] ?? null;
@@ -157,7 +157,7 @@ class CardService
     $card->fill($fields);
     
     // Boolean fields
-    $card->area = (in_array($cardTypeId, [Card::TECHNIQUE_TYPE_ID, Card::SPELL_TYPE_ID, Card::SPELL_TYPE_ID]) && isset($data['area'])) 
+    $card->area = (in_array($cardTypeId, [Card::TECHNIQUE_TYPE_ID, Card::SPELL_TYPE_ID, Card::LITANY_TYPE_ID]) && isset($data['area'])) 
       ? (bool)$data['area'] 
       : false;
     $card->is_unique = isset($data['is_unique']) ? (bool)$data['is_unique'] : false;
