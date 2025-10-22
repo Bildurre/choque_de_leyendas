@@ -97,7 +97,7 @@
               :value="$card->cardType->name"
             />
 
-            @if ($card->cardSubype)
+            @if ($card->cardSubtype)
               <x-entity-show.info-list-item 
               label="{{ __('entities.card_subtypes.singular') }}"
               :value="$card->cardSubype->name"
