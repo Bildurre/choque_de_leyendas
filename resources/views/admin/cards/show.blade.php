@@ -97,6 +97,13 @@
               :value="$card->cardType->name"
             />
 
+            @if ($card->cardSubype)
+              <x-entity-show.info-list-item 
+              label="{{ __('entities.card_subtypes.singular') }}"
+              :value="$card->cardSubype->name"
+            />
+            @endif
+
             @if($card->equipmentType)
               <x-entity-show.info-list-item 
                 label="{{ __('entities.equipment_types.singular') }}"
@@ -121,12 +128,15 @@
                 :value="$card->attackRange->name"
               />
             @endif
-            
-            @if($card->attackSubtype)
+
+            @if($card->attack_type)
               <x-entity-show.info-list-item 
                 :label="__('entities.attack_subtypes.damage_type')"
                 value="{{ __('entities.cards.attack_types.' . $card->attack_type) }}"
               />
+            @endif
+            
+            @if($card->attackSubtype)
               <x-entity-show.info-list-item 
                 label="{{ __('entities.attack_subtypes.singular') }}"
                 :value="$card->attackSubtype->name"

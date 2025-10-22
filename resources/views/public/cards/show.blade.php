@@ -129,14 +129,16 @@
                         </x-entity-show.info-link>
                       </x-entity-show.info-list-item>
                     @endif
-                      
-                    @if($card->attackSubtype)
+
+                    @if($card->attack_type)
                       <x-entity-show.info-list-item label="{{ __('entities.attack_subtypes.type') }}">
                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attackSubtype_type' => $card->attackSubtype->type])">
                           {{ __('entities.attack_subtypes.types.' . $card->attack_type) }}
                         </x-entity-show.info-link>
                       </x-entity-show.info-list-item>
+                    @endif
                       
+                    @if($card->attackSubtype)
                       <x-entity-show.info-list-item label="{{ __('entities.attack_subtypes.singular') }}">
                         <x-entity-show.info-link :href="route('public.cards.index') . '?' . http_build_query(['card_type_id' => [4, 5, 6, 7], 'attack_subtype_id' => [$card->attack_subtype_id]])">
                           {{ $card->attackSubtype->name }}
