@@ -35,31 +35,53 @@ return [
   
   // Selector de entidades
   'entity_selector' => [
-    'entitys' => 'Entidades',
-    'cards' => 'Cartas',
-    'heros' => 'Héroes',
-    'abilitys' => 'Habilidades',
+    // Tipos de entidades
+    'entitys' => 'entidades',
+    'cards' => 'cartas',
+    'heros' => 'héroes', 
+    'abilitys' => 'habilidades',
+    
+    // Placeholders de búsqueda
     'search_entitys' => 'Buscar entidades...',
     'search_cards' => 'Buscar cartas...',
     'search_heros' => 'Buscar héroes...',
     'search_abilitys' => 'Buscar habilidades...',
+    
+    // Labels de secciones
     'available_entitys' => 'Entidades disponibles',
     'available_cards' => 'Cartas disponibles',
     'available_heros' => 'Héroes disponibles',
     'available_abilitys' => 'Habilidades disponibles',
+    
     'selected_entitys' => 'Entidades seleccionadas',
     'selected_cards' => 'Cartas seleccionadas',
     'selected_heros' => 'Héroes seleccionados',
     'selected_abilitys' => 'Habilidades seleccionadas',
+    
+    // Mensajes vacíos
     'no_entitys_selected' => 'No hay entidades seleccionadas',
     'no_cards_selected' => 'No hay cartas seleccionadas',
     'no_heros_selected' => 'No hay héroes seleccionados',
     'no_abilitys_selected' => 'No hay habilidades seleccionadas',
+    
     'no_entitys_available' => 'No hay entidades disponibles',
     'no_cards_available' => 'No hay cartas disponibles',
     'no_heros_available' => 'No hay héroes disponibles',
     'no_abilitys_available' => 'No hay habilidades disponibles',
-    'copies' => 'Copias',
+    
+    // Mensajes de búsqueda
+    'no_results_found' => 'No se encontraron resultados',
+    'no_selected_match' => 'Ningún elemento seleccionado coincide con la búsqueda',
+    
+    // Acciones
+    'remove' => 'Eliminar',
+    'clear_search' => 'Limpiar búsqueda',
+    'decrease_copies' => 'Disminuir copias',
+    'increase_copies' => 'Aumentar copias',
+    
+    // Etiquetas
+    'copies' => 'copias',
+    'max_copies' => 'Máximo :max copias',
   ],
   
   // Errores de formulario

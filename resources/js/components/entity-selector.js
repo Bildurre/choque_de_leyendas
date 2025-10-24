@@ -6,7 +6,6 @@ export default function initEntitySelector() {
   selectors.forEach(selector => {
     const entityType = selector.dataset.entityType || 'entity';
     const fieldName = selector.dataset.fieldName || entityType + 's';
-    const entityItems = selector.querySelectorAll('.entity-selector__item');
     const checkboxes = selector.querySelectorAll('.entity-selector__checkbox');
     const selectedList = selector.querySelector('.entity-selector__selected-list');
     const placeholder = selector.querySelector('.entity-selector__placeholder');
@@ -15,83 +14,83 @@ export default function initEntitySelector() {
     const showCopies = selector.querySelector('.entity-selector__copies') !== null;
     const formInputsContainer = selector.querySelector('.entity-selector__form-inputs');
     
-    // Inicializar
+    // Initialize
     updateSelectedList();
     updateFormInputs();
     
-    // Manejar selección de entidades
-    entityItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        // Si el clic fue en un botón o input de copias, no activar checkbox
-        if (e.target.closest('.entity-selector__copies-controls')) {
-          return;
+    // Handle entity selection
+    selector.addEventListener('click', (e) => {
+      const entityItem = e.target.closest('.entity-selector__item');
+      if (!entityItem || e.target.closest('.entity-selector__copies-controls')) {
+        return;
+      }
+      
+      const checkbox = entityItem.querySelector('.entity-selector__checkbox');
+      if (!checkbox) return;
+      
+      checkbox.checked = !checkbox.checked;
+      
+      if (checkbox.checked) {
+        entityItem.classList.add('is-selected');
+        
+        // Enable copies input if available
+        if (showCopies) {
+          const copiesInput = entityItem.querySelector('.entity-selector__copies-input');
+          if (copiesInput) copiesInput.disabled = false;
         }
+      } else {
+        entityItem.classList.remove('is-selected');
         
-        const checkbox = item.querySelector('.entity-selector__checkbox');
-        if (!checkbox) return;
-        
-        checkbox.checked = !checkbox.checked;
-        
-        if (checkbox.checked) {
-          item.classList.add('is-selected');
-          
-          // Si hay control de copias, habilitar el input
-          if (showCopies) {
-            const copiesInput = item.querySelector('.entity-selector__copies-input');
-            if (copiesInput) copiesInput.disabled = false;
-          }
-        } else {
-          item.classList.remove('is-selected');
-          
-          // Si hay control de copias, deshabilitar el input
-          if (showCopies) {
-            const copiesInput = item.querySelector('.entity-selector__copies-input');
-            if (copiesInput) {
-              copiesInput.disabled = true;
-              copiesInput.value = 1; // Reset a 1
-            }
+        // Disable copies input if available
+        if (showCopies) {
+          const copiesInput = entityItem.querySelector('.entity-selector__copies-input');
+          if (copiesInput) {
+            copiesInput.disabled = true;
+            copiesInput.value = 1; // Reset to 1
           }
         }
-        
-        updateSelectedList();
-        updateFormInputs();
-        
-        // Disparar evento para notificar cambios
-        const event = new CustomEvent('entity-selection-changed', {
-          detail: {
-            entityType: entityType,
-            selectedCount: getSelectedCount(),
-            selectedEntities: getSelectedEntities(),
-            totalCount: getTotalCount()
-          }
-        });
-        selector.dispatchEvent(event);
-      });
+      }
+      
+      // Clear search when adding/removing entities
+      clearSearch();
+      
+      updateSelectedList();
+      updateFormInputs();
+      dispatchChangeEvent();
     });
     
-    // Manejar botones de control de copias
+    // Setup copy buttons if needed
     if (showCopies) {
       setupCopyButtons();
     }
     
-    // Filtrado de búsqueda
+    // Search filtering
     if (searchInput) {
       searchInput.addEventListener('input', () => {
         const searchTerm = searchInput.value.toLowerCase().trim();
         filterEntities(searchTerm);
+        
+        // Show/hide clear button based on input value
+        if (clearSearchBtn) {
+          clearSearchBtn.style.display = searchTerm ? 'block' : 'none';
+        }
       });
+      
+      // Initially hide clear button
+      if (clearSearchBtn) {
+        clearSearchBtn.style.display = 'none';
+      }
     }
     
-    // Botón para limpiar la búsqueda
+    // Clear search button
     if (clearSearchBtn) {
       clearSearchBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        filterEntities('');
+        clearSearch();
         searchInput.focus();
       });
     }
     
-    // Función para configurar los botones de copias
+    // Function to setup copy buttons
     function setupCopyButtons() {
       selector.addEventListener('click', (e) => {
         const decreaseBtn = e.target.closest('.entity-selector__copies-btn--decrease');
@@ -115,34 +114,14 @@ export default function initEntitySelector() {
       const controls = button.closest('.entity-selector__copies-controls');
       const input = controls.querySelector('.entity-selector__copies-input');
       const entityItem = button.closest('.entity-selector__item');
-      const entityId = entityItem.getAttribute('data-entity-id');
-      const maxCopies = parseInt(button.dataset.maxCopies || 1, 10);
-      let value = parseInt(input.value, 10);
+      const maxCopies = parseInt(button.dataset.maxCopies || '3', 10);
       
-      if (value > 1) {
-        value--;
-        input.value = value;
-        
-        // Actualizar estado de botones
-        button.disabled = value <= 1;
-        controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
-        
-        // Sincronizar con la otra instancia del mismo item si existe
-        syncCopiesValue(entityId, value);
-        
-        // Actualizar los inputs del formulario
+      const currentValue = parseInt(input.value, 10);
+      if (currentValue > 1) {
+        input.value = currentValue - 1;
+        updateCopyDisplay(entityItem, currentValue - 1);
         updateFormInputs();
-        
-        // Disparar evento
-        const event = new CustomEvent('entity-copies-changed', {
-          detail: {
-            entityType: entityType,
-            totalCount: getTotalCount(),
-            entityId: entityId,
-            copies: value
-          }
-        });
-        selector.dispatchEvent(event);
+        dispatchChangeEvent();
       }
     }
     
@@ -150,133 +129,93 @@ export default function initEntitySelector() {
       const controls = button.closest('.entity-selector__copies-controls');
       const input = controls.querySelector('.entity-selector__copies-input');
       const entityItem = button.closest('.entity-selector__item');
-      const entityId = entityItem.getAttribute('data-entity-id');
-      const maxCopies = parseInt(button.dataset.maxCopies || 1, 10);
-      let value = parseInt(input.value, 10);
+      const maxCopies = parseInt(button.dataset.maxCopies || '3', 10);
       
-      if (value < maxCopies) {
-        value++;
-        input.value = value;
-        
-        // Actualizar estado de botones
-        button.disabled = value >= maxCopies;
-        controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
-        
-        // Sincronizar con la otra instancia del mismo item si existe
-        syncCopiesValue(entityId, value);
-        
-        // Actualizar los inputs del formulario
+      const currentValue = parseInt(input.value, 10);
+      if (currentValue < maxCopies) {
+        input.value = currentValue + 1;
+        updateCopyDisplay(entityItem, currentValue + 1);
         updateFormInputs();
-        
-        // Disparar evento
-        const event = new CustomEvent('entity-copies-changed', {
-          detail: {
-            entityType: entityType,
-            totalCount: getTotalCount(),
-            entityId: entityId,
-            copies: value
-          }
-        });
-        selector.dispatchEvent(event);
+        dispatchChangeEvent();
       }
     }
     
     function handleCopiesInputChange(input) {
-      const controls = input.closest('.entity-selector__copies-controls');
       const entityItem = input.closest('.entity-selector__item');
-      const entityId = entityItem.getAttribute('data-entity-id');
-      const maxCopies = parseInt(controls.querySelector('.entity-selector__copies-btn--increase').dataset.maxCopies || 1, 10);
+      const maxCopies = parseInt(input.dataset.maxCopies || '3', 10);
       let value = parseInt(input.value, 10);
       
-      // Validar límites
-      if (isNaN(value) || value < 1) value = 1;
-      if (value > maxCopies) value = maxCopies;
+      if (isNaN(value) || value < 1) {
+        value = 1;
+      } else if (value > maxCopies) {
+        value = maxCopies;
+      }
       
       input.value = value;
-      
-      // Actualizar estado de botones
-      controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
-      controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
-      
-      // Sincronizar con la otra instancia del mismo item si existe
-      syncCopiesValue(entityId, value);
-      
-      // Actualizar los inputs del formulario
+      updateCopyDisplay(entityItem, value);
       updateFormInputs();
-      
-      // Disparar evento
-      const event = new CustomEvent('entity-copies-changed', {
-        detail: {
-          entityType: entityType,
-          totalCount: getTotalCount(),
-          entityId: entityId,
-          copies: value
-        }
-      });
-      selector.dispatchEvent(event);
+      dispatchChangeEvent();
     }
     
-    // Función para sincronizar el valor de copias entre el item original y el clonado
-    function syncCopiesValue(entityId, value) {
-      const allItems = selector.querySelectorAll(`.entity-selector__item[data-entity-id="${entityId}"]`);
+    function updateCopyDisplay(item, value) {
+      // Update copy display in both available and selected lists
+      const entityId = item.getAttribute('data-entity-id');
+      const allItems = selector.querySelectorAll(`[data-entity-id="${entityId}"]`);
       
-      allItems.forEach(item => {
-        const copiesInput = item.querySelector('.entity-selector__copies-input');
-        if (copiesInput && copiesInput.value != value) {
+      allItems.forEach(itemToUpdate => {
+        const copiesInput = itemToUpdate.querySelector('.entity-selector__copies-input');
+        if (copiesInput && copiesInput.value !== value.toString()) {
           copiesInput.value = value;
-          
-          // Actualizar estado de botones
-          const controls = copiesInput.closest('.entity-selector__copies-controls');
-          if (controls) {
-            const maxCopies = parseInt(controls.querySelector('.entity-selector__copies-btn--increase').dataset.maxCopies || 1, 10);
-            controls.querySelector('.entity-selector__copies-btn--decrease').disabled = value <= 1;
-            controls.querySelector('.entity-selector__copies-btn--increase').disabled = value >= maxCopies;
-          }
         }
       });
     }
     
-    // Función para actualizar la lista de entidades seleccionadas
+    // Function to update selected list
     function updateSelectedList() {
-      const selectedEntities = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+      if (!selectedList) return;
       
-      // Limpiar la lista existente
-      const existingItems = selectedList.querySelectorAll('.entity-selector__item.in-selected-list');
+      // Clear current selected list (except placeholder)
+      const existingItems = selectedList.querySelectorAll('.entity-selector__item');
       existingItems.forEach(item => item.remove());
       
+      // Get selected entities
+      const selectedEntities = getSelectedEntities();
+      
       if (selectedEntities.length > 0) {
-        placeholder.style.display = 'none';
+        // Hide placeholder
+        if (placeholder) placeholder.style.display = 'none';
         
-        // Añadir las entidades seleccionadas
-        selectedEntities.forEach(checkbox => {
-          const originalItem = checkbox.closest('.entity-selector__item');
-          const clonedItem = originalItem.cloneNode(true);
+        // Add selected items to the list
+        selectedEntities.forEach(entity => {
+          // Find the original item
+          const originalItem = selector.querySelector(`.entity-selector__list [data-entity-id="${entity.id}"]`);
+          if (!originalItem) return;
           
-          // Añadir clase para identificar que está en la lista de seleccionados
+          // Clone the item
+          const clonedItem = originalItem.cloneNode(true);
           clonedItem.classList.add('in-selected-list');
           
-          // Habilitar el input de copias si existe
-          const copiesInput = clonedItem.querySelector('.entity-selector__copies-input');
-          if (copiesInput) {
-            copiesInput.disabled = false;
-          }
+          // Remove display style to ensure visibility
+          clonedItem.style.display = '';
           
-          // Añadir botón para quitar de la selección
+          // Create remove button
           const removeBtn = document.createElement('button');
+          removeBtn.type = 'button';
           removeBtn.className = 'entity-selector__remove';
           removeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>';
-          removeBtn.setAttribute('type', 'button');
-          removeBtn.setAttribute('aria-label', 'Remove entity');
+          removeBtn.setAttribute('aria-label', 'Remove');
           
-          // Manejar clic en el botón de eliminar
           removeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             
-            // Desmarcar el checkbox original
-            checkbox.checked = false;
-            originalItem.classList.remove('is-selected');
+            // Uncheck the original checkbox
+            const originalCheckbox = originalItem.querySelector('.entity-selector__checkbox');
+            if (originalCheckbox) {
+              originalCheckbox.checked = false;
+              originalItem.classList.remove('is-selected');
+            }
             
-            // Deshabilitar y resetear copias
+            // Reset copies if applicable
             if (showCopies) {
               const copiesInput = originalItem.querySelector('.entity-selector__copies-input');
               if (copiesInput) {
@@ -285,20 +224,13 @@ export default function initEntitySelector() {
               }
             }
             
-            // Actualizar la lista
+            // Clear search when removing entities
+            clearSearch();
+            
+            // Update the lists
             updateSelectedList();
             updateFormInputs();
-            
-            // Disparar evento
-            const event = new CustomEvent('entity-selection-changed', {
-              detail: {
-                entityType: entityType,
-                selectedCount: getSelectedCount(),
-                selectedEntities: getSelectedEntities(),
-                totalCount: getTotalCount()
-              }
-            });
-            selector.dispatchEvent(event);
+            dispatchChangeEvent();
           });
           
           clonedItem.appendChild(removeBtn);
@@ -306,29 +238,31 @@ export default function initEntitySelector() {
         });
         
       } else {
-        // Mostrar el placeholder cuando no hay elementos seleccionados
-        placeholder.style.display = 'block';
+        // Show placeholder when no items are selected
+        if (placeholder) placeholder.style.display = 'block';
       }
     }
     
-    // Función para actualizar los inputs del formulario
+    // Function to update form inputs
     function updateFormInputs() {
-      // Limpiar contenedor
+      if (!formInputsContainer) return;
+      
+      // Clear container
       formInputsContainer.innerHTML = '';
       
-      // Obtener entidades seleccionadas
+      // Get selected entities
       const selectedEntities = getSelectedEntities();
       
-      // Crear inputs para cada entidad seleccionada
+      // Create inputs for each selected entity
       selectedEntities.forEach((entity, index) => {
-        // Input para el ID
+        // Input for ID
         const idInput = document.createElement('input');
         idInput.type = 'hidden';
         idInput.name = `${fieldName}[${index}][id]`;
         idInput.value = entity.id;
         formInputsContainer.appendChild(idInput);
         
-        // Input para las copias si es necesario
+        // Input for copies if needed
         if (showCopies) {
           const copiesInput = document.createElement('input');
           copiesInput.type = 'hidden';
@@ -339,32 +273,112 @@ export default function initEntitySelector() {
       });
     }
     
-    // Función para filtrar entidades
+    // Function to filter entities
     function filterEntities(searchTerm) {
-      entityItems.forEach(item => {
-        // Solo filtramos en la lista de disponibles, no en los seleccionados
-        if (!item.classList.contains('in-selected-list')) {
-          const name = item.getAttribute('data-entity-name').toLowerCase();
-          const type = item.getAttribute('data-entity-type').toLowerCase();
-          const detailsText = Array.from(item.querySelectorAll('.entity-selector__details'))
-            .map(el => el.textContent.toLowerCase())
-            .join(' ');
-          
-          if (name.includes(searchTerm) || type.includes(searchTerm) || detailsText.includes(searchTerm)) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
+      // Filter items in available list
+      const availableItems = selector.querySelectorAll('.entity-selector__list .entity-selector__item');
+      availableItems.forEach(item => {
+        const name = (item.getAttribute('data-entity-name') || '').toLowerCase();
+        const type = (item.getAttribute('data-entity-type') || '').toLowerCase();
+        const detailsText = Array.from(item.querySelectorAll('.entity-selector__details'))
+          .map(el => el.textContent.toLowerCase())
+          .join(' ');
+        
+        if (searchTerm === '' || name.includes(searchTerm) || type.includes(searchTerm) || detailsText.includes(searchTerm)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
         }
       });
+      
+      // Filter items in selected list
+      const selectedItems = selector.querySelectorAll('.entity-selector__selected-list .entity-selector__item');
+      selectedItems.forEach(item => {
+        const name = (item.getAttribute('data-entity-name') || '').toLowerCase();
+        const type = (item.getAttribute('data-entity-type') || '').toLowerCase();
+        const detailsText = Array.from(item.querySelectorAll('.entity-selector__details'))
+          .map(el => el.textContent.toLowerCase())
+          .join(' ');
+        
+        if (searchTerm === '' || name.includes(searchTerm) || type.includes(searchTerm) || detailsText.includes(searchTerm)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      // Update empty messages if they exist
+      updateEmptyMessages();
     }
     
-    // Función para obtener el número de entidades seleccionadas
+    // Function to clear search
+    function clearSearch() {
+      if (searchInput) {
+        searchInput.value = '';
+        filterEntities('');
+        
+        // Hide clear button
+        if (clearSearchBtn) {
+          clearSearchBtn.style.display = 'none';
+        }
+      }
+    }
+    
+    // Function to update empty messages
+    function updateEmptyMessages() {
+      const availableList = selector.querySelector('.entity-selector__list');
+      const selectedListContainer = selector.querySelector('.entity-selector__selected');
+      
+      // Check available list
+      if (availableList) {
+        const visibleItems = availableList.querySelectorAll('.entity-selector__item:not([style*="display: none"])');
+        let emptyMessage = availableList.querySelector('.entity-selector__empty-search');
+        
+        if (visibleItems.length === 0 && searchInput && searchInput.value.trim() !== '') {
+          if (!emptyMessage) {
+            emptyMessage = document.createElement('div');
+            emptyMessage.className = 'entity-selector__empty-search';
+            emptyMessage.textContent = 'No results found';
+            availableList.appendChild(emptyMessage);
+          }
+          emptyMessage.style.display = 'block';
+        } else if (emptyMessage) {
+          emptyMessage.style.display = 'none';
+        }
+      }
+      
+      // Check selected list
+      if (selectedListContainer && selectedList) {
+        const visibleItems = selectedList.querySelectorAll('.entity-selector__item:not([style*="display: none"])');
+        const hasSelectedItems = selectedList.querySelectorAll('.entity-selector__item').length > 0;
+        
+        if (hasSelectedItems && visibleItems.length === 0 && searchInput && searchInput.value.trim() !== '') {
+          // All selected items are hidden by filter
+          if (placeholder) {
+            placeholder.textContent = 'No selected items match the search';
+            placeholder.style.display = 'block';
+          }
+        } else if (!hasSelectedItems) {
+          // No items selected at all
+          if (placeholder) {
+            placeholder.textContent = placeholder.getAttribute('data-original-text') || 'No items selected';
+            placeholder.style.display = 'block';
+          }
+        } else {
+          // Has visible selected items
+          if (placeholder) {
+            placeholder.style.display = 'none';
+          }
+        }
+      }
+    }
+    
+    // Function to get selected count
     function getSelectedCount() {
       return Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
     }
     
-    // Función para obtener las entidades seleccionadas
+    // Function to get selected entities
     function getSelectedEntities() {
       return Array.from(checkboxes)
         .filter(checkbox => checkbox.checked)
@@ -388,7 +402,7 @@ export default function initEntitySelector() {
         });
     }
     
-    // Función para obtener el total de copias
+    // Function to get total count
     function getTotalCount() {
       return Array.from(checkboxes)
         .filter(checkbox => checkbox.checked)
@@ -402,6 +416,24 @@ export default function initEntitySelector() {
           }
           return total + 1;
         }, 0);
+    }
+    
+    // Function to dispatch change event
+    function dispatchChangeEvent() {
+      const event = new CustomEvent('entity-selection-changed', {
+        detail: {
+          entityType: entityType,
+          selectedCount: getSelectedCount(),
+          selectedEntities: getSelectedEntities(),
+          totalCount: getTotalCount()
+        }
+      });
+      selector.dispatchEvent(event);
+    }
+    
+    // Store original placeholder text
+    if (placeholder) {
+      placeholder.setAttribute('data-original-text', placeholder.textContent);
     }
   });
 }
