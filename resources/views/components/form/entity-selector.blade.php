@@ -11,6 +11,7 @@
   'secondaryField' => 'type',
   'secondaryFieldClass' => '',
   'detailsView' => null, // Vista parcial para renderizar detalles específicos
+  'sortable' => false,
 ])
 
 @php
@@ -23,12 +24,24 @@
   $noEntitiesAvailable = __("forms.entity_selector.no_{$entityType}s_available");
 @endphp
 
+@php
+  // Mapa id => posición (1-based) según el orden de $selected
+  $selectedOrderMap = [];
+  if (is_array($selected)) {
+    foreach (array_values($selected) as $idx => $sel) {
+      if (isset($sel['id'])) {
+        $selectedOrderMap[$sel['id']] = $idx + 1; // 1-based
+      }
+    }
+  }
+@endphp
+
 <div class="form-field">
   @if($label)
     <x-form.label :for="$name" :required="$required">{{ $label }}</x-form.label>
   @endif
   
-  <div class="entity-selector" data-entity-type="{{ $entityType }}" data-field-name="{{ $name }}" {{ $attributes }}>
+  <div class="entity-selector" data-entity-type="{{ $entityType }}" data-field-name="{{ $name }}" @if($sortable) data-sortable-selected="1" @endif {{ $attributes }}>
     <div class="entity-selector__controls">
       <div class="entity-selector__search">
         <input type="text" class="form-input entity-selector__search-input" placeholder="{{ $searchPlaceholder }}" id="{{ $entityType }}-search-input">
@@ -106,7 +119,8 @@
             <div class="entity-selector__item {{ $isSelected ? 'is-selected' : '' }}" 
                  data-entity-id="{{ $entity->id }}" 
                  data-entity-name="{{ $mainValue }}" 
-                 data-entity-type="{{ $secondaryValue }}">
+                 data-entity-type="{{ $secondaryValue }}"
+                 data-selected-order="{{ $selectedOrderMap[$entity->id] ?? '' }}">
               {{-- Checkbox sin name attribute para evitar envío duplicado --}}
               <input type="checkbox" 
                      id="{{ $entityType }}_{{ $entity->id }}" 

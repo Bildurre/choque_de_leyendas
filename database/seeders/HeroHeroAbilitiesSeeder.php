@@ -2,37 +2,46 @@
 
 namespace Database\Seeders;
 
-use App\Models\Hero;
-use App\Models\HeroAbility;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 
 class HeroHeroAbilitiesSeeder extends Seeder
 {
-  /**
-   * Run the database seeds.
-   */
   public function run(): void
   {
-    // Leer el archivo JSON con las relaciones
+    // Lee JSON
     $json = File::get(database_path('data/heroHeroAbilities.json'));
     $relations = json_decode($json, true);
 
-    // Array para almacenar los datos a insertar
+    // Si el JSON viene con 'position', la usamos; si no, contamos por héroe
+    $posByHero = [];
     $dataToInsert = [];
 
-    // Preparar los datos para la inserción masiva
-    foreach ($relations as $relation) {
+    foreach ($relations as $rel) {
+      $heroId = (int) $rel['hero_id'];
+      $abilityId = (int) $rel['hero_ability_id'];
+
+      // si no viene position en el JSON, la asignamos incremental
+      $position = isset($rel['position'])
+        ? (int) $rel['position']
+        : (($posByHero[$heroId] ?? 0) + 1);
+
+      $posByHero[$heroId] = $position;
+
       $dataToInsert[] = [
-        'hero_id' => $relation['hero_id'],
-        'hero_ability_id' => $relation['hero_ability_id']
+        'hero_id' => $heroId,
+        'hero_ability_id' => $abilityId,
+        'position' => $position,
+        'created_at' => now(),
+        'updated_at' => now(),
       ];
     }
 
-    // Insertar los datos en la tabla pivot
+    // Inserción masiva (si la tabla ya tiene datos, decide si truncas antes)
+    // DB::table('hero_hero_ability')->truncate();
     DB::table('hero_hero_ability')->insert($dataToInsert);
 
-    $this->command->info("Relaciones entre héroes y habilidades creadas con éxito");
+    $this->command?->info("Relaciones héroe ↔ habilidad insertadas con posición.");
   }
 }

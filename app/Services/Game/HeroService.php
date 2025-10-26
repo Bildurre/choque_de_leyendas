@@ -97,40 +97,25 @@ class HeroService
    */
   public function create(array $data): Hero
   {
+    DB::beginTransaction();
     try {
-      // Start a transaction
-      DB::beginTransaction();
-      
       $hero = new Hero();
-      
-      // Process translatable fields
       $data = $this->processTranslatableFields($data, $this->translatableFields);
-      
-      // Apply translations
       $this->applyTranslations($hero, $data, $this->translatableFields);
-      
-      // Set regular fields
       $this->setHeroFields($hero, $data);
-      
-      // Handle image upload
-      if (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+      if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
         $hero->storeImage($data['image']);
       }
-      
       $hero->save();
-      
-      // Sync hero abilities
+
       if (isset($data['hero_abilities']) && is_array($data['hero_abilities'])) {
-        $abilityIds = $this->processHeroAbilities($data['hero_abilities']);
-        $hero->heroAbilities()->sync($abilityIds);
+        $syncPayload = $this->processHeroAbilitiesWithOrder($data['hero_abilities']);
+        $hero->heroAbilities()->sync($syncPayload); // <-- ahora con position
       }
-      
-      // Commit the transaction
+
       DB::commit();
-      
       return $hero;
     } catch (\Exception $e) {
-      // Rollback the transaction in case of error
       DB::rollBack();
       throw $e;
     }
@@ -146,66 +131,54 @@ class HeroService
    */
   public function update(Hero $hero, array $data): Hero
   {
+    DB::beginTransaction();
     try {
-      // Start a transaction
-      DB::beginTransaction();
-      
-      // Process translatable fields
       $data = $this->processTranslatableFields($data, $this->translatableFields);
-      
-      // Apply translations
       $this->applyTranslations($hero, $data, $this->translatableFields);
-      
-      // Set regular fields
       $this->setHeroFields($hero, $data);
-      
-      // Handle image updates
+
       if (isset($data['remove_image']) && $data['remove_image']) {
         $hero->deleteImage();
-      } elseif (isset($data['image']) && $data['image'] instanceof UploadedFile) {
+      } elseif (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
         $hero->storeImage($data['image']);
       }
-      
+
       $hero->save();
-      
-      // Sync hero abilities
+
       if (isset($data['hero_abilities']) && is_array($data['hero_abilities'])) {
-        $abilityIds = $this->processHeroAbilities($data['hero_abilities']);
-        $hero->heroAbilities()->sync($abilityIds);
+        $syncPayload = $this->processHeroAbilitiesWithOrder($data['hero_abilities']);
+        $hero->heroAbilities()->sync($syncPayload); // <-- ahora con position
+      } else {
+        // si no viene el campo, opcionalmente no tocar; si quieres vaciar cuando no llegue:
+        // $hero->heroAbilities()->sync([]);
       }
-      
-      // Commit the transaction
+
       DB::commit();
-      
       return $hero;
     } catch (\Exception $e) {
-      // Rollback the transaction in case of error
       DB::rollBack();
       throw $e;
     }
   }
 
   /**
-   * Process hero abilities data to extract only IDs
-   * 
-   * @param array $abilitiesData
-   * @return array
+   * Recibe el array ordenado del formulario y devuelve payload para sync:
+   * [ ability_id => ['position' => N], ... ]
    */
-  protected function processHeroAbilities(array $abilitiesData): array
+  protected function processHeroAbilitiesWithOrder(array $abilitiesData): array
   {
-    $abilityIds = [];
-    
-    foreach ($abilitiesData as $ability) {
+    $syncPayload = [];
+    foreach (array_values($abilitiesData) as $index => $ability) {
       if (is_array($ability) && isset($ability['id'])) {
-        // Si viene en formato de array con 'id'
-        $abilityIds[] = $ability['id'];
+        $id = (int) $ability['id'];
       } elseif (is_numeric($ability)) {
-        // Si viene como ID directo (por compatibilidad)
-        $abilityIds[] = $ability;
+        $id = (int) $ability; // compat
+      } else {
+        continue;
       }
+      $syncPayload[$id] = ['position' => $index + 1]; // 1-based
     }
-    
-    return $abilityIds;
+    return $syncPayload;
   }
 
   /**

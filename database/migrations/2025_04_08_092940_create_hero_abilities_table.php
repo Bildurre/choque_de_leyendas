@@ -29,10 +29,12 @@ return new class extends Migration
       $table->id();
       $table->foreignId('hero_id')->constrained()->onDelete('cascade');
       $table->foreignId('hero_ability_id')->constrained()->onDelete('cascade');
+      $table->unsignedInteger('position')->default(1);
       $table->datetimes();
 
       // Índice único para evitar duplicados
       $table->unique(['hero_id', 'hero_ability_id'], 'hero_ability_unique');
+      $table->index(['hero_id', 'position'], 'hero_ability_position_idx');
     });
   }
 

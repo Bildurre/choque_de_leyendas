@@ -44,7 +44,8 @@ class HeroRequest extends FormRequest
       'strength' => ['required', 'integer', 'min:' . $config->min_attribute_value, 'max:' . $config->max_attribute_value],
       'armor' => ['required', 'integer', 'min:' . $config->min_attribute_value, 'max:' . $config->max_attribute_value],
       'hero_abilities' => ['nullable', 'array'],
-      'hero_abilities.*' => ['exists:hero_abilities,id'],
+      'hero_abilities.*' => ['array'], // <-- cada item es un array {id}
+      'hero_abilities.*.id' => ['required','exists:hero_abilities,id','distinct'], // <-- validar el id
       'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
       'remove_image' => ['nullable', 'boolean'],
       'is_published' => ['nullable', 'boolean'],

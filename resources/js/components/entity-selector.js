@@ -1,4 +1,6 @@
 // resources/js/components/entity-selector.js
+import Sortable from 'sortablejs'; // [sortable] requiere que sortablejs esté instalado
+
 export default function initEntitySelector() {
   const selectors = document.querySelectorAll('.entity-selector');
   if (!selectors.length) return;
@@ -13,9 +15,14 @@ export default function initEntitySelector() {
     const clearSearchBtn = selector.querySelector('.entity-selector__search-clear');
     const showCopies = selector.querySelector('.entity-selector__copies') !== null;
     const formInputsContainer = selector.querySelector('.entity-selector__form-inputs');
-    
+
+    // [sortable] flag opcional: activar si el root tiene data-sortable-selected="1"
+    const sortableEnabled = selector.getAttribute('data-sortable-selected') === '1';
+    let sortableInstance = null;
+
     // Initialize
     updateSelectedList();
+    initSortable(); // [sortable]
     updateFormInputs();
     
     // Handle entity selection
@@ -33,7 +40,6 @@ export default function initEntitySelector() {
       if (checkbox.checked) {
         entityItem.classList.add('is-selected');
         
-        // Enable copies input if available
         if (showCopies) {
           const copiesInput = entityItem.querySelector('.entity-selector__copies-input');
           if (copiesInput) copiesInput.disabled = false;
@@ -41,7 +47,6 @@ export default function initEntitySelector() {
       } else {
         entityItem.classList.remove('is-selected');
         
-        // Disable copies input if available
         if (showCopies) {
           const copiesInput = entityItem.querySelector('.entity-selector__copies-input');
           if (copiesInput) {
@@ -51,7 +56,6 @@ export default function initEntitySelector() {
         }
       }
       
-      // Clear search when adding/removing entities
       clearSearch();
       
       updateSelectedList();
@@ -69,14 +73,10 @@ export default function initEntitySelector() {
       searchInput.addEventListener('input', () => {
         const searchTerm = searchInput.value.toLowerCase().trim();
         filterEntities(searchTerm);
-        
-        // Show/hide clear button based on input value
         if (clearSearchBtn) {
           clearSearchBtn.style.display = searchTerm ? 'block' : 'none';
         }
       });
-      
-      // Initially hide clear button
       if (clearSearchBtn) {
         clearSearchBtn.style.display = 'none';
       }
@@ -158,10 +158,8 @@ export default function initEntitySelector() {
     }
     
     function updateCopyDisplay(item, value) {
-      // Update copy display in both available and selected lists
       const entityId = item.getAttribute('data-entity-id');
       const allItems = selector.querySelectorAll(`[data-entity-id="${entityId}"]`);
-      
       allItems.forEach(itemToUpdate => {
         const copiesInput = itemToUpdate.querySelector('.entity-selector__copies-input');
         if (copiesInput && copiesInput.value !== value.toString()) {
@@ -173,32 +171,78 @@ export default function initEntitySelector() {
     // Function to update selected list
     function updateSelectedList() {
       if (!selectedList) return;
-      
-      // Clear current selected list (except placeholder)
+
+      // [sortable] guardamos el orden previo (por IDs) para respetarlo
+      const previousOrder = sortableEnabled
+        ? Array.from(selectedList.querySelectorAll('.entity-selector__item')).map(i => i.getAttribute('data-entity-id'))
+        : [];
+
+      // Limpiar (excepto placeholder)
       const existingItems = selectedList.querySelectorAll('.entity-selector__item');
       existingItems.forEach(item => item.remove());
       
       // Get selected entities
       const selectedEntities = getSelectedEntities();
-      
+
       if (selectedEntities.length > 0) {
-        // Hide placeholder
         if (placeholder) placeholder.style.display = 'none';
-        
-        // Add selected items to the list
-        selectedEntities.forEach(entity => {
-          // Find the original item
+
+        // [sortable] ordenar los seleccionados según el orden previo; los nuevos al final
+        const orderedEntities = (function() {
+          if (!sortableEnabled) return selectedEntities;
+
+          // 1) Si ya había una lista dibujada, mantén ese orden (previousOrder)
+          if (previousOrder.length) {
+            return selectedEntities.slice().sort((a, b) => {
+              const ia = previousOrder.indexOf(a.id);
+              const ib = previousOrder.indexOf(b.id);
+              if (ia === -1 && ib === -1) return 0;
+              if (ia === -1) return 1;
+              if (ib === -1) return -1;
+              return ia - ib;
+            });
+          }
+
+          // 2) Primera carga: usa selectedOrder (del Blade). Los que no lo tengan, al final.
+          const withOrder = [], withoutOrder = [];
+          selectedEntities.forEach(e => (Number.isFinite(e.selectedOrder) ? withOrder : withoutOrder)
+            [(Number.isFinite(e.selectedOrder) ? 'push' : 'push')](e));
+          withOrder.sort((a, b) => a.selectedOrder - b.selectedOrder);
+          return withOrder.concat(withoutOrder);
+        })();
+
+
+        orderedEntities.forEach(entity => {
           const originalItem = selector.querySelector(`.entity-selector__list [data-entity-id="${entity.id}"]`);
           if (!originalItem) return;
           
-          // Clone the item
           const clonedItem = originalItem.cloneNode(true);
           clonedItem.classList.add('in-selected-list');
-          
-          // Remove display style to ensure visibility
           clonedItem.style.display = '';
+
+          if (sortableEnabled) {
+            const dragIcon = document.createElement('span');
+            dragIcon.className = 'entity-selector__drag-icon'; // clase “hook” por si quieres estilizar
+            dragIcon.setAttribute('aria-hidden', 'true');
+            dragIcon.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <circle cx="5" cy="5" r="1"></circle>
+                <circle cx="12" cy="5" r="1"></circle>
+                <circle cx="19" cy="5" r="1"></circle>
+                <circle cx="5" cy="12" r="1"></circle>
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="19" cy="12" r="1"></circle>
+                <circle cx="5" cy="19" r="1"></circle>
+                <circle cx="12" cy="19" r="1"></circle>
+                <circle cx="19" cy="19" r="1"></circle>
+              </svg>
+            `;
+
+            // lo colocamos al inicio del contenido del item clonado
+            const content = clonedItem.querySelector('.entity-selector__content') || clonedItem;
+            content.insertBefore(dragIcon, content.firstChild);
+          }
           
-          // Create remove button
           const removeBtn = document.createElement('button');
           removeBtn.type = 'button';
           removeBtn.className = 'entity-selector__remove';
@@ -207,15 +251,11 @@ export default function initEntitySelector() {
           
           removeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            
-            // Uncheck the original checkbox
             const originalCheckbox = originalItem.querySelector('.entity-selector__checkbox');
             if (originalCheckbox) {
               originalCheckbox.checked = false;
               originalItem.classList.remove('is-selected');
             }
-            
-            // Reset copies if applicable
             if (showCopies) {
               const copiesInput = originalItem.querySelector('.entity-selector__copies-input');
               if (copiesInput) {
@@ -223,11 +263,8 @@ export default function initEntitySelector() {
                 copiesInput.value = 1;
               }
             }
-            
-            // Clear search when removing entities
+            originalItem.removeAttribute('data-selected-order');
             clearSearch();
-            
-            // Update the lists
             updateSelectedList();
             updateFormInputs();
             dispatchChangeEvent();
@@ -236,9 +273,12 @@ export default function initEntitySelector() {
           clonedItem.appendChild(removeBtn);
           selectedList.appendChild(clonedItem);
         });
-        
+
+        // [sortable] re-inicializar tras volver a pintar
+        if (sortableEnabled) {
+          initSortable(true);
+        }
       } else {
-        // Show placeholder when no items are selected
         if (placeholder) placeholder.style.display = 'block';
       }
     }
@@ -246,23 +286,17 @@ export default function initEntitySelector() {
     // Function to update form inputs
     function updateFormInputs() {
       if (!formInputsContainer) return;
-      
-      // Clear container
       formInputsContainer.innerHTML = '';
-      
-      // Get selected entities
-      const selectedEntities = getSelectedEntities();
-      
-      // Create inputs for each selected entity
-      selectedEntities.forEach((entity, index) => {
-        // Input for ID
+
+      const selectedEntitiesOrdered = getSelectedEntitiesInVisualOrder(); // [sortable]
+
+      selectedEntitiesOrdered.forEach((entity, index) => {
         const idInput = document.createElement('input');
         idInput.type = 'hidden';
         idInput.name = `${fieldName}[${index}][id]`;
         idInput.value = entity.id;
         formInputsContainer.appendChild(idInput);
         
-        // Input for copies if needed
         if (showCopies) {
           const copiesInput = document.createElement('input');
           copiesInput.type = 'hidden';
@@ -272,10 +306,47 @@ export default function initEntitySelector() {
         }
       });
     }
+
+    // [sortable] Devuelve los seleccionados siguiendo el orden visual del selectedList (si está activo)
+    function getSelectedEntitiesInVisualOrder() {
+      const base = getSelectedEntities();
+      if (!sortableEnabled || !selectedList) return base;
+
+      const byId = new Map(base.map(e => [String(e.id), e]));
+      const ordered = [];
+      selectedList.querySelectorAll('.entity-selector__item').forEach(item => {
+        const id = String(item.getAttribute('data-entity-id'));
+        if (byId.has(id)) ordered.push(byId.get(id));
+      });
+      // por si hubiera algún seleccionado que no esté pintado aún (debería no pasar)
+      base.forEach(e => { if (!ordered.includes(e)) ordered.push(e); });
+      return ordered;
+    }
+
+    // [sortable] Inicializa Sortable sobre la lista de seleccionados
+    function initSortable(recreate = false) {
+      if (!sortableEnabled || !selectedList) return;
+
+      if (recreate && sortableInstance) {
+        sortableInstance.destroy();
+        sortableInstance = null;
+      }
+      if (sortableInstance) return;
+
+      sortableInstance = Sortable.create(selectedList, {
+        animation: 150,
+        draggable: '.entity-selector__item',
+        // handle opcional: si quisieras limitar el arrastre a alguna zona añade aquí el selector
+        onEnd: () => {
+          // tras reordenar, actualizamos inputs ocultos y disparamos evento
+          updateFormInputs();
+          dispatchChangeEvent();
+        }
+      });
+    }
     
     // Function to filter entities
     function filterEntities(searchTerm) {
-      // Filter items in available list
       const availableItems = selector.querySelectorAll('.entity-selector__list .entity-selector__item');
       availableItems.forEach(item => {
         const name = (item.getAttribute('data-entity-name') || '').toLowerCase();
@@ -291,7 +362,6 @@ export default function initEntitySelector() {
         }
       });
       
-      // Filter items in selected list
       const selectedItems = selector.querySelectorAll('.entity-selector__selected-list .entity-selector__item');
       selectedItems.forEach(item => {
         const name = (item.getAttribute('data-entity-name') || '').toLowerCase();
@@ -307,29 +377,23 @@ export default function initEntitySelector() {
         }
       });
       
-      // Update empty messages if they exist
       updateEmptyMessages();
     }
     
-    // Function to clear search
     function clearSearch() {
       if (searchInput) {
         searchInput.value = '';
         filterEntities('');
-        
-        // Hide clear button
         if (clearSearchBtn) {
           clearSearchBtn.style.display = 'none';
         }
       }
     }
     
-    // Function to update empty messages
     function updateEmptyMessages() {
       const availableList = selector.querySelector('.entity-selector__list');
       const selectedListContainer = selector.querySelector('.entity-selector__selected');
       
-      // Check available list
       if (availableList) {
         const visibleItems = availableList.querySelectorAll('.entity-selector__item:not([style*="display: none"])');
         let emptyMessage = availableList.querySelector('.entity-selector__empty-search');
@@ -347,25 +411,21 @@ export default function initEntitySelector() {
         }
       }
       
-      // Check selected list
       if (selectedListContainer && selectedList) {
         const visibleItems = selectedList.querySelectorAll('.entity-selector__item:not([style*="display: none"])');
         const hasSelectedItems = selectedList.querySelectorAll('.entity-selector__item').length > 0;
         
         if (hasSelectedItems && visibleItems.length === 0 && searchInput && searchInput.value.trim() !== '') {
-          // All selected items are hidden by filter
           if (placeholder) {
             placeholder.textContent = 'No selected items match the search';
             placeholder.style.display = 'block';
           }
         } else if (!hasSelectedItems) {
-          // No items selected at all
           if (placeholder) {
             placeholder.textContent = placeholder.getAttribute('data-original-text') || 'No items selected';
             placeholder.style.display = 'block';
           }
         } else {
-          // Has visible selected items
           if (placeholder) {
             placeholder.style.display = 'none';
           }
@@ -373,36 +433,29 @@ export default function initEntitySelector() {
       }
     }
     
-    // Function to get selected count
     function getSelectedCount() {
       return Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
     }
     
-    // Function to get selected entities
     function getSelectedEntities() {
       return Array.from(checkboxes)
         .filter(checkbox => checkbox.checked)
         .map(checkbox => {
           const item = checkbox.closest('.entity-selector__item');
           const result = {
-            id: checkbox.value,
-            name: item.getAttribute('data-entity-name')
+            id: String(checkbox.value),
+            name: item.getAttribute('data-entity-name'),
+            // ⬇️ nuevo: orden inicial que viene desde Blade (string o vacío)
+            selectedOrder: parseInt(item.getAttribute('data-selected-order') || '', 10)
           };
-          
           if (showCopies) {
             const copiesInput = item.querySelector('.entity-selector__copies-input');
-            if (copiesInput) {
-              result.copies = parseInt(copiesInput.value, 10);
-            } else {
-              result.copies = 1;
-            }
+            result.copies = copiesInput ? parseInt(copiesInput.value, 10) : 1;
           }
-          
           return result;
         });
     }
     
-    // Function to get total count
     function getTotalCount() {
       return Array.from(checkboxes)
         .filter(checkbox => checkbox.checked)
@@ -418,20 +471,18 @@ export default function initEntitySelector() {
         }, 0);
     }
     
-    // Function to dispatch change event
     function dispatchChangeEvent() {
       const event = new CustomEvent('entity-selection-changed', {
         detail: {
           entityType: entityType,
           selectedCount: getSelectedCount(),
-          selectedEntities: getSelectedEntities(),
+          selectedEntities: getSelectedEntitiesInVisualOrder(), // [sortable]
           totalCount: getTotalCount()
         }
       });
       selector.dispatchEvent(event);
     }
     
-    // Store original placeholder text
     if (placeholder) {
       placeholder.setAttribute('data-original-text', placeholder.textContent);
     }

@@ -418,9 +418,11 @@ class Hero extends Model implements LocalizedUrlRoutable
    * Get the abilities of the hero.
    */
   public function heroAbilities()
-  {
-    return $this->belongsToMany(HeroAbility::class, 'hero_hero_ability');
-  }
+{
+  return $this->belongsToMany(HeroAbility::class, 'hero_hero_ability')
+    ->withPivot('position')
+    ->orderBy('hero_hero_ability.position');
+}
 
   /**
    * Calculate total health based on attributes and configuration

@@ -153,6 +153,7 @@
         entityType="ability"
         secondaryField="attackRange.name"
         :detailsView="'admin.heroes._ability-details'"
+        :sortable="true"
       />
     </x-form.fieldset>
 
