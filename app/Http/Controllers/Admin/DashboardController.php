@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\DashboardService;
 
@@ -15,9 +16,11 @@ class DashboardController extends Controller
     $this->dashboardService = $dashboardService;
   }
 
-  public function index(): View
+  public function index(Request $request): View
   {
-    $stats = $this->dashboardService->getAllStats();
+    $selectedFactionId = $request->get('faction_id');
+    
+    $stats = $this->dashboardService->getAllStats($selectedFactionId);
     
     return view('admin.dashboard.index', compact('stats'));
   }

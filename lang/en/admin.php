@@ -158,6 +158,32 @@ return [
         'popular_hero_classes' => 'Popular Hero Classes',
         'mode_details' => 'Mode Details',
       ],
+      'faction_details' => [
+        'title' => 'Faction Details',
+        'select_faction' => 'Select a faction',
+        'select_placeholder' => '-- Select a faction --',
+        'no_faction_selected' => 'Select a faction to view detailed statistics',
+        
+        'heroes_stats' => 'Heroes Statistics',
+        'heroes_by_superclass' => 'Heroes by Superclass',
+        'heroes_by_class' => 'Heroes by Class',
+        'hero_attributes' => 'Average Hero Attributes',
+        
+        'abilities_stats' => 'Hero Abilities Statistics',
+        'abilities_by_attack_type' => 'Abilities by Attack Type',
+        'abilities_by_attack_subtype' => 'Abilities by Attack Subtype',
+        'abilities_by_attack_range' => 'Abilities by Attack Range',
+        
+        'cards_stats' => 'Cards Statistics',
+        'cards_by_dice_cost' => 'Cards by Dice Cost',
+        'cards_by_specific_cost' => 'Main Specific Costs',
+        'cards_by_type' => 'Cards by Type',
+        'cards_by_subtype' => 'Cards by Subtype',
+        'cards_by_attack_type' => 'Cards by Attack Type',
+        'cards_by_attack_subtype' => 'Cards by Attack Subtype',
+        
+        'equipment_distribution' => 'Equipment Distribution',
+      ],
     ],
   ],
   

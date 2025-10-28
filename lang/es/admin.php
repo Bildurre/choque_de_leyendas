@@ -160,6 +160,32 @@ return [
         'popular_hero_classes' => 'Clases de Héroe Populares',
         'mode_details' => 'Detalles por Modo',
       ],
+      'faction_details' => [
+        'title' => 'Detalles de Facción',
+        'select_faction' => 'Selecciona una facción',
+        'select_placeholder' => '-- Selecciona una facción --',
+        'no_faction_selected' => 'Selecciona una facción para ver estadísticas detalladas',
+        
+        'heroes_stats' => 'Estadísticas de Héroes',
+        'heroes_by_superclass' => 'Héroes por Superclase',
+        'heroes_by_class' => 'Héroes por Clase',
+        'hero_attributes' => 'Atributos Medios de Héroes',
+        
+        'abilities_stats' => 'Estadísticas de Habilidades de Héroe',
+        'abilities_by_attack_type' => 'Habilidades por Tipo de Ataque',
+        'abilities_by_attack_subtype' => 'Habilidades por Subtipo de Ataque',
+        'abilities_by_attack_range' => 'Habilidades por Rango de Ataque',
+        
+        'cards_stats' => 'Estadísticas de Cartas',
+        'cards_by_dice_cost' => 'Cartas por Coste en Dados',
+        'cards_by_specific_cost' => 'Costes Específicos Principales',
+        'cards_by_type' => 'Cartas por Tipo',
+        'cards_by_subtype' => 'Cartas por Subtipo',
+        'cards_by_attack_type' => 'Cartas por Tipo de Ataque',
+        'cards_by_attack_subtype' => 'Cartas por Subtipo de Ataque',
+        
+        'equipment_distribution' => 'Distribución de Equipamiento',
+      ],
     ],
   ],
 

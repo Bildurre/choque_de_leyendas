@@ -6,6 +6,7 @@
     
     <div class="dashboard__content">
       <div class="dashboard__modules">
+        @include('admin.dashboard.modules._faction-details-module')
         @include('admin.dashboard.modules._factions-module')
         @include('admin.dashboard.modules._cards-module')
         @include('admin.dashboard.modules._heroes-module')
