@@ -96,7 +96,7 @@
           
           @if($counter->effect)
             <div class="counter-effect">
-              {{ strip_tags($counter->effect) }}
+              {!! strip_tags($counter->effect) !!}
             </div>
           @endif
         </x-entity.list-card>
