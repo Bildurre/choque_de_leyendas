@@ -144,16 +144,11 @@
       />
     </x-form.fieldset>
     
-    <x-form.fieldset :legend="__('entities.heroes.actives')">      
-      <x-form.entity-selector
+    <x-form.fieldset :legend="__('entities.heroes.actives')">
+      <x-form.hero-ability-selector
+        :abilities="$heroAbilities"
+        :selectedAbilities="$selectedAbilities"
         name="hero_abilities"
-        :label="__('entities.heroes.select_abilities')"
-        :entities="$heroAbilities"
-        :selected="$selectedAbilities"
-        entityType="ability"
-        secondaryField="attackRange.name"
-        :detailsView="'admin.heroes._ability-details'"
-        :sortable="true"
       />
     </x-form.fieldset>
 

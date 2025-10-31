@@ -14,11 +14,6 @@
   
   <input type="hidden" name="game_mode_id" value="{{ $gameModeId ?? (isset($factionDeck) ? $factionDeck->game_mode_id : '') }}">
   
-  <!-- Elemento oculto para pasar la configuración a JavaScript -->
-  <script type="application/json" id="deck-config-data">
-    @json($deckConfig ?? null)
-  </script>
-  
   <x-form.card :submit_label="$submitLabel" :cancel_route="route('admin.faction-decks.index')">
       
     <p>{{ __('entities.faction_decks.selected_game_mode') }}: <strong>{{ $gameMode->name ?? (isset($factionDeck) ? $factionDeck->gameMode->name : '') }}</strong></p>
@@ -28,7 +23,6 @@
           <li>{{ __('entities.faction_decks.min_cards') }}: <strong>{{ $deckConfig->min_cards }}</strong></li>
           <li>{{ __('entities.faction_decks.max_cards') }}: <strong>{{ $deckConfig->max_cards }}</strong></li>
           <li>{{ __('entities.faction_decks.max_copies_per_card') }}: <strong>{{ $deckConfig->max_copies_per_card }}</strong></li>
-          <li>{{ __('entities.faction_decks.max_copies_per_hero') }}: <strong>{{ $deckConfig->max_copies_per_hero }}</strong></li>
           <li>{{ __('entities.faction_decks.required_heroes') }}: <strong>{{ $deckConfig->required_heroes }}</strong></li>
         </ul>
     @else
@@ -79,52 +73,24 @@
         />
     </x-form.fieldset>
     
-    <x-form.fieldset :legend="__('entities.faction_decks.cards') . ': 0/'.$deckConfig->min_cards.'-'.$deckConfig->max_cards ">
-      <x-form.entity-selector
-        name="cards"
-        :label="__('entities.faction_decks.select_cards')"
-        :entities="$allCards"
-        :selected="$selectedCards ?? []"
-        entityType="card"
-        secondaryField="cardType.name"
-        :showCopies="true"
+    <x-form.fieldset :legend="__('entities.faction_decks.cards')">
+      <x-form.deck-card-selector
+        :cards="$allCards"
+        :selectedCards="$selectedCards ?? []"
         :maxCopies="$deckConfig->max_copies_per_card"
-        :detailsView="'admin.faction-decks._card-details'"
-        data-faction-filter="true"
+        :minCards="$deckConfig->min_cards"
+        :maxCards="$deckConfig->max_cards"
+        name="cards"
       />
     </x-form.fieldset>
 
-    <x-form.fieldset :legend="__('entities.faction_decks.heroes') . ': 0/'.$deckConfig->required_heroes">
-      <x-form.entity-selector
+    <x-form.fieldset :legend="__('entities.faction_decks.heroes')">
+      <x-form.deck-hero-selector
+        :heroes="$allHeroes"
+        :selectedHeroes="$selectedHeroes ?? []"
+        :requiredHeroes="$deckConfig->required_heroes"
         name="heroes"
-        :label="__('entities.faction_decks.select_heroes')"
-        :entities="$allHeroes"
-        :selected="$selectedHeroes ?? []"
-        entityType="hero"
-        secondaryField="heroClass.name"
-        :showCopies="true"
-        :maxCopies="$deckConfig->max_copies_per_hero"
-        :detailsView="'admin.faction-decks._hero-details'"
-        data-faction-filter="true"
       />
     </x-form.fieldset>
   </x-form.card>
 </form>
-
-<script>
-  // Datos para filtrado por facción
-  window.entityData = {
-    cards: @json($allCards->map(function($card) {
-      return [
-        'id' => $card->id,
-        'faction_id' => $card->faction_id
-      ];
-    })),
-    heroes: @json($allHeroes->map(function($hero) {
-      return [
-        'id' => $hero->id,
-        'faction_id' => $hero->faction_id
-      ];
-    }))
-  };
-</script>

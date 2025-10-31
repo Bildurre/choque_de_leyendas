@@ -56,7 +56,9 @@
 @use 'components/form/cost-input';
 @use 'components/form/color-picker';
 @use 'components/form/image-upload';
-@use 'components/form/entity-selector';
+@use 'components/form/hero-ability-selector';
+@use 'components/form/deck-card-selector';
+@use 'components/form/deck-hero-selector';
 @use 'components/form/number';
 @use 'components/form/fieldset';
 @use 'components/form/radio';
