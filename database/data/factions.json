@@ -2,6 +2,25 @@
   {
     "name": 
     {
+      "en": "Mercenaries",
+      "es": "Mercenarios"
+    },
+    "lore_text":
+    {
+      "en": "The Mercenaries have no flag, no homeland, no loyalty beyond gold. They are warriors from all corners of Ulkhimarel, united only by their willingness to fight for the highest bidder. In battle, they are unpredictable and diverse, bringing skills from every faction. Where others see betrayal, they see opportunity.",
+      "es": "Los Mercenarios no tienen bandera, ni patria, ni lealtad más allá del oro. Son guerreros de todos los rincones de Ulkhimarel, unidos solo por su disposición a luchar por el mejor postor. En batalla, son impredecibles y diversos, trayendo habilidades de cada facción. Donde otros ven traición, ellos ven oportunidad."
+    },
+    "epic_quote":
+    {
+      "en": "Loyalty is golden, and gold is our only master.",
+      "es": "La lealtad es dorada, y el oro es nuestro único amo."
+    },
+    "color": "#9E9E9E",
+    "icon": "images/factions/mercenarios.jpeg"
+  },
+  {
+    "name": 
+    {
       "en": "Defenders of Terik",
       "es": "Defensores de Terik"
     },
