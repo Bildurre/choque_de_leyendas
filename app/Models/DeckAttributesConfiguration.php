@@ -19,7 +19,6 @@ class DeckAttributesConfiguration extends Model
     'min_cards',
     'max_cards',
     'max_copies_per_card',
-    'max_copies_per_hero',
     'required_heroes',
   ];
 
@@ -32,7 +31,6 @@ class DeckAttributesConfiguration extends Model
     'min_cards' => 'integer',
     'max_cards' => 'integer',
     'max_copies_per_card' => 'integer',
-    'max_copies_per_hero' => 'integer',
     'required_heroes' => 'integer',
   ];
 
@@ -47,12 +45,12 @@ class DeckAttributesConfiguration extends Model
   /**
    * Validate if a deck meets the configuration requirements
    * 
-   * @param int $totalCards
-   * @param bool $hasExceededCardCopies
-   * @param bool $hasExceededHeroCopies
+   * @param int $totalCards Total number of cards (sum of copies)
+   * @param bool $hasExceededCardCopies Whether any card exceeds max copies
+   * @param int $totalHeroes Total number of heroes
    * @return array Array with validation results
    */
-  public function validateDeck(int $totalCards, bool $hasExceededCardCopies, bool $hasExceededHeroCopies, int $totalHeroes = 0): array
+  public function validateDeck(int $totalCards, bool $hasExceededCardCopies, int $totalHeroes = 0): array
   {
     $isValid = true;
     $errors = [];
@@ -74,13 +72,7 @@ class DeckAttributesConfiguration extends Model
       $errors[] = "El mazo no puede tener más de {$this->max_copies_per_card} copias de una misma carta.";
     }
 
-    // Check hero copies
-    if ($hasExceededHeroCopies) {
-      $isValid = false;
-      $errors[] = "El mazo no puede tener más de {$this->max_copies_per_hero} copias de un mismo héroe.";
-    }
-
-    // Check required heroes
+    // Check required heroes (exact number)
     if ($this->required_heroes > 0 && $totalHeroes != $this->required_heroes) {
       $isValid = false;
       $errors[] = "El mazo debe tener exactamente {$this->required_heroes} héroes.";

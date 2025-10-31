@@ -38,11 +38,6 @@
               <span class="deck-attributes-details__label">{{ __('entities.deck_attributes.max_copies_per_card') }}:</span>
               <span class="deck-attributes-details__value">{{ $configuration->max_copies_per_card }}</span>
             </div>
-            
-            <div class="deck-attributes-details__item">
-              <span class="deck-attributes-details__label">{{ __('entities.deck_attributes.max_copies_per_hero') }}:</span>
-              <span class="deck-attributes-details__value">{{ $configuration->max_copies_per_hero }}</span>
-            </div>
 
             <div class="deck-attributes-details__item">
               <span class="deck-attributes-details__label">{{ __('entities.deck_attributes.required_heroes') }}:</span>

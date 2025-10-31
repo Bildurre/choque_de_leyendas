@@ -18,7 +18,6 @@ return new class extends Migration
       $table->integer('min_cards')->default(30);
       $table->integer('max_cards')->default(40);
       $table->integer('max_copies_per_card')->default(2);
-      $table->integer('max_copies_per_hero')->default(1);
       $table->unsignedTinyInteger('required_heroes')->default(0);
       $table->datetimes();
     });
@@ -28,7 +27,6 @@ return new class extends Migration
       'min_cards' => 30,
       'max_cards' => 40,
       'max_copies_per_card' => 2,
-      'max_copies_per_hero' => 1,
       'required_heroes' => 5,
       'created_at' => now(),
       'updated_at' => now()

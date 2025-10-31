@@ -40,7 +40,7 @@ class DeckAttributesConfigurationService
     $config->min_cards = 30;
     $config->max_cards = 40;
     $config->max_copies_per_card = 2;
-    $config->max_copies_per_hero = 1;
+    $config->required_heroes = 5;
     $config->save();
     
     return $config;
@@ -68,7 +68,7 @@ class DeckAttributesConfigurationService
       
       return $config;
     } catch (Exception $e) {
-      throw new Exception("__('entities.deck_attributes.errors.create') + ' '" . $e->getMessage());
+      throw new Exception(__('entities.deck_attributes.errors.create') . ' ' . $e->getMessage());
     }
   }
 
@@ -88,7 +88,7 @@ class DeckAttributesConfigurationService
       
       return $config;
     } catch (Exception $e) {
-      throw new Exception("__('entities.deck_attributes.errors.update') + ' '" . $e->getMessage());
+      throw new Exception(__('entities.deck_attributes.errors.update') . ' ' . $e->getMessage());
     }
   }
 
@@ -104,26 +104,26 @@ class DeckAttributesConfigurationService
     try {
       return $config->delete();
     } catch (Exception $e) {
-      throw new Exception("__('entities.deck_attributes.errors.delete') + ' '" . $e->getMessage());
+      throw new Exception(__('entities.deck_attributes.errors.delete') . ' ' . $e->getMessage());
     }
   }
 
   /**
    * Validate a deck against the appropriate configuration
    * 
-   * @param int $totalCards
-   * @param bool $hasExceededCardCopies
-   * @param bool $hasExceededHeroCopies
-   * @param int|null $gameModeId
+   * @param int $totalCards Total cards (sum of copies)
+   * @param bool $hasExceededCardCopies Whether any card exceeds max copies
+   * @param int $totalHeroes Total number of heroes
+   * @param int|null $gameModeId Game mode ID
    * @return array Validation results
    */
   public function validateDeck(
     int $totalCards, 
-    bool $hasExceededCardCopies, 
-    bool $hasExceededHeroCopies, 
+    bool $hasExceededCardCopies,
+    int $totalHeroes = 0,
     ?int $gameModeId = null
   ): array {
     $config = $this->getConfiguration($gameModeId);
-    return $config->validateDeck($totalCards, $hasExceededCardCopies, $hasExceededHeroCopies);
+    return $config->validateDeck($totalCards, $hasExceededCardCopies, $totalHeroes);
   }
 }

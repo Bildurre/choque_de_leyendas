@@ -178,11 +178,10 @@ class FactionDeckService
       ];
     })->toArray();
     
-    // Format current heroes for the form
+    // Format current heroes for the form (just IDs, no copies)
     $selectedHeroes = $factionDeck->heroes->map(function ($hero) {
       return [
-        'id' => $hero->id,
-        'copies' => $hero->pivot->copies
+        'id' => $hero->id
       ];
     })->toArray();
     
@@ -311,7 +310,7 @@ class FactionDeckService
    */
   protected function syncCardsAndHeroes(FactionDeck $factionDeck, array $data): void
   {
-    // Process cards
+    // Process cards (with copies)
     if (isset($data['cards']) && is_array($data['cards'])) {
       $cardPivot = [];
       
@@ -322,19 +321,26 @@ class FactionDeckService
       }
       
       $factionDeck->cards()->sync($cardPivot);
+    } else {
+      // If no cards provided, detach all
+      $factionDeck->cards()->sync([]);
     }
     
-    // Process heroes
+    // Process heroes (without copies - just IDs)
     if (isset($data['heroes']) && is_array($data['heroes'])) {
-      $heroPivot = [];
+      $heroIds = [];
       
       foreach ($data['heroes'] as $heroData) {
-        if (isset($heroData['id']) && isset($heroData['copies'])) {
-          $heroPivot[$heroData['id']] = ['copies' => $heroData['copies']];
+        if (isset($heroData['id'])) {
+          $heroIds[] = $heroData['id'];
         }
       }
       
-      $factionDeck->heroes()->sync($heroPivot);
+      // Sync only with IDs (no pivot data)
+      $factionDeck->heroes()->sync($heroIds);
+    } else {
+      // If no heroes provided, detach all
+      $factionDeck->heroes()->sync([]);
     }
   }
 
@@ -358,16 +364,10 @@ class FactionDeckService
       ->wherePivot('copies', '>', $config->max_copies_per_card)
       ->exists();
     
-    // Check if any hero exceeds the max copies
-    $hasExceededHeroCopies = $factionDeck->heroes()
-      ->wherePivot('copies', '>', $config->max_copies_per_hero)
-      ->exists();
-    
     // Delegate the actual validation to the configuration model
     $validationResult = $config->validateDeck(
       $totalCards,
       $hasExceededCardCopies,
-      $hasExceededHeroCopies,
       $totalHeroes
     );
     
@@ -473,7 +473,7 @@ class FactionDeckService
       'averageDiceCount' => $totalCards > 0 ? round($totalDiceCount / $totalCards, 2) : 0,
       'symbolCounts' => $symbolCounts,
       'cardsByType' => $factionDeck->getCardCopiesBreakdown(),
-      'totalHeroes' => $factionDeck->heroes->sum('pivot.copies'),
+      'totalHeroes' => $factionDeck->heroes->count(),
       'uniqueHeroes' => $factionDeck->heroes->count(),
       'heroesByClass' => $factionDeck->getHeroCopiesByClassBreakdown(),
       'heroesBySuperclass' => $factionDeck->getHeroCopiesBreakdown()

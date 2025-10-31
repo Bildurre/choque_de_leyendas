@@ -34,12 +34,11 @@ return new class extends Migration
       $table->datetimes();
     });
 
-    // Pivot table for heroes
+    // Pivot table for heroes - NO copies field
     Schema::create('faction_deck_hero', function (Blueprint $table) {
       $table->id();
       $table->foreignId('hero_id')->constrained('heroes');
       $table->foreignId('faction_deck_id')->constrained('faction_decks');
-      $table->integer('copies')->default(1);
       $table->datetimes();
     });
   }

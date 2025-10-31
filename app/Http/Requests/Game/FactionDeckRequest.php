@@ -39,7 +39,6 @@ class FactionDeckRequest extends FormRequest
       'cards.*.copies' => ['required', 'integer', 'min:1'],
       'heroes' => ['nullable', 'array'],
       'heroes.*.id' => ['exists:heroes,id'],
-      'heroes.*.copies' => ['required', 'integer', 'min:1'],
       'is_published' => ['nullable', 'boolean'],
     ];
 
@@ -94,9 +93,6 @@ class FactionDeckRequest extends FormRequest
       'cards.*.copies.min' => 'El número de copias debe ser al menos 1.',
       'heroes.array' => 'Los héroes deben ser un array.',
       'heroes.*.id.exists' => 'El héroe seleccionado no existe.',
-      'heroes.*.copies.required' => 'El número de copias es obligatorio.',
-      'heroes.*.copies.integer' => 'El número de copias debe ser un número entero.',
-      'heroes.*.copies.min' => 'El número de copias debe ser al menos 1.',
     ];
 
     // Messages for uniqueness in each language

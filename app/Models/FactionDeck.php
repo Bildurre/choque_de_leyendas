@@ -195,11 +195,11 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
 
   /**
    * Get the heroes in this faction deck.
+   * Heroes always have 1 copy (no copies field in pivot)
    */
   public function heroes()
   {
     return $this->belongsToMany(Hero::class, 'faction_deck_hero')
-      ->withPivot('copies')
       ->withTimestamps();
   }
 
@@ -214,13 +214,14 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   }
 
   /**
-   * Get the total number of heroes in the deck (including copies)
+   * Get the total number of heroes in the deck
+   * Heroes always count as 1 each (no copies)
    * 
    * @return int
    */
   public function getTotalHeroesAttribute(): int
   {
-    return $this->heroes->sum('pivot.copies');
+    return $this->heroes->count();
   }
 
   /**
@@ -288,8 +289,9 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
 
   /**
    * Get a breakdown of hero copies by their superclass
+   * Each hero counts as 1 (no copies)
    * 
-   * @return \Illuminate\Support\Collection Collection with hero superclass names as keys and copy counts as values
+   * @return \Illuminate\Support\Collection Collection with hero superclass names as keys and counts as values
    */
   public function getHeroCopiesBreakdown(): \Illuminate\Support\Collection
   {
@@ -302,7 +304,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
       }
       return 'uncategorized'; // For heroes without class or superclass
     })->map(function ($heroes) {
-      return $heroes->sum('pivot.copies');
+      return $heroes->count(); // Count heroes (each is 1)
     });
     
     return $breakdown;
@@ -310,8 +312,9 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
 
   /**
    * Get a breakdown of hero copies by their specific class
+   * Each hero counts as 1 (no copies)
    * 
-   * @return \Illuminate\Support\Collection Collection with hero class names as keys and copy counts as values
+   * @return \Illuminate\Support\Collection Collection with hero class names as keys and counts as values
    */
   public function getHeroCopiesByClassBreakdown(): \Illuminate\Support\Collection
   {
@@ -320,7 +323,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
     $breakdown = $heroes->groupBy(function ($hero) {
       return $hero->heroClass ? $hero->heroClass->name : 'uncategorized';
     })->map(function ($heroes) {
-      return $heroes->sum('pivot.copies');
+      return $heroes->count(); // Count heroes (each is 1)
     });
     
     return $breakdown;

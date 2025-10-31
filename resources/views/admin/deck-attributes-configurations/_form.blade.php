@@ -52,17 +52,7 @@
         max="10"
         required
       />
-      
-      <x-form.input
-        type="number" 
-        name="max_copies_per_hero" 
-        :label="__('entities.deck_attributes.max_copies_per_hero')"
-        value="{{ old('max_copies_per_hero', isset($configuration) ? $configuration->max_copies_per_hero : 1) }}" 
-        min="1"
-        max="10"
-        required
-      />
-      
+            
       <x-form.input
         type="number" 
         name="required_heroes" 
