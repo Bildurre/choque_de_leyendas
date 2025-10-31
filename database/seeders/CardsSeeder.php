@@ -28,7 +28,7 @@ class CardsSeeder extends Seeder
         $card->image = $data['image'];
         $card->lore_text = $data['lore_text'];
         $card->epic_quote = $data['epic_quote'];
-        $card->faction_id = $faction_id;
+        $card->faction_id = $faction_id + 1;
         $card->card_type_id = $data['card_type_id'];
         $card->equipment_type_id = $data['equipment_type_id'] ?? null;
         $card->attack_range_id = $data['attack_range_id'] ?? null;
