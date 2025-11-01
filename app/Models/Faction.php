@@ -210,11 +210,12 @@ class Faction extends Model implements LocalizedUrlRoutable
   }
 
   /**
-   * Get the faction decks associated with the faction.
+   * Get the faction decks associated with the faction (many-to-many).
    */
   public function factionDecks()
   {
-    return $this->hasMany(FactionDeck::class);
+    return $this->belongsToMany(FactionDeck::class, 'faction_deck_faction')
+      ->withTimestamps();
   }
 
   /**
@@ -229,5 +230,15 @@ class Faction extends Model implements LocalizedUrlRoutable
       ->where('locale', $locale)
       ->where('is_permanent', true)
       ->first();
+  }
+
+  /**
+   * Check if this is the Mercenaries faction
+   * 
+   * @return bool
+   */
+  public function isMercenaries(): bool
+  {
+    return $this->id === 1;
   }
 }

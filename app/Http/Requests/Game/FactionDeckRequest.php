@@ -2,14 +2,10 @@
 
 namespace App\Http\Requests\Game;
 
-use App\Http\Requests\Traits\ValidatesTranslatableUniqueness;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class FactionDeckRequest extends FormRequest
 {
-  use ValidatesTranslatableUniqueness;
-
   /**
    * Determine if the user is authorized to make this request.
    */
@@ -20,87 +16,64 @@ class FactionDeckRequest extends FormRequest
 
   /**
    * Get the validation rules that apply to the request.
+   *
+   * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
    */
   public function rules(): array
   {
-    $factionDeck = $this->route('faction_deck');
-    $locales = array_keys(config('laravellocalization.supportedLocales', ['es' => []]));
-    
     $rules = [
-      'name' => ['required', 'array'],
-      'name.es' => ['required', 'string', 'max:255'],
-      'description' => ['nullable', 'array'],
-      'epic_quote' => ['nullable', 'array'],
-      'faction_id' => ['required', 'exists:factions,id'],
-      'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-      'remove_icon' => ['nullable', 'boolean'],
-      'cards' => ['nullable', 'array'],
-      'cards.*.id' => ['exists:cards,id'],
-      'cards.*.copies' => ['required', 'integer', 'min:1'],
-      'heroes' => ['nullable', 'array'],
-      'heroes.*.id' => ['exists:heroes,id'],
-      'is_published' => ['nullable', 'boolean'],
+      'name.en' => 'required|string|max:255',
+      'name.es' => 'required|string|max:255',
+      'description.en' => 'nullable|string',
+      'description.es' => 'nullable|string',
+      'game_mode_id' => 'required|exists:game_modes,id',
+      'faction_ids' => 'required|array|min:1',
+      'faction_ids.*' => 'required|exists:factions,id|distinct',
+      'hero_ids' => 'nullable|array',
+      'hero_ids.*' => 'nullable|exists:heroes,id|distinct',
+      'card_ids' => 'nullable|array',
+      'card_ids.*' => 'nullable|exists:cards,id|distinct',
+      'is_published' => 'boolean',
     ];
-
-    // Solo añadir la regla de game_mode_id si es una nueva creación
-    if (!$factionDeck) {
-      $rules['game_mode_id'] = ['required', 'exists:game_modes,id'];
-    }
-
-    // Add uniqueness rules for each locale (globally unique)
-    $rules = array_merge(
-      $rules, 
-      $this->uniqueTranslatableRules('faction_decks', 'name', $factionDeck, $locales)
-    );
 
     return $rules;
   }
 
   /**
-   * Prepare the data for validation.
+   * Get custom attributes for validator errors.
+   *
+   * @return array<string, string>
    */
-  protected function prepareForValidation()
+  public function attributes(): array
   {
-    // Si estamos editando, obtener el game_mode_id existente
-    $factionDeck = $this->route('faction_deck');
-    if ($factionDeck) {
-      $this->merge([
-        'game_mode_id' => $factionDeck->game_mode_id,
-      ]);
-    }
+    return [
+      'name.en' => __('entities.faction_decks.name') . ' (EN)',
+      'name.es' => __('entities.faction_decks.name') . ' (ES)',
+      'description.en' => __('entities.faction_decks.description') . ' (EN)',
+      'description.es' => __('entities.faction_decks.description') . ' (ES)',
+      'game_mode_id' => __('entities.game_modes.singular'),
+      'faction_ids' => __('entities.factions.plural'),
+      'faction_ids.*' => __('entities.factions.singular'),
+      'hero_ids' => __('entities.heroes.plural'),
+      'hero_ids.*' => __('entities.heroes.singular'),
+      'card_ids' => __('entities.cards.plural'),
+      'card_ids.*' => __('entities.cards.singular'),
+      'is_published' => __('admin.publication_status'),
+    ];
   }
 
   /**
-   * Get custom validation messages.
+   * Get custom messages for validator errors.
+   *
+   * @return array<string, string>
    */
   public function messages(): array
   {
-    $messages = [
-      'name.required' => 'El nombre del mazo es obligatorio.',
-      'name.array' => __('validation.array', ['attribute' => __('common.name')]),
-      'name.es.required' => __('validation.required', ['attribute' => __('common.name'). ' ' . __('in_spanish')]),
-      'faction_id.required' => 'La facción es obligatoria.',
-      'faction_id.exists' => 'La facción seleccionada no existe.',
-      'game_mode_id.required' => 'El modo de juego es obligatorio.',
-      'game_mode_id.exists' => 'El modo de juego seleccionado no existe.',
-      'icon.image' => 'El archivo debe ser una imagen válida.',
-      'icon.mimes' => 'El archivo debe ser de tipo: jpeg, png, jpg, gif, svg.',
-      'icon.max' => 'La imagen no debe ser mayor de 2MB.',
-      'cards.array' => 'Las cartas deben ser un array.',
-      'cards.*.id.exists' => 'La carta seleccionada no existe.',
-      'cards.*.copies.required' => 'El número de copias es obligatorio.',
-      'cards.*.copies.integer' => 'El número de copias debe ser un número entero.',
-      'cards.*.copies.min' => 'El número de copias debe ser al menos 1.',
-      'heroes.array' => 'Los héroes deben ser un array.',
-      'heroes.*.id.exists' => 'El héroe seleccionado no existe.',
+    return [
+      'faction_ids.required' => __('validation.required', ['attribute' => __('entities.factions.plural')]),
+      'faction_ids.min' => __('validation.min.array', ['attribute' => __('entities.factions.plural'), 'min' => 1]),
+      'faction_ids.*.exists' => __('validation.exists', ['attribute' => __('entities.factions.singular')]),
+      'faction_ids.*.distinct' => __('validation.distinct', ['attribute' => __('entities.factions.singular')]),
     ];
-
-    // Messages for uniqueness in each language
-    foreach (array_keys(config('laravellocalization.supportedLocales', ['es' => []])) as $locale) {
-      $localeName = locale_name($locale);
-      $messages["name.{$locale}.unique"] = "Ya existe un mazo con este nombre en {$localeName}.";
-    }
-
-    return $messages;
   }
 }

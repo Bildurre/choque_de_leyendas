@@ -19,7 +19,6 @@ return new class extends Migration
       $table->json('epic_quote')->nullable();
       $table->json('slug');
       $table->text('icon')->nullable();
-      $table->foreignId('faction_id')->constrained('factions');
       $table->boolean('is_published')->default(false);
       $table->datetimes();
       $table->softDeletes();
@@ -41,6 +40,16 @@ return new class extends Migration
       $table->foreignId('faction_deck_id')->constrained('faction_decks');
       $table->datetimes();
     });
+
+    Schema::create('faction_deck_faction', function (Blueprint $table) {
+      $table->id();
+      $table->foreignId('faction_deck_id')->constrained()->onDelete('cascade');
+      $table->foreignId('faction_id')->constrained()->onDelete('cascade');
+      $table->datetimes();
+      
+      // Ensure unique combinations
+      $table->unique(['faction_deck_id', 'faction_id']);
+    });
   }
 
   /**
@@ -50,6 +59,7 @@ return new class extends Migration
   {
     Schema::dropIfExists('faction_deck_hero');
     Schema::dropIfExists('card_faction_deck');
+    Schema::dropIfExists('faction_deck_faction');
     Schema::dropIfExists('faction_decks');
   }
 };

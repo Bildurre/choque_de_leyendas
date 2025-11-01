@@ -5,7 +5,6 @@ namespace App\Models;
 use Spatie\Sluggable\SlugOptions;
 use App\Models\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Traits\HasImageAttribute;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasTranslatableSlug;
 use App\Models\Traits\HasPublishedAttribute;
@@ -19,7 +18,6 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   use HasTranslations;
   use HasTranslatableSlug;
   use SoftDeletes;
-  use HasImageAttribute;
   use HasFilters;
   use HasPublishedAttribute;
 
@@ -30,11 +28,8 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
    */
   protected $fillable = [
     'name',
-    'description',
-    'epic_quote',
     'slug',
-    'icon',
-    'faction_id',
+    'description',
     'game_mode_id',
     'is_published',
   ];
@@ -56,34 +51,44 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
    */
   public $translatable = [
     'name',
-    'description',
-    'epic_quote',
     'slug',
+    'description',
   ];
 
   /**
-  * Get fields that can be filtered
-  *
-  * @return array
-  */
+   * Get fields that can be searched in admin
+   *
+   * @return array
+   */
+  public function getAdminSearchable(): array
+  {
+    return ['description'];
+  }
+
+  /**
+   * Get fields that can be searched in public
+   *
+   * @return array
+   */
+  public function getPublicSearchable(): array
+  {
+    return ['description'];
+  }
+
+  /**
+   * Get fields that can be filtered in admin
+   *
+   * @return array
+   */
   public function getAdminFilterable(): array
   {
     return [
       [
-        'type' => 'relation',
-        'field' => 'faction_id',
-        'relation' => 'faction',
-        'label' => __('entities.factions.singular'),
-        'option_label' => 'name',
-        'option_value' => 'id'
-      ],
-      [
-        'type' => 'relation',
+        'type' => 'relationship',
         'field' => 'game_mode_id',
-        'relation' => 'gameMode',
         'label' => __('entities.game_modes.singular'),
-        'option_label' => 'name',
-        'option_value' => 'id'
+        'model' => GameMode::class,
+        'display_field' => 'name'
       ],
       [
         'type' => 'enum',
@@ -98,10 +103,28 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   }
 
   /**
-  * Get fields that can be sorted
-  *
-  * @return array
-  */
+   * Get fields that can be filtered in public
+   *
+   * @return array
+   */
+  public function getPublicFilterable(): array
+  {
+    return [
+      [
+        'type' => 'relationship',
+        'field' => 'game_mode_id',
+        'label' => __('entities.game_modes.singular'),
+        'model' => GameMode::class,
+        'display_field' => 'name'
+      ],
+    ];
+  }
+
+  /**
+   * Get fields that can be sorted in admin
+   *
+   * @return array
+   */
   public function getAdminSortable(): array
   {
     return [
@@ -110,20 +133,27 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
         'label' => __('entities.faction_decks.name')
       ],
       [
-        'field' => 'faction.name',
-        'label' => __('entities.factions.singular')
-      ],
-      [
-        'field' => 'gameMode.name',
-        'label' => __('entities.game_modes.singular')
-      ],
-      [
         'field' => 'created_at',
         'label' => __('common.created_at')
       ],
       [
         'field' => 'is_published',
         'label' => __('admin.publication_status')
+      ],
+    ];
+  }
+
+  /**
+   * Get fields that can be sorted in public
+   *
+   * @return array
+   */
+  public function getPublicSortable(): array
+  {
+    return [
+      [
+        'field' => 'name',
+        'label' => __('entities.faction_decks.name')
       ],
     ];
   }
@@ -158,25 +188,16 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   }
 
   /**
-   * Get the directory for storing images for this model
-   * 
-   * @return string
+   * Get the factions that belong to this deck (many-to-many).
    */
-  public function getImageDirectory(): string
+  public function factions()
   {
-    return 'images/faction-decks';
+    return $this->belongsToMany(Faction::class, 'faction_deck_faction')
+      ->withTimestamps();
   }
 
   /**
-   * Get the faction that owns the faction deck.
-   */
-  public function faction()
-  {
-    return $this->belongsTo(Faction::class);
-  }
-
-  /**
-   * Get the game mode associated with this faction deck.
+   * Get the game mode that this deck belongs to.
    */
   public function gameMode()
   {
@@ -184,148 +205,73 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   }
 
   /**
-   * Get the cards in this faction deck.
-   */
-  public function cards()
-  {
-    return $this->belongsToMany(Card::class, 'card_faction_deck')
-      ->withPivot('copies')
-      ->withTimestamps();
-  }
-
-  /**
-   * Get the heroes in this faction deck.
-   * Heroes always have 1 copy (no copies field in pivot)
+   * Get the heroes that belong to this deck.
    */
   public function heroes()
   {
     return $this->belongsToMany(Hero::class, 'faction_deck_hero')
+      ->withPivot('position')
+      ->withTimestamps()
+      ->orderBy('faction_deck_hero.position');
+  }
+
+  /**
+   * Get the cards that belong to this deck.
+   */
+  public function cards()
+  {
+    return $this->belongsToMany(Card::class, 'card_faction_deck')
       ->withTimestamps();
   }
 
   /**
-   * Get the total number of cards in the deck (including copies)
+   * Check if this deck is multi-faction (has more than one non-mercenary faction).
    * 
-   * @return int
+   * @return bool
    */
-  public function getTotalCardsAttribute(): int
+  public function isMultiFaction(): bool
   {
-    return $this->cards->sum('pivot.copies');
-  }
-
-  /**
-   * Get the total number of heroes in the deck
-   * Heroes always count as 1 each (no copies)
-   * 
-   * @return int
-   */
-  public function getTotalHeroesAttribute(): int
-  {
-    return $this->heroes->count();
-  }
-
-  /**
-   * Get the available PDF for a specific locale
-   */
-  public function getAvailablePdf(string $locale = null): ?GeneratedPdf
-  {
-    $locale = $locale ?? app()->getLocale();
+    $nonMercenaryFactions = $this->factions()
+      ->where('factions.id', '!=', 1) // Mercenaries ID = 1
+      ->count();
     
-    return GeneratedPdf::where('type', 'deck')
-      ->where('deck_id', $this->id)
-      ->where('locale', $locale)
-      ->where('is_permanent', true)
+    return $nonMercenaryFactions > 1;
+  }
+
+  /**
+   * Get the primary faction for display purposes.
+   * Returns the first non-mercenary faction, or mercenary if that's all there is.
+   * 
+   * @return Faction|null
+   */
+  public function getPrimaryFaction(): ?Faction
+  {
+    // Try to get first non-mercenary faction
+    $primaryFaction = $this->factions()
+      ->where('factions.id', '!=', 1)
       ->first();
+    
+    // If no non-mercenary faction, return mercenary or null
+    return $primaryFaction ?? $this->factions()->first();
   }
 
   /**
-   * Get a breakdown of card copies by type
-   * Equipment cards are further broken down by their category
+   * Get all faction IDs for this deck.
    * 
-   * @return \Illuminate\Support\Collection Collection with card types as keys and copy counts as values
+   * @return array
    */
-  public function getCardCopiesBreakdown(): \Illuminate\Support\Collection
+  public function getFactionIds(): array
   {
-
-    $cards = $this->cards()->with(['equipmentType', 'cardType'])->get();
-    
-    $breakdown = collect();
-    
-    // Group non-equipment cards by type
-    $nonEquipmentCards = $cards->where('card_type_id', '!=', '1');
-    $nonEquipmentBreakdown = $nonEquipmentCards
-      ->groupBy(function ($card) {
-        return $card->cardType ? $card->cardType->name : 'uncategorized';
-      })
-      ->map(function ($cards) {
-        return $cards->sum('pivot.copies');
-      });
-    
-    // Merge non-equipment breakdown
-    $breakdown = $breakdown->merge($nonEquipmentBreakdown);
-    
-    // Handle equipment cards separately
-    $equipmentCards = $cards->where('card_type_id', '1');
-    
-    if ($equipmentCards->isNotEmpty()) {
-      // Group equipment cards by category
-      $equipmentBreakdown = $equipmentCards
-        ->groupBy(function ($card) {
-          return $card->equipmentType ? $card->equipmentType->category : 'equipment_other';
-        })
-        ->map(function ($cards) {
-          return $cards->sum('pivot.copies');
-        });
-      
-      // Add equipment breakdown with prefixed keys
-      $equipmentBreakdown->each(function ($count, $category) use ($breakdown) {
-        $key = $category === 'equipment_other' ? 'equipment_other' : 'equipment_' . $category;
-        $breakdown->put($key, $count);
-      });
-    }
-    
-    return $breakdown;
+    return $this->factions()->pluck('factions.id')->toArray();
   }
 
   /**
-   * Get a breakdown of hero copies by their superclass
-   * Each hero counts as 1 (no copies)
+   * Check if this deck has mercenary faction.
    * 
-   * @return \Illuminate\Support\Collection Collection with hero superclass names as keys and counts as values
+   * @return bool
    */
-  public function getHeroCopiesBreakdown(): \Illuminate\Support\Collection
+  public function hasMercenaries(): bool
   {
-    $heroes = $this->heroes()->with('heroClass.heroSuperclass')->get();
-    
-    $breakdown = $heroes->groupBy(function ($hero) {
-      // Check if hero has a class and that class has a superclass
-      if ($hero->heroClass && $hero->heroClass->heroSuperclass) {
-        return $hero->heroClass->heroSuperclass->name;
-      }
-      return 'uncategorized'; // For heroes without class or superclass
-    })->map(function ($heroes) {
-      return $heroes->count(); // Count heroes (each is 1)
-    });
-    
-    return $breakdown;
+    return $this->factions()->where('factions.id', 1)->exists();
   }
-
-  /**
-   * Get a breakdown of hero copies by their specific class
-   * Each hero counts as 1 (no copies)
-   * 
-   * @return \Illuminate\Support\Collection Collection with hero class names as keys and counts as values
-   */
-  public function getHeroCopiesByClassBreakdown(): \Illuminate\Support\Collection
-  {
-    $heroes = $this->heroes()->with('heroClass')->get();
-    
-    $breakdown = $heroes->groupBy(function ($hero) {
-      return $hero->heroClass ? $hero->heroClass->name : 'uncategorized';
-    })->map(function ($heroes) {
-      return $heroes->count(); // Count heroes (each is 1)
-    });
-    
-    return $breakdown;
-  }  
 }

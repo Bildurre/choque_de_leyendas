@@ -49,7 +49,7 @@ class FactionDeckService
     bool $onlyUnpublished = false
   ): mixed {
     // Base query with relationships and counts
-    $query = FactionDeck::with(['faction', 'gameMode'])
+    $query = FactionDeck::with(['factions', 'gameMode'])
       ->withCount(['cards', 'heroes']);
     
     // Apply trash filters
@@ -79,7 +79,7 @@ class FactionDeckService
     
     // Apply default ordering only if no sort parameter is provided
     if (!$request || !$request->has('sort')) {
-      $query->orderBy('faction_id')->orderBy('id');
+      $query->orderBy('id');
     }
     
     // Paginate if needed
@@ -119,7 +119,7 @@ class FactionDeckService
   public function getFactionDeckWithRelations(FactionDeck $factionDeck): FactionDeck
   {
     return $factionDeck->load([
-      'faction',
+      'factions',
       'gameMode',
       'cards.cardType',
       'cards.attackRange',
@@ -212,8 +212,7 @@ class FactionDeckService
       // Apply translations
       $this->applyTranslations($factionDeck, $data, $this->translatableFields);
       
-      // Set faction and game mode
-      $factionDeck->faction_id = $data['faction_id'];
+      // Set game mode
       $factionDeck->game_mode_id = $data['game_mode_id'];
       
       // Handle icon upload
@@ -224,6 +223,11 @@ class FactionDeckService
       $factionDeck->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
       
       $factionDeck->save();
+      
+      // Sync factions (many-to-many)
+      if (isset($data['faction_ids']) && is_array($data['faction_ids'])) {
+        $factionDeck->factions()->sync($data['faction_ids']);
+      }
       
       // Process cards and heroes
       $this->syncCardsAndHeroes($factionDeck, $data);
@@ -262,11 +266,7 @@ class FactionDeckService
       // Apply translations
       $this->applyTranslations($factionDeck, $data, $this->translatableFields);
       
-      // Update faction and game mode if present
-      if (isset($data['faction_id'])) {
-        $factionDeck->faction_id = $data['faction_id'];
-      }
-      
+      // Update game mode if present
       if (isset($data['game_mode_id'])) {
         $factionDeck->game_mode_id = $data['game_mode_id'];
       }
@@ -283,6 +283,11 @@ class FactionDeckService
       }
       
       $factionDeck->save();
+      
+      // Sync factions (many-to-many)
+      if (isset($data['faction_ids']) && is_array($data['faction_ids'])) {
+        $factionDeck->factions()->sync($data['faction_ids']);
+      }
       
       // Process cards and heroes
       $this->syncCardsAndHeroes($factionDeck, $data);
@@ -418,7 +423,8 @@ class FactionDeckService
       $factionDeck->deleteImage('icon');
     }
     
-    // Detach cards and heroes
+    // Detach all relationships
+    $factionDeck->factions()->detach();
     $factionDeck->cards()->detach();
     $factionDeck->heroes()->detach();
     
