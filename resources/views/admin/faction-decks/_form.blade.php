@@ -39,10 +39,12 @@
         />
 
         <x-form.select
-          name="faction_id"
-          :label="__('entities.factions.singular')"
+          name="faction_ids"
+          :label="__('entities.factions.plural')"
           :options="$factions->pluck('name', 'id')->toArray()"
-          :selected="old('faction_id', $factionId ?? (isset($factionDeck) ? $factionDeck->faction_id : ''))"
+          :selected="isset($factionDeck) ? $factionDeck->factions->pluck('id')->toArray() : []"
+          :placeholder="__('forms.select_options')"
+          :multiple="true"
           required
         />
 

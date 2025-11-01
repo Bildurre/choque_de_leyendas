@@ -31,6 +31,7 @@ import initPdfCollection from './pdf-collection/index';
 import initNotificationService from './services/notification-service';
 import initPdfDownloader from './components/pdf-downloader';
 import initDashboardCharts from './components/dashboard-charts';
+import initFormSelects from './components/form-select';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNotificationService();
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPdfCollection();
   initPdfDownloader();
   initDashboardCharts();
+  initFormSelects();
 
   // Inicializar campos condicionales
 

@@ -1,3 +1,5 @@
+{{-- resources/views/components/form/select.blade.php --}}
+
 @props([
   'name',
   'label' => null,
@@ -6,8 +8,15 @@
   'placeholder' => null,
   'required' => false,
   'multiple' => false,
-  'size' => null
+  'size' => null,
+  'useChoices' => null, // Explicitly enable/disable Choices.js
+  'searchable' => true,
 ])
+
+@php
+  // Auto-enable Choices.js for multiple selects unless explicitly disabled
+  $shouldUseChoices = $useChoices ?? $multiple;
+@endphp
 
 <div class="form-field" id="{{ 'form-field--'.$name }}">
   @if($label)
@@ -21,10 +30,16 @@
     {{ $required ? 'required' : '' }}
     {{ $multiple ? 'multiple' : '' }}
     {{ $size ? "size=$size" : '' }}
+    {{ $shouldUseChoices ? 'data-choices' : '' }}
+    @if($placeholder)
+      data-placeholder="{{ $placeholder }}"
+    @endif
     {{ $attributes }}
   >
-    @if($placeholder)
-      <option value="" {{ is_null($selected) ? 'selected' : '' }} {{ $required ? 'disabled' : '' }}>{{ $placeholder }}</option>
+    @if($placeholder && !$multiple)
+      <option value="" {{ is_null($selected) ? 'selected' : '' }} {{ $required ? 'disabled' : '' }}>
+        {{ $placeholder }}
+      </option>
     @endif
     
     @foreach($options as $value => $label)
@@ -36,7 +51,9 @@
           $isSelected = $selected == $value;
         }
       @endphp
-      <option value="{{ $value }}" {{ $isSelected ? 'selected' : '' }}>{{ $label }}</option>
+      <option value="{{ $value }}" {{ $isSelected ? 'selected' : '' }}>
+        {{ $label }}
+      </option>
     @endforeach
   </select>
 

@@ -1,3 +1,5 @@
+// resources/js/admin/deck-card-selector.js
+
 export default function initDeckCardSelector() {
   const selectors = document.querySelectorAll('[data-component="deck-card-selector"]');
   
@@ -21,8 +23,23 @@ export default function initDeckCardSelector() {
     const selectedCards = new Map(); // Map<cardId, copies>
     let totalCards = 0; // Sum of all copies
     
-    // Get faction selector
-    const factionSelect = document.querySelector('select[name="faction_id"]');
+    // Get faction selector (now supports multiple)
+    const factionSelect = document.querySelector('select[name="faction_ids[]"]');
+    
+    // Get selected faction IDs
+    function getSelectedFactionIds() {
+      if (!factionSelect) return [];
+      
+      // If Choices.js is initialized
+      if (factionSelect.choicesInstance) {
+        const values = factionSelect.choicesInstance.getValue(true);
+        return Array.isArray(values) ? values : [values];
+      }
+      
+      // Fallback to native select
+      const options = Array.from(factionSelect.selectedOptions);
+      return options.map(option => option.value).filter(val => val);
+    }
     
     // Initialize selected cards from server-rendered content
     function initializeSelectedCards() {
@@ -36,28 +53,30 @@ export default function initDeckCardSelector() {
       });
     }
     
-    // Filter cards by faction
-    function filterByFaction(selectedFactionId) {
+    // Filter cards by faction(s)
+    function filterByFactions(selectedFactionIds) {
       const availableItems = availableList.querySelectorAll('[data-card-item]');
       
       availableItems.forEach(item => {
         const cardFactionId = item.dataset.cardFaction;
         const isSelected = selectedCards.has(item.dataset.cardId);
         
-        // Hide if selected
+        // Hide if already selected
         if (isSelected) {
           item.style.display = 'none';
           return;
         }
         
-        // If no faction selected, show all
-        if (!selectedFactionId) {
+        // If no factions selected, show all
+        if (!selectedFactionIds || selectedFactionIds.length === 0) {
           item.style.display = '';
           return;
         }
         
-        // Filter by faction
-        if (cardFactionId === selectedFactionId) {
+        // Show card if it belongs to ANY of the selected factions
+        const belongsToSelectedFaction = selectedFactionIds.includes(cardFactionId);
+        
+        if (belongsToSelectedFaction) {
           item.style.display = '';
         } else {
           item.style.display = 'none';
@@ -80,7 +99,7 @@ export default function initDeckCardSelector() {
       }
 
       const availableItems = availableList.querySelectorAll('[data-card-item]');
-      const selectedFactionId = factionSelect ? factionSelect.value : null;
+      const selectedFactionIds = getSelectedFactionIds();
       
       availableItems.forEach(item => {
         const cardName = item.dataset.cardName;
@@ -92,8 +111,9 @@ export default function initDeckCardSelector() {
           return;
         }
         
-        // Check faction filter
-        const passesFactionFilter = !selectedFactionId || cardFactionId === selectedFactionId;
+        // Check faction filter (card must belong to at least one selected faction)
+        const passesFactionFilter = selectedFactionIds.length === 0 || 
+                                    selectedFactionIds.includes(cardFactionId);
         
         // Check search filter
         const passesSearchFilter = !searchTerm || cardName.includes(searchTerm);
@@ -227,11 +247,11 @@ export default function initDeckCardSelector() {
       // Show in available list
       const availableItem = availableList.querySelector(`[data-card-id="${cardId}"]`);
       if (availableItem) {
-        const selectedFactionId = factionSelect ? factionSelect.value : null;
+        const selectedFactionIds = getSelectedFactionIds();
         const cardFactionId = availableItem.dataset.cardFaction;
         
         // Only show if matches faction filter (or no filter)
-        if (!selectedFactionId || cardFactionId === selectedFactionId) {
+        if (selectedFactionIds.length === 0 || selectedFactionIds.includes(cardFactionId)) {
           availableItem.style.display = '';
         }
       }
@@ -405,9 +425,24 @@ export default function initDeckCardSelector() {
 
     // Faction filter change
     if (factionSelect) {
-      factionSelect.addEventListener('change', (e) => {
-        filterByFaction(e.target.value);
+      // Listen for changes (both native and Choices.js)
+      factionSelect.addEventListener('change', () => {
+        const selectedFactionIds = getSelectedFactionIds();
+        filterByFactions(selectedFactionIds);
       });
+      
+      // Also listen to Choices.js specific events if available
+      if (factionSelect.choicesInstance) {
+        factionSelect.addEventListener('addItem', () => {
+          const selectedFactionIds = getSelectedFactionIds();
+          filterByFactions(selectedFactionIds);
+        });
+        
+        factionSelect.addEventListener('removeItem', () => {
+          const selectedFactionIds = getSelectedFactionIds();
+          filterByFactions(selectedFactionIds);
+        });
+      }
     }
 
     // Add card on click
@@ -449,9 +484,10 @@ export default function initDeckCardSelector() {
     updateAllIncreaseButtons();
     updateHiddenInputs();
     
-    // Apply initial faction filter if faction is already selected
-    if (factionSelect && factionSelect.value) {
-      filterByFaction(factionSelect.value);
+    // Apply initial faction filter if factions are already selected
+    const initialFactionIds = getSelectedFactionIds();
+    if (initialFactionIds.length > 0) {
+      filterByFactions(initialFactionIds);
     }
   });
 }
