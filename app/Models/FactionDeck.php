@@ -384,18 +384,29 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
         'colors' => [$faction->color],
         'rgb_values' => [$faction->rgb_values],
         'text_color' => $faction->text_is_dark ? '#000000' : '#ffffff',
+        'text_colors' => [
+          $faction->text_is_dark ? '#000000' : '#ffffff',
+        ],
       ];
     }
     
     // Multi-faction deck
-    $colors = $nonMercenaryFactions->pluck('color')->toArray();
-    $rgbValues = $nonMercenaryFactions->pluck('rgb_values')->toArray();
+    $colors = [];
+    $rgbValues = [];
+    $textColors = [];
+
+    foreach ($nonMercenaryFactions as $faction) {
+      $colors[] = $faction->color;
+      $rgbValues[] = $faction->rgb_values;
+      $textColors[] = $faction->text_is_dark ? '#000000' : '#ffffff';
+    }
     
     return [
       'is_multi_faction' => true,
       'colors' => $colors,
       'rgb_values' => $rgbValues,
-      'text_color' => '#ffffff', // Default to white for multi-faction
+      'text_color' => '#ffffff', // valor por defecto genérico
+      'text_colors' => $textColors, // uno por facción, en el mismo orden que colors
     ];
   }
 

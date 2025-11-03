@@ -12,7 +12,7 @@
 
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    border-color: var(--faction-color);
+    border-color: var(--random-accent-color);
   }
 
   &--multi-faction {
@@ -29,10 +29,6 @@
       z-index: -1;
     }
     
-    &:hover {
-      border-color: transparent;
-    }
-    
     .deck-preview__icon {
       border-color: transparent;
       border-width: 0;
@@ -44,11 +40,6 @@
     
     .deck-preview__name {
       @include text-stroke(5px, rgba(0, 0, 0, 0.7));
-    }
-
-    .deck-preview__mode {
-      background: var(--random-accent-color);
-      color: var(--color-text-primary);
     }
   }
   
@@ -98,31 +89,31 @@
 
   &__mode {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     text-align: center;
-    font-size: clamp(.8rem, 5cqw, 1rem);
-    color: var(--faction-text);
-    background-color: var(--faction-color);
-    padding: $spacing-sm $spacing-lg;
-    border-bottom-left-radius: $spacing-sm;
+    font-size: .75rem;
+    color: var(--mode-text, var(--faction-text));
+    background-color: var(--mode-bg, var(--faction-color));
+    padding: $spacing-sm $spacing-md;
+    border-bottom-right-radius: $spacing-sm;
     margin: 0;
     line-height: 1;
     z-index: 2;
+    font-weight: 500;
   }
   
   &__badge {
     position: absolute;
-    bottom: $spacing-sm;
-    right: $spacing-sm;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $border-radius-sm;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    bottom: 0;
+    right: 0;
+    background: var(--badge-bg, rgba(0, 0, 0, 0.8));
+    color: var(--badge-text, #ffffff);
+    padding: $spacing-sm $spacing-md;
+    border-top-left-radius: $spacing-sm;
+    font-size: .75rem;
+    font-weight: 500;
     z-index: 2;
+    line-height: 1;
   }
 }
