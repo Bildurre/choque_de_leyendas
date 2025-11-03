@@ -5,6 +5,13 @@
 ])
 
 <div class="entity-public-card" data-type="{{ $type }}">
+  <div class="entity-public-card__header">
+    <div class="entity-public-card__extra">
+      @isset($extra)
+        {{ $extra }}
+      @endisset
+    </div>
+
     <div class="entity-public-card__actions">
       @if(in_array($type, ['deck', 'faction']))
         <x-pdf.download-button
@@ -18,6 +25,8 @@
         />
       @endif
     </div>
+  </div>
+
   <a href="{{ $viewRoute }}" class="entity-public-card__link">
     <div class="entity-public-card__preview">
       <x-previews.preview-image :entity="$entity" :type="$type"/>

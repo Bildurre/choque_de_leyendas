@@ -257,7 +257,7 @@
                 ['name', 'asc']
               ]);
             @endphp
-            
+
             <x-entity.list
               :items="$cards"
               :showHeader="false"
@@ -271,11 +271,9 @@
                   :view-route="route('public.cards.show', $card)"
                 >
                   <x-slot:extra>
-                    @if($card->pivot->copies > 1)
                       <div class="card-quantity">
                         <span>x{{ $card->pivot->copies }}</span>
                       </div>
-                    @endif
                   </x-slot:extra>
                 </x-entity.public-card>
               @endforeach

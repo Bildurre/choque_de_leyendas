@@ -4,6 +4,25 @@
   display: flex;
   flex-direction: column;
   
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm;
+  }
+
+  &__extra {
+    // aquí va el Nx (card-quantity)
+    display: flex;
+    align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: flex-end;
+  }
+  
   &__link {
     display: block;
     text-decoration: none;
@@ -21,26 +40,11 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
   }
-  
-  &__actions {
-    display: flex;
-    gap: $spacing-sm;
-    padding: $spacing-sm;
-    justify-content: flex-end;
-  }
 }
 
-// Estilos para los botones en las páginas single
-
-
-@keyframes rotate-check {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.2);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
+// Badge de cantidad tipo "x2"
+.card-quantity {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
 }
