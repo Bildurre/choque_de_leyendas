@@ -15,7 +15,7 @@ class DeckStatsService
    */
   public function getStats(): array
   {
-    $decks = FactionDeck::with(['faction', 'gameMode', 'cards', 'heroes'])->get();
+    $decks = FactionDeck::with(['factions', 'gameMode', 'cards', 'heroes'])->get();
     
     return [
       'summary' => $this->getSummaryStats($decks),

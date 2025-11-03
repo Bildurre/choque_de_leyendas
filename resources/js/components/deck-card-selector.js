@@ -1,63 +1,76 @@
-export default function initDeckCardSelector() {
-  const selectors = document.querySelectorAll('[data-component="deck-card-selector"]');
+// resources/js/admin/deck-hero-selector.js
+
+export default function initDeckHeroSelector() {
+  const selectors = document.querySelectorAll('[data-component="deck-hero-selector"]');
   
   if (!selectors.length) return;
   
   selectors.forEach(selectorElement => {
-    const maxCopies = parseInt(selectorElement.dataset.maxCopies) || 3;
-    const minCards = parseInt(selectorElement.dataset.minCards) || 0;
-    const maxCards = parseInt(selectorElement.dataset.maxCards) || 999;
+    const requiredHeroes = parseInt(selectorElement.dataset.requiredHeroes) || 0;
     const searchInput = selectorElement.querySelector('[data-search-input]');
     const searchClear = selectorElement.querySelector('[data-search-clear]');
     const availableList = selectorElement.querySelector('[data-available-list]');
     const selectedList = selectorElement.querySelector('[data-selected-list]');
     const selectedCount = selectorElement.querySelector('[data-selected-count]');
-    const totalCardsDisplay = selectorElement.querySelector('[data-total-cards]');
+    const totalHeroesDisplay = selectorElement.querySelector('[data-total-heroes]');
     const emptyMessage = selectorElement.querySelector('[data-empty-message]');
     const hiddenInputsContainer = selectorElement.querySelector('[data-hidden-inputs]');
     
     if (!availableList || !selectedList || !hiddenInputsContainer) return;
     
-    const selectedCards = new Map(); // Map<cardId, copies>
-    let totalCards = 0; // Sum of all copies
+    const selectedHeroes = new Set();
     
-    // Get faction selector
-    const factionSelect = document.querySelector('select[name="faction_id"]');
+    // Get faction selector (now supports multiple)
+    const factionSelect = document.querySelector('select[name="faction_ids[]"]');
     
-    // Initialize selected cards from server-rendered content
-    function initializeSelectedCards() {
+    // Get selected faction IDs
+    function getSelectedFactionIds() {
+      if (!factionSelect) return [];
+      
+      // If Choices.js is initialized
+      if (factionSelect.choicesInstance) {
+        const values = factionSelect.choicesInstance.getValue(true);
+        return Array.isArray(values) ? values : [values];
+      }
+      
+      // Fallback to native select
+      const options = Array.from(factionSelect.selectedOptions);
+      return options.map(option => option.value).filter(val => val);
+    }
+    
+    // Initialize selected heroes from server-rendered content
+    function initializeSelectedHeroes() {
       const selectedItems = selectedList.querySelectorAll('[data-selected-item]');
       selectedItems.forEach(item => {
-        const cardId = item.dataset.cardId;
-        const copiesElement = item.querySelector('[data-copies-count]');
-        const copies = copiesElement ? parseInt(copiesElement.textContent) : 1;
-        selectedCards.set(cardId, copies);
-        totalCards += copies;
+        const heroId = item.dataset.heroId;
+        selectedHeroes.add(heroId);
       });
     }
     
-    // Filter cards by faction
-    function filterByFaction(selectedFactionId) {
-      const availableItems = availableList.querySelectorAll('[data-card-item]');
+    // Filter heroes by faction(s)
+    function filterByFactions(selectedFactionIds) {
+      const availableItems = availableList.querySelectorAll('[data-hero-item]');
       
       availableItems.forEach(item => {
-        const cardFactionId = item.dataset.cardFaction;
-        const isSelected = selectedCards.has(item.dataset.cardId);
+        const heroFactionId = item.dataset.heroFaction;
+        const isSelected = selectedHeroes.has(item.dataset.heroId);
         
-        // Hide if selected
+        // Hide if already selected
         if (isSelected) {
           item.style.display = 'none';
           return;
         }
         
-        // If no faction selected, show all
-        if (!selectedFactionId) {
+        // If no factions selected, show all
+        if (!selectedFactionIds || selectedFactionIds.length === 0) {
           item.style.display = '';
           return;
         }
         
-        // Filter by faction
-        if (cardFactionId === selectedFactionId) {
+        // Show hero if it belongs to ANY of the selected factions
+        const belongsToSelectedFaction = selectedFactionIds.includes(heroFactionId);
+        
+        if (belongsToSelectedFaction) {
           item.style.display = '';
         } else {
           item.style.display = 'none';
@@ -79,24 +92,25 @@ export default function initDeckCardSelector() {
         searchClear.style.display = searchTerm ? 'flex' : 'none';
       }
 
-      const availableItems = availableList.querySelectorAll('[data-card-item]');
-      const selectedFactionId = factionSelect ? factionSelect.value : null;
+      const availableItems = availableList.querySelectorAll('[data-hero-item]');
+      const selectedFactionIds = getSelectedFactionIds();
       
       availableItems.forEach(item => {
-        const cardName = item.dataset.cardName;
-        const cardFactionId = item.dataset.cardFaction;
-        const isSelected = selectedCards.has(item.dataset.cardId);
+        const heroName = item.dataset.heroName;
+        const heroFactionId = item.dataset.heroFaction;
+        const isSelected = selectedHeroes.has(item.dataset.heroId);
         
         if (isSelected) {
           item.style.display = 'none';
           return;
         }
         
-        // Check faction filter
-        const passesFactionFilter = !selectedFactionId || cardFactionId === selectedFactionId;
+        // Check faction filter (hero must belong to at least one selected faction)
+        const passesFactionFilter = selectedFactionIds.length === 0 || 
+                                    selectedFactionIds.includes(heroFactionId);
         
         // Check search filter
-        const passesSearchFilter = !searchTerm || cardName.includes(searchTerm);
+        const passesSearchFilter = !searchTerm || heroName.includes(searchTerm);
         
         if (passesFactionFilter && passesSearchFilter) {
           item.style.display = '';
@@ -115,25 +129,26 @@ export default function initDeckCardSelector() {
       }
     }
     
-    // Add card to selected list
-    function addCard(cardItem) {
-      const cardId = cardItem.dataset.cardId;
+    // Add hero to selected list
+    function addHero(heroItem) {
+      const heroId = heroItem.dataset.heroId;
       
-      if (selectedCards.has(cardId)) {
+      if (selectedHeroes.has(heroId)) {
         return;
       }
 
-      // Check if adding this card would exceed max cards
-      if (totalCards >= maxCards) {
-        alert(`No puedes añadir más cartas. Máximo: ${maxCards}`);
+      // Check max heroes limit (usually 5)
+      const maxHeroes = parseInt(selectorElement.dataset.maxHeroes) || 5;
+      if (selectedHeroes.size >= maxHeroes) {
+        alert(`No puedes añadir más héroes. Máximo: ${maxHeroes}`);
         return;
       }
 
       // Hide from available list
-      cardItem.style.display = 'none';
+      heroItem.style.display = 'none';
       
       // Clone and modify for selected list
-      const selectedItem = createSelectedItem(cardItem);
+      const selectedItem = createSelectedItem(heroItem);
       
       // Hide empty message if visible
       if (emptyMessage) {
@@ -144,229 +159,95 @@ export default function initDeckCardSelector() {
       selectedList.appendChild(selectedItem);
       
       // Update state
-      selectedCards.set(cardId, 1);
-      totalCards += 1;
+      selectedHeroes.add(heroId);
       updateSelectedCount();
-      updateTotalCardsDisplay();
+      updateTotalHeroesDisplay();
       updateHiddenInputs();
       clearSearch();
     }
     
     // Create selected item from available item
-    function createSelectedItem(cardItem) {
+    function createSelectedItem(heroItem) {
       const selectedItem = document.createElement('div');
-      selectedItem.className = 'deck-card-selector__item deck-card-selector__item--selected';
+      selectedItem.className = 'deck-hero-selector__item deck-hero-selector__item--selected';
       selectedItem.dataset.selectedItem = '';
-      selectedItem.dataset.cardId = cardItem.dataset.cardId;
-      selectedItem.dataset.cardUnique = cardItem.dataset.cardUnique || 'false';
+      selectedItem.dataset.heroId = heroItem.dataset.heroId;
       
-      // Clone the card item
-      const cardItemInner = cardItem.querySelector('[data-card-item-inner]');
-      const clonedItem = cardItemInner.cloneNode(true);
-      
-      const isUnique = cardItem.dataset.cardUnique === 'true';
-      
-      // Add copies control
-      const copiesControl = document.createElement('div');
-      copiesControl.className = 'card-item__copies';
-      copiesControl.dataset.copiesControl = '';
-      copiesControl.innerHTML = `
-        <button 
-          type="button" 
-          class="card-item__copies-btn" 
-          data-decrease-copies
-          aria-label="Decrease copies"
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-        
-        <span class="card-item__copies-count" data-copies-count>1</span>
-        
-        <button 
-          type="button" 
-          class="card-item__copies-btn" 
-          data-increase-copies
-          aria-label="Increase copies"
-          ${isUnique ? 'disabled title="Carta única"' : ''}
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 2V10M2 6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      `;
+      // Clone the hero item
+      const heroItemInner = heroItem.querySelector('[data-hero-item-inner]');
+      const clonedItem = heroItemInner.cloneNode(true);
       
       // Add remove button
       const removeButton = document.createElement('button');
       removeButton.type = 'button';
-      removeButton.className = 'card-item__remove';
-      removeButton.dataset.removeCard = '';
-      removeButton.setAttribute('aria-label', 'Remove card');
+      removeButton.className = 'hero-item__remove';
+      removeButton.dataset.removeHero = '';
+      removeButton.setAttribute('aria-label', 'Remove hero');
       removeButton.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       `;
       
-      clonedItem.appendChild(copiesControl);
       clonedItem.appendChild(removeButton);
       selectedItem.appendChild(clonedItem);
       
       return selectedItem;
     }
     
-    // Remove card from selected list
-    function removeCard(selectedItem) {
-      const cardId = selectedItem.dataset.cardId;
-      const copies = selectedCards.get(cardId) || 1;
+    // Remove hero from selected list
+    function removeHero(selectedItem) {
+      const heroId = selectedItem.dataset.heroId;
       
       // Remove from selected list
       selectedItem.remove();
       
       // Show in available list
-      const availableItem = availableList.querySelector(`[data-card-id="${cardId}"]`);
+      const availableItem = availableList.querySelector(`[data-hero-id="${heroId}"]`);
       if (availableItem) {
-        const selectedFactionId = factionSelect ? factionSelect.value : null;
-        const cardFactionId = availableItem.dataset.cardFaction;
+        const selectedFactionIds = getSelectedFactionIds();
+        const heroFactionId = availableItem.dataset.heroFaction;
         
         // Only show if matches faction filter (or no filter)
-        if (!selectedFactionId || cardFactionId === selectedFactionId) {
+        if (selectedFactionIds.length === 0 || selectedFactionIds.includes(heroFactionId)) {
           availableItem.style.display = '';
         }
       }
       
       // Update state
-      selectedCards.delete(cardId);
-      totalCards -= copies;
+      selectedHeroes.delete(heroId);
       updateSelectedCount();
-      updateTotalCardsDisplay();
+      updateTotalHeroesDisplay();
       updateHiddenInputs();
       
       // Show empty message if no items selected
-      if (selectedCards.size === 0 && emptyMessage) {
+      if (selectedHeroes.size === 0 && emptyMessage) {
         emptyMessage.style.display = '';
       }
-    }
-    
-    // Increase copies
-    function increaseCopies(selectedItem) {
-      const cardId = selectedItem.dataset.cardId;
-      const currentCopies = selectedCards.get(cardId) || 1;
-      const isUnique = selectedItem.dataset.cardUnique === 'true';
-      
-      // Check if card is unique
-      if (isUnique) {
-        return;
-      }
-      
-      // Check max copies per card
-      if (currentCopies >= maxCopies) {
-        return;
-      }
-      
-      // Check if adding one more would exceed max total cards
-      if (totalCards >= maxCards) {
-        alert(`No puedes añadir más cartas. Máximo: ${maxCards}`);
-        return;
-      }
-      
-      const newCopies = currentCopies + 1;
-      selectedCards.set(cardId, newCopies);
-      totalCards += 1;
-      
-      const copiesElement = selectedItem.querySelector('[data-copies-count]');
-      if (copiesElement) {
-        copiesElement.textContent = newCopies;
-      }
-      
-      // Disable increase button if max reached
-      const increaseBtn = selectedItem.querySelector('[data-increase-copies]');
-      if (increaseBtn && (newCopies >= maxCopies || totalCards >= maxCards)) {
-        increaseBtn.disabled = true;
-      }
-      
-      updateTotalCardsDisplay();
-      updateHiddenInputs();
-      
-      // Re-enable other increase buttons if we were at max
-      updateAllIncreaseButtons();
-    }
-    
-    // Decrease copies
-    function decreaseCopies(selectedItem) {
-      const cardId = selectedItem.dataset.cardId;
-      const currentCopies = selectedCards.get(cardId) || 1;
-      
-      if (currentCopies <= 1) {
-        removeCard(selectedItem);
-        return;
-      }
-      
-      const newCopies = currentCopies - 1;
-      selectedCards.set(cardId, newCopies);
-      totalCards -= 1;
-      
-      const copiesElement = selectedItem.querySelector('[data-copies-count]');
-      if (copiesElement) {
-        copiesElement.textContent = newCopies;
-      }
-      
-      // Re-enable increase button if it was disabled
-      const increaseBtn = selectedItem.querySelector('[data-increase-copies]');
-      const isUnique = selectedItem.dataset.cardUnique === 'true';
-      if (increaseBtn && !isUnique && newCopies < maxCopies && totalCards < maxCards) {
-        increaseBtn.disabled = false;
-      }
-      
-      updateTotalCardsDisplay();
-      updateHiddenInputs();
-      
-      // Re-enable other increase buttons
-      updateAllIncreaseButtons();
     }
     
     // Update selected count badge
     function updateSelectedCount() {
       if (selectedCount) {
-        selectedCount.textContent = selectedCards.size;
+        selectedCount.textContent = selectedHeroes.size;
       }
     }
     
-    // Update total cards display
-    function updateTotalCardsDisplay() {
-      if (totalCardsDisplay) {
-        totalCardsDisplay.textContent = totalCards;
+    // Update total heroes display
+    function updateTotalHeroesDisplay() {
+      if (totalHeroesDisplay) {
+        totalHeroesDisplay.textContent = selectedHeroes.size;
         
-        // Add visual feedback if limits exceeded
-        const display = totalCardsDisplay.parentElement;
+        // Add visual feedback if required heroes not met
+        const display = totalHeroesDisplay.parentElement;
         if (display) {
-          display.classList.remove('deck-card-selector__total-cards--warning', 'deck-card-selector__total-cards--error');
+          display.classList.remove('deck-hero-selector__total-heroes--warning');
           
-          if (totalCards < minCards) {
-            display.classList.add('deck-card-selector__total-cards--warning');
-          } else if (totalCards > maxCards) {
-            display.classList.add('deck-card-selector__total-cards--error');
+          if (selectedHeroes.size < requiredHeroes) {
+            display.classList.add('deck-hero-selector__total-heroes--warning');
           }
         }
       }
-    }
-    
-    // Update all increase buttons state
-    function updateAllIncreaseButtons() {
-      const selectedItems = selectedList.querySelectorAll('[data-selected-item]');
-      
-      selectedItems.forEach(item => {
-        const increaseBtn = item.querySelector('[data-increase-copies]');
-        const cardId = item.dataset.cardId;
-        const copies = selectedCards.get(cardId) || 1;
-        const isUnique = item.dataset.cardUnique === 'true';
-        
-        if (increaseBtn && !isUnique) {
-          // Disable if: card at max copies OR total cards at max
-          increaseBtn.disabled = (copies >= maxCopies || totalCards >= maxCards);
-        }
-      });
     }
     
     // Update hidden form inputs
@@ -374,22 +255,13 @@ export default function initDeckCardSelector() {
       hiddenInputsContainer.innerHTML = '';
       
       let index = 0;
-      selectedCards.forEach((copies, cardId) => {
-        // Hidden input for card ID
+      selectedHeroes.forEach(heroId => {
         const idInput = document.createElement('input');
         idInput.type = 'hidden';
-        idInput.name = `cards[${index}][id]`;
-        idInput.value = cardId;
-        
-        // Hidden input for copies
-        const copiesInput = document.createElement('input');
-        copiesInput.type = 'hidden';
-        copiesInput.name = `cards[${index}][copies]`;
-        copiesInput.value = copies;
+        idInput.name = `heroes[${index}][id]`;
+        idInput.value = heroId;
         
         hiddenInputsContainer.appendChild(idInput);
-        hiddenInputsContainer.appendChild(copiesInput);
-        
         index++;
       });
     }
@@ -405,53 +277,56 @@ export default function initDeckCardSelector() {
 
     // Faction filter change
     if (factionSelect) {
-      factionSelect.addEventListener('change', (e) => {
-        filterByFaction(e.target.value);
+      // Listen for changes (both native and Choices.js)
+      factionSelect.addEventListener('change', () => {
+        const selectedFactionIds = getSelectedFactionIds();
+        filterByFactions(selectedFactionIds);
       });
+      
+      // Also listen to Choices.js specific events if available
+      if (factionSelect.choicesInstance) {
+        factionSelect.addEventListener('addItem', () => {
+          const selectedFactionIds = getSelectedFactionIds();
+          filterByFactions(selectedFactionIds);
+        });
+        
+        factionSelect.addEventListener('removeItem', () => {
+          const selectedFactionIds = getSelectedFactionIds();
+          filterByFactions(selectedFactionIds);
+        });
+      }
     }
 
-    // Add card on click
+    // Add hero on click
     availableList.addEventListener('click', (e) => {
-      const cardItem = e.target.closest('[data-card-item]');
-      if (cardItem) {
-        addCard(cardItem);
+      const heroItem = e.target.closest('[data-hero-item]');
+      if (heroItem) {
+        addHero(heroItem);
       }
     });
 
     // Selected list event delegation
     selectedList.addEventListener('click', (e) => {
-      const removeButton = e.target.closest('[data-remove-card]');
-      const increaseButton = e.target.closest('[data-increase-copies]');
-      const decreaseButton = e.target.closest('[data-decrease-copies]');
+      const removeButton = e.target.closest('[data-remove-hero]');
       
       if (removeButton) {
         const selectedItem = removeButton.closest('[data-selected-item]');
         if (selectedItem) {
-          removeCard(selectedItem);
-        }
-      } else if (increaseButton) {
-        const selectedItem = increaseButton.closest('[data-selected-item]');
-        if (selectedItem) {
-          increaseCopies(selectedItem);
-        }
-      } else if (decreaseButton) {
-        const selectedItem = decreaseButton.closest('[data-selected-item]');
-        if (selectedItem) {
-          decreaseCopies(selectedItem);
+          removeHero(selectedItem);
         }
       }
     });
     
     // Initialize
-    initializeSelectedCards();
+    initializeSelectedHeroes();
     updateSelectedCount();
-    updateTotalCardsDisplay();
-    updateAllIncreaseButtons();
+    updateTotalHeroesDisplay();
     updateHiddenInputs();
     
-    // Apply initial faction filter if faction is already selected
-    if (factionSelect && factionSelect.value) {
-      filterByFaction(factionSelect.value);
+    // Apply initial faction filter if factions are already selected
+    const initialFactionIds = getSelectedFactionIds();
+    if (initialFactionIds.length > 0) {
+      filterByFactions(initialFactionIds);
     }
   });
 }

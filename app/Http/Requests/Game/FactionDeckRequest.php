@@ -29,10 +29,11 @@ class FactionDeckRequest extends FormRequest
       'game_mode_id' => 'required|exists:game_modes,id',
       'faction_ids' => 'required|array|min:1',
       'faction_ids.*' => 'required|exists:factions,id|distinct',
-      'hero_ids' => 'nullable|array',
-      'hero_ids.*' => 'nullable|exists:heroes,id|distinct',
-      'card_ids' => 'nullable|array',
-      'card_ids.*' => 'nullable|exists:cards,id|distinct',
+      'heroes' => 'nullable|array',
+      'heroes.*.id' => 'required|exists:heroes,id|distinct',
+      'cards' => 'nullable|array',
+      'cards.*.id' => 'required|exists:cards,id',
+      'cards.*.copies' => 'required|integer|min:1|max:3',
       'is_published' => 'boolean',
     ];
 

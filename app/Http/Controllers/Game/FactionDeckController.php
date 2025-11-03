@@ -130,22 +130,54 @@ class FactionDeckController extends Controller
   /**
    * Store a newly created faction deck in storage.
    */
-  public function store(FactionDeckRequest $request)
-  {
-    $validated = $request->validated();
-
-    try {
-      // Crear el mazo usando el servicio
-      $factionDeck = $this->factionDeckService->create($validated);
+ public function store(FactionDeckRequest $request)
+{
+  try {
+    // LOG 1: Ver qué datos llegan
+    \Log::info('FactionDeck Store - Request Data:', $request->all());
+    
+    $data = $request->validated();
+    
+    // LOG 2: Ver datos validados
+    \Log::info('FactionDeck Store - Validated Data:', $data);
+    
+    $factionDeck = $this->factionDeckService->create($data);
+    
+    // LOG 3: Success
+    \Log::info('FactionDeck Store - Created Successfully:', [
+      'id' => $factionDeck->id,
+      'faction_ids' => $factionDeck->getFactionIds()
+    ]);
+    
+    return redirect()
+      ->route('admin.faction-decks.show', $factionDeck)
+      ->with('success', __('entities.faction_decks.creation_success'));
       
-      return redirect()->route('admin.faction-decks.show', $factionDeck)
-        ->with('success', __('faction_decks.created_successfully', ['name' => $factionDeck->name]));
-    } catch (\Exception $e) {
-      return back()
-        ->with('error', __('faction_decks.creation_error'))
-        ->withInput();
-    }
+  } catch (\Illuminate\Validation\ValidationException $e) {
+    // LOG 4: Validation error
+    \Log::error('FactionDeck Store - Validation Error:', [
+      'errors' => $e->errors(),
+      'data' => $request->all()
+    ]);
+    
+    return back()
+      ->withErrors($e->errors())
+      ->withInput();
+      
+  } catch (\Exception $e) {
+    // LOG 5: Other error
+    \Log::error('FactionDeck Store - Error:', [
+      'message' => $e->getMessage(),
+      'file' => $e->getFile(),
+      'line' => $e->getLine(),
+      'trace' => $e->getTraceAsString()
+    ]);
+    
+    return back()
+      ->with('error', __('entities.faction_decks.creation_error') . ': ' . $e->getMessage())
+      ->withInput();
   }
+}
 
   /**
    * Display the specified faction deck.

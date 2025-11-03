@@ -210,9 +210,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   public function heroes()
   {
     return $this->belongsToMany(Hero::class, 'faction_deck_hero')
-      ->withPivot('position')
-      ->withTimestamps()
-      ->orderBy('faction_deck_hero.position');
+      ->withTimestamps();
   }
 
   /**
@@ -221,7 +219,85 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   public function cards()
   {
     return $this->belongsToMany(Card::class, 'card_faction_deck')
+      ->withPivot('copies')
       ->withTimestamps();
+  }
+
+  /**
+   * Get the total number of cards (sum of copies)
+   * 
+   * @return int
+   */
+  public function getTotalCardsAttribute(): int
+  {
+    return $this->cards->sum('pivot.copies');
+  }
+
+  /**
+   * Get the total number of heroes
+   * 
+   * @return int
+   */
+  public function getTotalHeroesAttribute(): int
+  {
+    return $this->heroes->count();
+  }
+
+  /**
+   * Get card breakdown by type with copies
+   * 
+   * @return array
+   */
+  public function getCardCopiesBreakdown(): array
+  {
+    $breakdown = [];
+    
+    foreach ($this->cards as $card) {
+      $typeName = $card->cardType->name ?? 'Unknown';
+      $copies = $card->pivot->copies ?? 0;
+      
+      if (!isset($breakdown[$typeName])) {
+        $breakdown[$typeName] = 0;
+      }
+      
+      $breakdown[$typeName] += $copies;
+    }
+    
+    return $breakdown;
+  }
+
+  /**
+   * Get hero breakdown by class with count
+   * 
+   * @return array
+   */
+  public function getHeroCopiesByClassBreakdown(): array
+  {
+    $breakdown = [];
+    
+    foreach ($this->heroes as $hero) {
+      $className = $hero->heroClass->name ?? 'Unknown';
+      
+      if (!isset($breakdown[$className])) {
+        $breakdown[$className] = 0;
+      }
+      
+      $breakdown[$className]++;
+    }
+    
+    return $breakdown;
+  }
+
+  /**
+   * Get hero breakdown by superclass (currently just class, for future expansion)
+   * 
+   * @return array
+   */
+  public function getHeroCopiesBreakdown(): array
+  {
+    // For now, same as by class
+    // Can be expanded later for superclass grouping
+    return $this->getHeroCopiesByClassBreakdown();
   }
 
   /**
