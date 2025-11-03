@@ -25,11 +25,10 @@ class DeckExportService
     $items = collect();
     
     foreach ($heroes as $hero) {
-      $copies = $hero->pivot->copies ?? 1;
       $items->push([
         'type' => 'hero',
         'entity' => $hero,
-        'copies' => $copies,
+        'copies' => 1, // Heroes don't have copies
       ]);
     }
     

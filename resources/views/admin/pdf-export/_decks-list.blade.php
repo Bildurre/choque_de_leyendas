@@ -1,8 +1,11 @@
 <div class="pdf-export__decks">
   <x-pdf.list :items="$decks" type="deck">
     @foreach($decks as $deck)
+      @php
+        $factionNames = $deck->factions->pluck('name')->join(', ');
+      @endphp
       <x-pdf.item
-        :title="$deck->name . ' (' . $deck->faction->name . ')'"
+        :title="$deck->name . ' (' . $factionNames . ')'"
         type="deck"
         :entityId="$deck->id"
         :existingPdf="$existingPdfs[$deck->id] ?? null"

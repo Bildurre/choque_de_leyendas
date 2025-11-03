@@ -90,11 +90,12 @@ class PdfCollectionService
       ->where('is_permanent', true)
       ->where('locale', $locale)
       ->whereIn('deck_id', $publishedDeckIds)
-      ->with(['deck.faction'])
+      ->with(['deck.factions'])
       ->orderBy('created_at', 'desc')
       ->get()
       ->map(function ($pdf) {
-        $pdf->display_name = $pdf->deck->name . ' (' . $pdf->deck->faction->name . ')';
+        $factionNames = $pdf->deck->factions->pluck('name')->join(', ');
+        $pdf->display_name = $pdf->deck->name . ' (' . $factionNames . ')';
         return $pdf;
       });
   }

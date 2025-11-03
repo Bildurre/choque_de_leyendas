@@ -431,7 +431,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
    */
   public function getImageDirectory(): string
   {
-    return 'images/decks';
+    return 'images/faction-decks';
   }
 
     /**
