@@ -1,5 +1,4 @@
 <?php
-// app/Services/Game/FactionDeckService.php
 
 namespace App\Services\Game;
 
@@ -431,6 +430,12 @@ class FactionDeckService
     return $factionDeck->forceDelete();
   }
 
+  /**
+   * Get deck statistics
+   * 
+   * @param FactionDeck $factionDeck
+   * @return array
+   */
   public function getDeckStatistics(FactionDeck $factionDeck): array
   {
     $cards = $factionDeck->cards;

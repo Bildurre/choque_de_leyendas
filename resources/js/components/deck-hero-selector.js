@@ -7,6 +7,7 @@ export default function initDeckHeroSelector() {
   
   selectors.forEach(selectorElement => {
     const requiredHeroes = parseInt(selectorElement.dataset.requiredHeroes) || 0;
+    const maxHeroes = parseInt(selectorElement.dataset.maxHeroes) || 5;
     const searchInput = selectorElement.querySelector('[data-search-input]');
     const searchClear = selectorElement.querySelector('[data-search-clear]');
     const availableList = selectorElement.querySelector('[data-available-list]');
@@ -19,6 +20,7 @@ export default function initDeckHeroSelector() {
     if (!availableList || !selectedList || !hiddenInputsContainer) return;
     
     const selectedHeroes = new Set();
+    const MERCENARIES_ID = '1';
     
     // Get faction selector (now supports multiple)
     const factionSelect = document.querySelector('select[name="faction_ids[]"]');
@@ -30,12 +32,12 @@ export default function initDeckHeroSelector() {
       // If Choices.js is initialized
       if (factionSelect.choicesInstance) {
         const values = factionSelect.choicesInstance.getValue(true);
-        return Array.isArray(values) ? values : [values];
+        return Array.isArray(values) ? values.map(String) : [String(values)];
       }
       
       // Fallback to native select
       const options = Array.from(factionSelect.selectedOptions);
-      return options.map(option => option.value).filter(val => val);
+      return options.map(option => String(option.value)).filter(val => val);
     }
     
     // Initialize selected heroes from server-rendered content
@@ -47,13 +49,30 @@ export default function initDeckHeroSelector() {
       });
     }
     
+    // Check if hero belongs to valid factions
+    function heroBelongsToValidFaction(heroFactionId, selectedFactionIds) {
+      // If no factions selected, show all
+      if (!selectedFactionIds || selectedFactionIds.length === 0) {
+        return true;
+      }
+      
+      // Mercenaries heroes are always valid if there's at least one faction selected
+      if (heroFactionId === MERCENARIES_ID) {
+        return true;
+      }
+      
+      // Hero must belong to one of the selected non-mercenary factions
+      return selectedFactionIds.includes(heroFactionId);
+    }
+    
     // Filter heroes by faction(s)
     function filterByFactions(selectedFactionIds) {
       const availableItems = availableList.querySelectorAll('[data-hero-item]');
       
       availableItems.forEach(item => {
         const heroFactionId = item.dataset.heroFaction;
-        const isSelected = selectedHeroes.has(item.dataset.heroId);
+        const heroId = item.dataset.heroId;
+        const isSelected = selectedHeroes.has(heroId);
         
         // Hide if already selected
         if (isSelected) {
@@ -61,16 +80,8 @@ export default function initDeckHeroSelector() {
           return;
         }
         
-        // If no factions selected, show all
-        if (!selectedFactionIds || selectedFactionIds.length === 0) {
-          item.style.display = '';
-          return;
-        }
-        
-        // Show hero if it belongs to ANY of the selected factions
-        const belongsToSelectedFaction = selectedFactionIds.includes(heroFactionId);
-        
-        if (belongsToSelectedFaction) {
+        // Check if hero belongs to valid factions
+        if (heroBelongsToValidFaction(heroFactionId, selectedFactionIds)) {
           item.style.display = '';
         } else {
           item.style.display = 'none';
@@ -98,16 +109,16 @@ export default function initDeckHeroSelector() {
       availableItems.forEach(item => {
         const heroName = item.dataset.heroName;
         const heroFactionId = item.dataset.heroFaction;
-        const isSelected = selectedHeroes.has(item.dataset.heroId);
+        const heroId = item.dataset.heroId;
+        const isSelected = selectedHeroes.has(heroId);
         
         if (isSelected) {
           item.style.display = 'none';
           return;
         }
         
-        // Check faction filter (hero must belong to at least one selected faction)
-        const passesFactionFilter = selectedFactionIds.length === 0 || 
-                                    selectedFactionIds.includes(heroFactionId);
+        // Check faction filter
+        const passesFactionFilter = heroBelongsToValidFaction(heroFactionId, selectedFactionIds);
         
         // Check search filter
         const passesSearchFilter = !searchTerm || heroName.includes(searchTerm);
@@ -137,8 +148,7 @@ export default function initDeckHeroSelector() {
         return;
       }
 
-      // Check max heroes limit (usually 5)
-      const maxHeroes = parseInt(selectorElement.dataset.maxHeroes) || 5;
+      // Check max heroes limit
       if (selectedHeroes.size >= maxHeroes) {
         alert(`No puedes añadir más héroes. Máximo: ${maxHeroes}`);
         return;
@@ -208,8 +218,8 @@ export default function initDeckHeroSelector() {
         const selectedFactionIds = getSelectedFactionIds();
         const heroFactionId = availableItem.dataset.heroFaction;
         
-        // Only show if matches faction filter (or no filter)
-        if (selectedFactionIds.length === 0 || selectedFactionIds.includes(heroFactionId)) {
+        // Only show if matches faction filter
+        if (heroBelongsToValidFaction(heroFactionId, selectedFactionIds)) {
           availableItem.style.display = '';
         }
       }

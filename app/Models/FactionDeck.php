@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Spatie\Sluggable\SlugOptions;
 use App\Models\Traits\HasFilters;
+use App\Models\Traits\HasImageAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasTranslatableSlug;
@@ -20,6 +21,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   use SoftDeletes;
   use HasFilters;
   use HasPublishedAttribute;
+  use HasImageAttribute;
 
   /**
    * The attributes that are mass assignable.
@@ -53,6 +55,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
     'name',
     'slug',
     'description',
+    'epic_quote'
   ];
 
   /**
@@ -349,5 +352,99 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
   public function hasMercenaries(): bool
   {
     return $this->factions()->where('factions.id', 1)->exists();
+  }
+
+  /**
+   * Get all non-mercenary factions
+   * 
+   * @return \Illuminate\Database\Eloquent\Collection
+   */
+  public function getNonMercenaryFactions()
+  {
+    return $this->factions->filter(function ($faction) {
+      return !$faction->isMercenaries();
+    });
+  }
+
+  /**
+   * Get color configuration for preview
+   * 
+   * @return array
+   */
+  public function getColorConfiguration(): array
+  {
+    $nonMercenaryFactions = $this->getNonMercenaryFactions();
+    
+    if ($nonMercenaryFactions->count() === 1) {
+      // Single faction deck
+      $faction = $nonMercenaryFactions->first();
+      return [
+        'is_multi_faction' => false,
+        'colors' => [$faction->color],
+        'rgb_values' => [$faction->rgb_values],
+        'text_color' => $faction->text_is_dark ? '#000000' : '#ffffff',
+      ];
+    }
+    
+    // Multi-faction deck
+    $colors = $nonMercenaryFactions->pluck('color')->toArray();
+    $rgbValues = $nonMercenaryFactions->pluck('rgb_values')->toArray();
+    
+    return [
+      'is_multi_faction' => true,
+      'colors' => $colors,
+      'rgb_values' => $rgbValues,
+      'text_color' => '#ffffff', // Default to white for multi-faction
+    ];
+  }
+
+  /**
+   * Get gradient CSS for multi-faction decks
+   * 
+   * @return string
+   */
+  public function getGradientCss(): string
+  {
+    $config = $this->getColorConfiguration();
+    
+    if (!$config['is_multi_faction']) {
+      return $config['colors'][0];
+    }
+    
+    $colorCount = count($config['colors']);
+    $percentage = 100 / $colorCount;
+    
+    $stops = [];
+    foreach ($config['colors'] as $index => $color) {
+      $start = $index * $percentage;
+      $end = ($index + 1) * $percentage;
+      $stops[] = "{$color} {$start}%, {$color} {$end}%";
+    }
+    
+    return 'linear-gradient(135deg, ' . implode(', ', $stops) . ')';
+  }
+
+    /**
+   * Get the directory for storing images for this model
+   * 
+   * @return string
+   */
+  public function getImageDirectory(): string
+  {
+    return 'images/decks';
+  }
+
+    /**
+   * Get the available PDF for a specific locale
+   */
+  public function getAvailablePdf(string $locale = null): ?GeneratedPdf
+  {
+    $locale = $locale ?? app()->getLocale();
+    
+    return GeneratedPdf::where('type', 'deck')
+      ->where('deck_id', $this->id)
+      ->where('locale', $locale)
+      ->where('is_permanent', true)
+      ->first();
   }
 }

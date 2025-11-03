@@ -164,7 +164,7 @@ class FactionService
   public function getFactionDecks(Faction $faction, int $perPage = 8)
   {
     return $faction->factionDecks()
-      ->with(['gameMode', 'faction'])
+      ->with(['gameMode', 'factions'])
       ->paginate($perPage);
   }
   

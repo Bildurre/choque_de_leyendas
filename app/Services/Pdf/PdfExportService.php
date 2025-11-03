@@ -209,7 +209,7 @@ class PdfExportService
    */
   private function getDecks(): Collection
   {
-    return FactionDeck::with(['faction', 'heroes', 'cards'])
+    return FactionDeck::with(['factions', 'heroes', 'cards'])
       ->orderBy('name')
       ->get();
   }

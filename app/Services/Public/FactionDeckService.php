@@ -13,7 +13,7 @@ class FactionDeckService
   public function getFactionDeckRelations(): array
   {
     return [
-      'faction',
+      'factions',
       'gameMode',
       'heroes.heroClass.heroSuperclass',
       'heroes.heroRace',
@@ -95,7 +95,7 @@ class FactionDeckService
       'averageDiceCount' => $totalCards > 0 ? round($totalDiceCount / $totalCards, 2) : 0,
       'symbolCounts' => $symbolCounts,
       'cardsByType' => $factionDeck->getCardCopiesBreakdown(),
-      'totalHeroes' => $factionDeck->heroes->sum('pivot.copies'),
+      'totalHeroes' => $factionDeck->heroes->count(),
       'uniqueHeroes' => $factionDeck->heroes->count(),
       'heroesByClass' => $factionDeck->getHeroCopiesByClassBreakdown(),
       'heroesBySuperclass' => $factionDeck->getHeroCopiesBreakdown()

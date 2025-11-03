@@ -1,4 +1,3 @@
-
 @php
   $tab = request()->get('tab', 'info');
 @endphp
@@ -6,17 +5,17 @@
   :title="__('entities.faction_decks.page_title', ['name' => $factionDeck->name])"
   :metaDescription="__('entities.faction_decks.page_description', [
     'name' => $factionDeck->name,
-    'faction' => $factionDeck->faction->name,
+    'faction' => $factionDeck->factions->pluck('name')->join(', '),
     'description' => Str::limit(strip_tags($factionDeck->gameMode->name), 100)
   ])"
   ogType="article"
-  :ogImage="$factionDeck->hasImage() ? $factionDeck->getImageUrl() : $factionDeck->faction->getImageUrl()"
+  :ogImage="$factionDeck->hasImage() ? $factionDeck->getImageUrl() : ($factionDeck->getPrimaryFaction()?->getImageUrl() ?? '')"
 >
-  {{-- Page background with deck icon or faction icon --}}
+  {{-- Page background with deck icon or primary faction icon --}}
   @if($factionDeck->hasImage())
     <x-page-background :image="$factionDeck->getImageUrl()" />
-  @elseif($factionDeck->faction->hasImage())
-    <x-page-background :image="$factionDeck->faction->getImageUrl()" />
+  @elseif($factionDeck->getPrimaryFaction() && $factionDeck->getPrimaryFaction()->hasImage())
+    <x-page-background :image="$factionDeck->getPrimaryFaction()->getImageUrl()" />
   @endif
 
   {{-- Header Block con acciones --}}
@@ -26,7 +25,12 @@
     
     foreach (config('laravellocalization.supportedLocales', ['es' => [], 'en' => []]) as $locale => $data) {
       $titleTranslations[$locale] = $factionDeck->getTranslation('name', $locale);
-      $subtitleTranslations[$locale] = $factionDeck->faction->getTranslation('name', $locale) . ' - ' . $factionDeck->gameMode->getTranslation('name', $locale);
+      
+      $factionNames = $factionDeck->factions->map(function($faction) use ($locale) {
+        return $faction->getTranslation('name', $locale);
+      })->join(', ');
+      
+      $subtitleTranslations[$locale] = $factionNames . ' - ' . $factionDeck->gameMode->getTranslation('name', $locale);
     }
     
     $headerBlock = new \App\Models\Block([
@@ -100,14 +104,17 @@
                       :value="$factionDeck->name" 
                     />
 
-                    <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
-                      <x-entity-show.info-link :href="route('public.factions.show', [$factionDeck->faction])">
-                        {{ $factionDeck->faction->name }}
-                      </x-entity-show.info-link>
+                    <x-entity-show.info-list-item label="{{ __('entities.factions.plural') }}">
+                      @foreach($factionDeck->factions as $faction)
+                        <x-entity-show.info-link :href="route('public.factions.show', $faction)">
+                          {{ $faction->name }}
+                        </x-entity-show.info-link>
+                        @if(!$loop->last), @endif
+                      @endforeach
                     </x-entity-show.info-list-item>
                     
                     <x-entity-show.info-list-item label="{{ __('entities.game_modes.singular') }}">
-                      <x-entity-show.info-link :href="route('public.faction-decks.index', ['tab' => $factionDeck->gameMode])">
+                      <x-entity-show.info-link :href="route('public.faction-decks.index', ['tab' => $factionDeck->gameMode->id])">
                         {{ $factionDeck->gameMode->name }}
                       </x-entity-show.info-link>
                     </x-entity-show.info-list-item>
@@ -238,15 +245,7 @@
                   :entity="$hero"
                   type="hero"
                   :view-route="route('public.heroes.show', $hero)"
-                >
-                  <x-slot:extra>
-                    @if($hero->pivot->copies > 1)
-                      <div class="card-quantity">
-                        <span>x{{ $hero->pivot->copies }}</span>
-                      </div>
-                    @endif
-                  </x-slot:extra>
-                </x-entity.public-card>
+                />
               @endforeach
             </x-entity.list>
             

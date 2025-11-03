@@ -1,4 +1,3 @@
-
 @php
   $tab = request()->get('tab', 'heroes');
 @endphp
@@ -147,7 +146,7 @@
             {{-- Decks Tab Content --}}
             @php
               $decks = $faction->factionDecks()->published()
-                ->with(['gameMode', 'heroes.heroClass', 'cards.cardType', 'faction'])
+                ->with(['gameMode', 'heroes.heroClass', 'cards.cardType', 'factions'])
                 ->orderBy('name')
                 ->paginate(12);
             @endphp

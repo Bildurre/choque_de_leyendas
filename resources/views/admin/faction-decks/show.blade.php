@@ -101,10 +101,13 @@
                     :value="$factionDeck->name" 
                   />
 
-                  <x-entity-show.info-list-item label="{{ __('entities.factions.singular') }}">
-                    <x-entity-show.info-link :href="route('admin.factions.show', [$factionDeck->faction])">
-                      {{ $factionDeck->faction->name }}
-                    </x-entity-show.info-link>
+                  <x-entity-show.info-list-item label="{{ __('entities.factions.plural') }}">
+                    @foreach($factionDeck->factions as $faction)
+                      <x-entity-show.info-link :href="route('admin.factions.show', $faction)">
+                        {{ $faction->name }}
+                      </x-entity-show.info-link>
+                      @if(!$loop->last), @endif
+                    @endforeach
                   </x-entity-show.info-list-item>
                   
                   <x-entity-show.info-list-item label="{{ __('entities.game_modes.singular') }}">
@@ -265,12 +268,6 @@
                 :edit-route="route('admin.heroes.edit', $hero)"
               >
                 <x-slot:badges>
-                  @if($hero->pivot->copies > 1)
-                    <x-badge variant="primary">
-                      x{{ $hero->pivot->copies }}
-                    </x-badge>
-                  @endif
-                  
                   <x-badge 
                     :variant="$hero->faction->text_is_dark ? 'light' : 'dark'" 
                     style="background-color: {{ $hero->faction->color }};"
@@ -332,9 +329,11 @@
                     </x-badge>
                   @endif
                   
-                  <x-badge variant="info">
-                    {{ $card->cardType->name }}
-                  </x-badge>
+                  @if($card->cardType)
+                    <x-badge variant="info">
+                      {{ $card->cardType->name }}
+                    </x-badge>
+                  @endif
                   
                   @if($card->faction)
                     <x-badge 
