@@ -354,6 +354,7 @@ return [
   
   // Faction decks
   'faction_decks' => [
+    'multi_faction' => 'Multifaction',
     'index_page_title' => 'Faction Decks - Blades of Ash: Clash of Legends',
     'index_page_description' => 'Explore all pre-built faction decks for each game mode in Blades of Ash: Clash of Legends',
     'page_title' => ':name - Preset deck | Blades of Ash: Clash of Legends',

@@ -4,12 +4,14 @@
 
 @php
   $colorConfig = $deck->getColorConfiguration();
+  $isMultiFaction = $colorConfig['is_multi_faction'];
+  $primaryFaction = $deck->getPrimaryFaction();
 @endphp
 
 <article 
-  class="deck-preview {{ $colorConfig['is_multi_faction'] ? 'deck-preview--multi-faction' : '' }}"
+  class="deck-preview {{ $isMultiFaction ? 'deck-preview--multi-faction' : '' }}"
   style="
-    --faction-color: {{ $colorConfig['is_multi_faction'] ? 'transparent' : $colorConfig['colors'][0] }}; 
+    --faction-color: {{ $isMultiFaction ? 'transparent' : $colorConfig['colors'][0] }}; 
     --faction-gradient: {{ $deck->getGradientCss() }}; 
     --faction-text: {{ $colorConfig['text_color'] }};
   "
@@ -25,8 +27,12 @@
     
     <h3 class="deck-preview__name">{{ $deck->name }}</h3>
     
-    @if($colorConfig['is_multi_faction'])
-      <span class="deck-preview__badge">{{ __('entities.faction_decks.multi_faction') }}</span>
-    @endif
+    <span class="deck-preview__badge">
+      @if($isMultiFaction)
+        {{ __('entities.faction_decks.multi_faction') }}
+      @elseif($primaryFaction)
+        {{ $primaryFaction->name }}
+      @endif
+    </span>
   </div>
 </article>

@@ -214,14 +214,15 @@ class FactionDeckService
       // Set game mode
       $factionDeck->game_mode_id = $data['game_mode_id'];
       
-      // Handle icon upload
+      $factionDeck->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
+      
+      // Save first to get an ID
+      $factionDeck->save();
+      
+      // Handle icon upload AFTER saving (needs ID for filename generation)
       if (isset($data['icon']) && $data['icon'] instanceof UploadedFile) {
         $factionDeck->storeImage($data['icon'], 'icon');
       }
-
-      $factionDeck->is_published = isset($data['is_published']) ? (bool)$data['is_published'] : false;
-      
-      $factionDeck->save();
       
       // Sync factions (many-to-many)
       if (isset($data['faction_ids']) && is_array($data['faction_ids'])) {

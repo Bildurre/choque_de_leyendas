@@ -34,6 +34,7 @@ class FactionDeck extends Model implements LocalizedUrlRoutable
     'description',
     'game_mode_id',
     'is_published',
+    'icon',
   ];
 
   /**

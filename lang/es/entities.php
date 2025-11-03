@@ -353,6 +353,7 @@ return [
   
   // Mazos de facción
   'faction_decks' => [
+    'multi_faction' => 'Multifacción',
     'index_page_title' => 'Mazos de Facción - Espadas de Ceniza: Choque de Leyendas',
     'index_page_description' => 'Explora todos los mazos de facción prediseñados para cada modo de juego de Espadas de Ceniza: Choque de Leyendas',
     'page_title' => ':name - Mazo predeterminado | Espadas de Ceniza: Choque de Leyendas',
