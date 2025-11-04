@@ -46,10 +46,53 @@ export default function initDeckCardSelector() {
       const selectedItems = selectedList.querySelectorAll('[data-selected-item]');
       selectedItems.forEach(item => {
         const cardId = item.dataset.cardId;
+        const isUnique = item.dataset.cardUnique === 'true';
+        
+        // Try to get copies from span (Blade-rendered) or input (JS-created)
+        const copiesSpan = item.querySelector('[data-copies-count]');
         const copiesInput = item.querySelector('[data-copies-input]');
-        const copies = copiesInput ? parseInt(copiesInput.value) : 1;
+        
+        let copies = 1;
+        if (copiesSpan) {
+          copies = parseInt(copiesSpan.textContent) || 1;
+        } else if (copiesInput) {
+          copies = parseInt(copiesInput.value) || 1;
+        }
+        
         selectedCards.set(cardId, copies);
+        
+        // Convert Blade-rendered controls to interactive ones
+        if (copiesSpan) {
+          convertCopiesControlToInteractive(item, copies, isUnique);
+        }
       });
+    }
+    
+    // Convert Blade-rendered copies control to interactive version
+    function convertCopiesControlToInteractive(selectedItem, currentCopies, isUnique) {
+      const copiesControl = selectedItem.querySelector('[data-copies-control]');
+      if (!copiesControl) return;
+      
+      const copiesSpan = copiesControl.querySelector('[data-copies-count]');
+      if (!copiesSpan) return;
+      
+      // Replace span with input
+      const copiesInput = document.createElement('input');
+      copiesInput.type = 'number';
+      copiesInput.className = 'card-item__copies-input';
+      copiesInput.dataset.copiesInput = '';
+      copiesInput.value = currentCopies;
+      copiesInput.min = '1';
+      copiesInput.max = isUnique ? '1' : maxCopies;
+      copiesInput.readOnly = true;
+      
+      copiesSpan.replaceWith(copiesInput);
+      
+      // Disable increase button if unique
+      const increaseBtn = copiesControl.querySelector('[data-increase-copies]');
+      if (increaseBtn && isUnique) {
+        increaseBtn.disabled = true;
+      }
     }
     
     // Check if card belongs to valid factions
@@ -196,10 +239,19 @@ export default function initDeckCardSelector() {
       // Add copies controls
       const copiesControl = document.createElement('div');
       copiesControl.className = 'card-item__copies';
+      copiesControl.dataset.copiesControl = '';
       copiesControl.innerHTML = `
-        <button type="button" class="card-item__copies-btn" data-decrease-copies aria-label="Decrease copies">−</button>
+        <button type="button" class="card-item__copies-btn" data-decrease-copies aria-label="Decrease copies">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
         <input type="number" class="card-item__copies-input" data-copies-input value="1" min="1" max="${isUnique ? 1 : maxCopies}" readonly>
-        <button type="button" class="card-item__copies-btn" data-increase-copies aria-label="Increase copies" ${isUnique ? 'disabled' : ''}>+</button>
+        <button type="button" class="card-item__copies-btn" data-increase-copies aria-label="Increase copies" ${isUnique ? 'disabled' : ''}>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2V10M2 6H10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
       `;
       
       // Add remove button
