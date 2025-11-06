@@ -84,11 +84,12 @@
         />
 
         <x-form.select
-          name="hero_ability_id"
-          :label="__('entities.hero_abilities.singular')"
-          :options="['' => __('entities.cards.no_hero_ability')] + $heroAbilities->pluck('name', 'id')->toArray()"
-          :selected="old('hero_ability_id', isset($card) ? $card->hero_ability_id : '')"
-        />
+  name="hero_ability_id"
+  :label="__('entities.hero_abilities.singular')"
+  :options="['' => __('entities.cards.no_hero_ability')] + $heroAbilities->pluck('name', 'id')->toArray()"
+  :selected="old('hero_ability_id', isset($card) ? $card->hero_ability_id : '')"
+  :use-choices="true"
+/>
 
         <x-form.select
           name="hands"

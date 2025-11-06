@@ -72,7 +72,8 @@ class CardController extends Controller
     $equipmentTypes = EquipmentType::orderBy('category')->orderBy('id')->get();
     $attackRanges = AttackRange::orderBy('id')->get();
     $attackSubtypes = AttackSubtype::orderBy('id')->get();
-    $heroAbilities = HeroAbility::orderBy('id')->get();
+    $locale = app()->getLocale();
+    $heroAbilities = HeroAbility::orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"{$locale}\"'))")->get();
     
     $selectedFactionId = $request->query('faction_id');
     
@@ -128,7 +129,8 @@ class CardController extends Controller
     $equipmentTypes = EquipmentType::orderBy('category')->orderBy('id')->get();
     $attackRanges = AttackRange::orderBy('id')->get();
     $attackSubtypes = AttackSubtype::orderBy('id')->get();
-    $heroAbilities = HeroAbility::orderBy('id')->get();
+    $locale = app()->getLocale();
+    $heroAbilities = HeroAbility::orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"{$locale}\"'))")->get();
     
     return view('admin.cards.edit', compact(
       'card',
