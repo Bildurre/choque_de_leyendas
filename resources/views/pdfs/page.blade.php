@@ -326,7 +326,7 @@
     .block--counters-list .counter-effect {
       font-size: 9pt;
       line-height: 1;
-      padding: 1px !important;
+      padding: 3px !important;
       margin: 0 !important;
     }
     
