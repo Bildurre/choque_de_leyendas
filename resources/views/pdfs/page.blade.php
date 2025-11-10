@@ -303,13 +303,10 @@
     
     .block--counters-list .counter-icon {
       text-align: center;
-      width: 1cm;
-      height: .75cm;
+      width: 1.5cm;
     }
     
     .block--counters-list .counter-icon img {
-      width: .5cm;
-      height: .5cm;
       object-fit: contain;
       border-radius: 50%;
     }
@@ -343,8 +340,8 @@
     
     /* Ensure counter icon images are not affected */
     .block--counters-list .counter-icon img {
-      width: 1.2cm !important;
-      height: 1.2cm !important;
+      width: 1cm !important;
+      height: 1cm !important;
     }
     
     /* Clear floats */
