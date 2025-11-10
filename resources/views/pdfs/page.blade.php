@@ -340,8 +340,8 @@
     
     /* Ensure counter icon images are not affected */
     .block--counters-list .counter-icon img {
-      width: 1cm !important;
-      height: 1cm !important;
+      width: .8cm !important;
+      height: .8cm !important;
     }
     
     /* Clear floats */
