@@ -307,8 +307,8 @@
     }
     
     .block--counters-list .counter-icon img {
-      width: 1cm;
-      height: 1cm;
+      width: .8cm;
+      height: .8cm;
       object-fit: contain;
       border-radius: 50%;
     }
@@ -322,7 +322,7 @@
     }
     
     .block--counters-list .counter-effect {
-      font-size: 10pt;
+      font-size: 9pt;
     }
     
     .block--counters-list .block__empty {
@@ -670,7 +670,7 @@
                     </td>
                     <td class="counter-info">
                       <div class="counter-name">{{ $counter->name }}</div>
-                      <div class="counter-effect">{{ $counter->effect }}</div>
+                      <div class="counter-effect">{!! $counter->effect !!}</div>
                     </td>
                   </tr>
                 @endforeach
