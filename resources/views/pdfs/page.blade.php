@@ -297,7 +297,9 @@
     }
     
     .block--counters-list .counters-table td {
-      padding: 0;
+      
+      padding: 0 !important;
+      margin: 0 !important;
       vertical-align: middle;
     }
     
