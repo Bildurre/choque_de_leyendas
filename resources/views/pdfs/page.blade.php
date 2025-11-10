@@ -304,7 +304,7 @@
     .block--counters-list .counter-icon {
       text-align: center;
       width: 1cm;
-      height: 1cm;
+      height: .75cm;
     }
     
     .block--counters-list .counter-icon img {
