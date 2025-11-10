@@ -303,12 +303,12 @@
     
     .block--counters-list .counter-icon {
       text-align: center;
-      width: 1.2cm;
+      width: 1.5cm;
     }
     
     .block--counters-list .counter-icon img {
-      width: .75cm;
-      height: .75cm;
+      width: .5cm;
+      height: .5cm;
       object-fit: contain;
       border-radius: 50%;
     }
