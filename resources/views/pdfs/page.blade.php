@@ -325,8 +325,18 @@
     
     .block--counters-list .counter-effect {
       font-size: 9pt;
+      line-height: 1;
+      padding: 1px !important;
+      margin: 0 !important;
     }
     
+    .block--counters-list .counter-effect * {
+      font-size: 9pt;
+      line-height: 1;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
     .block--counters-list .block__empty {
       text-align: center;
       padding: 5mm;
