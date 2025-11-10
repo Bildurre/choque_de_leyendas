@@ -312,6 +312,7 @@
     }
     
     .block--counters-list .counter-info {
+      padding: 0 !important;
     }
     
     .block--counters-list .counter-name {
