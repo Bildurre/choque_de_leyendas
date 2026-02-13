@@ -14,6 +14,7 @@ class FactionResource extends JsonResource
       'name' => $this->name,
       'lore_text' => $this->lore_text,
       'color' => $this->color,
+      'icon_url' => $this->icon ? asset('storage/' . $this->icon) : null,
       'text_is_dark' => $this->text_is_dark,
       'is_mercenaries' => $this->isMercenaries(),
     ];
