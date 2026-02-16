@@ -44,7 +44,7 @@ trait HasPreviewImage
   {
     $locale = $locale ?? app()->getLocale();
     
-    $previewImages = $this->preview_image ?? [];
+    $previewImages = $this->getTranslations('preview_image');
     
     if (!isset($previewImages[$locale])) {
       return null;
@@ -64,7 +64,7 @@ trait HasPreviewImage
   {
     $locale = $locale ?? app()->getLocale();
     
-    $previewImages = $this->preview_image ?? [];
+    $previewImages = $this->getTranslations('preview_image');
     
     if (!isset($previewImages[$locale])) {
       return false;
@@ -89,11 +89,7 @@ trait HasPreviewImage
    */
   public function setPreviewImagePath(string $locale, string $path): void
   {
-    $previewImages = $this->preview_image ?? [];
-    $previewImages[$locale] = $path;
-    
-    // Use saveQuietly to avoid triggering events
-    $this->preview_image = $previewImages;
+    $this->setTranslation('preview_image', $locale, $path);
     $this->saveQuietly();
   }
   
@@ -105,7 +101,7 @@ trait HasPreviewImage
    */
   public function deletePreviewImage(?string $locale = null): bool
   {
-    $previewImages = $this->preview_image ?? [];
+    $previewImages = $this->getTranslations('preview_image');
     
     if ($locale === null) {
       // Delete all preview images
@@ -113,7 +109,7 @@ trait HasPreviewImage
         Storage::disk('public')->delete($imagePath);
       }
       
-      $this->preview_image = null;
+      $this->forgetAllTranslations('preview_image');
       $this->saveQuietly();
       
       return true;
@@ -125,7 +121,7 @@ trait HasPreviewImage
       
       unset($previewImages[$locale]);
       
-      $this->preview_image = empty($previewImages) ? null : $previewImages;
+      $this->preview_image = $previewImages;
       $this->saveQuietly();
       
       return true;
@@ -141,7 +137,7 @@ trait HasPreviewImage
    */
   public function getAllPreviewImages(): array
   {
-    return $this->preview_image ?? [];
+    return $this->getTranslations('preview_image');
   }
   
   /**
