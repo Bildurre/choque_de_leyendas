@@ -14,6 +14,7 @@ class CounterResource extends JsonResource
       'name' => $this->name,
       'effect' => $this->effect,
       'type' => $this->type,
+      'icon_url' => $this->icon ? asset('storage/' . $this->icon) : null,
     ];
   }
 }

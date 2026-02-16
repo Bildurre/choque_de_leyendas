@@ -28,6 +28,7 @@ class FactionDeckResource extends JsonResource
           ];
         });
       }),
+      'icon_url' => $this->icon ? asset('storage/' . $this->icon) : null,
     ];
   }
 }

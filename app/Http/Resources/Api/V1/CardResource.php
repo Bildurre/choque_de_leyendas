@@ -29,6 +29,8 @@ class CardResource extends JsonResource
       'restriction' => $this->restriction,
       'area' => $this->area,
       'is_unique' => $this->is_unique,
+      'image_url' => $this->image ? asset('storage/' . $this->image) : null,
+      'preview_image_url' => $this->preview_image ? asset('storage/' . $this->preview_image) : null,
     ];
   }
 }
