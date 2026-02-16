@@ -30,7 +30,7 @@ class CardResource extends JsonResource
       'area' => $this->area,
       'is_unique' => $this->is_unique,
       'image_url' => $this->image ? asset('storage/' . $this->image) : null,
-      'preview_image_url' => $this->preview_image ? asset('storage/' . $this->preview_image) : null,
+      'preview_image_url' => $this->preview_image ? collect(json_decode($this->preview_image, true))->map(fn($path) => asset('storage/' . $path)) : null,
     ];
   }
 }
