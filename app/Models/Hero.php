@@ -86,7 +86,8 @@ class Hero extends Model implements LocalizedUrlRoutable
     'lore_text',
     'epic_quote',
     'passive_name',
-    'passive_description'
+    'passive_description',
+    'preview_image'
   ];
 
   /**

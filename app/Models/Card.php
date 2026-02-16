@@ -66,7 +66,8 @@ class Card extends Model implements LocalizedUrlRoutable
     'lore_text',
     'epic_quote',
     'effect',
-    'restriction'
+    'restriction',
+    'preview_image'
   ];
 
   /**
